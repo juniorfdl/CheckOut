@@ -82,11 +82,11 @@ var CaminhoNomeArquivo, Linha : String;
     Arquivo : TextFile;
 begin
 
-  if DelphiAberto then
+  {if DelphiAberto then
   begin
     ModalResult := mrok;
     exit;
-  end;
+  end;}
 
   if ComboPDV.Text = '' then
   begin
