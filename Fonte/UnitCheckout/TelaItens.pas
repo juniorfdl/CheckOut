@@ -4773,7 +4773,7 @@ begin
       DM.SQLTemplate.Close ;
       DM.SQLTemplate.SQL.Clear ;
       DM.SQLTemplate.SQL.Add('select CUPOA13ID from CUPOM') ;
-      DM.SQLTemplate.SQL.Add('where (EMPRICOD='+EmpresaPadrao+') and (TERMICOD='+IntToStr(TerminalAtual)+') and (CUPOINRO='+IntToStr(StrToInt(NroCupomFiscal))+')');
+      DM.SQLTemplate.SQL.Add('where (EMPRICOD='+EmpresaPadrao+') and (TERMICOD='+IntToStr(TerminalAtual)+') and (CUPOINRO='+IntToStr(StrToIntdef(NroCupomFiscal,0))+')');
       DM.SQLTemplate.Open ;
       if DM.SQLTemplate.IsEmpty then
         begin
