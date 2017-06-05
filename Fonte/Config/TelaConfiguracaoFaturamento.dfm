@@ -10,13 +10,13 @@ inherited FormTelaConfiguracaoFaturamento: TFormTelaConfiguracaoFaturamento
   TextHeight = 13
   inherited ScrollBoxFundo: TScrollBox
     Width = 796
-    Height = 531
+    Height = 530
     inherited PanelCentral: TPanel
       Width = 792
-      Height = 447
+      Height = 446
       inherited PanelBarra: TPanel
         Width = 0
-        Height = 447
+        Height = 446
       end
       object GroupBox1: TGroupBox
         Left = 12
@@ -593,7 +593,7 @@ inherited FormTelaConfiguracaoFaturamento: TFormTelaConfiguracaoFaturamento
         Left = 669
         Top = 0
         Width = 123
-        Height = 447
+        Height = 446
         Align = alRight
         Caption = ' Adicionais '
         TabOrder = 6
@@ -782,17 +782,13 @@ inherited FormTelaConfiguracaoFaturamento: TFormTelaConfiguracaoFaturamento
     UpdateObject = UpdateSQLConfigVenda
     Left = 136
     Top = 8
-    object SQLConfigVendaCFVEN3MAXLIMCRED: TBCDField
+    object SQLConfigVendaCFVEN3MAXLIMCRED: TFloatField
       FieldName = 'CFVEN3MAXLIMCRED'
       Origin = 'DB.CONFIGVENDA.CFVEN3MAXLIMCRED'
-      Precision = 15
-      Size = 3
     end
-    object SQLConfigVendaCFVEN2PERCLIMCRED: TBCDField
+    object SQLConfigVendaCFVEN2PERCLIMCRED: TFloatField
       FieldName = 'CFVEN2PERCLIMCRED'
       Origin = 'DB.CONFIGVENDA.CFVEN2PERCLIMCRED'
-      Precision = 15
-      Size = 3
     end
     object SQLConfigVendaCFVECTIPOLIMCRED: TStringField
       FieldName = 'CFVECTIPOLIMCRED'
@@ -830,11 +826,9 @@ inherited FormTelaConfiguracaoFaturamento: TFormTelaConfiguracaoFaturamento
       FixedChar = True
       Size = 1
     end
-    object SQLConfigVendaCFVEN3ALIQISSQN: TBCDField
+    object SQLConfigVendaCFVEN3ALIQISSQN: TFloatField
       FieldName = 'CFVEN3ALIQISSQN'
       Origin = 'DB.CONFIGVENDA.CFVEN3ALIQISSQN'
-      Precision = 15
-      Size = 3
     end
     object SQLConfigVendaCFVECIMPLEGPEDVENF: TStringField
       FieldName = 'CFVECIMPLEGPEDVENF'
@@ -842,11 +836,9 @@ inherited FormTelaConfiguracaoFaturamento: TFormTelaConfiguracaoFaturamento
       FixedChar = True
       Size = 1
     end
-    object SQLConfigVendaCFVEN3PERCICMFRETE: TBCDField
+    object SQLConfigVendaCFVEN3PERCICMFRETE: TFloatField
       FieldName = 'CFVEN3PERCICMFRETE'
       Origin = 'DB.CONFIGVENDA.CFVEN3PERCICMFRETE'
-      Precision = 15
-      Size = 3
     end
     object SQLConfigVendaCFVEA255OBSPADNF: TStringField
       FieldName = 'CFVEA255OBSPADNF'

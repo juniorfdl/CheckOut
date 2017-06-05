@@ -163,7 +163,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
                 Top = 82
                 Width = 146
                 Height = 13
-                Caption = #218'ltima Altera'#231#227'o do Saldo'
+                Caption = 'Última Alteração do Saldo'
                 FocusControl = DBEdit6
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = 8404992
@@ -177,7 +177,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
                 Top = 42
                 Width = 109
                 Height = 13
-                Caption = 'C'#243'd. Conta Cont'#225'bil'
+                Caption = 'Cód. Conta Contábil'
                 FocusControl = DBEdit7
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = 8404992
@@ -266,7 +266,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
                 Top = 124
                 Width = 510
                 Height = 153
-                Caption = ' Cedente - Dados para emiss'#227'o boleto laser '
+                Caption = ' Cedente - Dados para emissão boleto laser '
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clWindowText
                 Font.Height = -11
@@ -279,7 +279,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
                   Top = 18
                   Width = 88
                   Height = 13
-                  Caption = 'C'#243'digo Cedente'
+                  Caption = 'Código Cedente'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clRed
                   Font.Height = -11
@@ -292,7 +292,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
                   Top = 18
                   Width = 83
                   Height = 13
-                  Caption = 'D'#237'gito Cedente'
+                  Caption = 'Dígito Cedente'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clRed
                   Font.Height = -11
@@ -331,7 +331,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
                   Top = 62
                   Width = 143
                   Height = 13
-                  Caption = 'Nosso N'#250'mero  (pr'#243'ximo)'
+                  Caption = 'Nosso Número  (próximo)'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clRed
                   Font.Height = -11
@@ -344,7 +344,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
                   Top = 18
                   Width = 49
                   Height = 13
-                  Caption = 'Varia'#231#227'o'
+                  Caption = 'Variação'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = 8404992
                   Font.Height = -11
@@ -357,7 +357,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
                   Top = 61
                   Width = 52
                   Height = 13
-                  Caption = 'Conv'#234'nio'
+                  Caption = 'Convênio'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = 8404992
                   Font.Height = -11
@@ -561,7 +561,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
               Top = 79
               Width = 70
               Height = 13
-              Caption = 'Nro. Ag'#234'ncia'
+              Caption = 'Nro. Agência'
               FocusControl = DBEdit2
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clRed
@@ -617,7 +617,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
               Top = 79
               Width = 69
               Height = 13
-              Caption = 'D'#237'gito Conta'
+              Caption = 'Dígito Conta'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clRed
               Font.Height = -11
@@ -630,7 +630,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
               Top = 79
               Width = 81
               Height = 13
-              Caption = 'D'#237'gito Ag'#234'ncia'
+              Caption = 'Dígito Agência'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clRed
               Font.Height = -11
@@ -764,7 +764,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
       end>
     object SQLTemplateCTCRICOD: TIntegerField
       Tag = 1
-      DisplayLabel = 'C'#243'digo'
+      DisplayLabel = 'Código'
       FieldName = 'CTCRICOD'
       Origin = 'DB.CONTACORRENTE.CTCRICOD'
       Visible = False
@@ -790,14 +790,14 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
       Calculated = True
     end
     object SQLTemplateCTCRA15AGENCIA: TStringField
-      DisplayLabel = 'Ag'#234'ncia'
+      DisplayLabel = 'Agência'
       FieldName = 'CTCRA15AGENCIA'
       Origin = 'DB.CONTACORRENTE.CTCRA15AGENCIA'
       FixedChar = True
       Size = 15
     end
     object SQLTemplateCTCRA15NUMERO: TStringField
-      DisplayLabel = 'N'#250'mero'
+      DisplayLabel = 'Número'
       FieldName = 'CTCRA15NUMERO'
       Origin = 'DB.CONTACORRENTE.CTCRA15NUMERO'
       FixedChar = True
@@ -816,20 +816,16 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
       Origin = 'DB.CONTACORRENTE.CTCRDABERTURA'
       DisplayFormat = 'dd/mm/yyyy'
     end
-    object SQLTemplateCTCRN2LIMITE: TBCDField
+    object SQLTemplateCTCRN2LIMITE: TFloatField
       DisplayLabel = 'Limite'
       FieldName = 'CTCRN2LIMITE'
       Origin = 'DB.CONTACORRENTE.CTCRN2LIMITE'
-      Precision = 15
-      Size = 3
     end
-    object SQLTemplateCTCRN2SALDOATUAL: TBCDField
+    object SQLTemplateCTCRN2SALDOATUAL: TFloatField
       DisplayLabel = 'Saldo Atual'
       FieldName = 'CTCRN2SALDOATUAL'
       Origin = 'DB.CONTACORRENTE.CTCRN2SALDOATUAL'
       Visible = False
-      Precision = 15
-      Size = 3
     end
     object SQLTemplateTMBCICOD: TIntegerField
       FieldName = 'TMBCICOD'
@@ -846,14 +842,14 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
       Origin = 'DB.CONTACORRENTE.REGISTRO'
     end
     object SQLTemplateCTCRDULTALTSALDO: TDateTimeField
-      DisplayLabel = #218'lt. Alt. Saldo'
+      DisplayLabel = 'Últ. Alt. Saldo'
       FieldName = 'CTCRDULTALTSALDO'
       Origin = 'DB.CONTACORRENTE.CTCRDULTALTSALDO'
       Visible = False
       DisplayFormat = 'dddddd hh:nn:ss'
     end
     object SQLTemplateCTCRA30CODCONTABIL: TStringField
-      DisplayLabel = 'Cod. Conta Cont'#225'bil'
+      DisplayLabel = 'Cod. Conta Contábil'
       FieldName = 'CTCRA30CODCONTABIL'
       Origin = 'DB.CONTACORRENTE.CTCRA30CODCONTABIL'
       FixedChar = True

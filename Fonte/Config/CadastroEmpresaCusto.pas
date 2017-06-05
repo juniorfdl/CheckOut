@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, CadastroTEMPLATE, DBTables, DBActns, ActnList, ImgList, DB,
   RxQuery, Menus, StdCtrls, Mask, Grids, DBGrids, ComCtrls, ExtCtrls,
-  RXCtrls, Buttons, jpeg, ToolEdit, RXDBCtrl, RxDBComb, DBCtrls, DBNumEdt,
+  RXCtrls, Buttons, jpeg, ToolEdit, RXDBCtrl, RxDBComb, DBCtrls, 
   EDBNum, AdvOfficeStatusBar, AdvOfficeStatusBarStylers, AdvPanel;
 
 type
@@ -17,8 +17,8 @@ type
     SQLTemplateEMCTA4ANO: TStringField;
     SQLTemplateEMCTA60DESCR: TStringField;
     SQLTemplateEMCTCFIXOVARIA: TStringField;
-    SQLTemplateEMCTN2VALOR: TBCDField;
-    SQLTemplateEMCTN2PERC: TBCDField;
+    SQLTemplateEMCTN2VALOR: TFloatField;
+    SQLTemplateEMCTN2PERC: TFloatField;
     Label2: TLabel;
     DBEdit1: TDBEdit;
     Label3: TLabel;

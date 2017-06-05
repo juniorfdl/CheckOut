@@ -101,7 +101,7 @@ inherited FormCadastroEspecialidade: TFormCadastroEspecialidade
               Top = 3
               Width = 38
               Height = 13
-              Caption = 'C'#243'digo'
+              Caption = 'Código'
               FocusControl = DBEdit1
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clNavy
@@ -115,7 +115,7 @@ inherited FormCadastroEspecialidade: TFormCadastroEspecialidade
               Top = 4
               Width = 55
               Height = 13
-              Caption = 'Descri'#231#227'o'
+              Caption = 'Descrição'
               FocusControl = DBEdit2
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clNavy
@@ -176,26 +176,25 @@ inherited FormCadastroEspecialidade: TFormCadastroEspecialidade
       'Select * From Especialidade Where (%MFiltro)')
     object SQLTemplateESPEICOD: TIntegerField
       Tag = 1
-      DisplayLabel = 'C'#243'digo'
+      DisplayLabel = 'Código'
       FieldName = 'ESPEICOD'
       Origin = 'SISCON.ESPECIALIDADE.ESPEICOD'
       Visible = False
     end
     object SQLTemplateESPEA60DESCR: TStringField
-      DisplayLabel = 'Descri'#231#227'o'
+      DisplayLabel = 'Descrição'
       FieldName = 'ESPEA60DESCR'
       Origin = 'SISCON.ESPECIALIDADE.ESPEA60DESCR'
       FixedChar = True
       Size = 60
     end
-    object SQLTemplateESPEN3VLRCONSULTA: TBCDField
+    object SQLTemplateESPEN3VLRCONSULTA: TFloatField
       DisplayLabel = 'Valor Consulta'
       FieldName = 'ESPEN3VLRCONSULTA'
       Origin = 'DB.ESPECIALIDADE.ESPEN3VLRCONSULTA'
       DisplayFormat = '#,###.00'
       EditFormat = '#,###.00'
-      Precision = 15
-      Size = 3
+
     end
   end
   inherited SQLCount: TRxQuery

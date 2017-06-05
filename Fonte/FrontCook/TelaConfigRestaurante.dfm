@@ -232,11 +232,9 @@ inherited FormTelaConfigRestaurante: TFormTelaConfigRestaurante
       'select * from CONFIGREST')
     Left = 134
     Top = 7
-    object SQLConfigRestauranteCONFN2TAXASERV: TBCDField
+    object SQLConfigRestauranteCONFN2TAXASERV: TFloatField
       FieldName = 'CONFN2TAXASERV'
       Origin = 'DB.CONFIGREST.CONFN2TAXASERV'
-      Precision = 15
-      Size = 2
     end
     object SQLConfigRestauranteCONFCPEDEFUNC: TStringField
       FieldName = 'CONFCPEDEFUNC'
@@ -254,11 +252,9 @@ inherited FormTelaConfigRestaurante: TFormTelaConfigRestaurante
       FieldName = 'FUNCICODPADRAO'
       Origin = 'DB.CONFIGREST.FUNCICODPADRAO'
     end
-    object SQLConfigRestauranteCONFN2TAXAENTR: TBCDField
+    object SQLConfigRestauranteCONFN2TAXAENTR: TFloatField
       FieldName = 'CONFN2TAXAENTR'
       Origin = 'DB.CONFIGREST.CONFN2TAXAENTR'
-      Precision = 15
-      Size = 2
     end
   end
   object QryFUNC: TQuery

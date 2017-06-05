@@ -76,7 +76,7 @@ type
     PictureDialog: TOpenPictureDialog;
     Label9: TLabel;
     DBEdit5: TDBEdit;
-    SQLTemplateNUMEN2TAXAADM: TBCDField;
+    SQLTemplateNUMEN2TAXAADM: TFloatField;
     SQLTemplateNUMECBONUSTROCA: TStringField;
     DBCheckBox1: TDBCheckBox;
     procedure FormCreate(Sender: TObject);

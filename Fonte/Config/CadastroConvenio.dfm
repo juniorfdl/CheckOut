@@ -253,19 +253,15 @@ inherited FormCadastroConvenio: TFormCadastroConvenio
       FixedChar = True
       Size = 60
     end
-    object SQLTemplateCONVN2DESC: TBCDField
+    object SQLTemplateCONVN2DESC: TFloatField
       DisplayLabel = 'Desconto'
       FieldName = 'CONVN2DESC'
       Origin = 'DB.CONVENIO.CONVN2DESC'
-      Precision = 15
-      Size = 3
     end
-    object SQLTemplateCONVN2TAXA: TBCDField
+    object SQLTemplateCONVN2TAXA: TFloatField
       DisplayLabel = 'Taxa'
       FieldName = 'CONVN2TAXA'
       Origin = 'DB.CONVENIO.CONVN2TAXA'
-      Precision = 15
-      Size = 3
     end
     object SQLTemplateCONVDVENC: TIntegerField
       DisplayLabel = 'Vencimento'

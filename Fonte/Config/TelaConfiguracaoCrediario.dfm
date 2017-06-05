@@ -9,14 +9,14 @@ inherited FormTelaConfiguracaoCrediario: TFormTelaConfiguracaoCrediario
   TextHeight = 13
   inherited ScrollBoxFundo: TScrollBox
     Width = 717
-    Height = 512
+    Height = 511
     inherited PanelCentral: TPanel
       Width = 713
-      Height = 428
+      Height = 427
       ParentFont = False
       inherited PanelBarra: TPanel
         Width = 0
-        Height = 428
+        Height = 427
         TabOrder = 7
       end
       object GroupBox1: TGroupBox
@@ -803,17 +803,13 @@ inherited FormTelaConfiguracaoCrediario: TFormTelaConfiguracaoCrediario
       'select * from CONFIGCREDIARIO ')
     Left = 134
     Top = 7
-    object SQLConfigCrediarioCFCRN2PERCMULATRAS: TBCDField
+    object SQLConfigCrediarioCFCRN2PERCMULATRAS: TFloatField
       FieldName = 'CFCRN2PERCMULATRAS'
       Origin = 'DB.CONFIGCREDIARIO.CFCRN2PERCMULATRAS'
-      Precision = 15
-      Size = 3
     end
-    object SQLConfigCrediarioCFCRN2PERCJURATRAS: TBCDField
+    object SQLConfigCrediarioCFCRN2PERCJURATRAS: TFloatField
       FieldName = 'CFCRN2PERCJURATRAS'
       Origin = 'DB.CONFIGCREDIARIO.CFCRN2PERCJURATRAS'
-      Precision = 15
-      Size = 3
     end
     object SQLConfigCrediarioCFCRINRODIASTOLJUR: TIntegerField
       FieldName = 'CFCRINRODIASTOLJUR'
@@ -823,11 +819,9 @@ inherited FormTelaConfiguracaoCrediario: TFormTelaConfiguracaoCrediario
       FieldName = 'CFCRINRODIASTOLMUL'
       Origin = 'DB.CONFIGCREDIARIO.CFCRINRODIASTOLMUL'
     end
-    object SQLConfigCrediarioCFCRN2PERCADIANT: TBCDField
+    object SQLConfigCrediarioCFCRN2PERCADIANT: TFloatField
       FieldName = 'CFCRN2PERCADIANT'
       Origin = 'DB.CONFIGCREDIARIO.CFCRN2PERCADIANT'
-      Precision = 15
-      Size = 3
     end
     object SQLConfigCrediarioCFCRINRODIASADIANT: TIntegerField
       FieldName = 'CFCRINRODIASADIANT'
@@ -886,11 +880,9 @@ inherited FormTelaConfiguracaoCrediario: TFormTelaConfiguracaoCrediario
       FieldName = 'CFCRINRODIACARTA4A'
       Origin = 'DB.CONFIGCREDIARIO.CFCRINRODIACARTA4A'
     end
-    object SQLConfigCrediarioCFCRN2PERCTAXACOBR: TBCDField
+    object SQLConfigCrediarioCFCRN2PERCTAXACOBR: TFloatField
       FieldName = 'CFCRN2PERCTAXACOBR'
       Origin = 'DB.CONFIGCREDIARIO.CFCRN2PERCTAXACOBR'
-      Precision = 15
-      Size = 3
     end
     object SQLConfigCrediarioCFCRCBLOQVENDCLI1AV: TStringField
       FieldName = 'CFCRCBLOQVENDCLI1AV'

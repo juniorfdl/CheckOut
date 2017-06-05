@@ -135,8 +135,11 @@ ProductName=Advanced Control Config
 ProductVersion=3.0.0.0
 Comments=Sistema de Gestão Empresarial
 [Excluded Packages]
-c:\delphi7\Projects\Bpl\dclfrx7.bpl=FastReport 4.0 Components
-C:\Delphi7\DevExpress\Library\Delphi7\dcldxPScxScheduler3LnkD7.bpl=ExpressPrinting System ReportLink for ExpressScheduler 3 by Developer Express Inc.
+C:\Program Files (x86)\Borland\Delphi7\Projects\Bpl\ZParseSql70.bpl=Zeos SQL Parsing Classes and Interfaces
+C:\Program Files (x86)\Borland\Delphi7\Projects\Bpl\ZDbc70.bpl=Zeos Low Level Database API
+C:\Program Files (x86)\Borland\Delphi7\Projects\Bpl\ZPlain70.bpl=Zeos Plain Database API
+c:\program files (x86)\borland\delphi7\Projects\Bpl\xtradev7.bpl=Extra ReportBuilder Devices
+c:\program files (x86)\borland\delphi7\Bin\dclindy70.bpl=(Untitled)
 [HistoryLists\hlUnitAliases]
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;

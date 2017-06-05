@@ -5,8 +5,6 @@ inherited DM: TDM
   Height = 404
   Width = 679
   inherited DB: TDatabase
-    AliasName = 'Easy_Gestao'
-    Connected = False
     Left = 44
   end
   inherited SQLTemplate: TRxQuery
@@ -35,16 +33,16 @@ inherited DM: TDM
     Left = 461
     Top = 59
   end
-  inherited SQLProdutoSaldoDia: TRxQuery
-    Left = 45
-    Top = 268
-  end
   inherited SQLProdutoSaldoAux: TRxQuery
     Left = 46
     Top = 316
   end
   inherited UpdateSQLProdutoSaldo: TUpdateSQL
     Left = 148
+    Top = 268
+  end
+  inherited SQLProdutoSaldoDia: TRxQuery
+    Left = 45
     Top = 268
   end
   object SQLConfigGeral: TQuery
@@ -318,11 +316,9 @@ inherited DM: TDM
       FixedChar = True
       Size = 1
     end
-    object SQLUsuariosUSUAN2PERCDESC: TBCDField
+    object SQLUsuariosUSUAN2PERCDESC: TFloatField
       FieldName = 'USUAN2PERCDESC'
       Origin = 'DB.USUARIO.USUAN2PERCDESC'
-      Precision = 15
-      Size = 3
     end
     object SQLUsuariosUSUACVENDCLIBLOQ: TStringField
       FieldName = 'USUACVENDCLIBLOQ'
@@ -447,17 +443,13 @@ inherited DM: TDM
       'select * from CONFIGVENDA')
     Left = 149
     Top = 316
-    object SQLConfigVendaCFVEN3MAXLIMCRED: TBCDField
+    object SQLConfigVendaCFVEN3MAXLIMCRED: TFloatField
       FieldName = 'CFVEN3MAXLIMCRED'
       Origin = 'DB.CONFIGVENDA.CFVEN3MAXLIMCRED'
-      Precision = 15
-      Size = 3
     end
-    object SQLConfigVendaCFVEN2PERCLIMCRED: TBCDField
+    object SQLConfigVendaCFVEN2PERCLIMCRED: TFloatField
       FieldName = 'CFVEN2PERCLIMCRED'
       Origin = 'DB.CONFIGVENDA.CFVEN2PERCLIMCRED'
-      Precision = 15
-      Size = 3
     end
     object SQLConfigVendaCFVECTIPOLIMCRED: TStringField
       FieldName = 'CFVECTIPOLIMCRED'
@@ -495,11 +487,9 @@ inherited DM: TDM
       FixedChar = True
       Size = 1
     end
-    object SQLConfigVendaCFVEN3ALIQISSQN: TBCDField
+    object SQLConfigVendaCFVEN3ALIQISSQN: TFloatField
       FieldName = 'CFVEN3ALIQISSQN'
       Origin = 'DB.CONFIGVENDA.CFVEN3ALIQISSQN'
-      Precision = 15
-      Size = 3
     end
     object SQLConfigVendaCFVECIMPLEGPEDVENF: TStringField
       FieldName = 'CFVECIMPLEGPEDVENF'
@@ -507,11 +497,9 @@ inherited DM: TDM
       FixedChar = True
       Size = 1
     end
-    object SQLConfigVendaCFVEN3PERCICMFRETE: TBCDField
+    object SQLConfigVendaCFVEN3PERCICMFRETE: TFloatField
       FieldName = 'CFVEN3PERCICMFRETE'
       Origin = 'DB.CONFIGVENDA.CFVEN3PERCICMFRETE'
-      Precision = 15
-      Size = 3
     end
     object SQLConfigVendaCFVEA255OBSPADNF: TStringField
       FieldName = 'CFVEA255OBSPADNF'
@@ -739,23 +727,17 @@ inherited DM: TDM
       FieldName = 'PRODICOD'
       Origin = 'DB.PRODUTOSALDO.PRODICOD'
     end
-    object SQLProdutoSaldoPSLDN3QTDE: TBCDField
+    object SQLProdutoSaldoPSLDN3QTDE: TFloatField
       FieldName = 'PSLDN3QTDE'
       Origin = 'DB.PRODUTOSALDO.PSLDN3QTDE'
-      Precision = 15
-      Size = 3
     end
-    object SQLProdutoSaldoPSLDN3QTDMIN: TBCDField
+    object SQLProdutoSaldoPSLDN3QTDMIN: TFloatField
       FieldName = 'PSLDN3QTDMIN'
       Origin = 'DB.PRODUTOSALDO.PSLDN3QTDMIN'
-      Precision = 15
-      Size = 3
     end
-    object SQLProdutoSaldoPSLDN3QTDMAX: TBCDField
+    object SQLProdutoSaldoPSLDN3QTDMAX: TFloatField
       FieldName = 'PSLDN3QTDMAX'
       Origin = 'DB.PRODUTOSALDO.PSLDN3QTDMAX'
-      Precision = 15
-      Size = 3
     end
   end
   object SQLProdutoFilho: TRxQuery
@@ -799,69 +781,49 @@ inherited DM: TDM
     Macros = <>
     Left = 258
     Top = 160
-    object SQLConfigContaCFGCINIVEL1: TBCDField
+    object SQLConfigContaCFGCINIVEL1: TFloatField
       FieldName = 'CFGCINIVEL1'
       Origin = 'DB.CONFIGCONTA.CFGCINIVEL1'
-      Precision = 15
-      Size = 3
     end
     object SQLConfigContaCFGCNIVEIS: TIntegerField
       FieldName = 'CFGCNIVEIS'
       Origin = 'DB.CONFIGCONTA.CFGCNIVEIS'
     end
-    object SQLConfigContaCFGCINIVEL2: TBCDField
+    object SQLConfigContaCFGCINIVEL2: TFloatField
       FieldName = 'CFGCINIVEL2'
       Origin = 'DB.CONFIGCONTA.CFGCINIVEL2'
-      Precision = 15
-      Size = 3
     end
-    object SQLConfigContaCFGCINIVEL3: TBCDField
+    object SQLConfigContaCFGCINIVEL3: TFloatField
       FieldName = 'CFGCINIVEL3'
       Origin = 'DB.CONFIGCONTA.CFGCINIVEL3'
-      Precision = 15
-      Size = 3
     end
-    object SQLConfigContaCFGCINIVEL4: TBCDField
+    object SQLConfigContaCFGCINIVEL4: TFloatField
       FieldName = 'CFGCINIVEL4'
       Origin = 'DB.CONFIGCONTA.CFGCINIVEL4'
-      Precision = 15
-      Size = 3
     end
-    object SQLConfigContaCFGCINIVEL5: TBCDField
+    object SQLConfigContaCFGCINIVEL5: TFloatField
       FieldName = 'CFGCINIVEL5'
       Origin = 'DB.CONFIGCONTA.CFGCINIVEL5'
-      Precision = 15
-      Size = 3
     end
-    object SQLConfigContaCFGCINIVEL6: TBCDField
+    object SQLConfigContaCFGCINIVEL6: TFloatField
       FieldName = 'CFGCINIVEL6'
       Origin = 'DB.CONFIGCONTA.CFGCINIVEL6'
-      Precision = 15
-      Size = 3
     end
-    object SQLConfigContaCFGCINIVEL7: TBCDField
+    object SQLConfigContaCFGCINIVEL7: TFloatField
       FieldName = 'CFGCINIVEL7'
       Origin = 'DB.CONFIGCONTA.CFGCINIVEL7'
-      Precision = 15
-      Size = 3
     end
-    object SQLConfigContaCFGCINIVEL8: TBCDField
+    object SQLConfigContaCFGCINIVEL8: TFloatField
       FieldName = 'CFGCINIVEL8'
       Origin = 'DB.CONFIGCONTA.CFGCINIVEL8'
-      Precision = 15
-      Size = 3
     end
-    object SQLConfigContaCFGCINIVEL9: TBCDField
+    object SQLConfigContaCFGCINIVEL9: TFloatField
       FieldName = 'CFGCINIVEL9'
       Origin = 'DB.CONFIGCONTA.CFGCINIVEL9'
-      Precision = 15
-      Size = 3
     end
-    object SQLConfigContaCFGCINIVEL10: TBCDField
+    object SQLConfigContaCFGCINIVEL10: TFloatField
       FieldName = 'CFGCINIVEL10'
       Origin = 'DB.CONFIGCONTA.CFGCINIVEL10'
-      Precision = 15
-      Size = 3
     end
     object SQLConfigContaCFGCA30MASCARA: TStringField
       FieldName = 'CFGCA30MASCARA'
@@ -1262,17 +1224,13 @@ inherited DM: TDM
     Macros = <>
     Left = 147
     Top = 216
-    object SQLConfigCrediarioCFCRN2PERCMULATRAS: TBCDField
+    object SQLConfigCrediarioCFCRN2PERCMULATRAS: TFloatField
       FieldName = 'CFCRN2PERCMULATRAS'
       Origin = 'DB.CONFIGCREDIARIO.CFCRN2PERCMULATRAS'
-      Precision = 15
-      Size = 3
     end
-    object SQLConfigCrediarioCFCRN2PERCJURATRAS: TBCDField
+    object SQLConfigCrediarioCFCRN2PERCJURATRAS: TFloatField
       FieldName = 'CFCRN2PERCJURATRAS'
       Origin = 'DB.CONFIGCREDIARIO.CFCRN2PERCJURATRAS'
-      Precision = 15
-      Size = 3
     end
     object SQLConfigCrediarioCFCRINRODIASTOLJUR: TIntegerField
       FieldName = 'CFCRINRODIASTOLJUR'
@@ -1282,17 +1240,13 @@ inherited DM: TDM
       FieldName = 'CFCRINRODIASTOLMUL'
       Origin = 'DB.CONFIGCREDIARIO.CFCRINRODIASTOLMUL'
     end
-    object SQLConfigCrediarioCFCRN2PERCTAXACOBR: TBCDField
+    object SQLConfigCrediarioCFCRN2PERCTAXACOBR: TFloatField
       FieldName = 'CFCRN2PERCTAXACOBR'
       Origin = 'DB.CONFIGCREDIARIO.CFCRN2PERCTAXACOBR'
-      Precision = 15
-      Size = 3
     end
-    object SQLConfigCrediarioCFCRN2PERCADIANT: TBCDField
+    object SQLConfigCrediarioCFCRN2PERCADIANT: TFloatField
       FieldName = 'CFCRN2PERCADIANT'
       Origin = 'DB.CONFIGCREDIARIO.CFCRN2PERCADIANT'
-      Precision = 15
-      Size = 3
     end
     object SQLConfigCrediarioCFCRINRODIASADIANT: TIntegerField
       FieldName = 'CFCRINRODIASADIANT'

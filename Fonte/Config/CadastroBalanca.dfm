@@ -733,11 +733,9 @@ inherited FormCadastroBalanca: TFormCadastroBalanca
       FixedChar = True
       Size = 30
     end
-    object SQLProdutoPRODN3VLRVENDA: TBCDField
+    object SQLProdutoPRODN3VLRVENDA: TFloatField
       FieldName = 'PRODN3VLRVENDA'
       Origin = 'DB.PRODUTO.PRODN3VLRVENDA'
-      Precision = 15
-      Size = 3
     end
     object SQLProdutoPRODICODBALANCA: TIntegerField
       FieldName = 'PRODICODBALANCA'

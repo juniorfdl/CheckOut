@@ -2489,11 +2489,9 @@ inherited FormCadastroEmpresa: TFormCadastroEmpresa
       FixedChar = True
       Size = 1
     end
-    object SQLTemplateEMPRN2VLRFUNDOPROMO: TBCDField
+    object SQLTemplateEMPRN2VLRFUNDOPROMO: TFloatField
       FieldName = 'EMPRN2VLRFUNDOPROMO'
       Origin = 'DB.EMPRESA.EMPRN2VLRFUNDOPROMO'
-      Precision = 15
-      Size = 2
     end
     object SQLTemplateEMPRA20IMUNIC: TStringField
       FieldName = 'EMPRA20IMUNIC'
@@ -2563,12 +2561,10 @@ inherited FormCadastroEmpresa: TFormCadastroEmpresa
       Origin = 'DB.EMPRESA.EMPRA30CRC'
       Size = 30
     end
-    object SQLTemplateEMPRN2CREDICMS: TBCDField
+    object SQLTemplateEMPRN2CREDICMS: TFloatField
       FieldName = 'EMPRN2CREDICMS'
       Origin = 'DB.EMPRESA.EMPRN2CREDICMS'
       DisplayFormat = ',0.00'
-      Precision = 15
-      Size = 2
     end
     object SQLTemplateEMPRA15CRCCONTADOR: TStringField
       FieldName = 'EMPRA15CRCCONTADOR'
@@ -2877,23 +2873,17 @@ inherited FormCadastroEmpresa: TFormCadastroEmpresa
       FieldName = 'PRODICOD'
       Origin = 'DB.PRODUTOSALDO.PRODICOD'
     end
-    object SQLProdutoSaldoPSLDN3QTDE: TBCDField
+    object SQLProdutoSaldoPSLDN3QTDE: TFloatField
       FieldName = 'PSLDN3QTDE'
       Origin = 'DB.PRODUTOSALDO.PSLDN3QTDE'
-      Precision = 15
-      Size = 3
     end
-    object SQLProdutoSaldoPSLDN3QTDMIN: TBCDField
+    object SQLProdutoSaldoPSLDN3QTDMIN: TFloatField
       FieldName = 'PSLDN3QTDMIN'
       Origin = 'DB.PRODUTOSALDO.PSLDN3QTDMIN'
-      Precision = 15
-      Size = 3
     end
-    object SQLProdutoSaldoPSLDN3QTDMAX: TBCDField
+    object SQLProdutoSaldoPSLDN3QTDMAX: TFloatField
       FieldName = 'PSLDN3QTDMAX'
       Origin = 'DB.PRODUTOSALDO.PSLDN3QTDMAX'
-      Precision = 15
-      Size = 3
     end
     object SQLProdutoSaldoPENDENTE: TStringField
       FieldName = 'PENDENTE'

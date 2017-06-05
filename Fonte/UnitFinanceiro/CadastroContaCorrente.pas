@@ -18,8 +18,8 @@ type
     SQLTemplateCTCRA15NUMERO: TStringField;
     SQLTemplateCTCRA60TITULAR: TStringField;
     SQLTemplateCTCRDABERTURA: TDateTimeField;
-    SQLTemplateCTCRN2LIMITE: TBCDField;
-    SQLTemplateCTCRN2SALDOATUAL: TBCDField;
+    SQLTemplateCTCRN2LIMITE: TFloatField;
+    SQLTemplateCTCRN2SALDOATUAL: TFloatField;
     SQLTemplateTMBCICOD: TIntegerField;
     SQLTemplatePENDENTE: TStringField;
     SQLTemplateREGISTRO: TDateTimeField;

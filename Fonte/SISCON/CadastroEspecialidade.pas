@@ -17,7 +17,7 @@ type
     DBEdit1: TDBEdit;
     DBEdit2: TDBEdit;
     Label2: TLabel;
-    SQLTemplateESPEN3VLRCONSULTA: TBCDField;
+    SQLTemplateESPEN3VLRCONSULTA: TFloatField;
     Label3: TLabel;
     DBEdit3: TDBEdit;
     procedure FormCreate(Sender: TObject);

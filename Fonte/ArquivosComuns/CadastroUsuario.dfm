@@ -1169,11 +1169,9 @@ inherited FormCadastroUsuario: TFormCadastroUsuario
       FixedChar = True
       Size = 1
     end
-    object SQLTemplateUSUAN2PERCDESC: TBCDField
+    object SQLTemplateUSUAN2PERCDESC: TFloatField
       FieldName = 'USUAN2PERCDESC'
       Origin = 'DB.USUARIO.USUAN2PERCDESC'
-      Precision = 15
-      Size = 3
     end
     object SQLTemplateUSUACVENDCLIBLOQ: TStringField
       FieldName = 'USUACVENDCLIBLOQ'
@@ -1495,7 +1493,7 @@ inherited FormCadastroUsuario: TFormCadastroUsuario
     DataPipeline = Pipe
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Etiquetas de C'#243'digo de Barras'
-    PrinterSetup.PaperName = 'Letter'
+    PrinterSetup.PaperName = 'Carta'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.mmMarginBottom = 7000
     PrinterSetup.mmMarginLeft = 2000
@@ -1503,7 +1501,7 @@ inherited FormCadastroUsuario: TFormCadastroUsuario
     PrinterSetup.mmMarginTop = 14000
     PrinterSetup.mmPaperHeight = 279000
     PrinterSetup.mmPaperWidth = 216000
-    PrinterSetup.PaperSize = 256
+    PrinterSetup.PaperSize = 1
     Template.FileName = 'C:\TiagoAllfaro\Moreleh\EtiquetasMalaDireta\EtiquetaMoreleh.rtm'
     Units = utMillimeters
     DeviceType = 'Screen'

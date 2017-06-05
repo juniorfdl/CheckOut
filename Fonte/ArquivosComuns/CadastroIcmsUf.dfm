@@ -791,19 +791,15 @@ inherited FormCadastroIcmsUF: TFormCadastroIcmsUF
       Origin = 'DB.ICMSUF.NCMA30CODIGO'
       Size = 30
     end
-    object SQLTemplateICMUN2ALIQUOTA: TBCDField
+    object SQLTemplateICMUN2ALIQUOTA: TFloatField
       DisplayLabel = 'Al'#237'quota'
       FieldName = 'ICMUN2ALIQUOTA'
       Origin = 'DB.ICMSUF.ICMUN2ALIQUOTA'
-      Precision = 15
-      Size = 3
     end
-    object SQLTemplateICMSN2PERCSUBSTSAI: TBCDField
+    object SQLTemplateICMSN2PERCSUBSTSAI: TFloatField
       DisplayLabel = 'Subst.Tribut %'
       FieldName = 'ICMSN2PERCSUBSTSAI'
       Origin = 'DB.ICMSUF.ICMSN2PERCSUBSTSAI'
-      Precision = 15
-      Size = 3
     end
     object SQLTemplatePENDENTE: TStringField
       FieldName = 'PENDENTE'
@@ -831,31 +827,25 @@ inherited FormCadastroIcmsUF: TFormCadastroIcmsUF
       FieldName = 'ICMUICOD'
       Origin = 'DB.ICMSUF.ICMUICOD'
     end
-    object SQLTemplateICMUN3REDBASECALC: TBCDField
+    object SQLTemplateICMUN3REDBASECALC: TFloatField
       DisplayLabel = 'Red.Base C'#225'lc.'
       FieldName = 'ICMUN3REDBASECALC'
       Origin = 'DB.ICMSUF.ICMUN3REDBASECALC'
-      Precision = 15
-      Size = 3
     end
     object SQLTemplateICMUISITTRIB: TIntegerField
       DisplayLabel = 'Sit.Trib.'
       FieldName = 'ICMUISITTRIB'
       Origin = 'DB.ICMSUF.ICMUISITTRIB'
     end
-    object SQLTemplateICMUN3MVA: TBCDField
+    object SQLTemplateICMUN3MVA: TFloatField
       DisplayLabel = 'Margem Valor Agregado'
       FieldName = 'ICMUN3MVA'
       Origin = 'DB.ICMSUF.ICMUN3MVA'
-      Precision = 15
-      Size = 3
     end
-    object SQLTemplateICMUN2ALIQUOTAINTERNA: TBCDField
+    object SQLTemplateICMUN2ALIQUOTAINTERNA: TFloatField
       DisplayLabel = 'Al'#237'quota Interna'
       FieldName = 'ICMUN2ALIQUOTAINTERNA'
       Origin = 'DB.ICMSUF.ICMUN2ALIQUOTAINTERNA'
-      Precision = 15
-      Size = 2
     end
     object SQLTemplateICMUISITTRIBJURIDICA: TIntegerField
       FieldName = 'ICMUISITTRIBJURIDICA'

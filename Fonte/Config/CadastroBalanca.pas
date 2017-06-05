@@ -63,7 +63,7 @@ type
     SQLProduto: TRxQuery;
     SQLProdutoPRODICOD: TIntegerField;
     SQLProdutoPRODA30ADESCRREDUZ: TStringField;
-    SQLProdutoPRODN3VLRVENDA: TBCDField;
+    SQLProdutoPRODN3VLRVENDA: TFloatField;
     SQLProdutoPRODICODBALANCA: TIntegerField;
     ComboTipoPreco: TRxDBComboBox;
     Label18: TLabel;

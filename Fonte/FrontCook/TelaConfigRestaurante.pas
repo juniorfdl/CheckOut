@@ -14,11 +14,11 @@ type
     DataSetPost1: TDataSetPost;
     DSSQLConfigRestaurante: TDataSource;
     SQLConfigRestaurante: TQuery;
-    SQLConfigRestauranteCONFN2TAXASERV: TBCDField;
+    SQLConfigRestauranteCONFN2TAXASERV: TFloatField;
     SQLConfigRestauranteCONFCPEDEFUNC: TStringField;
     SQLConfigRestauranteCONFCPEDECONTA: TStringField;
     SQLConfigRestauranteFUNCICODPADRAO: TIntegerField;
-    SQLConfigRestauranteCONFN2TAXAENTR: TBCDField;
+    SQLConfigRestauranteCONFN2TAXAENTR: TFloatField;
     Label1: TLabel;
     TxServ: TDBEdit;
     Label2: TLabel;

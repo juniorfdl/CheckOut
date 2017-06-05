@@ -103,7 +103,7 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
         Top = 25
         Width = 94
         Height = 23
-        Caption = 'Descrição'
+        Caption = 'Descri'#231#227'o'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
         Font.Color = clRed
@@ -121,7 +121,7 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
         Top = 25
         Width = 126
         Height = 23
-        Caption = 'Desc.Técnica'
+        Caption = 'Desc.T'#233'cnica'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
         Font.Color = clRed
@@ -385,7 +385,7 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
             Font.Height = -13
             Font.Name = 'Arial'
             Font.Style = [fsBold]
-            Title.Caption = 'Código'
+            Title.Caption = 'C'#243'digo'
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWhite
             Title.Font.Height = -13
@@ -402,7 +402,7 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
             Font.Height = -13
             Font.Name = 'Arial'
             Font.Style = [fsBold]
-            Title.Caption = 'Descrição'
+            Title.Caption = 'Descri'#231#227'o'
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWhite
             Title.Font.Height = -13
@@ -679,7 +679,7 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
         Top = 107
         Width = 284
         Height = 23
-        Caption = 'Descrição Técnica / Aplicação'
+        Caption = 'Descri'#231#227'o T'#233'cnica / Aplica'#231#227'o'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
         Font.Color = clRed
@@ -766,7 +766,7 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
         Top = 54
         Width = 136
         Height = 23
-        Caption = 'Vlr. Promoção'
+        Caption = 'Vlr. Promo'#231#227'o'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
         Font.Color = clRed
@@ -856,7 +856,7 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
         Top = 4
         Width = 96
         Height = 23
-        Caption = 'Dimensão'
+        Caption = 'Dimens'#227'o'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
         Font.Color = clRed
@@ -1151,7 +1151,7 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
     OnCalcFields = SQLProdutoCalcFields
     DatabaseName = 'DB'
     SQL.Strings = (
-      'select * from PRODUTO where PRODCATIVO = ''S'''
+      'select * from PRODUTO where PRODCATIVO = '#39'S'#39
       'order by PRODA60DESCR, PRODA60REFER')
     Macros = <>
     Left = 663
@@ -1179,7 +1179,7 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       Size = 15
     end
     object SQLProdutoPRODA60REFER: TStringField
-      DisplayLabel = 'Referência'
+      DisplayLabel = 'Refer'#234'ncia'
       FieldName = 'PRODA60REFER'
       Origin = 'DB.PRODUTO.PRODA60REFER'
       FixedChar = True
@@ -1192,7 +1192,7 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       Size = 60
     end
     object SQLProdutoPRODA30ADESCRREDUZ: TStringField
-      DisplayLabel = 'DESCRIÇÃO'
+      DisplayLabel = 'DESCRI'#199#195'O'
       FieldName = 'PRODA30ADESCRREDUZ'
       Origin = 'DB.PRODUTO.PRODA30ADESCRREDUZ'
       FixedChar = True
@@ -1201,7 +1201,6 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
     object SQLProdutoPRODN3PESOBRUTO: TFloatField
       FieldName = 'PRODN3PESOBRUTO'
       Origin = 'DB.PRODUTO.PRODN3PESOBRUTO'
-      Size = 3
     end
     object SQLProdutoGRADICOD: TIntegerField
       FieldName = 'GRADICOD'
@@ -1229,13 +1228,11 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
     object SQLProdutoPRODN3PESOLIQ: TFloatField
       FieldName = 'PRODN3PESOLIQ'
       Origin = 'DB.PRODUTO.PRODN3PESOLIQ'
-      Size = 3
     end
     object SQLProdutoPRODN3VLRVENDA: TFloatField
       FieldName = 'PRODN3VLRVENDA'
       Origin = 'DB.PRODUTO.PRODN3VLRVENDA'
       DisplayFormat = '#,##0.00 '
-      Size = 3
     end
     object SQLProdutoPRODIAGRUPGRADE: TIntegerField
       FieldName = 'PRODIAGRUPGRADE'
@@ -1244,7 +1241,6 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
     object SQLProdutoPRODN3CAPACEMBAL: TFloatField
       FieldName = 'PRODN3CAPACEMBAL'
       Origin = 'DB.PRODUTO.PRODN3CAPACEMBAL'
-      Size = 3
     end
     object SQLProdutoMARCICOD: TIntegerField
       FieldName = 'MARCICOD'
@@ -1258,7 +1254,6 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       FieldName = 'PRODN3VLRVENDAPROM'
       Origin = 'DB.PRODUTO.PRODN3VLRVENDAPROM'
       DisplayFormat = '#,##0.00 '
-      Size = 3
     end
     object SQLProdutoSaldoEmpresa: TFloatField
       DisplayLabel = 'Saldo'
@@ -1380,15 +1375,11 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
     object SQLProdutoPRODN3QTDULTCOMPRA: TFloatField
       FieldName = 'PRODN3QTDULTCOMPRA'
       Origin = 'DB.PRODUTO.PRODN3QTDULTCOMPRA'
-      Precision = 15
-      Size = 3
     end
     object SQLProdutoPRODN3VLRVENDA2: TFloatField
       FieldName = 'PRODN3VLRVENDA2'
       Origin = 'DB.PRODUTO.PRODN3VLRVENDA2'
       DisplayFormat = '##0.00'
-      Precision = 15
-      Size = 3
     end
     object SQLProdutoPRODA15APAVIM: TStringField
       FieldName = 'PRODA15APAVIM'
@@ -1417,14 +1408,10 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
     object SQLProdutoPRODN2VLRVENDA2835D: TFloatField
       FieldName = 'PRODN2VLRVENDA2835D'
       Origin = 'DB.PRODUTO.PRODN2VLRVENDA2835D'
-      Precision = 15
-      Size = 3
     end
     object SQLProdutoPRODN2VLRVENDA283542D: TFloatField
       FieldName = 'PRODN2VLRVENDA283542D'
       Origin = 'DB.PRODUTO.PRODN2VLRVENDA283542D'
-      Precision = 15
-      Size = 3
     end
   end
   object FormStorage: TFormStorage

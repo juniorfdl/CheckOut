@@ -1,5 +1,5 @@
 inherited FormTelaGeracaoHorario: TFormTelaGeracaoHorario
-  Caption = 'Gera'#231#227'o de Hor'#225'rios'
+  Caption = 'Geração de Horários'
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
@@ -11,7 +11,7 @@ inherited FormTelaGeracaoHorario: TFormTelaGeracaoHorario
         Width = 712
         Height = 26
         Caption = 
-          'Aguarde enquanto o sistema gera os hor'#225'rios para este profission' +
+          'Aguarde enquanto o sistema gera os horários para este profission' +
           'al !!!'
         Font.Charset = ANSI_CHARSET
         Font.Color = clRed
@@ -62,7 +62,7 @@ inherited FormTelaGeracaoHorario: TFormTelaGeracaoHorario
           Top = 60
           Width = 341
           Height = 41
-          Caption = ' Per'#237'odo '
+          Caption = ' Período '
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -89,7 +89,7 @@ inherited FormTelaGeracaoHorario: TFormTelaGeracaoHorario
             Top = 18
             Width = 19
             Height = 13
-            Caption = 'a&t'#233
+            Caption = 'a&té'
             FocusControl = Ate
             Font.Charset = ANSI_CHARSET
             Font.Color = clNavy
@@ -143,7 +143,7 @@ inherited FormTelaGeracaoHorario: TFormTelaGeracaoHorario
               Height = 25
               Cursor = crHandPoint
               Hint = 'Fechar Tela'
-              Caption = '&Gerar Hor'#225'rios Autom'#225'ticos'
+              Caption = '&Gerar Horários Automáticos'
               Flat = True
               Font.Charset = ANSI_CHARSET
               Font.Color = clBlack
@@ -420,7 +420,7 @@ inherited FormTelaGeracaoHorario: TFormTelaGeracaoHorario
     Left = 522
     Top = 10
     object SQLAgendamentoAGENICOD: TIntegerField
-      DisplayLabel = 'C'#243'd.Interno'
+      DisplayLabel = 'Cód.Interno'
       FieldName = 'AGENICOD'
       Origin = 'DB.AGENDAMENTO.AGENICOD'
     end
@@ -439,7 +439,7 @@ inherited FormTelaGeracaoHorario: TFormTelaGeracaoHorario
       Origin = 'DB.AGENDAMENTO.AGENICODAGRUP'
     end
     object SQLAgendamentoPROFICOD: TIntegerField
-      DisplayLabel = 'C'#243'd.Profissional'
+      DisplayLabel = 'Cód.Profissional'
       FieldName = 'PROFICOD'
       Origin = 'DB.AGENDAMENTO.PROFICOD'
     end
@@ -460,7 +460,7 @@ inherited FormTelaGeracaoHorario: TFormTelaGeracaoHorario
       Origin = 'DB.AGENDAMENTO.AGENINRORECIBO'
     end
     object SQLAgendamentoUSUAICOD: TIntegerField
-      DisplayLabel = 'C'#243'd.Usu'#225'rio'
+      DisplayLabel = 'Cód.Usuário'
       FieldName = 'USUAICOD'
       Origin = 'DB.AGENDAMENTO.USUAICOD'
     end
@@ -478,17 +478,13 @@ inherited FormTelaGeracaoHorario: TFormTelaGeracaoHorario
       FieldName = 'AGENDDIGIT'
       Origin = 'DB.AGENDAMENTO.AGENDDIGIT'
     end
-    object SQLAgendamentoAGENN3VLRCONSULTA: TBCDField
+    object SQLAgendamentoAGENN3VLRCONSULTA: TFloatField
       FieldName = 'AGENN3VLRCONSULTA'
       Origin = 'DB.AGENDAMENTO.AGENN3VLRCONSULTA'
-      Precision = 15
-      Size = 3
     end
-    object SQLAgendamentoAGENN3VLRPAGO: TBCDField
+    object SQLAgendamentoAGENN3VLRPAGO: TFloatField
       FieldName = 'AGENN3VLRPAGO'
       Origin = 'DB.AGENDAMENTO.AGENN3VLRPAGO'
-      Precision = 15
-      Size = 3
     end
   end
   object MemDias: TMemoryTable

@@ -8,18 +8,12 @@ uses
   Grids, DBGrids, ComCtrls, ExtCtrls, Buttons, jpeg, DBCtrls, RxDBComb,
   DBActns, ActnList, ImgList, OleCtnrs, IBSQLMonitor, ExtDlgs, variants,
   ToolEdit, RXDBCtrl, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit,
-  dxSkinsCore, dxSkinsDefaultPainters, cxTextEdit, cxDBEdit, cxGroupBox,
-  cxRadioGroup, cxMaskEdit, cxButtonEdit, cxSpinEdit, ACBrNFe,
-  cxDropDownEdit, cxCheckBox, dxSkinBlack, dxSkinBlue, dxSkinCaramel,
-  dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide, dxSkinFoggy,
-  dxSkinGlassOceans, dxSkiniMaginary, dxSkinLilian, dxSkinLiquidSky,
-  dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMoneyTwins,
-  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
-  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinPumpkin, dxSkinSeven,
-  dxSkinSharp, dxSkinSilver, dxSkinSpringTime, dxSkinStardust,
-  dxSkinSummer2008, dxSkinValentine, dxSkinXmas2008Blue,
+  dxSkinsCore, ACBrNFe,
+  cxDropDownEdit, cxCheckBox,
+  
   AdvOfficeStatusBar, AdvOfficeStatusBarStylers, AdvPanel, ACBrBase,
-  ACBrMail, ACBrDFe;
+  ACBrMail, ACBrDFe, cxDBEdit, cxSpinEdit, cxMaskEdit, cxButtonEdit,
+  cxTextEdit, cxGroupBox, cxRadioGroup;
 
 type
   TFormCadastroEmpresa = class(TFormCadastroTEMPLATE)
@@ -73,9 +67,9 @@ type
     SQLProdutoSaldo: TRxQuery;
     SQLProdutoSaldoEMPRICOD: TIntegerField;
     SQLProdutoSaldoPRODICOD: TIntegerField;
-    SQLProdutoSaldoPSLDN3QTDE: TBCDField;
-    SQLProdutoSaldoPSLDN3QTDMIN: TBCDField;
-    SQLProdutoSaldoPSLDN3QTDMAX: TBCDField;
+    SQLProdutoSaldoPSLDN3QTDE: TFloatField;
+    SQLProdutoSaldoPSLDN3QTDMIN: TFloatField;
+    SQLProdutoSaldoPSLDN3QTDMAX: TFloatField;
     SQLProdutoSaldoPENDENTE: TStringField;
     SQLProdutoSaldoREGISTRO: TDateTimeField;
     UpdateSQLProdutoSaldo: TUpdateSQL;
@@ -100,7 +94,7 @@ type
     ImpPreVenda: TDBCheckBox;
     Label19: TLabel;
     DBEdit16: TDBEdit;
-    SQLTemplateEMPRN2VLRFUNDOPROMO: TBCDField;
+    SQLTemplateEMPRN2VLRFUNDOPROMO: TFloatField;
     SQLTemplateEMPRA15REGJUNTA: TStringField;
     SQLTemplateEMPRA20IMUNIC: TStringField;
     DBEdit17: TDBEdit;
@@ -136,7 +130,7 @@ type
     Label41: TLabel;
     DBEdit35: TDBEdit;
     SQLTemplateEMPRA30CRC: TStringField;
-    SQLTemplateEMPRN2CREDICMS: TBCDField;
+    SQLTemplateEMPRN2CREDICMS: TFloatField;
     SQLTemplateEMPRA15CRCCONTADOR: TStringField;
     SQLTemplateEMPRA14CNPJCONTADOR: TStringField;
     SQLTemplateEMPRA8CEPCONTADOR: TStringField;

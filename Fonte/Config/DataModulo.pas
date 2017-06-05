@@ -7,7 +7,7 @@ uses
   VarSYS, DataModuloTemplate, Db, DBTables, RxQuery, DBLists, IdComponent,
   IdTCPConnection, IdTCPClient, IdMessageClient, IdSMTP, IdBaseComponent,
   IdMessage, DBXpress, ZConnection, SqlExpr, ZAbstractRODataset,
-  ZAbstractDataset, ZDataset;
+  ZAbstractDataset, ZDataset, ZAbstractConnection;
 
 type
   TDM = class(TDMTemplate)
@@ -49,24 +49,24 @@ type
     SQLProdutoSaldo: TRxQuery;
     SQLProdutoSaldoEMPRICOD: TIntegerField;
     SQLProdutoSaldoPRODICOD: TIntegerField;
-    SQLProdutoSaldoPSLDN3QTDE: TBCDField;
-    SQLProdutoSaldoPSLDN3QTDMIN: TBCDField;
-    SQLProdutoSaldoPSLDN3QTDMAX: TBCDField;
+    SQLProdutoSaldoPSLDN3QTDE: TFloatField;
+    SQLProdutoSaldoPSLDN3QTDMIN: TFloatField;
+    SQLProdutoSaldoPSLDN3QTDMAX: TFloatField;
     SQLProdutoFilho: TRxQuery;
     DSSQLProduto: TDataSource;
     SQLProduto: TRxQuery;
     SQLConfigConta: TRxQuery;
-    SQLConfigContaCFGCINIVEL1: TBCDField;
+    SQLConfigContaCFGCINIVEL1: TFloatField;
     SQLConfigContaCFGCNIVEIS: TIntegerField;
-    SQLConfigContaCFGCINIVEL2: TBCDField;
-    SQLConfigContaCFGCINIVEL3: TBCDField;
-    SQLConfigContaCFGCINIVEL4: TBCDField;
-    SQLConfigContaCFGCINIVEL5: TBCDField;
-    SQLConfigContaCFGCINIVEL6: TBCDField;
-    SQLConfigContaCFGCINIVEL7: TBCDField;
-    SQLConfigContaCFGCINIVEL8: TBCDField;
-    SQLConfigContaCFGCINIVEL9: TBCDField;
-    SQLConfigContaCFGCINIVEL10: TBCDField;
+    SQLConfigContaCFGCINIVEL2: TFloatField;
+    SQLConfigContaCFGCINIVEL3: TFloatField;
+    SQLConfigContaCFGCINIVEL4: TFloatField;
+    SQLConfigContaCFGCINIVEL5: TFloatField;
+    SQLConfigContaCFGCINIVEL6: TFloatField;
+    SQLConfigContaCFGCINIVEL7: TFloatField;
+    SQLConfigContaCFGCINIVEL8: TFloatField;
+    SQLConfigContaCFGCINIVEL9: TFloatField;
+    SQLConfigContaCFGCINIVEL10: TFloatField;
     SQLConfigContaCFGCA30MASCARA: TStringField;
     SQLConfigContaPENDENTE: TStringField;
     SQLConfigContaREGISTRO: TDateTimeField;
@@ -100,17 +100,17 @@ type
     SQLProdutoOrdemPesquisa: TRxQuery;
     SQLProdutoOrdemPesquisaPDOPIORDEM: TIntegerField;
     SQLProdutoOrdemPesquisaPDOPA30CAMPO: TStringField;
-    SQLConfigVendaCFVEN3MAXLIMCRED: TBCDField;
-    SQLConfigVendaCFVEN2PERCLIMCRED: TBCDField;
+    SQLConfigVendaCFVEN3MAXLIMCRED: TFloatField;
+    SQLConfigVendaCFVEN2PERCLIMCRED: TFloatField;
     SQLConfigVendaCFVECTIPOLIMCRED: TStringField;
     SQLConfigVendaCFVECARREDPARCELA: TStringField;
     SQLConfigVendaCFVECTIPOIMPPED: TStringField;
     SQLConfigVendaCFVECDADOSCHQPDV: TStringField;
     SQLConfigVendaCFVECUSADEBCREDCLI: TStringField;
     SQLConfigVendaCGVECTESTAITENSNF: TStringField;
-    SQLConfigVendaCFVEN3ALIQISSQN: TBCDField;
+    SQLConfigVendaCFVEN3ALIQISSQN: TFloatField;
     SQLConfigVendaCFVECIMPLEGPEDVENF: TStringField;
-    SQLConfigVendaCFVEN3PERCICMFRETE: TBCDField;
+    SQLConfigVendaCFVEN3PERCICMFRETE: TFloatField;
     SQLConfigVendaCFVEA255OBSPADNF: TStringField;
     SQLConfigVendaCFVEITEMPOCONSPROD: TIntegerField;
     SQLConfigVendaCFVECQUITARPARCHQ: TStringField;
@@ -156,12 +156,12 @@ type
     SQLTerminalAtivoECFA13ID: TStringField;
     SQLTerminalAtivoTERMCSQLORDENADO: TStringField;
     SQLConfigCrediario: TRxQuery;
-    SQLConfigCrediarioCFCRN2PERCMULATRAS: TBCDField;
-    SQLConfigCrediarioCFCRN2PERCJURATRAS: TBCDField;
+    SQLConfigCrediarioCFCRN2PERCMULATRAS: TFloatField;
+    SQLConfigCrediarioCFCRN2PERCJURATRAS: TFloatField;
     SQLConfigCrediarioCFCRINRODIASTOLJUR: TIntegerField;
     SQLConfigCrediarioCFCRINRODIASTOLMUL: TIntegerField;
-    SQLConfigCrediarioCFCRN2PERCTAXACOBR: TBCDField;
-    SQLConfigCrediarioCFCRN2PERCADIANT: TBCDField;
+    SQLConfigCrediarioCFCRN2PERCTAXACOBR: TFloatField;
+    SQLConfigCrediarioCFCRN2PERCADIANT: TFloatField;
     SQLConfigCrediarioCFCRINRODIASADIANT: TIntegerField;
     SQLConfigCrediarioCFCRINRODIACARTA1A: TIntegerField;
     SQLConfigCrediarioCFCRINRODIACARTA2A: TIntegerField;
@@ -200,7 +200,7 @@ type
     QueryOperacaoDebito: TQuery;
     SQLUsuariosUSUACVERDADCOMPRCLI: TStringField;
     SQLUsuariosUSUACDESBLOQCLI: TStringField;
-    SQLUsuariosUSUAN2PERCDESC: TBCDField;
+    SQLUsuariosUSUAN2PERCDESC: TFloatField;
     SQLUsuariosUSUACVENDCLIBLOQ: TStringField;
     SQLUsuariosUSUACCANCVENDA: TStringField;
     SQLUsuariosUSUACEXCLCLI: TStringField;

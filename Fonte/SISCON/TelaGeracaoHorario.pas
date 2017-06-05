@@ -101,8 +101,8 @@ type
     SQLConfigAgendaCFAGDSABFIM: TDateTimeField;
     SQLExisteData: TRxQuery;
     SQLExisteDataAGENDMARCACAO: TDateTimeField;
-    SQLAgendamentoAGENN3VLRCONSULTA: TBCDField;
-    SQLAgendamentoAGENN3VLRPAGO: TBCDField;
+    SQLAgendamentoAGENN3VLRCONSULTA: TFloatField;
+    SQLAgendamentoAGENN3VLRPAGO: TFloatField;
     SQLProfissionalVENDICOD: TIntegerField;
     SQLProfissionalVENDA60NOME: TStringField;
     SQLProfissionalESPEICOD: TIntegerField;

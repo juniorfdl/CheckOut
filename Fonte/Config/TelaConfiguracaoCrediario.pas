@@ -47,11 +47,11 @@ type
     ArqCartaAvisoSPC: TFilenameEdit;
     Label13: TLabel;
     DBEdit13: TDBEdit;
-    SQLConfigCrediarioCFCRN2PERCMULATRAS: TBCDField;
-    SQLConfigCrediarioCFCRN2PERCJURATRAS: TBCDField;
+    SQLConfigCrediarioCFCRN2PERCMULATRAS: TFloatField;
+    SQLConfigCrediarioCFCRN2PERCJURATRAS: TFloatField;
     SQLConfigCrediarioCFCRINRODIASTOLJUR: TIntegerField;
     SQLConfigCrediarioCFCRINRODIASTOLMUL: TIntegerField;
-    SQLConfigCrediarioCFCRN2PERCADIANT: TBCDField;
+    SQLConfigCrediarioCFCRN2PERCADIANT: TFloatField;
     SQLConfigCrediarioCFCRINRODIASADIANT: TIntegerField;
     SQLConfigCrediarioCFCRINRODIACARTA1A: TIntegerField;
     SQLConfigCrediarioCFCRINRODIACARTA2A: TIntegerField;
@@ -64,7 +64,7 @@ type
     SQLConfigCrediarioCFCRA255PATHRELSPC: TStringField;
     SQLConfigCrediarioCFCRA255PATHAUTDEP: TStringField;
     SQLConfigCrediarioCFCRINRODIACARTA4A: TIntegerField;
-    SQLConfigCrediarioCFCRN2PERCTAXACOBR: TBCDField;
+    SQLConfigCrediarioCFCRN2PERCTAXACOBR: TFloatField;
     Label14: TLabel;
     DBEdit14: TDBEdit;
     SQLConfigCrediarioCFCRCBLOQVENDCLI1AV: TStringField;

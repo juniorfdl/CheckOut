@@ -1,7 +1,7 @@
 inherited FormCadastroNumerario: TFormCadastroNumerario
   Left = 383
   Top = 104
-  Caption = 'Numer'#225'rios'
+  Caption = 'Numerários'
   ClientHeight = 478
   ClientWidth = 774
   OldCreateOrder = True
@@ -245,7 +245,7 @@ inherited FormCadastroNumerario: TFormCadastroNumerario
                 Top = 39
                 Width = 67
                 Height = 13
-                Caption = 'Tipo Padr'#227'o'
+                Caption = 'Tipo Padrão'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = 8404992
                 Font.Height = -11
@@ -284,7 +284,7 @@ inherited FormCadastroNumerario: TFormCadastroNumerario
                 Top = 91
                 Width = 21
                 Height = 21
-                Hint = 'Acessa Cadastro de Provedores de Cart'#227'o'
+                Hint = 'Acessa Cadastro de Provedores de Cartão'
                 Flat = True
                 Glyph.Data = {
                   9E020000424D9E0200000000000036000000280000000E0000000E0000000100
@@ -316,7 +316,7 @@ inherited FormCadastroNumerario: TFormCadastroNumerario
                 Top = 204
                 Width = 362
                 Height = 13
-                Caption = 'Opera'#231#227'o Padr'#227'o ao Enviar Dados da Redu'#231#227'o Z para Tesouraria'
+                Caption = 'Operação Padrão ao Enviar Dados da Redução Z para Tesouraria'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = 8404992
                 Font.Height = -11
@@ -352,12 +352,12 @@ inherited FormCadastroNumerario: TFormCadastroNumerario
                   'DINHEIRO'
                   'CHEQUE VISTA'
                   'CHEQUE PRAZO'
-                  'CREDI'#193'RIO'
-                  'CONV'#202'NIO'
-                  'CART'#195'O'
-                  'CART'#195'O FIDELIZA'#199#195'O'
+                  'CREDIÁRIO'
+                  'CONVÊNIO'
+                  'CARTÃO'
+                  'CARTÃO FIDELIZAÇÃO'
                   'CREDITO ANTECIPADO'
-                  'RETORNO CONSIGNA'#199#195'O')
+                  'RETORNO CONSIGNAÇÃO')
                 TabOrder = 1
                 Values.Strings = (
                   'DIN'
@@ -383,7 +383,7 @@ inherited FormCadastroNumerario: TFormCadastroNumerario
                 ItemHeight = 13
                 Items.Strings = (
                   'Sim'
-                  'N'#227'o')
+                  'Não')
                 TabOrder = 0
                 Values.Strings = (
                   'S'
@@ -425,13 +425,13 @@ inherited FormCadastroNumerario: TFormCadastroNumerario
                   Style = tsFlatButtons
                   TabOrder = 0
                   object TabCredito: TTabSheet
-                    Caption = '&Cr'#233'dito'
+                    Caption = '&Crédito'
                     object Label4: TLabel
                       Left = 3
                       Top = 0
                       Width = 77
                       Height = 13
-                      Caption = 'Conta Cr'#233'dito'
+                      Caption = 'Conta Crédito'
                       FocusControl = DBEdit9
                       Font.Charset = DEFAULT_CHARSET
                       Font.Color = clNavy
@@ -503,14 +503,14 @@ inherited FormCadastroNumerario: TFormCadastroNumerario
                     end
                   end
                   object TabDebito: TTabSheet
-                    Caption = '&D'#233'bito'
+                    Caption = '&Débito'
                     ImageIndex = 1
                     object Label14: TLabel
                       Left = 3
                       Top = 0
                       Width = 73
                       Height = 13
-                      Caption = 'Conta D'#233'bito'
+                      Caption = 'Conta Débito'
                       FocusControl = DBEdit11
                       Font.Charset = DEFAULT_CHARSET
                       Font.Color = clNavy
@@ -597,7 +597,7 @@ inherited FormCadastroNumerario: TFormCadastroNumerario
                     Height = 28
                     Align = alClient
                     Caption = 
-                      ' Dica: Sempre que este numer'#225'rio for utilizado ser'#225' associado na' +
+                      ' Dica: Sempre que este numerário for utilizado será associado na' +
                       's parcelas o plano '#13#10' de contas configurado.'
                     WordWrap = True
                   end
@@ -657,7 +657,7 @@ inherited FormCadastroNumerario: TFormCadastroNumerario
               Top = 3
               Width = 38
               Height = 13
-              Caption = 'C'#243'digo'
+              Caption = 'Código'
               FocusControl = DBEdit1
               Font.Charset = DEFAULT_CHARSET
               Font.Color = 8404992
@@ -671,7 +671,7 @@ inherited FormCadastroNumerario: TFormCadastroNumerario
               Top = 3
               Width = 55
               Height = 13
-              Caption = 'Descri'#231#227'o'
+              Caption = 'Descrição'
               FocusControl = DBEdit2
               Font.Charset = DEFAULT_CHARSET
               Font.Color = 8404992
@@ -763,13 +763,13 @@ inherited FormCadastroNumerario: TFormCadastroNumerario
     object SQLTemplateNUMEICOD: TIntegerField
       Tag = 1
       Alignment = taCenter
-      DisplayLabel = 'C'#243'digo'
+      DisplayLabel = 'Código'
       FieldName = 'NUMEICOD'
       Origin = 'DB.NUMERARIO.NUMEICOD'
       Visible = False
     end
     object SQLTemplateNUMEA30DESCR: TStringField
-      DisplayLabel = 'Desrci'#231#227'o'
+      DisplayLabel = 'Desrcição'
       FieldName = 'NUMEA30DESCR'
       Origin = 'DB.NUMERARIO.NUMEA30DESCR'
       FixedChar = True
@@ -792,14 +792,14 @@ inherited FormCadastroNumerario: TFormCadastroNumerario
     end
     object SQLTemplateNUMEA5TIPO: TStringField
       ConstraintErrorMessage = '1'
-      DisplayLabel = 'Tipo Padr'#227'o'
+      DisplayLabel = 'Tipo Padrão'
       FieldName = 'NUMEA5TIPO'
       Origin = 'DB.NUMERARIO.NUMEA5TIPO'
       FixedChar = True
       Size = 5
     end
     object SQLTemplatePRCAA13ID: TStringField
-      DisplayLabel = 'Provedor Cart'#227'o'
+      DisplayLabel = 'Provedor Cartão'
       FieldName = 'PRCAA13ID'
       Origin = 'DB.NUMERARIO.PRCAA13ID'
       Visible = False
@@ -807,7 +807,7 @@ inherited FormCadastroNumerario: TFormCadastroNumerario
       Size = 13
     end
     object SQLTemplatePRCAA60DESCR: TStringField
-      DisplayLabel = 'Provedor Cart'#227'o'
+      DisplayLabel = 'Provedor Cartão'
       FieldKind = fkLookup
       FieldName = 'PRCAA60DESCR'
       LookupDataSet = TableProvedorCartao
@@ -870,11 +870,10 @@ inherited FormCadastroNumerario: TFormCadastroNumerario
       Origin = 'DB.NUMERARIO.NUMEBIMAGEM'
       Size = 1
     end
-    object SQLTemplateNUMEN2TAXAADM: TBCDField
+    object SQLTemplateNUMEN2TAXAADM: TFloatField
       FieldName = 'NUMEN2TAXAADM'
       Origin = 'DB.NUMERARIO.NUMEN2TAXAADM'
-      Precision = 15
-      Size = 2
+
     end
     object SQLTemplateNUMECBONUSTROCA: TStringField
       FieldName = 'NUMECBONUSTROCA'

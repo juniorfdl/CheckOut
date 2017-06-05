@@ -47,8 +47,8 @@ type
     SQLContaCorrenteCTCRA15NUMERO: TStringField;
     SQLContaCorrenteCTCRA60TITULAR: TStringField;
     SQLContaCorrenteCTCRDABERTURA: TDateTimeField;
-    SQLContaCorrenteCTCRN2LIMITE: TBCDField;
-    SQLContaCorrenteCTCRN2SALDOATUAL: TBCDField;
+    SQLContaCorrenteCTCRN2LIMITE: TFloatField;
+    SQLContaCorrenteCTCRN2SALDOATUAL: TFloatField;
     SQLContaCorrenteTMBCICOD: TIntegerField;
     SQLContaCorrentePENDENTE: TStringField;
     SQLContaCorrenteREGISTRO: TDateTimeField;

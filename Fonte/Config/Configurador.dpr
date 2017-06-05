@@ -96,7 +96,10 @@ uses
   CadastroOperacoesEstoque in '..\UnitFaturamento\CadastroOperacoesEstoque.pas' {FormCadastroOperacoesEstoque},
   CadastroOperacoesEstoqueCFOP in '..\UnitFaturamento\CadastroOperacoesEstoqueCFOP.pas' {CadastroOperacaoEstoqueCFOP},
   CadastroOperacoesEstoqueConversor in '..\UnitFaturamento\CadastroOperacoesEstoqueConversor.pas' {CadastroOperacoesEstoqueConverte},
-  TelaSplash in '..\ArquivosComuns\TelaSplash.pas' {FormSplash};
+  TelaSplash in '..\ArquivosComuns\TelaSplash.pas' {FormSplash},
+  uDebugEx in '..\..\Template\uDebugEx.pas',
+  UnSoundPlay in '..\..\Template\UnSoundPlay.pas',
+  TelaGerenciamentoAcesso in '..\..\Template\TelaGerenciamentoAcesso.pas' {FormTelaGerenciamentoAcesso};
 
 {$R *.res}
 

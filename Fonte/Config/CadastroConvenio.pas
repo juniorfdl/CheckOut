@@ -13,8 +13,8 @@ type
   TFormCadastroConvenio = class(TFormCadastroTEMPLATE)
     SQLTemplateCONVICOD: TIntegerField;
     SQLTemplateCONVA60DESCR: TStringField;
-    SQLTemplateCONVN2DESC: TBCDField;
-    SQLTemplateCONVN2TAXA: TBCDField;
+    SQLTemplateCONVN2DESC: TFloatField;
+    SQLTemplateCONVN2TAXA: TFloatField;
     SQLTemplateCONVDVENC: TIntegerField;
     SQLTemplatePENDENTE: TStringField;
     SQLTemplateREGISTRO: TDateTimeField;

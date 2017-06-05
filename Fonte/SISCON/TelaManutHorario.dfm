@@ -585,17 +585,13 @@ inherited FormTelaManutHorario: TFormTelaManutHorario
       FieldName = 'AGENDDIGIT'
       Origin = 'DB.AGENDAMENTO.AGENDDIGIT'
     end
-    object SQLAgendamentoAGENN3VLRCONSULTA: TBCDField
+    object SQLAgendamentoAGENN3VLRCONSULTA: TFloatField
       FieldName = 'AGENN3VLRCONSULTA'
       Origin = 'DB.AGENDAMENTO.AGENN3VLRCONSULTA'
-      Precision = 15
-      Size = 3
     end
-    object SQLAgendamentoAGENN3VLRPAGO: TBCDField
+    object SQLAgendamentoAGENN3VLRPAGO: TFloatField
       FieldName = 'AGENN3VLRPAGO'
       Origin = 'DB.AGENDAMENTO.AGENN3VLRPAGO'
-      Precision = 15
-      Size = 3
     end
   end
   object MemDias: TMemoryTable

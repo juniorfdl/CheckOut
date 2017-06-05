@@ -76,8 +76,8 @@ type
     SQLAgendamentoESPEICOD: TIntegerField;
     SQLAgendamentoAGENA254OBS: TStringField;
     SQLAgendamentoAGENDDIGIT: TDateTimeField;
-    SQLAgendamentoAGENN3VLRCONSULTA: TBCDField;
-    SQLAgendamentoAGENN3VLRPAGO: TBCDField;
+    SQLAgendamentoAGENN3VLRCONSULTA: TFloatField;
+    SQLAgendamentoAGENN3VLRPAGO: TFloatField;
     MemDias: TMemoryTable;
     MemDiasDom: TIntegerField;
     MemDiasSeg: TIntegerField;
