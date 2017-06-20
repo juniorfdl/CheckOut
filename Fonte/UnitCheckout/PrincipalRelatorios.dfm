@@ -1431,18 +1431,17 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
   object ReportTotais: TppReport
     AutoStop = False
     DataPipeline = PipeOperacao
-    PassSetting = psTwoPass
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'Custom'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.mmMarginBottom = 6350
     PrinterSetup.mmMarginLeft = 6350
     PrinterSetup.mmMarginRight = 6350
     PrinterSetup.mmMarginTop = 6350
-    PrinterSetup.mmPaperHeight = 0
-    PrinterSetup.mmPaperWidth = 0
-    PrinterSetup.PaperSize = 139
+    PrinterSetup.mmPaperHeight = 297000
+    PrinterSetup.mmPaperWidth = 210000
+    PrinterSetup.PaperSize = 9
     DeviceType = 'Screen'
     EmailSettings.ReportFormat = 'PDF'
     OnPreviewFormClose = ReportTotaisPreviewFormClose
@@ -1459,11 +1458,12 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     mmColumnWidth = 0
     DataPipelineName = 'PipeOperacao'
     object ppTitleBand1: TppTitleBand
+      BeforePrint = ppTitleBand1BeforePrint
       mmBottomOffset = 0
-      mmHeight = 9380556
+      mmHeight = 35454
       mmPrintPosition = 0
       object ppLabel1: TppLabel
-        UserName = 'ppLabel1'
+        UserName = 'Label1'
         Border.BorderPositions = []
         Border.Color = clBlack
         Border.Style = psSolid
@@ -1475,14 +1475,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Size = 12
         Font.Style = [fsBold, fsUnderline]
         Transparent = True
-        mmHeight = 1330063
-        mmLeft = 70115
-        mmTop = 2100267
-        mmWidth = 9730601
+        mmHeight = 5027
+        mmLeft = 265
+        mmTop = 7938
+        mmWidth = 36777
         BandType = 1
       end
       object ppLabel2: TppLabel
-        UserName = 'ppLabel2'
+        UserName = 'Label2'
         Border.BorderPositions = []
         Border.Color = clBlack
         Border.Style = psSolid
@@ -1495,14 +1495,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Style = [fsBold]
         TextAlignment = taCentered
         Transparent = True
-        mmHeight = 993248
-        mmLeft = 264055
-        mmTop = 4060304
-        mmWidth = 3112035
+        mmHeight = 3754
+        mmLeft = 998
+        mmTop = 15346
+        mmWidth = 11762
         BandType = 1
       end
       object ppLabel3: TppLabel
-        UserName = 'ppLabel3'
+        UserName = 'Label3'
         Border.BorderPositions = []
         Border.Color = clBlack
         Border.Style = psSolid
@@ -1514,10 +1514,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Size = 9
         Font.Style = [fsBold]
         Transparent = True
-        mmHeight = 993248
-        mmLeft = 70115
-        mmTop = 5180287
-        mmWidth = 4005800
+        mmHeight = 3754
+        mmLeft = 265
+        mmTop = 19579
+        mmWidth = 15140
         BandType = 1
       end
       object LbPeriodo: TppLabel
@@ -1533,10 +1533,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Size = 9
         Font.Style = []
         Transparent = True
-        mmHeight = 960175
-        mmLeft = 4060304
-        mmTop = 4130154
-        mmWidth = 3807097
+        mmHeight = 3629
+        mmLeft = 15346
+        mmTop = 15610
+        mmWidth = 14389
         BandType = 1
       end
       object LbTerminal: TppLabel
@@ -1552,14 +1552,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Size = 9
         Font.Style = []
         Transparent = True
-        mmHeight = 960175
-        mmLeft = 4900358
-        mmTop = 5180287
-        mmWidth = 4171429
+        mmHeight = 3629
+        mmLeft = 18521
+        mmTop = 19579
+        mmWidth = 15766
         BandType = 1
       end
       object ppLabel9: TppLabel
-        UserName = 'ppLabel9'
+        UserName = 'Label4'
         Border.BorderPositions = []
         Border.Color = clBlack
         Border.Style = psSolid
@@ -1571,14 +1571,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Size = 9
         Font.Style = [fsBold]
         Transparent = True
-        mmHeight = 993248
-        mmLeft = 70115
-        mmTop = 6230421
-        mmWidth = 3707878
+        mmHeight = 3754
+        mmLeft = 265
+        mmTop = 23548
+        mmWidth = 14014
         BandType = 1
       end
       object ppSystemVariable1: TppSystemVariable
-        UserName = 'ppSystemVariable1'
+        UserName = 'SystemVariable2'
         Border.BorderPositions = []
         Border.Color = clBlack
         Border.Style = psSolid
@@ -1590,14 +1590,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Size = 9
         Font.Style = []
         Transparent = True
-        mmHeight = 993248
-        mmLeft = 4410348
-        mmTop = 6230421
-        mmWidth = 7084497
+        mmHeight = 3754
+        mmLeft = 16669
+        mmTop = 23548
+        mmWidth = 26776
         BandType = 1
       end
       object ppLabel14: TppLabel
-        UserName = 'ppLabel14'
+        UserName = 'Label101'
         Border.BorderPositions = []
         Border.Color = clBlack
         Border.Style = psSolid
@@ -1610,14 +1610,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Style = []
         TextAlignment = taRightJustified
         Transparent = True
-        mmHeight = 910168
-        mmLeft = 42072803
-        mmTop = 2520161
-        mmWidth = 9380556
+        mmHeight = 3440
+        mmLeft = 159015
+        mmTop = 9525
+        mmWidth = 35454
         BandType = 1
       end
       object ppLabel31: TppLabel
-        UserName = 'ppLabel31'
+        UserName = 'Label31'
         Border.BorderPositions = []
         Border.Color = clBlack
         Border.Style = psSolid
@@ -1629,14 +1629,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Size = 9
         Font.Style = [fsBold]
         Transparent = True
-        mmHeight = 1008065
-        mmLeft = 70115
-        mmTop = 8330423
-        mmWidth = 12320877
+        mmHeight = 3810
+        mmLeft = 265
+        mmTop = 31485
+        mmWidth = 46567
         BandType = 1
       end
       object ppOperador: TppLabel
-        UserName = 'ppOperador'
+        UserName = 'Operador'
         Border.BorderPositions = []
         Border.Color = clBlack
         Border.Style = psSolid
@@ -1648,19 +1648,20 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Size = 9
         Font.Style = [fsBold]
         Transparent = True
-        mmHeight = 1008065
-        mmLeft = 70115
-        mmTop = 7280554
-        mmWidth = 4267473
+        mmHeight = 3810
+        mmLeft = 265
+        mmTop = 27517
+        mmWidth = 16129
         BandType = 1
       end
     end
     object ppHeaderBand1: TppHeaderBand
+      BeforePrint = ppHeaderBand1BeforePrint
       mmBottomOffset = 0
-      mmHeight = 1050133
+      mmHeight = 3969
       mmPrintPosition = 0
       object ppLabel10: TppLabel
-        UserName = 'ppLabel10'
+        UserName = 'Label5'
         AutoSize = False
         Border.BorderPositions = []
         Border.Color = clBlack
@@ -1673,14 +1674,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Size = 8
         Font.Style = [fsBold, fsUnderline]
         Transparent = True
-        mmHeight = 926837
+        mmHeight = 3503
         mmLeft = 0
-        mmTop = 70115
-        mmWidth = 28561828
+        mmTop = 265
+        mmWidth = 107950
         BandType = 0
       end
       object ppLabel11: TppLabel
-        UserName = 'ppLabel11'
+        UserName = 'Label7'
         Border.BorderPositions = []
         Border.Color = clBlack
         Border.Style = psSolid
@@ -1693,14 +1694,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Style = [fsBold, fsUnderline]
         TextAlignment = taRightJustified
         Transparent = True
-        mmHeight = 926837
-        mmLeft = 33901659
-        mmTop = 70115
-        mmWidth = 2780776
+        mmHeight = 3503
+        mmLeft = 128132
+        mmTop = 265
+        mmWidth = 10510
         BandType = 0
       end
       object ppLabel12: TppLabel
-        UserName = 'ppLabel12'
+        UserName = 'Label8'
         Border.BorderPositions = []
         Border.Color = clBlack
         Border.Style = psSolid
@@ -1713,14 +1714,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Style = [fsBold, fsUnderline]
         TextAlignment = taRightJustified
         Transparent = True
-        mmHeight = 926837
-        mmLeft = 41553689
-        mmTop = 70115
-        mmWidth = 2549265
+        mmHeight = 3503
+        mmLeft = 157053
+        mmTop = 265
+        mmWidth = 9635
         BandType = 0
       end
       object ppLabel13: TppLabel
-        UserName = 'ppLabel13'
+        UserName = 'Label13'
         Border.BorderPositions = []
         Border.Color = clBlack
         Border.Style = psSolid
@@ -1733,24 +1734,25 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Style = [fsBold, fsUnderline]
         TextAlignment = taRightJustified
         Transparent = True
-        mmHeight = 926837
-        mmLeft = 49334836
-        mmTop = 70115
-        mmWidth = 2118788
+        mmHeight = 3503
+        mmLeft = 186462
+        mmTop = 265
+        mmWidth = 8008
         BandType = 0
       end
     end
     object ppDetailBand1: TppDetailBand
       PrintHeight = phDynamic
-      mmBottomOffset = 1
-      mmHeight = 980019
+      mmBottomOffset = 0
+      mmHeight = 3704
       mmPrintPosition = 0
       object ppDBText1: TppDBText
-        UserName = 'ppDBText1'
+        UserName = 'DBText1'
         Border.BorderPositions = []
         Border.Color = clBlack
         Border.Style = psSolid
         Border.Visible = False
+        DataField = 'OPCXA60DESCR'
         DataPipeline = PipeOperacao
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1760,18 +1762,19 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         ParentDataPipeline = False
         Transparent = True
         DataPipelineName = 'PipeOperacao'
-        mmHeight = 926837
+        mmHeight = 3503
         mmLeft = 0
         mmTop = 0
-        mmWidth = 28491978
+        mmWidth = 107686
         BandType = 4
       end
       object ppDBText2: TppDBText
-        UserName = 'ppDBText2'
+        UserName = 'DBText2'
         Border.BorderPositions = []
         Border.Color = clBlack
         Border.Style = psSolid
         Border.Visible = False
+        DataField = 'CREDITOS'
         DataPipeline = PipeOperacao
         DisplayFormat = '#,0.00;-#,0.00'
         Font.Charset = DEFAULT_CHARSET
@@ -1783,18 +1786,19 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'PipeOperacao'
-        mmHeight = 926837
-        mmLeft = 30381900
+        mmHeight = 3503
+        mmLeft = 114829
         mmTop = 0
-        mmWidth = 6300535
+        mmWidth = 23813
         BandType = 4
       end
       object ppDBText3: TppDBText
-        UserName = 'ppDBText3'
+        UserName = 'DBText3'
         Border.BorderPositions = []
         Border.Color = clBlack
         Border.Style = psSolid
         Border.Visible = False
+        DataField = 'DEBITOS'
         DataPipeline = PipeOperacao
         DisplayFormat = '#,0.00;-#,0.00'
         Font.Charset = DEFAULT_CHARSET
@@ -1806,18 +1810,19 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'PipeOperacao'
-        mmHeight = 926837
-        mmLeft = 39552641
+        mmHeight = 3503
+        mmLeft = 149490
         mmTop = 0
-        mmWidth = 4550313
+        mmWidth = 17198
         BandType = 4
       end
       object ppDBText4: TppDBText
-        UserName = 'ppDBText4'
+        UserName = 'DBText8'
         Border.BorderPositions = []
         Border.Color = clBlack
         Border.Style = psSolid
         Border.Visible = False
+        DataField = 'SALDO'
         DataPipeline = PipeOperacao
         DisplayFormat = '#,0.00;-#,0.00'
         Font.Charset = DEFAULT_CHARSET
@@ -1828,29 +1833,29 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'PipeOperacao'
-        mmHeight = 926837
-        mmLeft = 46062992
-        mmTop = 53181
-        mmWidth = 5460482
+        mmHeight = 3503
+        mmLeft = 174096
+        mmTop = 201
+        mmWidth = 20638
         BandType = 4
       end
     end
     object ppSummaryBand2: TppSummaryBand
       PrintHeight = phDynamic
-      mmBottomOffset = 139965
-      mmHeight = 4830243
+      mmBottomOffset = 0
+      mmHeight = 18256
       mmPrintPosition = 0
       object ppSubReport1: TppSubReport
-        UserName = 'ppSubReport1'
+        UserName = 'SubReport1'
         ExpandAll = False
         NewPrintJob = False
         OutlineSettings.CreateNode = True
         TraverseAllData = False
         DataPipelineName = 'PipeNumerario'
-        mmHeight = 1330063
+        mmHeight = 5027
         mmLeft = 0
-        mmTop = 3360215
-        mmWidth = 52202396
+        mmTop = 12700
+        mmWidth = 197300
         BandType = 7
         mmBottomOffset = 0
         mmOverFlowOffset = 0
@@ -1858,27 +1863,26 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         object ppChildReport1: TppChildReport
           AutoStop = False
           DataPipeline = PipeNumerario
-          PassSetting = psTwoPass
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
-          PrinterSetup.PaperName = 'Custom'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.mmMarginBottom = 6350
           PrinterSetup.mmMarginLeft = 6350
           PrinterSetup.mmMarginRight = 6350
           PrinterSetup.mmMarginTop = 6350
-          PrinterSetup.mmPaperHeight = 0
-          PrinterSetup.mmPaperWidth = 0
-          PrinterSetup.PaperSize = 139
+          PrinterSetup.mmPaperHeight = 297000
+          PrinterSetup.mmPaperWidth = 210000
+          PrinterSetup.PaperSize = 9
           Version = '10.06'
           mmColumnWidth = 0
           DataPipelineName = 'PipeNumerario'
           object ppTitleBand5: TppTitleBand
             mmBottomOffset = 0
-            mmHeight = 1119983
+            mmHeight = 4233
             mmPrintPosition = 0
             object ppLabel15: TppLabel
-              UserName = 'ppLabel15'
+              UserName = 'Label6'
               AutoSize = False
               Border.BorderPositions = []
               Border.Color = clBlack
@@ -1891,14 +1895,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               Font.Size = 10
               Font.Style = [fsBold, fsUnderline]
               Transparent = True
-              mmHeight = 1142473
+              mmHeight = 4318
               mmLeft = 0
               mmTop = 0
-              mmWidth = 29332031
+              mmWidth = 110861
               BandType = 1
             end
             object ppLabel23: TppLabel
-              UserName = 'ppLabel23'
+              UserName = 'Label9'
               Border.BorderPositions = []
               Border.Color = clBlack
               Border.Style = psSolid
@@ -1911,14 +1915,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               Font.Style = [fsBold, fsUnderline]
               TextAlignment = taRightJustified
               Transparent = True
-              mmHeight = 1119983
-              mmLeft = 33392335
+              mmHeight = 4233
+              mmLeft = 126207
               mmTop = 0
-              mmWidth = 3360215
+              mmWidth = 12700
               BandType = 1
             end
             object ppLabel24: TppLabel
-              UserName = 'ppLabel24'
+              UserName = 'Label14'
               Border.BorderPositions = []
               Border.Color = clBlack
               Border.Style = psSolid
@@ -1931,14 +1935,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               Font.Style = [fsBold, fsUnderline]
               TextAlignment = taRightJustified
               Transparent = True
-              mmHeight = 1119983
-              mmLeft = 41372714
+              mmHeight = 4233
+              mmLeft = 156369
               mmTop = 0
-              mmWidth = 3150135
+              mmWidth = 11906
               BandType = 1
             end
             object ppLabel32: TppLabel
-              UserName = 'ppLabel32'
+              UserName = 'Label15'
               Border.BorderPositions = []
               Border.Color = clBlack
               Border.Style = psSolid
@@ -1951,23 +1955,24 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               Font.Style = [fsBold, fsUnderline]
               TextAlignment = taRightJustified
               Transparent = True
-              mmHeight = 1119983
-              mmLeft = 49003312
+              mmHeight = 4233
+              mmLeft = 185209
               mmTop = 0
-              mmWidth = 2590276
+              mmWidth = 9790
               BandType = 1
             end
           end
           object ppDetailBand2: TppDetailBand
             mmBottomOffset = 0
-            mmHeight = 1119983
+            mmHeight = 4233
             mmPrintPosition = 0
             object ppDBText5: TppDBText
-              UserName = 'ppDBText5'
+              UserName = 'DBText4'
               Border.BorderPositions = []
               Border.Color = clBlack
               Border.Style = psSolid
               Border.Visible = False
+              DataField = 'NUMEA30DESCR'
               DataPipeline = PipeNumerario
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -1976,18 +1981,19 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               Font.Style = []
               Transparent = True
               DataPipelineName = 'PipeNumerario'
-              mmHeight = 993248
+              mmHeight = 3754
               mmLeft = 0
               mmTop = 0
-              mmWidth = 29332031
+              mmWidth = 110861
               BandType = 4
             end
             object ppDBText6: TppDBText
-              UserName = 'ppDBText6'
+              UserName = 'DBText5'
               Border.BorderPositions = []
               Border.Color = clBlack
               Border.Style = psSolid
               Border.Visible = False
+              DataField = 'VLRCREDITO'
               DataPipeline = PipeNumerario
               DisplayFormat = '#,0.00;-#,0.00'
               Font.Charset = DEFAULT_CHARSET
@@ -1998,18 +2004,19 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               TextAlignment = taRightJustified
               Transparent = True
               DataPipelineName = 'PipeNumerario'
-              mmHeight = 993248
-              mmLeft = 30662094
+              mmHeight = 3754
+              mmLeft = 115888
               mmTop = 0
-              mmWidth = 6090456
+              mmWidth = 23019
               BandType = 4
             end
             object ppDBText7: TppDBText
-              UserName = 'ppDBText7'
+              UserName = 'DBText6'
               Border.BorderPositions = []
               Border.Color = clBlack
               Border.Style = psSolid
               Border.Visible = False
+              DataField = 'VLRDEBITO'
               DataPipeline = PipeNumerario
               DisplayFormat = '#,0.00;-#,0.00'
               Font.Charset = DEFAULT_CHARSET
@@ -2020,18 +2027,19 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               TextAlignment = taRightJustified
               Transparent = True
               DataPipelineName = 'PipeNumerario'
-              mmHeight = 993248
-              mmLeft = 38852552
+              mmHeight = 3754
+              mmLeft = 146844
               mmTop = 0
-              mmWidth = 5670297
+              mmWidth = 21431
               BandType = 4
             end
             object ppDBText8: TppDBText
-              UserName = 'ppDBText8'
+              UserName = 'DBText7'
               Border.BorderPositions = []
               Border.Color = clBlack
               Border.Style = psSolid
               Border.Visible = False
+              DataField = 'SALDO'
               DataPipeline = PipeNumerario
               DisplayFormat = '#,0.00;-#,0.00'
               Font.Charset = DEFAULT_CHARSET
@@ -2042,25 +2050,27 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               TextAlignment = taRightJustified
               Transparent = True
               DataPipelineName = 'PipeNumerario'
-              mmHeight = 993248
-              mmLeft = 46133106
+              mmHeight = 3754
+              mmLeft = 174361
               mmTop = 0
-              mmWidth = 5460482
+              mmWidth = 20638
               BandType = 4
             end
           end
           object SumarioNumerarios: TppSummaryBand
+            BeforePrint = SumarioNumerariosBeforePrint
             PrintHeight = phDynamic
-            mmBottomOffset = 840318
-            mmHeight = 3780374
+            mmBottomOffset = 0
+            mmHeight = 14288
             mmPrintPosition = 0
             object ppDBCalc1: TppDBCalc
-              UserName = 'ppDBCalc1'
+              UserName = 'DBCalc3'
               AutoSize = True
               Border.BorderPositions = []
               Border.Color = clBlack
               Border.Style = psSolid
               Border.Visible = False
+              DataField = 'SALDO'
               DataPipeline = PipeNumerario
               DisplayFormat = '#,0.00;-#,0.00'
               Font.Charset = DEFAULT_CHARSET
@@ -2071,14 +2081,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               TextAlignment = taRightJustified
               Transparent = True
               DataPipelineName = 'PipeNumerario'
-              mmHeight = 1008065
-              mmLeft = 45346234
-              mmTop = 279930
-              mmWidth = 6373296
+              mmHeight = 3810
+              mmLeft = 171387
+              mmTop = 1058
+              mmWidth = 24088
               BandType = 7
             end
             object ppLabel33: TppLabel
-              UserName = 'ppLabel33'
+              UserName = 'Label12'
               Border.BorderPositions = []
               Border.Color = clBlack
               Border.Style = psSolid
@@ -2091,37 +2101,37 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               Font.Style = [fsBold]
               TextAlignment = taCentered
               Transparent = True
-              mmHeight = 1119983
+              mmHeight = 4233
               mmLeft = 0
-              mmTop = 70115
-              mmWidth = 3220250
+              mmTop = 265
+              mmWidth = 12171
               BandType = 7
             end
             object ppLine4: TppLine
-              UserName = 'ppLine4'
+              UserName = 'Line4'
               Border.BorderPositions = []
               Border.Color = clBlack
               Border.Style = psSolid
               Border.Visible = False
               Pen.Style = psDot
               Weight = 0.750000000000000000
-              mmHeight = 490009
-              mmLeft = 139965
-              mmTop = 1400178
-              mmWidth = 52153448
+              mmHeight = 1852
+              mmLeft = 529
+              mmTop = 5292
+              mmWidth = 197115
               BandType = 7
             end
             object ppLine13: TppLine
-              UserName = 'ppLine13'
+              UserName = 'Line13'
               Border.BorderPositions = []
               Border.Color = clBlack
               Border.Style = psSolid
               Border.Visible = False
               Weight = 0.750000000000000000
-              mmHeight = 279930
-              mmLeft = 30452015
-              mmTop = 70115
-              mmWidth = 21561468
+              mmHeight = 1058
+              mmLeft = 115094
+              mmTop = 265
+              mmWidth = 81492
               BandType = 7
             end
             object SubProdutosVendidos: TppSubReport
@@ -2131,10 +2141,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               OutlineSettings.CreateNode = True
               TraverseAllData = False
               DataPipelineName = 'PipeItensVendidos'
-              mmHeight = 1330063
+              mmHeight = 5027
               mmLeft = 0
-              mmTop = 1609993
-              mmWidth = 52202396
+              mmTop = 6085
+              mmWidth = 197300
               BandType = 7
               mmBottomOffset = 0
               mmOverFlowOffset = 0
@@ -2142,27 +2152,26 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               object ppChildReport5: TppChildReport
                 AutoStop = False
                 DataPipeline = PipeItensVendidos
-                PassSetting = psTwoPass
                 PrinterSetup.BinName = 'Default'
                 PrinterSetup.DocumentName = 'Report'
-                PrinterSetup.PaperName = 'Custom'
+                PrinterSetup.PaperName = 'A4'
                 PrinterSetup.PrinterName = 'Default'
                 PrinterSetup.mmMarginBottom = 6350
                 PrinterSetup.mmMarginLeft = 6350
                 PrinterSetup.mmMarginRight = 6350
                 PrinterSetup.mmMarginTop = 6350
-                PrinterSetup.mmPaperHeight = 0
-                PrinterSetup.mmPaperWidth = 0
-                PrinterSetup.PaperSize = 139
+                PrinterSetup.mmPaperHeight = 297000
+                PrinterSetup.mmPaperWidth = 210000
+                PrinterSetup.PaperSize = 9
                 Version = '10.06'
                 mmColumnWidth = 0
                 DataPipelineName = 'PipeItensVendidos'
                 object TituloProdutosVendidos: TppTitleBand
                   mmBottomOffset = 0
-                  mmHeight = 2240232
+                  mmHeight = 8467
                   mmPrintPosition = 0
                   object ppLabel41: TppLabel
-                    UserName = 'ppLabel41'
+                    UserName = 'Label1'
                     Border.BorderPositions = []
                     Border.Color = clBlack
                     Border.Style = psSolid
@@ -2175,14 +2184,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                     Font.Style = [fsBold, fsUnderline]
                     TextAlignment = taRightJustified
                     Transparent = True
-                    mmHeight = 1119983
-                    mmLeft = 45362903
-                    mmTop = 1050133
-                    mmWidth = 6496328
+                    mmHeight = 4233
+                    mmLeft = 171450
+                    mmTop = 3969
+                    mmWidth = 24553
                     BandType = 1
                   end
                   object ppLabel42: TppLabel
-                    UserName = 'ppLabel42'
+                    UserName = 'Label2'
                     Border.BorderPositions = []
                     Border.Color = clBlack
                     Border.Style = psSolid
@@ -2195,14 +2204,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                     Font.Style = [fsBold, fsUnderline]
                     TextAlignment = taRightJustified
                     Transparent = True
-                    mmHeight = 1119983
-                    mmLeft = 39832571
-                    mmTop = 1050133
-                    mmWidth = 5398834
+                    mmHeight = 4233
+                    mmLeft = 150548
+                    mmTop = 3969
+                    mmWidth = 20405
                     BandType = 1
                   end
                   object ppLabel43: TppLabel
-                    UserName = 'ppLabel43'
+                    UserName = 'Label3'
                     AutoSize = False
                     Border.BorderPositions = []
                     Border.Color = clBlack
@@ -2215,14 +2224,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                     Font.Size = 10
                     Font.Style = [fsBold, fsUnderline]
                     Transparent = True
-                    mmHeight = 1142473
+                    mmHeight = 4318
                     mmLeft = 0
-                    mmTop = 1050133
-                    mmWidth = 29332031
+                    mmTop = 3969
+                    mmWidth = 110861
                     BandType = 1
                   end
                   object ppLabel30: TppLabel
-                    UserName = 'ppLabel30'
+                    UserName = 'Label30'
                     Border.BorderPositions = []
                     Border.Color = clBlack
                     Border.Style = psSolid
@@ -2235,25 +2244,27 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                     Font.Style = [fsBold, fsUnderline]
                     TextAlignment = taRightJustified
                     Transparent = True
-                    mmHeight = 1119983
-                    mmLeft = 34237945
-                    mmTop = 1050133
-                    mmWidth = 5488263
+                    mmHeight = 4233
+                    mmLeft = 129403
+                    mmTop = 3969
+                    mmWidth = 20743
                     BandType = 1
                   end
                 end
                 object DetalheProdutosVendidos: TppDetailBand
+                  BeforePrint = DetalheProdutosVendidosBeforePrint
                   Visible = False
                   mmBottomOffset = 0
-                  mmHeight = 279930
+                  mmHeight = 1058
                   mmPrintPosition = 0
                   object ppDBText27: TppDBText
-                    UserName = 'ppDBText27'
+                    UserName = 'DBText10'
                     AutoSize = True
                     Border.BorderPositions = []
                     Border.Color = clBlack
                     Border.Style = psSolid
                     Border.Visible = False
+                    DataField = 'QTDE'
                     DataPipeline = PipeItensVendidos
                     DisplayFormat = '#0.000'
                     Font.Charset = DEFAULT_CHARSET
@@ -2264,19 +2275,20 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                     TextAlignment = taRightJustified
                     Transparent = True
                     DataPipelineName = 'PipeItensVendidos'
-                    mmHeight = 3429
-                    mmLeft = 44510478
+                    mmHeight = 1058
+                    mmLeft = 161132
                     mmTop = 0
-                    mmWidth = 15282
+                    mmWidth = 7154
                     BandType = 4
                   end
                   object ppDBText28: TppDBText
-                    UserName = 'ppDBText28'
+                    UserName = 'DBText101'
                     AutoSize = True
                     Border.BorderPositions = []
                     Border.Color = clBlack
                     Border.Style = psSolid
                     Border.Visible = False
+                    DataField = 'VLRTOTALITEM'
                     DataPipeline = PipeItensVendidos
                     DisplayFormat = '#0.00'
                     Font.Charset = DEFAULT_CHARSET
@@ -2287,30 +2299,31 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                     TextAlignment = taRightJustified
                     Transparent = True
                     DataPipelineName = 'PipeItensVendidos'
-                    mmHeight = 3429
-                    mmLeft = 51558727
+                    mmHeight = 1058
+                    mmLeft = 175155
                     mmTop = 0
-                    mmWidth = 15282
+                    mmWidth = 19770
                     BandType = 4
                   end
                 end
                 object SumarioProdutosVendidos: TppSummaryBand
+                  BeforePrint = SumarioProdutosVendidosBeforePrint
                   PrintHeight = phDynamic
-                  mmBottomOffset = 769939
-                  mmHeight = 2660126
+                  mmBottomOffset = 0
+                  mmHeight = 10054
                   mmPrintPosition = 0
                   object ppLine5: TppLine
-                    UserName = 'ppLine5'
+                    UserName = 'Line1'
                     Border.BorderPositions = []
                     Border.Color = clBlack
                     Border.Style = psSolid
                     Border.Visible = False
                     Pen.Style = psDot
                     Weight = 0.750000000000000000
-                    mmHeight = 139965
-                    mmLeft = 139965
-                    mmTop = 210080
-                    mmWidth = 52153448
+                    mmHeight = 529
+                    mmLeft = 529
+                    mmTop = 794
+                    mmWidth = 197115
                     BandType = 7
                   end
                   object SubVendasCartoesCheque: TppSubReport
@@ -2320,10 +2333,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                     OutlineSettings.CreateNode = True
                     TraverseAllData = False
                     DataPipelineName = 'PipeVendasCartoesCheques'
-                    mmHeight = 1330063
+                    mmHeight = 5027
                     mmLeft = 0
-                    mmTop = 560124
-                    mmWidth = 52202396
+                    mmTop = 2117
+                    mmWidth = 197300
                     BandType = 7
                     mmBottomOffset = 0
                     mmOverFlowOffset = 0
@@ -2331,27 +2344,26 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                     object ppChildReport6: TppChildReport
                       AutoStop = False
                       DataPipeline = PipeVendasCartoesCheques
-                      PassSetting = psTwoPass
                       PrinterSetup.BinName = 'Default'
                       PrinterSetup.DocumentName = 'Report'
-                      PrinterSetup.PaperName = 'Custom'
+                      PrinterSetup.PaperName = 'A4'
                       PrinterSetup.PrinterName = 'Default'
                       PrinterSetup.mmMarginBottom = 6350
                       PrinterSetup.mmMarginLeft = 6350
                       PrinterSetup.mmMarginRight = 6350
                       PrinterSetup.mmMarginTop = 6350
-                      PrinterSetup.mmPaperHeight = 0
-                      PrinterSetup.mmPaperWidth = 0
-                      PrinterSetup.PaperSize = 139
+                      PrinterSetup.mmPaperHeight = 297000
+                      PrinterSetup.mmPaperWidth = 210000
+                      PrinterSetup.PaperSize = 9
                       Version = '10.06'
                       mmColumnWidth = 0
                       DataPipelineName = 'PipeVendasCartoesCheques'
                       object TituloVendaCartoes: TppTitleBand
                         mmBottomOffset = 0
-                        mmHeight = 4340234
+                        mmHeight = 16404
                         mmPrintPosition = 0
                         object ppLabel7: TppLabel
-                          UserName = 'ppLabel7'
+                          UserName = 'Label1'
                           AutoSize = False
                           Border.BorderPositions = []
                           Border.Color = clBlack
@@ -2364,14 +2376,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                           Font.Size = 10
                           Font.Style = [fsBold, fsUnderline]
                           Transparent = True
-                          mmHeight = 1119983
-                          mmLeft = 560124
-                          mmTop = 3080285
-                          mmWidth = 14841038
+                          mmHeight = 4233
+                          mmLeft = 2117
+                          mmTop = 11642
+                          mmWidth = 56092
                           BandType = 1
                         end
                         object ppLabel8: TppLabel
-                          UserName = 'ppLabel8'
+                          UserName = 'Label2'
                           Border.BorderPositions = []
                           Border.Color = clBlack
                           Border.Style = psSolid
@@ -2384,14 +2396,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                           Font.Style = [fsBold, fsUnderline]
                           TextAlignment = taRightJustified
                           Transparent = True
-                          mmHeight = 1125540
-                          mmLeft = 19800927
-                          mmTop = 3080285
-                          mmWidth = 7150908
+                          mmHeight = 4254
+                          mmLeft = 74838
+                          mmTop = 11642
+                          mmWidth = 27027
                           BandType = 1
                         end
                         object ppLabel46: TppLabel
-                          UserName = 'ppLabel46'
+                          UserName = 'Label46'
                           Border.BorderPositions = []
                           Border.Color = clBlack
                           Border.Style = psSolid
@@ -2403,14 +2415,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                           Font.Size = 10
                           Font.Style = [fsBold, fsUnderline]
                           Transparent = True
-                          mmHeight = 1125540
-                          mmLeft = 27371729
-                          mmTop = 3080285
-                          mmWidth = 5561817
+                          mmHeight = 4254
+                          mmLeft = 103452
+                          mmTop = 11642
+                          mmWidth = 21021
                           BandType = 1
                         end
                         object ppLabel48: TppLabel
-                          UserName = 'ppLabel48'
+                          UserName = 'Label48'
                           AutoSize = False
                           Border.BorderPositions = []
                           Border.Color = clBlack
@@ -2423,14 +2435,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                           Font.Size = 10
                           Font.Style = [fsBold]
                           Transparent = True
-                          mmHeight = 1125540
-                          mmLeft = 700089
-                          mmTop = 629974
-                          mmWidth = 29332031
+                          mmHeight = 4254
+                          mmLeft = 2646
+                          mmTop = 2381
+                          mmWidth = 110861
                           BandType = 1
                         end
                         object ppLabel47: TppLabel
-                          UserName = 'ppLabel47'
+                          UserName = 'Label47'
                           Border.BorderPositions = []
                           Border.Color = clBlack
                           Border.Style = psSolid
@@ -2442,14 +2454,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                           Font.Size = 10
                           Font.Style = [fsBold, fsUnderline]
                           Transparent = True
-                          mmHeight = 1125540
-                          mmLeft = 33462185
-                          mmTop = 3080285
-                          mmWidth = 2847187
+                          mmHeight = 4254
+                          mmLeft = 126471
+                          mmTop = 11642
+                          mmWidth = 10761
                           BandType = 1
                         end
                         object ppLabel49: TppLabel
-                          UserName = 'ppLabel49'
+                          UserName = 'Label49'
                           Border.BorderPositions = []
                           Border.Color = clBlack
                           Border.Style = psSolid
@@ -2461,14 +2473,14 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                           Font.Size = 10
                           Font.Style = [fsBold, fsUnderline]
                           Transparent = True
-                          mmHeight = 1125540
-                          mmLeft = 36752550
-                          mmTop = 3080285
-                          mmWidth = 3707878
+                          mmHeight = 4254
+                          mmLeft = 138907
+                          mmTop = 11642
+                          mmWidth = 14014
                           BandType = 1
                         end
                         object ppLabel50: TppLabel
-                          UserName = 'ppLabel50'
+                          UserName = 'Label50'
                           Border.BorderPositions = []
                           Border.Color = clBlack
                           Border.Style = psSolid
@@ -2480,23 +2492,24 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                           Font.Size = 10
                           Font.Style = [fsBold, fsUnderline]
                           Transparent = True
-                          mmHeight = 1125540
-                          mmLeft = 43052821
-                          mmTop = 3080285
-                          mmWidth = 5793593
+                          mmHeight = 4254
+                          mmLeft = 162719
+                          mmTop = 11642
+                          mmWidth = 21897
                           BandType = 1
                         end
                       end
                       object DetalheVendaCartoes: TppDetailBand
                         mmBottomOffset = 0
-                        mmHeight = 1119983
+                        mmHeight = 4233
                         mmPrintPosition = 0
                         object ppDBText29: TppDBText
-                          UserName = 'ppDBText29'
+                          UserName = 'DBText29'
                           Border.BorderPositions = []
                           Border.Color = clBlack
                           Border.Style = psSolid
                           Border.Visible = False
+                          DataField = 'NUMEA30DESCR'
                           DataPipeline = PipeVendasCartoesCheques
                           Font.Charset = DEFAULT_CHARSET
                           Font.Color = clBlack
@@ -2505,18 +2518,19 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                           Font.Style = []
                           Transparent = True
                           DataPipelineName = 'PipeVendasCartoesCheques'
-                          mmHeight = 980019
-                          mmLeft = 560124
-                          mmTop = 139965
-                          mmWidth = 16381181
+                          mmHeight = 3704
+                          mmLeft = 2117
+                          mmTop = 529
+                          mmWidth = 61913
                           BandType = 4
                         end
                         object ppDBText30: TppDBText
-                          UserName = 'ppDBText30'
+                          UserName = 'DBText30'
                           Border.BorderPositions = []
                           Border.Color = clBlack
                           Border.Style = psSolid
                           Border.Visible = False
+                          DataField = 'CTRCN2VLR'
                           DataPipeline = PipeVendasCartoesCheques
                           DisplayFormat = '#,0.00;-#,0.00'
                           Font.Charset = DEFAULT_CHARSET
@@ -2527,18 +2541,19 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                           TextAlignment = taRightJustified
                           Transparent = True
                           DataPipelineName = 'PipeVendasCartoesCheques'
-                          mmHeight = 993248
-                          mmLeft = 20861379
-                          mmTop = 139965
-                          mmWidth = 6090456
+                          mmHeight = 3754
+                          mmLeft = 78846
+                          mmTop = 529
+                          mmWidth = 23019
                           BandType = 4
                         end
                         object ppDBText31: TppDBText
-                          UserName = 'ppDBText31'
+                          UserName = 'DBText301'
                           Border.BorderPositions = []
                           Border.Color = clBlack
                           Border.Style = psSolid
                           Border.Visible = False
+                          DataField = 'CTRCDVENC'
                           DataPipeline = PipeVendasCartoesCheques
                           Font.Charset = DEFAULT_CHARSET
                           Font.Color = clBlack
@@ -2548,18 +2563,19 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                           TextAlignment = taCentered
                           Transparent = True
                           DataPipelineName = 'PipeVendasCartoesCheques'
-                          mmHeight = 993248
-                          mmLeft = 27371729
-                          mmTop = 139965
-                          mmWidth = 5530332
+                          mmHeight = 3754
+                          mmLeft = 103452
+                          mmTop = 529
+                          mmWidth = 20902
                           BandType = 4
                         end
                         object ppDBText32: TppDBText
-                          UserName = 'ppDBText32'
+                          UserName = 'DBText32'
                           Border.BorderPositions = []
                           Border.Color = clBlack
                           Border.Style = psSolid
                           Border.Visible = False
+                          DataField = 'BANCA5CODCHQ'
                           DataPipeline = PipeVendasCartoesCheques
                           Font.Charset = DEFAULT_CHARSET
                           Font.Color = clBlack
@@ -2568,18 +2584,19 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                           Font.Style = []
                           Transparent = True
                           DataPipelineName = 'PipeVendasCartoesCheques'
-                          mmHeight = 993248
-                          mmLeft = 33462185
-                          mmTop = 139965
-                          mmWidth = 2870206
+                          mmHeight = 3754
+                          mmLeft = 126471
+                          mmTop = 529
+                          mmWidth = 10848
                           BandType = 4
                         end
                         object ppDBText33: TppDBText
-                          UserName = 'ppDBText33'
+                          UserName = 'DBText33'
                           Border.BorderPositions = []
                           Border.Color = clBlack
                           Border.Style = psSolid
                           Border.Visible = False
+                          DataField = 'CTRCA10AGENCIACHQ'
                           DataPipeline = PipeVendasCartoesCheques
                           Font.Charset = DEFAULT_CHARSET
                           Font.Color = clBlack
@@ -2588,18 +2605,19 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                           Font.Style = []
                           Transparent = True
                           DataPipelineName = 'PipeVendasCartoesCheques'
-                          mmHeight = 980019
-                          mmLeft = 36752550
-                          mmTop = 139965
-                          mmWidth = 5810262
+                          mmHeight = 3704
+                          mmLeft = 138907
+                          mmTop = 529
+                          mmWidth = 21960
                           BandType = 4
                         end
                         object ppDBText34: TppDBText
-                          UserName = 'ppDBText34'
+                          UserName = 'DBText34'
                           Border.BorderPositions = []
                           Border.Color = clBlack
                           Border.Style = psSolid
                           Border.Visible = False
+                          DataField = 'CTRCA15NROCHQ'
                           DataPipeline = PipeVendasCartoesCheques
                           Font.Charset = DEFAULT_CHARSET
                           Font.Color = clBlack
@@ -2608,10 +2626,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                           Font.Style = []
                           Transparent = True
                           DataPipelineName = 'PipeVendasCartoesCheques'
-                          mmHeight = 980019
-                          mmLeft = 43052821
-                          mmTop = 139965
-                          mmWidth = 8400538
+                          mmHeight = 3704
+                          mmLeft = 162719
+                          mmTop = 529
+                          mmWidth = 31750
                           BandType = 4
                         end
                         object TEF: TppLabel
@@ -2628,30 +2646,30 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                           Font.Style = []
                           TextAlignment = taCentered
                           Transparent = True
-                          mmHeight = 993248
-                          mmLeft = 17571279
-                          mmTop = 139965
-                          mmWidth = 1390388
+                          mmHeight = 3754
+                          mmLeft = 66411
+                          mmTop = 529
+                          mmWidth = 5255
                           BandType = 4
                         end
                       end
                       object SumarioVendaCartoes: TppSummaryBand
                         PrintHeight = phDynamic
-                        mmBottomOffset = 2170116
-                        mmHeight = 2590276
+                        mmBottomOffset = 0
+                        mmHeight = 9790
                         mmPrintPosition = 0
                         object ppLine2: TppLine
-                          UserName = 'ppLine2'
+                          UserName = 'Line1'
                           Border.BorderPositions = []
                           Border.Color = clBlack
                           Border.Style = psSolid
                           Border.Visible = False
                           Pen.Style = psDot
                           Weight = 0.750000000000000000
-                          mmHeight = 210080
-                          mmLeft = 139965
-                          mmTop = 210080
-                          mmWidth = 52153448
+                          mmHeight = 794
+                          mmLeft = 529
+                          mmTop = 794
+                          mmWidth = 197115
                           BandType = 7
                         end
                       end
@@ -2659,30 +2677,30 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                   end
                 end
                 object ppGroup1: TppGroup
+                  BreakName = 'PRODICOD'
                   DataPipeline = PipeItensVendidos
                   KeepTogether = True
                   OutlineSettings.CreateNode = True
-                  ReprintOnSubsequentColumn = False
-                  ReprintOnSubsequentPage = False
                   UserName = 'Group1'
                   mmNewColumnThreshold = 0
                   mmNewPageThreshold = 0
                   DataPipelineName = 'PipeItensVendidos'
                   object ppGroupHeaderBand1: TppGroupHeaderBand
                     mmBottomOffset = 0
-                    mmHeight = 139965
+                    mmHeight = 529
                     mmPrintPosition = 0
                   end
                   object TotalProdutosVendidos: TppGroupFooterBand
                     mmBottomOffset = 0
-                    mmHeight = 980019
+                    mmHeight = 3704
                     mmPrintPosition = 0
                     object ppDBCalc4: TppDBCalc
-                      UserName = 'ppDBCalc4'
+                      UserName = 'DBCalc4'
                       Border.BorderPositions = []
                       Border.Color = clBlack
                       Border.Style = psSolid
                       Border.Visible = False
+                      DataField = 'QTDE'
                       DataPipeline = PipeItensVendidos
                       DisplayFormat = '##0.000'
                       Font.Charset = DEFAULT_CHARSET
@@ -2694,19 +2712,20 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                       TextAlignment = taRightJustified
                       Transparent = True
                       DataPipelineName = 'PipeItensVendidos'
-                      mmHeight = 910168
-                      mmLeft = 40182615
-                      mmTop = 70115
-                      mmWidth = 4410348
+                      mmHeight = 3440
+                      mmLeft = 151871
+                      mmTop = 265
+                      mmWidth = 16669
                       BandType = 5
                       GroupNo = 0
                     end
                     object ppDBCalc2: TppDBCalc
-                      UserName = 'ppDBCalc2'
+                      UserName = 'DBCalc2'
                       Border.BorderPositions = []
                       Border.Color = clBlack
                       Border.Style = psSolid
                       Border.Visible = False
+                      DataField = 'VLRTOTALITEM'
                       DataPipeline = PipeItensVendidos
                       DisplayFormat = '##0.00'
                       Font.Charset = DEFAULT_CHARSET
@@ -2718,19 +2737,20 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                       TextAlignment = taRightJustified
                       Transparent = True
                       DataPipelineName = 'PipeItensVendidos'
-                      mmHeight = 907258
-                      mmLeft = 45993142
-                      mmTop = 70115
-                      mmWidth = 5600447
+                      mmHeight = 3429
+                      mmLeft = 173832
+                      mmTop = 265
+                      mmWidth = 21167
                       BandType = 5
                       GroupNo = 0
                     end
                     object ppDBText26: TppDBText
-                      UserName = 'ppDBText26'
+                      UserName = 'DBText9'
                       Border.BorderPositions = []
                       Border.Color = clBlack
                       Border.Style = psSolid
                       Border.Visible = False
+                      DataField = 'PRODICOD'
                       DataPipeline = PipeItensVendidos
                       DisplayFormat = '#####00000'
                       Font.Charset = DEFAULT_CHARSET
@@ -2740,10 +2760,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                       Font.Style = []
                       Transparent = True
                       DataPipelineName = 'PipeItensVendidos'
-                      mmHeight = 910168
-                      mmLeft = 139965
-                      mmTop = 70115
-                      mmWidth = 4550313
+                      mmHeight = 3440
+                      mmLeft = 529
+                      mmTop = 265
+                      mmWidth = 17198
                       BandType = 5
                       GroupNo = 0
                     end
@@ -2761,20 +2781,21 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                       Font.Size = 8
                       Font.Style = []
                       Transparent = True
-                      mmHeight = 910168
-                      mmLeft = 5040323
-                      mmTop = 70115
-                      mmWidth = 24501524
+                      mmHeight = 3440
+                      mmLeft = 19050
+                      mmTop = 265
+                      mmWidth = 92604
                       BandType = 5
                       GroupNo = 0
                     end
                     object ppDBText20: TppDBText
-                      UserName = 'ppDBText20'
+                      UserName = 'DBText102'
                       AutoSize = True
                       Border.BorderPositions = []
                       Border.Color = clBlack
                       Border.Style = psSolid
                       Border.Visible = False
+                      DataField = 'CPITN3VLRUNIT'
                       DataPipeline = PipeItensVendidos
                       DisplayFormat = '#0.000'
                       Font.Charset = DEFAULT_CHARSET
@@ -2785,10 +2806,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                       TextAlignment = taRightJustified
                       Transparent = True
                       DataPipelineName = 'PipeItensVendidos'
-                      mmHeight = 3429
-                      mmLeft = 39747174
-                      mmTop = 70115
-                      mmWidth = 15282
+                      mmHeight = 3440
+                      mmLeft = 130704
+                      mmTop = 265
+                      mmWidth = 19579
                       BandType = 5
                       GroupNo = 0
                     end
@@ -2800,11 +2821,12 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         end
       end
       object ppDBCalc3: TppDBCalc
-        UserName = 'ppDBCalc3'
+        UserName = 'TotalCredito'
         Border.BorderPositions = []
         Border.Color = clBlack
         Border.Style = psSolid
         Border.Visible = False
+        DataField = 'CREDITOS'
         DataPipeline = PipeOperacao
         DisplayFormat = '#,0.00;-#,0.00'
         Font.Charset = DEFAULT_CHARSET
@@ -2815,18 +2837,19 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'PipeOperacao'
-        mmHeight = 926837
-        mmLeft = 30241935
-        mmTop = 420159
-        mmWidth = 6440500
+        mmHeight = 3503
+        mmLeft = 114300
+        mmTop = 1588
+        mmWidth = 24342
         BandType = 7
       end
       object ppDBCalc7: TppDBCalc
-        UserName = 'ppDBCalc7'
+        UserName = 'TotalDebito'
         Border.BorderPositions = []
         Border.Color = clBlack
         Border.Style = psSolid
         Border.Visible = False
+        DataField = 'DEBITOS'
         DataPipeline = PipeOperacao
         DisplayFormat = '#,0.00;-#,0.00'
         Font.Charset = DEFAULT_CHARSET
@@ -2837,28 +2860,28 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'PipeOperacao'
-        mmHeight = 926837
-        mmLeft = 37662454
-        mmTop = 420159
-        mmWidth = 6440500
+        mmHeight = 3503
+        mmLeft = 142346
+        mmTop = 1588
+        mmWidth = 24342
         BandType = 7
       end
       object ppLine11: TppLine
-        UserName = 'ppLine11'
+        UserName = 'Line2'
         Border.BorderPositions = []
         Border.Color = clBlack
         Border.Style = psSolid
         Border.Visible = False
         Pen.Style = psDot
         Weight = 0.750000000000000000
-        mmHeight = 490009
+        mmHeight = 1852
         mmLeft = 0
-        mmTop = 3010171
-        mmWidth = 52153448
+        mmTop = 11377
+        mmWidth = 197115
         BandType = 7
       end
       object ppLabel45: TppLabel
-        UserName = 'ppLabel45'
+        UserName = 'Label11'
         Border.BorderPositions = []
         Border.Color = clBlack
         Border.Style = psSolid
@@ -2871,32 +2894,33 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Style = [fsBold]
         TextAlignment = taCentered
         Transparent = True
-        mmHeight = 926837
-        mmLeft = 302419
-        mmTop = 210080
-        mmWidth = 2615411
+        mmHeight = 3503
+        mmLeft = 1143
+        mmTop = 794
+        mmWidth = 9885
         BandType = 7
       end
       object ppLine12: TppLine
-        UserName = 'ppLine12'
+        UserName = 'Line5'
         Border.BorderPositions = []
         Border.Color = clBlack
         Border.Style = psSolid
         Border.Visible = False
         Weight = 0.750000000000000000
-        mmHeight = 279930
-        mmLeft = 30241935
-        mmTop = 139965
-        mmWidth = 21561468
+        mmHeight = 1058
+        mmLeft = 114300
+        mmTop = 529
+        mmWidth = 81492
         BandType = 7
       end
       object ppDBCalc8: TppDBCalc
-        UserName = 'ppDBCalc8'
+        UserName = 'DBCalc1'
         AutoSize = True
         Border.BorderPositions = []
         Border.Color = clBlack
         Border.Style = psSolid
         Border.Visible = False
+        DataField = 'SALDO'
         DataPipeline = PipeOperacao
         DisplayFormat = '#,0.00;-#,0.00'
         Font.Charset = DEFAULT_CHARSET
@@ -2907,10 +2931,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'PipeOperacao'
-        mmHeight = 907258
-        mmLeft = 45867200
-        mmTop = 420159
-        mmWidth = 5656274
+        mmHeight = 3429
+        mmLeft = 173356
+        mmTop = 1588
+        mmWidth = 21378
         BandType = 7
       end
     end
