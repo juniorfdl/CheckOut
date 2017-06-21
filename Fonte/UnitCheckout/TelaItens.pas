@@ -329,6 +329,7 @@ type
     procedure GridItensEnter(Sender: TObject);
     procedure btnF7Click(Sender: TObject);
     procedure btnF9Click(Sender: TObject);
+    procedure btnF5Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -6274,6 +6275,12 @@ begin
       lbStatusECF.Caption := 'NFCe Offline';
       lbStatusECF.Update;
     end;
+end;
+
+procedure TFormTelaItens.btnF5Click(Sender: TObject);
+begin
+  EntradaDados.SetFocus;
+  FormKeyDown(Sender, F5, [ssShift]);
 end;
 
 end.
