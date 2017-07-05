@@ -571,10 +571,13 @@ begin
        IF iCRT = 2 Then
          Emit.CRT      := crtSimplesExcessoReceita  else
        IF iCRT = 3 Then
-         Emit.CRT      := crtRegimeNormal;
+         Emit.CRT      := crtRegimeNormal;   
 
-
-       Dest.CNPJCPF           := xDocumento;
+       if DocumentoClienteVenda <> '' then
+         Dest.CNPJCPF           := DocumentoClienteVenda
+       else
+         Dest.CNPJCPF           := xDocumento;
+         
        Dest.xNome             := xCliente;
        Dest.indIEDest         := inNaoContribuinte; {Pq NFCe nao informa Destinatario}
 
