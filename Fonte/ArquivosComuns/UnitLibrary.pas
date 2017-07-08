@@ -153,6 +153,7 @@ var
   NroUltItem : Integer;
   DataAtualizacaoEstoque, DataNotaCompra : TDateTime;
 
+function ExecSql(xsql: string; Tipo: Integer = 0): TQuery;
 function  LocateByDisplayLabel(DataSet:TDataSet;DisplayLabel:String):Integer ;
 procedure Informa(Texto:string) ;
 procedure InformaErro(Texto:string; Abortar: Boolean; SetarFoco: TWinControl) ;
@@ -1656,6 +1657,27 @@ begin
 //        end;
     end;
 end;
+
+function ExecSql(xsql: string; Tipo: Integer = 0): TQuery;
+begin
+  try
+    if tipo = 0 then
+    begin
+      Result := TQuery.Create(nil);
+      Result.DatabaseName := 'DB';
+      Result.SQL.Text := xsql;
+      Result.Open;
+    end
+    else begin
+      DM.DB.Execute(xsql);
+      Result := nil;
+    end;
+  except
+    on e: exception do
+      ShowMessage('Erro sql: ' + xsql + ' - ' + e.Message);
+  end;
+end;
+
 
 function LocateByDisplayLabel(DataSet:TDataSet;DisplayLabel:string) : Integer;
 var

@@ -227,7 +227,7 @@ begin
   F12   := Vk_F12;
   Application.Title := 'Cupom Fiscal';
   Application.CreateForm(TDM, DM);
-  if dm.SQLConfigGeralCFGECBLOQ.AsString = 'S' then
+  if (not DelphiAberto)and(dm.SQLConfigGeralCFGECBLOQ.AsString = 'S') then
     begin
       ShowMessage('Sistema Bloqueado!!! Ligue para a Suporte');
       DM.DB.Close;
