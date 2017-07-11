@@ -189,7 +189,8 @@ uses
   TelaProdutoNumeroSerieTEMP in '..\ArquivosComuns\TelaProdutoNumeroSerieTEMP.pas',
   TelaAtualizacaoCEP in '..\ArquivosComuns\TelaAtualizacaoCEP.pas' {FormTelaAtualizacaoCEP},
   TelaSelecaoProduto in '..\ArquivosComuns\TelaSelecaoProduto.pas' {FormTelaSelecaoProduto},
-  CadastroProdutos in '..\ArquivosComuns\CadastroProdutos.pas' {FormCadastroProduto};
+  CadastroProdutos in '..\ArquivosComuns\CadastroProdutos.pas' {FormCadastroProduto},
+  ACBrNFeDANFeESCPOS in '..\..\..\..\..\Acbr\trunk2\Fontes\ACBrDFe\ACBrNFe\DANFE\NFCe\EscPos\ACBrNFeDANFeESCPOS.pas';
 
 {$R *.RES}
 

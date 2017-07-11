@@ -112,10 +112,10 @@ RootDir=
 [Version Info]
 IncludeVerInfo=1
 AutoIncBuild=1
-MajorVer=3
-MinorVer=1
-Release=0
-Build=31
+MajorVer=2017
+MinorVer=7
+Release=10
+Build=0
 Debug=0
 PreRelease=0
 Special=0
@@ -126,7 +126,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=ATW - Automação, Tecnologia e Web
 FileDescription=Sistema de Gestão Empresarial
-FileVersion=3.1.0.31
+FileVersion=2017.7.10.0
 InternalName=Advanced Control Cash
 LegalCopyright=ATW - Automação, Tecnologia e Web
 LegalTrademarks=ATW - Automação, Tecnologia e Web
@@ -138,6 +138,7 @@ Comments=Sistema de Gestão Empresarial
 C:\Program Files (x86)\Borland\Delphi7\Projects\Bpl\ZParseSql70.bpl=Zeos SQL Parsing Classes and Interfaces
 C:\Program Files (x86)\Borland\Delphi7\Projects\Bpl\ZDbc70.bpl=Zeos Low Level Database API
 C:\Program Files (x86)\Borland\Delphi7\Projects\Bpl\ZPlain70.bpl=Zeos Plain Database API
+c:\program files (x86)\borland\delphi7\Projects\Bpl\xtradev7.bpl=Extra ReportBuilder Devices
 c:\program files (x86)\borland\delphi7\Bin\dclindy70.bpl=(Untitled)
 [HistoryLists\hlUnitAliases]
 Count=1

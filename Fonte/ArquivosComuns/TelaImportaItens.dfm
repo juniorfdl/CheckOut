@@ -48,7 +48,7 @@ object FormTelaImportaItens: TFormTelaImportaItens
     Top = 169
     Width = 236
     Height = 13
-    Caption = 'Lista de Problemas durante a importação:'
+    Caption = 'Lista de Problemas durante a importa'#231#227'o:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = 8404992
     Font.Height = -11
@@ -236,20 +236,14 @@ object FormTelaImportaItens: TFormTelaImportaItens
     object SQLConsultaInventarioINVICONTAGEM1: TFloatField
       FieldName = 'INVICONTAGEM1'
       Origin = 'DB.INVENTARIOESTOQUE.INVICONTAGEM1'
-      Precision = 15
-      Size = 3
     end
     object SQLConsultaInventarioINVICONTAGEM2: TFloatField
       FieldName = 'INVICONTAGEM2'
       Origin = 'DB.INVENTARIOESTOQUE.INVICONTAGEM2'
-      Precision = 15
-      Size = 3
     end
     object SQLConsultaInventarioINVICONTAGEM3: TFloatField
       FieldName = 'INVICONTAGEM3'
       Origin = 'DB.INVENTARIOESTOQUE.INVICONTAGEM3'
-      Precision = 15
-      Size = 3
     end
     object SQLConsultaInventarioINVDFECHAMENTO: TDateTimeField
       FieldName = 'INVDFECHAMENTO'

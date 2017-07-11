@@ -38,7 +38,7 @@ inherited DM: TDM
   end
   inherited SQLProdutoSaldoAux: TRxQuery
     Left = 294
-    Top = 273
+    Top = 305
   end
   inherited UpdateSQLProdutoSaldo: TUpdateSQL
     Left = 153
@@ -6763,13 +6763,13 @@ inherited DM: TDM
   end
   object ACBrNFeDANFeESCPOS: TACBrNFeDANFeESCPOS
     ACBrNFe = ACBrNFe
-    Sistema = 'Easy2Solutions'
+    Sistema = 'AUTOMAFOUR'
     PathPDF = '.\pdf\'
     MostrarPreview = True
     MostrarStatus = True
     TipoDANFE = tiNFCe
     NumCopias = 1
-    Site = 'http://www.projetoacbr.com.br'
+    Site = 'https://www.automafour.com.br/'
     ImprimeNomeFantasia = False
     ImprimirDescPorc = False
     ImprimirTotalLiquido = False
