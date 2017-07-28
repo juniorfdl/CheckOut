@@ -11,7 +11,7 @@ uses
   Menus, ESkinPlus, AdvGlowButton, AdvOfficeStatusBar, AdvOfficeStatusBarStylers,
   AdvSmoothPanel, AdvReflectionLabel, AdvSmoothSlideShow, ComCtrls, TFlatPanelUnit,
   OleCtrls, SHDocVw, ACBrBAL, XMLIntf, XMLDoc, zlib, ACBrNFe, ACBrMail, ACBrBase, ACBrPosPrinter,
-  pcnConversao, ACBrUtil, ACBrDevice, RXClock;
+  pcnConversao, ACBrUtil, ACBrDevice, RXClock, cxStyles, dxSkinsCore;
 
 const
   //AS VARIAVEIS ABAIXO FORAM CRIADAS PARA NÃO CORRER O RISCO DE DIGITAR ERRADO
@@ -287,6 +287,8 @@ type
     SQLProdutoPRODN2VLRVENDA2835D: TFloatField;
     SQLProdutoPRODN2VLRVENDA283542D: TFloatField;
     SQLProdutoTABCEST: TStringField;
+    AdvSmoothPanel2: TAdvSmoothPanel;
+    Image2: TImage;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure EntradaDadosKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -326,7 +328,6 @@ type
     procedure setarceiroClick(Sender: TObject);
     procedure ACBrMailMailProcess(const AMail: TACBrMail;
       const aStatus: TMailStatus);
-    procedure GridItensEnter(Sender: TObject);
     procedure btnF7Click(Sender: TObject);
     procedure btnF9Click(Sender: TObject);
     procedure btnF5Click(Sender: TObject);
@@ -3121,24 +3122,20 @@ begin
                  EntradaDados.SelectAll ;
                  exit ;
                end ;
-
              // MANDA DADOS DISPLAY TECLADO
              IF TecladoReduzidoModelo = 'TEC44DIS' THEN
                EnviaTecladoTextoDisplay44('Escolha o Tipo do Desconto?','(Valor ou Percentual)');
              IF TecladoReduzidoModelo = 'TEC65' THEN
                EnviaTecladoTextoDisplay65('Escolha o Tipo do Desconto?','(Valor ou Percentual)');
-
              Application.CreateForm(TFormTelaTipoDescontoItem, FormTelaTipoDescontoItem) ;
              FormTelaTipoDescontoItem.ShowModal ;
              if TipoDescItem = '' then
                Exit ;
-
              EstadoPDVChkAnt := EstadoPDVChk ;
              if TipoDescItem = 'VALOR' then
                EstadoPDVChk := DescontoVlrItem ;
              if TipoDescItem = 'PERCENTUAL' then
                EstadoPDVChk := DescontoPercItem ;
-
              PreparaEstadoBalcao(EstadoPDVChk) ;}
       end;
     VK_F8: begin //RECEBIMENTO DE CREDIÁRIO
@@ -3688,7 +3685,6 @@ begin
                       DM.SQLTemplate.SQL.Add('select OPCXICOD from OPERACAOCAIXA') ;
                       DM.SQLTemplate.SQL.Add('where OPCXA5SIGLA = ''ABGAV''') ;
                       DM.SQLTemplate.Open ;
-
                       if not DM.SQLTemplate.IsEmpty then
                         GravaMovimentoCaixa(DM.SQLTotalizadorCaixa,
                                             DM.SQLTotalizar,
@@ -5987,11 +5983,6 @@ begin
   end;
 end;
 
-procedure TFormTelaItens.GridItensEnter(Sender: TObject);
-begin
-  EntradaDados.SetFocus;
-end;
-
 procedure TFormTelaItens.btnF7Click(Sender: TObject);
 begin
   EntradaDados.SetFocus;
@@ -6302,4 +6293,3 @@ begin
 end;
 
 end.
-
