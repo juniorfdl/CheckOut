@@ -526,6 +526,7 @@ begin
   LblInstrucoes.Caption := 'Aguarde... Montando NFCe.. ' + intToStr(NumNFe);
   LblInstrucoes.Update;
 
+  //dm.ACBrNFe.
   dm.ACBrNFe.NotasFiscais.Clear;
   with dm.ACBrNFe.NotasFiscais.Add.NFe do
   begin
@@ -1072,14 +1073,14 @@ begin
 
   SQLItensVendaTempQUANTIDADE.DisplayFormat := '';
   case DM.SQLTerminalAtivoTERMINRODECQUANT.Value of
-    2: SQLItensVendaTempQUANTIDADE.DisplayFormat := '##0.00';
+    2: SQLItensVendaTempQUANTIDADE.DisplayFormat := '##0.00##';
     3: SQLItensVendaTempQUANTIDADE.DisplayFormat := '##0.000';
   end;
   FormatStrQuant := SQLItensVendaTempQUANTIDADE.DisplayFormat;
 
   SQLItensVendaTempVLRUNITBRUT.DisplayFormat := '';
   case Dm.SQLConfigVendaCFVEINROCASASDEC.AsInteger of
-    2: SQLItensVendaTempVLRUNITBRUT.DisplayFormat := '##0.00';
+    2: SQLItensVendaTempVLRUNITBRUT.DisplayFormat := '##0.00##';
     3: SQLItensVendaTempVLRUNITBRUT.DisplayFormat := '###0.000';
   end;
   FormatStrVlrVenda := SQLItensVendaTempVLRUNITBRUT.DisplayFormat;

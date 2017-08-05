@@ -170,16 +170,17 @@ begin
                      end ;
             ftFloat:Case (Components[I] as TFloatField).Size of
                     0:Begin
-                        (Components[I] as TFloatField).DisplayFormat := '#,##0.00';
-                        (Components[I] as TFloatField).EditFormat    := '0.00';
+                        if ((Components[I] as TFloatField).DisplayFormat = '') then
+                        (Components[I] as TFloatField).DisplayFormat := '0.,00';
+                        (Components[I] as TFloatField).EditFormat    := '0.00##';
                       end ;
                     1:begin
-                        (Components[I] as TFloatField).DisplayFormat := '#,##0.0';
-                        (Components[I] as TFloatField).EditFormat    := '0.0';
+                        (Components[I] as TFloatField).DisplayFormat := '#,##0.0##';
+                        (Components[I] as TFloatField).EditFormat    := '0.0##';
                       end ;
                     2:Begin
-                        (Components[I] as TFloatField).DisplayFormat := '#,##0.00';
-                        (Components[I] as TFloatField).EditFormat    := '0.00';
+                        (Components[I] as TFloatField).DisplayFormat := '0.,00##';
+                        (Components[I] as TFloatField).EditFormat    := '0.00##';
                       end ;
                     3:begin
                         (Components[I] as TFloatField).DisplayFormat := '#,##0.000';

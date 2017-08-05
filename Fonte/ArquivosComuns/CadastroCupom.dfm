@@ -376,6 +376,7 @@ inherited FormCadastroCupom: TFormCadastroCupom
                   item
                     Expanded = False
                     FieldName = 'CPITN3QTD'
+                    Title.Caption = 'Qtde'
                     Width = 60
                     Visible = True
                   end
@@ -3067,23 +3068,27 @@ inherited FormCadastroCupom: TFormCadastroCupom
       DisplayLabel = 'C'#243'digo'
       FieldName = 'PRODICOD'
     end
+    object SQLCupomItemCPITN3QTD: TFloatField
+      FieldName = 'CPITN3QTD'
+      Origin = 'DB.CUPOMITEM.CPITN3QTD'
+      DisplayFormat = '0.,00##'
+      EditFormat = '0.,00##'
+    end
     object SQLCupomItemPRODA60DESCR: TStringField
       DisplayLabel = 'Descri'#231#227'o'
       FieldName = 'PRODA60DESCR'
       FixedChar = True
       Size = 60
     end
-    object SQLCupomItemCPITN3QTD: TFloatField
-      DisplayLabel = 'Quant.'
-      FieldName = 'CPITN3QTD'
-    end
     object SQLCupomItemCPITN3VLRUNIT: TFloatField
       DisplayLabel = 'Vlr.Unit.'
       FieldName = 'CPITN3VLRUNIT'
+      DisplayFormat = '0.,00###'
     end
     object SQLCupomItemVLRTOTALITEM: TFloatField
       DisplayLabel = 'Vlr.Total'
       FieldName = 'VLRTOTALITEM'
+      DisplayFormat = '0.,00'
     end
     object SQLCupomItemVENDICOD: TIntegerField
       DisplayLabel = 'C'#243'd.Vend.'
@@ -3092,6 +3097,7 @@ inherited FormCadastroCupom: TFormCadastroCupom
     object SQLCupomItemCPITN2DESC: TFloatField
       FieldName = 'CPITN2DESC'
       Origin = 'DB.CUPOMITEM.CPITN2DESC'
+      DisplayFormat = '0.,00###'
     end
     object SQLCupomItemCPITN2BASEICMS: TFloatField
       DisplayLabel = 'Base ICMS'
@@ -3102,6 +3108,7 @@ inherited FormCadastroCupom: TFormCadastroCupom
       DisplayLabel = 'Vlr. ICMS'
       FieldName = 'CPITN2VLRICMS'
       Origin = 'DB.CUPOMITEM.CPITN2VLRICMS'
+      DisplayFormat = '0.,00###'
     end
     object SQLCupomItemCPITN3QTDTROCA: TFloatField
       FieldName = 'CPITN3QTDTROCA'

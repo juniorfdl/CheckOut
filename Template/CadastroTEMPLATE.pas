@@ -472,42 +472,48 @@ begin
                   end ;
           ftFloat:Case (Components[I] as TFloatField).Size of
                     0:Begin
-                        (Components[I] as TFloatField).DisplayFormat := '#,##0.00';
-                        (Components[I] as TFloatField).EditFormat    := '0.00';
+                        if ((Components[I] as TFloatField).DisplayFormat = '') then
+                        (Components[I] as TFloatField).DisplayFormat := '0.,00';
+                        (Components[I] as TFloatField).EditFormat    := '0.00##';
                       end ;
                     1:begin
-                        (Components[I] as TFloatField).DisplayFormat := '#,##0.0';
+                      if ((Components[I] as TFloatField).DisplayFormat = '') then
+                        (Components[I] as TFloatField).DisplayFormat := '0.,00##';
                         (Components[I] as TFloatField).EditFormat    := '0.0';
                       end ;
                     2: begin
-                        (Components[I] as TFloatField).DisplayFormat := '#,##0.00';
-                        (Components[I] as TFloatField).EditFormat    := '0.00';
+                        if ((Components[I] as TFloatField).DisplayFormat = '') then
+                        (Components[I] as TFloatField).DisplayFormat := '0.,00##';
+                        (Components[I] as TFloatField).EditFormat    := '0.00##';
                        end;
                     3:Begin
-                        (Components[I] as TFloatField).DisplayFormat := '#,###0.000';
-                        (Components[I] as TFloatField).EditFormat    := '0.000';
+                        if ((Components[I] as TFloatField).DisplayFormat = '') then
+                        (Components[I] as TFloatField).DisplayFormat := '0.,00##';
+                        (Components[I] as TFloatField).EditFormat    := '0.000#';
                       end ;
                     4:begin
-                        (Components[I] as TFloatField).DisplayFormat := '#,##0.0000';
+                        if ((Components[I] as TFloatField).DisplayFormat = '') then
+                        (Components[I] as TFloatField).DisplayFormat := '0.,00##';
                         (Components[I] as TFloatField).EditFormat    := '0.0000';
                       end ;
                     5:begin
-                        (Components[I] as TFloatField).DisplayFormat := '#,##0.00000';
+                        if ((Components[I] as TFloatField).DisplayFormat = '') then
+                        (Components[I] as TFloatField).DisplayFormat := '0.,00##';
                         (Components[I] as TFloatField).EditFormat    := '0.00000';
                       end ;
                   end ;
           ftBCD:  Case (Components[I] as TBCDField).Size of
                     0:Begin
-                        (Components[I] as TBCDField).DisplayFormat := '#,##0.00';
+                        (Components[I] as TBCDField).DisplayFormat := '0.,00##';
                         (Components[I] as TBCDField).EditFormat    := '0.00';
                       end ;
                     1:begin
-                        (Components[I] as TBCDField).DisplayFormat := '#,##0.0';
-                        (Components[I] as TBCDField).EditFormat    := '0.0';
+                        (Components[I] as TBCDField).DisplayFormat := '#,##0.0##';
+                        (Components[I] as TBCDField).EditFormat    := '0.0##';
                       end ;
                   2,3:Begin
-                        (Components[I] as TBCDField).DisplayFormat := '#,##0.00';
-                        (Components[I] as TBCDField).EditFormat    := '0.00';
+                        (Components[I] as TBCDField).DisplayFormat := '0.,00##';
+                        (Components[I] as TBCDField).EditFormat    := '0.00##';
                       end ;
                     4:begin
                         (Components[I] as TBCDField).DisplayFormat := '#,##0.0000';

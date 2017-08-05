@@ -171,7 +171,6 @@ type
     SQLCupomItemCPITIPOS: TIntegerField;
     SQLCupomItemPRODICOD: TIntegerField;
     SQLCupomItemCPITCSTATUS: TStringField;
-    SQLCupomItemCPITN3QTD: TFloatField;
     SQLCupomItemCPITN3QTDTROCA: TFloatField;
     SQLCupomItemCPITN3VLRUNIT: TFloatField;
     SQLCupomItemCPITN3VLRCUSTUNIT: TFloatField;
@@ -1137,6 +1136,7 @@ type
     SQLPreVendaItem1M3_ESPESSURA: TFloatField;
     SQLPreVendaItem1M3_LARGURA: TFloatField;
     SQLPreVendaItem1M3_COMPRI: TFloatField;
+    SQLCupomItemCPITN3QTD: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure SQLCupomNewRecord(DataSet: TDataSet);
     procedure SQLCupomBeforePost(DataSet: TDataSet);

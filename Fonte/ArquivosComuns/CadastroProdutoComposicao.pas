@@ -85,7 +85,7 @@ begin
     begin
       case Dm.SQLTerminalAtivoTERMINRODECQUANT.AsInteger of
         0, 2 : begin
-                 SQLTemplatePRODN3QTDE.EditFormat        := '0.00';
+                 SQLTemplatePRODN3QTDE.EditFormat        := '0.00##';
                  SQLTemplatePRODN3QTDE.DisplayFormat     := '#,##0.00';
                  EditQuant.Decimals  := 2;
                end;

@@ -1165,12 +1165,12 @@ begin
   DoNumeroCasasDec := Dm.SQLConfigVendaCFVEINROCASASDEC.AsInteger;
   case Dm.SQLConfigVendaCFVEINROCASASDEC.AsInteger of
     2 : begin
-          SQLTemplatePRODN3VLRVENDA.DisplayFormat     := '##0.00';
-          SQLTemplatePRODN3VLRVENDA.EditFormat        := '##0.00';
-          SQLTemplatePRODN3VLRVENDA2.DisplayFormat    := '##0.00';
-          SQLTemplatePRODN3VLRVENDA2.EditFormat       := '##0.00';
-          SQLTemplatePRODN3VLRVENDAPROM.DisplayFormat := '##0.00';
-          SQLTemplatePRODN3VLRVENDAPROM.EditFormat    := '##0.00';
+          SQLTemplatePRODN3VLRVENDA.DisplayFormat     := '##0.00##';
+          SQLTemplatePRODN3VLRVENDA.EditFormat        := '##0.00##';
+          SQLTemplatePRODN3VLRVENDA2.DisplayFormat    := '##0.00##';
+          SQLTemplatePRODN3VLRVENDA2.EditFormat       := '##0.00##';
+          SQLTemplatePRODN3VLRVENDAPROM.DisplayFormat := '##0.00##';
+          SQLTemplatePRODN3VLRVENDAPROM.EditFormat    := '##0.00##';
           DBEditVlrVenda.Decimals        := 2;
           DBEditVlrVendaAtacado.Decimals := 2;
           DBEditVlrPromocao.Decimals     := 2;

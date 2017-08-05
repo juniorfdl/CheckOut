@@ -5,6 +5,7 @@ inherited DM: TDM
   Height = 744
   Width = 1382
   inherited DB: TDatabase
+    Connected = False
     Left = 32
     Top = 8
   end
@@ -2143,17 +2144,16 @@ inherited DM: TDM
       FixedChar = True
       Size = 1
     end
-    object SQLCupomItemCPITN3QTD: TFloatField
-      FieldName = 'CPITN3QTD'
-      Origin = 'DB.CUPOMITEM.CPITN3QTD'
-    end
     object SQLCupomItemCPITN3QTDTROCA: TFloatField
       FieldName = 'CPITN3QTDTROCA'
       Origin = 'DB.CUPOMITEM.CPITN3QTDTROCA'
+      DisplayFormat = '0.,00##'
     end
     object SQLCupomItemCPITN3VLRUNIT: TFloatField
       FieldName = 'CPITN3VLRUNIT'
       Origin = 'DB.CUPOMITEM.CPITN3VLRUNIT'
+      DisplayFormat = '0.,00##'
+      EditFormat = '0.00##'
     end
     object SQLCupomItemCPITN3VLRCUSTUNIT: TFloatField
       FieldName = 'CPITN3VLRCUSTUNIT'
@@ -2265,6 +2265,12 @@ inherited DM: TDM
       FieldName = 'M3_ESPESSURA'
       Origin = 'DB.CUPOMITEM.M3_ESPESSURA'
       Precision = 9
+    end
+    object SQLCupomItemCPITN3QTD: TFloatField
+      FieldName = 'CPITN3QTD'
+      Origin = 'DB.CUPOMITEM.CPITN3QTD'
+      DisplayFormat = '0.,00##'
+      EditFormat = '0.00##'
     end
   end
   object DSSQLCupomItem: TDataSource
@@ -3347,6 +3353,8 @@ inherited DM: TDM
     object SQLPreVendaItem2PVITN3QTD: TFloatField
       FieldName = 'PVITN3QTD'
       Origin = 'DB.PREVENDAITEM.PVITN3QTD'
+      DisplayFormat = '0.,00##'
+      EditFormat = '0.,00##'
     end
     object SQLPreVendaItem2PVITN3VLRUNIT: TFloatField
       FieldName = 'PVITN3VLRUNIT'
@@ -3941,6 +3949,8 @@ inherited DM: TDM
     object SQLPreVendaItem1PVITN3QTD: TFloatField
       FieldName = 'PVITN3QTD'
       Origin = 'DB.PREVENDAITEM.PVITN3QTD'
+      DisplayFormat = '0.,00##'
+      EditFormat = '0.,00##'
     end
     object SQLPreVendaItem1PVITN3VLRUNIT: TFloatField
       FieldName = 'PVITN3VLRUNIT'
@@ -6780,8 +6790,8 @@ inherited DM: TDM
     CasasDecimais.Formato = tdetInteger
     CasasDecimais._qCom = 3
     CasasDecimais._vUnCom = 2
-    CasasDecimais._Mask_qCom = '###,###,###,##0.00'
-    CasasDecimais._Mask_vUnCom = '###,###,###,##0.00'
+    CasasDecimais._Mask_qCom = '###,###,###,##0.00###'
+    CasasDecimais._Mask_vUnCom = '###,###,###,##0.00###'
     ExibirResumoCanhoto = False
     FormularioContinuo = False
     TamanhoFonte_DemaisCampos = 10

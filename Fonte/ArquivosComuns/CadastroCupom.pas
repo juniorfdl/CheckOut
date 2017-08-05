@@ -118,7 +118,6 @@ type
     SQLCupomItemCUPOA13ID: TStringField;
     SQLCupomItemPRODICOD: TIntegerField;
     SQLCupomItemVLRTOTALITEM: TFloatField;
-    SQLCupomItemCPITN3QTD: TFloatField;
     SQLCupomItemVENDICOD: TIntegerField;
     SQLCupomItemPRODA60DESCR: TStringField;
     DSSQLCupomItem: TDataSource;
@@ -406,6 +405,7 @@ type
     SQLCupomItemM3_COMPRI: TFloatField;
     SQLCupomItemM3_ESPESSURA: TFloatField;
     CorrigeProblemaCadterm603para661: TMenuItem;
+    SQLCupomItemCPITN3QTD: TFloatField;
     procedure FormCreate(Sender: TObject);
     procedure SQLTemplateCalcFields(DataSet: TDataSet);
     procedure Button1Click(Sender: TObject);

@@ -4092,6 +4092,8 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
     object SQLPreVendaItemPVITN3QTD: TFloatField
       FieldName = 'PVITN3QTD'
       Origin = 'DB.PREVENDAITEM.PVITN3QTD'
+      DisplayFormat = '0.,00##'
+      EditFormat = '0.,00##'
     end
     object SQLPreVendaItemPVITN3VLRUNIT: TFloatField
       FieldName = 'PVITN3VLRUNIT'

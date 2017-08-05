@@ -1182,11 +1182,14 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     object SQLPrevendaItemPVITN3QTD: TFloatField
       FieldName = 'PVITN3QTD'
       Origin = 'DB.PREVENDAITEM.PVITN3QTD'
+      DisplayFormat = '0.,00###'
+      EditFormat = '0.,00#'
     end
     object SQLPrevendaItemPVITN3VLRUNIT: TFloatField
       FieldName = 'PVITN3VLRUNIT'
       Origin = 'DB.PREVENDAITEM.PVITN3VLRUNIT'
-      DisplayFormat = '##0.00'
+      DisplayFormat = '0.,00#'
+      EditFormat = '0.,00#'
     end
     object SQLPrevendaItemPVITN3VLRCUSTUNIT: TFloatField
       FieldName = 'PVITN3VLRCUSTUNIT'
