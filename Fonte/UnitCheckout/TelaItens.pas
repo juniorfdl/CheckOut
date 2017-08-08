@@ -202,13 +202,6 @@ type
     SQLProdutoPRODA255DESCRTEC: TMemoField;
     AdvOfficeStatusBarOfficeStyler1: TAdvOfficeStatusBarOfficeStyler;
     ScrollBoxPrincipal: TScrollBox;
-    AdvSmoothPanel4: TAdvSmoothPanel;
-    RxLabel2: TRxLabel;
-    EditQtde: TCurrencyEdit;
-    EntradaDados: TEdit;
-    AdvSmoothPanel3: TAdvSmoothPanel;
-    LblSubTotal: TRxLabel;
-    CurSubTotal: TCurrencyEdit;
     DSSQLParcelasVistaVendaTemp: TDataSource;
     SQLAgendaVer: TQuery;
     ScrollBoxEsquerda: TScrollBox;
@@ -222,47 +215,22 @@ type
     AdvOfficeStatusBar3: TAdvOfficeStatusBar;
     RxLabel7: TRxLabel;
     GridItens: TDBGrid;
-    AdvDetalheVenda: TAdvSmoothPanel;
-    lbRef: TRxLabel;
-    LBSaldo: TRxLabel;
-    rxVendedor: TRxLabel;
-    rxClienteNome: TRxLabel;
     AdvSmoothPanel5: TAdvSmoothPanel;
     slideshow: TAdvSmoothSlideShow;
     btnF1: TAdvGlowButton;
     btnF2: TAdvGlowButton;
     btnF4: TAdvGlowButton;
     btnF3: TAdvGlowButton;
-    LabelLeitor: TLabel;
     AdvSmoothPanel6: TAdvSmoothPanel;
-    shpStatusECF: TShape;
-    lbStatusECF: TRxLabel;
     rxParceiro: TRxLabel;
-    ImgUsuario: TImage;
-    RxLabel5: TRxLabel;
-    RxUsuario: TRxLabel;
-    Image1: TImage;
-    RxLabel4: TRxLabel;
-    RxTerminal: TRxLabel;
     ValorBonusTroca: TCurrencyEdit;
     LblBonusTroca: TRxLabel;
     DescricaoProduto: TRxLabel;
-    LblInstrucoes: TRxLabel;
     AdicionalProduto: TRxLabel;
-    RxLabel3: TRxLabel;
-    RxLabel1: TRxLabel;
-    RxLabel8: TRxLabel;
-    RxLabel10: TRxLabel;
-    shpStatusServidor: TShape;
-    lbStatusServidor: TRxLabel;
     btnF11: TAdvGlowButton;
     btnF12: TAdvGlowButton;
     btnSair: TAdvGlowButton;
     btnF7: TAdvGlowButton;
-    rxClienteFone: TRxLabel;
-    RxLabel9: TRxLabel;
-    rxClienteEmail: TRxLabel;
-    RxLabel13: TRxLabel;
     MemoRetornoNFE: TMemo;
     PanelDadosConvenio: TPanel;
     LblConvenio: TLabel;
@@ -282,13 +250,35 @@ type
     SQLItensVendaTempM3_QTDE: TFloatField;
     RxHora: TRxClock;
     btnF9: TAdvGlowButton;
-    lbUnidade: TRxLabel;
-    RxLabel11: TRxLabel;
     SQLProdutoPRODN2VLRVENDA2835D: TFloatField;
     SQLProdutoPRODN2VLRVENDA283542D: TFloatField;
     SQLProdutoTABCEST: TStringField;
     AdvSmoothPanel2: TAdvSmoothPanel;
-    Image2: TImage;
+    foto_empresa: TImage;
+    LblInstrucoes: TRxLabel;
+    AdvSmoothPanel3: TAdvSmoothPanel;
+    LblSubTotal: TRxLabel;
+    CurSubTotal: TCurrencyEdit;
+    AdvSmoothPanel4: TAdvSmoothPanel;
+    RxLabel2: TRxLabel;
+    EditQtde: TCurrencyEdit;
+    EntradaDados: TEdit;
+    RxLabel6: TRxLabel;
+    AdvSmoothPanel7: TAdvSmoothPanel;
+    RxLabel4: TRxLabel;
+    RxTerminal: TRxLabel;
+    RxLabel5: TRxLabel;
+    RxUsuario: TRxLabel;
+    RxLabel12: TRxLabel;
+    RxLabel3: TRxLabel;
+    rxClienteNome: TRxLabel;
+    RxLabel1: TRxLabel;
+    rxVendedor: TRxLabel;
+    shpStatusServidor: TShape;
+    lbStatusServidor: TRxLabel;
+    shpStatusECF: TShape;
+    lbStatusECF: TRxLabel;
+    LabelLeitor: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure EntradaDadosKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -1280,8 +1270,8 @@ begin
     end;
   end;
 
-  if DetalhesVenda = 'S' then
-    AdvDetalheVenda.Visible := True;
+{ if DetalhesVenda = 'S' then
+    AdvDetalheVenda.Visible := True;}
 
   // Pega NFCe Configs Iniciais
   if (copy(EcfAtual, 1, 4) = 'NFCE') then
@@ -1392,14 +1382,14 @@ begin
             if DM.SQLTemplate.FieldByName('QUANT').asstring <> '' then
             begin
               SaldoEstoqueAtual := DM.SQLTemplate.FieldByName('QUANT').Value;
-              LBSaldo.Caption := FormatFloat('##0.000', DM.SQLTemplate.FieldByName('QUANT').Value);
-              LBSaldo.Update;
-            end
-            else
-            begin
-              LBSaldo.Caption := 'Saldo: Não Consta';
-              LBSaldo.Update;
+//            LBSaldo.Caption := FormatFloat('##0.000', DM.SQLTemplate.FieldByName('QUANT').Value);
+//            LBSaldo.Update;
             end;
+//          else
+//          begin
+//            LBSaldo.Caption := 'Saldo: Não Consta';
+//            LBSaldo.Update;
+//          end;
           end;
                 ////////////////////////////////////////////////////////////////////////////////
           Application.CreateForm(TFormTelaTiraTeima, FormTelaTiraTeima);
@@ -1476,12 +1466,12 @@ begin
           end;
 
           FormTelaTiraTeima.ShowModal;
-          if DetalhesVenda = 'S' then
-          begin
-            LBRef.Caption := '';
-            lbUnidade.Caption := '';
-            LBSaldo.Caption := '';
-          end;
+//        if DetalhesVenda = 'S' then
+//        begin
+//          LBRef.Caption := '';
+//          lbUnidade.Caption := '';
+//          LBSaldo.Caption := '';
+//        end;
         end
         else
           ProdutoNaoCadastrado;
@@ -1675,14 +1665,14 @@ begin
         if DM.SQLTemplate.FieldByName('QUANT').asstring <> '' then
         begin
           SaldoEstoqueAtual := DM.SQLTemplate.FieldByName('QUANT').Value;
-          LBSaldo.Caption := FormatFloat('##0.000', DM.SQLTemplate.FieldByName('QUANT').Value);
-          LBSaldo.Update;
-        end
-        else
-        begin
-          LBSaldo.Caption := 'Saldo: Não Consta';
-          LBSaldo.Update;
+//        LBSaldo.Caption := FormatFloat('##0.000', DM.SQLTemplate.FieldByName('QUANT').Value);
+//        LBSaldo.Update;
         end;
+//        else
+//        begin
+//          LBSaldo.Caption := 'Saldo: Não Consta';
+//          LBSaldo.Update;
+ //       end;
           {if (DM.SQLTemplate.FieldByName('PRODCVDESTNEG').Value = 'N') and (DM.SQLTemplate.FieldByName('QUANT').Value < 1) then
             begin
               InformaG('Saldo Insuficiente para Vender esse Produto!');
@@ -1727,13 +1717,13 @@ begin
           DescricaoProduto.Update;
           AdicionalProduto.Caption := '';
           AdicionalProduto.Update;
-          if DetalhesVenda = 'S' then
-          begin
-            LBRef.caption := SQLProdutoPRODA60REFER.Value;
-            LBRef.Update;
-            lbUnidade.caption := dm.SQLLocate('UNIDADE', 'UNIDICOD', 'UNIDA5DESCR', SQLProdutoUNIDICOD.AsString);
-            lbUnidade.Update;
-          end;
+//          if DetalhesVenda = 'S' then
+//          begin
+//            LBRef.caption := SQLProdutoPRODA60REFER.Value;
+//            LBRef.Update;
+//            lbUnidade.caption := dm.SQLLocate('UNIDADE', 'UNIDICOD', 'UNIDA5DESCR', SQLProdutoUNIDICOD.AsString);
+//            lbUnidade.Update;
+//          end;
 
           // ValorItem := StrToFloat(InputBox('Alteração de Valor do Item', 'Prompt', FormatFloat(FormatStrVlrVenda, RetornaPreco(SQLProduto, DM.SQLConfigVendaTPRCICOD.AsString, ''))));
           // MANDA DADOS DISPLAY TECLADO
@@ -1830,13 +1820,13 @@ begin
       AdicionalProduto.Update;
 
 
-      if DetalhesVenda = 'S' then
-      begin
-        LBRef.caption := SQLProdutoPRODA60REFER.Value;
-        LBRef.Update;
-        lbUnidade.caption := dm.SQLLocate('UNIDADE', 'UNIDICOD', 'UNIDA5DESCR', SQLProdutoUNIDICOD.AsString);
-        lbUnidade.Update;
-      end;
+//      if DetalhesVenda = 'S' then
+//      begin
+//        LBRef.caption := SQLProdutoPRODA60REFER.Value;
+//        LBRef.Update;
+//        lbUnidade.caption := dm.SQLLocate('UNIDADE', 'UNIDICOD', 'UNIDA5DESCR', SQLProdutoUNIDICOD.AsString);
+//        lbUnidade.Update;
+//      end;
 
       if (ValorItem = 0) and (EditQtde.Text <> '') then
       begin
@@ -2506,12 +2496,12 @@ begin
 
       DescricaoProduto.Caption := '';
       AdicionalProduto.Caption := '';
-      if DetalhesVenda = 'S' then
-      begin
-        LBRef.caption := '';
-        lbUnidade.Caption := '';
-        LBSaldo.Caption := '';
-      end;
+//      if DetalhesVenda = 'S' then
+//      begin
+//        LBRef.caption := '';
+//        lbUnidade.Caption := '';
+//        LBSaldo.Caption := '';
+//      end;
 
       EstadoPDVChk := InformandoItens;
       PreparaEstadoBalcao(EstadoPDVChk);
@@ -4988,12 +4978,12 @@ begin
     DescricaoProduto.Caption := '';
     AdicionalProduto.Caption := '';
 
-    if DetalhesVenda = 'S' then
-    begin
-      LBRef.Caption := '';
-      lbUnidade.Caption := '';
-      LBSaldo.Caption := '';
-    end;
+//    if DetalhesVenda = 'S' then
+//    begin
+//      LBRef.Caption := '';
+//      lbUnidade.Caption := '';
+//      LBSaldo.Caption := '';
+//    end;
     LblInstrucoes.Caption := '';
 
     rxVendedor.Visible := False;
@@ -5060,12 +5050,12 @@ begin
 
     DescricaoProduto.Caption := '';
     AdicionalProduto.Caption := '';
-    if DetalhesVenda = 'S' then
-    begin
-      LBRef.Caption := '';
-      lbUnidade.Caption := '';
-      LBSaldo.Caption := '';
-    end;
+//    if DetalhesVenda = 'S' then
+//    begin
+//      LBRef.Caption := '';
+//      lbUnidade.Caption := '';
+//      LBSaldo.Caption := '';
+//    end;
     exit;
   end;
 
@@ -5075,12 +5065,12 @@ begin
     LblInstrucoes.Refresh;
     DescricaoProduto.Caption := '';
     AdicionalProduto.Caption := '';
-    if DetalhesVenda = 'S' then
-    begin
-      LBRef.Caption := '';
-      lbUnidade.Caption := '';
-      LBSaldo.Caption := '';
-    end;
+//    if DetalhesVenda = 'S' then
+//    begin
+//      LBRef.Caption := '';
+//      lbUnidade.Caption := '';
+//      LBSaldo.Caption := '';
+//    end;
 
     // MANDA DADOS DISPLAY TECLADO
     if TecladoReduzidoModelo = 'TEC44DIS' then
@@ -5098,12 +5088,12 @@ begin
     EntradaDados.Refresh;
     DescricaoProduto.Caption := '';
     AdicionalProduto.Caption := '';
-    if DetalhesVenda = 'S' then
-    begin
-      LBRef.Caption := '';
-      lbUnidade.Caption := '';
-      LBSaldo.Caption := '';
-    end;
+//    if DetalhesVenda = 'S' then
+//    begin
+//      LBRef.Caption := '';
+//      lbUnidade.Caption := '';
+//      LBSaldo.Caption := '';
+//    end;
 
     // MANDA DADOS DISPLAY TECLADO
     if TecladoReduzidoModelo = 'TEC44DIS' then
@@ -5120,12 +5110,12 @@ begin
     LblInstrucoes.Refresh;
     DescricaoProduto.Caption := '';
     AdicionalProduto.Caption := '';
-    if DetalhesVenda = 'S' then
-    begin
-      LBRef.Caption := '';
-      lbUnidade.Caption := '';
-      LBSaldo.Caption := '';
-    end;
+//    if DetalhesVenda = 'S' then
+//    begin
+//      LBRef.Caption := '';
+//      lbUnidade.Caption := '';
+//      LBSaldo.Caption := '';
+//    end;
 
     // MANDA DADOS DISPLAY TECLADO
     if TecladoReduzidoModelo = 'TEC44DIS' then
