@@ -254,7 +254,7 @@ type
     SQLProdutoPRODN2VLRVENDA283542D: TFloatField;
     SQLProdutoTABCEST: TStringField;
     AdvSmoothPanel2: TAdvSmoothPanel;
-    foto_empresa: TImage;
+    Foto_Empresa: TImage;
     LblInstrucoes: TRxLabel;
     AdvSmoothPanel3: TAdvSmoothPanel;
     LblSubTotal: TRxLabel;
@@ -279,6 +279,8 @@ type
     shpStatusECF: TShape;
     lbStatusECF: TRxLabel;
     LabelLeitor: TLabel;
+    sqlEmpresa: TRxQuery;
+    Shape1: TShape;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure EntradaDadosKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -1029,6 +1031,10 @@ begin
     Foto.Picture.LoadFromFile('Bmp\Logo PDV.Bmp');
   if FileExists('Bmp\Logo PDV.Jpg') then
     Foto.Picture.LoadFromFile('Bmp\Logo PDV.Jpg');
+  if FileExists('Bmp\Empresa.Bmp') then
+    Foto_Empresa.Picture.LoadFromFile('Bmp\Empresa.Bmp');
+  if FileExists('Bmp\Empresa.Jpg') then
+    Foto_Empresa.Picture.LoadFromFile('Bmp\Empresa.Jpg');
 
   FormTelaItens.Caption := '';
   CodProxCntRecTemp := 0;
@@ -2655,7 +2661,7 @@ end;
 
 procedure TFormTelaItens.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 var
-  PreVendaRimp: string;
+  PreVendaRimp, Certificado: string;
   RetornoUser: TInfoRetornoUser;
   FechouCupomFiscal, TemNumerarioAVista, TemNumerarioPrazo: Boolean;
   VlrTotalECF, VlrTotalSistema, VlrTotalDiferenca: Double;
@@ -2992,8 +2998,10 @@ begin
           end;
 
               {Chama Rotina de Transmissao da NFCe se nao tiver o arquivo confirma}
-        if (copy(ECFAtual, 1, 4) = 'NFCE') and ImpCupomAutomatico then
-          Transmite_NFCe(dm.CodNextCupom);
+        Certificado := SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRA100CERTIFSERIE', EmpresaPadrao);
+        if Certificado <> '' then
+          if (copy(ECFAtual, 1, 4) = 'NFCE') and ImpCupomAutomatico then
+            Transmite_NFCe(dm.CodNextCupom);
 
             { exit ;}
       end;
