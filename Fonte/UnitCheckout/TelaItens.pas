@@ -323,6 +323,7 @@ type
     procedure btnF7Click(Sender: TObject);
     procedure btnF9Click(Sender: TObject);
     procedure btnF5Click(Sender: TObject);
+    procedure SQLItensVendaTempAfterPost(DataSet: TDataSet);
 
   private
     { Private declarations }
@@ -353,6 +354,7 @@ type
     function Gerar_NFCe(idCupom: string): string;
     procedure LoadXML(MyMemo: TMemo; MyWebBrowser: TWebBrowser);
     function SN(sNum: string): string;
+    procedure VoltaParaEntradaDados;
   public
     { Public declarations }
     CodICMS,
@@ -2659,6 +2661,16 @@ begin
   end; //Key
 end;
 
+procedure TFormTelaItens.VoltaParaEntradaDados;
+begin
+  try
+    if not EntradaDados.Focused  then
+      EntradaDados.SetFocus;
+
+  except
+  end;
+end;
+
 procedure TFormTelaItens.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 var
   PreVendaRimp, Certificado: string;
@@ -2666,6 +2678,9 @@ var
   FechouCupomFiscal, TemNumerarioAVista, TemNumerarioPrazo: Boolean;
   VlrTotalECF, VlrTotalSistema, VlrTotalDiferenca: Double;
 begin
+
+  VoltaParaEntradaDados;
+
   case Key of
     VK_F1: begin //CHAMAR TECLA DE ATALHO
         Application.CreateForm(TFormTelaTeclasAtalhoTelaItens, FormTelaTeclasAtalhoTelaItens);
@@ -2675,7 +2690,7 @@ begin
              {Testa pra ver se tem caminho ao Servidor para definir se o PDV é Offline}
 
         DocumentoClienteVenda := '';
-             
+
         if dm.ConectaServidor then
           shpStatusServidor.Brush.Color := clLime
         else
@@ -3580,7 +3595,7 @@ begin
 
                 // Zerar variaveis e Retornar ao Edit principal;
             DescItemVlr := 0; DescItemPerc := 0; DescItemVlrUnitario := 0;
-            EntradaDados.SetFocus;
+            VoltaParaEntradaDados;
           end;
           // ABRIR GAVETA
         'G': begin
@@ -4578,7 +4593,7 @@ begin
             if (EstadoPDVChk <> AguardandoNovaVenda) then
             begin
               InformaG('Só é possível reativar pedido/orçamento quando o sistema não estiver efetuando uma venda!');
-              EntradaDados.SetFocus;
+              VoltaParaEntradaDados;
               Exit;
             end
             else
@@ -4596,7 +4611,7 @@ begin
             if (EstadoPDVChk <> AguardandoNovaVenda) then
             begin
               InformaG('Só é possível importar pedido/orçamento quando o sistema não estiver efetuando uma venda!');
-              EntradaDados.SetFocus;
+              VoltaParaEntradaDados;
               Exit;
             end
             else
@@ -4948,14 +4963,14 @@ begin
       FormTelaMovimentoCaixa.Caption := FormTelaMovimentoCaixa.Caption + ' [' + DM.SQLTemplate.FieldByName('TERMA60DESCR').Value + ']';
       FormTelaMovimentoCaixa.EditData.Text := TerminalAtualData;
       FormTelaMovimentoCaixa.ShowModal;
-      EntradaDados.SetFocus;
+      VoltaParaEntradaDados;
     end;
   end;
 end;
 
 procedure TFormTelaItens.CurSubTotalEnter(Sender: TObject);
 begin
-  EntradaDados.SetFocus;
+  VoltaParaEntradaDados;
   EntradaDados.SelectAll;
 end;
 
@@ -4965,11 +4980,13 @@ begin
 
   if TerminalModo = 'C' then
     TestaStatusCaixa;
+
+  VoltaParaEntradaDados;
 end;
 
 procedure TFormTelaItens.ListaItensEnter(Sender: TObject);
 begin
-  EntradaDados.Setfocus;
+  VoltaParaEntradaDados;
 end;
 
 procedure TFormTelaItens.PreparaEstadoBalcao(Estado: string);
@@ -5401,7 +5418,7 @@ begin
   if (EditQtde.Value = 0) or (EditQtde.Value = Null) then
   begin
     ValorItem := 0;
-    EntradaDados.SetFocus;
+    VoltaParaEntradaDados;
     PreparaEstadoBalcao(InformandoItens);
   end
   else
@@ -5421,20 +5438,20 @@ begin
     begin
       if (EntradaDados.Text <> '') then
       begin
-        EntradaDados.SetFocus;
+        VoltaParaEntradaDados;
         FormTelaItens.EstadoPDVChk := 'InformandoItens';
         EntradaDadosKeyDown(Sender, Enter, [ssAlt]);
       end
       else
-        EntradaDados.SetFocus;
+        VoltaParaEntradaDados;
     end
     else
-      EntradaDados.SetFocus;
+      VoltaParaEntradaDados;
   end;
   if (Key = VK_Escape) or (Key = VK_TAB) then
   begin
     ValorItem := 0;
-    EntradaDados.SetFocus;
+    VoltaParaEntradaDados;
   end;
 end;
 
@@ -5446,7 +5463,7 @@ begin
   if (EstadoPDVChk <> InformandoItens) and (EstadoPDVChk <> InformandoItensTroca) and (F2_AUTOMATICO = 'N') then
   begin
     InformaG('A alteração da quantidade do item só pode aplicada quando o sistema está solicitando itens!');
-    EntradaDados.SetFocus;
+    VoltaParaEntradaDados;
     Exit;
   end;
 
@@ -5457,7 +5474,7 @@ begin
       if RetornoCampoUsuario <> 'S' then
       begin
         InformaG('Usuario não tem permissão para alterar a quantidade!');
-        EntradaDados.SetFocus;
+        VoltaParaEntradaDados;
         Exit;
       end;
     end;
@@ -5517,32 +5534,32 @@ end;
 
 procedure TFormTelaItens.BtnF2Click(Sender: TObject);
 begin
-  EntradaDados.SetFocus;
+  VoltaParaEntradaDados;
   if EstadoPDVChk = 'AguardandoNovaVenda' then
     FormKeyDown(Sender, F2, [ssAlt]);
 end;
 
 procedure TFormTelaItens.BtnF3Click(Sender: TObject);
 begin
-  EntradaDados.SetFocus;
+  VoltaParaEntradaDados;
   FormKeyDown(Sender, F3, [ssAlt]);
 end;
 
 procedure TFormTelaItens.BtnF4Click(Sender: TObject);
 begin
-  EntradaDados.SetFocus;
+  VoltaParaEntradaDados;
   FormKeyDown(Sender, F4, [ssShift]);
 end;
 
 procedure TFormTelaItens.BtnF11Click(Sender: TObject);
 begin
-  EntradaDados.SetFocus;
+  VoltaParaEntradaDados;
   FormKeyDown(Sender, F11, [ssAlt]);
 end;
 
 procedure TFormTelaItens.BtnF12Click(Sender: TObject);
 begin
-  EntradaDados.SetFocus;
+  VoltaParaEntradaDados;
   FormKeyDown(Sender, F12, [ssAlt]);
 end;
 
@@ -5818,13 +5835,13 @@ end;
 
 procedure TFormTelaItens.BtF7Click(Sender: TObject);
 begin
-  EntradaDados.SetFocus;
+  VoltaParaEntradaDados;
   FormKeyDown(Sender, F7, [ssAlt]);
 end;
 
 procedure TFormTelaItens.btnSairClick(Sender: TObject);
 begin
-  EntradaDados.SetFocus;
+  VoltaParaEntradaDados;
   if EstadoPDVChk <> AguardandoNovaVenda then
     keybd_event(27, 27, 0, 0)
   else
@@ -5881,7 +5898,7 @@ begin
     Application.ProcessMessages;
   end;
 
-  EntradaDados.SetFocus;
+  VoltaParaEntradaDados;
 end;
 
 procedure TFormTelaItens.ACBrMailMailProcess(const AMail: TACBrMail;
@@ -5984,7 +6001,7 @@ end;
 
 procedure TFormTelaItens.btnF7Click(Sender: TObject);
 begin
-  EntradaDados.SetFocus;
+  VoltaParaEntradaDados;
   FormKeyDown(Sender, F7, [ssAlt]);
 end;
 
@@ -6192,7 +6209,7 @@ end;
 
 procedure TFormTelaItens.btnF9Click(Sender: TObject);
 begin
-  EntradaDados.SetFocus;
+  VoltaParaEntradaDados;
   FormKeyDown(Sender, F9, [ssAlt]);
 end;
 
@@ -6283,12 +6300,17 @@ begin
     lbStatusECF.Caption := 'NFCe Offline';
     lbStatusECF.Update;
   end;
-end;
+end;             
 
 procedure TFormTelaItens.btnF5Click(Sender: TObject);
 begin
-  EntradaDados.SetFocus;
+  VoltaParaEntradaDados;
   FormKeyDown(Sender, F5, [ssShift]);
+end;
+
+procedure TFormTelaItens.SQLItensVendaTempAfterPost(DataSet: TDataSet);
+begin
+  VoltaParaEntradaDados;
 end;
 
 end.
