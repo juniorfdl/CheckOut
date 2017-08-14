@@ -2679,7 +2679,8 @@ var
   VlrTotalECF, VlrTotalSistema, VlrTotalDiferenca: Double;
 begin
 
-  VoltaParaEntradaDados;
+  if not EditQtde.Focused then
+    VoltaParaEntradaDados;
 
   case Key of
     VK_F1: begin //CHAMAR TECLA DE ATALHO
@@ -2919,6 +2920,7 @@ begin
 
         EstadoPDVChk := InformandoItens;
         PreparaEstadoBalcao(EstadoPDVChk);
+        VoltaParaEntradaDados;
       end;
     VK_F3: begin //FECHAMENTO DE VENDA
         if EstadoPDVChk <> InformandoItens then
