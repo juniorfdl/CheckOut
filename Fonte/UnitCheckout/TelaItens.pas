@@ -215,8 +215,6 @@ type
     AdvOfficeStatusBar3: TAdvOfficeStatusBar;
     RxLabel7: TRxLabel;
     GridItens: TDBGrid;
-    AdvSmoothPanel5: TAdvSmoothPanel;
-    slideshow: TAdvSmoothSlideShow;
     btnF1: TAdvGlowButton;
     btnF2: TAdvGlowButton;
     btnF4: TAdvGlowButton;
@@ -281,6 +279,8 @@ type
     LabelLeitor: TLabel;
     sqlEmpresa: TRxQuery;
     Shape1: TShape;
+    AdvSmoothPanel5: TAdvSmoothPanel;
+    slideshow: TAdvSmoothSlideShow;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure EntradaDadosKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -969,8 +969,10 @@ begin
 
   if MostraPublicidade then
   begin
+    slideshow.Visible := True;
     slideshow.Enabled := True;
-    PagePrincipal.ActivePage := TabPublicidade;
+    AdvSmoothPanel5.Visible := True;
+    PagePrincipal.ActivePage := TabVenda;
   end
   else
   begin
@@ -2698,7 +2700,11 @@ begin
           shpStatusServidor.Brush.Color := clRed;
 
         if MostraPublicidade then
+        begin
+          slideshow.Visible := False;
+          AdvSmoothPanel5.Visible := False;
           PagePrincipal.ActivePage := TabVenda;
+        end;
 
         UsuarioAutorizouOperacao := '';
         ImpCupomAutomatico := false;
@@ -3006,11 +3012,17 @@ begin
           if MostraPublicidade then
           begin
             slideshow.Enabled := True;
-            PagePrincipal.ActivePage := TabPublicidade;
+            slideshow.Visible := True;
+            AdvSmoothPanel5.Visible := True;
+            PagePrincipal.ActivePage := TabVenda;
+//            PagePrincipal.ActivePage := TabPublicidade;
+
           end
           else
           begin
             slideshow.Enabled := False;
+            slideshow.Visible := False;
+            AdvSmoothPanel5.Visible := False;
             PagePrincipal.ActivePage := TabVenda;
           end;
 
@@ -4877,11 +4889,16 @@ begin
   if MostraPublicidade then
   begin
     slideshow.Enabled := True;
-    PagePrincipal.ActivePage := TabPublicidade;
+    slideshow.Visible := True;
+    AdvSmoothPanel5.Visible := True;
+    PagePrincipal.ActivePage := TabVenda;
+//  PagePrincipal.ActivePage := TabPublicidade;
   end
   else
   begin
     slideshow.Enabled := False;
+    slideshow.Visible := False;
+    AdvSmoothPanel5.Visible := False;
     PagePrincipal.ActivePage := TabVenda;
   end;
 end;
