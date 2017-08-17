@@ -315,8 +315,6 @@ type
     procedure BtF7Click(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure TabPublicidadeShow(Sender: TObject);
-    procedure TabVendaShow(Sender: TObject);
     procedure setarceiroClick(Sender: TObject);
     procedure ACBrMailMailProcess(const AMail: TACBrMail;
       const aStatus: TMailStatus);
@@ -971,12 +969,14 @@ begin
   begin
     slideshow.Visible := True;
     slideshow.Enabled := True;
+    slideshow.Animation := True;
     AdvSmoothPanel5.Visible := True;
     PagePrincipal.ActivePage := TabVenda;
   end
   else
   begin
     slideshow.Enabled := False;
+    slideshow.Animation := false;
     PagePrincipal.ActivePage := TabVenda;
   end;
 
@@ -2703,6 +2703,7 @@ begin
         begin
           slideshow.Visible := False;
           AdvSmoothPanel5.Visible := False;
+          slideshow.Animation := True;
           PagePrincipal.ActivePage := TabVenda;
         end;
 
@@ -3013,15 +3014,15 @@ begin
           begin
             slideshow.Enabled := True;
             slideshow.Visible := True;
+            slideshow.Animation := True;
             AdvSmoothPanel5.Visible := True;
             PagePrincipal.ActivePage := TabVenda;
-//            PagePrincipal.ActivePage := TabPublicidade;
-
           end
           else
           begin
             slideshow.Enabled := False;
             slideshow.Visible := False;
+            slideshow.Animation := false;
             AdvSmoothPanel5.Visible := False;
             PagePrincipal.ActivePage := TabVenda;
           end;
@@ -4891,13 +4892,14 @@ begin
     slideshow.Enabled := True;
     slideshow.Visible := True;
     AdvSmoothPanel5.Visible := True;
+    slideshow.Animation := True;
     PagePrincipal.ActivePage := TabVenda;
-//  PagePrincipal.ActivePage := TabPublicidade;
   end
   else
   begin
     slideshow.Enabled := False;
     slideshow.Visible := False;
+    slideshow.Animation := false;
     AdvSmoothPanel5.Visible := False;
     PagePrincipal.ActivePage := TabVenda;
   end;
@@ -5897,16 +5899,7 @@ begin
       shpStatusECF.Brush.Color := clRed;
     end;
   end;
-end;
-
-procedure TFormTelaItens.TabPublicidadeShow(Sender: TObject);
-begin
   slideshow.Animation := True;
-end;
-
-procedure TFormTelaItens.TabVendaShow(Sender: TObject);
-begin
-  slideshow.Animation := False;
 end;
 
 procedure TFormTelaItens.setarceiroClick(Sender: TObject);
