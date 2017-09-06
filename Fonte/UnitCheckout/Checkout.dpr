@@ -190,64 +190,67 @@ uses
   TelaAtualizacaoCEP in '..\ArquivosComuns\TelaAtualizacaoCEP.pas' {FormTelaAtualizacaoCEP},
   TelaSelecaoProduto in '..\ArquivosComuns\TelaSelecaoProduto.pas' {FormTelaSelecaoProduto},
   CadastroProdutos in '..\ArquivosComuns\CadastroProdutos.pas' {FormCadastroProduto},
+  JsonToDataSetConverter in '..\..\..\Program Files (x86)\Borland\Componentes\rest-client-api\src\JsonToDataSetConverter.pas',
   ACBrNFeDANFeESCPOS in '..\..\..\..\..\Acbr\trunk2\Fontes\ACBrDFe\ACBrNFe\DANFE\NFCe\EscPos\ACBrNFeDANFeESCPOS.pas';
 
 {$R *.RES}
 
 var
-  hMapping : hwnd ;
+  hMapping: hwnd;
 begin
   //Este código foi testado no arquivo dpr do projeto
   hMapping := CreateFileMapping(HWND($FFFFFFFF),
-                                nil,
-                                PAGE_READONLY,
-                                0,
-                                32,
-                                PChar(ExtractFileName(Application.ExeName))) ;
+    nil,
+    PAGE_READONLY,
+    0,
+    32,
+    PChar(ExtractFileName(Application.ExeName)));
 
-  if (hMapping <> Null)  and (GetLastError <> 0) then
+  if (hMapping <> Null) and (GetLastError <> 0) then
   begin
-    Informa('O Módulo de Emissão de Cupom Fiscal já está sendo executado.') ;
-    Halt ;
-  end ;
+    Informa('O Módulo de Emissão de Cupom Fiscal já está sendo executado.');
+    Halt;
+  end;
 
-  Application.Initialize ;
-  VersaoSistema := 'v.3.1' ;
+  Application.Initialize;
+  VersaoSistema := 'v.3.1';
   Enter := VK_Return;
-  Esc   := VK_Escape;
-  F2    := Vk_F2;
-  F3    := Vk_F3;
-  F4    := Vk_F4;
-  F5    := Vk_F5;
-  F6    := Vk_F6;
-  F7    := Vk_F7;
-  F8    := Vk_F8;
-  F9    := Vk_F9;
-  F10   := Vk_F10;
-  F11   := Vk_F11;
-  F12   := Vk_F12;
+  Esc := VK_Escape;
+  F2 := Vk_F2;
+  F3 := Vk_F3;
+  F4 := Vk_F4;
+  F5 := Vk_F5;
+  F6 := Vk_F6;
+  F7 := Vk_F7;
+  F8 := Vk_F8;
+  F9 := Vk_F9;
+  F10 := Vk_F10;
+  F11 := Vk_F11;
+  F12 := Vk_F12;
   Application.Title := 'Cupom Fiscal';
   Application.CreateForm(TDM, DM);
-  if (not DelphiAberto)and(dm.SQLConfigGeralCFGECBLOQ.AsString = 'S') then
+
+  if (DM.OBSAutorizacao <> '') or (dm.SQLConfigGeralCFGECBLOQ.AsString = 'S') then //and(not DelphiAberto) then
+  begin
+    FormTelaAtivacao := TFormTelaAtivacao.Create(Application);
+    FormTelaAtivacao.ShowModal;
+
+    if (dm.SQLConfigGeralCFGECBLOQ.AsString = 'S') then
     begin
-      ShowMessage('Sistema Bloqueado!!! Ligue para a Suporte');
-      DM.DB.Close;
-      DM.zdb.Connected := False;
-      application.terminate;
-    end
-  else
-    begin
-      FormTelaLogin := TFormTelaLogin.Create(Application);
-      FormTelaLogin.Caption := 'Bem Vindo ao Módulo Emissão de Cupom Fiscal ' ;
-      if FormTelaLogin.ShowModal <> idOk then
-        begin
-          DM.DB.Close;
-          DM.zdb.Connected := False;
-        end
-      else
-        begin
-          Application.CreateForm(TFormTelaItens, FormTelaItens);
-          Application.Run;
-        end;
+      Application.terminate;
+      Exit;
     end;
+  end;                                
+
+  FormTelaLogin := TFormTelaLogin.Create(Application);
+  FormTelaLogin.Caption := 'Bem Vindo ao Módulo Emissão de Cupom Fiscal ';
+
+  if FormTelaLogin.ShowModal <> idOk then
+  begin
+    application.terminate;
+  end;
+
+  Application.CreateForm(TFormTelaItens, FormTelaItens);
+  Application.Run;
 end.
+

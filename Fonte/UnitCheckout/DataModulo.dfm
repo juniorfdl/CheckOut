@@ -5,7 +5,7 @@ inherited DM: TDM
   Height = 744
   Width = 1382
   inherited DB: TDatabase
-    Connected = False
+    AfterConnect = DBAfterConnect
     Left = 32
     Top = 8
   end
@@ -1313,6 +1313,9 @@ inherited DM: TDM
     object SQLConfigGeralCFGEDBLOQ: TDateTimeField
       FieldName = 'CFGEDBLOQ'
       Origin = 'DB.CONFIGGERAL.CFGEDBLOQ'
+    end
+    object SQLConfigGeralDIAS_AVISO: TIntegerField
+      FieldName = 'DIAS_AVISO'
     end
   end
   object MemCtRecParc: TTable
@@ -4816,7 +4819,6 @@ inherited DM: TDM
     PrinterSetup.mmPaperWidth = 0
     PrinterSetup.PaperSize = 9
     DeviceType = 'Screen'
-    EmailSettings.ReportFormat = 'PDF'
     OutlineSettings.CreateNode = True
     OutlineSettings.CreatePageNodes = True
     OutlineSettings.Enabled = False
@@ -4825,20 +4827,16 @@ inherited DM: TDM
     TextSearchSettings.Enabled = False
     Left = 479
     Top = 360
-    Version = '10.06'
+    Version = '7.04'
     mmColumnWidth = 0
     DataPipelineName = 'PipePedVdIt'
     object ppHeaderBand1: TppHeaderBand
       mmBottomOffset = 0
-      mmHeight = 18551297
+      mmHeight = 613406209
       mmPrintPosition = 0
       object ppDBText6: TppDBText
         UserName = 'ppDBText6'
         AutoSize = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVd
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -4850,16 +4848,12 @@ inherited DM: TDM
         DataPipelineName = 'PipePedVd'
         mmHeight = 4022
         mmLeft = 0
-        mmTop = 420159
+        mmTop = 111167290
         mmWidth = 17230
         BandType = 0
       end
       object ppDBText7: TppDBText
         UserName = 'ppDBText7'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVd
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -4869,18 +4863,14 @@ inherited DM: TDM
         ParentDataPipeline = False
         Transparent = True
         DataPipelineName = 'PipePedVd'
-        mmHeight = 1119983
+        mmHeight = 296329425
         mmLeft = 0
-        mmTop = 3430330
-        mmWidth = 23871814
+        mmTop = 907609953
+        mmWidth = 2021129399
         BandType = 0
       end
       object ppDBText8: TppDBText
         UserName = 'ppDBText8'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVd
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -4890,18 +4880,14 @@ inherited DM: TDM
         ParentDataPipeline = False
         Transparent = True
         DataPipelineName = 'PipePedVd'
-        mmHeight = 1119983
+        mmHeight = 296329425
         mmLeft = 0
-        mmTop = 4620428
-        mmWidth = 23871814
+        mmTop = 1222490675
+        mmWidth = 2021129399
         BandType = 0
       end
       object ppDBText9: TppDBText
         UserName = 'ppDBText9'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVd
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -4911,18 +4897,14 @@ inherited DM: TDM
         ParentDataPipeline = False
         Transparent = True
         DataPipelineName = 'PipePedVd'
-        mmHeight = 1119983
+        mmHeight = 296329425
         mmLeft = 0
-        mmTop = 5810262
-        mmWidth = 23871550
+        mmTop = 1537301548
+        mmWidth = 2021059549
         BandType = 0
       end
       object ppDBText10: TppDBText
         UserName = 'ppDBText10'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVd
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -4932,19 +4914,15 @@ inherited DM: TDM
         ParentDataPipeline = False
         Transparent = True
         DataPipelineName = 'PipePedVd'
-        mmHeight = 1119983
+        mmHeight = 296329425
         mmLeft = 0
-        mmTop = 7000360
-        mmWidth = 23871550
+        mmTop = 1852182271
+        mmWidth = 2021059549
         BandType = 0
       end
       object ppLabel1: TppLabel
         UserName = 'ppLabel1'
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'NOME.....:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -4952,19 +4930,15 @@ inherited DM: TDM
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 1119983
+        mmHeight = 296329425
         mmLeft = 0
-        mmTop = 8820697
-        mmWidth = 6090456
+        mmTop = -1961153235
+        mmWidth = 1611436358
         BandType = 0
       end
       object ppLabel2: TppLabel
         UserName = 'ppLabel2'
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'ENDERE'#199'O.:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -4972,19 +4946,15 @@ inherited DM: TDM
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 1119983
+        mmHeight = 296329425
         mmLeft = 0
-        mmTop = 10010530
-        mmWidth = 6090456
+        mmTop = -1646342627
+        mmWidth = 1611436358
         BandType = 0
       end
       object ppLabel3: TppLabel
         UserName = 'ppLabel3'
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'BAIRRO...:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -4992,19 +4962,15 @@ inherited DM: TDM
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 1119983
+        mmHeight = 296329425
         mmLeft = 0
-        mmTop = 11200629
-        mmWidth = 6090456
+        mmTop = -1331461640
+        mmWidth = 1611436358
         BandType = 0
       end
       object ppLabel4: TppLabel
         UserName = 'ppLabel4'
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'CIDADE...:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5012,19 +4978,15 @@ inherited DM: TDM
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 1119983
+        mmHeight = 296329425
         mmLeft = 0
-        mmTop = 12390727
-        mmWidth = 6090456
+        mmTop = -1016580917
+        mmWidth = 1611436358
         BandType = 0
       end
       object ppLabel5: TppLabel
         UserName = 'ppLabel5'
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'CPF/C.G.C:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5032,18 +4994,14 @@ inherited DM: TDM
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 1119983
+        mmHeight = 296329425
         mmLeft = 0
-        mmTop = 13580825
-        mmWidth = 6090456
+        mmTop = -701700195
+        mmWidth = 1611436358
         BandType = 0
       end
       object ppLabel6: TppLabel
         UserName = 'ppLabel6'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'Codigo'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5051,18 +5009,14 @@ inherited DM: TDM
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 1119983
+        mmHeight = 296329425
         mmLeft = 0
-        mmTop = 16871190
-        mmWidth = 3360215
+        mmTop = 168877278
+        mmWidth = 889058655
         BandType = 0
       end
       object ppDBText12: TppDBText
         UserName = 'ppDBText12'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVd
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5072,18 +5026,14 @@ inherited DM: TDM
         ParentDataPipeline = False
         Transparent = True
         DataPipelineName = 'PipePedVd'
-        mmHeight = 1119983
-        mmLeft = 6090456
-        mmTop = 8820697
-        mmWidth = 23871550
+        mmHeight = 296329425
+        mmLeft = 1611436358
+        mmTop = -1961153235
+        mmWidth = 2021059549
         BandType = 0
       end
       object ppDBText13: TppDBText
         UserName = 'ppDBText13'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVd
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5093,18 +5043,14 @@ inherited DM: TDM
         ParentDataPipeline = False
         Transparent = True
         DataPipelineName = 'PipePedVd'
-        mmHeight = 1119983
-        mmLeft = 6090456
-        mmTop = 10010530
-        mmWidth = 23871550
+        mmHeight = 296329425
+        mmLeft = 1611436358
+        mmTop = -1646342627
+        mmWidth = 2021059549
         BandType = 0
       end
       object ppDBText14: TppDBText
         UserName = 'ppDBText14'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVd
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5114,18 +5060,14 @@ inherited DM: TDM
         ParentDataPipeline = False
         Transparent = True
         DataPipelineName = 'PipePedVd'
-        mmHeight = 1119983
-        mmLeft = 6090456
-        mmTop = 11200629
-        mmWidth = 23871550
+        mmHeight = 296329425
+        mmLeft = 1611436358
+        mmTop = -1331461640
+        mmWidth = 2021059549
         BandType = 0
       end
       object ppDBText15: TppDBText
         UserName = 'ppDBText15'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVd
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5135,18 +5077,14 @@ inherited DM: TDM
         ParentDataPipeline = False
         Transparent = True
         DataPipelineName = 'PipePedVd'
-        mmHeight = 1119983
-        mmLeft = 6090456
-        mmTop = 13580825
-        mmWidth = 23871550
+        mmHeight = 296329425
+        mmLeft = 1611436358
+        mmTop = -701700195
+        mmWidth = 2021059549
         BandType = 0
       end
       object ppDBText16: TppDBText
         UserName = 'ppDBText16'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVd
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5156,18 +5094,14 @@ inherited DM: TDM
         ParentDataPipeline = False
         Transparent = True
         DataPipelineName = 'PipePedVd'
-        mmHeight = 1119983
-        mmLeft = 6090456
-        mmTop = 14770923
-        mmWidth = 23871550
+        mmHeight = 296329425
+        mmLeft = 1611436358
+        mmTop = -386819472
+        mmWidth = 2021059549
         BandType = 0
       end
       object ppDBText17: TppDBText
         UserName = 'ppDBText17'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVd
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5177,19 +5111,15 @@ inherited DM: TDM
         ParentDataPipeline = False
         Transparent = True
         DataPipelineName = 'PipePedVd'
-        mmHeight = 1119983
-        mmLeft = 6090456
-        mmTop = 12390727
-        mmWidth = 23871550
+        mmHeight = 296329425
+        mmLeft = 1611436358
+        mmTop = -1016580917
+        mmWidth = 2021059549
         BandType = 0
       end
       object ppLabel13: TppLabel
         UserName = 'ppLabel13'
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'FONE.....:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5197,19 +5127,15 @@ inherited DM: TDM
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 1119983
+        mmHeight = 296329425
         mmLeft = 0
-        mmTop = 14770923
-        mmWidth = 6090720
+        mmTop = -386819472
+        mmWidth = 1611506208
         BandType = 0
       end
       object ppLabel14: TppLabel
         UserName = 'ppLabel14'
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'Descri'#231#227'o'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5217,19 +5143,15 @@ inherited DM: TDM
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 1119983
-        mmLeft = 5880376
-        mmTop = 16871190
-        mmWidth = 28491978
+        mmHeight = 296329425
+        mmLeft = 1555852581
+        mmTop = 168877278
+        mmWidth = -1051417072
         BandType = 0
       end
       object ppLabel25: TppLabel
         UserName = 'ppLabel25'
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'Quant.'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5237,19 +5159,15 @@ inherited DM: TDM
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 1119983
-        mmLeft = 35352372
-        mmTop = 16941040
-        mmWidth = 4830243
+        mmHeight = 296329425
+        mmLeft = 763732454
+        mmTop = 187358461
+        mmWidth = 1278004338
         BandType = 0
       end
       object ppLabel26: TppLabel
         UserName = 'ppLabel26'
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'Unit'#225'rio'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5258,19 +5176,15 @@ inherited DM: TDM
         Font.Style = []
         TextAlignment = taRightJustified
         Transparent = True
-        mmHeight = 1119983
-        mmLeft = 41302599
-        mmTop = 16941040
-        mmWidth = 4830243
+        mmHeight = 296329425
+        mmLeft = -1956900549
+        mmTop = 187358461
+        mmWidth = 1278004338
         BandType = 0
       end
       object ppLabel27: TppLabel
         UserName = 'ppLabel27'
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'Total'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5279,49 +5193,37 @@ inherited DM: TDM
         Font.Style = []
         TextAlignment = taRightJustified
         Transparent = True
-        mmHeight = 1119983
-        mmLeft = 46903045
-        mmTop = 16941040
-        mmWidth = 4830243
+        mmHeight = 296329425
+        mmLeft = -475113458
+        mmTop = 187358461
+        mmWidth = 1278004338
         BandType = 0
       end
       object ppLine1: TppLine
         UserName = 'ppLine1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Pen.Style = psDot
         ParentWidth = True
         Weight = 0.750000000000000000
-        mmHeight = 70115
+        mmHeight = 18551297
         mmLeft = 0
-        mmTop = 18271103
-        mmWidth = 52202396
+        mmTop = 539271928
+        mmWidth = 927009550
         BandType = 0
       end
       object ppLine3: TppLine
         UserName = 'ppLine3'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Pen.Style = psDot
         ParentWidth = True
         Weight = 0.750000000000000000
-        mmHeight = 70115
+        mmHeight = 18551297
         mmLeft = 0
-        mmTop = 8400538
-        mmWidth = 52202396
+        mmTop = -2072320525
+        mmWidth = 927009550
         BandType = 0
       end
       object ppLabel28: TppLabel
         UserName = 'ppLabel28'
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'OR'#199'AMENTO NRO:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5329,19 +5231,15 @@ inherited DM: TDM
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 1119983
+        mmHeight = 296329425
         mmLeft = 0
-        mmTop = 1750222
-        mmWidth = 8610617
+        mmTop = 463080493
+        mmWidth = -2016737013
         BandType = 0
       end
       object ppDBText24: TppDBText
         UserName = 'ppDBText24'
         AutoSize = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVd
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5352,22 +5250,18 @@ inherited DM: TDM
         Transparent = True
         DataPipelineName = 'PipePedVd'
         mmHeight = 4022
-        mmLeft = 8960662
-        mmTop = 1750222
+        mmLeft = -1924120755
+        mmTop = 463080493
         mmWidth = 19177
         BandType = 0
       end
     end
     object ppDetailBand1: TppDetailBand
       mmBottomOffset = 0
-      mmHeight = 1119983
+      mmHeight = 296329425
       mmPrintPosition = 0
       object ppDBText1: TppDBText
         UserName = 'ppDBText1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVdIt
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5376,19 +5270,15 @@ inherited DM: TDM
         Font.Style = []
         Transparent = True
         DataPipelineName = 'PipePedVdIt'
-        mmHeight = 1119983
-        mmLeft = 139965
+        mmHeight = 296329425
+        mmLeft = 37032480
         mmTop = 0
-        mmWidth = 4690278
+        mmWidth = 1240971858
         BandType = 4
       end
       object ppDBText2: TppDBText
         UserName = 'ppDBText2'
         AutoSize = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVdIt
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5398,17 +5288,13 @@ inherited DM: TDM
         Transparent = True
         DataPipelineName = 'PipePedVdIt'
         mmHeight = 4022
-        mmLeft = 5880376
+        mmLeft = 1555852581
         mmTop = 0
         mmWidth = 17230
         BandType = 4
       end
       object ppDBText3: TppDBText
         UserName = 'ppDBText3'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVdIt
         DisplayFormat = '#,##0.00'
         Font.Charset = ANSI_CHARSET
@@ -5418,18 +5304,14 @@ inherited DM: TDM
         Font.Style = []
         Transparent = True
         DataPipelineName = 'PipePedVdIt'
-        mmHeight = 1119983
-        mmLeft = 35352372
+        mmHeight = 296329425
+        mmLeft = 763732454
         mmTop = 0
-        mmWidth = 4829978
+        mmWidth = 1277934223
         BandType = 4
       end
       object ppDBText4: TppDBText
         UserName = 'ppDBText4'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVdIt
         DisplayFormat = '#,##0.00'
         Font.Charset = ANSI_CHARSET
@@ -5440,18 +5322,14 @@ inherited DM: TDM
         TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'PipePedVdIt'
-        mmHeight = 1119983
-        mmLeft = 41302599
+        mmHeight = 296329425
+        mmLeft = -1956900549
         mmTop = 0
-        mmWidth = 4829978
+        mmWidth = 1277934223
         BandType = 4
       end
       object ppDBText5: TppDBText
         UserName = 'ppDBText5'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVdIt
         DisplayFormat = '#,##0.00'
         Font.Charset = ANSI_CHARSET
@@ -5462,28 +5340,24 @@ inherited DM: TDM
         TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'PipePedVdIt'
-        mmHeight = 1119983
-        mmLeft = 46903045
+        mmHeight = 296329425
+        mmLeft = -475113458
         mmTop = 0
-        mmWidth = 4829978
+        mmWidth = 1277934223
         BandType = 4
       end
     end
     object ppFooterBand1: TppFooterBand
       mmBottomOffset = 0
-      mmHeight = 1330063
+      mmHeight = 351913203
       mmPrintPosition = 0
     end
     object ppSummaryBand1: TppSummaryBand
       mmBottomOffset = 0
-      mmHeight = 13300895
+      mmHeight = -775765155
       mmPrintPosition = 0
       object ppDBText18: TppDBText
         UserName = 'ppDBText18'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVd
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5493,19 +5367,15 @@ inherited DM: TDM
         ParentDataPipeline = False
         Transparent = True
         DataPipelineName = 'PipePedVd'
-        mmHeight = 1119983
-        mmLeft = 6090456
-        mmTop = 420159
-        mmWidth = 23871550
+        mmHeight = 296329425
+        mmLeft = 1611436358
+        mmTop = 111167290
+        mmWidth = 2021059549
         BandType = 7
       end
       object ppLabel16: TppLabel
         UserName = 'ppLabel16'
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'PLANO....:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5513,19 +5383,15 @@ inherited DM: TDM
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 1119983
+        mmHeight = 296329425
         mmLeft = 0
-        mmTop = 420159
-        mmWidth = 6090720
+        mmTop = 111167290
+        mmWidth = 1611506208
         BandType = 7
       end
       object ppLabel17: TppLabel
         UserName = 'ppLabel17'
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'P A R C E L A S '
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5534,19 +5400,15 @@ inherited DM: TDM
         Font.Style = []
         TextAlignment = taCentered
         Transparent = True
-        mmHeight = 1119983
-        mmLeft = 69850
-        mmTop = 3920339
-        mmWidth = 29569892
+        mmHeight = 296329425
+        mmLeft = 18481183
+        mmTop = 1037258425
+        mmWidth = -766218425
         BandType = 7
       end
       object ppLabel18: TppLabel
         UserName = 'ppLabel18'
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'O B S E R V A '#199' '#213' E S'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5555,19 +5417,15 @@ inherited DM: TDM
         Font.Style = []
         TextAlignment = taCentered
         Transparent = True
-        mmHeight = 1119983
-        mmLeft = 69850
-        mmTop = 9030512
-        mmWidth = 29569892
+        mmHeight = 296329425
+        mmLeft = 18481183
+        mmTop = -1905639573
+        mmWidth = -766218425
         BandType = 7
       end
       object ppLabel19: TppLabel
         UserName = 'ppLabel19'
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'VENDEDOR.:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5575,18 +5433,14 @@ inherited DM: TDM
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 1119983
+        mmHeight = 296329425
         mmLeft = 0
-        mmTop = 1609993
-        mmWidth = 6090720
+        mmTop = 425978163
+        mmWidth = 1611506208
         BandType = 7
       end
       object ppDBText19: TppDBText
         UserName = 'ppDBText19'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVd
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5596,19 +5450,15 @@ inherited DM: TDM
         ParentDataPipeline = False
         Transparent = True
         DataPipelineName = 'PipePedVd'
-        mmHeight = 1119983
-        mmLeft = 6090456
-        mmTop = 1609993
-        mmWidth = 23871550
+        mmHeight = 296329425
+        mmLeft = 1611436358
+        mmTop = 425978163
+        mmWidth = 2021059549
         BandType = 7
       end
       object ppLabel21: TppLabel
         UserName = 'ppLabel21'
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'TOTAL ITENS'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5616,18 +5466,14 @@ inherited DM: TDM
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 1119983
-        mmLeft = 35352372
-        mmTop = 420159
-        mmWidth = 7280554
+        mmHeight = 296329425
+        mmLeft = 763732454
+        mmTop = 111167290
+        mmWidth = 1926317081
         BandType = 7
       end
       object ppDBText20: TppDBText
         UserName = 'ppDBText20'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVd
         DisplayFormat = '#,##0.00'
         Font.Charset = ANSI_CHARSET
@@ -5639,19 +5485,15 @@ inherited DM: TDM
         TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'PipePedVd'
-        mmHeight = 1119983
-        mmLeft = 46903045
-        mmTop = 420159
-        mmWidth = 4830243
+        mmHeight = 296329425
+        mmLeft = -475113458
+        mmTop = 111167290
+        mmWidth = 1278004338
         BandType = 7
       end
       object ppLabel22: TppLabel
         UserName = 'ppLabel22'
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'TOTAL FRETE'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5659,18 +5501,14 @@ inherited DM: TDM
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 1119983
-        mmLeft = 35352372
-        mmTop = 1609993
-        mmWidth = 7280554
+        mmHeight = 296329425
+        mmLeft = 763732454
+        mmTop = 425978163
+        mmWidth = 1926317081
         BandType = 7
       end
       object ppDBText21: TppDBText
         UserName = 'ppDBText21'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVd
         DisplayFormat = '#,##0.00'
         Font.Charset = ANSI_CHARSET
@@ -5682,18 +5520,14 @@ inherited DM: TDM
         TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'PipePedVd'
-        mmHeight = 1119983
-        mmLeft = 46903045
-        mmTop = 1609993
-        mmWidth = 4830243
+        mmHeight = 296329425
+        mmLeft = -475113458
+        mmTop = 425978163
+        mmWidth = 1278004338
         BandType = 7
       end
       object ppDBText22: TppDBText
         UserName = 'ppDBText22'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVd
         DisplayFormat = '#,##0.00'
         Font.Charset = ANSI_CHARSET
@@ -5705,19 +5539,15 @@ inherited DM: TDM
         TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'PipePedVd'
-        mmHeight = 1119983
-        mmLeft = 46903045
-        mmTop = 2800091
-        mmWidth = 4829978
+        mmHeight = 296329425
+        mmLeft = -475113458
+        mmTop = 740858885
+        mmWidth = 1277934223
         BandType = 7
       end
       object ppLabel23: TppLabel
         UserName = 'ppLabel23'
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'TOTAL DESC.'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5725,19 +5555,15 @@ inherited DM: TDM
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 1119983
-        mmLeft = 35352372
-        mmTop = 2800091
-        mmWidth = 7280554
+        mmHeight = 296329425
+        mmLeft = 763732454
+        mmTop = 740858885
+        mmWidth = 1926317081
         BandType = 7
       end
       object ppLabel24: TppLabel
         UserName = 'ppLabel24'
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'TOTAL GERAL'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -5745,18 +5571,14 @@ inherited DM: TDM
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 1119983
-        mmLeft = 35352372
-        mmTop = 3990189
-        mmWidth = 7280554
+        mmHeight = 296329425
+        mmLeft = 763732454
+        mmTop = 1055739608
+        mmWidth = 1926317081
         BandType = 7
       end
       object ppDBMemo1: TppDBMemo
         UserName = 'ppDBMemo1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         CharWrap = False
         DataPipeline = PipePedVd
         Font.Charset = ANSI_CHARSET
@@ -5767,10 +5589,10 @@ inherited DM: TDM
         ParentDataPipeline = False
         Transparent = True
         DataPipelineName = 'PipePedVd'
-        mmHeight = 2520161
-        mmLeft = 69850
-        mmTop = 10220610
-        mmWidth = 29569892
+        mmHeight = 666793925
+        mmLeft = 18481183
+        mmTop = -1590758850
+        mmWidth = -766218425
         BandType = 7
         mmBottomOffset = 0
         mmOverFlowOffset = 0
@@ -5779,25 +5601,17 @@ inherited DM: TDM
       end
       object ppLine2: TppLine
         UserName = 'ppLine2'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Pen.Style = psDot
         ParentWidth = True
         Weight = 0.750000000000000000
-        mmHeight = 70115
+        mmHeight = 18551297
         mmLeft = 0
         mmTop = 0
-        mmWidth = 52202396
+        mmWidth = 927009550
         BandType = 7
       end
       object ppDBText23: TppDBText
         UserName = 'ppDBText23'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         DataPipeline = PipePedVd
         DisplayFormat = '#,##0.00'
         Font.Charset = ANSI_CHARSET
@@ -5809,10 +5623,10 @@ inherited DM: TDM
         TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'PipePedVd'
-        mmHeight = 1119983
-        mmLeft = 46903045
-        mmTop = 3990189
-        mmWidth = 4830243
+        mmHeight = 296329425
+        mmLeft = -475113458
+        mmTop = 1055739608
+        mmWidth = 1278004338
         BandType = 7
       end
     end
@@ -6814,5 +6628,46 @@ inherited DM: TDM
     PosPrinter = ACBrPosPrinter
     Left = 760
     Top = 13
+  end
+  object RestClient: TRestClient
+    ConnectionType = hctIndy
+    EnabledCompression = False
+    Left = 744
+    Top = 424
+  end
+  object cdsAPIAutorizacao: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 736
+    Top = 472
+    object cdsAPIAutorizacaoDATA_AUTORIZACAO: TStringField
+      FieldName = 'DATA_AUTORIZACAO'
+      Size = 15
+    end
+    object cdsAPIAutorizacaoOBS_AUTORIZACAO: TStringField
+      FieldName = 'OBS_AUTORIZACAO'
+      Size = 250
+    end
+    object cdsAPIAutorizacaoDIAS_AVISO: TStringField
+      FieldName = 'DIAS_AVISO'
+      Size = 15
+    end
+  end
+  object TblAPIAutorizacao: TTable
+    DatabaseName = 'Easy_Temp'
+    TableName = 'APIAutorizacao.DB'
+    Left = 824
+    Top = 472
+    object TblAPIAutorizacaoDATA_AUTORIZACAO: TDateField
+      FieldName = 'DATA_AUTORIZACAO'
+    end
+    object TblAPIAutorizacaoOBS_AUTORIZACAO: TStringField
+      FieldName = 'OBS_AUTORIZACAO'
+      Size = 250
+    end
+    object TblAPIAutorizacaoDIAS_AVISO: TStringField
+      FieldName = 'DIAS_AVISO'
+      Size = 15
+    end
   end
 end

@@ -13,7 +13,7 @@ uses
   ZConnection, ZAbstractRODataset, ZAbstractDataset, ZDataset, ACBrBase,
   ACBrBAL, ACBrPosPrinter, ACBrNFeDANFEClass, ACBrNFeDANFeESCPOS, ACBrDFe,
   ACBrNFe, pcnConversao, ACBrUtil, ACBrMail, ACBrNFeDANFeRLClass, ACBrDevice,
-  ZAbstractConnection ;
+  ZAbstractConnection, DBClient, RestClient, RestUtils;
 
 type
   TDM = class(TDMTemplate)
@@ -1137,6 +1137,16 @@ type
     SQLPreVendaItem1M3_LARGURA: TFloatField;
     SQLPreVendaItem1M3_COMPRI: TFloatField;
     SQLCupomItemCPITN3QTD: TFloatField;
+    SQLConfigGeralDIAS_AVISO: TIntegerField;
+    RestClient: TRestClient;
+    cdsAPIAutorizacao: TClientDataSet;
+    cdsAPIAutorizacaoDATA_AUTORIZACAO: TStringField;
+    cdsAPIAutorizacaoOBS_AUTORIZACAO: TStringField;
+    cdsAPIAutorizacaoDIAS_AVISO: TStringField;
+    TblAPIAutorizacao: TTable;
+    TblAPIAutorizacaoDATA_AUTORIZACAO: TDateField;
+    TblAPIAutorizacaoOBS_AUTORIZACAO: TStringField;
+    TblAPIAutorizacaoDIAS_AVISO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure SQLCupomNewRecord(DataSet: TDataSet);
     procedure SQLCupomBeforePost(DataSet: TDataSet);
@@ -1152,7 +1162,10 @@ type
     procedure TblPedidoCabCalcFields(DataSet: TDataSet);
     procedure SQLFechamentoCaixaBeforePost(DataSet: TDataSet);
     procedure ACBrNFeStatusChange(Sender: TObject);
+    procedure DBAfterConnect(Sender: TObject);
   private
+    procedure GetDataValidadeSistema;
+    procedure GetDataValidadeSistemaWebApi;
     { Private declarations }
   public
     { Public declarations }
@@ -1171,6 +1184,8 @@ type
     PedidoPesoB, PedidoPesoL, PedidoOBS : String;
     VendedorAtualPedidos, RotaAtualPedidos, TranspAtualPedidos : Integer;
     Texto : TextFile;
+    DataSistema: TDate;
+    OBSAutorizacao: string;
     function ConectaServidor : boolean ;
     function BloquearTerminal(Usuario, Terminal : string ) : boolean ;
     procedure DesbloquearTerminal(Terminal : string) ;
@@ -1181,7 +1196,7 @@ var
 
 implementation
 
-uses TelaSplash;
+uses TelaSplash, TelaAtivacao, JsonToDataSetConverter, DateUtils, Math;
 
 {$R *.DFM}
 
@@ -1276,7 +1291,7 @@ begin
 
   DBRel.Connected := True ;
 
-  FormSplash.lbDados.Caption := 'Verificando Licença de uso...'; FormSplash.lbDados.Update;
+  {FormSplash.lbDados.Caption := 'Verificando Licença de uso...'; FormSplash.lbDados.Update;
   if FileExists('Licenca.dll') and (SQLConfigGeralCFGEDBLOQ.AsString = '') then
     begin
       SQLConfigGeral.Edit;
@@ -1293,8 +1308,98 @@ begin
     end;
   FormSplash.lbDados.Caption := 'Licença de uso Válida até => '+FormatDateTime('dd/mm/yyyy',SQLConfigGeralCFGEDBLOQ.Value) ; FormSplash.lbDados.Update;
   Sleep(1000);
-  FormSplash.close;
+  FormSplash.close;}
+
+  DataSistema := ExecSql('select current_timestamp from rdb$relations').fieldbyname('current_timestamp').AsDateTime;
+  DataSistema := StrToDate(FormatDateTime('dd/mm/yyyy', DataSistema));
+  GetDataValidadeSistema;
 end;
+
+procedure TDM.GetDataValidadeSistema;
+var
+  Data: TDateTime;
+  DiasVencimento: integer;
+begin
+
+  OBSAutorizacao := '';
+  if Dm.SQLConfigGeralCFGEDBLOQ.AsDateTime < DataSistema then
+  begin
+    GetDataValidadeSistemaWebApi;
+  end;
+
+  Dm.SQLConfigGeral.Edit;
+  if Dm.SQLConfigGeralCFGEDBLOQ.AsDateTime < DataSistema then
+    Dm.SQLConfigGeralCFGECBLOQ.Value := 'S'
+  else begin
+    Dm.SQLConfigGeralCFGECBLOQ.Value := '';
+
+    if Dm.SQLConfigGeralDIAS_AVISO.Value > 0 then
+    begin
+      DiasVencimento := DaysBetween(Dm.SQLConfigGeralCFGEDBLOQ.AsDateTime, DataSistema);
+
+      if Dm.SQLConfigGeralDIAS_AVISO.Value >= DiasVencimento then
+      begin
+        if DiasVencimento = 1 then
+          OBSAutorizacao := '01 dia'
+        else
+          OBSAutorizacao := FormatFloat('00', DiasVencimento) + ' dias '; // - Falta '+FormatFloat('00', DiasVencimento)+' dias;
+      end;
+    end;
+
+  end;
+  Dm.SQLConfigGeral.Post;
+end;
+
+procedure TDM.GetDataValidadeSistemaWebApi;
+var
+  Data: TDate;
+  xhttp: string;
+begin
+  if not Dm.SQLEmpresa.Active then
+    Dm.SQLEmpresa.Open;
+
+  cdsAPIAutorizacao.Close;
+  cdsAPIAutorizacao.CreateDataSet;
+
+  xhttp := 'http://200.98.202.84/Automafour/api/cad_pessoa/documento/'
+    + Dm.SQLEmpresaEMPRA14CGC.AsString;
+
+  //xhttp:= 'http://localhost:51308/api/cad_pessoa/documento/83125841020';
+
+  try
+    try
+      RestClient.Resource(xhttp).Accept(RestUtils.MediaType_Json).GetAsDataSet(cdsAPIAutorizacao);
+    except
+      exit;
+    end;
+
+    if cdsAPIAutorizacao.Active then
+    begin
+      if cdsAPIAutorizacaoDATA_AUTORIZACAO.AsString <> '' then
+      begin
+        Data := StrToDate(copy(cdsAPIAutorizacaoDATA_AUTORIZACAO.value, 9, 2) + '/' + copy(cdsAPIAutorizacaoDATA_AUTORIZACAO.value, 6, 2)
+          + '/' + copy(cdsAPIAutorizacaoDATA_AUTORIZACAO.value, 1, 4));
+
+        Dm.SQLConfigGeral.Edit;
+        Dm.SQLConfigGeralCFGEDBLOQ.Value := Data;
+        Dm.SQLConfigGeralDIAS_AVISO.AsInteger := StrToIntDef(cdsAPIAutorizacaoDIAS_AVISO.AsString, 0);
+        Dm.SQLConfigGeral.Post;
+      end
+    end;
+
+  finally
+    if (not cdsAPIAutorizacao.Active) or (cdsAPIAutorizacaoDATA_AUTORIZACAO.AsString = '') then
+    begin
+      FormTelaAtivacao := TFormTelaAtivacao.Create(Application);
+      FormTelaAtivacao.lblMensagem.Font.Size := 17;
+      FormTelaAtivacao.lblMensagem.Caption := 'Cadastro não encontrado na Base de Dados da Automafour!';
+      FormTelaAtivacao.ShowModal;
+      Application.terminate;
+    end;
+  end;
+
+end;
+
 
 procedure TDM.SQLCupomNewRecord(DataSet: TDataSet);
 begin
@@ -1494,6 +1599,12 @@ begin
   end;
   Application.ProcessMessages;
   }
+end;
+
+procedure TDM.DBAfterConnect(Sender: TObject);
+begin
+  inherited;
+  //
 end;
 
 end.
