@@ -832,6 +832,10 @@ begin
       // Gerar XML
     SQLImpressaoCupom.Close;
     dm.ACBrNFe.NotasFiscais.GerarNFe;
+
+    if DirectoryExists('c:\temp') then
+      if dm.ACBrNFe.NotasFiscais.Count > 0 then
+        dm.ACBrNFe.NotasFiscais[0].GravarXML('nfe.xml', 'c:\temp');
   end;
 end;
 
