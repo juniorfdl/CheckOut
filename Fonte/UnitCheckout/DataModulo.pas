@@ -1307,8 +1307,8 @@ begin
       SQLConfigGeral.Post;
     end;
   FormSplash.lbDados.Caption := 'Licença de uso Válida até => '+FormatDateTime('dd/mm/yyyy',SQLConfigGeralCFGEDBLOQ.Value) ; FormSplash.lbDados.Update;
-  Sleep(1000);
-  FormSplash.close;}
+  Sleep(1000);     }
+  FormSplash.close;
 
   DataSistema := ExecSql('select current_timestamp from rdb$relations').fieldbyname('current_timestamp').AsDateTime;
   DataSistema := StrToDate(FormatDateTime('dd/mm/yyyy', DataSistema));
