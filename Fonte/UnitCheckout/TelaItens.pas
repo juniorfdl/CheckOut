@@ -478,6 +478,7 @@ function TFormTelaItens.Gerar_NFCe(idCupom: string): string;
 var xCliente, xDocumento, xPlano: string;
 var iCRT: integer;
 var VlrDescNoTotal, VlrTroca, VlrTotalItens, PercDesc: double;
+    vaux:Currency;
 begin
   VlrTotalItens := 0;
   VlrDescNoTotal := 0;
@@ -491,7 +492,7 @@ begin
   xPlano := dm.sqlconsulta.fieldbyname('PLRCICOD').AsString;
 
   if dm.sqlconsulta.fieldbyname('CUPON2TOTITENS').Value > 0 then
-    VlrTotalItens := dm.sqlconsulta.fieldbyname('CUPON2TOTITENS').Value;
+    VlrTotalItens :=   RoundTo(dm.sqlconsulta.fieldbyname('CUPON2TOTITENS').AsCurrency,-2);
   if dm.sqlconsulta.fieldbyname('CUPON2DESC').Value > 0 then
     VlrDescNoTotal := dm.sqlconsulta.fieldbyname('CUPON2DESC').Value;
   if dm.sqlconsulta.fieldbyname('CUPON3BONUSTROCA').Value > 0 then
@@ -617,7 +618,9 @@ begin
         Prod.uCom := SQLLocate('UNIDADE', 'UNIDICOD', 'UNIDA5DESCR', SQLLocate('PRODUTO', 'PRODICOD', 'UNIDICOD', SQLImpressaoCupom.fieldbyname('PRODICOD').AsString));
         Prod.qCom := SQLImpressaoCupom.fieldbyname('CPITN3QTD').AsFloat;
         Prod.vUnCom := SQLImpressaoCupom.fieldbyname('CPITN3VLRUNIT').AsFloat;
-        Prod.vProd := SQLImpressaoCupom.fieldbyname('CPITN3VLRUNIT').AsFloat * SQLImpressaoCupom.fieldbyname('CPITN3QTD').AsFloat;
+        Prod.vProd := SQLImpressaoCupom.fieldbyname('CPITN3VLRUNIT').AsCurrency * SQLImpressaoCupom.fieldbyname('CPITN3QTD').AsCurrency;
+        vaux := RoundTo(Prod.vProd,-2);
+        Prod.vProd := vaux;
 
         Prod.uTrib := SQLLocate('UNIDADE', 'UNIDICOD', 'UNIDA5DESCR', SQLLocate('PRODUTO', 'PRODICOD', 'UNIDICOD', SQLImpressaoCupom.fieldbyname('PRODICOD').AsString));
         Prod.qTrib := SQLImpressaoCupom.fieldbyname('CPITN3QTD').AsFloat;
@@ -745,7 +748,11 @@ begin
               end;
           end;
         end;
-        Total.ICMSTot.vProd := Total.ICMSTot.vProd + Prod.vProd;
+
+        vaux := RoundTo(Total.ICMSTot.vProd,-2);
+        vaux := RoundTo(Prod.vProd,-2);
+        vaux := Total.ICMSTot.vProd + vaux;
+        Total.ICMSTot.vProd := vaux;
         Total.ICMSTot.vDesc := Total.ICMSTot.vDesc + Prod.vDesc;
       end;
       SQLImpressaoCupom.next;
@@ -2295,6 +2302,8 @@ begin
         TotalDescItens := TotalDescItens + DescItemVlr;
 
         ValorTotItem := FloatToStr(SQLItensVendaTempQUANTIDADE.Value * ValorItem);
+        ValorTotItem := FloatToStr(RoundTo(StrToFloat(ValorTotItem),-2));
+
         if (Unidade = 'M3') and (SQLItensVendaTempM3_ESPESSURA.Value > 0) and (SQLItensVendaTempM3_LARGURA.Value > 0) and
           (SQLItensVendaTempM3_COMPRI.Value > 0) then
         begin
@@ -2302,6 +2311,8 @@ begin
             (SQLItensVendaTempM3_LARGURA.Value / 100) *
             SQLItensVendaTempM3_COMPRI.Value *
             SQLItensVendaTempQUANTIDADE.Value) * ValorItem);
+
+
           SQLItensVendaTempDESCRICAO.Value := SQLItensVendaTempDESCRICAO.Value + ' (' +
             formatfloat('##0.00', SQLItensVendaTempM3_ESPESSURA.value) + 'X' +
             formatfloat('##0.00', SQLItensVendaTempM3_LARGURA.value) + 'X' +
@@ -2345,6 +2356,7 @@ begin
         if TrocandoItens then
           SQLItensVendaTempTROCA.Value := 'S';
 
+        ValorTotItem := FloatToStr(RoundTo(StrToFloat(ValorTotItem),-2));
 
           // Informa a Senha do Vendedor que irá iniciar a Venda
         if FileExists('SolicitaVendedorACadaItem.txt') then
@@ -4464,7 +4476,7 @@ begin
                 SQLParcelasVistaVendaTempTERMICOD.AsString := IntToStr(StrToInt(copy(IDReimprimir, 4, 3)));
                 SQLParcelasVistaVendaTempNROITEM.Value := 1;
                 SQLParcelasVistaVendaTempNUMEICOD.Value := 1;
-                SQLParcelasVistaVendaTempVALORPARC.Value := SQLImpressaoCupom.fieldbyname('CUPON2TOTITENS').Value;
+                SQLParcelasVistaVendaTempVALORPARC.AsCurrency := SQLImpressaoCupom.fieldbyname('CUPON2TOTITENS').AsCurrency;
                 SQLParcelasVistaVendaTempTIPOPADR.Value := 'DIN';
                 SQLParcelasVistaVendaTemp.Post;
                 SQLParcelasVistaVendaTemp.Close;
@@ -4923,6 +4935,9 @@ begin
   SQLSubTotal.Open;
   if SQLSubTotal.FieldByName('SubTotal').Value > 0 then
     ValorTemp := SQLSubTotal.FieldByName('SubTotal').Value;
+
+  ValorTemp := RoundTo(ValorTemp,-2);
+
   CurSubTotal.Value := ValorTemp;
   CurSubTotal.Update;
 
@@ -4934,6 +4949,7 @@ begin
   if SQLSubTotal.fieldbyname('SubTotal').Value > 0 then
     VlrBonusTroca := SQLSubTotal.fieldbyname('SubTotal').Value;
 
+  VlrBonusTroca := RoundTo(VlrBonusTroca,-2);
   ValorBonusTroca.Value := VlrBonusTroca;
   ValorBonusTroca.Update;
 
@@ -5777,7 +5793,7 @@ begin
   DM.SQLCupomUSUAICODVENDA.Value := UsuarioCorrente;
   DM.SQLCupomUSUAICODCANC.Value := CodUsuarioAutorizouOperacao;
   DM.SQLCupomCUPOCSTATUS.Value := 'C';
-  DM.SQLCupomCUPON2TOTITENS.Value := CurSubTotal.Value;
+  DM.SQLCupomCUPON2TOTITENS.AsCurrency := RoundTo(CurSubTotal.Value,-2);
   DM.SQLCupomCUPON2TOTITENSRET.Value := 0;
   DM.SQLCupomCUPON2ACRESC.Value := 0;
   DM.SQLCupomCUPON2DESC.Value := 0;
@@ -5952,8 +5968,8 @@ begin
   DM.SQLPedidoVendaPDVDN2VLRDESCPROM.Value := 0;
   DM.SQLPedidoVendaPDVDN2VLRDESC.Value := 0;
 
-  DM.SQLPedidoVendaPDVDN2TOTPROD.Value := CurSubTotal.Value + TotalDescItens;
-  DM.SQLPedidoVendaPDVDN2TOTPED.Value := CurSubTotal.Value;
+  DM.SQLPedidoVendaPDVDN2TOTPROD.Value := RoundTo(CurSubTotal.Value + TotalDescItens,-2);
+  DM.SQLPedidoVendaPDVDN2TOTPED.Value := RoundTo(CurSubTotal.Value,-2);
 
   DM.SQLPedidoVendaREGISTRO.Value := Now;
   DM.SQLPedidoVendaPENDENTE.Value := 'S';
