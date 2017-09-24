@@ -6084,7 +6084,7 @@ inherited DM: TDM
       'left outer join VENDEDOR on Pedido.VENDICOD  = VENDEDOR.VENDICOD'
       
         'left outer join PLANORECEBIMENTO PLANO on Pedido.PLRCICOD = PLAN' +
-        'ORECEBIMENTO.PLRCICOD'
+        'O.PLRCICOD'
       'where'
       '(%MFiltro)'
       ''
