@@ -478,7 +478,7 @@ function TFormTelaItens.Gerar_NFCe(idCupom: string): string;
 var xCliente, xDocumento, xPlano: string;
 var iCRT: integer;
 var VlrDescNoTotal, VlrTroca, VlrTotalItens, PercDesc: double;
-    vaux:Currency;
+    vaux, Total_vTotTrib:Currency;
 begin
   VlrTotalItens := 0;
   VlrDescNoTotal := 0;
@@ -591,7 +591,7 @@ begin
            {Carrega Produtos temporarios}
       dm.sqlconsulta.close;
       dm.sqlconsulta.sql.Clear;
-      dm.sqlconsulta.sql.Text := 'select PRODA30ADESCRREDUZ,PRODA60CODBAR,PRODA60REFER,PRODIORIGEM, PRODISITTRIB, PRODA1TIPO, PRODA1MODBC,PRODA1MODBCST,PRODA1MODBCST,TABCEST from produto where prodicod=' + SQLImpressaoCupom.fieldbyname('PRODICOD').AsString;
+      dm.sqlconsulta.sql.Text := 'select NCMICOD, PRODA30ADESCRREDUZ,PRODA60CODBAR,PRODA60REFER,PRODIORIGEM, PRODISITTRIB, PRODA1TIPO, PRODA1MODBC,PRODA1MODBCST,PRODA1MODBCST,TABCEST from produto where prodicod=' + SQLImpressaoCupom.fieldbyname('PRODICOD').AsString;
       dm.sqlconsulta.open;
 
       with Det.Add do
@@ -646,8 +646,7 @@ begin
         with Imposto do
         begin
                    // lei da transparencia nos impostos
-          vTotTrib := 0;
-
+          
           if dm.sqlConsulta.fieldbyname('PRODIORIGEM').AsString = '0' then
             ICMS.orig := oeNacional else
             if dm.sqlConsulta.fieldbyname('PRODIORIGEM').AsString = '1' then
@@ -747,18 +746,27 @@ begin
                 ICMS.vICMSST := 0;
               end;
           end;
+
+          vTotTrib := RetornaAliquotaMediaProduto(dm.sqlConsulta.fieldbyname('NCMICOD').AsInteger, dm.sqlConsulta.fieldbyname('PRODIORIGEM').AsInteger);
+        
+          if vTotTrib > 0 then
+            vTotTrib := (Prod.vProd * vTotTrib) / 100;
+
+          Total_vTotTrib := Total_vTotTrib + vTotTrib;
         end;
 
         vaux := RoundTo(Total.ICMSTot.vProd,-2);
         vaux := RoundTo(Prod.vProd,-2);
         vaux := Total.ICMSTot.vProd + vaux;
         Total.ICMSTot.vProd := vaux;
-        Total.ICMSTot.vDesc := Total.ICMSTot.vDesc + Prod.vDesc;
+        Total.ICMSTot.vDesc := Total.ICMSTot.vDesc + Prod.vDesc; 
       end;
       SQLImpressaoCupom.next;
     end;
 
       {Totais da NFCe}
+    Total.ICMSTot.vTotTrib := Total_vTotTrib;
+      
     SQLImpressaoCupom.Close;
     SQLImpressaoCupom.RequestLive := False;
     SQLImpressaoCupom.SQL.Clear;
@@ -785,7 +793,7 @@ begin
     Total.ISSQNTot.vBC := 0;
     Total.ISSQNTot.vISS := 0;
     Total.ISSQNTot.vPIS := 0;
-    Total.ISSQNTot.vCOFINS := 0;
+    Total.ISSQNTot.vCOFINS := 0; 
 
     Transp.modFrete := mfSemFrete; // NFC-e não pode ter FRETE
 
