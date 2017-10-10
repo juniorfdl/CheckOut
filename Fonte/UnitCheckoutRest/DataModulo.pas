@@ -11,7 +11,7 @@ uses
   IdTCPConnection, IdTCPClient, IdMessageClient, IdSMTP, IdBaseComponent,
   IdMessage, DBXpress, ZConnection, SqlExpr, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, ACBrNFeDANFEClass, ACBrNFeDANFeESCPOS,
-  ACBrDFe, ACBrNFe, ACBrBase, ACBrPosPrinter;
+  ACBrDFe, ACBrNFe, ACBrBase, ACBrPosPrinter, ZAbstractConnection;
 
 type
   TDM = class(TDMTemplate)

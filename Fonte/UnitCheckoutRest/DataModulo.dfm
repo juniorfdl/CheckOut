@@ -5,7 +5,6 @@ inherited DM: TDM
   Height = 724
   Width = 859
   inherited DB: TDatabase
-    AliasName = 'Easy_Gestao'
     Left = 32
   end
   inherited SQLTemplate: TRxQuery
@@ -35,10 +34,6 @@ inherited DM: TDM
   inherited DSEmail: TDataSource
     Left = 624
     Top = 152
-  end
-  inherited SQLProdutoSaldoDia: TRxQuery
-    Left = 85
-    Top = 190
   end
   inherited SQLProdutoSaldoAux: TRxQuery
     Left = 294
@@ -70,13 +65,17 @@ inherited DM: TDM
     Left = 755
     Top = 165
   end
-  inherited SQLConsulta: TRxQuery
+  inherited sqlConsulta: TQuery
     Left = 261
     Top = 610
   end
-  inherited SQLUpdate: TRxQuery
+  inherited sqlUpdate: TQuery
     Left = 339
     Top = 610
+  end
+  inherited SQLProdutoSaldoDia: TRxQuery
+    Left = 85
+    Top = 190
   end
   object SQLUsuario: TRxQuery
     DatabaseName = 'DB'
@@ -5758,18 +5757,19 @@ inherited DM: TDM
     ConfigQRCode.ErrorLevel = 0
     ConfigLogo.IgnorarLogo = True
     LinhasEntreCupons = 3
-    CortaPapel = True
     ControlePorta = True
     Left = 102
     Top = 597
   end
   object ACBrNFe: TACBrNFe
     Configuracoes.Geral.SSLLib = libCapicom
+    Configuracoes.Geral.SSLCryptLib = cryCapicom
+    Configuracoes.Geral.SSLHttpLib = httpWinINet
+    Configuracoes.Geral.SSLXmlSignLib = xsMsXmlCapicom
     Configuracoes.Geral.FormatoAlerta = 'TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.'
     Configuracoes.Geral.ValidarDigest = False
     Configuracoes.Geral.ModeloDF = moNFCe
     Configuracoes.Geral.AtualizarXMLCancelado = True
-    Configuracoes.Geral.IncluirQRCodeXMLNFCe = True
     Configuracoes.Arquivos.PathSalvar = 'c:\easy2solutions\nfce\'
     Configuracoes.Arquivos.SepararPorMes = True
     Configuracoes.Arquivos.PathNFe = 'c:\easy2solutions\nfce\'
@@ -5794,6 +5794,7 @@ inherited DM: TDM
     TipoDANFE = tiNFCe
     NumCopias = 1
     Site = 'http://www.projetoacbr.com.br'
+    ImprimeNomeFantasia = False
     ImprimirDescPorc = False
     ImprimirTotalLiquido = False
     MargemInferior = 0.800000000000000000
@@ -5811,7 +5812,6 @@ inherited DM: TDM
     ProdutosPorPagina = 0
     ImprimirDetalhamentoEspecifico = True
     NFeCancelada = False
-    LocalImpCanhoto = 0
     ImprimirItens = True
     ViaConsumidor = True
     TamanhoLogoHeight = 0
@@ -5823,7 +5823,6 @@ inherited DM: TDM
     RecuoLogo = 0
     TributosSeparadamente = False
     FonteTributos = 'IBPT'
-    PosCanhoto = prCabecalho
     ImprimeEmUmaLinha = False
     ImprimeDescAcrescItem = False
     PosPrinter = ACBrPosPrinter
