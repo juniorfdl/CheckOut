@@ -353,6 +353,7 @@ type
     procedure LoadXML(MyMemo: TMemo; MyWebBrowser: TWebBrowser);
     function SN(sNum: string): string;
     procedure VoltaParaEntradaDados;
+    procedure CalcularImpostos(CodNCM, OrigemProduto : Integer; Valor:Currency);
   public
     { Public declarations }
     CodICMS,
@@ -480,6 +481,10 @@ var iCRT: integer;
 var VlrDescNoTotal, VlrTroca, VlrTotalItens, PercDesc: double;
     vaux, Total_vTotTrib:Currency;
 begin
+  dm.ACBrNFe.DANFE.vTribFed := 0;
+  dm.ACBrNFe.DANFE.vTribEst := 0;
+  dm.ACBrNFe.DANFE.vTribMun := 0;
+
   VlrTotalItens := 0;
   VlrDescNoTotal := 0;
   VlrTroca := 0;
@@ -523,6 +528,7 @@ begin
   dm.ACBrNFe.NotasFiscais.Clear;
   with dm.ACBrNFe.NotasFiscais.Add.NFe do
   begin
+    
     Ide.cNF := NumNFe; //Caso não seja preenchido será gerado um número aleatório pelo componente
     Ide.natOp := 'VENDA CONSUMIDOR';
     Ide.modelo := 65;
@@ -629,7 +635,7 @@ begin
         Prod.vOutro := 0;
         Prod.vFrete := 0;
         Prod.vSeg := 0;
-        Prod.vDesc := 0;
+        Prod.vDesc := 0; 
 
         if SQLImpressaoCupom.fieldbyname('CPITN2DESC').AsFloat > 0 then
           Prod.vDesc := SQLImpressaoCupom.fieldbyname('CPITN2DESC').AsFloat;
@@ -748,10 +754,11 @@ begin
           end;
 
           vTotTrib := RetornaAliquotaMediaProduto(dm.sqlConsulta.fieldbyname('NCMICOD').AsInteger, dm.sqlConsulta.fieldbyname('PRODIORIGEM').AsInteger);
-        
-          if vTotTrib > 0 then
-            vTotTrib := (Prod.vProd * vTotTrib) / 100;
+          CalcularImpostos(dm.sqlConsulta.fieldbyname('NCMICOD').AsInteger, dm.sqlConsulta.fieldbyname('PRODIORIGEM').AsInteger, Prod.vProd - Prod.vDesc);
 
+          if vTotTrib > 0 then
+            vTotTrib := (Prod.vProd * vTotTrib) / 100; 
+          
           Total_vTotTrib := Total_vTotTrib + vTotTrib;
         end;
 
@@ -765,14 +772,14 @@ begin
     end;
 
       {Totais da NFCe}
-    Total.ICMSTot.vTotTrib := Total_vTotTrib;
-      
+    Total.ICMSTot.vTotTrib := Total_vTotTrib;    
+
     SQLImpressaoCupom.Close;
     SQLImpressaoCupom.RequestLive := False;
     SQLImpressaoCupom.SQL.Clear;
     SQLImpressaoCupom.SQL.Add('Select * From CUPOM Where CUPOA13ID = ''' + idCupom + '''');
     SQLImpressaoCupom.Open;
-
+    
 //      Total.ICMSTot.vBC     := 0; //SQLImpressaoCupom.fieldbyname('CUPON2BASEICMS').AsFloat;
 //      Total.ICMSTot.vICMS   := 0; //SQLImpressaoCupom.fieldbyname('CUPON2VLRICMS').AsFloat;
 //      Total.ICMSTot.vProd   := SQLImpressaoCupom.fieldbyname('CUPON2TOTITENS').AsFloat+SQLImpressaoCupom.fieldbyname('CUPON2DESCITENS').AsFloat;
@@ -6351,6 +6358,25 @@ end;
 procedure TFormTelaItens.SQLItensVendaTempAfterPost(DataSet: TDataSet);
 begin
   VoltaParaEntradaDados;
+end;
+
+procedure TFormTelaItens.CalcularImpostos(CodNCM, OrigemProduto: Integer; Valor:Currency);
+begin
+  with ExecSql('SELECT NCMN2ALIQNAC, ALIQESTADUAL, ALIQMUNICIPAL FROM NCM WHERE NCMICOD = ' + IntToStr(CodNCM)) do
+  try  
+    if FieldByName('NCMN2ALIQNAC').AsCurrency > 0 then
+      dm.ACBrNFe.DANFE.vTribFed := dm.ACBrNFe.DANFE.vTribFed + ((Valor * FieldByName('NCMN2ALIQNAC').AsCurrency) / 100);
+
+    if FieldByName('ALIQESTADUAL').AsCurrency > 0 then
+      dm.ACBrNFe.DANFE.vTribEst := dm.ACBrNFe.DANFE.vTribEst + ((Valor * FieldByName('ALIQESTADUAL').AsCurrency) / 100);
+
+    if FieldByName('ALIQMUNICIPAL').AsCurrency > 0 then
+      dm.ACBrNFe.DANFE.vTribMun := dm.ACBrNFe.DANFE.vTribMun + ((Valor * FieldByName('ALIQMUNICIPAL').AsCurrency) / 100);
+    
+  finally
+    free;
+  end;
+  
 end;
 
 end.
