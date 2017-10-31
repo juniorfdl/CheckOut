@@ -353,7 +353,7 @@ type
     procedure LoadXML(MyMemo: TMemo; MyWebBrowser: TWebBrowser);
     function SN(sNum: string): string;
     procedure VoltaParaEntradaDados;
-    procedure CalcularImpostos(CodNCM, OrigemProduto : Integer; Valor:Currency);
+    procedure CalcularImpostos(CodNCM, OrigemProduto: Integer; Valor: Currency);
   public
     { Public declarations }
     CodICMS,
@@ -479,7 +479,7 @@ function TFormTelaItens.Gerar_NFCe(idCupom: string): string;
 var xCliente, xDocumento, xPlano: string;
 var iCRT: integer;
 var VlrDescNoTotal, VlrTroca, VlrTotalItens, PercDesc: double;
-    vaux, Total_vTotTrib:Currency;
+  vaux, Total_vTotTrib: Currency;
 begin
   dm.ACBrNFe.DANFE.vTribFed := 0;
   dm.ACBrNFe.DANFE.vTribEst := 0;
@@ -497,7 +497,7 @@ begin
   xPlano := dm.sqlconsulta.fieldbyname('PLRCICOD').AsString;
 
   if dm.sqlconsulta.fieldbyname('CUPON2TOTITENS').Value > 0 then
-    VlrTotalItens :=   RoundTo(dm.sqlconsulta.fieldbyname('CUPON2TOTITENS').AsCurrency,-2);
+    VlrTotalItens := RoundTo(dm.sqlconsulta.fieldbyname('CUPON2TOTITENS').AsCurrency, -2);
   if dm.sqlconsulta.fieldbyname('CUPON2DESC').Value > 0 then
     VlrDescNoTotal := dm.sqlconsulta.fieldbyname('CUPON2DESC').Value;
   if dm.sqlconsulta.fieldbyname('CUPON3BONUSTROCA').Value > 0 then
@@ -528,7 +528,7 @@ begin
   dm.ACBrNFe.NotasFiscais.Clear;
   with dm.ACBrNFe.NotasFiscais.Add.NFe do
   begin
-    
+
     Ide.cNF := NumNFe; //Caso não seja preenchido será gerado um número aleatório pelo componente
     Ide.natOp := 'VENDA CONSUMIDOR';
     Ide.modelo := 65;
@@ -625,7 +625,7 @@ begin
         Prod.qCom := SQLImpressaoCupom.fieldbyname('CPITN3QTD').AsFloat;
         Prod.vUnCom := SQLImpressaoCupom.fieldbyname('CPITN3VLRUNIT').AsFloat;
         Prod.vProd := SQLImpressaoCupom.fieldbyname('CPITN3VLRUNIT').AsCurrency * SQLImpressaoCupom.fieldbyname('CPITN3QTD').AsCurrency;
-        vaux := RoundTo(Prod.vProd,-2);
+        vaux := RoundTo(Prod.vProd, -2);
         Prod.vProd := vaux;
 
         Prod.uTrib := SQLLocate('UNIDADE', 'UNIDICOD', 'UNIDA5DESCR', SQLLocate('PRODUTO', 'PRODICOD', 'UNIDICOD', SQLImpressaoCupom.fieldbyname('PRODICOD').AsString));
@@ -635,7 +635,7 @@ begin
         Prod.vOutro := 0;
         Prod.vFrete := 0;
         Prod.vSeg := 0;
-        Prod.vDesc := 0; 
+        Prod.vDesc := 0;
 
         if SQLImpressaoCupom.fieldbyname('CPITN2DESC').AsFloat > 0 then
           Prod.vDesc := SQLImpressaoCupom.fieldbyname('CPITN2DESC').AsFloat;
@@ -652,7 +652,7 @@ begin
         with Imposto do
         begin
                    // lei da transparencia nos impostos
-          
+
           if dm.sqlConsulta.fieldbyname('PRODIORIGEM').AsString = '0' then
             ICMS.orig := oeNacional else
             if dm.sqlConsulta.fieldbyname('PRODIORIGEM').AsString = '1' then
@@ -757,32 +757,28 @@ begin
           CalcularImpostos(dm.sqlConsulta.fieldbyname('NCMICOD').AsInteger, dm.sqlConsulta.fieldbyname('PRODIORIGEM').AsInteger, Prod.vProd - Prod.vDesc);
 
           if vTotTrib > 0 then
-            vTotTrib := (Prod.vProd * vTotTrib) / 100; 
-          
+            vTotTrib := (Prod.vProd * vTotTrib) / 100;
+
           Total_vTotTrib := Total_vTotTrib + vTotTrib;
         end;
 
-        vaux := RoundTo(Total.ICMSTot.vProd,-2);
-        vaux := RoundTo(Prod.vProd,-2);
+        vaux := RoundTo(Total.ICMSTot.vProd, -2);
+        vaux := RoundTo(Prod.vProd, -2);
         vaux := Total.ICMSTot.vProd + vaux;
         Total.ICMSTot.vProd := vaux;
-        Total.ICMSTot.vDesc := Total.ICMSTot.vDesc + Prod.vDesc; 
+        Total.ICMSTot.vDesc := Total.ICMSTot.vDesc + Prod.vDesc;
       end;
       SQLImpressaoCupom.next;
     end;
 
       {Totais da NFCe}
-    Total.ICMSTot.vTotTrib := Total_vTotTrib;    
+    Total.ICMSTot.vTotTrib := Total_vTotTrib;
 
     SQLImpressaoCupom.Close;
     SQLImpressaoCupom.RequestLive := False;
     SQLImpressaoCupom.SQL.Clear;
     SQLImpressaoCupom.SQL.Add('Select * From CUPOM Where CUPOA13ID = ''' + idCupom + '''');
     SQLImpressaoCupom.Open;
-    
-//      Total.ICMSTot.vBC     := 0; //SQLImpressaoCupom.fieldbyname('CUPON2BASEICMS').AsFloat;
-//      Total.ICMSTot.vICMS   := 0; //SQLImpressaoCupom.fieldbyname('CUPON2VLRICMS').AsFloat;
-//      Total.ICMSTot.vProd   := SQLImpressaoCupom.fieldbyname('CUPON2TOTITENS').AsFloat+SQLImpressaoCupom.fieldbyname('CUPON2DESCITENS').AsFloat;
 
     Total.ICMSTot.vBCST := 0;
     Total.ICMSTot.vST := 0;
@@ -800,39 +796,57 @@ begin
     Total.ISSQNTot.vBC := 0;
     Total.ISSQNTot.vISS := 0;
     Total.ISSQNTot.vPIS := 0;
-    Total.ISSQNTot.vCOFINS := 0; 
+    Total.ISSQNTot.vCOFINS := 0;
 
     Transp.modFrete := mfSemFrete; // NFC-e não pode ter FRETE
 
-      //PAGAMENTOS apenas para NFC-e
-    with pag.Add do
+    with ExecSql(' select CTRCN2VLR from CONTASRECEBER where CUPOA13ID = ' + QuotedStr(idCupom) + ' order by CTRCINROPARC ') do
     begin
-      if (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'VISTA') or
-        (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'DIN') then
+      if IsEmpty then
       begin
-        Ide.indPag := ipVista;
-        tPag := fpDinheiro;
+        with pag.Add do
+        begin
+          if (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'VISTA') or
+            (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'DIN') then
+          begin
+            Ide.indPag := ipVista;
+            tPag := fpDinheiro;
+          end;
+          if SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CRT' then
+          begin
+            Ide.indPag := ipPrazo;
+            tPag := fpCartaoCredito;
+          end;
+          if (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CRTF') or
+            (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CRD') then
+          begin
+            Ide.indPag := ipPrazo;
+            tPag := fpCreditoLoja;
+          end;
+          if (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CHQV') or
+            (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CHQP') then
+          begin
+            Ide.indPag := ipPrazo;
+            tPag := fpCheque;
+          end;
+          vPag := Total.ICMSTot.vNF;
+        end;
+      end
+      else begin
+        while not eof do
+        begin
+          with pag.Add do
+          begin
+            Ide.indPag := ipPrazo;
+            tPag := fpCartaoCredito;
+            vPag := fieldbyname('CTRCN2VLR').AsFloat;
+          end;
+          next;
+        end;
       end;
-      if SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CRT' then
-      begin
-        Ide.indPag := ipPrazo;
-        tPag := fpCartaoCredito;
-      end;
-      if (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CRTF') or
-        (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CRD') then
-      begin
-        Ide.indPag := ipPrazo;
-        tPag := fpCreditoLoja;
-      end;
-      if (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CHQV') or
-        (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CHQP') then
-      begin
-        Ide.indPag := ipPrazo;
-        tPag := fpCheque;
-      end;
-      vPag := Total.ICMSTot.vNF;
     end;
 
+    //PAGAMENTOS apenas para NFC-e
     SQLImpressaoCupomFinanceiro.Close;
 
     InfAdic.infCpl := '';
@@ -2320,7 +2334,7 @@ begin
         TotalDescItens := TotalDescItens + DescItemVlr;
 
         ValorTotItem := FloatToStr(SQLItensVendaTempQUANTIDADE.Value * ValorItem);
-        ValorTotItem := FloatToStr(RoundTo(StrToFloat(ValorTotItem),-2));
+        ValorTotItem := FloatToStr(RoundTo(StrToFloat(ValorTotItem), -2));
 
         if (Unidade = 'M3') and (SQLItensVendaTempM3_ESPESSURA.Value > 0) and (SQLItensVendaTempM3_LARGURA.Value > 0) and
           (SQLItensVendaTempM3_COMPRI.Value > 0) then
@@ -2374,7 +2388,7 @@ begin
         if TrocandoItens then
           SQLItensVendaTempTROCA.Value := 'S';
 
-        ValorTotItem := FloatToStr(RoundTo(StrToFloat(ValorTotItem),-2));
+        ValorTotItem := FloatToStr(RoundTo(StrToFloat(ValorTotItem), -2));
 
           // Informa a Senha do Vendedor que irá iniciar a Venda
         if FileExists('SolicitaVendedorACadaItem.txt') then
@@ -2700,7 +2714,7 @@ end;
 procedure TFormTelaItens.VoltaParaEntradaDados;
 begin
   try
-    if not EntradaDados.Focused  then
+    if not EntradaDados.Focused then
       EntradaDados.SetFocus;
 
   except
@@ -4172,7 +4186,7 @@ begin
         'X': begin {Cttl X}
             DocumentoClienteVenda := '';
             if (ECFAtual <> '') then
-            begin     
+            begin
               if not Pergunta('SIM', 'Imprimir Cupom da Ultima Venda ou Consultar Vendas Anteriores?') then
               begin
                 IDReimprimir := '';
@@ -4954,7 +4968,7 @@ begin
   if SQLSubTotal.FieldByName('SubTotal').Value > 0 then
     ValorTemp := SQLSubTotal.FieldByName('SubTotal').Value;
 
-  ValorTemp := RoundTo(ValorTemp,-2);
+  ValorTemp := RoundTo(ValorTemp, -2);
 
   CurSubTotal.Value := ValorTemp;
   CurSubTotal.Update;
@@ -4967,7 +4981,7 @@ begin
   if SQLSubTotal.fieldbyname('SubTotal').Value > 0 then
     VlrBonusTroca := SQLSubTotal.fieldbyname('SubTotal').Value;
 
-  VlrBonusTroca := RoundTo(VlrBonusTroca,-2);
+  VlrBonusTroca := RoundTo(VlrBonusTroca, -2);
   ValorBonusTroca.Value := VlrBonusTroca;
   ValorBonusTroca.Update;
 
@@ -5811,7 +5825,7 @@ begin
   DM.SQLCupomUSUAICODVENDA.Value := UsuarioCorrente;
   DM.SQLCupomUSUAICODCANC.Value := CodUsuarioAutorizouOperacao;
   DM.SQLCupomCUPOCSTATUS.Value := 'C';
-  DM.SQLCupomCUPON2TOTITENS.AsCurrency := RoundTo(CurSubTotal.Value,-2);
+  DM.SQLCupomCUPON2TOTITENS.AsCurrency := RoundTo(CurSubTotal.Value, -2);
   DM.SQLCupomCUPON2TOTITENSRET.Value := 0;
   DM.SQLCupomCUPON2ACRESC.Value := 0;
   DM.SQLCupomCUPON2DESC.Value := 0;
@@ -5986,8 +6000,8 @@ begin
   DM.SQLPedidoVendaPDVDN2VLRDESCPROM.Value := 0;
   DM.SQLPedidoVendaPDVDN2VLRDESC.Value := 0;
 
-  DM.SQLPedidoVendaPDVDN2TOTPROD.Value := RoundTo(CurSubTotal.Value + TotalDescItens,-2);
-  DM.SQLPedidoVendaPDVDN2TOTPED.Value := RoundTo(CurSubTotal.Value,-2);
+  DM.SQLPedidoVendaPDVDN2TOTPROD.Value := RoundTo(CurSubTotal.Value + TotalDescItens, -2);
+  DM.SQLPedidoVendaPDVDN2TOTPED.Value := RoundTo(CurSubTotal.Value, -2);
 
   DM.SQLPedidoVendaREGISTRO.Value := Now;
   DM.SQLPedidoVendaPENDENTE.Value := 'S';
@@ -6350,7 +6364,7 @@ begin
     lbStatusECF.Caption := 'NFCe Offline';
     lbStatusECF.Update;
   end;
-end;             
+end;
 
 procedure TFormTelaItens.btnF5Click(Sender: TObject);
 begin
@@ -6363,10 +6377,10 @@ begin
   VoltaParaEntradaDados;
 end;
 
-procedure TFormTelaItens.CalcularImpostos(CodNCM, OrigemProduto: Integer; Valor:Currency);
+procedure TFormTelaItens.CalcularImpostos(CodNCM, OrigemProduto: Integer; Valor: Currency);
 begin
   with ExecSql('SELECT NCMN2ALIQNAC, ALIQESTADUAL, ALIQMUNICIPAL FROM NCM WHERE NCMICOD = ' + IntToStr(CodNCM)) do
-  try  
+  try
     if FieldByName('NCMN2ALIQNAC').AsCurrency > 0 then
       dm.ACBrNFe.DANFE.vTribFed := dm.ACBrNFe.DANFE.vTribFed + ((Valor * FieldByName('NCMN2ALIQNAC').AsCurrency) / 100);
 
@@ -6375,11 +6389,12 @@ begin
 
     if FieldByName('ALIQMUNICIPAL').AsCurrency > 0 then
       dm.ACBrNFe.DANFE.vTribMun := dm.ACBrNFe.DANFE.vTribMun + ((Valor * FieldByName('ALIQMUNICIPAL').AsCurrency) / 100);
-    
+
   finally
     free;
   end;
-  
+
 end;
 
 end.
+d.
