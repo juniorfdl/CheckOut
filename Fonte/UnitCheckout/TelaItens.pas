@@ -463,7 +463,13 @@ begin
   else
     dm.ACBrPosPrinter.Device.Porta := '\\localhost\nfce';
 
-  dm.ACBrPosPrinter.Device.Baud := dm.SQLTerminalAtivoECF_VELOC.Value;
+  if not FileExists('COMUNICACAO_OFFLINE.TXT') then
+    dm.ACBrPosPrinter.Device.Baud := dm.SQLTerminalAtivoECF_VELOC.Value
+  else begin
+    dm.ACBrPosPrinter.Device.Porta := ExtractFilePath(application.ExeName) + '\nfceOffline.txt';
+    dm.ACBrPosPrinter.ControlePorta := False;
+    dm.ACBrPosPrinter.Device.DeviceType := dtFile;
+  end;
 
   dm.ACBrNFeDANFeESCPOS.ImprimeEmUmaLinha := False;
   dm.ACBrNFeDANFeESCPOS.ImprimeDescAcrescItem := True;
@@ -800,51 +806,80 @@ begin
 
     Transp.modFrete := mfSemFrete; // NFC-e não pode ter FRETE
 
-    with ExecSql(' select CTRCN2VLR from CONTASRECEBER where CUPOA13ID = ' + QuotedStr(idCupom) + ' order by CTRCINROPARC ') do
+    if (SQLParcelasPrazoVendaTemp.Active) and (SQLParcelasPrazoVendaTemp.RecordCount > 1) then
     begin
-      if IsEmpty then
+      SQLParcelasPrazoVendaTemp.First;
+      while not SQLParcelasPrazoVendaTemp.eof do
       begin
         with pag.Add do
         begin
-          if (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'VISTA') or
-            (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'DIN') then
-          begin
-            Ide.indPag := ipVista;
-            tPag := fpDinheiro;
-          end;
-          if SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CRT' then
-          begin
-            Ide.indPag := ipPrazo;
+          Ide.indPag := ipPrazo;
+
+          if SQLParcelasPrazoVendaTempTIPOPADR.AsString = 'CRD' then
+            tPag := fpCartaoCredito
+          else if SQLParcelasPrazoVendaTempTIPOPADR.AsString = 'CHQV' then
+            tPag := fpCheque
+          else
             tPag := fpCartaoCredito;
-          end;
-          if (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CRTF') or
-            (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CRD') then
-          begin
-            Ide.indPag := ipPrazo;
-            tPag := fpCreditoLoja;
-          end;
-          if (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CHQV') or
-            (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CHQP') then
-          begin
-            Ide.indPag := ipPrazo;
-            tPag := fpCheque;
-          end;
-          vPag := Total.ICMSTot.vNF;
+
+          vPag := SQLParcelasPrazoVendaTempVALORVENCTO.AsFloat;
+          SQLParcelasPrazoVendaTemp.Next;
         end;
-      end
-      else begin
-        while not eof do
+      end;
+    end
+    else
+      with ExecSql(' select CTRCN2VLR, ctrca5tipopadrao from CONTASRECEBER where CUPOA13ID = ' + QuotedStr(idCupom) + ' order by CTRCINROPARC ') do
+      begin
+        if IsEmpty then
         begin
           with pag.Add do
           begin
-            Ide.indPag := ipPrazo;
-            tPag := fpCartaoCredito;
-            vPag := fieldbyname('CTRCN2VLR').AsFloat;
+            if (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'VISTA') or
+              (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'DIN') then
+            begin
+              Ide.indPag := ipVista;
+              tPag := fpDinheiro;
+            end;
+            if SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CRT' then
+            begin
+              Ide.indPag := ipPrazo;
+              tPag := fpCartaoCredito;
+            end;
+            if (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CRTF') or
+              (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CRD') then
+            begin
+              Ide.indPag := ipPrazo;
+              tPag := fpCreditoLoja;
+            end;
+            if (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CHQV') or
+              (SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CHQP') then
+            begin
+              Ide.indPag := ipPrazo;
+              tPag := fpCheque;
+            end;
+            vPag := Total.ICMSTot.vNF;
           end;
-          next;
+        end
+        else begin
+          while not eof do
+          begin
+            with pag.Add do
+            begin
+              Ide.indPag := ipPrazo;
+
+              if fieldbyname('ctrca5tipopadrao').AsString = 'CRD' then
+                tPag := fpCartaoCredito
+              else if fieldbyname('ctrca5tipopadrao').AsString = 'CHQV' then
+                tPag := fpCheque
+              else
+                tPag := fpCartaoCredito;
+
+              vPag := fieldbyname('CTRCN2VLR').AsFloat;
+            end;
+            next;
+          end;
         end;
       end;
-    end;
 
     //PAGAMENTOS apenas para NFC-e
     SQLImpressaoCupomFinanceiro.Close;
@@ -875,6 +910,9 @@ begin
     if DirectoryExists('c:\temp') then
       if dm.ACBrNFe.NotasFiscais.Count > 0 then
         dm.ACBrNFe.NotasFiscais[0].GravarXML('nfe.xml', 'c:\temp');
+
+    if FileExists('COMUNICACAO_OFFLINE.TXT') then
+      dm.ACBrNFe.NotasFiscais.Imprimir;
   end;
 end;
 
@@ -4783,8 +4821,10 @@ begin
                   nfce_tentativa := nfce_tentativa + 1;
                   LblInstrucoes.Caption := 'Consultando Retorno Sefaz RS NFCe: ' + IntToStr(NumNFe) + ' - Tentativa N.' + intToStr(nfce_tentativa);
                   LblInstrucoes.Update;
-                  dm.ACBrNFe.Consultar(chave);
-                  if (dm.ACBrNFe.WebServices.Consulta.cStat = 217) then
+                  if not FileExists('COMUNICACAO_OFFLINE.TXT') then
+                    dm.ACBrNFe.Consultar(chave);
+
+                  if (FileExists('COMUNICACAO_OFFLINE.TXT')) or (dm.ACBrNFe.WebServices.Consulta.cStat = 217) then
                   begin
                               { Cria o arquivo XML }
                     sXML := Gerar_NFCe(IDReimprimir);
@@ -4797,11 +4837,15 @@ begin
                     dm.ACBrNFe.NotasFiscais.Validar;
                     LblInstrucoes.Caption := 'Enviando ao Sefaz RS NFCe: ' + intToStr(NumNFe);
                     LblInstrucoes.Update;
-                    dm.ACBrNFe.Enviar('1', False, False);
+
+                    if not FileExists('COMUNICACAO_OFFLINE.TXT') then
+                      dm.ACBrNFe.Enviar('1', False, False);
                               {refaz a consulta}
                     LblInstrucoes.Caption := 'Consultando Retorno Sefaz do NFCe: ' + intToStr(NumNFe);
                     LblInstrucoes.Update;
-                    dm.ACBrNFe.Consultar(chave);
+
+                    if not FileExists('COMUNICACAO_OFFLINE.TXT') then
+                      dm.ACBrNFe.Consultar(chave);
                   end;
 
                   if (dm.ACBrNFe.WebServices.Consulta.cStat = 100) then
@@ -6398,3 +6442,4 @@ end;
 
 end.
 d.
+
