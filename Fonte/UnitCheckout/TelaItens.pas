@@ -828,7 +828,9 @@ begin
       end;
     end
     else
-      with ExecSql(' select CTRCN2VLR, ctrca5tipopadrao from CONTASRECEBER where CUPOA13ID = ' + QuotedStr(idCupom) + ' order by CTRCINROPARC ') do
+      with ExecSql(' select a.CTRCN2VLR, a.ctrca5tipopadrao, b.numecvistaprazo from CONTASRECEBER A LEFT JOIN Numerario B ON B.numeicod = A.numeicod '
+         + ' where CUPOA13ID = ' + QuotedStr(idCupom)
+         + ' union all select cpnmn2vlr, ''DIN'', ''V'' from cupomnumerario where cupoa13id = '+ QuotedStr(idCupom)) do
       begin
         if IsEmpty then
         begin
@@ -866,13 +868,23 @@ begin
             with pag.Add do
             begin
               Ide.indPag := ipPrazo;
-
+              if fieldbyname('ctrca5tipopadrao').AsString = 'DIN' then
+                tPag := fpDinheiro
+              else
+              if fieldbyname('ctrca5tipopadrao').AsString = 'CRT' then
+              begin
+                if fieldbyname('numecvistaprazo').AsString = 'P' then
+                  tPag := fpCartaoCredito
+                else
+                  tPag := fpCartaoDebito
+              end
+              else
               if fieldbyname('ctrca5tipopadrao').AsString = 'CRD' then
-                tPag := fpCartaoCredito
+                tPag := fpOutro
               else if fieldbyname('ctrca5tipopadrao').AsString = 'CHQV' then
                 tPag := fpCheque
               else
-                tPag := fpCartaoCredito;
+                tPag := fpDinheiro;
 
               vPag := fieldbyname('CTRCN2VLR').AsFloat;
             end;
