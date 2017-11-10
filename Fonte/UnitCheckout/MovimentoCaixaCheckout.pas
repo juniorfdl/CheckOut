@@ -6,7 +6,11 @@ uses
   RxDBComb, Db, DBTables, ConerBtn, Grids, DBGrids, RXCtrls, RxQuery,
   ppVar, ppPrnabl, ppClass, ppCtrls, ppCache, ppBands, ppComm, ppRelatv,
   ppProd, ppReport, ppStrtch, ppMemo, RXDBCtrl, AdvSmoothPanel,
-  AdvReflectionLabel, ACBrNFeDANFEClass, ACBrNFeDANFeESCPOS, pcnConversao ;
+  AdvReflectionLabel, ACBrNFeDANFEClass, ACBrNFeDANFeESCPOS, pcnConversao,
+  JvMemoryDataset, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData,
+  cxDataStorage, cxEdit, cxDBData, cxGridCustomTableView, cxGridTableView,
+  cxGridDBTableView, cxGridLevel, cxClasses, cxControls, cxGridCustomView,
+  cxGrid ;
 type
   TFormTelaMovimentoCaixa = class(TForm)
     SQLOperacaoCaixa: TRxQuery;
@@ -68,7 +72,6 @@ type
     EditValor: TCurrencyEdit;
     ComboNumerario: TRxDBLookupCombo;
     LblMsg: TRxLabel;
-    LblValor: TRxLabel;
     LblNumerario: TRxLabel;
     ScrollBoxEsquerda: TScrollBox;
     ScrollBoxDireita: TScrollBox;
@@ -88,6 +91,16 @@ type
     SQLClienteCreditoVALORCREDITO: TFloatField;
     SQLClienteCreditoVALORDEBITO: TFloatField;
     SQLClienteCreditoHISTORICO: TStringField;
+    cdsValores: TJvMemoryData;
+    cdsValoresnumeicod: TIntegerField;
+    cdsValoresValor: TFloatField;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1Level1: TcxGridLevel;
+    cxGrid1: TcxGrid;
+    dsValores: TDataSource;
+    cdsValoresDescricao: TStringField;
+    cxGrid1DBTableView1Descricao: TcxGridDBColumn;
+    cxGrid1DBTableView1Valor: TcxGridDBColumn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDeactivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -102,6 +115,7 @@ type
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
+    procedure GravarFechamentoCupom;
     procedure MostraMsg(Mensagem : string) ;
     procedure GerarTotalizadoresDiarios ;
     function  EstornoRecebimento : boolean ;
@@ -124,6 +138,7 @@ uses DataModulo, UnitLibrary, ECFCheckout, UnitCheckoutLibrary, Epson_Termica,
 procedure TFormTelaMovimentoCaixa.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
+  cdsValores.close;
   Action := CaFree;
 end;
 
@@ -143,7 +158,20 @@ begin
   SQLTotalizadorCaixa.Open ;
   SQLNumerario.Open ;
   sqlCliente.Open ;
-end ;
+
+  cdsValores.open;
+
+  with ExecSql(' select numeicod, trim(numea30descr) as numea30descr '
+   +' from NUMERARIO where  (NUMECATIVO = ''S'') order by NUMEA30DESCR ') do
+  begin
+    while not eof do
+    begin
+      cdsValores.InsertRecord([FieldByName('numeicod').AsInteger, FieldByName('numea30descr').AsString, 0]);
+      next;
+    end;
+  end;
+
+end;
 
 procedure TFormTelaMovimentoCaixa.BtnCancelarClick(Sender: TObject);
 begin
@@ -177,7 +205,7 @@ begin
     begin
       Informa('Selecione o tipo de operação!');
       Exit;
-    end ;
+    end;
 
 
   if (SQLOperacaoCaixaOPCXCSOLICVLR.Value = 'S') and (EditValor.Value = 0) then
@@ -232,6 +260,8 @@ begin
     FormTelaItens.TefAdm;
     Close;
    end;
+
+   GravarFechamentoCupom;
 
   if SQLOperacaoCaixaOPCXA5SIGLA.Value = 'LEITX' Then {Leitura X}
     begin
@@ -672,7 +702,18 @@ begin
                                   ImprimeTextoFormatado_NAOFISCAL(ImpNaoFiscalAtual,' DOCUMENTO NAO FISCAL'+chr(10),2,0,0,1,0);
                                   ImprimeTextoFormatado_NAOFISCAL(ImpNaoFiscalAtual,'     VALE COMPRAS '+chr(10),2,0,0,1,0);
                                   ImprimeTextoFormatado_NAOFISCAL(ImpNaoFiscalAtual,'-----------------------------------------------'+chr(10),2,0,0,0,0);
-                                  ImprimeTextoFormatado_NAOFISCAL(ImpNaoFiscalAtual,'Valor....: R$ ' + FormatFloat('#,##0.00',EditValor.Value) + ' ' + DBEditObs.Text + chr(10),2,0,0,0,0);
+
+
+                                  cdsValores.First;
+                    while not cdsValores.eof do
+                    begin
+                      if cdsValoresValor.AsCurrency > 0 then
+                      ImprimeTextoFormatado_NAOFISCAL(ImpNaoFiscalAtual,cdsValoresDescricao.AsString+' '
+                         + FormatFloat('#,##0.00',cdsValoresValor.Value)+ chr(10),2,0,0,0,0);
+                      cdsValores.next;
+                    end;
+                    ImprimeTextoFormatado_NAOFISCAL(ImpNaoFiscalAtual,DBEditObs.Text + chr(10),2,0,0,0,0);
+
                                   ImprimeTextoFormatado_NAOFISCAL(ImpNaoFiscalAtual,'-----------------------------------------------'+chr(10),2,0,0,0,0);
                                   ImprimeTextoFormatado_NAOFISCAL(ImpNaoFiscalAtual,'Dt: ' + FormatDateTime('dd/mm/yyyy hh:nn',Now) +
                                                                                     '  Op: '+ Copy(UsuarioAtualNome,1,20) + chr(10),2,0,0,0,0);
@@ -720,7 +761,7 @@ begin
         end;
     end;
 
-  if (SQLOperacaoCaixaOPCXCAUTENTICA.Value = 'S') and (SQLOperacaoCaixaOPCXCSOLICVLR.Value = 'S') and (EditValor.Value > 0) then
+  if (SQLOperacaoCaixaOPCXCAUTENTICA.Value = 'S') and (SQLOperacaoCaixaOPCXCSOLICVLR.Value = 'S') then //and (EditValor.Value > 0) then
     begin
       if ECFAtual <> '' then
         begin
@@ -738,7 +779,16 @@ begin
                     FormTelaItens.MemoRetornoNFE.Lines.Add('Impresso em '+FormatDateTime('dd/mm/yy hh:mm',now));
                     FormTelaItens.MemoRetornoNFE.Lines.Add('Obs: '+DBEditObs.Text);
                     FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
-                    FormTelaItens.MemoRetornoNFE.Lines.Add('</ce><e><n>Valor ' + FormatFloat('R$ ##0.00',EditValor.Value) + '</n></e>');
+
+                    cdsValores.First;
+                    while not cdsValores.eof do
+                    begin
+                      if cdsValoresValor.AsCurrency > 0 then
+                      FormTelaItens.MemoRetornoNFE.Lines.Add('</ce><e><n>'+cdsValoresDescricao.AsString+' '
+                        + FormatFloat('R$ ##0.00',cdsValoresValor.Value) + '</n></e>');
+                      cdsValores.next;
+                    end;
+                    
                     FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
                     FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
                     FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
@@ -1239,9 +1289,9 @@ begin
   if ComboOperacaoCaixa.Text <> '' then
     EditTipMov.Text := ComboOperacaoCaixa.Value ;
 
-  LblValor.Visible       := (SQLOperacaoCaixaOPCXCSOLICVLR.Value = 'S') ;
+  //LblValor.Visible       := (SQLOperacaoCaixaOPCXCSOLICVLR.Value = 'S') ;
   EditValor.Visible      := (SQLOperacaoCaixaOPCXCSOLICVLR.Value = 'S') ;
-  LblNumerario.Visible   := (SQLOperacaoCaixaOPCXCAUTENTICA.Value = 'S') ;
+  //LblNumerario.Visible   := (SQLOperacaoCaixaOPCXCAUTENTICA.Value = 'S') ;
   ComboNumerario.Visible := (SQLOperacaoCaixaOPCXCAUTENTICA.Value = 'S') ;
   if SQLOperacaoCaixaOPCXA5SIGLA.Value = 'CREDC' then
     begin
@@ -1452,6 +1502,58 @@ end;
 procedure TFormTelaMovimentoCaixa.FormShow(Sender: TObject);
 begin
   EditTipMov.SetFocus;
+end;
+
+procedure TFormTelaMovimentoCaixa.GravarFechamentoCupom;
+var
+  COD_CUPOM_FECHAMENTO, OBSERVACOES, STATUS:String;
+begin
+
+  WITH ExecSql('SELECT gen_id(G_CUPOM_FECHAMENTO,1) AS ID FROM RDB$DATABASE') do
+  try
+    COD_CUPOM_FECHAMENTO := FieldByName('ID').AsString;
+  finally
+    free;
+  end;
+
+  if DBEditObs.Text = '' then
+    OBSERVACOES := 'null'
+  else
+    OBSERVACOES := QuotedStr(DBEditObs.Text);
+
+  if DM.SQLTerminalAtivoTERMCSTATUSCAIXA.AsString = '' then
+    STATUS := 'null'
+  else
+    STATUS := QuotedStr(DM.SQLTerminalAtivoTERMCSTATUSCAIXA.AsString);
+
+  ExecSql('INSERT INTO CUPOM_FECHAMENTO (COD_CUPOM_FECHAMENTO, STATUS,DATA_STATUS, DATA_MOVIMENTO, OPERACAO_CAIXA, OBSERVACOES)VALUES('
+  +COD_CUPOM_FECHAMENTO+','+STATUS+','+
+  QuotedStr(FormatDateTime('mm/dd/yyyy', DM.SQLTerminalAtivoTERMDSTATUSCAIXA.AsDateTime))
+  +','+QuotedStr(FormatDateTime('mm/dd/yyyy', EditData.Date))
+  +','+SQLOperacaoCaixaOPCXICOD.AsString+','+  (OBSERVACOES)+')',1);
+
+  cdsValores.First;
+  while not cdsValores.eof do
+  begin
+    if cdsValoresValor.AsCurrency > 0 then
+    begin
+        {ExecSql('INSERT INTO CUPOM_FECHAMENTO_ITEM(COD_CUPOM_FECHAMENTO,COD_CPRZ,VALOR)VALUES('
+        +COD_CUPOM_FECHAMENTO+','+cdsValoresnumeicod.asstring+','+
+        QuotedStr(StringReplace(FormatFloat('0.00', cdsValoresValor.AsCurrency),',','.',[]))
+        +')',1);}
+
+        DM.SQLTemplate.Close ;
+        DM.SQLTemplate.SQL.Clear ;
+        DM.SQLTemplate.SQL.Text := 'INSERT INTO CUPOM_FECHAMENTO_ITEM(COD_CUPOM_FECHAMENTO,COD_CPRZ,VALOR)VALUES('
+        +COD_CUPOM_FECHAMENTO+','+cdsValoresnumeicod.asstring+','+
+        QuotedStr(StringReplace(FormatFloat('0.00', cdsValoresValor.AsCurrency),',','.',[]))
+        +')';
+        DM.SQLTemplate.ExecSQL ;
+
+    end;
+    cdsValores.next;
+  end;
+
 end;
 
 end.
