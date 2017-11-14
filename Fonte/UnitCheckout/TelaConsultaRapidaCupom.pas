@@ -78,14 +78,33 @@ var ano, Modelo, Serie, Justificativa, NumeroInicial, NumeroFinal : string;
 begin
   if (copy(ECFAtual,1,4) = 'NFCE')  then
     begin
-      ano    := FormatDateTime('yyyy',now);
+      ano := FormatDateTime('yyyy',now);
+
       Modelo := '65';
       Serie  := dm.SQLTerminalAtivoTERMICOD.AsString;
-      Justificativa := 'Falha no processo de geração desta NFCe!';
+
+      if not(InputQuery('WebServices Inutilização ', 'Modelo', Modelo)) then
+        exit;
+
+      if not(InputQuery('WebServices Inutilização ', 'Serie',  Serie)) then
+        exit;
+
+      if Modelo = '' then
+        Modelo := '65';
+
+      if Serie = '' then
+        Serie  := dm.SQLTerminalAtivoTERMICOD.AsString;
+
+      if not(InputQuery('WebServices Inutilização ', 'Justificativa',  Justificativa)) then
+        exit;
+
+      if Justificativa = '' then
+        Justificativa := 'Falha no processo de geração desta NFCe!';
 
       if not(InputQuery('WebServices Inutilização ', 'Número Inicial', NumeroInicial)) then
         exit;
-      if not(InputQuery('WebServices Inutilização ', 'Número Inicial', NumeroFinal)) then
+        
+      if not(InputQuery('WebServices Inutilização ', 'Número Final', NumeroFinal)) then
         exit;
 
       try
@@ -99,7 +118,8 @@ begin
 
         ShowMessage('Numeração Inutilizada.');
       except
-        ShowMessage('Inutilização Ok.');
+        on e:Exception do
+          ShowMessage(e.message);
       end;  
     end;
 end;
