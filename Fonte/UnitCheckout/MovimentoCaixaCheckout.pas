@@ -1502,6 +1502,13 @@ end;
 procedure TFormTelaMovimentoCaixa.FormShow(Sender: TObject);
 begin
   EditTipMov.SetFocus;
+
+  if DM.SQLTemplate.FieldByName('TERMCSTATUSCAIXA').Value <> 'A' then
+  begin
+    LblNumerario.Visible := false;
+    cxGrid1.Visible := false;
+  end;
+
 end;
 
 procedure TFormTelaMovimentoCaixa.GravarFechamentoCupom;
