@@ -1568,11 +1568,8 @@ end;
 
 procedure TFormTelaMovimentoCaixa.HabilitaFechamento;
 begin
- if SQLOperacaoCaixaOPCXICOD.AsString <> '2' then
-  begin
-    LblNumerario.Visible := false;
-    cxGrid1.Visible := false;
-  end;
+    LblNumerario.Visible := SQLOperacaoCaixaOPCXICOD.AsString = '2';
+    cxGrid1.Visible := SQLOperacaoCaixaOPCXICOD.AsString = '2';
 end;
 
 procedure TFormTelaMovimentoCaixa.SQLOperacaoCaixaOPCXICODChange(
