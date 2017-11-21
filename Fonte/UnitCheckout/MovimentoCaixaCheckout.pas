@@ -113,8 +113,11 @@ type
     procedure DBEditObsExit(Sender: TObject);
     procedure ReportAutenticBeforePrint(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure SQLOperacaoCaixaAfterScroll(DataSet: TDataSet);
+    procedure SQLOperacaoCaixaOPCXICODChange(Sender: TField);
   private
     { Private declarations }
+    procedure HabilitaFechamento;
     procedure GravarFechamentoCupom;
     procedure MostraMsg(Mensagem : string) ;
     procedure GerarTotalizadoresDiarios ;
@@ -1503,12 +1506,6 @@ procedure TFormTelaMovimentoCaixa.FormShow(Sender: TObject);
 begin
   EditTipMov.SetFocus;
 
-  if DM.SQLTemplate.FieldByName('TERMCSTATUSCAIXA').Value <> 'A' then
-  begin
-    LblNumerario.Visible := false;
-    cxGrid1.Visible := false;
-  end;
-
 end;
 
 procedure TFormTelaMovimentoCaixa.GravarFechamentoCupom;
@@ -1561,6 +1558,27 @@ begin
     cdsValores.next;
   end;
 
+end;
+
+procedure TFormTelaMovimentoCaixa.SQLOperacaoCaixaAfterScroll(
+  DataSet: TDataSet);
+begin
+  HabilitaFechamento;
+end;
+
+procedure TFormTelaMovimentoCaixa.HabilitaFechamento;
+begin
+ if SQLOperacaoCaixaOPCXICOD.AsString <> '2' then
+  begin
+    LblNumerario.Visible := false;
+    cxGrid1.Visible := false;
+  end;
+end;
+
+procedure TFormTelaMovimentoCaixa.SQLOperacaoCaixaOPCXICODChange(
+  Sender: TField);
+begin
+  HabilitaFechamento;
 end;
 
 end.
