@@ -369,8 +369,8 @@ begin
           vSaldoTotal := vSaldoTotal + SQLTotalOperacaoSALDO.Value;
           SQLTotalOperacao.next;
         end;
-      //memo.Lines.Add('------------------------------------------------');
-      //memo.Lines.Add('<ad><n>TOTAL => ' + FormatFloat('R$ ##0.00',vSaldoTotal) + '</n></ad>');
+      memo.Lines.Add('------------------------------------------------');
+      memo.Lines.Add('<ad><n>TOTAL => ' + FormatFloat('R$ ##0.00',vSaldoTotal) + '</n></ad>');
       SQLTotalOperacao.First;
 
       vSaldoTotal := 0;

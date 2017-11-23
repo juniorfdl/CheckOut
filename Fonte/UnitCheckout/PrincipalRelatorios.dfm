@@ -1129,7 +1129,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       'from'
       '  MOVIMENTOCAIXA, OPERACAOCAIXA'
       'where'
-      '  MOVIMENTOCAIXA.OPCXICOD = OPERACAOCAIXA.OPCXICOD and IMPRIMIR_RESUMO = 'S' and '
+      '  MOVIMENTOCAIXA.OPCXICOD = OPERACAOCAIXA.OPCXICOD and'
       '  (%MData)     and'
       '  (%MEmpresa)  and'
       '  (%MTerminal) and'
