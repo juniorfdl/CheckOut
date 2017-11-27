@@ -1,8 +1,8 @@
 object FormPrincipalRelatorios: TFormPrincipalRelatorios
-  Left = 367
-  Top = 192
-  Width = 607
-  Height = 384
+  Left = 388
+  Top = 179
+  Width = 685
+  Height = 383
   AutoSize = True
   Caption = 'Relat'#243'rio para Resumo de Caixa'
   Color = clWhite
@@ -22,7 +22,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
   object ptopo: TAdvOfficeStatusBar
     Left = 0
     Top = 0
-    Width = 591
+    Width = 669
     Height = 49
     AnchorHint = False
     Align = alTop
@@ -404,10 +404,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     end
   end
   object Memo: TMemo
-    Left = 5
-    Top = 330
+    Left = 37
+    Top = 314
     Width = 504
-    Height = 15
+    Height = 14
     Lines.Strings = (
       'T'
       'E'
@@ -1129,7 +1129,9 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       'from'
       '  MOVIMENTOCAIXA, OPERACAOCAIXA'
       'where'
-      '  MOVIMENTOCAIXA.OPCXICOD = OPERACAOCAIXA.OPCXICOD and'
+      
+        '  MOVIMENTOCAIXA.OPCXICOD = OPERACAOCAIXA.OPCXICOD AND OPERACAOC' +
+        'AIXA.IMPRIMIR_RESUMO = '#39'S'#39' and'
       '  (%MData)     and'
       '  (%MEmpresa)  and'
       '  (%MTerminal) and'

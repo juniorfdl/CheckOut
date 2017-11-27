@@ -4,7 +4,7 @@ interface
 
 uses Variants, MemTable, Menus, Stdctrls, Classes, Windows, Forms, WinINet,
      RxQuery, DBTables, Controls, Dialogs, DB, JPeg, Sysutils, DBCtrls,
-     Registry, CommDlg, Messages, Graphics,IniFiles, FileCtrl, Math, DateUtils;
+     Registry, CommDlg, Messages, Graphics,IniFiles, FileCtrl, Math, DateUtils, StrUtils;
 type
   TInfoRetornoUser = record
   CampoRetorno : string;
@@ -324,11 +324,12 @@ function  PadR(Str : String; Tamanho : Integer) : String;
 function  PadL(Str : String; Tamanho : Integer) : String;
 function  Left(Str:String; Nro: Integer): String;
 function  Right(Str:String; Nro: Integer): String;
+function MontaString(x: string; Tamanho: integer; tipo: Integer = 0; CompletarCom: string = ' '): string;
 
 implementation
 
 uses DataModulo, DataModuloTemplate, TelaImpressaoTermicaCodBar, WindowsLibrary,
-  TelaAutenticaUsuario, TelaAvisoDebito;
+  TelaAutenticaUsuario, TelaAvisoDebito;//, StrUtils;
 
 function MontaDataSQL(ACampo: String; ADe, AAte: TDate): String;
 begin
@@ -5878,6 +5879,29 @@ begin
   aDiaSemana[7] := 'Sábado';
   aDia := DayOfWeek(aData);
   result := aDiaSemana[aDia];
+end;
+function MontaString(x: string; Tamanho: integer; tipo: Integer = 0; CompletarCom: string = ' '): string;
+var
+  t: integer;
+  s: string;
+begin
+  //Tipo = Lado que será completado.
+  //Tipo 0 = Left(Esquerda)
+  //Tipo 1 = Right(Direita)
+  s := CompletarCom;
+  t := tamanho - length(x);
+  s := DupeString(s, t);
+
+  if Tamanho < Length(x) then
+    if tipo = 0 then
+      x := Copy(x, Length(x) - (Tamanho - 1), Tamanho)
+    else
+      x := Copy(x, 1, Tamanho);
+
+  if tipo = 0 then
+    Result := s + x
+  else
+    Result := x + s;
 end;
 
 end.

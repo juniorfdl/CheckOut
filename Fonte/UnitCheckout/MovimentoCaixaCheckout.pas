@@ -10,7 +10,15 @@ uses
   JvMemoryDataset, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData,
   cxDataStorage, cxEdit, cxDBData, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGridLevel, cxClasses, cxControls, cxGridCustomView,
-  cxGrid ;
+  cxGrid, dxSkinsCore, dxSkinBlack, dxSkinBlue, dxSkinCaramel,
+  dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide, dxSkinFoggy,
+  dxSkinGlassOceans, dxSkiniMaginary, dxSkinLilian, dxSkinLiquidSky,
+  dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMoneyTwins,
+  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
+  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinPumpkin, dxSkinSeven,
+  dxSkinSharp, dxSkinSilver, dxSkinSpringTime, dxSkinStardust,
+  dxSkinSummer2008, dxSkinsDefaultPainters, dxSkinValentine,
+  dxSkinXmas2008Blue, dxSkinscxPCPainter ;
 type
   TFormTelaMovimentoCaixa = class(TForm)
     SQLOperacaoCaixa: TRxQuery;
@@ -780,6 +788,8 @@ begin
                     FormTelaItens.MemoRetornoNFE.Lines.Add('</ae></fn>Terminal: '+dm.SQLTerminalAtivoTERMA60DESCR.Value);
                     FormTelaItens.MemoRetornoNFE.Lines.Add('Usuario : '+dm.SQLUsuarioUSUAA60LOGIN.Value);
                     FormTelaItens.MemoRetornoNFE.Lines.Add('Impresso em '+FormatDateTime('dd/mm/yy hh:mm',now));
+                    if SQLOperacaoCaixaOPCXA5SIGLA.Value = 'SANGR' then
+                      FormTelaItens.MemoRetornoNFE.Lines.Add('Valor Sangria: ' + formatfloat('##0.00',EditValor.value));
                     FormTelaItens.MemoRetornoNFE.Lines.Add('Obs: '+DBEditObs.Text);
                     FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
 

@@ -163,9 +163,9 @@ begin
        WinExec(Pchar('IMPRESSAOPREVENDA.EXE'),sw_Show)
      else
        begin
-         if dm.SQLTerminalAtivoTERMCIMPPREVENDASIM.Value = 'S' then
-           if Pergunta('SIM','Imprimir Prevenda / Orçamento?') then
-             WinExec(Pchar('IMPRESSAOPREVENDA.EXE'),sw_Show);
+//         if dm.SQLTerminalAtivoTERMCIMPPREVENDASIM.Value = 'S' then
+//           if Pergunta('NAO','Imprimir Prevenda / Orçamento?') then
+//             WinExec(Pchar('IMPRESSAOPREVENDA.EXE'),sw_Show);
          if dm.SQLTerminalAtivoTERMCIMPPREVENDASIM.Value <> 'S' then
            if Pergunta('NAO','Imprimir Prevenda / Orçamento?') then
              WinExec(Pchar('IMPRESSAOPREVENDA.EXE'),sw_Show);

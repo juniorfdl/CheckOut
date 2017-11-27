@@ -233,7 +233,10 @@ begin
 end;
 
 procedure TFormPrincipalRelatorios.BtnVisualizarClick(Sender: TObject);
-var vSaldoTotal : double;
+var
+  vSaldoTotal, vValorSangria : double;
+  x,y : string;
+
 begin
   SQLTotaNumerario.Close ;
   SQLTotaNumerario.MacrobyName('MEmpresa').Value  := 'EMPRICOD  = ' + EmpresaPadrao;
@@ -350,6 +353,7 @@ begin
     begin
       {Impressao em formato Bobina}
       vSaldoTotal := 0;
+      vValorSangria := 0;
       memo.Lines.Clear;
       memo.Lines.Add(' ');
       memo.Lines.Add('<ce><e>Resumo de Caixa</e></ce>');
@@ -359,34 +363,45 @@ begin
       else
         memo.Lines.Add('</ae></fn>Periodo: ' + de.Text+' '+HoraInicial.Text+' até ' + Ate.Text+' '+HoraFinal.Text);
       memo.Lines.Add('Terminais: ' + ComboTerminal.Text + ' - ' + ComboTerminal2.Text);
+      memo.Lines.Add('Operador: ' + ComboOperador.Text);
       memo.Lines.Add(' ');
-      memo.Lines.Add('<n>Totais por Operacoes                  Vlr.Saldo</n>');
+      memo.Lines.Add('<n>Totais por Operacoes                Vlr.Saldo</n>');
+      if SQLTotalOperacao.IsEmpty then
+        ShowMessage('Nenhuma Operação inicial informada!');
       SQLTotalOperacao.First;
       while not SQLTotalOperacao.eof do
         begin
-          memo.Lines.Add('</fn>' + SQLTotalOperacaoOPCXA60DESCR.Value);
-          memo.Lines.Add('<ad></fn>' + FormatFloat('R$ ##0.00',SQLTotalOperacaoSALDO.Value) + '</ad>');
-          vSaldoTotal := vSaldoTotal + SQLTotalOperacaoSALDO.Value;
+          x := MontaString(SQLTotalOperacaoOPCXA60DESCR.Value,21,1,' ');
+          y := MontaString(FormatFloat('R$ ##0.00',SQLTotalOperacaoSALDO.Value),24,0,' ');
+          x := x + y;
+          memo.Lines.Add('<ad></fn>' + x + '</ad>');
+//          memo.Lines.Add('<ad></fn>' + FormatFloat('R$ ##0.00',SQLTotalOperacaoSALDO.Value) + '</ad>');
+          vValorSangria := vValorSangria + (SQLTotalOperacaoSALDO.AsFloat * -1);
           SQLTotalOperacao.next;
         end;
-      memo.Lines.Add('------------------------------------------------');
-      memo.Lines.Add('<ad><n>TOTAL => ' + FormatFloat('R$ ##0.00',vSaldoTotal) + '</n></ad>');
+//      memo.Lines.Add('------------------------------------------------');
+//      memo.Lines.Add('<ad><n>TOTAL => ' + FormatFloat('R$ ##0.00',vSaldoTotal) + '</n></ad>');
       SQLTotalOperacao.First;
 
       vSaldoTotal := 0;
       memo.Lines.Add('------------------------------------------------');
-      memo.Lines.Add('<n>Totais por Numerarios                 Vlr.Saldo</n>');
+      memo.Lines.Add('<n>Totais por Numerarios               Vlr.Saldo</n>');
       SQLTotaNumerario.First;
       while not SQLTotaNumerario.eof do
         begin
-          memo.Lines.Add('</fn>' + SQLTotaNumerarioNUMEA30DESCR.Value);
-          memo.Lines.Add('<ad></fn>' + FormatFloat('R$ ##0.00',SQLTotaNumerarioSALDO.Value) + '</ad>');
+          x := MontaString(SQLTotaNumerarioNUMEA30DESCR.Value,21,1,' ');
+          y := MontaString(FormatFloat('R$ ##0.00',SQLTotaNumerarioSALDO.Value),24,0,' ');
+          x := x + y;
+          memo.Lines.Add('<ad></fn>' + x + '</ad>');
           vSaldoTotal := vSaldoTotal + SQLTotaNumerarioSALDO.Value;
           SQLTotaNumerario.next;
         end;
       memo.Lines.Add('------------------------------------------------');
       memo.Lines.Add('<ad><n>TOTAL => ' + FormatFloat('R$ ##0.00',vSaldoTotal) + '</n></ad>');
       memo.Lines.Add('------------------------------------------------');
+      vValorSangria := vSaldoTotal + vValorSangria;
+      memo.Lines.Add('<ad><n>TOTAL DE VENDA => ' + FormatFloat('R$ ##0.00',vValorSangria) + '</n></ad>');
+
       memo.Lines.Add(' ');
       memo.Lines.Add(' ');
       memo.Lines.Add(' ');

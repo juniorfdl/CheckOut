@@ -4748,9 +4748,11 @@ begin
                 Exit;
               end;
             end;
-            {REIMPRIME CUPOM NÃO FISCAL VINCULADO DE TEF}
+            {REIMPRIME ÚLTIMO CUPOM}
           'I': begin
-              Exit;
+               if FileExists('ImpressaoPreVenda.exe') then
+                  WinExec(Pchar('ImpressaoPreVenda.exe'), sw_Show);
+              {Exit;
               if FileExists(ExtractFilePath(Application.ExeName) + '\NoBreak.txt') then
               begin
                 DadosImpressora.ECFAtual := ECFAtual;
@@ -4761,7 +4763,7 @@ begin
                 ImprimeRetorno(RetornoCartao, DadosImpressora, NroViasTEF, True);
               end
               else
-                Application.MessageBox(PChar('Nenhum comprovante TEF foi encontrado para ser reimpresso!'), 'Atenção', MB_OK + MB_SYSTEMMODAL + MB_SETFOREGROUND + MB_ICONINFORMATION);
+                Application.MessageBox(PChar('Nenhum comprovante TEF foi encontrado para ser reimpresso!'), 'Atenção', MB_OK + MB_SYSTEMMODAL + MB_SETFOREGROUND + MB_ICONINFORMATION);}
             end;
             {FIM FUNÇÕES ADMINISTRATIVAS DE TEF}
           'P': begin
