@@ -788,10 +788,12 @@ begin
                     FormTelaItens.MemoRetornoNFE.Lines.Add('</ae></fn>Terminal: '+dm.SQLTerminalAtivoTERMA60DESCR.Value);
                     FormTelaItens.MemoRetornoNFE.Lines.Add('Usuario : '+dm.SQLUsuarioUSUAA60LOGIN.Value);
                     FormTelaItens.MemoRetornoNFE.Lines.Add('Impresso em '+FormatDateTime('dd/mm/yy hh:mm',now));
-                    if SQLOperacaoCaixaOPCXA5SIGLA.Value = 'SANGR' then
-                      FormTelaItens.MemoRetornoNFE.Lines.Add('Valor Sangria: ' + formatfloat('##0.00',EditValor.value));
                     FormTelaItens.MemoRetornoNFE.Lines.Add('Obs: '+DBEditObs.Text);
                     FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+                    FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+                    
+                    if (SQLOperacaoCaixaOPCXA5SIGLA.Value = 'SANGR') or (SQLOperacaoCaixaOPCXA5SIGLA.Value = 'TROCO') then
+                      FormTelaItens.MemoRetornoNFE.Lines.Add('</ce><e><n>Valor ' + FormatFloat('R$ ##0.00',EditValor.Value) + '</n></e>');
 
                     cdsValores.First;
                     while not cdsValores.eof do
@@ -801,7 +803,7 @@ begin
                         + FormatFloat('R$ ##0.00',cdsValoresValor.Value) + '</n></e>');
                       cdsValores.next;
                     end;
-                    
+
                     FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
                     FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
                     FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
@@ -1304,7 +1306,7 @@ begin
 
   //LblValor.Visible       := (SQLOperacaoCaixaOPCXCSOLICVLR.Value = 'S') ;
   EditValor.Visible      := (SQLOperacaoCaixaOPCXCSOLICVLR.Value = 'S') ;
-  //LblNumerario.Visible   := (SQLOperacaoCaixaOPCXCAUTENTICA.Value = 'S') ;
+  LblNumerario.Visible   := (SQLOperacaoCaixaOPCXCAUTENTICA.Value = 'S') ;
   ComboNumerario.Visible := (SQLOperacaoCaixaOPCXCAUTENTICA.Value = 'S') ;
   if SQLOperacaoCaixaOPCXA5SIGLA.Value = 'CREDC' then
     begin
