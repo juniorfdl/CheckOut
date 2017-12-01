@@ -465,7 +465,8 @@ begin
 
   if not FileExists('COMUNICACAO_OFFLINE.TXT') then
     dm.ACBrPosPrinter.Device.Baud := dm.SQLTerminalAtivoECF_VELOC.Value
-  else begin
+  else
+   begin
     dm.ACBrPosPrinter.Device.Porta := ExtractFilePath(application.ExeName) + '\nfceOffline.txt';
     dm.ACBrPosPrinter.ControlePorta := False;
     dm.ACBrPosPrinter.Device.DeviceType := dtFile;
@@ -484,7 +485,7 @@ end;
 function TFormTelaItens.Gerar_NFCe(idCupom: string): string;
 var xCliente, xDocumento, xPlano: string;
 var iCRT: integer;
-var VlrDescNoTotal, VlrTroca, VlrTotalItens, PercDesc: double;
+var VlrDescNoTotal, VlrTroca, VlrTotalItens, PercDesc, TotalDesconto: double;
   vaux, Total_vTotTrib: Currency;
 begin
   dm.ACBrNFe.DANFE.vTribFed := 0;
@@ -649,6 +650,8 @@ begin
         if (PercDesc > 0) then
           Prod.vDesc := ((Prod.vProd * PercDesc) / 100) + SQLImpressaoCupom.fieldbyname('CPITN2DESC').AsFloat;
 
+        Prod.vDesc := RoundTo(Prod.vDesc, -2);
+
                {CEST CODIGO}
         if (dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '60') or (dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '500') then
           Prod.CEST := dm.sqlConsulta.fieldbyname('TABCEST').AsString;
@@ -765,6 +768,8 @@ begin
           if vTotTrib > 0 then
             vTotTrib := (Prod.vProd * vTotTrib) / 100;
 
+          vTotTrib := RoundTo(vTotTrib, -2);  
+
           Total_vTotTrib := Total_vTotTrib + vTotTrib;
         end;
 
@@ -772,11 +777,13 @@ begin
         vaux := RoundTo(Prod.vProd, -2);
         vaux := Total.ICMSTot.vProd + vaux;
         Total.ICMSTot.vProd := vaux;
-        Total.ICMSTot.vDesc := Total.ICMSTot.vDesc + Prod.vDesc;
+        vaux := Prod.vDesc;
+        TotalDesconto :=  TotalDesconto + vaux;
       end;
       SQLImpressaoCupom.next;
     end;
 
+    Total.ICMSTot.vDesc := TotalDesconto;
       {Totais da NFCe}
     Total.ICMSTot.vTotTrib := Total_vTotTrib;
 
@@ -4838,7 +4845,7 @@ begin
                   if not FileExists('COMUNICACAO_OFFLINE.TXT') then
                     dm.ACBrNFe.Consultar(chave);
 
-                  if (FileExists('COMUNICACAO_OFFLINE.TXT')) or (dm.ACBrNFe.WebServices.Consulta.cStat = 217) then
+                  if (FileExists('COMUNICACAO_OFFLINE.TXT')) or (dm.ACBrNFe.WebServices.Consulta.cStat = 217)or (dm.ACBrNFe.WebServices.Consulta.cStat = 613) then
                   begin
                               { Cria o arquivo XML }
                     sXML := Gerar_NFCe(IDReimprimir);
