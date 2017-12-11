@@ -58,6 +58,14 @@ begin
                    end ;
                    EditDesconto.SetFocus;
                 end ;
+    37 : begin
+           DescValor.Checked := True;
+           DescPerc.Checked := False;
+         end;
+    39 : begin
+           DescValor.Checked := False;
+           DescPerc.Checked := True;
+         end;
   end ;
 end;
 

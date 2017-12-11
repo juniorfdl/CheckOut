@@ -1,6 +1,6 @@
 object FormTelaTipoDescontoItem: TFormTelaTipoDescontoItem
-  Left = 297
-  Top = 233
+  Left = 551
+  Top = 264
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Tipo de desconto'
