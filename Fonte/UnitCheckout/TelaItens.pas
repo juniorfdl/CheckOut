@@ -4845,7 +4845,7 @@ begin
                   if not FileExists('COMUNICACAO_OFFLINE.TXT') then
                     dm.ACBrNFe.Consultar(chave);
 
-                  if (FileExists('COMUNICACAO_OFFLINE.TXT')) or (dm.ACBrNFe.WebServices.Consulta.cStat = 217)or (dm.ACBrNFe.WebServices.Consulta.cStat = 613) then
+                  if (FileExists('COMUNICACAO_OFFLINE.TXT')) or (dm.ACBrNFe.WebServices.Consulta.cStat <> 100) then//or (dm.ACBrNFe.WebServices.Consulta.cStat = 217)or (dm.ACBrNFe.WebServices.Consulta.cStat = 613) then
                   begin
                               { Cria o arquivo XML }
                     sXML := Gerar_NFCe(IDReimprimir);
