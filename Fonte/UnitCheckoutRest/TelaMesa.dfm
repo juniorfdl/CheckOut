@@ -1855,11 +1855,9 @@ object FormTelaMesa: TFormTelaMesa
       FieldName = 'NUMEICOD'
       Origin = 'DB.PREVENDACONTASRECEBER.NUMEICOD'
     end
-    object SQLPrevendaContasReceberPVCRN2VLR: TBCDField
+    object SQLPrevendaContasReceberPVCRN2VLR: TFloatField
       FieldName = 'PVCRN2VLR'
       Origin = 'DB.PREVENDACONTASRECEBER.PVCRN2VLR'
-      Precision = 15
-      Size = 3
     end
     object SQLPrevendaContasReceberNumerarioDescri: TStringField
       FieldKind = fkLookup
@@ -1902,11 +1900,9 @@ object FormTelaMesa: TFormTelaMesa
       FieldName = 'NUMEICOD'
       Origin = 'DB.PREVENDANUMERARIO.NUMEICOD'
     end
-    object SQLPrevendaNumerarioPVNUN2VLR: TBCDField
+    object SQLPrevendaNumerarioPVNUN2VLR: TFloatField
       FieldName = 'PVNUN2VLR'
       Origin = 'DB.PREVENDANUMERARIO.PVNUN2VLR'
-      Precision = 15
-      Size = 3
     end
     object SQLPrevendaNumerarioNumerarioDescri: TStringField
       FieldKind = fkLookup
@@ -1949,18 +1945,14 @@ object FormTelaMesa: TFormTelaMesa
       FieldName = 'PRODICOD'
       Origin = 'DB.PREVENDAITEM.PRODICOD'
     end
-    object SQLPrevendaItemPVITN3QTD: TBCDField
+    object SQLPrevendaItemPVITN3QTD: TFloatField
       FieldName = 'PVITN3QTD'
       Origin = 'DB.PREVENDAITEM.PVITN3QTD'
-      Precision = 15
-      Size = 3
     end
-    object SQLPrevendaItemPVITN3VLRUNIT: TBCDField
+    object SQLPrevendaItemPVITN3VLRUNIT: TFloatField
       FieldName = 'PVITN3VLRUNIT'
       Origin = 'DB.PREVENDAITEM.PVITN3VLRUNIT'
       DisplayFormat = '##0.00'
-      Precision = 15
-      Size = 3
     end
     object SQLPrevendaItemVENDICOD: TIntegerField
       FieldName = 'VENDICOD'
@@ -2085,11 +2077,9 @@ object FormTelaMesa: TFormTelaMesa
       FixedChar = True
       Size = 1
     end
-    object SQLReimpPreVendaPRVDN2TOTITENS: TBCDField
+    object SQLReimpPreVendaPRVDN2TOTITENS: TFloatField
       FieldName = 'PRVDN2TOTITENS'
       Origin = 'DB.PREVENDA.PRVDN2TOTITENS'
-      Precision = 15
-      Size = 3
     end
     object SQLReimpPreVendaVENDICOD: TIntegerField
       FieldName = 'VENDICOD'
@@ -2119,17 +2109,13 @@ object FormTelaMesa: TFormTelaMesa
       FixedChar = True
       Size = 60
     end
-    object SQLReimpPreVendaPRVDN2ACRESC: TBCDField
+    object SQLReimpPreVendaPRVDN2ACRESC: TFloatField
       FieldName = 'PRVDN2ACRESC'
       Origin = 'DB.PREVENDA.PRVDN2ACRESC'
-      Precision = 15
-      Size = 3
     end
-    object SQLReimpPreVendaPRVDN2DESC: TBCDField
+    object SQLReimpPreVendaPRVDN2DESC: TFloatField
       FieldName = 'PRVDN2DESC'
       Origin = 'DB.PREVENDA.PRVDN2DESC'
-      Precision = 15
-      Size = 3
     end
   end
   object SQLImportarPrevendaSel: TRxQuery
@@ -2171,11 +2157,9 @@ object FormTelaMesa: TFormTelaMesa
       Origin = 'UNITGESTAO_TEMP."TblMemPreVenda.DB".PlanoNome'
       Size = 60
     end
-    object SQLImportarPrevendaSelPRVDN2TOTITENS: TBCDField
+    object SQLImportarPrevendaSelPRVDN2TOTITENS: TFloatField
       FieldName = 'PRVDN2TOTITENS'
       Origin = 'UNITGESTAO_TEMP."TblMemPreVenda.DB".PRVDN2TOTITENS'
-      Precision = 32
-      Size = 3
     end
     object SQLImportarPrevendaSelVENDICOD: TIntegerField
       FieldName = 'VENDICOD'
@@ -2370,11 +2354,10 @@ object FormTelaMesa: TFormTelaMesa
       FieldName = 'NUMEICOD'
       Origin = 'DB.PARCELASPRAZOVENDATEMP.NUMEICOD'
     end
-    object SQLParcelasVistaVendaTempVALORPARC: TBCDField
+    object SQLParcelasVistaVendaTempVALORPARC: TFloatField
       FieldName = 'VALORPARC'
       Origin = 'DB.PARCELASVISTAVENDATEMP.VALORPARC'
       DisplayFormat = '#,##0.00'
-      Size = 3
     end
     object SQLParcelasVistaVendaTempTIPOPADR: TStringField
       FieldName = 'TIPOPADR'
@@ -2432,11 +2415,10 @@ object FormTelaMesa: TFormTelaMesa
       Origin = 'DB.PARCELASPRAZOVENDATEMP.NROPARCELA'
       DisplayFormat = '000'
     end
-    object SQLParcelasPrazoVendaTempVALORVENCTO: TBCDField
+    object SQLParcelasPrazoVendaTempVALORVENCTO: TFloatField
       FieldName = 'VALORVENCTO'
       Origin = 'DB.PARCELASPRAZOVENDATEMP.VALORVENCTO'
       DisplayFormat = '#,##0.00'
-      Size = 3
     end
     object SQLParcelasPrazoVendaTempNUMEICOD: TIntegerField
       FieldName = 'NUMEICOD'
@@ -2474,18 +2456,14 @@ object FormTelaMesa: TFormTelaMesa
       FieldName = 'DescricaoRed'
       Size = 30
     end
-    object TblMemPrevendaitemPVITN3QTD: TBCDField
+    object TblMemPrevendaitemPVITN3QTD: TFloatField
       FieldName = 'PVITN3QTD'
       Origin = 'DB.PREVENDAITEM.PVITN3QTD'
-      Precision = 15
-      Size = 3
     end
-    object TblMemPrevendaitemPVITN3VLRUNIT: TBCDField
+    object TblMemPrevendaitemPVITN3VLRUNIT: TFloatField
       FieldName = 'PVITN3VLRUNIT'
       Origin = 'DB.PREVENDAITEM.PVITN3VLRUNIT'
       DisplayFormat = '##0.00'
-      Precision = 15
-      Size = 3
     end
     object TblMemPrevendaitemPVITCSTATUS: TStringField
       FieldName = 'PVITCSTATUS'
@@ -2797,11 +2775,9 @@ object FormTelaMesa: TFormTelaMesa
       Origin = 'DB.VENDASCANCELADAS.PRODUTO'
       Size = 60
     end
-    object SQLVendasCanceladasTOTALITEM: TBCDField
+    object SQLVendasCanceladasTOTALITEM: TFloatField
       FieldName = 'TOTALITEM'
       Origin = 'DB.VENDASCANCELADAS.TOTALITEM'
-      Precision = 15
-      Size = 3
     end
   end
 end

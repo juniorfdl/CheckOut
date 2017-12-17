@@ -90,7 +90,7 @@ MaxStackSize=1048576
 ImageBase=4194304
 ExeDescription=
 [Directories]
-OutputDir=C:\Easy2Solutions\Gestao
+OutputDir=C:\Easy2Solutions
 UnitOutputDir=
 PackageDLLOutputDir=
 PackageDCPOutputDir=
@@ -135,12 +135,15 @@ ProductName=Advanced Control Cash
 ProductVersion=3.0.0.0
 Comments=Sistema de Gestão Empresarial
 [Excluded Packages]
-c:\delphi7\Bin\DBWEBXPRT.BPL=Borland Web Wizard Package
-C:\Delphi7\DevExpress\Library\Delphi7\dcldxPScxScheduler3LnkD7.bpl=ExpressPrinting System ReportLink for ExpressScheduler 3 by Developer Express Inc.
+C:\Program Files (x86)\Borland\Delphi7\Projects\Bpl\ZParseSql70.bpl=Zeos SQL Parsing Classes and Interfaces
+C:\Program Files (x86)\Borland\Delphi7\Projects\Bpl\ZDbc70.bpl=Zeos Low Level Database API
+C:\Program Files (x86)\Borland\Delphi7\Projects\Bpl\ZPlain70.bpl=Zeos Plain Database API
+c:\program files (x86)\borland\delphi7\Bin\dclindy70.bpl=(Untitled)
 [HistoryLists\hlUnitAliases]
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
 [HistoryLists\hlOutputDirectorry]
-Count=2
-Item0=C:\Easy2Solutions\Gestao
-Item1=C:\Unit\Gestao
+Count=3
+Item0=C:\Easy2Solutions
+Item1=C:\Easy2Solutions\Gestao
+Item2=C:\Unit\Gestao

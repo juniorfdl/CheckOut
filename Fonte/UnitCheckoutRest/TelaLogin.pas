@@ -281,18 +281,19 @@ begin
   FormStorage.IniFileName := Application.Title + '.ini' ;
   FormStorage.IniSection  := Name ;
   FormStorage.Active      := true ;
-
-  if RetornarNomeComputador = '' then
-  begin
-    Informa('Não foi possível Descobrir o nome deste computador, a execução do sistema será cancelada!') ;
-    Abort;
-  end ;
-
+  
   SQLTerminal.Close ;
   if FileExists('NaoTestaTerminal.txt') then
     SQLTerminal.MacroByName('MFiltro').Value := '0=0'
-  else
+  else begin
+    if RetornarNomeComputador = '' then
+    begin
+      Informa('Não foi possível Descobrir o nome deste computador, a execução do sistema será cancelada!') ;
+      Abort;
+    end;
+
     SQLTerminal.MacroByName('MFiltro').Value := 'TERMA60NOMECOMPUT = "' + AnsiUpperCase(RetornarNomeComputador) + '"';
+  end;
   SQLTerminal.Open ;
 
   if SQLTerminal.EOF then

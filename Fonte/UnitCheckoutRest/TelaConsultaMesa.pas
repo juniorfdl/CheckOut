@@ -34,7 +34,7 @@ type
     DBText9: TDBText;
     dsSQLMesasTotais: TDataSource;
     SQLMesasTotais: TRxQuery;
-    SQLMesasTotaisSUM: TBCDField;
+    SQLMesasTotaisSUM: TFloatField;
     SQLCountAbertas: TRxQuery;
     SQLCountAbertasCOUNT: TIntegerField;
     dsSQLCountAbertas: TDataSource;

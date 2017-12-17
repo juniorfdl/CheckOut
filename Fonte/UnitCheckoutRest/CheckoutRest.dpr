@@ -158,6 +158,7 @@ begin
     end
   else
     begin
+
       FormTelaLogin := TFormTelaLogin.Create(Application);
       FormTelaLogin.Caption := 'Bem Vindo ao PDV Restaurante' ;
       if FormTelaLogin.ShowModal = idOk then

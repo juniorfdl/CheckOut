@@ -54,7 +54,7 @@ type
     btApagaSabor04: TSpeedButton;
     btApagaSabor05: TSpeedButton;
     btApagaSabor06: TSpeedButton;
-    SQLObsProdutoVALOR: TBCDField;
+    SQLObsProdutoVALOR: TFloatField;
     SQLObsProdutoPRODICOD: TIntegerField;
     rxSigla: TRxLabel;
     procedure DBGridItensDblClick(Sender: TObject);

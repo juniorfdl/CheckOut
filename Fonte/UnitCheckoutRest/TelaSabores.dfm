@@ -1096,11 +1096,9 @@ object FormTelaSabores: TFormTelaSabores
       FieldName = 'OBPRIORDEM'
       Origin = 'DB.OBSPRODUTOREST.OBPRIORDEM'
     end
-    object SQLObsProdutoVALOR: TBCDField
+    object SQLObsProdutoVALOR: TFloatField
       FieldName = 'VALOR'
       Origin = 'DB.OBSPRODUTOREST.VALOR'
-      Precision = 15
-      Size = 3
     end
     object SQLObsProdutoPRODICOD: TIntegerField
       FieldName = 'PRODICOD'

@@ -455,8 +455,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
     object LblNomeSistema: TRxLabel
       Left = 0
       Top = 0
-      Width = 890
-      Height = 50
+      Width = 328
+      Height = 39
       Align = alClient
       Caption = ' >> Consulta de Produtos'
       Font.Charset = ANSI_CHARSET
@@ -591,10 +591,9 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       FixedChar = True
       Size = 30
     end
-    object SQLProdutoPRODN3PESOBRUTO: TBCDField
+    object SQLProdutoPRODN3PESOBRUTO: TFloatField
       FieldName = 'PRODN3PESOBRUTO'
       Origin = 'DB.PRODUTO.PRODN3PESOBRUTO'
-      Size = 3
     end
     object SQLProdutoGRADICOD: TIntegerField
       FieldName = 'GRADICOD'
@@ -619,25 +618,22 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       FieldName = 'CORICOD'
       Origin = 'DB.PRODUTO.CORICOD'
     end
-    object SQLProdutoPRODN3PESOLIQ: TBCDField
+    object SQLProdutoPRODN3PESOLIQ: TFloatField
       FieldName = 'PRODN3PESOLIQ'
       Origin = 'DB.PRODUTO.PRODN3PESOLIQ'
-      Size = 3
     end
-    object SQLProdutoPRODN3VLRVENDA: TBCDField
+    object SQLProdutoPRODN3VLRVENDA: TFloatField
       FieldName = 'PRODN3VLRVENDA'
       Origin = 'DB.PRODUTO.PRODN3VLRVENDA'
       DisplayFormat = '#,##0.00 '
-      Size = 3
     end
     object SQLProdutoPRODIAGRUPGRADE: TIntegerField
       FieldName = 'PRODIAGRUPGRADE'
       Origin = 'DB.PRODUTO.PRODIAGRUPGRADE'
     end
-    object SQLProdutoPRODN3CAPACEMBAL: TBCDField
+    object SQLProdutoPRODN3CAPACEMBAL: TFloatField
       FieldName = 'PRODN3CAPACEMBAL'
       Origin = 'DB.PRODUTO.PRODN3CAPACEMBAL'
-      Size = 3
     end
     object SQLProdutoMARCICOD: TIntegerField
       FieldName = 'MARCICOD'
@@ -647,11 +643,10 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       FieldName = 'PRODDINIPROMO'
       Origin = 'DB.PRODUTO.PRODDINIPROMO'
     end
-    object SQLProdutoPRODN3VLRVENDAPROM: TBCDField
+    object SQLProdutoPRODN3VLRVENDAPROM: TFloatField
       FieldName = 'PRODN3VLRVENDAPROM'
       Origin = 'DB.PRODUTO.PRODN3VLRVENDAPROM'
       DisplayFormat = '#,##0.00 '
-      Size = 3
     end
     object SQLProdutoSaldoEmpresa: TFloatField
       DisplayLabel = 'Saldo'
@@ -770,18 +765,14 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       FieldName = 'PRODDULTCOMPRA'
       Origin = 'DB.PRODUTO.PRODDULTCOMPRA'
     end
-    object SQLProdutoPRODN3QTDULTCOMPRA: TBCDField
+    object SQLProdutoPRODN3QTDULTCOMPRA: TFloatField
       FieldName = 'PRODN3QTDULTCOMPRA'
       Origin = 'DB.PRODUTO.PRODN3QTDULTCOMPRA'
-      Precision = 15
-      Size = 3
     end
-    object SQLProdutoPRODN3VLRVENDA2: TBCDField
+    object SQLProdutoPRODN3VLRVENDA2: TFloatField
       FieldName = 'PRODN3VLRVENDA2'
       Origin = 'DB.PRODUTO.PRODN3VLRVENDA2'
       DisplayFormat = '##0.00'
-      Precision = 15
-      Size = 3
     end
     object SQLProdutoPRODA255DESCRTEC: TMemoField
       FieldName = 'PRODA255DESCRTEC'

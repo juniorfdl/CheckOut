@@ -112,11 +112,9 @@ inherited DM: TDM
       FixedChar = True
       Size = 1
     end
-    object SQLUsuarioUSUAN2PERCDESC: TBCDField
+    object SQLUsuarioUSUAN2PERCDESC: TFloatField
       FieldName = 'USUAN2PERCDESC'
       Origin = 'DB.USUARIO.USUAN2PERCDESC'
-      Precision = 15
-      Size = 3
     end
     object SQLUsuarioUSUACVENDCLIBLOQ: TStringField
       FieldName = 'USUACVENDCLIBLOQ'
@@ -785,20 +783,17 @@ inherited DM: TDM
     Macros = <>
     Left = 294
     Top = 8
-    object SQLConfigCrediarioCFCRN2PERCJURATRAS: TBCDField
+    object SQLConfigCrediarioCFCRN2PERCJURATRAS: TFloatField
       FieldName = 'CFCRN2PERCJURATRAS'
       Origin = 'DB.CONFIGCREDIARIO.CFCRN2PERCJURATRAS'
-      Size = 3
     end
-    object SQLConfigCrediarioCFCRN2PERCMULATRAS: TBCDField
+    object SQLConfigCrediarioCFCRN2PERCMULATRAS: TFloatField
       FieldName = 'CFCRN2PERCMULATRAS'
       Origin = 'DB.CONFIGCREDIARIO.CFCRN2PERCMULATRAS'
-      Size = 3
     end
-    object SQLConfigCrediarioCFCRN2PERCADIANT: TBCDField
+    object SQLConfigCrediarioCFCRN2PERCADIANT: TFloatField
       FieldName = 'CFCRN2PERCADIANT'
       Origin = 'DB.CONFIGCREDIARIO.CFCRN2PERCADIANT'
-      Size = 3
     end
     object SQLConfigCrediarioCFCRINRODIASADIANT: TIntegerField
       FieldName = 'CFCRINRODIASADIANT'
@@ -834,11 +829,9 @@ inherited DM: TDM
       FieldName = 'CFCRINRODIASTOLMUL'
       Origin = 'DB.CONFIGCREDIARIO.CFCRINRODIASTOLMUL'
     end
-    object SQLConfigCrediarioCFCRN2PERCTAXACOBR: TBCDField
+    object SQLConfigCrediarioCFCRN2PERCTAXACOBR: TFloatField
       FieldName = 'CFCRN2PERCTAXACOBR'
       Origin = 'DB.CONFIGCREDIARIO.CFCRN2PERCTAXACOBR'
-      Precision = 15
-      Size = 3
     end
     object SQLConfigCrediarioCFCRCBLOQVENDCLI1AV: TStringField
       FieldName = 'CFCRCBLOQVENDCLI1AV'
@@ -1279,21 +1272,21 @@ inherited DM: TDM
       Origin = 'DB.CUPOM.CUPODEMIS'
       DisplayFormat = 'dd/mm/yyyy'
     end
-    object MemCtRecParcCUPON2DESC: TBCDField
+    object MemCtRecParcCUPON2DESC: TFloatField
       DisplayLabel = 'Desc.'
       FieldName = 'CUPON2DESC'
       Origin = 'DB.CUPOM.CUPON2DESC'
       DisplayFormat = '#,##0.00'
       EditFormat = '#,##0.00'
     end
-    object MemCtRecParcCUPON2TOTITENS: TBCDField
+    object MemCtRecParcCUPON2TOTITENS: TFloatField
       DisplayLabel = 'Produtos'
       FieldName = 'CUPON2TOTITENS'
       Origin = 'DB.CUPOM.CUPON2TOTITENS'
       DisplayFormat = '#,##0.00'
       EditFormat = '#,##0.00'
     end
-    object MemCtRecParcCUPON2ACRESC: TBCDField
+    object MemCtRecParcCUPON2ACRESC: TFloatField
       DisplayLabel = 'Acr'#233'sc.'
       FieldName = 'CUPON2ACRESC'
       Origin = 'DB.CUPOM.CUPON2ACRESC'
@@ -1307,13 +1300,12 @@ inherited DM: TDM
       FixedChar = True
       Size = 13
     end
-    object MemCtRecParcCTRCN2VLR: TBCDField
+    object MemCtRecParcCTRCN2VLR: TFloatField
       DisplayLabel = 'Valor Atual'
       FieldName = 'CTRCN2VLR'
       Origin = 'DB.CONTASRECEBER.CTRCN2VLR'
       DisplayFormat = '#,##0.00'
       EditFormat = '#,##0.00'
-      Size = 2
     end
     object MemCtRecParcBaixar: TBooleanField
       FieldName = 'Baixar'
@@ -1363,17 +1355,13 @@ inherited DM: TDM
     Macros = <>
     Left = 294
     Top = 52
-    object SQLConfigVendaCFVEN2PERCLIMCRED: TBCDField
+    object SQLConfigVendaCFVEN2PERCLIMCRED: TFloatField
       FieldName = 'CFVEN2PERCLIMCRED'
       Origin = 'DB.CONFIGVENDA.CFVEN2PERCLIMCRED'
-      Precision = 15
-      Size = 3
     end
-    object SQLConfigVendaCFVEN3MAXLIMCRED: TBCDField
+    object SQLConfigVendaCFVEN3MAXLIMCRED: TFloatField
       FieldName = 'CFVEN3MAXLIMCRED'
       Origin = 'DB.CONFIGVENDA.CFVEN3MAXLIMCRED'
-      Precision = 15
-      Size = 3
     end
     object SQLConfigVendaCFVECTIPOLIMCRED: TStringField
       FieldName = 'CFVECTIPOLIMCRED'
@@ -1417,11 +1405,9 @@ inherited DM: TDM
       FixedChar = True
       Size = 1
     end
-    object SQLConfigVendaCFVEN3ALIQISSQN: TBCDField
+    object SQLConfigVendaCFVEN3ALIQISSQN: TFloatField
       FieldName = 'CFVEN3ALIQISSQN'
       Origin = 'DB.CONFIGVENDA.CFVEN3ALIQISSQN'
-      Precision = 15
-      Size = 3
     end
     object SQLConfigVendaCFVECIMPLEGPEDVENF: TStringField
       FieldName = 'CFVECIMPLEGPEDVENF'
@@ -1429,11 +1415,9 @@ inherited DM: TDM
       FixedChar = True
       Size = 1
     end
-    object SQLConfigVendaCFVEN3PERCICMFRETE: TBCDField
+    object SQLConfigVendaCFVEN3PERCICMFRETE: TFloatField
       FieldName = 'CFVEN3PERCICMFRETE'
       Origin = 'DB.CONFIGVENDA.CFVEN3PERCICMFRETE'
-      Precision = 15
-      Size = 3
     end
     object SQLConfigVendaCFVEA255OBSPADNF: TStringField
       FieldName = 'CFVEA255OBSPADNF'
@@ -1650,29 +1634,21 @@ inherited DM: TDM
       FieldName = 'OPESICODVENDCONSIG'
       Origin = 'DB.CONFIGVENDA.OPESICODVENDCONSIG'
     end
-    object SQLConfigVendaCFVEN2PERCCOFINS: TBCDField
+    object SQLConfigVendaCFVEN2PERCCOFINS: TFloatField
       FieldName = 'CFVEN2PERCCOFINS'
       Origin = 'DB.CONFIGVENDA.CFVEN2PERCCOFINS'
-      Precision = 15
-      Size = 3
     end
-    object SQLConfigVendaCFVEN2PERCENCARG: TBCDField
+    object SQLConfigVendaCFVEN2PERCENCARG: TFloatField
       FieldName = 'CFVEN2PERCENCARG'
       Origin = 'DB.CONFIGVENDA.CFVEN2PERCENCARG'
-      Precision = 15
-      Size = 3
     end
-    object SQLConfigVendaCFVEN2PERCICMS: TBCDField
+    object SQLConfigVendaCFVEN2PERCICMS: TFloatField
       FieldName = 'CFVEN2PERCICMS'
       Origin = 'DB.CONFIGVENDA.CFVEN2PERCICMS'
-      Precision = 15
-      Size = 3
     end
-    object SQLConfigVendaCFVEN2PERCPIS: TBCDField
+    object SQLConfigVendaCFVEN2PERCPIS: TFloatField
       FieldName = 'CFVEN2PERCPIS'
       Origin = 'DB.CONFIGVENDA.CFVEN2PERCPIS'
-      Precision = 15
-      Size = 3
     end
     object SQLConfigVendaCFVECSOLSENHAALTVLR: TStringField
       FieldName = 'CFVECSOLSENHAALTVLR'
@@ -1799,29 +1775,21 @@ inherited DM: TDM
       FixedChar = True
       Size = 1
     end
-    object SQLCupomCUPON2TOTITENS: TBCDField
+    object SQLCupomCUPON2TOTITENS: TFloatField
       FieldName = 'CUPON2TOTITENS'
       Origin = 'DB.CUPOM.CUPON2TOTITENS'
-      Precision = 15
-      Size = 3
     end
-    object SQLCupomCUPON2DESC: TBCDField
+    object SQLCupomCUPON2DESC: TFloatField
       FieldName = 'CUPON2DESC'
       Origin = 'DB.CUPOM.CUPON2DESC'
-      Precision = 15
-      Size = 3
     end
-    object SQLCupomCUPON2ACRESC: TBCDField
+    object SQLCupomCUPON2ACRESC: TFloatField
       FieldName = 'CUPON2ACRESC'
       Origin = 'DB.CUPOM.CUPON2ACRESC'
-      Precision = 15
-      Size = 3
     end
-    object SQLCupomCUPON2TOTITENSRET: TBCDField
+    object SQLCupomCUPON2TOTITENSRET: TFloatField
       FieldName = 'CUPON2TOTITENSRET'
       Origin = 'DB.CUPOM.CUPON2TOTITENSRET'
-      Precision = 15
-      Size = 3
     end
     object SQLCupomCUPOINRO: TIntegerField
       FieldName = 'CUPOINRO'
@@ -1833,11 +1801,9 @@ inherited DM: TDM
       FixedChar = True
       Size = 5
     end
-    object SQLCupomCUPON2CONVTAXA: TBCDField
+    object SQLCupomCUPON2CONVTAXA: TFloatField
       FieldName = 'CUPON2CONVTAXA'
       Origin = 'DB.CUPOM.CUPON2CONVTAXA'
-      Precision = 15
-      Size = 3
     end
     object SQLCupomCUPOINROORDCOMPRA: TIntegerField
       FieldName = 'CUPOINROORDCOMPRA'
@@ -1849,11 +1815,9 @@ inherited DM: TDM
       FixedChar = True
       Size = 13
     end
-    object SQLCupomCUPON2VLRCOMISSAO: TBCDField
+    object SQLCupomCUPON2VLRCOMISSAO: TFloatField
       FieldName = 'CUPON2VLRCOMISSAO'
       Origin = 'DB.CUPOM.CUPON2VLRCOMISSAO'
-      Precision = 15
-      Size = 3
     end
     object SQLCupomCUPOA20CODANT: TStringField
       FieldName = 'CUPOA20CODANT'
@@ -1864,17 +1828,13 @@ inherited DM: TDM
       FieldName = 'CUPODCANC'
       Origin = 'DB.CUPOM.CUPODCANC'
     end
-    object SQLCupomCUPON2JUROATRAS: TBCDField
+    object SQLCupomCUPON2JUROATRAS: TFloatField
       FieldName = 'CUPON2JUROATRAS'
       Origin = 'DB.CUPOM.CUPON2JUROATRAS'
-      Precision = 15
-      Size = 3
     end
-    object SQLCupomCUPON2MULTAATRAS: TBCDField
+    object SQLCupomCUPON2MULTAATRAS: TFloatField
       FieldName = 'CUPON2MULTAATRAS'
       Origin = 'DB.CUPOM.CUPON2MULTAATRAS'
-      Precision = 15
-      Size = 3
     end
     object SQLCupomCUPODPAGTOCONSIG: TDateTimeField
       FieldName = 'CUPODPAGTOCONSIG'
@@ -1890,11 +1850,9 @@ inherited DM: TDM
       FieldName = 'REGISTRO'
       Origin = 'DB.CUPOM.REGISTRO'
     end
-    object SQLCupomCUPON3BONUSTROCA: TBCDField
+    object SQLCupomCUPON3BONUSTROCA: TFloatField
       FieldName = 'CUPON3BONUSTROCA'
       Origin = 'DB.CUPOM.CUPON3BONUSTROCA'
-      Precision = 15
-      Size = 3
     end
     object SQLCupomCUPODENTREGA: TDateTimeField
       FieldName = 'CUPODENTREGA'
@@ -1904,11 +1862,9 @@ inherited DM: TDM
       FieldName = 'TPVDICOD'
       Origin = 'DB.CUPOM.TPVDICOD'
     end
-    object SQLCupomCUPON3CREDTAXA: TBCDField
+    object SQLCupomCUPON3CREDTAXA: TFloatField
       FieldName = 'CUPON3CREDTAXA'
       Origin = 'DB.CUPOM.CUPON3CREDTAXA'
-      Precision = 15
-      Size = 3
     end
     object SQLCupomCUPOCCONSIG: TStringField
       FieldName = 'CUPOCCONSIG'
@@ -1949,11 +1905,9 @@ inherited DM: TDM
       FixedChar = True
       Size = 30
     end
-    object SQLCupomCUPON2DESCITENS: TBCDField
+    object SQLCupomCUPON2DESCITENS: TFloatField
       FieldName = 'CUPON2DESCITENS'
       Origin = 'DB.CUPOM.CUPON2DESCITENS'
-      Precision = 15
-      Size = 3
     end
     object SQLCupomCATCA13ID: TStringField
       FieldName = 'CATCA13ID'
@@ -1977,17 +1931,13 @@ inherited DM: TDM
       FixedChar = True
       Size = 15
     end
-    object SQLCupomCUPON2BASEICMS: TBCDField
+    object SQLCupomCUPON2BASEICMS: TFloatField
       FieldName = 'CUPON2BASEICMS'
       Origin = 'DB.CUPOM.CUPON2BASEICMS'
-      Precision = 15
-      Size = 2
     end
-    object SQLCupomCUPON2VLRICMS: TBCDField
+    object SQLCupomCUPON2VLRICMS: TFloatField
       FieldName = 'CUPON2VLRICMS'
       Origin = 'DB.CUPOM.CUPON2VLRICMS'
-      Precision = 15
-      Size = 2
     end
     object SQLCupomCUPOA13IDCUPNEG: TStringField
       FieldName = 'CUPOA13IDCUPNEG'
@@ -2059,11 +2009,9 @@ inherited DM: TDM
       Origin = 'DB.CUPOM.ORIGEMVENDA'
       Size = 5
     end
-    object SQLCupomTROCO: TBCDField
+    object SQLCupomTROCO: TFloatField
       FieldName = 'TROCO'
       Origin = 'DB.CUPOM.TROCO'
-      Precision = 15
-      Size = 2
     end
     object SQLCupomDISPICOD: TIntegerField
       FieldName = 'DISPICOD'
@@ -2151,47 +2099,33 @@ inherited DM: TDM
       FixedChar = True
       Size = 1
     end
-    object SQLCupomItemCPITN3QTD: TBCDField
+    object SQLCupomItemCPITN3QTD: TFloatField
       FieldName = 'CPITN3QTD'
       Origin = 'DB.CUPOMITEM.CPITN3QTD'
-      Precision = 15
-      Size = 3
     end
-    object SQLCupomItemCPITN3QTDTROCA: TBCDField
+    object SQLCupomItemCPITN3QTDTROCA: TFloatField
       FieldName = 'CPITN3QTDTROCA'
       Origin = 'DB.CUPOMITEM.CPITN3QTDTROCA'
-      Precision = 15
-      Size = 3
     end
-    object SQLCupomItemCPITN3VLRUNIT: TBCDField
+    object SQLCupomItemCPITN3VLRUNIT: TFloatField
       FieldName = 'CPITN3VLRUNIT'
       Origin = 'DB.CUPOMITEM.CPITN3VLRUNIT'
-      Precision = 15
-      Size = 3
     end
-    object SQLCupomItemCPITN3VLRCUSTUNIT: TBCDField
+    object SQLCupomItemCPITN3VLRCUSTUNIT: TFloatField
       FieldName = 'CPITN3VLRCUSTUNIT'
       Origin = 'DB.CUPOMITEM.CPITN3VLRCUSTUNIT'
-      Precision = 15
-      Size = 3
     end
-    object SQLCupomItemCPITN2DESC: TBCDField
+    object SQLCupomItemCPITN2DESC: TFloatField
       FieldName = 'CPITN2DESC'
       Origin = 'DB.CUPOMITEM.CPITN2DESC'
-      Precision = 15
-      Size = 3
     end
-    object SQLCupomItemCPITN3VLRUNITLUCR: TBCDField
+    object SQLCupomItemCPITN3VLRUNITLUCR: TFloatField
       FieldName = 'CPITN3VLRUNITLUCR'
       Origin = 'DB.CUPOMITEM.CPITN3VLRUNITLUCR'
-      Precision = 15
-      Size = 3
     end
-    object SQLCupomItemCOITN2ICMSALIQ: TBCDField
+    object SQLCupomItemCOITN2ICMSALIQ: TFloatField
       FieldName = 'COITN2ICMSALIQ'
       Origin = 'DB.CUPOMITEM.COITN2ICMSALIQ'
-      Precision = 15
-      Size = 3
     end
     object SQLCupomItemVENDICOD: TIntegerField
       FieldName = 'VENDICOD'
@@ -2207,29 +2141,21 @@ inherited DM: TDM
       FieldName = 'REGISTRO'
       Origin = 'DB.CUPOMITEM.REGISTRO'
     end
-    object SQLCupomItemCPITN2VLRDESCSOBTOT: TBCDField
+    object SQLCupomItemCPITN2VLRDESCSOBTOT: TFloatField
       FieldName = 'CPITN2VLRDESCSOBTOT'
       Origin = 'DB.CUPOMITEM.CPITN2VLRDESCSOBTOT'
-      Precision = 15
-      Size = 3
     end
-    object SQLCupomItemCPITN2BASEICMS: TBCDField
+    object SQLCupomItemCPITN2BASEICMS: TFloatField
       FieldName = 'CPITN2BASEICMS'
       Origin = 'DB.CUPOMITEM.CPITN2BASEICMS'
-      Precision = 15
-      Size = 2
     end
-    object SQLCupomItemCPITN2VLRICMS: TBCDField
+    object SQLCupomItemCPITN2VLRICMS: TFloatField
       FieldName = 'CPITN2VLRICMS'
       Origin = 'DB.CUPOMITEM.CPITN2VLRICMS'
-      Precision = 15
-      Size = 2
     end
-    object SQLCupomItemCPITN2VLRQDEVERIAVENDER: TBCDField
+    object SQLCupomItemCPITN2VLRQDEVERIAVENDER: TFloatField
       FieldName = 'CPITN2VLRQDEVERIAVENDER'
       Origin = 'DB.CUPOMITEM.CPITN2VLRQDEVERIAVENDER'
-      Precision = 15
-      Size = 2
     end
     object SQLCupomItemBOMBICOD: TIntegerField
       FieldName = 'BOMBICOD'
@@ -2244,11 +2170,9 @@ inherited DM: TDM
       FieldName = 'EMPRICOD'
       Origin = 'DB.CUPOMITEM.EMPRICOD'
     end
-    object SQLCupomItemCPITN2IMPOSTOMED: TBCDField
+    object SQLCupomItemCPITN2IMPOSTOMED: TFloatField
       FieldName = 'CPITN2IMPOSTOMED'
       Origin = 'DB.CUPOMITEM.CPITN2IMPOSTOMED'
-      Precision = 15
-      Size = 2
     end
     object SQLCupomItemBORDA01: TStringField
       FieldName = 'BORDA01'
@@ -2333,11 +2257,9 @@ inherited DM: TDM
       FixedChar = True
       Size = 1
     end
-    object SQLCupomNumerarioCPNMN2VLR: TBCDField
+    object SQLCupomNumerarioCPNMN2VLR: TFloatField
       FieldName = 'CPNMN2VLR'
       Origin = 'DB.CUPOMNUMERARIO.CPNMN2VLR'
-      Precision = 15
-      Size = 3
     end
     object SQLCupomNumerarioPENDENTE: TStringField
       FieldName = 'PENDENTE'
@@ -2433,17 +2355,13 @@ inherited DM: TDM
       FieldName = 'CTRCDVENC'
       Origin = 'DB.CONTASRECEBER.CTRCDVENC'
     end
-    object SQLContasReceberCTRCN2VLR: TBCDField
+    object SQLContasReceberCTRCN2VLR: TFloatField
       FieldName = 'CTRCN2VLR'
       Origin = 'DB.CONTASRECEBER.CTRCN2VLR'
-      Precision = 15
-      Size = 3
     end
-    object SQLContasReceberCTRCN2DESCFIN: TBCDField
+    object SQLContasReceberCTRCN2DESCFIN: TFloatField
       FieldName = 'CTRCN2DESCFIN'
       Origin = 'DB.CONTASRECEBER.CTRCN2DESCFIN'
-      Precision = 15
-      Size = 3
     end
     object SQLContasReceberNUMEICOD: TIntegerField
       FieldName = 'NUMEICOD'
@@ -2453,17 +2371,13 @@ inherited DM: TDM
       FieldName = 'PORTICOD'
       Origin = 'DB.CONTASRECEBER.PORTICOD'
     end
-    object SQLContasReceberCTRCN2TXJURO: TBCDField
+    object SQLContasReceberCTRCN2TXJURO: TFloatField
       FieldName = 'CTRCN2TXJURO'
       Origin = 'DB.CONTASRECEBER.CTRCN2TXJURO'
-      Precision = 15
-      Size = 3
     end
-    object SQLContasReceberCTRCN2TXMULTA: TBCDField
+    object SQLContasReceberCTRCN2TXMULTA: TFloatField
       FieldName = 'CTRCN2TXMULTA'
       Origin = 'DB.CONTASRECEBER.CTRCN2TXMULTA'
-      Precision = 15
-      Size = 3
     end
     object SQLContasReceberCTRCA5TIPOPADRAO: TStringField
       FieldName = 'CTRCA5TIPOPADRAO'
@@ -2475,29 +2389,21 @@ inherited DM: TDM
       FieldName = 'CTRCDULTREC'
       Origin = 'DB.CONTASRECEBER.CTRCDULTREC'
     end
-    object SQLContasReceberCTRCN2TOTREC: TBCDField
+    object SQLContasReceberCTRCN2TOTREC: TFloatField
       FieldName = 'CTRCN2TOTREC'
       Origin = 'DB.CONTASRECEBER.CTRCN2TOTREC'
-      Precision = 15
-      Size = 3
     end
-    object SQLContasReceberCTRCN2TOTJUROREC: TBCDField
+    object SQLContasReceberCTRCN2TOTJUROREC: TFloatField
       FieldName = 'CTRCN2TOTJUROREC'
       Origin = 'DB.CONTASRECEBER.CTRCN2TOTJUROREC'
-      Precision = 15
-      Size = 3
     end
-    object SQLContasReceberCTRCN2TOTMULTAREC: TBCDField
+    object SQLContasReceberCTRCN2TOTMULTAREC: TFloatField
       FieldName = 'CTRCN2TOTMULTAREC'
       Origin = 'DB.CONTASRECEBER.CTRCN2TOTMULTAREC'
-      Precision = 15
-      Size = 3
     end
-    object SQLContasReceberCTRCN2TOTDESCREC: TBCDField
+    object SQLContasReceberCTRCN2TOTDESCREC: TFloatField
       FieldName = 'CTRCN2TOTDESCREC'
       Origin = 'DB.CONTASRECEBER.CTRCN2TOTDESCREC'
-      Precision = 15
-      Size = 3
     end
     object SQLContasReceberEMPRICODULTREC: TIntegerField
       FieldName = 'EMPRICODULTREC'
@@ -2549,11 +2455,9 @@ inherited DM: TDM
       FieldName = 'CTRCDREABILSPC'
       Origin = 'DB.CONTASRECEBER.CTRCDREABILSPC'
     end
-    object SQLContasReceberCTRCN2TOTMULTACOBR: TBCDField
+    object SQLContasReceberCTRCN2TOTMULTACOBR: TFloatField
       FieldName = 'CTRCN2TOTMULTACOBR'
       Origin = 'DB.CONTASRECEBER.CTRCN2TOTMULTACOBR'
-      Precision = 15
-      Size = 3
     end
     object SQLContasReceberBANCA5CODCHQ: TStringField
       FieldName = 'BANCA5CODCHQ'
@@ -2725,10 +2629,9 @@ inherited DM: TDM
       FieldName = 'PRODICOD'
       Origin = 'DB.PRODUTOSALDO.PRODICOD'
     end
-    object SQLProdutoSaldoPSLDN3QTDE: TBCDField
+    object SQLProdutoSaldoPSLDN3QTDE: TFloatField
       FieldName = 'PSLDN3QTDE'
       Origin = 'DB.PRODUTOSALDO.PSLDQTDE'
-      Size = 3
     end
   end
   object SQLProdutoFilho: TRxQuery
@@ -3325,29 +3228,21 @@ inherited DM: TDM
       FixedChar = True
       Size = 1
     end
-    object SQLCupomItCPITN3QTD: TBCDField
+    object SQLCupomItCPITN3QTD: TFloatField
       FieldName = 'CPITN3QTD'
       Origin = 'DB.CUPOMITEM.CPITN3QTD'
-      Precision = 15
-      Size = 3
     end
-    object SQLCupomItCPITN3QTDTROCA: TBCDField
+    object SQLCupomItCPITN3QTDTROCA: TFloatField
       FieldName = 'CPITN3QTDTROCA'
       Origin = 'DB.CUPOMITEM.CPITN3QTDTROCA'
-      Precision = 15
-      Size = 3
     end
-    object SQLCupomItCPITN3VLRUNIT: TBCDField
+    object SQLCupomItCPITN3VLRUNIT: TFloatField
       FieldName = 'CPITN3VLRUNIT'
       Origin = 'DB.CUPOMITEM.CPITN3VLRUNIT'
-      Precision = 15
-      Size = 3
     end
-    object SQLCupomItCPITN2DESC: TBCDField
+    object SQLCupomItCPITN2DESC: TFloatField
       FieldName = 'CPITN2DESC'
       Origin = 'DB.CUPOMITEM.CPITN2DESC'
-      Precision = 15
-      Size = 3
     end
     object SQLCupomItVENDICOD: TIntegerField
       FieldName = 'VENDICOD'
@@ -3474,39 +3369,29 @@ inherited DM: TDM
       FieldName = 'PRODICOD'
       Origin = 'DB.PREVENDAITEM.PRODICOD'
     end
-    object SQLPreVendaItem2PVITN3QTD: TBCDField
+    object SQLPreVendaItem2PVITN3QTD: TFloatField
       FieldName = 'PVITN3QTD'
       Origin = 'DB.PREVENDAITEM.PVITN3QTD'
-      Precision = 15
-      Size = 3
     end
-    object SQLPreVendaItem2PVITN3VLRUNIT: TBCDField
+    object SQLPreVendaItem2PVITN3VLRUNIT: TFloatField
       FieldName = 'PVITN3VLRUNIT'
       Origin = 'DB.PREVENDAITEM.PVITN3VLRUNIT'
-      Precision = 15
-      Size = 3
     end
-    object SQLPreVendaItem2PVITN3VLRCUSTUNIT: TBCDField
+    object SQLPreVendaItem2PVITN3VLRCUSTUNIT: TFloatField
       FieldName = 'PVITN3VLRCUSTUNIT'
       Origin = 'DB.PREVENDAITEM.PVITN3VLRCUSTUNIT'
-      Precision = 15
-      Size = 3
     end
-    object SQLPreVendaItem2PVITN2DESC: TBCDField
+    object SQLPreVendaItem2PVITN2DESC: TFloatField
       FieldName = 'PVITN2DESC'
       Origin = 'DB.PREVENDAITEM.PVITN2DESC'
-      Precision = 15
-      Size = 3
     end
     object SQLPreVendaItem2VENDICOD: TIntegerField
       FieldName = 'VENDICOD'
       Origin = 'DB.PREVENDAITEM.VENDICOD'
     end
-    object SQLPreVendaItem2PVITN3VLRUNITLUCR: TBCDField
+    object SQLPreVendaItem2PVITN3VLRUNITLUCR: TFloatField
       FieldName = 'PVITN3VLRUNITLUCR'
       Origin = 'DB.PREVENDAITEM.PVITN3VLRUNITLUCR'
-      Precision = 15
-      Size = 3
     end
     object SQLPreVendaItem2PVITCSTATUS: TStringField
       FieldName = 'PVITCSTATUS'
@@ -3514,11 +3399,9 @@ inherited DM: TDM
       FixedChar = True
       Size = 1
     end
-    object SQLPreVendaItem2PVITN2ICMSALIQ: TBCDField
+    object SQLPreVendaItem2PVITN2ICMSALIQ: TFloatField
       FieldName = 'PVITN2ICMSALIQ'
       Origin = 'DB.PREVENDAITEM.PVITN2ICMSALIQ'
-      Precision = 15
-      Size = 3
     end
     object SQLPreVendaItem2PRODA60NROSERIE: TStringField
       FieldName = 'PRODA60NROSERIE'
@@ -3526,11 +3409,9 @@ inherited DM: TDM
       FixedChar = True
       Size = 60
     end
-    object SQLPreVendaItem2PVITN3QTDTROCA: TBCDField
+    object SQLPreVendaItem2PVITN3QTDTROCA: TFloatField
       FieldName = 'PVITN3QTDTROCA'
       Origin = 'DB.PREVENDAITEM.PVITN3QTDTROCA'
-      Precision = 15
-      Size = 3
     end
     object SQLPreVendaItem2PVITTOBS: TStringField
       FieldName = 'PVITTOBS'
@@ -3985,22 +3866,16 @@ inherited DM: TDM
       FixedChar = True
       Size = 1
     end
-    object SQLPreVendaPRVDN2TOTITENS: TBCDField
+    object SQLPreVendaPRVDN2TOTITENS: TFloatField
       FieldName = 'PRVDN2TOTITENS'
       Origin = 'DB.PREVENDA.PRVDN2TOTITENS'
-      Precision = 15
-      Size = 3
     end
-    object SQLPreVendaPRVDN2CONVTAXA: TBCDField
+    object SQLPreVendaPRVDN2CONVTAXA: TFloatField
       FieldName = 'PRVDN2CONVTAXA'
-      Precision = 15
-      Size = 3
     end
-    object SQLPreVendaPRVDN2DESC: TBCDField
+    object SQLPreVendaPRVDN2DESC: TFloatField
       FieldName = 'PRVDN2DESC'
       Origin = 'DB.PREVENDA.PRVDN2DESC'
-      Precision = 15
-      Size = 3
     end
     object SQLPreVendaVENDICOD: TIntegerField
       FieldName = 'VENDICOD'
@@ -4106,23 +3981,17 @@ inherited DM: TDM
       FieldName = 'CLIEDNASC'
       Origin = 'DB.CLIENTE.CLIEDNASC'
     end
-    object SQLPreVendaCLIEN2RENDA: TBCDField
+    object SQLPreVendaCLIEN2RENDA: TFloatField
       FieldName = 'CLIEN2RENDA'
       Origin = 'DB.CLIENTE.CLIEN2RENDA'
-      Precision = 15
-      Size = 3
     end
-    object SQLPreVendaCLIEN2CONJUGERENDA: TBCDField
+    object SQLPreVendaCLIEN2CONJUGERENDA: TFloatField
       FieldName = 'CLIEN2CONJUGERENDA'
       Origin = 'DB.CLIENTE.CLIEN2CONJUGERENDA'
-      Precision = 15
-      Size = 3
     end
-    object SQLPreVendaCLIEN2LIMITECRED: TBCDField
+    object SQLPreVendaCLIEN2LIMITECRED: TFloatField
       FieldName = 'CLIEN2LIMITECRED'
       Origin = 'DB.CLIENTE.CLIEN2LIMITECRED'
-      Precision = 15
-      Size = 3
     end
     object SQLPreVendaPDVDDHVENDA: TDateTimeField
       FieldName = 'PDVDDHVENDA'
@@ -4208,34 +4077,29 @@ inherited DM: TDM
       FieldName = 'PRODICOD'
       Origin = 'DB.PREVENDAITEM.PRODICOD'
     end
-    object SQLPreVendaItem1PVITN3QTD: TBCDField
+    object SQLPreVendaItem1PVITN3QTD: TFloatField
       FieldName = 'PVITN3QTD'
       Origin = 'DB.PREVENDAITEM.PVITN3QTD'
-      Size = 3
     end
-    object SQLPreVendaItem1PVITN3VLRUNIT: TBCDField
+    object SQLPreVendaItem1PVITN3VLRUNIT: TFloatField
       FieldName = 'PVITN3VLRUNIT'
       Origin = 'DB.PREVENDAITEM.PVITN3VLRUNIT'
-      Size = 3
     end
-    object SQLPreVendaItem1PVITN3VLRCUSTUNIT: TBCDField
+    object SQLPreVendaItem1PVITN3VLRCUSTUNIT: TFloatField
       FieldName = 'PVITN3VLRCUSTUNIT'
       Origin = 'DB.PREVENDAITEM.PVITN3VLRCUSTUNIT'
-      Size = 3
     end
-    object SQLPreVendaItem1PVITN2DESC: TBCDField
+    object SQLPreVendaItem1PVITN2DESC: TFloatField
       FieldName = 'PVITN2DESC'
       Origin = 'DB.PREVENDAITEM.PVITN2DESC'
-      Size = 3
     end
     object SQLPreVendaItem1VENDICOD: TIntegerField
       FieldName = 'VENDICOD'
       Origin = 'DB.PREVENDAITEM.VENDICOD'
     end
-    object SQLPreVendaItem1PVITN3VLRUNITLUCR: TBCDField
+    object SQLPreVendaItem1PVITN3VLRUNITLUCR: TFloatField
       FieldName = 'PVITN3VLRUNITLUCR'
       Origin = 'DB.PREVENDAITEM.PVITN3VLRUNITLUCR'
-      Size = 3
     end
     object SQLPreVendaItem1PVITCSTATUS: TStringField
       FieldName = 'PVITCSTATUS'
@@ -4243,10 +4107,9 @@ inherited DM: TDM
       FixedChar = True
       Size = 1
     end
-    object SQLPreVendaItem1PVITN2ICMSALIQ: TBCDField
+    object SQLPreVendaItem1PVITN2ICMSALIQ: TFloatField
       FieldName = 'PVITN2ICMSALIQ'
       Origin = 'DB.PREVENDAITEM.PVITN2ICMSALIQ'
-      Size = 3
     end
     object SQLPreVendaItem1PRODA60NROSERIE: TStringField
       FieldName = 'PRODA60NROSERIE'
@@ -4254,11 +4117,9 @@ inherited DM: TDM
       FixedChar = True
       Size = 60
     end
-    object SQLPreVendaItem1PVITN3QTDTROCA: TBCDField
+    object SQLPreVendaItem1PVITN3QTDTROCA: TFloatField
       FieldName = 'PVITN3QTDTROCA'
       Origin = 'DB.PREVENDAITEM.PVITN3QTDTROCA'
-      Precision = 15
-      Size = 3
     end
     object SQLPreVendaItem1PVITTOBS: TStringField
       FieldName = 'PVITTOBS'
@@ -4336,10 +4197,9 @@ inherited DM: TDM
       FieldName = 'NUMEICOD'
       Origin = 'DB.PREVENDANUMERARIO.NUMEICOD'
     end
-    object SQLPreVendaNumerarioPVNUN2VLR: TBCDField
+    object SQLPreVendaNumerarioPVNUN2VLR: TFloatField
       FieldName = 'PVNUN2VLR'
       Origin = 'DB.PREVENDANUMERARIO.PVNUN2VLR'
-      Size = 3
     end
   end
   object SQLPreVendaContasReceber: TRxQuery
@@ -4379,15 +4239,13 @@ inherited DM: TDM
       FieldName = 'PVCRDVENC'
       Origin = 'DB.PREVENDACONTASRECEBER.PVCRDVENC'
     end
-    object SQLPreVendaContasReceberPVCRN2VLR: TBCDField
+    object SQLPreVendaContasReceberPVCRN2VLR: TFloatField
       FieldName = 'PVCRN2VLR'
       Origin = 'DB.PREVENDACONTASRECEBER.PVCRN2VLR'
-      Size = 3
     end
-    object SQLPreVendaContasReceberPVCRN2DESCFIN: TBCDField
+    object SQLPreVendaContasReceberPVCRN2DESCFIN: TFloatField
       FieldName = 'PVCRN2DESCFIN'
       Origin = 'DB.PREVENDACONTASRECEBER.PVCRN2DESCFIN'
-      Size = 3
     end
   end
   object SQLPedidoVenda: TRxQuery
@@ -4440,11 +4298,9 @@ inherited DM: TDM
       FieldName = 'PDVDDEMISSAO'
       Origin = 'DB.PEDIDOVENDA.PDVDDEMISSAO'
     end
-    object SQLPedidoVendaPDVDN2VLRFRETE: TBCDField
+    object SQLPedidoVendaPDVDN2VLRFRETE: TFloatField
       FieldName = 'PDVDN2VLRFRETE'
       Origin = 'DB.PEDIDOVENDA.PDVDN2VLRFRETE'
-      Precision = 15
-      Size = 3
     end
     object SQLPedidoVendaPDVDA30NROPEDCOMP: TStringField
       FieldName = 'PDVDA30NROPEDCOMP'
@@ -4470,23 +4326,17 @@ inherited DM: TDM
       FixedChar = True
       Size = 1
     end
-    object SQLPedidoVendaPDVDN2VLRDESC: TBCDField
+    object SQLPedidoVendaPDVDN2VLRDESC: TFloatField
       FieldName = 'PDVDN2VLRDESC'
       Origin = 'DB.PEDIDOVENDA.PDVDN2VLRDESC'
-      Precision = 15
-      Size = 3
     end
-    object SQLPedidoVendaPDVDN2TOTPROD: TBCDField
+    object SQLPedidoVendaPDVDN2TOTPROD: TFloatField
       FieldName = 'PDVDN2TOTPROD'
       Origin = 'DB.PEDIDOVENDA.PDVDN2TOTPROD'
-      Precision = 15
-      Size = 3
     end
-    object SQLPedidoVendaPDVDN2TOTPED: TBCDField
+    object SQLPedidoVendaPDVDN2TOTPED: TFloatField
       FieldName = 'PDVDN2TOTPED'
       Origin = 'DB.PEDIDOVENDA.PDVDN2TOTPED'
-      Precision = 15
-      Size = 3
     end
     object SQLPedidoVendaPDVDTOBS: TStringField
       FieldName = 'PDVDTOBS'
@@ -4504,11 +4354,9 @@ inherited DM: TDM
       FixedChar = True
       Size = 1
     end
-    object SQLPedidoVendaPDVDN2VLRDESCPROM: TBCDField
+    object SQLPedidoVendaPDVDN2VLRDESCPROM: TFloatField
       FieldName = 'PDVDN2VLRDESCPROM'
       Origin = 'DB.PEDIDOVENDA.PDVDN2VLRDESCPROM'
-      Precision = 15
-      Size = 3
     end
     object SQLPedidoVendaPDVDCTIPOFRETE: TStringField
       FieldName = 'PDVDCTIPOFRETE'
@@ -4554,29 +4402,21 @@ inherited DM: TDM
       FieldName = 'PRODICOD'
       Origin = 'DB.PEDIDOVENDAITEM.PRODICOD'
     end
-    object SQLPedidoVendaItemPVITN3QUANT: TBCDField
+    object SQLPedidoVendaItemPVITN3QUANT: TFloatField
       FieldName = 'PVITN3QUANT'
       Origin = 'DB.PEDIDOVENDAITEM.PVITN3QUANT'
-      Precision = 15
-      Size = 3
     end
-    object SQLPedidoVendaItemPVITN2VLRUNIT: TBCDField
+    object SQLPedidoVendaItemPVITN2VLRUNIT: TFloatField
       FieldName = 'PVITN2VLRUNIT'
       Origin = 'DB.PEDIDOVENDAITEM.PVITN2VLRUNIT'
-      Precision = 15
-      Size = 3
     end
-    object SQLPedidoVendaItemPVITN2PERCDESC: TBCDField
+    object SQLPedidoVendaItemPVITN2PERCDESC: TFloatField
       FieldName = 'PVITN2PERCDESC'
       Origin = 'DB.PEDIDOVENDAITEM.PVITN2PERCDESC'
-      Precision = 15
-      Size = 3
     end
-    object SQLPedidoVendaItemPVITN2VLRDESC: TBCDField
+    object SQLPedidoVendaItemPVITN2VLRDESC: TFloatField
       FieldName = 'PVITN2VLRDESC'
       Origin = 'DB.PEDIDOVENDAITEM.PVITN2VLRDESC'
-      Precision = 15
-      Size = 3
     end
     object SQLPedidoVendaItemREGISTRO: TDateTimeField
       FieldName = 'REGISTRO'
@@ -4594,17 +4434,13 @@ inherited DM: TDM
       FixedChar = True
       Size = 60
     end
-    object SQLPedidoVendaItemPVITN2PERCCOMIS: TBCDField
+    object SQLPedidoVendaItemPVITN2PERCCOMIS: TFloatField
       FieldName = 'PVITN2PERCCOMIS'
       Origin = 'DB.PEDIDOVENDAITEM.PVITN2PERCCOMIS'
-      Precision = 15
-      Size = 3
     end
-    object SQLPedidoVendaItemPVITN3QUANTVEND: TBCDField
+    object SQLPedidoVendaItemPVITN3QUANTVEND: TFloatField
       FieldName = 'PVITN3QUANTVEND'
       Origin = 'DB.PEDIDOVENDAITEM.PVITN3QUANTVEND'
-      Precision = 15
-      Size = 3
     end
     object SQLPedidoVendaItemPDVDA255OBS1: TStringField
       FieldName = 'PDVDA255OBS1'
@@ -4612,11 +4448,9 @@ inherited DM: TDM
       FixedChar = True
       Size = 255
     end
-    object SQLPedidoVendaItemPVITN3TOTVENDITEM: TBCDField
+    object SQLPedidoVendaItemPVITN3TOTVENDITEM: TFloatField
       FieldName = 'PVITN3TOTVENDITEM'
       Origin = 'DB.PEDIDOVENDAITEM.PVITN3TOTVENDITEM'
-      Precision = 15
-      Size = 3
     end
   end
   object DBRel: TDatabase
@@ -4685,14 +4519,12 @@ inherited DM: TDM
       FieldName = 'FECXICOD'
       Origin = 'DB.FECHAMENTOCAIXA.FECXICOD'
     end
-    object SQLFechamentoCaixaFECXN2VALOR: TBCDField
+    object SQLFechamentoCaixaFECXN2VALOR: TFloatField
       DisplayLabel = 'Valor'
       FieldName = 'FECXN2VALOR'
       Origin = 'DB.FECHAMENTOCAIXA.FECXN2VALOR'
       DisplayFormat = '#,##0.00'
       EditFormat = '#,##0.00'
-      Precision = 15
-      Size = 3
     end
     object SQLFechamentoCaixaUSUAICOD: TIntegerField
       DisplayLabel = 'Usu'#225'rio'
@@ -4917,10 +4749,8 @@ inherited DM: TDM
     object SQLPedidoOrcamentoPLRCICOD: TIntegerField
       FieldName = 'PLRCICOD'
     end
-    object SQLPedidoOrcamentoPDVDN2TOTPROD: TBCDField
+    object SQLPedidoOrcamentoPDVDN2TOTPROD: TFloatField
       FieldName = 'PDVDN2TOTPROD'
-      Precision = 15
-      Size = 3
     end
     object SQLPedidoOrcamentoCLIEA60RAZAOSOC: TStringField
       FieldName = 'CLIEA60RAZAOSOC'
@@ -4937,20 +4767,14 @@ inherited DM: TDM
       FixedChar = True
       Size = 60
     end
-    object SQLPedidoOrcamentoPDVDN2VLRDESC: TBCDField
+    object SQLPedidoOrcamentoPDVDN2VLRDESC: TFloatField
       FieldName = 'PDVDN2VLRDESC'
-      Precision = 15
-      Size = 3
     end
-    object SQLPedidoOrcamentoPDVDN2VLRDESCPROM: TBCDField
+    object SQLPedidoOrcamentoPDVDN2VLRDESCPROM: TFloatField
       FieldName = 'PDVDN2VLRDESCPROM'
-      Precision = 15
-      Size = 3
     end
-    object SQLPedidoOrcamentoPDVDN2VLRFRETE: TBCDField
+    object SQLPedidoOrcamentoPDVDN2VLRFRETE: TFloatField
       FieldName = 'PDVDN2VLRFRETE'
-      Precision = 15
-      Size = 3
     end
     object SQLPedidoOrcamentoPDVDTOBS: TStringField
       FieldName = 'PDVDTOBS'
@@ -4989,10 +4813,8 @@ inherited DM: TDM
       FixedChar = True
       Size = 1
     end
-    object SQLPedidoOrcamentoPDVDN2TOTPED: TBCDField
+    object SQLPedidoOrcamentoPDVDN2TOTPED: TFloatField
       FieldName = 'PDVDN2TOTPED'
-      Precision = 15
-      Size = 3
     end
     object SQLPedidoOrcamentoREGISTRO: TDateTimeField
       FieldName = 'REGISTRO'
@@ -5018,15 +4840,11 @@ inherited DM: TDM
       FixedChar = True
       Size = 1
     end
-    object SQLPedidoOrcamentoPDVDN2PERCFAT: TBCDField
+    object SQLPedidoOrcamentoPDVDN2PERCFAT: TFloatField
       FieldName = 'PDVDN2PERCFAT'
-      Precision = 15
-      Size = 2
     end
-    object SQLPedidoOrcamentoPDVDN2PERCOMIS: TBCDField
+    object SQLPedidoOrcamentoPDVDN2PERCOMIS: TFloatField
       FieldName = 'PDVDN2PERCOMIS'
-      Precision = 15
-      Size = 2
     end
     object SQLPedidoOrcamentoUSUAA60LOGIN: TStringField
       FieldName = 'USUAA60LOGIN'
@@ -5097,29 +4915,21 @@ inherited DM: TDM
       FieldName = 'PRODICOD'
       Origin = 'DB.PEDIDOVENDAITEM.PRODICOD'
     end
-    object SQLPedidoOrcamentoItemPVITN3QUANT: TBCDField
+    object SQLPedidoOrcamentoItemPVITN3QUANT: TFloatField
       FieldName = 'PVITN3QUANT'
       Origin = 'DB.PEDIDOVENDAITEM.PVITN3QUANT'
-      Precision = 15
-      Size = 3
     end
-    object SQLPedidoOrcamentoItemPVITN2VLRUNIT: TBCDField
+    object SQLPedidoOrcamentoItemPVITN2VLRUNIT: TFloatField
       FieldName = 'PVITN2VLRUNIT'
       Origin = 'DB.PEDIDOVENDAITEM.PVITN2VLRUNIT'
-      Precision = 15
-      Size = 3
     end
-    object SQLPedidoOrcamentoItemPVITN2PERCDESC: TBCDField
+    object SQLPedidoOrcamentoItemPVITN2PERCDESC: TFloatField
       FieldName = 'PVITN2PERCDESC'
       Origin = 'DB.PEDIDOVENDAITEM.PVITN2PERCDESC'
-      Precision = 15
-      Size = 3
     end
-    object SQLPedidoOrcamentoItemPVITN2VLRDESC: TBCDField
+    object SQLPedidoOrcamentoItemPVITN2VLRDESC: TFloatField
       FieldName = 'PVITN2VLRDESC'
       Origin = 'DB.PEDIDOVENDAITEM.PVITN2VLRDESC'
-      Precision = 15
-      Size = 3
     end
     object SQLPedidoOrcamentoItemREGISTRO: TDateTimeField
       FieldName = 'REGISTRO'
@@ -5131,11 +4941,9 @@ inherited DM: TDM
       FixedChar = True
       Size = 1
     end
-    object SQLPedidoOrcamentoItemPVITN3QUANTVEND: TBCDField
+    object SQLPedidoOrcamentoItemPVITN3QUANTVEND: TFloatField
       FieldName = 'PVITN3QUANTVEND'
       Origin = 'DB.PEDIDOVENDAITEM.PVITN3QUANTVEND'
-      Precision = 15
-      Size = 3
     end
     object SQLPedidoOrcamentoItemPDVDA60OBS: TStringField
       FieldName = 'PDVDA60OBS'
@@ -5143,11 +4951,9 @@ inherited DM: TDM
       FixedChar = True
       Size = 60
     end
-    object SQLPedidoOrcamentoItemPVITN2PERCCOMIS: TBCDField
+    object SQLPedidoOrcamentoItemPVITN2PERCCOMIS: TFloatField
       FieldName = 'PVITN2PERCCOMIS'
       Origin = 'DB.PEDIDOVENDAITEM.PVITN2PERCCOMIS'
-      Precision = 15
-      Size = 3
     end
     object SQLPedidoOrcamentoItemPDVDA255OBS1: TStringField
       FieldName = 'PDVDA255OBS1'
@@ -5613,12 +5419,10 @@ inherited DM: TDM
       Origin = 'DB.MESA.MESADFECHAMENTO'
       DisplayFormat = 'hh:mm'
     end
-    object SQLMesaStatusMESAN3VLRTOTAL: TBCDField
+    object SQLMesaStatusMESAN3VLRTOTAL: TFloatField
       FieldName = 'MESAN3VLRTOTAL'
       Origin = 'DB.MESA.MESAN3VLRTOTAL'
       DisplayFormat = '##0.00'
-      Precision = 15
-      Size = 3
     end
     object SQLMesaStatusMESADULTPED: TDateTimeField
       FieldName = 'MESADULTPED'
@@ -5740,11 +5544,9 @@ inherited DM: TDM
       'SELECT * From CONFIGREST')
     Left = 576
     Top = 104
-    object SQLConfigRestCONFN2TAXASERV: TBCDField
+    object SQLConfigRestCONFN2TAXASERV: TFloatField
       FieldName = 'CONFN2TAXASERV'
       Origin = 'DB.CONFIGREST.CONFN2TAXASERV'
-      Precision = 15
-      Size = 2
     end
   end
   object ACBrPosPrinter: TACBrPosPrinter

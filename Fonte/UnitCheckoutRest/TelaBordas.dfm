@@ -485,8 +485,8 @@ object FormTelaBordas: TFormTelaBordas
     object RxLabel7: TRxLabel
       Left = 551
       Top = 7
-      Width = 169
-      Height = 37
+      Width = 168
+      Height = 36
       Caption = 'Total Borda=>'
       Font.Charset = ANSI_CHARSET
       Font.Color = clBlack
@@ -590,11 +590,9 @@ object FormTelaBordas: TFormTelaBordas
       FieldName = 'OBPRIORDEM'
       Origin = 'DB.OBSPRODUTOREST.OBPRIORDEM'
     end
-    object SQLObsProdutoVALOR: TBCDField
+    object SQLObsProdutoVALOR: TFloatField
       FieldName = 'VALOR'
       Origin = 'DB.OBSPRODUTOREST.VALOR'
-      Precision = 15
-      Size = 3
     end
   end
 end

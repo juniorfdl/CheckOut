@@ -30,7 +30,7 @@ type
     btApagaBorda01: TSpeedButton;
     btApagaBorda02: TSpeedButton;
     btApagaBorda03: TSpeedButton;
-    SQLObsProdutoVALOR: TBCDField;
+    SQLObsProdutoVALOR: TFloatField;
     RxLabel7: TRxLabel;
     EditValorTotal: TEdit;
     procedure DBGridItensDblClick(Sender: TObject);

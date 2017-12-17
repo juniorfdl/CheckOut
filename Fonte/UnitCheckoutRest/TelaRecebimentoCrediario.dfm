@@ -1033,45 +1033,38 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       FieldName = 'DVENC'
       Origin = 'DB.PARCELASRECEBERTEMP.DVENC'
     end
-    object SQLParcelasReceberTempN2VLRVENC: TBCDField
+    object SQLParcelasReceberTempN2VLRVENC: TFloatField
       FieldName = 'N2VLRVENC'
       Origin = 'DB.PARCELASRECEBERTEMP.N2VLRVENC'
       DisplayFormat = '#,###.00'
-      Size = 3
     end
-    object SQLParcelasReceberTempN2VLRJURO: TBCDField
+    object SQLParcelasReceberTempN2VLRJURO: TFloatField
       FieldName = 'N2VLRJURO'
       Origin = 'DB.PARCELASRECEBERTEMP.N2VLRJURO'
       DisplayFormat = '#,##0.00'
-      Size = 3
     end
-    object SQLParcelasReceberTempN2VLRMULTA: TBCDField
+    object SQLParcelasReceberTempN2VLRMULTA: TFloatField
       FieldName = 'N2VLRMULTA'
       Origin = 'DB.PARCELASRECEBERTEMP.N2VLRMULTA'
       DisplayFormat = '#,##0.00'
-      Size = 3
     end
-    object SQLParcelasReceberTempN2VLRDESC: TBCDField
+    object SQLParcelasReceberTempN2VLRDESC: TFloatField
       FieldName = 'N2VLRDESC'
       Origin = 'DB.PARCELASRECEBERTEMP.N2VLRDESC'
       DisplayFormat = '#,##0.00'
-      Size = 3
     end
-    object SQLParcelasReceberTempN2VLRTXCOBR: TBCDField
+    object SQLParcelasReceberTempN2VLRTXCOBR: TFloatField
       FieldName = 'N2VLRTXCOBR'
       Origin = 'DB.PARCELASRECEBERTEMP.N2VLRTXCOBR'
       DisplayFormat = '#,##0.00'
-      Precision = 15
-      Size = 3
     end
-    object SQLParcelasReceberTempN2VLRPAGAR: TBCDField
+    object SQLParcelasReceberTempN2VLRPAGAR: TFloatField
       FieldKind = fkCalculated
       FieldName = 'N2VLRPAGAR'
       DisplayFormat = '#,##0.00'
-      Size = 3
       Calculated = True
     end
-    object SQLParcelasReceberTempINRODIASATRAS: TBCDField
+    object SQLParcelasReceberTempINRODIASATRAS: TFloatField
       FieldKind = fkCalculated
       FieldName = 'INRODIASATRAS'
       Calculated = True
@@ -1085,12 +1078,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       FieldName = 'NOMECLIENTE'
       Size = 60
     end
-    object SQLParcelasReceberTempN2VLRAMORT: TBCDField
+    object SQLParcelasReceberTempN2VLRAMORT: TFloatField
       FieldName = 'N2VLRAMORT'
       Origin = 'DB.PARCELASRECEBERTEMP.N2VLRAMORT'
       DisplayFormat = '#,##0.00'
-      Precision = 15
-      Size = 3
     end
     object SQLParcelasReceberTempTIPODOC: TStringField
       FieldName = 'TIPODOC'
@@ -1104,11 +1095,9 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       Size = 15
       Calculated = True
     end
-    object SQLParcelasReceberTempCTRCN2TOTCORRECAO: TBCDField
+    object SQLParcelasReceberTempCTRCN2TOTCORRECAO: TFloatField
       FieldName = 'CTRCN2TOTCORRECAO'
       Origin = 'DB.PARCELASRECEBERTEMP.CTRCN2TOTCORRECAO'
-      Precision = 15
-      Size = 3
     end
   end
   object DSSQLParcelasReceberTemp: TDataSource
@@ -1239,26 +1228,23 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       FixedChar = True
       Size = 13
     end
-    object SQLCupomCUPON2TOTITENS: TBCDField
+    object SQLCupomCUPON2TOTITENS: TFloatField
       DisplayLabel = 'Total'
       FieldName = 'CUPON2TOTITENS'
       Origin = 'DB.CUPOM.CUPON2TOTITENS'
       DisplayFormat = '#,##0.00'
-      Size = 3
     end
-    object SQLCupomCUPON2DESC: TBCDField
+    object SQLCupomCUPON2DESC: TFloatField
       DisplayLabel = 'Desc.'
       FieldName = 'CUPON2DESC'
       Origin = 'DB.CUPOM.CUPON2DESC'
       DisplayFormat = '#,##0.00'
-      Size = 3
     end
-    object SQLCupomCUPON2ACRESC: TBCDField
+    object SQLCupomCUPON2ACRESC: TFloatField
       DisplayLabel = 'Acr'#233'sc.'
       FieldName = 'CUPON2ACRESC'
       Origin = 'DB.CUPOM.CUPON2ACRESC'
       DisplayFormat = '#,##0.00'
-      Size = 3
     end
     object SQLCupomCUPOINRO: TIntegerField
       FieldName = 'CUPOINRO'
@@ -1270,15 +1256,13 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       FixedChar = True
       Size = 1
     end
-    object SQLCupomCUPON2JUROATRAS: TBCDField
+    object SQLCupomCUPON2JUROATRAS: TFloatField
       FieldName = 'CUPON2JUROATRAS'
       Origin = 'DB.CUPOM.CUPON2JUROATRAS'
-      Size = 3
     end
-    object SQLCupomCUPON2MULTAATRAS: TBCDField
+    object SQLCupomCUPON2MULTAATRAS: TFloatField
       FieldName = 'CUPON2MULTAATRAS'
       Origin = 'DB.CUPOM.CUPON2MULTAATRAS'
-      Size = 3
     end
     object SQLCupomCUPOCSTATUS: TStringField
       FieldName = 'CUPOCSTATUS'
@@ -1354,17 +1338,13 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       FieldName = 'CTRCDVENC'
       Origin = 'DB.CONTASRECEBER.CTRCDVENC'
     end
-    object SQLContasReceberCTRCN2VLR: TBCDField
+    object SQLContasReceberCTRCN2VLR: TFloatField
       FieldName = 'CTRCN2VLR'
       Origin = 'DB.CONTASRECEBER.CTRCN2VLR'
-      Precision = 15
-      Size = 3
     end
-    object SQLContasReceberCTRCN2DESCFIN: TBCDField
+    object SQLContasReceberCTRCN2DESCFIN: TFloatField
       FieldName = 'CTRCN2DESCFIN'
       Origin = 'DB.CONTASRECEBER.CTRCN2DESCFIN'
-      Precision = 15
-      Size = 3
     end
     object SQLContasReceberNUMEICOD: TIntegerField
       FieldName = 'NUMEICOD'
@@ -1374,17 +1354,13 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       FieldName = 'PORTICOD'
       Origin = 'DB.CONTASRECEBER.PORTICOD'
     end
-    object SQLContasReceberCTRCN2TXMULTA: TBCDField
+    object SQLContasReceberCTRCN2TXMULTA: TFloatField
       FieldName = 'CTRCN2TXMULTA'
       Origin = 'DB.CONTASRECEBER.CTRCN2TXMULTA'
-      Precision = 15
-      Size = 3
     end
-    object SQLContasReceberCTRCN2TXJURO: TBCDField
+    object SQLContasReceberCTRCN2TXJURO: TFloatField
       FieldName = 'CTRCN2TXJURO'
       Origin = 'DB.CONTASRECEBER.CTRCN2TXJURO'
-      Precision = 15
-      Size = 3
     end
     object SQLContasReceberCTRCA5TIPOPADRAO: TStringField
       FieldName = 'CTRCA5TIPOPADRAO'
@@ -1396,29 +1372,21 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       FieldName = 'CTRCDULTREC'
       Origin = 'DB.CONTASRECEBER.CTRCDULTREC'
     end
-    object SQLContasReceberCTRCN2TOTREC: TBCDField
+    object SQLContasReceberCTRCN2TOTREC: TFloatField
       FieldName = 'CTRCN2TOTREC'
       Origin = 'DB.CONTASRECEBER.CTRCN2TOTREC'
-      Precision = 15
-      Size = 3
     end
-    object SQLContasReceberCTRCN2TOTJUROREC: TBCDField
+    object SQLContasReceberCTRCN2TOTJUROREC: TFloatField
       FieldName = 'CTRCN2TOTJUROREC'
       Origin = 'DB.CONTASRECEBER.CTRCN2TOTJUROREC'
-      Precision = 15
-      Size = 3
     end
-    object SQLContasReceberCTRCN2TOTMULTAREC: TBCDField
+    object SQLContasReceberCTRCN2TOTMULTAREC: TFloatField
       FieldName = 'CTRCN2TOTMULTAREC'
       Origin = 'DB.CONTASRECEBER.CTRCN2TOTMULTAREC'
-      Precision = 15
-      Size = 3
     end
-    object SQLContasReceberCTRCN2TOTDESCREC: TBCDField
+    object SQLContasReceberCTRCN2TOTDESCREC: TFloatField
       FieldName = 'CTRCN2TOTDESCREC'
       Origin = 'DB.CONTASRECEBER.CTRCN2TOTDESCREC'
-      Precision = 15
-      Size = 3
     end
     object SQLContasReceberEMPRICODULTREC: TIntegerField
       FieldName = 'EMPRICODULTREC'
@@ -1470,16 +1438,12 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       FieldName = 'CTRCDREABILSPC'
       Origin = 'DB.CONTASRECEBER.CTRCDREABILSPC'
     end
-    object SQLContasReceberCTRCN2TOTMULTACOBR: TBCDField
+    object SQLContasReceberCTRCN2TOTMULTACOBR: TFloatField
       FieldName = 'CTRCN2TOTMULTACOBR'
       Origin = 'DB.CONTASRECEBER.CTRCN2TOTMULTACOBR'
-      Precision = 15
-      Size = 3
     end
-    object SQLContasReceberCTRCN2TOTCORRECAO: TBCDField
+    object SQLContasReceberCTRCN2TOTCORRECAO: TFloatField
       FieldName = 'CTRCN2TOTCORRECAO'
-      Precision = 15
-      Size = 3
     end
   end
   object SQLlCupomNumerario: TRxQuery
@@ -1506,11 +1470,9 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       FieldName = 'NUMEICOD'
       Origin = 'DB.CUPOMNUMERARIO.NUMEICOD'
     end
-    object SQLlCupomNumerarioCPNMN2VLR: TBCDField
+    object SQLlCupomNumerarioCPNMN2VLR: TFloatField
       FieldName = 'CPNMN2VLR'
       Origin = 'DB.CUPOMNUMERARIO.CPNMN2VLR'
-      Precision = 15
-      Size = 3
     end
     object SQLlCupomNumerarioCPNMCAUTENT: TStringField
       FieldName = 'CPNMCAUTENT'
@@ -1554,29 +1516,21 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       FieldName = 'USUAICOD'
       Origin = 'DB.RECEBIMENTO.USUAICOD'
     end
-    object SQLRecebimentoRECEN2VLRRECTO: TBCDField
+    object SQLRecebimentoRECEN2VLRRECTO: TFloatField
       FieldName = 'RECEN2VLRRECTO'
       Origin = 'DB.RECEBIMENTO.RECEN2VLRRECTO'
-      Precision = 15
-      Size = 3
     end
-    object SQLRecebimentoRECEN2VLRJURO: TBCDField
+    object SQLRecebimentoRECEN2VLRJURO: TFloatField
       FieldName = 'RECEN2VLRJURO'
       Origin = 'DB.RECEBIMENTO.RECEN2VLRJURO'
-      Precision = 15
-      Size = 3
     end
-    object SQLRecebimentoRECEN2VLRMULTA: TBCDField
+    object SQLRecebimentoRECEN2VLRMULTA: TFloatField
       FieldName = 'RECEN2VLRMULTA'
       Origin = 'DB.RECEBIMENTO.RECEN2VLRMULTA'
-      Precision = 15
-      Size = 3
     end
-    object SQLRecebimentoRECEN2DESC: TBCDField
+    object SQLRecebimentoRECEN2DESC: TFloatField
       FieldName = 'RECEN2DESC'
       Origin = 'DB.RECEBIMENTO.RECEN2DESC'
-      Precision = 15
-      Size = 3
     end
     object SQLRecebimentoCLIEA13ID: TStringField
       FieldName = 'CLIEA13ID'
@@ -1594,11 +1548,9 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       FieldName = 'REGISTRO'
       Origin = 'DB.RECEBIMENTO.REGISTRO'
     end
-    object SQLRecebimentoRECEN2MULTACOBR: TBCDField
+    object SQLRecebimentoRECEN2MULTACOBR: TFloatField
       FieldName = 'RECEN2MULTACOBR'
       Origin = 'DB.RECEBIMENTO.RECEN2MULTACOBR'
-      Precision = 15
-      Size = 3
     end
     object SQLRecebimentoRECEDDATAMOV: TDateTimeField
       FieldName = 'RECEDDATAMOV'
@@ -1644,11 +1596,9 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       FieldName = 'VENCIMENTO'
       Origin = 'DB.CARTAPRIMEIROAVISO.PRAVDVENC'
     end
-    object SQLPrimeiroAvisoVALOR: TBCDField
+    object SQLPrimeiroAvisoVALOR: TFloatField
       FieldName = 'VALOR'
       Origin = 'DB.CARTAPRIMEIROAVISO.CTRCN2VLR'
-      Precision = 15
-      Size = 3
     end
     object SQLPrimeiroAvisoENVIADO: TStringField
       FieldName = 'ENVIADO'
@@ -1702,11 +1652,9 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       FieldName = 'VENCIMENTO'
       Origin = 'DB.CARTASEGUNDOAVISO.SGAVDVENC'
     end
-    object SQLSegundoAvisoVALOR: TBCDField
+    object SQLSegundoAvisoVALOR: TFloatField
       FieldName = 'VALOR'
       Origin = 'DB.CARTASEGUNDOAVISO.CTRCN2VLR'
-      Precision = 15
-      Size = 3
     end
     object SQLSegundoAvisoENVIADO: TStringField
       FieldName = 'ENVIADO'
@@ -1759,11 +1707,9 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       FieldName = 'VENCIMENTO'
       Origin = 'DB.CARTAAVISOSPC.AVSPDVENC'
     end
-    object SQLSPCVALOR: TBCDField
+    object SQLSPCVALOR: TFloatField
       FieldName = 'VALOR'
       Origin = 'DB.CARTAAVISOSPC.CTRCN2VLR'
-      Precision = 15
-      Size = 3
     end
     object SQLSPCENVIADO: TStringField
       FieldName = 'ENVIADO'
@@ -1816,11 +1762,9 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       FieldName = 'VENCIMENTO'
       Origin = 'DB.CARTAAVISOCOBRANCA.AVCODVENC'
     end
-    object SQLAvisoCobrancaVALOR: TBCDField
+    object SQLAvisoCobrancaVALOR: TFloatField
       FieldName = 'VALOR'
       Origin = 'DB.CARTAAVISOCOBRANCA.CTRCN2VLR'
-      Precision = 15
-      Size = 3
     end
     object SQLAvisoCobrancaENVIADO: TStringField
       FieldName = 'ENVIADO'
@@ -1840,6 +1784,7 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
   object ReportAutentic: TppReport
     AutoStop = False
     DataPipeline = DBPipeParc
+    PassSetting = psTwoPass
     PrinterSetup.BinName = 'Default'
     PrinterSetup.Copies = 2
     PrinterSetup.DocumentName = 'Report'
@@ -1849,15 +1794,14 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     PrinterSetup.mmMarginLeft = 0
     PrinterSetup.mmMarginRight = 0
     PrinterSetup.mmMarginTop = 6350
-    PrinterSetup.mmPaperHeight = 130000
-    PrinterSetup.mmPaperWidth = 75000
-    PrinterSetup.PaperSize = 256
+    PrinterSetup.mmPaperHeight = 0
+    PrinterSetup.mmPaperWidth = 0
+    PrinterSetup.PaperSize = 0
     Units = utMillimeters
     AllowPrintToFile = True
     BeforePrint = ReportAutenticBeforePrint
     CachePages = True
     DeviceType = 'Printer'
-    EmailSettings.ReportFormat = 'PDF'
     OutlineSettings.CreateNode = True
     OutlineSettings.CreatePageNodes = True
     OutlineSettings.Enabled = False
@@ -1868,22 +1812,18 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     TextSearchSettings.Enabled = False
     Left = 64
     Top = 63
-    Version = '10.06'
-    mmColumnWidth = 75000
+    Version = '7.04'
+    mmColumnWidth = 0
     DataPipelineName = 'DBPipeParc'
     object ppDetailBand1: TppDetailBand
       Save = True
       mmBottomOffset = 0
-      mmHeight = 113242
+      mmHeight = 29962005
       mmPrintPosition = 0
       object ppLabel1: TppLabel
-        UserName = 'Label1'
+        UserName = 'ppLabel1'
         SaveOrder = 10
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'Recibo de pagamento'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1891,20 +1831,16 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 14552
-        mmTop = 10054
-        mmWidth = 30565
+        mmHeight = 1119983
+        mmLeft = 3850224
+        mmTop = 2660126
+        mmWidth = 8087006
         BandType = 4
       end
       object ppLabel2: TppLabel
-        UserName = 'Label2'
+        UserName = 'ppLabel2'
         SaveOrder = 16
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'Cliente:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1912,22 +1848,17 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 5027
-        mmTop = 19315
-        mmWidth = 11345
+        mmHeight = 1119983
+        mmLeft = 1330063
+        mmTop = 5110437
+        mmWidth = 3001704
         BandType = 4
       end
       object ppDBText1: TppDBText
-        UserName = 'DBText1'
+        UserName = 'ppDBText1'
         CharWrap = True
         SaveOrder = 0
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
-        DataField = 'NOMECLIENTE'
         DataPipeline = DBPipeParc
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1936,22 +1867,17 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Style = []
         WordWrap = True
         DataPipelineName = 'DBPipeParc'
-        mmHeight = 8467
-        mmLeft = 5027
-        mmTop = 23813
-        mmWidth = 59796
+        mmHeight = 2240232
+        mmLeft = 1330063
+        mmTop = 6300535
+        mmWidth = 15821056
         BandType = 4
       end
       object ppDBText2: TppDBText
-        UserName = 'DBText2'
+        UserName = 'ppDBText2'
         SaveOrder = 1
         Save = True
         AutoSize = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
-        DataField = 'CLIEA13ID'
         DataPipeline = DBPipeParc
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1961,19 +1887,15 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Transparent = True
         DataPipelineName = 'DBPipeParc'
         mmHeight = 4233
-        mmLeft = 36513
-        mmTop = 19315
-        mmWidth = 17695
+        mmLeft = 9660750
+        mmTop = 5110437
+        mmWidth = 15610
         BandType = 4
       end
       object ppLabel3: TppLabel
-        UserName = 'Label3'
+        UserName = 'ppLabel3'
         SaveOrder = 17
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'Contrato:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1981,22 +1903,17 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 5027
-        mmTop = 32808
-        mmWidth = 13547
+        mmHeight = 1119983
+        mmLeft = 1330063
+        mmTop = 8680467
+        mmWidth = 3584318
         BandType = 4
       end
       object ppDBText3: TppDBText
-        UserName = 'DBText3'
+        UserName = 'ppDBText3'
         SaveOrder = 2
         Save = True
         AutoSize = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
-        DataField = 'A13CUPOID'
         DataPipeline = DBPipeParc
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2006,19 +1923,15 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Transparent = True
         DataPipelineName = 'DBPipeParc'
         mmHeight = 4233
-        mmLeft = 42598
-        mmTop = 32808
-        mmWidth = 19135
+        mmLeft = 11270743
+        mmTop = 8680467
+        mmWidth = 15610
         BandType = 4
       end
       object ppLabel4: TppLabel
-        UserName = 'Label4'
+        UserName = 'ppLabel4'
         SaveOrder = 18
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'Vencimento:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2026,22 +1939,17 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 5027
-        mmTop = 37306
-        mmWidth = 18373
+        mmHeight = 1119983
+        mmLeft = 1330063
+        mmTop = 9870565
+        mmWidth = 4861199
         BandType = 4
       end
       object ppDBText4: TppDBText
-        UserName = 'DBText4'
+        UserName = 'ppDBText4'
         SaveOrder = 3
         Save = True
         AutoSize = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
-        DataField = 'DVENC'
         DataPipeline = DBPipeParc
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2051,19 +1959,15 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Transparent = True
         DataPipelineName = 'DBPipeParc'
         mmHeight = 4233
-        mmLeft = 42598
-        mmTop = 37306
-        mmWidth = 12192
+        mmLeft = 11270743
+        mmTop = 9870565
+        mmWidth = 15610
         BandType = 4
       end
       object ppLabel5: TppLabel
-        UserName = 'Label5'
+        UserName = 'ppLabel5'
         SaveOrder = 19
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'Presta'#231#227'o:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2071,22 +1975,17 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 5027
-        mmTop = 46038
-        mmWidth = 14563
+        mmHeight = 1119983
+        mmLeft = 1330063
+        mmTop = 12180912
+        mmWidth = 3853135
         BandType = 4
       end
       object ppDBText5: TppDBText
-        UserName = 'DBText5'
+        UserName = 'ppDBText5'
         SaveOrder = 4
         Save = True
         AutoSize = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
-        DataField = 'N2VLRVENC'
         DataPipeline = DBPipeParc
         DisplayFormat = '###0.00'
         Font.Charset = ANSI_CHARSET
@@ -2098,19 +1997,15 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Transparent = True
         DataPipelineName = 'DBPipeParc'
         mmHeight = 4233
-        mmLeft = 43656
-        mmTop = 46038
-        mmWidth = 20913
+        mmLeft = 17068305
+        mmTop = 12180912
+        mmWidth = 15610
         BandType = 4
       end
       object ppLabel6: TppLabel
-        UserName = 'Label6'
+        UserName = 'ppLabel6'
         SaveOrder = 20
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'Juros:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2118,22 +2013,17 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 5027
-        mmTop = 50536
-        mmWidth = 8467
+        mmHeight = 1119983
+        mmLeft = 1330063
+        mmTop = 13371010
+        mmWidth = 2240232
         BandType = 4
       end
       object ppDBText6: TppDBText
-        UserName = 'DBText6'
+        UserName = 'ppDBText6'
         SaveOrder = 5
         Save = True
         AutoSize = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
-        DataField = 'N2VLRJURO'
         DataPipeline = DBPipeParc
         DisplayFormat = '###0.00'
         Font.Charset = ANSI_CHARSET
@@ -2145,19 +2035,15 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Transparent = True
         DataPipelineName = 'DBPipeParc'
         mmHeight = 4233
-        mmLeft = 44715
-        mmTop = 50536
-        mmWidth = 19897
+        mmLeft = 17079682
+        mmTop = 13371010
+        mmWidth = 15610
         BandType = 4
       end
       object ppLabel7: TppLabel
-        UserName = 'Label7'
+        UserName = 'ppLabel7'
         SaveOrder = 21
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'Multa:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2165,22 +2051,17 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 5027
-        mmTop = 55033
-        mmWidth = 9567
+        mmHeight = 1119983
+        mmLeft = 1330063
+        mmTop = 14560844
+        mmWidth = 2531274
         BandType = 4
       end
       object ppDBText7: TppDBText
-        UserName = 'DBText7'
+        UserName = 'ppDBText7'
         SaveOrder = 6
         Save = True
         AutoSize = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
-        DataField = 'N2VLRMULTA'
         DataPipeline = DBPipeParc
         DisplayFormat = '###0.00'
         Font.Charset = ANSI_CHARSET
@@ -2192,19 +2073,15 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Transparent = True
         DataPipelineName = 'DBPipeParc'
         mmHeight = 4233
-        mmLeft = 40746
-        mmTop = 55033
-        mmWidth = 23707
+        mmLeft = 17037614
+        mmTop = 14560844
+        mmWidth = 15610
         BandType = 4
       end
       object ppLabel8: TppLabel
-        UserName = 'Label8'
+        UserName = 'ppLabel8'
         SaveOrder = 22
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'Desconto:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2212,22 +2089,17 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 5027
-        mmTop = 59531
-        mmWidth = 14224
+        mmHeight = 1119983
+        mmLeft = 1330063
+        mmTop = 15750942
+        mmWidth = 3763441
         BandType = 4
       end
       object ppDBText8: TppDBText
-        UserName = 'DBText8'
+        UserName = 'ppDBText8'
         SaveOrder = 7
         Save = True
         AutoSize = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
-        DataField = 'N2VLRDESC'
         DataPipeline = DBPipeParc
         DisplayFormat = '###0.00'
         Font.Charset = ANSI_CHARSET
@@ -2239,19 +2111,15 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Transparent = True
         DataPipelineName = 'DBPipeParc'
         mmHeight = 4233
-        mmLeft = 44186
-        mmTop = 59531
-        mmWidth = 20320
+        mmLeft = 17051636
+        mmTop = 15750942
+        mmWidth = 15610
         BandType = 4
       end
       object ppLabel9: TppLabel
-        UserName = 'Label9'
+        UserName = 'ppLabel9'
         SaveOrder = 23
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'Total:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2259,22 +2127,17 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 5027
-        mmTop = 64029
-        mmWidth = 8551
+        mmHeight = 1119983
+        mmLeft = 1330063
+        mmTop = 16941040
+        mmWidth = 2262457
         BandType = 4
       end
       object ppDBText9: TppDBText
-        UserName = 'DBText9'
+        UserName = 'ppDBText9'
         SaveOrder = 8
         Save = True
         AutoSize = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
-        DataField = 'N2VLRPAGAR'
         DataPipeline = DBPipeParc
         DisplayFormat = '###0.00'
         Font.Charset = ANSI_CHARSET
@@ -2286,19 +2149,15 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Transparent = True
         DataPipelineName = 'DBPipeParc'
         mmHeight = 4233
-        mmLeft = 41540
-        mmTop = 64029
-        mmWidth = 23114
+        mmLeft = 17090795
+        mmTop = 16941040
+        mmWidth = 15610
         BandType = 4
       end
       object ppLabel10: TppLabel
-        UserName = 'Label10'
+        UserName = 'ppLabel10'
         SaveOrder = 11
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'Emitido em:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2306,20 +2165,16 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 5027
-        mmTop = 69586
-        mmWidth = 17780
+        mmHeight = 1119983
+        mmLeft = 1330063
+        mmTop = 18411332
+        mmWidth = 4704301
         BandType = 4
       end
       object ppSystemVariable1: TppSystemVariable
-        UserName = 'SystemVariable1'
+        UserName = 'ppSystemVariable1'
         SaveOrder = 24
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         VarType = vtDateTime
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2327,20 +2182,16 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 42598
-        mmTop = 69586
-        mmWidth = 28109
+        mmHeight = 1119983
+        mmLeft = 11270743
+        mmTop = 18411332
+        mmWidth = 7437188
         BandType = 4
       end
       object ppLabel11: TppLabel
-        UserName = 'Label11'
+        UserName = 'ppLabel11'
         SaveOrder = 12
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = '----------------------------------------------'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2348,20 +2199,16 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 5292
-        mmTop = 5556
-        mmWidth = 54525
+        mmHeight = 1119983
+        mmLeft = 1400178
+        mmTop = 1470028
+        mmWidth = 14426435
         BandType = 4
       end
       object ppLabel13: TppLabel
-        UserName = 'Label13'
+        UserName = 'ppLabel13'
         SaveOrder = 13
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = '----------------------------------------------'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2369,20 +2216,16 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 5027
-        mmTop = 41804
-        mmWidth = 54525
+        mmHeight = 1119983
+        mmLeft = 1330063
+        mmTop = 11060664
+        mmWidth = 14426435
         BandType = 4
       end
       object ppLabel14: TppLabel
-        UserName = 'Label14'
+        UserName = 'ppLabel14'
         SaveOrder = 14
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = '----------------------------------------------'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2390,21 +2233,16 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 5027
-        mmTop = 15081
-        mmWidth = 54525
+        mmHeight = 1119983
+        mmLeft = 1330063
+        mmTop = 3990189
+        mmWidth = 14426435
         BandType = 4
       end
       object Empresa: TppLabel
         UserName = 'Empresa'
         SaveOrder = 9
         Save = True
-        Anchors = [atLeft, atBottom]
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'Empresa'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2412,20 +2250,16 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 5027
-        mmTop = 529
-        mmWidth = 12531
+        mmHeight = 1119983
+        mmLeft = 1330063
+        mmTop = 139965
+        mmWidth = 3315500
         BandType = 4
       end
       object ppLabel15: TppLabel
-        UserName = 'Label15'
+        UserName = 'ppLabel15'
         SaveOrder = 15
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = '..'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2433,19 +2267,14 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 3969
-        mmLeft = 5556
-        mmTop = 108744
-        mmWidth = 2117
+        mmHeight = 1050133
+        mmLeft = 1470028
+        mmTop = 28771907
+        mmWidth = 560124
         BandType = 4
       end
       object ppDBText10: TppDBText
-        UserName = 'DBText10'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
-        DataField = 'TERMICOD'
+        UserName = 'ppDBText10'
         DataPipeline = DBPipeParc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2454,10 +2283,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Style = []
         Transparent = True
         DataPipelineName = 'DBPipeParc'
-        mmHeight = 3969
-        mmLeft = 5292
-        mmTop = 10054
-        mmWidth = 7408
+        mmHeight = 1050133
+        mmLeft = 1400178
+        mmTop = 2660126
+        mmWidth = 1960037
         BandType = 4
       end
     end
@@ -2689,6 +2518,8 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     end
   end
   object ReportTotRec: TppReport
+    AutoStop = False
+    PassSetting = psTwoPass
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.PaperName = 'Custom'
@@ -2697,15 +2528,14 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     PrinterSetup.mmMarginLeft = 0
     PrinterSetup.mmMarginRight = 0
     PrinterSetup.mmMarginTop = 6350
-    PrinterSetup.mmPaperHeight = 130000
-    PrinterSetup.mmPaperWidth = 75000
-    PrinterSetup.PaperSize = 256
+    PrinterSetup.mmPaperHeight = 0
+    PrinterSetup.mmPaperWidth = 0
+    PrinterSetup.PaperSize = 0
     Units = utMillimeters
     AllowPrintToFile = True
     BeforePrint = ReportAutenticBeforePrint
     CachePages = True
     DeviceType = 'Printer'
-    EmailSettings.ReportFormat = 'PDF'
     OutlineSettings.CreateNode = True
     OutlineSettings.CreatePageNodes = True
     OutlineSettings.Enabled = False
@@ -2716,21 +2546,16 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     TextSearchSettings.Enabled = False
     Left = 8
     Top = 91
-    Version = '10.06'
-    mmColumnWidth = 75000
+    Version = '7.04'
+    mmColumnWidth = 0
     object ppTitleBand1: TppTitleBand
-      BeforePrint = ppTitleBand1BeforePrint
       mmBottomOffset = 0
-      mmHeight = 87577
+      mmHeight = 23171461
       mmPrintPosition = 0
       object lbTotal: TppLabel
-        UserName = 'Label9'
+        UserName = 'lbTotal'
         SaveOrder = 0
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'Valor Recebido: '
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2738,20 +2563,16 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 4233
-        mmTop = 59267
-        mmWidth = 24077
+        mmHeight = 1119983
+        mmLeft = 1119983
+        mmTop = 15681092
+        mmWidth = 6370386
         BandType = 1
       end
       object ppLabel24: TppLabel
-        UserName = 'Label10'
+        UserName = 'ppLabel24'
         SaveOrder = 1
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'Emitido em:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2759,20 +2580,16 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 4233
-        mmTop = 63765
-        mmWidth = 17727
+        mmHeight = 1119983
+        mmLeft = 1119983
+        mmTop = 16871190
+        mmWidth = 4690278
         BandType = 1
       end
       object ppSystemVariable2: TppSystemVariable
-        UserName = 'SystemVariable1'
+        UserName = 'ppSystemVariable2'
         SaveOrder = 2
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         VarType = vtDateTime
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2780,20 +2597,16 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 30427
-        mmTop = 64029
-        mmWidth = 28046
+        mmHeight = 1119983
+        mmLeft = 8050493
+        mmTop = 16941040
+        mmWidth = 7420519
         BandType = 1
       end
       object ppLabel25: TppLabel
-        UserName = 'Label11'
+        UserName = 'ppLabel25'
         SaveOrder = 3
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = '----------------------------------------------'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2801,20 +2614,16 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 4498
-        mmTop = 27252
-        mmWidth = 54504
+        mmHeight = 1119983
+        mmLeft = 1190098
+        mmTop = 7210439
+        mmWidth = 14420879
         BandType = 1
       end
       object ppLabel27: TppLabel
-        UserName = 'Label14'
+        UserName = 'ppLabel27'
         SaveOrder = 4
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = '----------------------------------------------'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2822,22 +2631,17 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 4233
-        mmTop = 40746
-        mmWidth = 54504
+        mmHeight = 1119983
+        mmLeft = 1119983
+        mmTop = 10780734
+        mmWidth = 14420879
         BandType = 1
       end
       object lbEmpresa: TppLabel
-        UserName = 'Empresa'
+        UserName = 'lbEmpresa'
         SaveOrder = 5
         Save = True
-        Anchors = [atLeft, atBottom]
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
-        Caption = 'Empresa'
+        Caption = 'lbEmpresa'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Times New Roman'
@@ -2845,19 +2649,15 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Style = []
         Transparent = True
         mmHeight = 4233
-        mmLeft = 4233
-        mmTop = 22225
-        mmWidth = 12435
+        mmLeft = 1119983
+        mmTop = 5880376
+        mmWidth = 14552
         BandType = 1
       end
       object ppLabel29: TppLabel
-        UserName = 'Label15'
+        UserName = 'ppLabel29'
         SaveOrder = 6
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = '..'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2865,21 +2665,16 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 3969
-        mmLeft = 4233
-        mmTop = 75936
-        mmWidth = 2117
+        mmHeight = 1050133
+        mmLeft = 1119983
+        mmTop = 20091440
+        mmWidth = 560124
         BandType = 1
       end
       object ppLabel12: TppLabel
-        UserName = 'Empresa1'
+        UserName = 'ppLabel12'
         SaveOrder = 7
         Save = True
-        Anchors = [atLeft, atBottom]
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'DOCUMENTO NAO FISCAL'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2887,21 +2682,16 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 4498
-        mmTop = 31750
-        mmWidth = 43921
+        mmHeight = 1119983
+        mmLeft = 1190098
+        mmTop = 8400538
+        mmWidth = 11620788
         BandType = 1
       end
       object ppLabel16: TppLabel
-        UserName = 'Label16'
+        UserName = 'ppLabel16'
         SaveOrder = 8
         Save = True
-        Anchors = [atLeft, atBottom]
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'RECEBIMENTO'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2909,20 +2699,16 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 4498
-        mmTop = 36248
-        mmWidth = 25135
+        mmHeight = 1119983
+        mmLeft = 1190098
+        mmTop = 9590636
+        mmWidth = 6650315
         BandType = 1
       end
       object lbCliente: TppLabel
         UserName = 'lbCliente'
         SaveOrder = 9
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'Cliente:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2930,20 +2716,16 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 4233
-        mmTop = 49742
-        mmWidth = 11113
+        mmHeight = 1119983
+        mmLeft = 1119983
+        mmTop = 13160930
+        mmWidth = 2940320
         BandType = 1
       end
       object ppLabel17: TppLabel
-        UserName = 'lbCliente1'
+        UserName = 'ppLabel17'
         SaveOrder = 10
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'Cliente:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2951,20 +2733,16 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4149
-        mmLeft = 4233
-        mmTop = 45244
-        mmWidth = 11091
+        mmHeight = 1097758
+        mmLeft = 1119983
+        mmTop = 11970832
+        mmWidth = 2934500
         BandType = 1
       end
       object lbOperador: TppLabel
-        UserName = 'Label101'
+        UserName = 'lbOperador'
         SaveOrder = 11
         Save = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
         Caption = 'Operador:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2972,10 +2750,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 4149
-        mmLeft = 3969
-        mmTop = 68263
-        mmWidth = 14351
+        mmHeight = 1097758
+        mmLeft = 1050133
+        mmTop = 18061288
+        mmWidth = 3797043
         BandType = 1
       end
     end
@@ -3094,11 +2872,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       Origin = 'DB.PARCELASPRAZOVENDATEMP.NROPARCELA'
       DisplayFormat = '000'
     end
-    object SQLParcelasPrazoVendaTempVALORVENCTO: TBCDField
+    object SQLParcelasPrazoVendaTempVALORVENCTO: TFloatField
       FieldName = 'VALORVENCTO'
       Origin = 'DB.PARCELASPRAZOVENDATEMP.VALORVENCTO'
       DisplayFormat = '#,##0.00'
-      Size = 3
     end
     object SQLParcelasPrazoVendaTempNUMEICOD: TIntegerField
       FieldName = 'NUMEICOD'
@@ -3139,11 +2916,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       FieldName = 'NUMEICOD'
       Origin = 'DB.PARCELASPRAZOVENDATEMP.NUMEICOD'
     end
-    object SQLParcelasVistaVendaTempVALORPARC: TBCDField
+    object SQLParcelasVistaVendaTempVALORPARC: TFloatField
       FieldName = 'VALORPARC'
       Origin = 'DB.PARCELASVISTAVENDATEMP.VALORPARC'
       DisplayFormat = '#,##0.00'
-      Size = 3
     end
     object SQLParcelasVistaVendaTempTIPOPADR: TStringField
       FieldName = 'TIPOPADR'

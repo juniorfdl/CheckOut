@@ -908,7 +908,11 @@ begin
   try
     DB.Connected := True;
   except
-    Application.ProcessMessages;
+    on e: Exception do
+    begin
+      ShowMessage(e.message);
+      Application.ProcessMessages;
+    end;
   end;
 
   if not DB.Connected then
