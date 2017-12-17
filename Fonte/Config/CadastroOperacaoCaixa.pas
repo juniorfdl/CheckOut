@@ -37,6 +37,9 @@ type
     SQLTemplateOPCXCOPINTERNA: TStringField;
     RxDBComboOpInterna: TRxDBComboBox;
     Label8: TLabel;
+    SQLTemplateIMPRIMIR_RESUMO: TStringField;
+    RxDBComboBox1: TRxDBComboBox;
+    Label9: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure SQLTemplateNewRecord(DataSet: TDataSet);

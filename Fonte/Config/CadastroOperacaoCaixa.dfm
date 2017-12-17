@@ -45,7 +45,6 @@ inherited FormCadastroOperacaoCaixa: TFormCadastroOperacaoCaixa
             Top = 83
             Width = 672
             Height = 366
-            ActivePage = TabSheetDadosPrincipais
             inherited TabSheetConsulta: TTabSheet
               inherited DBGridLista: TDBGrid
                 Width = 664
@@ -77,6 +76,12 @@ inherited FormCadastroOperacaoCaixa: TFormCadastroOperacaoCaixa
                     Expanded = False
                     FieldName = 'OPCXCAUTENTICA'
                     Width = 103
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'IMPRIMIR_RESUMO'
+                    Title.Caption = 'Imprimir Resumo'
                     Visible = True
                   end>
               end
@@ -175,6 +180,19 @@ inherited FormCadastroOperacaoCaixa: TFormCadastroOperacaoCaixa
                 Width = 166
                 Height = 13
                 Caption = 'Opera'#231#227'o Interna do Sistema'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = 8404992
+                Font.Height = -11
+                Font.Name = 'Tahoma'
+                Font.Style = [fsBold]
+                ParentFont = False
+              end
+              object Label9: TLabel
+                Left = 18
+                Top = 238
+                Width = 150
+                Height = 13
+                Caption = 'Imprimir Resumo de Caixa'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = 8404992
                 Font.Height = -11
@@ -375,6 +393,24 @@ inherited FormCadastroOperacaoCaixa: TFormCadastroOperacaoCaixa
                   'S'
                   'N')
               end
+              object RxDBComboBox1: TRxDBComboBox
+                Left = 15
+                Top = 252
+                Width = 181
+                Height = 21
+                Style = csDropDownList
+                DataField = 'IMPRIMIR_RESUMO'
+                DataSource = DSTemplate
+                EnableValues = True
+                ItemHeight = 13
+                Items.Strings = (
+                  'Sim'
+                  'N'#227'o')
+                TabOrder = 6
+                Values.Strings = (
+                  'S'
+                  'N')
+              end
             end
           end
           inherited PanelMaster: TPanel
@@ -501,6 +537,12 @@ inherited FormCadastroOperacaoCaixa: TFormCadastroOperacaoCaixa
     object SQLTemplateOPCXCOPINTERNA: TStringField
       FieldName = 'OPCXCOPINTERNA'
       Origin = 'DB.OPERACAOCAIXA.OPCXCOPINTERNA'
+      FixedChar = True
+      Size = 1
+    end
+    object SQLTemplateIMPRIMIR_RESUMO: TStringField
+      FieldName = 'IMPRIMIR_RESUMO'
+      Origin = 'DB.OPERACAOCAIXA.IMPRIMIR_RESUMO'
       FixedChar = True
       Size = 1
     end

@@ -187,7 +187,7 @@ var
   CupomOk            : boolean ;
   VlrEstorn,
   Valor,
-  TotalDeb,TotalCred : Double ;
+  TotalDeb,TotalCred,ValorTotal : Double ;
   TipoRecEsc         : Variant ;
   Docum,
   OperCx,
@@ -764,6 +764,44 @@ begin
         end;
     end;
 
+  if (SQLOperacaoCaixaOPCXA5SIGLA.AsString = 'FECHA') then
+  begin
+    if Pergunta('SIM','Imprimir Fechamento?') then
+    begin
+      FormTelaItens.MemoRetornoNFE.Lines.Clear;
+      FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+      FormTelaItens.MemoRetornoNFE.Lines.Add('</ce><e>'+ComboOperacaoCaixa.Text+'</e>');
+      FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+      FormTelaItens.MemoRetornoNFE.Lines.Add('</ae></fn>Terminal: '+dm.SQLTerminalAtivoTERMA60DESCR.Value);
+      FormTelaItens.MemoRetornoNFE.Lines.Add('Usuario : '+dm.SQLUsuarioUSUAA60LOGIN.Value);
+      FormTelaItens.MemoRetornoNFE.Lines.Add('Impresso em '+FormatDateTime('dd/mm/yy hh:mm',now));
+      FormTelaItens.MemoRetornoNFE.Lines.Add('Obs: '+DBEditObs.Text);
+      FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+      FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+      ValorTotal := 0;
+      cdsValores.First;
+      while not cdsValores.eof do
+      begin
+        if cdsValoresValor.AsCurrency > 0 then
+        FormTelaItens.MemoRetornoNFE.Lines.Add('</ae></fn>'+cdsValoresDescricao.AsString+' '
+        + FormatFloat('R$ ##0.00',cdsValoresValor.Value));
+        ValorTotal := ValorTotal + cdsValoresValor.Value;
+        cdsValores.next;
+      end;
+      FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+      FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+      FormTelaItens.MemoRetornoNFE.Lines.Add('Valor Total: ' + FormatFloat('R$ ##0.00',ValorTotal));
+      FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+      FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+      FormTelaItens.MemoRetornoNFE.Lines.Add('</corte_parcial>');
+      dm.ACBrPosPrinter.Device.Desativar;
+      dm.ACBrPosPrinter.Device.Ativar;
+      dm.ACBrPosPrinter.Imprimir(FormTelaItens.MemoRetornoNFE.Lines.Text);
+      FormTelaItens.MemoRetornoNFE.Lines.Clear;
+      dm.ACBrPosPrinter.Device.Desativar;
+    end;
+  end;
+
   if (SQLOperacaoCaixaOPCXCAUTENTICA.Value = 'S') and (SQLOperacaoCaixaOPCXCSOLICVLR.Value = 'S') then //and (EditValor.Value > 0) then
     begin
       if ECFAtual <> '' then
@@ -783,18 +821,18 @@ begin
                     FormTelaItens.MemoRetornoNFE.Lines.Add('Obs: '+DBEditObs.Text);
                     FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
                     FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
-                    
+
                     if (SQLOperacaoCaixaOPCXA5SIGLA.Value = 'SANGR') or (SQLOperacaoCaixaOPCXA5SIGLA.Value = 'TROCO') then
                       FormTelaItens.MemoRetornoNFE.Lines.Add('</ce><e><n>Valor ' + FormatFloat('R$ ##0.00',EditValor.Value) + '</n></e>');
 
-                    cdsValores.First;
+                    {cdsValores.First;
                     while not cdsValores.eof do
                     begin
                       if cdsValoresValor.AsCurrency > 0 then
                       FormTelaItens.MemoRetornoNFE.Lines.Add('</ce><e><n>'+cdsValoresDescricao.AsString+' '
                         + FormatFloat('R$ ##0.00',cdsValoresValor.Value) + '</n></e>');
                       cdsValores.next;
-                    end;
+                    end;}
 
                     FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
                     FormTelaItens.MemoRetornoNFE.Lines.Add(' ');

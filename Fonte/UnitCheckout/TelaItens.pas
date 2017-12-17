@@ -4858,6 +4858,7 @@ begin
                     dm.ACBrNFe.NotasFiscais.Validar;
                     LblInstrucoes.Caption := 'Enviando ao Sefaz RS NFCe: ' + intToStr(NumNFe);
                     LblInstrucoes.Update;
+                    LblInstrucoes.Caption := 'Evento de retorno: ' + IntToStr(dm.ACBrNFe.WebServices.Consulta.cStat);
 
                     if not FileExists('COMUNICACAO_OFFLINE.TXT') then
                       dm.ACBrNFe.Enviar('1', False, False);
