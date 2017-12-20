@@ -270,6 +270,7 @@ type
     SQLClienteCreditoVALORCREDITO: TFloatField;
     SQLClienteCreditoVALORDEBITO: TFloatField;
     SQLClienteCreditoHISTORICO: TStringField;
+    edtSaldo: TCurrencyEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure EntradaDadosKeyDown(Sender: TObject; var Key: Word;
@@ -304,6 +305,7 @@ type
     DescTotVenda, ForcaDescTotVenda , FechandoVenda, SairRec, Gravou, SolicitarLiberacao : boolean ;
     DataVctoCartao : TDateTime;
     Dia,Mes,Ano,AnoVctoConvenio : Word;
+    procedure AtualizarSaldoEdit;
     procedure OnPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
     procedure GravarCaixaPrazo ;
     procedure GravarMontanteCaixa ;
@@ -1246,6 +1248,7 @@ begin
           EstadoFechVenda := InformandoValorNumerarioVista ;
           PreparaEstadoFech(EstadoFechVenda) ;
           EntradaDados.Text := FormatFloat('##0.00', ValorEntrada.Value - ValorRecebido.Value) ;
+          AtualizarSaldoEdit;
           EntradaDados.SelectAll ;
           exit ;
         end ;
@@ -1291,6 +1294,7 @@ begin
               if DM.SQLTemplate.EOF then
                 begin
                   ValorDevido := ValorEntrada.Value - ValorRecebido.Value ;
+                  AtualizarSaldoEdit;
                   SQLParcelasVistaVendaTemp.Last ;
                   NroIt := SQLParcelasVistaVendaTempNROITEM.Value + 1 ;
 
@@ -1319,6 +1323,7 @@ begin
                   SQLParcelasVistaVendaTemp.Open ;
 
                   ValorDevido := ValorEntrada.Value - ValorRecebido.Value ;
+                  AtualizarSaldoEdit;
 
                   SQLParcelasVistaVendaTemp.Edit ;
                  // SQLParcelasVistaVendaTempVALORPARC.Value := StrToFloat(EntradaDados.Text) - ValorDevido ;
@@ -1336,6 +1341,7 @@ begin
 
               ValorRecebido.Value := ValorRecebido.Value + StrToFloat(EntradaDados.Text) ;
               VarValorRecebido    := ValorRecebido.Value;
+              AtualizarSaldoEdit;
               EntradaDados.Clear ;
 
               if ValorRecebido.Value >= ValorEntrada.Value then
@@ -1728,6 +1734,7 @@ begin
             end ;
 
           ValorRecebido.Value := ValorRecebido.Value - SQLParcelasVistaVendaTempVALORPARC.Value ;
+          AtualizarSaldoEdit;
           VarValorRecebido    := ValorRecebido.Value;
           SQLParcelasVistaVendaTemp.Delete ;
 
@@ -3612,6 +3619,7 @@ begin
 
                           ValorEntrada.Value  := 0 ;
                           ValorRecebido.Value := 0 ;
+                          AtualizarSaldoEdit;
                           //LIMPAR PARCELAS A VISTA
                           DM.SQLTemplate.Close ;
                           DM.SQLTemplate.SQL.Clear ;
@@ -3657,6 +3665,7 @@ begin
 
                   ValorEntrada.Value  := 0 ;
                   ValorRecebido.Value := 0 ;
+                  AtualizarSaldoEdit;
                   //LIMPAR PARCELAS A VISTA
                   DM.SQLTemplate.Close ;
                   DM.SQLTemplate.SQL.Clear ;
@@ -3791,6 +3800,7 @@ begin
 
                 EntradaDados.Clear ;
                 ValorRecebido.Value  := 0;
+                AtualizarSaldoEdit;
                 ValorDescontoAcrescimo.Value := 0;
                 VlrAcresc := 0;
                 VlrJuro   := 0;
@@ -3885,9 +3895,11 @@ begin
                 PlanoVenda             := 0 ;
                 NumerarioPrazo         := 0 ;
 
+
                 ValorTotalVenda.Value := FormTelaItens.CurSubTotal.Value +
                                          VlrTxCrediario.Value -
                                          (VlrBonusTroca + VlrRetConfig_SldCad);
+                AtualizarSaldoEdit;                         
                 //LIMPAR PARCELAS A PRAZO
                 SQLParcelasPrazoVendaTemp.Close ;
                 DM.SQLTemplate.Close ;
@@ -4021,6 +4033,7 @@ begin
   if EstadoFechVenda = InformandoValorNumerarioVista then
   begin
     EntradaDados.Text := FormatFloat('###0.00', ValorEntrada.Value - ValorRecebido.Value) ;
+    AtualizarSaldoEdit;
     EntradaDados.SelectAll ;
     LblInstrucoes.Caption := 'Informe o Valor Recebido em ' + NumerarioVistaDescr ;
     LblInstrucoes.Refresh ;
@@ -6619,6 +6632,11 @@ begin
     shpStatusServidor.Brush.Color := clLime
   else
     shpStatusServidor.Brush.Color := clRed;
+end;
+
+procedure TFormTelaFechamentoVenda.AtualizarSaldoEdit;
+begin
+  edtSaldo.Text := FormatFloat('##0.00', ValorEntrada.Value - ValorRecebido.Value) ;
 end;
 
 end.

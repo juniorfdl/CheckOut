@@ -3325,6 +3325,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
         ParentFont = False
         ReadOnly = True
         TabOrder = 2
+        Visible = False
         OnEnter = ValorEntradaEnter
       end
       object ValorRecebido: TCurrencyEdit
@@ -3368,6 +3369,27 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
         ReadOnly = True
         TabOrder = 4
         OnEnter = ValorAcrescimoEnter
+      end
+      object edtSaldo: TCurrencyEdit
+        Left = 153
+        Top = 172
+        Width = 159
+        Height = 35
+        TabStop = False
+        Alignment = taCenter
+        AutoSize = False
+        Color = 14731440
+        Ctl3D = True
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clNavy
+        Font.Height = -24
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentCtl3D = False
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 5
+        OnEnter = ValorEntradaEnter
       end
     end
   end
