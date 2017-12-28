@@ -4845,11 +4845,39 @@ begin
                   if not FileExists('COMUNICACAO_OFFLINE.TXT') then
                     dm.ACBrNFe.Consultar(chave);
 
-                  if (FileExists('COMUNICACAO_OFFLINE.TXT')) or (dm.ACBrNFe.WebServices.Consulta.cStat <> 100) then//or (dm.ACBrNFe.WebServices.Consulta.cStat = 217)or (dm.ACBrNFe.WebServices.Consulta.cStat = 613) then
+                  if (dm.ACBrNFe.WebServices.Consulta.cStat = 613) or (dm.ACBrNFe.WebServices.Consulta.cStat = 539) then
+                  begin
+                    if dm.ACBrNFe.WebServices.Consulta.XMotivo <> '' then
+                    begin
+                      if pos('NF-e [', dm.ACBrNFe.WebServices.Consulta.XMotivo) > 0 then
+                      begin
+                        Chave := Copy(dm.ACBrNFe.WebServices.Consulta.XMotivo, pos('NF-e [', dm.ACBrNFe.WebServices.Consulta.XMotivo), 200);
+                        Chave := StringReplace(Chave, 'NF-e [', '', [rfReplaceAll, rfIgnoreCase]);
+                        Chave := StringReplace(Chave, ']', '', [rfReplaceAll]);
+                        FormTelaConsultaRapidaCupom.SQLCupom.Edit;
+                        FormTelaConsultaRapidaCupom.SQLCupomCHAVEACESSO.AsString := Chave;
+                        FormTelaConsultaRapidaCupom.SQLCupom.Post;
+                      end;
+                    end
+                    else if dm.ACBrNFe.WebServices.Consulta.protNFe.xMotivo <> '' then
+                    begin
+                      Chave := Copy(dm.ACBrNFe.WebServices.Consulta.XMotivo, pos('[chNFe:', dm.ACBrNFe.WebServices.Consulta.XMotivo), 200);
+                      Chave := StringReplace(Chave, '[chNFe:', '', [rfReplaceAll, rfIgnoreCase]);
+                      Chave := StringReplace(Chave, ']', '', [rfReplaceAll]);
+                      FormTelaConsultaRapidaCupom.SQLCupom.Edit;
+                      FormTelaConsultaRapidaCupom.SQLCupomCHAVEACESSO.AsString := Chave;
+                      FormTelaConsultaRapidaCupom.SQLCupom.Post;
+                    end;
+                  end;
+
+                  if (FileExists('COMUNICACAO_OFFLINE.TXT')) or (dm.ACBrNFe.WebServices.Consulta.cStat <> 100) then
+                      //or (dm.ACBrNFe.WebServices.Consulta.cStat = 217)or (dm.ACBrNFe.WebServices.Consulta.cStat = 613) then
                   begin
                               { Cria o arquivo XML }
                     sXML := Gerar_NFCe(IDReimprimir);
-                    chave := copy(dm.ACBrNFe.NotasFiscais.Items[0].NFe.infNFe.ID, (length(dm.ACBrNFe.NotasFiscais.Items[0].NFe.infNFe.ID) - 44) + 1, 44);
+                    if (dm.ACBrNFe.WebServices.Consulta.cStat <> 613)and(dm.ACBrNFe.WebServices.Consulta.cStat <> 613) then
+                      chave := copy(dm.ACBrNFe.NotasFiscais.Items[0].NFe.infNFe.ID, (length(dm.ACBrNFe.NotasFiscais.Items[0].NFe.infNFe.ID) - 44) + 1, 44);
+                      
                     LblInstrucoes.Caption := 'Assinando NFCe...' + intToStr(NumNFe);
                     LblInstrucoes.Update;
                     dm.ACBrNFe.NotasFiscais.Assinar;
