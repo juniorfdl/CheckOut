@@ -4857,6 +4857,20 @@ begin
                         FormTelaConsultaRapidaCupom.SQLCupom.Edit;
                         FormTelaConsultaRapidaCupom.SQLCupomCHAVEACESSO.AsString := Chave;
                         FormTelaConsultaRapidaCupom.SQLCupom.Post;
+
+                        if Chave <> '' then
+                        begin
+                          if dm.SQLCupom.IsEmpty then
+                          begin
+                            dm.SQLCupom.close;
+                            dm.SQLCupom.macrobyname('MFiltro').Value := 'CUPOA13ID = ''' + IDReimprimir + '''';
+                            dm.SQLCupom.Open;
+                          end;
+
+                          dm.SQLCupom.edit;
+                          dm.SQLCupomCHAVEACESSO.AsString := Chave;
+                          dm.SQLCupom.Post;
+                        end;
                       end;
                     end
                     else if dm.ACBrNFe.WebServices.Consulta.protNFe.xMotivo <> '' then
@@ -4864,9 +4878,21 @@ begin
                       Chave := Copy(dm.ACBrNFe.WebServices.Consulta.XMotivo, pos('[chNFe:', dm.ACBrNFe.WebServices.Consulta.XMotivo), 200);
                       Chave := StringReplace(Chave, '[chNFe:', '', [rfReplaceAll, rfIgnoreCase]);
                       Chave := StringReplace(Chave, ']', '', [rfReplaceAll]);
-                      FormTelaConsultaRapidaCupom.SQLCupom.Edit;
-                      FormTelaConsultaRapidaCupom.SQLCupomCHAVEACESSO.AsString := Chave;
-                      FormTelaConsultaRapidaCupom.SQLCupom.Post;
+
+                      if Chave <> '' then
+                      begin
+                        if dm.SQLCupom.IsEmpty then
+                        begin
+                          dm.SQLCupom.close;
+                          dm.SQLCupom.macrobyname('MFiltro').Value := 'CUPOA13ID = ''' + IDReimprimir + '''';
+                          dm.SQLCupom.Open;
+                        end;
+
+                        dm.SQLCupom.edit;
+                        dm.SQLCupomCHAVEACESSO.AsString := Chave;
+                        dm.SQLCupom.Post;
+                      end;
+
                     end;
                   end;
 
