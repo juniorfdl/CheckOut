@@ -230,11 +230,15 @@ begin
   Application.Title := 'Cupom Fiscal';
   Application.CreateForm(TDM, DM);
 
-  if (DM.OBSAutorizacao <> '') or (dm.SQLConfigGeralCFGECBLOQ.AsString = 'S') and(not DelphiAberto) then
+  if (DM.OBSAutorizacao <> '') or (dm.SQLConfigGeralCFGECBLOQ.AsString = 'S') then //and(not DelphiAberto) then
   begin
     FormTelaAtivacao := TFormTelaAtivacao.Create(Application);
     FormTelaAtivacao.ShowModal;
 
+    if (DM.vSEM_INTERNET)and((DM.DataSistema-DM.SQLConfigGeralDATA_INI_SEM_NET.AsDateTime) <= 7) then
+    begin
+    end
+    else
     if (dm.SQLConfigGeralCFGECBLOQ.AsString = 'S') then
     begin
       Application.terminate;

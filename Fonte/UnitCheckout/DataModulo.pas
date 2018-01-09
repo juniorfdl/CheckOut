@@ -1147,6 +1147,7 @@ type
     TblAPIAutorizacaoDATA_AUTORIZACAO: TDateField;
     TblAPIAutorizacaoOBS_AUTORIZACAO: TStringField;
     TblAPIAutorizacaoDIAS_AVISO: TStringField;
+    SQLConfigGeralDATA_INI_SEM_NET: TDateTimeField;
     procedure DataModuleCreate(Sender: TObject);
     procedure SQLCupomNewRecord(DataSet: TDataSet);
     procedure SQLCupomBeforePost(DataSet: TDataSet);
@@ -1169,6 +1170,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    vSEM_INTERNET:Boolean;
     CodTarefa,
     CodNextOrc,
     CodNextCupom,
@@ -1271,8 +1273,9 @@ begin
 end ;
 
 procedure TDM.DataModuleCreate(Sender: TObject);
-var IniFile: Tinifile;
-var DiaSemana : string;
+var
+  IniFile: Tinifile;
+  DiaSemana : string;
 begin
   inherited;
   FormSplash.lbDados.Caption := 'Abrindo Tabela de Filiais...'; FormSplash.lbDados.Update;
@@ -1320,7 +1323,7 @@ var
   Data: TDateTime;
   DiasVencimento: integer;
 begin
-
+  vSEM_INTERNET := False;
   OBSAutorizacao := '';
   if Dm.SQLConfigGeralCFGEDBLOQ.AsDateTime < DataSistema then
   begin
@@ -1328,6 +1331,14 @@ begin
   end;
 
   Dm.SQLConfigGeral.Edit;
+
+  if not vSEM_INTERNET then
+    Dm.SQLConfigGeralDATA_INI_SEM_NET.Clear
+  else begin
+    if Dm.SQLConfigGeralDATA_INI_SEM_NET.IsNull then
+      Dm.SQLConfigGeralDATA_INI_SEM_NET.AsDateTime := DataSistema;
+  end;
+
   if Dm.SQLConfigGeralCFGEDBLOQ.AsDateTime < DataSistema then
     Dm.SQLConfigGeralCFGECBLOQ.Value := 'S'
   else begin
@@ -1370,7 +1381,12 @@ begin
     try
       RestClient.Resource(xhttp).Accept(RestUtils.MediaType_Json).GetAsDataSet(cdsAPIAutorizacao);
     except
-      exit;
+      on E: Exception do
+      begin         
+        // E.message
+        vSEM_INTERNET := True;
+        exit;
+      end;
     end;
 
     if cdsAPIAutorizacao.Active then
@@ -1388,6 +1404,7 @@ begin
     end;
 
   finally
+    if not((DM.vSEM_INTERNET)and((DM.DataSistema-DM.SQLConfigGeralDATA_INI_SEM_NET.AsDateTime) <= 7)) then
     if (not cdsAPIAutorizacao.Active) or (cdsAPIAutorizacaoDATA_AUTORIZACAO.AsString = '') then
     begin
       FormTelaAtivacao := TFormTelaAtivacao.Create(Application);

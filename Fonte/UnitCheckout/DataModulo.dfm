@@ -1317,6 +1317,10 @@ inherited DM: TDM
     object SQLConfigGeralDIAS_AVISO: TIntegerField
       FieldName = 'DIAS_AVISO'
     end
+    object SQLConfigGeralDATA_INI_SEM_NET: TDateTimeField
+      FieldName = 'DATA_INI_SEM_NET'
+      Origin = 'DB.CONFIGGERAL.DATA_INI_SEM_NET'
+    end
   end
   object MemCtRecParc: TTable
     DatabaseName = 'Easy_Temp'
@@ -4817,7 +4821,7 @@ inherited DM: TDM
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 0
     PrinterSetup.mmPaperWidth = 0
-    PrinterSetup.PaperSize = 9
+    PrinterSetup.PaperSize = 0
     DeviceType = 'Screen'
     OutlineSettings.CreateNode = True
     OutlineSettings.CreatePageNodes = True
