@@ -325,6 +325,7 @@ type
 
   private
     { Private declarations }
+    vNaoPedeMaisParaFechar:Boolean;
     WNumItem, ItemCancelado: integer;
     FormatStrQuant, FormatStrVlrVenda,
       InfDesc,
@@ -5142,12 +5143,22 @@ begin
       end;
     end
     else
-      if DM.SQLTemplate.FieldByName('TERMDSTATUSCAIXA').Value <> StrToDate(TerminalAtualData) then
+      if (DM.SQLTemplate.FieldByName('TERMDSTATUSCAIXA').Value <> StrToDate(TerminalAtualData))and(not vNaoPedeMaisParaFechar) then
       begin
-        InformaG('O Caixa não foi fechado em ' + DM.SQLTemplate.FieldByName('TERMDSTATUSCAIXA').AsString);
+        if dm.SQLConfigGeralNAO_OBRIGA_FECHAR_CAIXA.asstring = 'S' then
+        begin
+          if Pergunta('SIM', 'O Caixa não foi fechado em ' + DM.SQLTemplate.FieldByName('TERMDSTATUSCAIXA').AsString
+            +#13+'Deseja fechar agora?') then
+            VerCaixa := True
+          else vNaoPedeMaisParaFechar:= True;  
+        end
+        else begin
+          InformaG('O Caixa não foi fechado em ' + DM.SQLTemplate.FieldByName('TERMDSTATUSCAIXA').AsString);
+          VerCaixa := True;
+        end;
+
         EntradaDados.SelectAll;
         TerminalAtualData := DM.SQLTemplate.FieldByName('TERMDSTATUSCAIXA').AsString;
-        VerCaixa := True;
       end;
 
     if VerCaixa then
@@ -5157,7 +5168,7 @@ begin
       FormTelaMovimentoCaixa.EditData.Text := TerminalAtualData;
       FormTelaMovimentoCaixa.ShowModal;
       VoltaParaEntradaDados;
-    end;
+    end;                                                                 
   end;
 end;
 

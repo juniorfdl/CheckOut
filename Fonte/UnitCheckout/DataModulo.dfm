@@ -1321,6 +1321,11 @@ inherited DM: TDM
       FieldName = 'DATA_INI_SEM_NET'
       Origin = 'DB.CONFIGGERAL.DATA_INI_SEM_NET'
     end
+    object SQLConfigGeralNAO_OBRIGA_FECHAR_CAIXA: TStringField
+      FieldName = 'NAO_OBRIGA_FECHAR_CAIXA'
+      ProviderFlags = [pfInUpdate]
+      Size = 1
+    end
   end
   object MemCtRecParc: TTable
     DatabaseName = 'Easy_Temp'

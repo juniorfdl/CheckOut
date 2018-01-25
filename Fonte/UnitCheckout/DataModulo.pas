@@ -1148,6 +1148,7 @@ type
     TblAPIAutorizacaoOBS_AUTORIZACAO: TStringField;
     TblAPIAutorizacaoDIAS_AVISO: TStringField;
     SQLConfigGeralDATA_INI_SEM_NET: TDateTimeField;
+    SQLConfigGeralNAO_OBRIGA_FECHAR_CAIXA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure SQLCupomNewRecord(DataSet: TDataSet);
     procedure SQLCupomBeforePost(DataSet: TDataSet);

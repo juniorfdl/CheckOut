@@ -102,6 +102,9 @@ type
     cdsValoresDescricao: TStringField;
     cxGrid1DBTableView1Descricao: TcxGridDBColumn;
     cxGrid1DBTableView1Valor: TcxGridDBColumn;
+    SQLFechamento: TRxQuery;
+    SQLFechamentoDEBITO: TFloatField;
+    SQLFechamentoCREDITO: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDeactivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -202,6 +205,7 @@ var
   nTotResumo, nTotalResu : Double;
   cForma, ValorSTR : String;
   Dia, Mes, Ano : Word;
+  vAux : Double;
 begin
   UsuarioAutorizouOperacao := '';
 
@@ -764,11 +768,18 @@ begin
           Exit;
         end;
     end;
-
+  ValorTotal := 0;
   if (SQLOperacaoCaixaOPCXA5SIGLA.AsString = 'FECHA') then
   begin
     if Pergunta('SIM','Imprimir Fechamento?') then
     begin
+      SQLFechamento.Close;
+      SQLFechamento.SQL.Clear;
+      SQLFechamento.SQL.Add('select sum(MVCXN2VLRDEB) DEBITO, sum(MVCXN2VLRCRED) CREDITO from MOVIMENTOCAIXA');
+      SQLFechamento.SQL.Add(' where MVCXDMOV = "' + FormatDateTime('mm/dd/yyyy', EditData.Date) + '"');
+      SQLFechamento.SQL.Add('and OPCXICOD = 3');
+      SQLFechamento.Open;
+      ValorTotal := ValorTotal + SQLFechamentoDEBITO.AsFloat;
       FormTelaItens.MemoRetornoNFE.Lines.Clear;
       FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
       FormTelaItens.MemoRetornoNFE.Lines.Add('</ce><e>'+ComboOperacaoCaixa.Text+'</e>');
@@ -779,7 +790,8 @@ begin
       FormTelaItens.MemoRetornoNFE.Lines.Add('Obs: '+DBEditObs.Text);
       FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
       FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
-      ValorTotal := 0;
+      FormTelaItens.MemoRetornoNFE.Lines.Add('</ae></fn>' + 'Sangria ' + FormatFloat('R$ ##0.00',SQLFechamentoDEBITO.AsFloat));
+      FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
       cdsValores.First;
       while not cdsValores.eof do
       begin
