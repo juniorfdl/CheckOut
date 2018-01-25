@@ -191,7 +191,8 @@ uses
   TelaSelecaoProduto in '..\ArquivosComuns\TelaSelecaoProduto.pas' {FormTelaSelecaoProduto},
   CadastroProdutos in '..\ArquivosComuns\CadastroProdutos.pas' {FormCadastroProduto},
   JsonToDataSetConverter in '..\..\..\Program Files (x86)\Borland\Componentes\rest-client-api\src\JsonToDataSetConverter.pas',
-  ACBrNFeDANFeESCPOS in '..\..\..\..\..\Acbr\trunk2\Fontes\ACBrDFe\ACBrNFe\DANFE\NFCe\EscPos\ACBrNFeDANFeESCPOS.pas';
+  ACBrNFeDANFeESCPOS in '..\..\..\..\..\Acbr\trunk2\Fontes\ACBrDFe\ACBrNFe\DANFE\NFCe\EscPos\ACBrNFeDANFeESCPOS.pas',
+  TelaItensCrediario in 'TelaItensCrediario.pas' {FormTelaItensCrediario};
 
 {$R *.RES}
 
@@ -229,7 +230,6 @@ begin
   F12 := Vk_F12;
   Application.Title := 'Cupom Fiscal';
   Application.CreateForm(TDM, DM);
-
   if (DM.OBSAutorizacao <> '') or (dm.SQLConfigGeralCFGECBLOQ.AsString = 'S') and(not DelphiAberto) then
   begin
     FormTelaAtivacao := TFormTelaAtivacao.Create(Application);

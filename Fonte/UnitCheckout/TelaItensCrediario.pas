@@ -15,9 +15,9 @@ type
     SQLItemDOCUMENTO: TStringField;
     SQLItemCUPOM: TIntegerField;
     SQLItemPRODICOD: TIntegerField;
-    SQLItemQTDE: TBCDField;
-    SQLItemVLRUNIT: TBCDField;
-    SQLItemVLRDESC: TBCDField;
+    SQLItemQTDE: TFloatField;
+    SQLItemVLRUNIT: TFloatField;
+    SQLItemVLRDESC: TFloatField;
     SQLItemSTATUS: TStringField;
     SQLItemEMPRICOD: TIntegerField;
     SQLItemCLIEA13ID: TStringField;
