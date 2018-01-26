@@ -250,23 +250,17 @@ object FormTelaItensCrediario: TFormTelaItensCrediario
       DisplayLabel = 'Produto'
       FieldName = 'PRODICOD'
     end
-    object SQLItemQTDE: TBCDField
+    object SQLItemQTDE: TFloatField
       DisplayLabel = 'Qtde'
       FieldName = 'QTDE'
-      Precision = 15
-      Size = 3
     end
-    object SQLItemVLRUNIT: TBCDField
+    object SQLItemVLRUNIT: TFloatField
       DisplayLabel = 'Valor Unit'
       FieldName = 'VLRUNIT'
-      Precision = 15
-      Size = 3
     end
-    object SQLItemVLRDESC: TBCDField
+    object SQLItemVLRDESC: TFloatField
       DisplayLabel = 'Desconto'
       FieldName = 'VLRDESC'
-      Precision = 15
-      Size = 3
     end
     object SQLItemSTATUS: TStringField
       DisplayLabel = 'Status'
