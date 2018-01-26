@@ -1713,6 +1713,7 @@ begin
               EnviaTecladoTextoDisplay65('Atencao!', 'Procurar pela Descricao do Produto');
             Application.CreateForm(TFormTelaConsultaRapidaItem, FormTelaConsultaRapidaItem);
             FormTelaConsultaRapidaItem.ShowModal;
+			
             if FormTelaConsultaRapidaItem.ModalResult = MrOk then
             begin
               SQLProduto.Close;
