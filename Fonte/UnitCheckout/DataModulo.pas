@@ -1373,7 +1373,7 @@ begin
   cdsAPIAutorizacao.Close;
   cdsAPIAutorizacao.CreateDataSet;
 
-  xhttp := 'http://200.98.202.84/Automafour/api/cad_pessoa/documento/'
+  xhttp := 'http://200.98.170.118/Automafour/api/cad_pessoa/documento/'
     + Dm.SQLEmpresaEMPRA14CGC.AsString;
 
   //xhttp:= 'http://localhost:51308/api/cad_pessoa/documento/83125841020';
