@@ -1444,7 +1444,6 @@ begin
         if not CancelarCupomFiscal(ECFAtual, PortaECFAtual) then
           InformaG('Problemas ao Cancelar Cupom Fiscal');
       end;
-
     end;
   end;
 
@@ -1589,6 +1588,20 @@ begin
 
         EntradaDados.Clear;
       end;
+    end;
+
+    if EntradaDados.Text <> '' then
+    begin
+      DM.SQLTemplate.Close;
+      DM.SQLTemplate.SQL.Clear;
+      DM.SQLTemplate.SQL.Add('select PRODUTO.PESAGEM_AUTOMATICA');
+      DM.SQLTemplate.SQL.Add('from PRODUTO');
+      DM.SQLTemplate.SQL.Add('where PRODUTO.PRODICOD = ' + EntradaDados.Text);
+      DM.SQLTemplate.Open;
+
+      Q := 81;
+      if DM.SQLTemplate.FieldByName('PESAGEM_AUTOMATICA').AsString = 'S' then
+        FormKeyDown(Sender, Q, [ssCtrl]);
     end;
 
     {* * * * INFORMADO ITENS * * * *}
@@ -1767,7 +1780,7 @@ begin
       begin
         DM.SQLTemplate.Close;
         DM.SQLTemplate.SQL.Clear;
-        DM.SQLTemplate.SQL.Add('select PRODUTO.PRODICOD, PRODUTO.PRODCVDESTNEG, ');
+        DM.SQLTemplate.SQL.Add('select PRODUTO.PESAGEM_AUTOMATICA, PRODUTO.PRODICOD, PRODUTO.PRODCVDESTNEG, ');
         DM.SQLTemplate.SQL.Add('(select PRODUTOSALDO.PSLDN3QTDE from PRODUTOSALDO');
         DM.SQLTemplate.SQL.Add('where PRODUTOSALDO.EMPRICOD = ' + EmpresaPadrao);
         DM.SQLTemplate.SQL.Add('and   PRODUTOSALDO.PRODICOD = PRODUTO.PRODICOD) as QUANT');
@@ -1780,6 +1793,7 @@ begin
 //        LBSaldo.Caption := FormatFloat('##0.000', DM.SQLTemplate.FieldByName('QUANT').Value);
 //        LBSaldo.Update;
         end;
+
 //        else
 //        begin
 //          LBSaldo.Caption := 'Saldo: Não Consta';

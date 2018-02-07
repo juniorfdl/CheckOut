@@ -22,7 +22,7 @@ const
   ScreenWidth : Longint  = 800 ;
   ScreenHeight : Longint = 600 ;
 var
-  Enter,Esc,F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12 : Word;
+  Enter,Esc,F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12,Q : Word;
   WBookmark         : TBookmark ;
   VarCriaNovaNota,
   DelContrLista,
