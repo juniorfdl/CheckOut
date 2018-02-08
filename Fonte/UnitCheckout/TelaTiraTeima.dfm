@@ -4371,6 +4371,21 @@ object FormTelaTiraTeima: TFormTelaTiraTeima
       ParentColor = False
       ParentFont = False
     end
+    object btnBuscarEstoqueFiliais: TFlatSpeedButton
+      Left = 227
+      Top = 215
+      Width = 176
+      Height = 35
+      Caption = 'Consultar Estoque Filiais'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      Layout = blGlyphLeft
+      ParentFont = False
+      OnClick = btnBuscarEstoqueFiliaisClick
+    end
     object PrecoNormal: TCurrencyEdit
       Left = 10
       Top = 141
@@ -4517,10 +4532,142 @@ object FormTelaTiraTeima: TFormTelaTiraTeima
       TabOrder = 0
     end
   end
+  object pnlEstoqueEmpresas: TAdvSmoothPanel
+    Left = 8
+    Top = 224
+    Width = 153
+    Height = 276
+    Cursor = crDefault
+    Caption.HTMLFont.Charset = DEFAULT_CHARSET
+    Caption.HTMLFont.Color = clWindowText
+    Caption.HTMLFont.Height = -11
+    Caption.HTMLFont.Name = 'Tahoma'
+    Caption.HTMLFont.Style = []
+    Caption.Font.Charset = DEFAULT_CHARSET
+    Caption.Font.Color = clWindowText
+    Caption.Font.Height = -16
+    Caption.Font.Name = 'Tahoma'
+    Caption.Font.Style = []
+    Caption.ColorStart = 11563548
+    Caption.ColorEnd = 10446362
+    Caption.Line = False
+    Fill.Color = 16445929
+    Fill.ColorTo = 15587527
+    Fill.ColorMirror = 15587527
+    Fill.ColorMirrorTo = 16773863
+    Fill.GradientMirrorType = gtVertical
+    Fill.BorderColor = 14922381
+    Fill.Rounding = 10
+    Fill.ShadowColor = 3355443
+    Fill.ShadowOffset = 10
+    Version = '1.0.9.0'
+    Visible = False
+    TabOrder = 4
+    object btnFecharEstoqueEmpresas: TFlatSpeedButton
+      Left = 754
+      Top = 6
+      Width = 53
+      Height = 22
+      Caption = 'Fechar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      Layout = blGlyphLeft
+      ParentFont = False
+      OnClick = btnFecharEstoqueEmpresasClick
+    end
+    object RxLabel4: TRxLabel
+      Left = 6
+      Top = 3
+      Width = 136
+      Height = 27
+      Caption = 'Estoque Filiais'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clRed
+      Font.Height = -21
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      Layout = tlBottom
+      ParentFont = False
+      ShadowColor = clBlack
+      ShadowSize = 2
+      ShadowPos = spRightBottom
+      Transparent = True
+    end
+    object cxGrid1: TcxGrid
+      Left = 7
+      Top = 32
+      Width = 800
+      Height = 226
+      TabOrder = 0
+      object cxGrid1DBTableView1: TcxGridDBTableView
+        NavigatorButtons.ConfirmDelete = False
+        DataController.DataSource = dsEstoqueEmpresas
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        OptionsData.CancelOnExit = False
+        OptionsData.Deleting = False
+        OptionsData.DeletingConfirmation = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
+        OptionsView.GroupByBox = False
+        OptionsView.Header = False
+        object cxGrid1DBTableView1Nome: TcxGridDBColumn
+          DataBinding.FieldName = 'Nome'
+          Styles.Content = cxStyle1
+          Width = 511
+        end
+        object cxGrid1DBTableView1Qtde: TcxGridDBColumn
+          DataBinding.FieldName = 'Qtde'
+          Styles.Content = cxStyle1
+          Width = 157
+        end
+      end
+      object cxGrid1Level1: TcxGridLevel
+        GridView = cxGrid1DBTableView1
+      end
+    end
+  end
   object TimerTiraTela: TTimer
+    Enabled = False
     Interval = 3000
     OnTimer = TimerTiraTelaTimer
     Left = 216
     Top = 12
+  end
+  object cdsEstoqueEmpresas: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 568
+    Top = 204
+    object cdsEstoqueEmpresasNome: TStringField
+      DisplayLabel = 'Filial'
+      FieldName = 'Nome'
+      Size = 150
+    end
+    object cdsEstoqueEmpresasQtde: TFloatField
+      DisplayLabel = 'Quantidade'
+      FieldName = 'Qtde'
+      DisplayFormat = '0.,00##'
+    end
+  end
+  object dsEstoqueEmpresas: TDataSource
+    DataSet = cdsEstoqueEmpresas
+    Left = 400
+    Top = 216
+  end
+  object cxStyleRepository1: TcxStyleRepository
+    PixelsPerInch = 96
+    object cxStyle1: TcxStyle
+      AssignedValues = [svFont]
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+    end
   end
 end
