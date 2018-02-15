@@ -1590,7 +1590,7 @@ begin
       end;
     end;
 
-    if EntradaDados.Text <> '' then
+    if (EntradaDados.Text <> '') and (IsNumeric(EntradaDados.Text, 'Integer')) then
     begin
       DM.SQLTemplate.Close;
       DM.SQLTemplate.SQL.Clear;
