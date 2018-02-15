@@ -106,8 +106,7 @@ begin
    else
      dsSQLItens.DataSet.DataSource.DataSet.FieldByName('TRFECDIVERG').AsString := 'N';
 
-   dsSQLItens.DataSet.DataSource.DataSet.Post;
-
+   dsSQLItens.DataSet.DataSource.DataSet.Post;  
 
    DestroyWindow;
    if Divergencias.Count > 0 then

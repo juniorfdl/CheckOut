@@ -1,6 +1,6 @@
 inherited FormTelaTransferencia: TFormTelaTransferencia
-  Left = 357
-  Top = 33
+  Left = 121
+  Top = 74
   Width = 880
   Height = 579
   Caption = 'Transfer'#234'ncia Produtos'
@@ -21,7 +21,7 @@ inherited FormTelaTransferencia: TFormTelaTransferencia
         Top = 0
         Width = 730
         Height = 463
-        ActivePage = TabSheetGerarTransferencia
+        ActivePage = TabTransfGerada
         Align = alClient
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -1173,7 +1173,7 @@ inherited FormTelaTransferencia: TFormTelaTransferencia
         end
         object ckGrade: TCheckBox
           Left = 7
-          Top = 417
+          Top = 380
           Width = 116
           Height = 17
           Caption = 'Abrir Tela de Grade'
@@ -1184,6 +1184,24 @@ inherited FormTelaTransferencia: TFormTelaTransferencia
           Font.Style = []
           ParentFont = False
           TabOrder = 5
+        end
+        object rgOnOff: TRadioGroup
+          Left = 6
+          Top = 396
+          Width = 114
+          Height = 58
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ItemIndex = 0
+          Items.Strings = (
+            'OffLine'
+            'OnLine')
+          ParentFont = False
+          TabOrder = 6
+          OnClick = rgOnOffClick
         end
       end
     end
@@ -2569,7 +2587,7 @@ inherited FormTelaTransferencia: TFormTelaTransferencia
       'Select * from NotaFiscal')
     Macros = <>
     Left = 32
-    Top = 408
+    Top = 352
     object SQLNotaFiscalNOFIA13ID: TStringField
       Tag = 2
       FieldName = 'NOFIA13ID'
@@ -2991,7 +3009,7 @@ inherited FormTelaTransferencia: TFormTelaTransferencia
         Value = '0=0'
       end>
     Left = 61
-    Top = 408
+    Top = 352
     object SQLNotaFiscalItemNOFIA13ID: TStringField
       FieldName = 'NOFIA13ID'
       Origin = 'DB.NOTAFISCALITEM.NOFIA13ID'
@@ -3165,7 +3183,7 @@ inherited FormTelaTransferencia: TFormTelaTransferencia
         Value = '0=0'
       end>
     Left = 32
-    Top = 445
+    Top = 389
     object SQLSerieNFSERIA5COD: TStringField
       FieldName = 'SERIA5COD'
       Origin = 'DB.SERIE.SERIA5COD'
@@ -3194,7 +3212,7 @@ inherited FormTelaTransferencia: TFormTelaTransferencia
   object DSSQLSerieNF: TDataSource
     DataSet = SQLSerieNF
     Left = 60
-    Top = 445
+    Top = 389
   end
   object crpSemCusto: TCrpe
     About = 'Version and Credits...'
@@ -3362,6 +3380,221 @@ inherited FormTelaTransferencia: TFormTelaTransferencia
     object ImportarBematechDC20001: TMenuItem
       Caption = 'Importar Produtos do Coletor Bematech DC2000'
       OnClick = ImportarBematechDC20001Click
+    end
+  end
+  object cdsTranferenciaOnline: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    BeforePost = cdsTranferenciaOnlineBeforePost
+    Left = 198
+    Top = 222
+    object cdsTranferenciaOnlineTRFEA13ID: TStringField
+      Tag = 2
+      DisplayLabel = 'ID'
+      FieldName = 'TRFEA13ID'
+      Origin = 'DB.TRANSFERENCIA.TRFEA13ID'
+      FixedChar = True
+      Size = 13
+    end
+    object cdsTranferenciaOnlineEMPRICOD: TIntegerField
+      DisplayLabel = 'Empresa Origem'
+      FieldName = 'EMPRICOD'
+      Origin = 'DB.TRANSFERENCIA.EMPRICOD'
+    end
+    object cdsTranferenciaOnlineTERMICOD: TIntegerField
+      DisplayLabel = 'Terminal'
+      FieldName = 'TERMICOD'
+      Origin = 'DB.TRANSFERENCIA.TERMICOD'
+    end
+    object cdsTranferenciaOnlineTRFEICOD: TIntegerField
+      Tag = 1
+      DisplayLabel = 'C'#243'd'
+      FieldName = 'TRFEICOD'
+      Origin = 'DB.TRANSFERENCIA.TRFEICOD'
+    end
+    object cdsTranferenciaOnlineTRFEIEMPRDEST: TIntegerField
+      DisplayLabel = 'Empresa Destino'
+      FieldName = 'TRFEIEMPRDEST'
+      Origin = 'DB.TRANSFERENCIA.TRFEIEMPRDEST'
+    end
+    object cdsTranferenciaOnlineTRFEDEMISSAO: TDateTimeField
+      DisplayLabel = 'Emiss'#227'o'
+      FieldName = 'TRFEDEMISSAO'
+      Origin = 'DB.TRANSFERENCIA.TRFEDEMISSAO'
+      DisplayFormat = 'dd/mm/yyyy'
+    end
+    object cdsTranferenciaOnlineTRFEDRECEBIMENTO: TDateTimeField
+      DisplayLabel = 'Recebimento'
+      FieldName = 'TRFEDRECEBIMENTO'
+      Origin = 'DB.TRANSFERENCIA.TRFEDRECEBIMENTO'
+      DisplayFormat = 'dd/mm/yyyy'
+    end
+    object cdsTranferenciaOnlineTRFECRECEBIDO: TStringField
+      DisplayLabel = 'Recebido'
+      FieldName = 'TRFECRECEBIDO'
+      Origin = 'DB.TRANSFERENCIA.TRFECRECEBIDO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsTranferenciaOnlineTRFEA30USUENVIO: TStringField
+      DisplayLabel = 'Usu'#225'rio Envio'
+      FieldName = 'TRFEA30USUENVIO'
+      Origin = 'DB.TRANSFERENCIA.TRFEA30USUENVIO'
+      FixedChar = True
+      Size = 30
+    end
+    object cdsTranferenciaOnlineTRFEA30USURECEB: TStringField
+      DisplayLabel = 'Usu'#225'rio Recebimento'
+      FieldName = 'TRFEA30USURECEB'
+      Origin = 'DB.TRANSFERENCIA.TRFEA30USURECEB'
+      FixedChar = True
+      Size = 30
+    end
+    object cdsTranferenciaOnlineREGISTRO: TDateTimeField
+      DisplayLabel = 'Dt Registro'
+      FieldName = 'REGISTRO'
+      Origin = 'DB.TRANSFERENCIA.REGISTRO'
+    end
+    object cdsTranferenciaOnlinePENDENTE: TStringField
+      DisplayLabel = 'Pendente'
+      FieldName = 'PENDENTE'
+      Origin = 'DB.TRANSFERENCIA.PENDENTE'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsTranferenciaOnlineEmpresaRemetente: TStringField
+      DisplayLabel = 'Empresa Remetente'
+      FieldKind = fkLookup
+      FieldName = 'EmpresaRemetente'
+      LookupDataSet = SQLEmpresaDestino
+      LookupKeyFields = 'EMPRICOD'
+      LookupResultField = 'EMPRA60RAZAOSOC'
+      KeyFields = 'EMPRICOD'
+      Size = 60
+      Lookup = True
+    end
+    object cdsTranferenciaOnlineEmpresaDestino: TStringField
+      DisplayLabel = 'Empresa Destino'
+      FieldKind = fkLookup
+      FieldName = 'EmpresaDestino'
+      LookupDataSet = SQLEmpresaDestino
+      LookupKeyFields = 'EMPRICOD'
+      LookupResultField = 'EMPRA60RAZAOSOC'
+      KeyFields = 'TRFEIEMPRDEST'
+      Size = 60
+      Lookup = True
+    end
+    object cdsTranferenciaOnlineTRFECDIVERG: TStringField
+      FieldName = 'TRFECDIVERG'
+      Origin = 'DB.TRANSFERENCIA.TRFECDIVERG'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsTranferenciaOnlineEMPRICODORIGEM: TIntegerField
+      FieldName = 'EMPRICODORIGEM'
+      Origin = 'DB.TRANSFERENCIA.EMPRICODORIGEM'
+    end
+  end
+  object cdsTranferenciaItemOnline: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    BeforePost = cdsTranferenciaItemOnlineBeforePost
+    Left = 262
+    Top = 222
+    object cdsTranferenciaItemOnlineTRFEA13ID: TStringField
+      DisplayLabel = 'ID'
+      FieldName = 'TRFEA13ID'
+      Origin = 'DB.TRANSFERENCIAITEM.TRFEA13ID'
+      FixedChar = True
+      Size = 13
+    end
+    object cdsTranferenciaItemOnlineTRITICOD: TIntegerField
+      Tag = 1
+      DisplayLabel = 'Item'
+      FieldName = 'TRITICOD'
+      Origin = 'DB.TRANSFERENCIAITEM.TRITICOD'
+    end
+    object cdsTranferenciaItemOnlinePRODICOD: TIntegerField
+      DisplayLabel = 'Produto'
+      FieldName = 'PRODICOD'
+      Origin = 'DB.TRANSFERENCIAITEM.PRODICOD'
+    end
+    object cdsTranferenciaItemOnlineTRITN3QTDEENVIADA: TFloatField
+      DisplayLabel = 'Qtde Enviada'
+      FieldName = 'TRITN3QTDEENVIADA'
+      Origin = 'DB.TRANSFERENCIAITEM.TRITN3QTDEENVIADA'
+      DisplayFormat = '#,###0.000'
+    end
+    object cdsTranferenciaItemOnlineTRITN3QTDERECEBIDA: TFloatField
+      DisplayLabel = 'Qtde Recebida'
+      FieldName = 'TRITN3QTDERECEBIDA'
+      Origin = 'DB.TRANSFERENCIAITEM.TRITN3QTDERECEBIDA'
+      DisplayFormat = '#,###0.000'
+    end
+    object cdsTranferenciaItemOnlineTRITA254DIVERGENCIA: TStringField
+      DisplayLabel = 'Divergencia'
+      FieldName = 'TRITA254DIVERGENCIA'
+      Origin = 'DB.TRANSFERENCIAITEM.TRITA254DIVERGENCIA'
+      FixedChar = True
+      Size = 100
+    end
+    object cdsTranferenciaItemOnlineREGISTRO: TDateTimeField
+      DisplayLabel = 'Registro'
+      FieldName = 'REGISTRO'
+      Origin = 'DB.TRANSFERENCIAITEM.REGISTRO'
+    end
+    object cdsTranferenciaItemOnlinePENDENTE: TStringField
+      DisplayLabel = 'Pendente'
+      FieldName = 'PENDENTE'
+      Origin = 'DB.TRANSFERENCIAITEM.PENDENTE'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsTranferenciaItemOnlineClassFiscal: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'ClassFiscal'
+      Size = 60
+      Calculated = True
+    end
+    object cdsTranferenciaItemOnlineMarca: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'Marca'
+      Size = 60
+      Calculated = True
+    end
+    object cdsTranferenciaItemOnlineUnidade: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'Unidade'
+      Size = 60
+      Calculated = True
+    end
+    object cdsTranferenciaItemOnlineProdutoLookup: TStringField
+      DisplayLabel = 'Produto'
+      FieldKind = fkCalculated
+      FieldName = 'ProdutoLookup'
+      Size = 100
+      Calculated = True
+    end
+    object cdsTranferenciaItemOnlineReferencia: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'Referencia'
+      Size = 60
+      Calculated = True
+    end
+    object cdsTranferenciaItemOnlineCodBarras: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'CodBarras'
+      Size = 60
+      Calculated = True
+    end
+    object cdsTranferenciaItemOnlineTRITN3VLRCUSTO: TFloatField
+      FieldName = 'TRITN3VLRCUSTO'
+      Origin = 'DB.TRANSFERENCIAITEM.TRITN3VLRCUSTO'
+    end
+    object cdsTranferenciaItemOnlineCUPOA13ID: TStringField
+      FieldName = 'CUPOA13ID'
+      Origin = 'DB.TRANSFERENCIAITEM.CUPOA13ID'
+      Size = 13
     end
   end
 end
