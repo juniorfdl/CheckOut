@@ -21,7 +21,7 @@ inherited FormTelaTransferencia: TFormTelaTransferencia
         Top = 0
         Width = 730
         Height = 463
-        ActivePage = TabTransfGerada
+        ActivePage = TabSheetGerarTransferencia
         Align = alClient
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -3499,6 +3499,7 @@ inherited FormTelaTransferencia: TFormTelaTransferencia
     Aggregates = <>
     Params = <>
     BeforePost = cdsTranferenciaItemOnlineBeforePost
+    OnCalcFields = cdsTranferenciaItemOnlineCalcFields
     Left = 262
     Top = 222
     object cdsTranferenciaItemOnlineTRFEA13ID: TStringField

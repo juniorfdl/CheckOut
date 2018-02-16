@@ -80,7 +80,7 @@ type
     class procedure Commit;
     Function Acesso(Modulo:String):Integer;
     Function ClausulaFiltro(Tabela:String;SQL:TRxQuery):String;
-    Procedure RegistraExclusao(Tabela:String;SQL:TRxQuery);
+    Procedure RegistraExclusao(Tabela:String;SQL:TDataSet);
     Function DigitVerifEAN(Cod:string) : string ;
     Function VerificaPonto(Valor:String):String;
     Function ObtemValor(Field:TField):String;
@@ -432,7 +432,7 @@ begin
   Campos.Close;
 End;
 
-Procedure TDMTemplate.RegistraExclusao(Tabela:String;SQL:TRxQuery);
+Procedure TDMTemplate.RegistraExclusao(Tabela:String;SQL:TDataSet);
 Var
   Proximo,Chave,Valores,Usuario:String;
 begin

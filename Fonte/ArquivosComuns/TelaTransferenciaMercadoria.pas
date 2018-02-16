@@ -433,6 +433,7 @@ type
     procedure rgOnOffClick(Sender: TObject);
     procedure cdsTranferenciaOnlineBeforePost(DataSet: TDataSet);
     procedure cdsTranferenciaItemOnlineBeforePost(DataSet: TDataSet);
+    procedure cdsTranferenciaItemOnlineCalcFields(DataSet: TDataSet);
 
   private
     { Private declarations }
@@ -657,10 +658,14 @@ begin
     end
   end;
 
-  SQLTranferencia.Close;
-  SQLTranferencia.MacroByName('MEmpresa').AsString := 'EMPRICOD = ' + EmpresaPadrao;
-  SQLTranferencia.MacroByName('MFiltro').AsString := 'TRFEA13ID IS NULL';
-  SQLTranferencia.Open;
+  if (rgOnOff.ItemIndex = 1)and(SQLTranferencia.MacroByName('MEmpresa').AsString = 'EMPRICOD = ' + EmpresaPadrao)
+    and SQLTranferencia.Active then
+  else begin
+    SQLTranferencia.Close;
+    SQLTranferencia.MacroByName('MEmpresa').AsString := 'EMPRICOD = ' + EmpresaPadrao;
+    SQLTranferencia.MacroByName('MFiltro').AsString := 'TRFEA13ID IS NULL';
+    SQLTranferencia.Open;
+  end;
 
   SQLTranferencia.Append;
   SQLTranferencia.Post;
@@ -904,9 +909,9 @@ begin
     RefazTabela(tblDadosTranferencia, tblDadosTranferencia.Name);
     tblDadosTranferencia.Open;
     tblDadosTranferencia.Append;
-    tblDadosTranferenciaTRFEA13ID.AsString := SQLTranferenciaTRFEA13ID.AsString;
-    tblDadosTranferenciaTRFEDEMISSAO.AsDateTime := SQLTranferenciaTRFEDEMISSAO.AsDateTime;
-    tblDadosTranferenciaTRFEA30USUENVIO.AsString := SQLTranferenciaTRFEA30USUENVIO.AsString;
+    tblDadosTranferenciaTRFEA13ID.AsString := DSSQLTranferencia.DataSet.FieldByName('TRFEA13ID').AsString;
+    tblDadosTranferenciaTRFEDEMISSAO.AsDateTime := DSSQLTranferencia.DataSet.FieldByName('TRFEDEMISSAO').AsDateTime;
+    tblDadosTranferenciaTRFEA30USUENVIO.AsString := DSSQLTranferencia.DataSet.FieldByName('TRFEA30USUENVIO').AsString;
 
     tblDadosTranferenciaRemtNome.AsString := SQLEmpresaRemetenteEMPRA60NOMEFANT.AsString;
     tblDadosTranferenciaRemtCnpj.AsString := SQLEmpresaRemetenteEMPRA14CGC.DisplayText;
@@ -938,24 +943,27 @@ begin
       tblTempTranferencia.CreateTable;
     end;
 
-    SQLTranferenciaItem.First;
-    while not SQLTranferenciaItem.Eof do
+    DSSQLTranferenciaItem.DataSet.First;
+    while not DSSQLTranferenciaItem.DataSet.Eof do
     begin
-      if not tblTempTranferencia.Active then tblTempTranferencia.Active := True;
+      if not tblTempTranferencia.Active then
+        tblTempTranferencia.Active := True;
+
       tblTempTranferencia.Append;
-      tblTempTranferenciaProdutoCod.Value := SQLTranferenciaItemPRODICOD.Value;
-      tblTempTranferenciaProdutoBarras.Value := SQLTranferenciaItemCodBarras.Value;
-      tblTempTranferenciaProdutoQtde.Value := SQLTranferenciaItemTRITN3QTDEENVIADA.Value;
-      tblTempTranferenciaProdutoNome.Value := SQLTranferenciaItemProdutoLookup.Value;
-      tblTempTranferenciaProdutoReferencia.Value := SQLTranferenciaItemReferencia.Value;
-      tblTempTranferenciaUnidade.Value := SQLTranferenciaItemUnidade.Value;
-      tblTempTranferenciaCUPOA13ID.Value := SQLTranferenciaItemCUPOA13ID.Value;
-      tblTempTranferenciaProdutoValorCusto.Value := SQLTranferenciaItemTRITN3VLRCUSTO.Value;
-      tblTempTranferenciaProdutoValorCustoTotal.Value := SQLTranferenciaItemTRITN3VLRCUSTO.Value * tblTempTranferenciaProdutoQtde.Value;
+      tblTempTranferenciaProdutoCod.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('PRODICOD').Value;
+      tblTempTranferenciaProdutoBarras.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('CodBarras').Value;
+      tblTempTranferenciaProdutoQtde.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('TRITN3QTDEENVIADA').Value;
+      tblTempTranferenciaProdutoNome.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('ProdutoLookup').Value;
+      tblTempTranferenciaProdutoReferencia.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('Referencia').Value;
+      tblTempTranferenciaUnidade.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('Unidade').Value;
+      tblTempTranferenciaCUPOA13ID.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('CUPOA13ID').Value;
+      tblTempTranferenciaProdutoValorCusto.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('TRITN3VLRCUSTO').Value;
+      tblTempTranferenciaProdutoValorCustoTotal.Value :=
+        DSSQLTranferenciaItem.DataSet.fieldbyname('TRITN3VLRCUSTO').Value * tblTempTranferenciaProdutoQtde.Value;
       tblTempTranferencia.Post;
-      SQLTranferenciaItem.Next;
+      DSSQLTranferenciaItem.DataSet.Next;
     end;
-    SQLTranferenciaItem.First;
+    DSSQLTranferenciaItem.DataSet.First;
 
     if CKImpMatricial.Checked then
       crpRelatorio.ReportName := DM.SQLConfigGeralCFGEA255PATHREPORT.AsString + '\Relatorio Transferencia-Envio Matricial.rpt'
@@ -1382,11 +1390,20 @@ var
   i: Integer;
 begin
   inherited;
+
+  if TButton(Sender).Name = 'Button1' then
+    PageControl.ActivePage := TabSheetGerarTransferencia
+  else
+  if TButton(Sender).Name = 'Button2' then
+    PageControl.ActivePage := TabTransfRecebida
+  else
+  if TButton(Sender).Name = 'Button3' then
+    PageControl.ActivePage := TabTransfGerada;
+
   if rgOnOff.ItemIndex = 0 then
   begin
     if TButton(Sender).Name = 'Button1' then
     begin
-      PageControl.ActivePage := TabSheetGerarTransferencia;
       SQLTranferencia.Close;
       SQLTranferencia.MacroByName('MEmpresa').AsString := 'EMPRICOD = ' + EmpresaPadrao;
       SQLTranferencia.MacroByName('MFiltro').AsString := 'TRFEA13ID IS NULL';
@@ -1395,7 +1412,6 @@ begin
 
     if TButton(Sender).Name = 'Button2' then
     begin
-      PageControl.ActivePage := TabTransfRecebida;
       SQLTranferencia.Close;
       SQLTranferencia.MacroByName('MEmpresa').AsString := 'TRFEIEMPRDEST = ' + EmpresaPadrao;
       SQLTranferencia.MacroByName('MFiltro').AsString := 'TRFECRECEBIDO = "N"';
@@ -1403,7 +1419,6 @@ begin
     end;
     if TButton(Sender).Name = 'Button3' then
     begin
-      PageControl.ActivePage := TabTransfGerada;
       SQLTranferencia.Close;
       SQLTranferencia.MacroByName('MEmpresa').AsString := 'EMPRICOD = ' + EmpresaPadrao;
       SQLTranferencia.MacroByName('MFiltro').AsString := 'TRFECRECEBIDO = "S"';
@@ -1425,9 +1440,9 @@ begin
     //Dados Trsnferencia e Empresas
   tblDadosTranferencia.Open;
   tblDadosTranferencia.Append;
-  tblDadosTranferenciaTRFEA13ID.AsString := SQLTranferenciaTRFEA13ID.AsString;
-  tblDadosTranferenciaTRFEDEMISSAO.AsDateTime := SQLTranferenciaTRFEDEMISSAO.AsDateTime;
-  tblDadosTranferenciaTRFEA30USUENVIO.AsString := SQLTranferenciaTRFEA30USUENVIO.AsString;
+  tblDadosTranferenciaTRFEA13ID.AsString := DSSQLTranferencia.DataSet.fieldbyname('TRFEA13ID').AsString;
+  tblDadosTranferenciaTRFEDEMISSAO.AsDateTime := DSSQLTranferencia.DataSet.fieldbyname('TRFEDEMISSAO').AsDateTime;
+  tblDadosTranferenciaTRFEA30USUENVIO.AsString := DSSQLTranferencia.DataSet.fieldbyname('TRFEA30USUENVIO').AsString;
   tblDadosTranferenciaDestNome.AsString := SQLEmpresaDestinoEMPRA60RAZAOSOC.AsString;
   tblDadosTranferenciaDestCnpj.AsString := SQLEmpresaDestinoEMPRA14CGC.DisplayText;
   tblDadosTranferenciaDestIE.AsString := SQLEmpresaDestinoEMPRA20IE.AsString;
@@ -1454,18 +1469,18 @@ begin
 
   tblTransferenciaDivergencias.Open;
 
-  SQLTranferenciaItem.First;
+  DSSQLTranferenciaItem.DataSet.First;
 
-  while not SQLTranferenciaItem.Eof do
+  while not DSSQLTranferenciaItem.DataSet.Eof do
   begin
     if not SQLTranferenciaItemTRITA254DIVERGENCIA.IsNull then
     begin
       tblTransferenciaDivergencias.Append;
       for I := 0 to tblTransferenciaDivergencias.FieldCount - 1 do
-        tblTransferenciaDivergencias.Fields.Fields[I].Value := SQLTranferenciaItem.FieldByName(tblTransferenciaDivergencias.Fields.Fields[I].FieldName).Value;
+        tblTransferenciaDivergencias.Fields.Fields[I].Value := DSSQLTranferenciaItem.DataSet.FieldByName(tblTransferenciaDivergencias.Fields.Fields[I].FieldName).Value;
       tblTransferenciaDivergencias.Post;
     end;
-    SQLTranferenciaItem.Next;
+    DSSQLTranferenciaItem.DataSet.Next;
   end;
 
   crpRelatorio.ReportName := DM.SQLConfigGeralCFGEA255PATHREPORT.AsString + '\Relatorio Transferencia-Divergencias.rpt';
@@ -1495,11 +1510,11 @@ begin
     RefazTabela(tblDadosTranferencia, tblDadosTranferencia.Name);
     tblDadosTranferencia.Open;
     tblDadosTranferencia.Append;
-    tblDadosTranferenciaTRFEA13ID.AsString := SQLTranferenciaTRFEA13ID.AsString;
-    tblDadosTranferenciaTRFEDEMISSAO.AsDateTime := SQLTranferenciaTRFEDEMISSAO.AsDateTime;
-    tblDadosTranferenciaTRFEA30USUENVIO.AsString := SQLTranferenciaTRFEA30USUENVIO.AsString;
+    tblDadosTranferenciaTRFEA13ID.AsString := DSSQLTranferencia.DataSet.fieldbyname('TRFEA13ID').AsString;
+    tblDadosTranferenciaTRFEDEMISSAO.AsDateTime := DSSQLTranferencia.DataSet.fieldbyname('TRFEDEMISSAO').AsDateTime;
+    tblDadosTranferenciaTRFEA30USUENVIO.AsString := DSSQLTranferencia.DataSet.fieldbyname('TRFEA30USUENVIO').AsString;
 
-    SQLEmpresaRemetente.Locate('EMPRICOD', SQLTranferenciaEMPRICOD.AsString, [loCaseInsensitive]);
+    SQLEmpresaRemetente.Locate('EMPRICOD', DSSQLTranferencia.DataSet.fieldbyname('EMPRICOD').AsString, [loCaseInsensitive]);
     tblDadosTranferenciaRemtNome.AsString := SQLEmpresaRemetenteEMPRA60NOMEFANT.AsString;
     tblDadosTranferenciaRemtCnpj.AsString := SQLEmpresaRemetenteEMPRA14CGC.DisplayText;
     tblDadosTranferenciaRemtIE.AsString := SQLEmpresaRemetenteEMPRA20IE.AsString;
@@ -1510,7 +1525,7 @@ begin
     if not SQLEmpresaRemetenteEMPRA20FAX.IsNull and not tblDadosTranferenciaRemtFoneFax.IsNull then
       tblDadosTranferenciaRemtFoneFax.AsString := tblDadosTranferenciaRemtFoneFax.AsString + ' / ' + SQLEmpresaRemetenteEMPRA20FAX.AsString;
 
-    SQLEmpresaDestino.Locate('EMPRICOD', SQLTranferenciaEMPRICODORIGEM.AsString, [loCaseInsensitive]);
+    SQLEmpresaDestino.Locate('EMPRICOD', DSSQLTranferencia.DataSet.fieldbyname('EMPRICODORIGEM').AsString, [loCaseInsensitive]);
     tblDadosTranferenciaDestNome.AsString := SQLEmpresaDestinoEMPRA60NOMEFANT.AsString;
     tblDadosTranferenciaDestCnpj.AsString := SQLEmpresaDestinoEMPRA14CGC.DisplayText;
     tblDadosTranferenciaDestIE.AsString := SQLEmpresaDestinoEMPRA20IE.AsString;
@@ -1531,23 +1546,23 @@ begin
       tblTempTranferencia.CreateTable;
     end;
 
-    SQLTranferenciaItem.First;
-    while not SQLTranferenciaItem.Eof do
+    DSSQLTranferenciaItem.DataSet.First;
+    while not DSSQLTranferenciaItem.DataSet.Eof do
     begin
       if not tblTempTranferencia.Active then tblTempTranferencia.Active := True;
       tblTempTranferencia.Append;
-      tblTempTranferenciaProdutoCod.Value := SQLTranferenciaItemPRODICOD.Value;
-      tblTempTranferenciaProdutoBarras.Value := SQLTranferenciaItemCodBarras.Value;
-      tblTempTranferenciaProdutoQtde.Value := SQLTranferenciaItemTRITN3QTDEENVIADA.Value;
-      tblTempTranferenciaProdutoNome.Value := SQLTranferenciaItemProdutoLookup.Value;
-      tblTempTranferenciaProdutoReferencia.Value := SQLTranferenciaItemReferencia.Value;
-      tblTempTranferenciaUnidade.Value := SQLTranferenciaItemUnidade.Value;
-      tblTempTranferenciaProdutoValorCusto.Value := SQLTranferenciaItemTRITN3VLRCUSTO.Value;
-      tblTempTranferenciaProdutoValorCustoTotal.Value := SQLTranferenciaItemTRITN3VLRCUSTO.Value * tblTempTranferenciaProdutoQtde.Value;
+      tblTempTranferenciaProdutoCod.AsString := DSSQLTranferenciaItem.DataSet.fieldbyname('PRODICOD').AsString;
+      tblTempTranferenciaProdutoBarras.AsString := DSSQLTranferenciaItem.DataSet.fieldbyname('CodBarras').AsString;
+      tblTempTranferenciaProdutoQtde.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('TRITN3QTDEENVIADA').AsCurrency;
+      tblTempTranferenciaProdutoNome.AsString := DSSQLTranferenciaItem.DataSet.fieldbyname('ProdutoLookup').AsString;
+      tblTempTranferenciaProdutoReferencia.AsString := DSSQLTranferenciaItem.DataSet.fieldbyname('Referencia').AsString;
+      tblTempTranferenciaUnidade.AsString := DSSQLTranferenciaItem.DataSet.fieldbyname('Unidade').AsString;
+      tblTempTranferenciaProdutoValorCusto.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('TRITN3VLRCUSTO').AsCurrency;
+      tblTempTranferenciaProdutoValorCustoTotal.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('TRITN3VLRCUSTO').AsCurrency * tblTempTranferenciaProdutoQtde.AsCurrency;
       tblTempTranferencia.Post;
-      SQLTranferenciaItem.Next;
+      DSSQLTranferenciaItem.DataSet.Next;
     end;
-    SQLTranferenciaItem.First;
+    DSSQLTranferenciaItem.DataSet.First;
 
     if CKImpMatricial.Checked then
       crpRelatorio.ReportName := DM.SQLConfigGeralCFGEA255PATHREPORT.AsString + '\Relatorio Transferencia-Envio Matricial.rpt'
@@ -1570,8 +1585,8 @@ begin
   mnEnvio.Caption := 'Transferências Enviadas [Empresa Origem: ' + EmpresaAtualNome + ']';
   if rgOnOff.ItemIndex = 0 then
   begin
-    mnEnvio.Enabled := not SQLTranferencia.IsEmpty and (SQLTranferenciaEMPRICOD.AsInteger = EmpresaCorrente);
-    mnRecebimento.Enabled := (SQLTranferenciaTRFECDIVERG.AsString = 'S');
+    mnEnvio.Enabled := not DSSQLTranferencia.DataSet.IsEmpty and (DSSQLTranferencia.DataSet.fieldbyname('EMPRICOD').AsInteger = EmpresaCorrente);
+    mnRecebimento.Enabled := (DSSQLTranferencia.DataSet.fieldbyname('TRFECDIVERG').AsString = 'S');
   end
   else begin
     mnEnvio.Enabled := not cdsTranferenciaOnline.IsEmpty and (cdsTranferenciaOnlineEMPRICOD.AsInteger = EmpresaCorrente);
@@ -1668,8 +1683,9 @@ procedure TFormTelaTransferencia.DSSQLTranferenciaDataChange(
   Sender: TObject; Field: TField);
 begin
   inherited;
-  btReceberTransferencia.Enabled := (SQLTranferenciaTRFECRECEBIDO.AsString = 'N') and
-    (SQLTranferenciaEMPRICOD.AsInteger <> EmpresaCorrente) and
+
+  btReceberTransferencia.Enabled := (DSSQLTranferencia.DataSet.FieldByName('TRFECRECEBIDO').AsString = 'N') and
+    (DSSQLTranferencia.DataSet.FieldByName('EMPRICOD').AsInteger <> EmpresaCorrente) and
     (PageControl.ActivePage = TabTransfRecebida);
 
 end;
@@ -1679,14 +1695,14 @@ procedure TFormTelaTransferencia.SQLTranferenciaBeforeDelete(
 begin
   if Pergunta('NAO', 'Atenção! Excluir esta Transferencia?') then
   begin
-    SQLTranferenciaItem.First;
-    while not SQLTranferenciaItem.eof do
+    DSSQLTranferenciaItem.DataSet.First;
+    while not DSSQLTranferenciaItem.DataSet.eof do
     begin
-      DM.RegistraExclusao('TRANSFERENCIAITEM', SQLTranferenciaItem);
-      SQLTranferenciaItem.Delete;
+      DM.RegistraExclusao('TRANSFERENCIAITEM', DSSQLTranferenciaItem.DataSet);
+      DSSQLTranferenciaItem.DataSet.Delete;
     end;
 
-    DM.RegistraExclusao('TRANSFERENCIA', SQLTranferencia);
+    DM.RegistraExclusao('TRANSFERENCIA', DSSQLTranferencia.DataSet);
   end
   else
   begin
@@ -1748,16 +1764,16 @@ begin
   if Pergunta('Nao', 'Deseja Movimentar Estoque do produto atual?') then
   begin
     GravaMovimentoEstoqueSimples(DM.SQLProduto, DM.SQLProdutoFilho, DM.SQLProdutoSaldo,
-      SQLTranferenciaTRFEIEMPRDEST.AsInteger,
-      SQLTranferenciaItemPRODICOD.AsInteger,
+      DSSQLTranferencia.DataSet.fieldbyname('TRFEIEMPRDEST').AsInteger,
+      DSSQLTranferenciaItem.DataSet.fieldbyname('PRODICOD').AsInteger,
       DM.SQLConfigGeral.FieldByName('OPESICODTRANSFENTR').AsInteger,
-      SQLTranferenciaItemTRITN3QTDEENVIADA.AsFloat,
+      DSSQLTranferenciaItem.DataSet.fieldbyname('TRITN3QTDEENVIADA').AsFloat,
       'E', FormatDateTime('mm/dd/yyyy', Now),
-      '0', 'TRANSFERENCIA', SQLTranferenciaItemTRFEA13ID.AsString, '');
+      '0', 'TRANSFERENCIA', DSSQLTranferenciaItem.DataSet.fieldbyname('TRFEA13ID').AsString, '');
 
-    SQLTranferenciaItem.Edit;
-    SQLTranferenciaItemTRITN3QTDERECEBIDA.Value := SQLTranferenciaItemTRITN3QTDEENVIADA.Value;
-    SQLTranferenciaItem.Post;
+    DSSQLTranferenciaItem.DataSet.Edit;
+    DSSQLTranferenciaItem.DataSet.fieldbyname('TRITN3QTDERECEBIDA').Value := DSSQLTranferenciaItem.DataSet.fieldbyname('TRITN3QTDEENVIADA').Value;
+    DSSQLTranferenciaItem.DataSet.Post;
   end;
 end;
 
@@ -1990,19 +2006,22 @@ begin
   xsql := ' select * from TRANSFERENCIA where EMPRICOD = ' + EmpresaPadrao;
 
   if OperacaoAcessada = 'Button1' then
-    xsql := ' and TRFEA13ID IS NULL '
+    xsql := xsql + ' and TRFEA13ID IS NULL '
   else
     if OperacaoAcessada = 'Button2' then
-      xsql := ' TRFECRECEBIDO = ''N'' '
+      xsql := xsql + ' and TRFECRECEBIDO = ''N'' '
     else
       if OperacaoAcessada = 'Button3' then
-        xsql := ' TRFECRECEBIDO = ''S'' ';
+        xsql := xsql + ' and TRFECRECEBIDO = ''S'' ';
 
   dm.zdbServidor.Connected := False;
   dm.zdbServidor.HostName := Servidor_HostName;
   dm.zdbServidor.Database := Servidor_Database; 
   cdsTranferenciaOnline.BeforePost := nil;
+  cdsTranferenciaItemOnline.BeforePost := nil;
   try
+    DSSQLTranferenciaItem.DataSet.DisableControls;
+    DSSQLTranferencia.DataSet.DisableControls;
     dm.zServidor_Consulta.Close;
     dm.zServidor_Consulta.sql.Clear;
     dm.zServidor_Consulta.SQL.Add(xsql);
@@ -2023,22 +2042,27 @@ begin
         dm.zServidor_Consulta.Next;
       end;
 
-      xsql := ' select * from TRANSFERENCIAITEM where TRFEA13ID = ' + QuotedStr(cdsTranferenciaOnlineTRFEA13ID.AsString);
-      dm.zServidor_Consulta.Close;
-      dm.zServidor_Consulta.sql.Clear;
-      dm.zServidor_Consulta.SQL.Add(xsql);
-      dm.zServidor_Consulta.Open;
-      while not dm.zServidor_Consulta.eof do
+      cdsTranferenciaOnline.First;
+      while not cdsTranferenciaOnline.Eof do
       begin
-        cdsTranferenciaItemOnline.Insert;
-        for i := 0 to cdsTranferenciaItemOnline.FieldCount - 1 do
+        xsql := ' select * from TRANSFERENCIAITEM where TRFEA13ID = ' + QuotedStr(cdsTranferenciaOnlineTRFEA13ID.AsString);
+        dm.zServidor_Consulta.Close;
+        dm.zServidor_Consulta.sql.Clear;
+        dm.zServidor_Consulta.SQL.Add(xsql);
+        dm.zServidor_Consulta.Open;
+        while not dm.zServidor_Consulta.eof do
         begin
-          if dm.zServidor_Consulta.FindField(cdsTranferenciaItemOnline.Fields[i].FieldName) <> nil then
-            cdsTranferenciaItemOnline.Fields[i].Value := dm.zServidor_Consulta.fieldbyname(cdsTranferenciaItemOnline.Fields[i].FieldName).AsVariant;
-        end;
-        cdsTranferenciaItemOnline.Post;
+          cdsTranferenciaItemOnline.Insert;
+          for i := 0 to cdsTranferenciaItemOnline.FieldCount - 1 do
+          begin
+            if dm.zServidor_Consulta.FindField(cdsTranferenciaItemOnline.Fields[i].FieldName) <> nil then
+              cdsTranferenciaItemOnline.Fields[i].Value := dm.zServidor_Consulta.fieldbyname(cdsTranferenciaItemOnline.Fields[i].FieldName).AsVariant;
+          end;
+          cdsTranferenciaItemOnline.Post;
 
-        dm.zServidor_Consulta.Next;
+          dm.zServidor_Consulta.Next;
+        end;
+        cdsTranferenciaOnline.next;
       end;
 
     except
@@ -2049,7 +2073,10 @@ begin
     end;
 
   finally
+    DSSQLTranferenciaItem.DataSet.EnableControls;
+    DSSQLTranferencia.DataSet.EnableControls;
     cdsTranferenciaOnline.BeforePost := cdsTranferenciaOnlineBeforePost;
+    cdsTranferenciaItemOnline.BeforePost := cdsTranferenciaItemOnlineBeforePost;
     dm.zServidor_Consulta.Close;
     dm.zdbServidor.Connected := False;
   end;
@@ -2077,7 +2104,7 @@ begin
       for i := 0 to pDados.FieldCount - 1 do
       begin
         if dm.zServidor_Consulta.FindField(pDados.Fields[i].FieldName) <> nil then
-          dm.zServidor_Consulta.Fields[i].Value := pDados.fieldbyname(pDados.Fields[i].FieldName).AsVariant;
+          dm.zServidor_Consulta.FieldByName(pDados.Fields[i].FieldName).AsVariant := pDados.Fields[i].AsVariant;
       end;
       dm.zServidor_Consulta.Post;
     except
@@ -2123,7 +2150,7 @@ begin
       for i := 0 to pDados.FieldCount - 1 do
       begin
         if dm.zServidor_Consulta.FindField(pDados.Fields[i].FieldName) <> nil then
-          dm.zServidor_Consulta.Fields[i].Value := pDados.fieldbyname(pDados.Fields[i].FieldName).AsVariant;
+          dm.zServidor_Consulta.FieldByName(pDados.Fields[i].FieldName).Value := pDados.Fields[i].AsVariant;
       end;
       dm.zServidor_Consulta.Post;
     except
@@ -2144,6 +2171,43 @@ procedure TFormTelaTransferencia.cdsTranferenciaItemOnlineBeforePost(
 begin
   inherited;
   GravarDadosItemOnline(DataSet);
+end;
+
+procedure TFormTelaTransferencia.cdsTranferenciaItemOnlineCalcFields(
+  DataSet: TDataSet);
+begin
+  inherited;
+  if DataSet.FieldByName('PRODICOD').AsVariant <> null then
+  begin
+    if DM.ProcuraRegistro('PRODUTO', ['PRODICOD'], [DataSet.FieldByName('PRODICOD').AsString], 1) then
+    begin
+      if not DM.SQLTemplate.FindField('MARCICOD').IsNull then
+        cdsTranferenciaItemOnlineMarca.AsString := SQLLocate('MARCA', 'MARCICOD', 'MARCA60DESCR', DM.SQLTemplate.FindField('MARCICOD').AsString);
+
+      if not DM.SQLTemplate.FindField('UNIDICOD').IsNull then
+        cdsTranferenciaItemOnlineUnidade.AsString := SQLLocate('UNIDADE', 'UNIDICOD', 'UNIDA5DESCR', DM.SQLTemplate.FindField('UNIDICOD').AsString);
+
+      if not DM.SQLTemplate.FindField('CLFSICOD').IsNull then
+        cdsTranferenciaItemOnlineClassFiscal.AsString := SQLLocate('CLASSIFICACAOFISCAL', 'CLFSICOD', 'CLFSA30DESCR', DM.SQLTemplate.FindField('CLFSICOD').AsString);
+
+      if not DM.SQLTemplate.FindField('PRODA60REFER').IsNull then
+        DataSet.FieldByName('Referencia').AsVariant := DM.SQLTemplate.FindField('PRODA60REFER').AsVariant;
+
+      if not DM.SQLTemplate.FindField('PRODA60CODBAR').IsNull then
+        DataSet.FieldByName('CodBarras').AsVariant := DM.SQLTemplate.FindField('PRODA60CODBAR').AsVariant;
+
+      if not DM.SQLTemplate.FindField('PRODICOD').IsNull then
+        DataSet.FieldByName('ProdutoLookup').AsVariant := DM.SQLTemplate.FindField('PRODICOD').AsString + '-' + DM.SQLTemplate.FindField('PRODA60DESCR').AsString;
+
+      if (DM.SQLTemplate.FindField('GRADICOD').AsVariant <> NULL) and (DM.SQLTemplate.FindField('GRTMICOD').AsVariant <> NULL) then
+        DataSet.FieldByName('ProdutoLookup').AsVariant := DataSet.FieldByName('ProdutoLookup').AsVariant +
+          ' / ' + RetornaTamanhoProduto(DM.SQLTemplate.FindField('GRADICOD').AsString,
+          DM.SQLTemplate.FindField('GRTMICOD').AsString);
+      if DM.SQLTemplate.FindField('CORICOD').AsVariant <> NULL then
+        DataSet.FieldByName('ProdutoLookup').AsVariant := DataSet.FieldByName('ProdutoLookup').AsVariant +
+          ' / ' + RetornaCorProduto(DM.SQLTemplate.FindField('CORICOD').AsString);
+    end;
+  end;
 end;
 
 end.
