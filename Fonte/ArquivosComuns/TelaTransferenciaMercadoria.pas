@@ -1035,7 +1035,9 @@ begin
     else
       DM.CodigoAutomatico('TRANSFERENCIAITEM', DSSQLTranferenciaItem, SQLTranferenciaItem, 1, 0);
   end;
-  GravarDadosItemOnline(DataSet);
+  
+  if rgOnOff.ItemIndex = 1 then
+    GravarDadosItemOnline(DataSet);
 end;
 
 procedure TFormTelaTransferencia.SQLTranferenciaItemCalcFields(
@@ -1727,6 +1729,7 @@ end;
 procedure TFormTelaTransferencia.SQLNotaFiscalBeforePost(
   DataSet: TDataSet);
 var Erro: Boolean;
+  i:integer;
 begin
   inherited;
   // Gerar o ID da Nota
@@ -1743,6 +1746,7 @@ begin
   SQLSerieNF.MacroByName('Serie').Value := 'SERIA5COD = "' + ComboSerieNF.Value + '"';
   SQLSerieNF.Open;
   Erro := True;
+  i:= 1;
   if DataSet.State in [DSInsert] then
   begin
     while Erro do
@@ -1756,6 +1760,11 @@ begin
       SQLSerieNFREGISTRO.asDateTime := Now;
       SQLSerieNF.Post;
       Erro := False;
+
+      inc(i);
+
+      if i > 100 then exit;
+
     except
       if SQLSerieNF.State in DsEditModes then SQLSerieNF.Cancel;
       Erro := True;
@@ -2020,6 +2029,8 @@ var
   xsql: string;
   i: integer;
 begin
+  if rgOnOff.ItemIndex = 0 then exit;
+  
   xsql := ' select * from TRANSFERENCIA where EMPRICOD = ' + EmpresaPadrao;
 
   if OperacaoAcessada = 'Button1' then
@@ -2104,6 +2115,8 @@ var
   xsql: string;
   i: integer;
 begin
+  if rgOnOff.ItemIndex = 0 then exit;
+
   xsql := ' select * from TRANSFERENCIA where TRFEA13ID = ' + QuotedStr(pDados.FieldByName('TRFEA13ID').AsString);
 
   dm.zdbServidor.Connected := False;
@@ -2149,6 +2162,8 @@ var
   xsql: string;
   i: integer;
 begin
+  if rgOnOff.ItemIndex = 0 then exit;
+  
   xsql := ' select * from TRANSFERENCIAITEM where TRITICOD = ' + QuotedStr(pDados.FieldByName('TRITICOD').AsString)
   +' AND TRFEA13ID = ' + QuotedStr(pDados.FieldByName('TRFEA13ID').AsString);
 
@@ -2187,7 +2202,8 @@ procedure TFormTelaTransferencia.cdsTranferenciaItemOnlineBeforePost(
   DataSet: TDataSet);
 begin
   inherited;
-  GravarDadosItemOnline(DataSet);
+  if rgOnOff.ItemIndex = 1 then
+    GravarDadosItemOnline(DataSet);
 end;
 
 procedure TFormTelaTransferencia.cdsTranferenciaItemOnlineCalcFields(
@@ -2234,6 +2250,10 @@ begin
     DM.DB.AliasName := DM.DB.AliasName+'ONLINE';
     DM.DB.Connected := True;
     rgOnOff.Visible := False;
+    dm.SQLConfigGeral.Close;
+    dm.SQLConfigGeral.Open;
+    dm.SQLConfigVenda.Close;
+    dm.SQLConfigVenda.Open;
   except
     //não existe base
   end;
@@ -2245,6 +2265,11 @@ begin
   DM.DB.Connected := False;
   DM.DB.AliasName :=  StringReplace(DM.DB.AliasName,'ONLINE','',[]);
   DM.DB.Connected := True;
+
+  dm.SQLConfigGeral.Close;
+  dm.SQLConfigGeral.Open;
+  dm.SQLConfigVenda.Close;
+  dm.SQLConfigVenda.Open;
 end;
 
 end.
