@@ -88,10 +88,14 @@ type
     function EncontraCampo(DataSet:TDataSet; Tag: Integer):Integer;
     function MontaChave(DataSet:TDataSet):String;
     function ProximoCodigoUnico(Tabela:String;DataSet: TDataSet;MasterDataSource:TDataSource; CampoAutoIncremento : Integer):Integer;
+    function ProximoCodigoUnicoOnline(Tabela:String;DataSet: TDataSet;MasterDataSource:TDataSource; CampoAutoIncremento : Integer):Integer;
     function ProximoCodigoPorEmpresa(Tabela:String;Campo:String):Integer;
+    function ProximoCodigoPorEmpresaOnline(Tabela:String;Campo:String):Integer;
     function ProximoCodigoPorEmpresaPorTerminal(Tabela:String;Campo:String):Integer;
+    function ProximoCodigoPorEmpresaPorTerminalOnLine(Tabela:String;Campo:String):Integer;
     function LocateByDisplayLabel(DataSet : TDataSet; DisplayLabel : string) : String;
     procedure CodigoAutomatico(Tabela:String; DataSource:TDataSource;DataSet: TDataSet; CampoAutoIncremento : Integer; CampoID: Integer);
+    procedure CodigoAutomaticoOnLine(Tabela:String; DataSource:TDataSource;DataSet: TDataSet; CampoAutoIncremento : Integer; CampoID: Integer);
     function ProximoCodigoUnicoDetalhe(Tabela: String; DataSet: TDataSet;
       MasterDataSource: TDataSource;
       CampoAutoIncremento: Integer): Integer;
@@ -1168,6 +1172,117 @@ end;
 procedure TDMTemplate.DataModuleDestroy(Sender: TObject);
 begin
   db.Connected  := False;
+end;
+
+function TDMTemplate.ProximoCodigoUnicoOnline(Tabela: String;
+  DataSet: TDataSet; MasterDataSource: TDataSource;
+  CampoAutoIncremento: Integer): Integer;
+var
+  I : Integer;  
+begin
+  if not dm.zdbServidor.Connected then
+  begin
+    dm.zdbServidor.HostName := Servidor_HostName;
+    dm.zdbServidor.Database := Servidor_Database;
+    dm.zdbServidor.Connected := True;
+  end;
+
+  dm.zServidor_Consulta.SQL.Clear;
+  dm.zServidor_Consulta.SQL.ADD('Select MAX('+ DataSet.Fields[CampoAutoIncremento].FieldName +') as ProximoCodigo from '+ Tabela);
+  If CampoAutoIncremento > 0 then
+    Begin
+      dm.zServidor_Consulta.SQL.ADD('Where');
+      For I := 0 to CampoAutoIncremento -1 do
+        begin
+          If I< CampoAutoIncremento -1 Then
+            dm.zServidor_Consulta.SQL.ADD(DataSet.Fields[I].FieldName +'=:'+ DataSet.Fields[I].FieldName +' and')
+          Else
+            dm.zServidor_Consulta.SQL.ADD(DataSet.Fields[I].FieldName +'=:'+ DataSet.Fields[I].FieldName);
+          dm.zServidor_Consulta.Params[I].DataType := DataSet.Fields[I].DataType;
+        end;
+    End;
+  dm.zServidor_Consulta.Open;
+  If dm.zServidor_Consulta.FindField('ProximoCodigo').asVariant<>Null Then
+    Result:= dm.zServidor_Consulta.FindField('ProximoCodigo').asInteger+1
+  Else
+    Result:=1;
+end;
+
+function TDMTemplate.ProximoCodigoPorEmpresaOnline(Tabela,
+  Campo: String): Integer;
+begin
+  if not dm.zdbServidor.Connected then
+  begin
+    dm.zdbServidor.HostName := Servidor_HostName;
+    dm.zdbServidor.Database := Servidor_Database;
+    dm.zdbServidor.Connected := True;
+  end;
+
+  If dm.zServidor_Consulta.Active Then
+    dm.zServidor_Consulta.Close;
+  dm.zServidor_Consulta.SQL.Clear;
+  dm.zServidor_Consulta.SQL.ADD('Select MAX('+Campo+') as ProximoCodigo from '+Tabela);
+  dm.zServidor_Consulta.SQL.ADD('Where');
+  dm.zServidor_Consulta.SQL.ADD('EMPRICOD='+IntToStr(EmpresaCorrente));
+  dm.zServidor_Consulta.Open;
+  
+  If dm.zServidor_Consulta.FindField('ProximoCodigo').asVariant <> Null Then
+    Result := dm.zServidor_Consulta.FindField('ProximoCodigo').asInteger + 1
+  Else
+    Result:=1;                           
+end;
+
+function TDMTemplate.ProximoCodigoPorEmpresaPorTerminalOnLine(Tabela,
+  Campo: String): Integer;
+begin
+  if not dm.zdbServidor.Connected then
+  begin
+    dm.zdbServidor.HostName := Servidor_HostName;
+    dm.zdbServidor.Database := Servidor_Database;
+    dm.zdbServidor.Connected := True;
+  end;
+
+  If dm.zServidor_Consulta.Active Then
+    dm.zServidor_Consulta.Close;
+
+  dm.zServidor_Consulta.SQL.Clear;
+  dm.zServidor_Consulta.SQL.ADD('Select MAX('+Campo+') as ProximoCodigo from '+Tabela);
+  dm.zServidor_Consulta.SQL.ADD('Where');
+  dm.zServidor_Consulta.SQL.ADD('EMPRICOD  ='+IntToStr(EmpresaCorrente)+' and ');
+  dm.zServidor_Consulta.SQL.ADD('TERMICOD ='+IntToStr(TerminalCorrente));
+  dm.zServidor_Consulta.Open;
+  If dm.zServidor_Consulta.FindField('ProximoCodigo').asVariant<>Null Then
+    Result:=dm.zServidor_Consulta.FindField('ProximoCodigo').asInteger+1
+  Else
+    Result:=1;
+
+end;
+
+procedure TDMTemplate.CodigoAutomaticoOnLine(Tabela: String;
+  DataSource: TDataSource; DataSet: TDataSet; CampoAutoIncremento,
+  CampoID: Integer);
+Var
+  ID:String;
+begin
+  Case DataSet.Tag Of
+    1:Begin
+        DataSet.Fields[CampoAutoIncremento].Value:=
+        ProximoCodigoUnicoOnline(Tabela,DataSet,DataSet.DataSource,CampoAutoIncremento);
+      End;
+    2:Begin
+        DataSet.Fields[CampoAutoIncremento].Value:=
+        ProximoCodigoPorEmpresaOnline(Tabela,DataSet.Fields[CampoAutoIncremento].FieldName);
+        ID:=Format('%.3d',[EmpresaCorrente])+Format('%.9d',[DataSet.Fields[CampoAutoIncremento].asInteger]);
+        DataSet.Fields[CampoID].asString:=ID+DigitVerifEAN(ID);
+      End;
+    3:Begin
+        DataSet.Fields[CampoAutoIncremento].Value:=
+           ProximoCodigoPorEmpresaPorTerminalOnLine(Tabela,DataSet.Fields[CampoAutoIncremento].FieldName);
+        ID :=Format('%.3d',[EmpresaCorrente])+Format('%.3d',[TerminalCorrente])+Format('%.6d',[DataSet.Fields[CampoAutoIncremento].asInteger]);
+        ID := ID+DigitVerifEAN(ID);
+        DataSet.Fields[CampoID].asString:= ID;
+      End;
+   End;
 end;
 
 end.

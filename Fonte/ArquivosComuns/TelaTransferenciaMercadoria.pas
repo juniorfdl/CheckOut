@@ -950,16 +950,16 @@ begin
         tblTempTranferencia.Active := True;
 
       tblTempTranferencia.Append;
-      tblTempTranferenciaProdutoCod.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('PRODICOD').Value;
-      tblTempTranferenciaProdutoBarras.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('CodBarras').Value;
-      tblTempTranferenciaProdutoQtde.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('TRITN3QTDEENVIADA').Value;
-      tblTempTranferenciaProdutoNome.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('ProdutoLookup').Value;
-      tblTempTranferenciaProdutoReferencia.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('Referencia').Value;
-      tblTempTranferenciaUnidade.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('Unidade').Value;
-      tblTempTranferenciaCUPOA13ID.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('CUPOA13ID').Value;
-      tblTempTranferenciaProdutoValorCusto.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('TRITN3VLRCUSTO').Value;
+      tblTempTranferenciaProdutoCod.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('PRODICOD').AsInteger;
+      tblTempTranferenciaProdutoBarras.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('CodBarras').AsString;
+      tblTempTranferenciaProdutoQtde.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('TRITN3QTDEENVIADA').AsCurrency;
+      tblTempTranferenciaProdutoNome.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('ProdutoLookup').AsString;
+      tblTempTranferenciaProdutoReferencia.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('Referencia').AsString;
+      tblTempTranferenciaUnidade.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('Unidade').AsString;
+      tblTempTranferenciaCUPOA13ID.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('CUPOA13ID').AsString;
+      tblTempTranferenciaProdutoValorCusto.Value := DSSQLTranferenciaItem.DataSet.fieldbyname('TRITN3VLRCUSTO').AsCurrency;
       tblTempTranferenciaProdutoValorCustoTotal.Value :=
-        DSSQLTranferenciaItem.DataSet.fieldbyname('TRITN3VLRCUSTO').Value * tblTempTranferenciaProdutoQtde.Value;
+        DSSQLTranferenciaItem.DataSet.fieldbyname('TRITN3VLRCUSTO').AsCurrency * tblTempTranferenciaProdutoQtde.AsCurrency;
       tblTempTranferencia.Post;
       DSSQLTranferenciaItem.DataSet.Next;
     end;
@@ -1005,7 +1005,10 @@ begin
     SQLTranferenciaTERMICOD.AsInteger := TerminalCorrente;
     SQLTranferenciaEMPRICODORIGEM.AsInteger := dblEmpresaOrigem.KeyValue;
     SQLTranferenciaTRFEIEMPRDEST.AsInteger := SQLEmpresaDestinoEMPRICOD.AsInteger;
-    DM.CodigoAutomatico('TRANSFERENCIA', DSSQLTranferencia, SQLTranferencia, 3, 0);
+    if rgOnOff.ItemIndex = 1 then
+      DM.CodigoAutomaticoOnLine('TRANSFERENCIA', DSSQLTranferencia, SQLTranferencia, 3, 0)
+    else
+      DM.CodigoAutomatico('TRANSFERENCIA', DSSQLTranferencia, SQLTranferencia, 3, 0);
   end;
 
   if rgOnOff.ItemIndex = 1 then
@@ -1022,7 +1025,12 @@ begin
   SQLTranferenciaItemREGISTRO.AsDateTime := Now;
   SQLTranferenciaItemPENDENTE.AsString := 'S';
   if DataSet.State in [dsInsert] then
-    DM.CodigoAutomatico('TRANSFERENCIAITEM', DSSQLTranferenciaItem, SQLTranferenciaItem, 1, 0);
+  begin
+    if rgOnOff.ItemIndex = 1 then
+      DM.CodigoAutomaticoOnLine('TRANSFERENCIAITEM', DSSQLTranferenciaItem, SQLTranferenciaItem, 1, 0)
+    else
+      DM.CodigoAutomatico('TRANSFERENCIAITEM', DSSQLTranferenciaItem, SQLTranferenciaItem, 1, 0);
+  end;
   GravarDadosItemOnline(DataSet);
 end;
 
@@ -1477,7 +1485,7 @@ begin
     begin
       tblTransferenciaDivergencias.Append;
       for I := 0 to tblTransferenciaDivergencias.FieldCount - 1 do
-        tblTransferenciaDivergencias.Fields.Fields[I].Value := DSSQLTranferenciaItem.DataSet.FieldByName(tblTransferenciaDivergencias.Fields.Fields[I].FieldName).Value;
+        tblTransferenciaDivergencias.Fields.Fields[I].AsString := DSSQLTranferenciaItem.DataSet.FieldByName(tblTransferenciaDivergencias.Fields.Fields[I].FieldName).AsString;
       tblTransferenciaDivergencias.Post;
     end;
     DSSQLTranferenciaItem.DataSet.Next;
@@ -1719,7 +1727,12 @@ begin
   inherited;
   // Gerar o ID da Nota
   if DataSet.State in [DSInsert] then
+  begin
+    if rgOnOff.ItemIndex = 1 then
+      DM.CodigoAutomaticoOnLine('NOTAFISCAL', nil, DataSet, 2, 0)
+    else
     DM.CodigoAutomatico('NOTAFISCAL', nil, DataSet, 2, 0);
+  end;
   // Gerar o Nro da Nota Fiscal
   SQLSerieNF.Close;
   SQLSerieNF.MacroByName('Empresa').value := 'EMPRICOD  = ' + EmpresaPadrao;
@@ -1772,7 +1785,7 @@ begin
       '0', 'TRANSFERENCIA', DSSQLTranferenciaItem.DataSet.fieldbyname('TRFEA13ID').AsString, '');
 
     DSSQLTranferenciaItem.DataSet.Edit;
-    DSSQLTranferenciaItem.DataSet.fieldbyname('TRITN3QTDERECEBIDA').Value := DSSQLTranferenciaItem.DataSet.fieldbyname('TRITN3QTDEENVIADA').Value;
+    DSSQLTranferenciaItem.DataSet.fieldbyname('TRITN3QTDERECEBIDA').AsString := DSSQLTranferenciaItem.DataSet.fieldbyname('TRITN3QTDEENVIADA').AsString;
     DSSQLTranferenciaItem.DataSet.Post;
   end;
 end;
@@ -2035,7 +2048,7 @@ begin
         for i := 0 to cdsTranferenciaOnline.FieldCount - 1 do
         begin
           if dm.zServidor_Consulta.FindField(cdsTranferenciaOnline.Fields[i].FieldName) <> nil then
-            cdsTranferenciaOnline.Fields[i].Value := dm.zServidor_Consulta.fieldbyname(cdsTranferenciaOnline.Fields[i].FieldName).AsVariant;
+            cdsTranferenciaOnline.Fields[i].AsString := dm.zServidor_Consulta.fieldbyname(cdsTranferenciaOnline.Fields[i].FieldName).AsString;
         end;
         cdsTranferenciaOnline.Post;
 
@@ -2056,7 +2069,7 @@ begin
           for i := 0 to cdsTranferenciaItemOnline.FieldCount - 1 do
           begin
             if dm.zServidor_Consulta.FindField(cdsTranferenciaItemOnline.Fields[i].FieldName) <> nil then
-              cdsTranferenciaItemOnline.Fields[i].Value := dm.zServidor_Consulta.fieldbyname(cdsTranferenciaItemOnline.Fields[i].FieldName).AsVariant;
+              cdsTranferenciaItemOnline.Fields[i].AsString := dm.zServidor_Consulta.fieldbyname(cdsTranferenciaItemOnline.Fields[i].FieldName).AsString;
           end;
           cdsTranferenciaItemOnline.Post;
 
@@ -2104,7 +2117,7 @@ begin
       for i := 0 to pDados.FieldCount - 1 do
       begin
         if dm.zServidor_Consulta.FindField(pDados.Fields[i].FieldName) <> nil then
-          dm.zServidor_Consulta.FieldByName(pDados.Fields[i].FieldName).AsVariant := pDados.Fields[i].AsVariant;
+          dm.zServidor_Consulta.FieldByName(pDados.Fields[i].FieldName).AsString := pDados.Fields[i].AsString;
       end;
       dm.zServidor_Consulta.Post;
     except
@@ -2150,7 +2163,7 @@ begin
       for i := 0 to pDados.FieldCount - 1 do
       begin
         if dm.zServidor_Consulta.FindField(pDados.Fields[i].FieldName) <> nil then
-          dm.zServidor_Consulta.FieldByName(pDados.Fields[i].FieldName).Value := pDados.Fields[i].AsVariant;
+          dm.zServidor_Consulta.FieldByName(pDados.Fields[i].FieldName).AsString := pDados.Fields[i].AsString;
       end;
       dm.zServidor_Consulta.Post;
     except
