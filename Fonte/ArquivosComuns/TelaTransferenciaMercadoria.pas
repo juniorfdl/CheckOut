@@ -434,6 +434,7 @@ type
     procedure cdsTranferenciaOnlineBeforePost(DataSet: TDataSet);
     procedure cdsTranferenciaItemOnlineBeforePost(DataSet: TDataSet);
     procedure cdsTranferenciaItemOnlineCalcFields(DataSet: TDataSet);
+    procedure FormDestroy(Sender: TObject);
 
   private
     { Private declarations }
@@ -443,6 +444,7 @@ type
     procedure AbrirDadosOnline;
     procedure GravarDadosOnline(pDados: TDataSet);
     procedure GravarDadosItemOnline(pDados: TDataSet);
+    Procedure UsarOnLine;
   public
     { Public declarations }
   end;
@@ -479,6 +481,8 @@ end;
 procedure TFormTelaTransferencia.FormCreate(Sender: TObject);
 begin
   inherited;
+  UsarOnLine;  
+
   cdsTranferenciaOnline.CreateDataSet;
   cdsTranferenciaItemOnline.CreateDataSet;
 
@@ -2221,6 +2225,26 @@ begin
           ' / ' + RetornaCorProduto(DM.SQLTemplate.FindField('CORICOD').AsString);
     end;
   end;
+end;
+
+procedure TFormTelaTransferencia.UsarOnLine;
+begin
+  try
+    DM.DB.Connected := False;
+    DM.DB.AliasName := DM.DB.AliasName+'ONLINE';
+    DM.DB.Connected := True;
+    rgOnOff.Visible := False;
+  except
+    //não existe base
+  end;
+end;
+
+procedure TFormTelaTransferencia.FormDestroy(Sender: TObject);
+begin
+  inherited;
+  DM.DB.Connected := False;
+  DM.DB.AliasName :=  StringReplace(DM.DB.AliasName,'ONLINE','',[]);
+  DM.DB.Connected := True;
 end;
 
 end.

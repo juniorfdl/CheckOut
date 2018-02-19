@@ -4813,13 +4813,15 @@ begin
                 '');
             end;
           'T': begin
-                  {Tela Transf. entre Filiais}
-              CriaFormulario(TFormTelaTransferencia,
-                'FormTelaTransferencia',
-                False,
-                False,
-                True,
-                '');
+                  {Tela Transf. entre Filiais}     
+              FormTelaTransferencia:= TFormTelaTransferencia.Create(nil);
+              try
+                FormTelaTransferencia.ShowModal;
+              finally
+                FreeAndNil(FormTelaTransferencia);
+              end;
+              //CriaFormulario(TFormTelaTransferencia,
+              //  'FormTelaTransferencia', False,  False,  True, '');
             end;
           'X': begin {Alt X - ReTransmitir NFCe Cupom Eletronico}
               if dm.sqlEmpresa.FieldByName('idTOKEN').AsString = '' then exit;

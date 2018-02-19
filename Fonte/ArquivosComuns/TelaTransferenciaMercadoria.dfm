@@ -3,9 +3,12 @@ inherited FormTelaTransferencia: TFormTelaTransferencia
   Top = 74
   Width = 880
   Height = 579
+  BorderIcons = [biSystemMenu]
   Caption = 'Transfer'#234'ncia Produtos'
   OldCreateOrder = True
   Position = poDesktopCenter
+  Visible = False
+  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   inherited ScrollBoxFundo: TScrollBox
