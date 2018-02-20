@@ -1749,7 +1749,7 @@ begin
   i:= 1;
   if DataSet.State in [DSInsert] then
   begin
-    while Erro do
+    //while Erro do
     try
           // Pega o nro atual
       SQLNotaFiscalNOFIINUMERO.Value := SQLSerieNFSERIINRONF.Value;
@@ -1763,7 +1763,7 @@ begin
 
       inc(i);
 
-      if i > 100 then exit;
+      if i > 1 then exit;
 
     except
       if SQLSerieNF.State in DsEditModes then SQLSerieNF.Cancel;
@@ -2270,6 +2270,25 @@ begin
   dm.SQLConfigGeral.Open;
   dm.SQLConfigVenda.Close;
   dm.SQLConfigVenda.Open;
+
+  dm.SQLEmpresa.Close;
+  dm.SQLTerminalAtivo.Close;
+  dm.SQLUsuario.Close;
+  dm.SQLConfigCrediario.Close;
+  dm.SQLConfigCompra.Close;
+  dm.SQLOperacaoCaixa.Close;
+  dm.SQLPopUP.Close;
+
+  dm.SQLEmpresa.Open ;
+  dm.SQLTerminalAtivo.Open ;
+  dm.SQLUsuario.Open ;
+  dm.SQLConfigCrediario.Open ;
+  dm.SQLConfigCompra.Open;
+  dm.SQLOperacaoCaixa.Open ;
+  dm.SQLPopUP.Open;
+
+  dm.DBRel.Close;
+  dm.DBRel.Open;
 end;
 
 end.
