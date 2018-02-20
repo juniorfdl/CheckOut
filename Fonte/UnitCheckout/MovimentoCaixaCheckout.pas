@@ -10,7 +10,15 @@ uses
   JvMemoryDataset, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData,
   cxDataStorage, cxEdit, cxDBData, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGridLevel, cxClasses, cxControls, cxGridCustomView,
-  cxGrid, dxSkinsCore;
+  cxGrid, dxSkinsCore, dxSkinBlack, dxSkinBlue, dxSkinCaramel,
+  dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide, dxSkinFoggy,
+  dxSkinGlassOceans, dxSkiniMaginary, dxSkinLilian, dxSkinLiquidSky,
+  dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMoneyTwins,
+  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
+  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinPumpkin, dxSkinSeven,
+  dxSkinSharp, dxSkinSilver, dxSkinSpringTime, dxSkinStardust,
+  dxSkinSummer2008, dxSkinsDefaultPainters, dxSkinValentine,
+  dxSkinXmas2008Blue, dxSkinscxPCPainter;
   
 type
   TFormTelaMovimentoCaixa = class(TForm)
@@ -102,9 +110,9 @@ type
     cdsValoresDescricao: TStringField;
     cxGrid1DBTableView1Descricao: TcxGridDBColumn;
     cxGrid1DBTableView1Valor: TcxGridDBColumn;
-    SQLFechamento: TRxQuery;
-    SQLFechamentoDEBITO: TFloatField;
-    SQLFechamentoCREDITO: TFloatField;
+    sqlFechamento: TRxQuery;
+    sqlFechamentoDEBITO: TFloatField;
+    sqlFechamentoCREDITO: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDeactivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
