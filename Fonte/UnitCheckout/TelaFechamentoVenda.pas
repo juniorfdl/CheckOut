@@ -1284,7 +1284,6 @@ begin
              (TipoPadrao = 'CRT') or
              (TipoPadrao = 'CRD') then
             begin
-
               DM.SQLTemplate.Close ;
               DM.SQLTemplate.SQL.Clear ;
               DM.SQLTemplate.SQL.Add('select * from PARCELASVISTAVENDATEMP') ;
@@ -1327,7 +1326,8 @@ begin
 
                   SQLParcelasVistaVendaTemp.Edit ;
                  // SQLParcelasVistaVendaTempVALORPARC.Value := StrToFloat(EntradaDados.Text) - ValorDevido ;
-                 SQLParcelasVistaVendaTempVALORPARC.Value := StrToFloat(EntradaDados.Text) + VarValorRecebido ;
+                 //SQLParcelasVistaVendaTempVALORPARC.Value := StrToFloat(EntradaDados.Text) + VarValorRecebido ;
+                 SQLParcelasVistaVendaTempVALORPARC.Value := StrToFloat(EntradaDados.Text) + SQLParcelasVistaVendaTempVALORPARC.Value;
 
                   SQLParcelasVistaVendaTempTIPOPADR.Value  := TipoPadrao ;
                   SQLParcelasVistaVendaTemp.Post ;
@@ -1348,7 +1348,7 @@ begin
                 begin
                   if EstadoFechVendaAnt = '' then
                     begin
-                              if SQLParcelasPrazoVendaTemp.RecordCount = 0 then
+                      if SQLParcelasPrazoVendaTemp.RecordCount = 0 then
                         EstadoFechVenda := FinalizandoVenda
                       else
                         EstadoFechVenda := InformandoNumerarioPrazo ;

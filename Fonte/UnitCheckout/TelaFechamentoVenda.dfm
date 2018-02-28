@@ -2580,7 +2580,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       object LblVendedor: TRxLabel
         Left = 28
         Top = 91
-        Width = 91
+        Width = 92
         Height = 20
         Caption = 'Vendedor:'
         Color = 10567680
@@ -2677,7 +2677,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       object LblBonusTroca: TRxLabel
         Left = 569
         Top = 91
-        Width = 113
+        Width = 115
         Height = 20
         Caption = 'B'#244'nus Troca:'
         Color = 10567680
@@ -3172,7 +3172,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       object LblTotalVenda: TRxLabel
         Left = 10
         Top = 56
-        Width = 86
+        Width = 90
         Height = 32
         Caption = 'TOTAL'
         Color = 32767
@@ -3191,7 +3191,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       object LblValorDescontoAcrescimo: TRxLabel
         Left = 10
         Top = 117
-        Width = 139
+        Width = 140
         Height = 29
         Caption = 'DESCONTO'
         Color = 32767
