@@ -2798,7 +2798,7 @@ procedure TFormTelaItens.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShi
 var
   PreVendaRimp, Certificado: string;
   RetornoUser: TInfoRetornoUser;
-  FechouCupomFiscal, TemNumerarioAVista, TemNumerarioPrazo: Boolean;
+  FechouCupomFiscal, TemNumerarioAVista, TemNumerarioPrazo, ConsultarDenovo: Boolean;
   VlrTotalECF, VlrTotalSistema, VlrTotalDiferenca: Double;
 begin
 
@@ -4857,6 +4857,7 @@ begin
                 nfce_tentativa := 0;
                 while (nfce_tentativa <= 5) do
                 begin
+                  ConsultarDenovo := False;
                   nfce_tentativa := nfce_tentativa + 1;
                   LblInstrucoes.Caption := 'Consultando Retorno Sefaz RS NFCe: ' + IntToStr(NumNFe) + ' - Tentativa N.' + intToStr(nfce_tentativa);
                   LblInstrucoes.Update;
@@ -4872,9 +4873,12 @@ begin
                         Chave := Copy(dm.ACBrNFe.WebServices.Consulta.XMotivo, pos('NF-e [', dm.ACBrNFe.WebServices.Consulta.XMotivo), 200);
                         Chave := StringReplace(Chave, 'NF-e [', '', [rfReplaceAll, rfIgnoreCase]);
                         Chave := StringReplace(Chave, ']', '', [rfReplaceAll]);
+
+                        {FormTelaConsultaRapidaCupom.SQLCupom.RequestLive := True;
                         FormTelaConsultaRapidaCupom.SQLCupom.Edit;
                         FormTelaConsultaRapidaCupom.SQLCupomCHAVEACESSO.AsString := Chave;
                         FormTelaConsultaRapidaCupom.SQLCupom.Post;
+                        FormTelaConsultaRapidaCupom.SQLCupom.RequestLive := False;}
 
                         if Chave <> '' then
                         begin
@@ -4889,6 +4893,11 @@ begin
                           dm.SQLCupomCHAVEACESSO.AsString := Chave;
                           dm.SQLCupom.Post;
                         end;
+
+                        FormTelaConsultaRapidaCupom.SQLCupom.Close;
+                        FormTelaConsultaRapidaCupom.SQLCupom.Open;
+
+                        ConsultarDenovo := True;
                       end;
                     end
                     else if dm.ACBrNFe.WebServices.Consulta.protNFe.xMotivo <> '' then
@@ -4914,7 +4923,7 @@ begin
                     end;
                   end;
 
-                  if (FileExists('COMUNICACAO_OFFLINE.TXT')) or (dm.ACBrNFe.WebServices.Consulta.cStat <> 100) then
+                  if ((FileExists('COMUNICACAO_OFFLINE.TXT')) or (dm.ACBrNFe.WebServices.Consulta.cStat <> 100)) and not ConsultarDenovo then
                       //or (dm.ACBrNFe.WebServices.Consulta.cStat = 217)or (dm.ACBrNFe.WebServices.Consulta.cStat = 613) then
                   begin
                               { Cria o arquivo XML }
