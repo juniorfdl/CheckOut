@@ -1574,11 +1574,13 @@ end;
 procedure TFormTelaMovimentoCaixa.GravarFechamentoCupom;
 var
   COD_CUPOM_FECHAMENTO, OBSERVACOES, STATUS:String;
+  i : integer;
 begin
 
   WITH ExecSql('SELECT gen_id(G_CUPOM_FECHAMENTO,1) AS ID FROM RDB$DATABASE') do
   try
-    COD_CUPOM_FECHAMENTO := FieldByName('ID').AsString;
+    i := StrToInt(FieldByName('ID').AsString);
+    COD_CUPOM_FECHAMENTO :=  FormatFloat('000',TerminalAtual) + FormatFloat('00000',i);
   finally
     free;
   end;
@@ -1593,11 +1595,11 @@ begin
   else
     STATUS := QuotedStr(DM.SQLTerminalAtivoTERMCSTATUSCAIXA.AsString);
 
-  ExecSql('INSERT INTO CUPOM_FECHAMENTO (COD_CUPOM_FECHAMENTO, STATUS,DATA_STATUS, DATA_MOVIMENTO, OPERACAO_CAIXA, OBSERVACOES)VALUES('
+  ExecSql('INSERT INTO CUPOM_FECHAMENTO (COD_CUPOM_FECHAMENTO, STATUS,DATA_STATUS, DATA_MOVIMENTO, OPERACAO_CAIXA, OBSERVACOES, TERMICOD)VALUES('
   +COD_CUPOM_FECHAMENTO+','+STATUS+','+
   QuotedStr(FormatDateTime('mm/dd/yyyy', DM.SQLTerminalAtivoTERMDSTATUSCAIXA.AsDateTime))
   +','+QuotedStr(FormatDateTime('mm/dd/yyyy', EditData.Date))
-  +','+SQLOperacaoCaixaOPCXICOD.AsString+','+  (OBSERVACOES)+')',1);
+  +','+SQLOperacaoCaixaOPCXICOD.AsString+','+  (OBSERVACOES)+','+ IntToStr(TerminalAtual) +')',1);
 
   cdsValores.First;
   while not cdsValores.eof do
