@@ -843,7 +843,7 @@ begin
                     FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
                     FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
 
-                    if (SQLOperacaoCaixaOPCXA5SIGLA.Value = 'SANGR') or (SQLOperacaoCaixaOPCXA5SIGLA.Value = 'TROCO') then
+//                    if (SQLOperacaoCaixaOPCXA5SIGLA.Value = 'SANGR') or (SQLOperacaoCaixaOPCXA5SIGLA.Value = 'TROCO')  then
                       FormTelaItens.MemoRetornoNFE.Lines.Add('</ce><e><n>Valor ' + FormatFloat('R$ ##0.00',EditValor.Value) + '</n></e>');
 
                     {cdsValores.First;

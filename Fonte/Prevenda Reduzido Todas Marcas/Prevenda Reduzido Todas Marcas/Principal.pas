@@ -91,6 +91,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
+    Sequencial : String;
     function GetCodigoImpressaoPreVendas(hostName, dataBase: string): string;
     procedure ImprimirCodigo(hostName, dataBase: string);
   public
@@ -135,8 +136,8 @@ begin
     ImpMarca            := IniFile.ReadString('Restaurante','ImpMarca','');
     ImpCaixaPorta       := IniFile.ReadString('Restaurante','ImpCaixaPorta','');
     ImpCaixaVeloc       := IniFile.ReadString('Restaurante','ImpCaixaVeloc','9600');
-    hostName            := IniFile.ReadString('SERVIDOR','HostName','');
-    dataBase            := IniFile.ReadString('SERVIDOR','dataBase','');
+    hostName            := IniFile.ReadString('PDV','HostName','');
+    dataBase            := IniFile.ReadString('PDV','dataBase','');
     IniFile.Free;
 
     if ImpMarca = 'EPSON'    then ACBrPosPrinter.Modelo := ppEscPosEpson;
@@ -162,7 +163,8 @@ begin
     else
       begin
         if (MostraDisplay = 'S') and (TblPreVendaCabDisplayNumero.Value>0) then
-          memo.Lines.Add('</ce><e>Comprovante: '+TblPreVendaCabDisplayNumero.AsString+'</e>')
+          memo.Lines.Add('</ce><e>Comprovante: '+Sequencial+'</e>')
+//          memo.Lines.Add('</ce><e>Comprovante: '+TblPreVendaCabDisplayNumero.AsString+'</e>')
         else
           memo.Lines.Add('<ce><e>ID: '+TblPreVendaCabTicketNumero.AsString+'</e></ce>');
       end;
@@ -309,7 +311,7 @@ begin
     if ImpMarca = 'DR800' then sleep(100);
     ACBrPosPrinter.Desativar;
 
-
+//   memo.Lines.SaveToFile('C:\ImpressaoPreVenda.txt');
     // Segunda Via
     if NroVias = '2' then
       begin
@@ -344,11 +346,19 @@ end;
 
 procedure TFormPrincipal.ImprimirCodigo(hostName, dataBase: string);
 begin
+  Sequencial := '1';
+//  memo.Lines.Add(' ');
+//  memo.Lines.Add(' ');
   memo.Lines.Add(' ');
   memo.Lines.Add(' ');
+  memo.Lines.Add('</ce><n><e>' + 'Pedido Nº:' + '</e></n>');
   memo.Lines.Add(' ');
   memo.Lines.Add(' ');
   memo.Lines.Add('</ce><n><e>' + GetCodigoImpressaoPreVendas(hostName, dataBase) + '</e></n>');
+  memo.Lines.Add(' ');
+  memo.Lines.Add(' ');
+  memo.Lines.Add('</ce><n><e>' + 'Aguarde ser chamado' + '</e></n>');
+  memo.Lines.Add(' ');
   memo.Lines.Add(' ');
   memo.Lines.Add(' ');
   memo.Lines.Add(' ');
@@ -363,12 +373,12 @@ var
   Query: TSQLQuery;
   SQL: string;
 begin
-  Result := '1';                                     
+  Result := '1';
 
   try
     Connection.Params.Values['DataBase'] := hostName + ':' + dataBase;
     Connection.Open;
-    
+
     Query               := TSQLQuery.Create(nil);
     Query.SQLConnection := Connection;
 
@@ -379,10 +389,11 @@ begin
 
     if not(Query.IsEmpty) then
     begin
-      Result := Query.FieldByName('IMPRESSAO_PREVENDA').AsString;
+      Result := Query.FieldByName('CODIGO').AsString;
       Connection.ExecuteDirect('UPDATE IMPRESSAO_PREVENDA SET CODIGO = ' + IntToStr(StrToInt(Result) + 1) + ' WHERE DATA = ' + QuotedStr(FormatDateTime('dd.mm.yyyy 00:00:00', Now)));
     end
     else Connection.ExecuteDirect('INSERT INTO IMPRESSAO_PREVENDA VALUES (' + QuotedStr(FormatDateTime('dd.mm.yyyy 00:00:00', Now)) + ', 1, ''M'')');
+    Sequencial :=  Result;
   finally
     Query.Free;
     Connection.CloseDataSets;
