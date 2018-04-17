@@ -302,6 +302,10 @@ type
     { Private declarations }
     FinalizandoRecto : boolean;
     TotalTroco : Double;
+    v_Abatimento_Original: Extended;
+    function fCompoemValor(AJuros, AMulta, AValorPago: Extended): Extended;
+    function fCompoemValorJuros(AJuros, AMulta, AValorPago: Extended): Extended;
+    function fCompoemValorMulta(AMulta, AValorPago: Extended): Extended;
     function TemEntrada(Documento : string) : boolean ;
     function AutenticaDocumentoImpressoaNaoFiscal : Boolean;
     function VerificaCartaoCredito : Boolean;
@@ -336,7 +340,7 @@ uses TelaItens, TelaTeclasAtalhoTelaRecebimetoCrediario,
      TelaConsultaRapidaCliente, TelaConsultaRapidaNumerario,
      UnitCheckoutLibrary, ECFCheckout, FormResources, CadastroCliente,
      IMPNAOFISCAL, WindowsLibrary, WaitWindow, TelaDadosCheque, ExtensoLib,
-     VarSYS, ACBrPosPrinter , TelaTroco;
+     VarSYS, ACBrPosPrinter , TelaTroco, Math;
 
 {$R *.DFM}
 
@@ -361,6 +365,8 @@ Var
   nx: Real;
   TotalRecbto, TotalDescto, TotalJuros: Extended;
 begin
+  v_Abatimento_Original := 0;
+
   if (Key = VK_Return) or (key = vk_down) then
     begin
       if (EstadoRecCred = InformandoDocumento) and (EntradaDados.text <> '') then
@@ -772,17 +778,25 @@ begin
               SQLContasReceber.First;
               TotParcRec := 0;
               while not SQLContasReceber.EOF do
-                begin
-                  TotParcRec := TotParcRec + ( SQLContasReceberCTRCN2VLR.Value -
-                                               SQLContasReceberCTRCN2TOTREC.Value );
-                  SQLContasReceber.Next;
-                end;
+              begin
+                TotParcRec := TotParcRec + ( SQLContasReceberCTRCN2VLR.Value -
+                                             SQLContasReceberCTRCN2TOTREC.Value );
+                SQLContasReceber.Next;
+              end;
+              
               if TotParcRec > 0 then
                 begin
                   SQLContasReceber.First;
                   while not SQLContasReceber.EOF do
                     begin
-                      Saldo := SQLContasReceberCTRCN2VLR.Value - SQLContasReceberCTRCN2TOTREC.Value;
+                      SQLPesquisa.Close;
+                      SQLPesquisa.SQL.Text := 'select * from CONTASRECEBER where CTRCA13ID = ' + SQLContasReceberCTRCA13ID.AsString;
+                      SQLPesquisa.Open;
+
+                      if SQLContasReceberCTRCN2VLR.Value > SQLPesquisa.FieldByName('CTRCN2VLR').Value then
+                        Saldo := SQLPesquisa.FieldByName('CTRCN2VLR').Value
+                      else Saldo := SQLContasReceberCTRCN2VLR.Value - SQLContasReceberCTRCN2TOTREC.Value;
+                      
                       if Saldo > 0 then
                         begin
                           DM.MemCtRecParc.Append ;
@@ -891,8 +905,18 @@ begin
                                                                             SQLParcelasReceberTempN2VLRMULTA.AsFloat    +
                                                                             SQLParcelasReceberTempN2VLRTXCOBR.AsFloat)  -
                                                                             SQLParcelasReceberTempN2VLRDESC.AsFloat);
+
+                              if SQLParcelasReceberTempN2VLRAMORT.AsFloat < 0 then
+                              begin
+                                v_Abatimento_Original                    := SQLParcelasReceberTempN2VLRAMORT.AsFloat;
+                                SQLParcelasReceberTempN2VLRAMORT.AsFloat := FormTelaConsultaContratosCliente.ValorSaldo.Value;
+                              end;
+
                               SQLParcelasReceberTemp.Post;
-                              TotalPagar.Value := TotalPagar.Value-(SQLParcelasReceberTempN2VLRVENC.AsFloat-SQLParcelasReceberTempN2VLRAMORT.AsFloat);
+
+                              if v_Abatimento_Original = 0 then
+                                TotalPagar.Value := TotalPagar.Value-(SQLParcelasReceberTempN2VLRVENC.AsFloat-SQLParcelasReceberTempN2VLRAMORT.AsFloat)
+                              else TotalPagar.Value := TotalPagar.Value-(SQLParcelasReceberTempN2VLRVENC.AsFloat-v_Abatimento_Original);
                             end;
                         end;
                     end;
@@ -1469,7 +1493,7 @@ begin
               if (SQLParcelasReceberTempINROPARC.AsInteger > 0) or
                  (SQLParcelasReceberTempDVENC.AsString <> DataVencto) then
                 begin
-                  MakeWindowMessage('Efetuando Recebimento...');
+                  //MakeWindowMessage('Efetuando Recebimento...');
 
                   DM.SQLTemplate.Close ;
                   DM.SQLTemplate.SQL.Clear ;
@@ -1488,8 +1512,11 @@ begin
                   SQLRecebimentoRECEDDATAMOV.Value   := DataBaixa ;
                   SQLRecebimentoCLIEA13ID.Value      := SQLParcelasReceberTempCLIEA13ID.Value ;
                   SQLRecebimentoRECEN2VLRRECTO.Value := SQLParcelasReceberTempN2VLRAMORT.Value ;
-                  SQLRecebimentoRECEN2VLRJURO.Value  := SQLParcelasReceberTempN2VLRJURO.Value ;
-                  SQLRecebimentoRECEN2VLRMULTA.Value := SQLParcelasReceberTempN2VLRMULTA.Value ;
+                  SQLRecebimentoRECEN2VLRJURO.Value  := fCompoemValorJuros(SQLParcelasReceberTempN2VLRJURO.Value,
+                                                                           SQLParcelasReceberTempN2VLRMULTA.Value,
+                                                                           SQLParcelasReceberTempN2VLRAMORT.Value) ;
+                  SQLRecebimentoRECEN2VLRMULTA.Value := fCompoemValorMulta(SQLParcelasReceberTempN2VLRMULTA.Value,
+                                                                           SQLParcelasReceberTempN2VLRAMORT.Value) ;
                   SQLRecebimentoRECEN2DESC.Value     := SQLParcelasReceberTempN2VLRDESC.Value ;
                   SQLRecebimentoRECEN2MULTACOBR.Value:= SQLParcelasReceberTempN2VLRTXCOBR.Value ;
                   SQLRecebimentoEMPRICODREC.Value    := StrToInt(EmpresaPadrao) ;
@@ -1554,7 +1581,9 @@ begin
                                                IntToStr(DM.UsuarioAtual),
                                                SQLParcelasReceberTempA13CUPOID.Value + '/' +
                                                SQLParcelasReceberTempINROPARC.AsString,
-                                               SQLParcelasReceberTempN2VLRAMORT.Value,
+                                               fCompoemValor(SQLParcelasReceberTempN2VLRJURO.Value,
+                                                             SQLParcelasReceberTempN2VLRMULTA.Value,
+                                                             SQLParcelasReceberTempN2VLRAMORT.Value),
                                                SQLParcelasReceberTempN2VLRJURO.Value,  //WMOVICAIXN2VLRJURO
                                                SQLParcelasReceberTempN2VLRMULTA.Value, //WMOVICAIXN2VLRMULTA
                                                SQLParcelasReceberTempN2VLRDESC.Value,  //WMOVICAIXN2VLRDEC
@@ -1565,7 +1594,10 @@ begin
                                                '') ;
                         end ;
                       //GRAVAR MOVIMENTO CAIXA REF. AO JURO DA PARCELA
-                      if SQLParcelasReceberTempN2VLRJURO.Value > 0 then
+                      if (SQLParcelasReceberTempN2VLRJURO.Value > 0) and
+                        (fCompoemValorJuros(SQLParcelasReceberTempN2VLRJURO.Value,
+                                           SQLParcelasReceberTempN2VLRMULTA.Value,
+                                           SQLParcelasReceberTempN2VLRAMORT.Value) > 0) then
                         begin
                           DM.SQLTemplate.Close ;
                           DM.SQLTemplate.SQL.Clear ;
@@ -1583,7 +1615,9 @@ begin
                                                  IntToStr(DM.UsuarioAtual),
                                                  SQLParcelasReceberTempA13CUPOID.Value + '/' +
                                                  SQLParcelasReceberTempINROPARC.AsString,
-                                                 SQLParcelasReceberTempN2VLRJURO.Value,
+                                                 fCompoemValorJuros(SQLParcelasReceberTempN2VLRJURO.Value,
+                                                                    SQLParcelasReceberTempN2VLRMULTA.Value,
+                                                                    SQLParcelasReceberTempN2VLRAMORT.Value),
                                                  0,//WMOVICAIXN2VLRJURO
                                                  0,//WMOVICAIXN2VLRMULTA
                                                  0,//WMOVICAIXN2VLRDEC
@@ -1594,7 +1628,9 @@ begin
                                                  '') ;
                         end ;
                       //GRAVAR MOVIMENTO CAIXA REF. A MULTA DA PARCELA
-                      if SQLParcelasReceberTempN2VLRMULTA.Value > 0 then
+                      if (SQLParcelasReceberTempN2VLRMULTA.Value > 0) and
+                        (fCompoemValorMulta(SQLParcelasReceberTempN2VLRMULTA.Value,
+                                            SQLParcelasReceberTempN2VLRAMORT.Value) > 0) then
                         begin
                           DM.SQLTemplate.Close ;
                           DM.SQLTemplate.SQL.Clear ;
@@ -1612,7 +1648,8 @@ begin
                                                  IntToStr(DM.UsuarioAtual),
                                                  SQLParcelasReceberTempA13CUPOID.Value + '/' +
                                                  SQLParcelasReceberTempINROPARC.AsString,
-                                                 SQLParcelasReceberTempN2VLRMULTA.Value,
+                                                 fCompoemValorMulta(SQLParcelasReceberTempN2VLRMULTA.Value,
+                                                                    SQLParcelasReceberTempN2VLRAMORT.Value),
                                                  0,//WMOVICAIXN2VLRJURO
                                                  0,//WMOVICAIXN2VLRMULTA
                                                  0,//WMOVICAIXN2VLRDEC
@@ -2379,20 +2416,39 @@ begin
 
   SQLParcelasReceberTempINRODIASATRAS.AsString := FormatFloat('#', DataCalculo - SQLParcelasReceberTempDVENC.Value) ;
 
-  if SQLParcelasReceberTempN2VLRVENC.Value > SQLParcelasReceberTempN2VLRAMORT.Value then
-    SQLParcelasReceberTempN2VLRPAGAR.Value := SQLParcelasReceberTempN2VLRVENC.Value -
-                                              (SQLParcelasReceberTempN2VLRVENC.Value - SQLParcelasReceberTempN2VLRAMORT.Value) +
-                                              SQLParcelasReceberTempN2VLRJURO.Value +
-                                              SQLParcelasReceberTempN2VLRMULTA.Value +
-                                              SQLParcelasReceberTempN2VLRTXCOBR.Value -
-                                              SQLParcelasReceberTempN2VLRDESC.Value
+  if (v_Abatimento_Original = 0) then
+  begin
+    if SQLParcelasReceberTempN2VLRVENC.Value > SQLParcelasReceberTempN2VLRAMORT.Value then
+      SQLParcelasReceberTempN2VLRPAGAR.Value := SQLParcelasReceberTempN2VLRVENC.Value -
+                                                (SQLParcelasReceberTempN2VLRVENC.Value - SQLParcelasReceberTempN2VLRAMORT.Value) +
+                                                SQLParcelasReceberTempN2VLRJURO.Value +
+                                                SQLParcelasReceberTempN2VLRMULTA.Value +
+                                                SQLParcelasReceberTempN2VLRTXCOBR.Value -
+                                                SQLParcelasReceberTempN2VLRDESC.Value
+    else
+      SQLParcelasReceberTempN2VLRPAGAR.Value := SQLParcelasReceberTempN2VLRVENC.Value +
+                                                SQLParcelasReceberTempN2VLRJURO.Value +
+                                                SQLParcelasReceberTempN2VLRMULTA.Value +
+                                                SQLParcelasReceberTempN2VLRTXCOBR.Value -
+                                                SQLParcelasReceberTempN2VLRDESC.Value ;
+  end
   else
-    SQLParcelasReceberTempN2VLRPAGAR.Value := SQLParcelasReceberTempN2VLRVENC.Value +
-                                              SQLParcelasReceberTempN2VLRJURO.Value +
-                                              SQLParcelasReceberTempN2VLRMULTA.Value +
-                                              SQLParcelasReceberTempN2VLRTXCOBR.Value -
-                                              SQLParcelasReceberTempN2VLRDESC.Value ;
-                                              
+  begin
+    if SQLParcelasReceberTempN2VLRVENC.Value > IfThen(v_Abatimento_Original < 0, v_Abatimento_Original * -1, v_Abatimento_Original) then
+      SQLParcelasReceberTempN2VLRPAGAR.Value := SQLParcelasReceberTempN2VLRVENC.Value -
+                                                (SQLParcelasReceberTempN2VLRVENC.Value - v_Abatimento_Original) +
+                                                SQLParcelasReceberTempN2VLRJURO.Value +
+                                                SQLParcelasReceberTempN2VLRMULTA.Value +
+                                                SQLParcelasReceberTempN2VLRTXCOBR.Value -
+                                                SQLParcelasReceberTempN2VLRDESC.Value
+    else
+      SQLParcelasReceberTempN2VLRPAGAR.Value := SQLParcelasReceberTempN2VLRVENC.Value +
+                                                SQLParcelasReceberTempN2VLRJURO.Value +
+                                                SQLParcelasReceberTempN2VLRMULTA.Value +
+                                                SQLParcelasReceberTempN2VLRTXCOBR.Value -
+                                                SQLParcelasReceberTempN2VLRDESC.Value ;
+  end;
+
   if SQLParcelasReceberTempTIPODOC.AsString = 'AV' then
     SQLParcelasReceberTempTipoDocCalc.AsString := 'Parcela Avulsa'
   else
@@ -3008,6 +3064,62 @@ procedure TFormTelaRecebimentoCrediario.FormClose(Sender: TObject;
 begin
   dm.ACBrPosPrinter.Device.Desativar;
   Action := CaFree;
+end;
+
+function TFormTelaRecebimentoCrediario.fCompoemValorJuros(AJuros, AMulta,
+  AValorPago: Extended): Extended;
+begin
+  Result := 0;
+
+  if (AValorPago <= AMulta) then
+    Exit;
+
+  if (AValorPago < (AJuros + AMulta)) then
+  begin
+    Result := AJuros - (AValorPago - AMulta);
+    Exit;
+  end
+  else if (AValorPago = (AJuros + AMulta)) then
+    Exit;
+
+  if (AValorPago > (AJuros + AMulta)) then
+  begin
+    Result := AJuros;
+    Exit;
+  end;
+end;
+
+function TFormTelaRecebimentoCrediario.fCompoemValorMulta(AMulta,
+  AValorPago: Extended): Extended;
+begin
+  Result := 0;
+
+  if (AValorPago < AMulta) then
+  begin
+    Result := AValorPago;
+    Exit;
+  end;
+
+  if (AValorPago >= AMulta) then
+  begin
+    Result := AMulta;
+    Exit;
+  end;
+end;
+
+function TFormTelaRecebimentoCrediario.fCompoemValor(AJuros, AMulta,
+  AValorPago: Extended): Extended;
+begin
+  Result := 0;
+
+  if (AValorPago <= (AJuros + AMulta)) then
+    Exit;
+
+  if (AValorPago > (AJuros + AMulta)) then
+  begin
+    Result := (AValorPago - (AJuros + AMulta));
+    Exit;
+  end;
 end;
 
 end.

@@ -1207,7 +1207,9 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     DataSource = DSSQLCupom
     SQL.Strings = (
       'select '
-      '  * '
+      
+        '  (CTRCN2VLR + (select valor from SP_BUSCAR_MOV_CAIXA(CONTASRECE' +
+        'BER.CUPOA13ID))) AS CTRCN2VLR, CONTASRECEBER.*'
       'from '
       '  CONTASRECEBER'
       'where '
@@ -1720,7 +1722,7 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 0
     PrinterSetup.mmPaperWidth = 0
-    PrinterSetup.PaperSize = 139
+    PrinterSetup.PaperSize = 119
     Units = utMillimeters
     AllowPrintToFile = True
     BeforePrint = ReportAutenticBeforePrint
@@ -2518,7 +2520,7 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 0
     PrinterSetup.mmPaperWidth = 0
-    PrinterSetup.PaperSize = 139
+    PrinterSetup.PaperSize = 119
     Units = utMillimeters
     AllowPrintToFile = True
     BeforePrint = ReportAutenticBeforePrint
