@@ -3177,6 +3177,9 @@ begin
           exit;
         end;
 
+        if not dm.SQLUsuario.Active then
+          DM.SQLUsuario.Open;
+
         if DM.SQLUsuario.Locate('USUAICOD', UsuarioCorrente, []) then
           if DM.SQLUsuario.FieldByName('USUACCANCITEMVENDA').AsString <> 'S' then
           begin

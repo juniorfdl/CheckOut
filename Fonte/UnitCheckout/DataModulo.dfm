@@ -349,6 +349,12 @@ inherited DM: TDM
       FieldName = 'EMPRESA_ACESSO'
       Origin = 'DB.USUARIO.EMPRESA_ACESSO'
     end
+    object SQLUsuarioUSUACCANCITEMVENDA: TStringField
+      FieldName = 'USUACCANCITEMVENDA'
+      Origin = 'DB.USUARIO.USUACCANCITEMVENDA'
+      FixedChar = True
+      Size = 1
+    end
   end
   object SQLTerminalAtivo: TRxQuery
     DatabaseName = 'DBTerm'
