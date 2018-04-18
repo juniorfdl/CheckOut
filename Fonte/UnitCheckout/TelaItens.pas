@@ -1427,9 +1427,9 @@ begin
 
       if TerminalModo <> 'P' then
         if DM.SQLUsuario.Locate('USUAICOD', UsuarioCorrente, []) then
-          if DM.SQLUsuario.FieldByName('USUACCANCITEMVENDA').AsString <> 'S' then
+          if DM.SQLUsuario.FieldByName('USUACCANCVENDA').AsString <> 'S' then
           begin
-            RetornoCampoUsuario := AutenticaUsuario(UsuarioAtualNome, 'USUACCANCITEMVENDA', RetornoUser);
+            RetornoCampoUsuario := AutenticaUsuario(UsuarioAtualNome, 'USUACCANCVENDA', RetornoUser);
             if RetornoCampoUsuario <> 'S' then
               Exit;
           end;
