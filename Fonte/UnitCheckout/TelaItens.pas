@@ -1634,7 +1634,7 @@ begin
             SQLProduto.Open;
             if not SQLProduto.Eof then
             begin
-              ValorItem := StrToFloat(FormatFloat(FormatStrVlrVenda, RetornaPreco(SQLProduto, DM.SQLConfigVendaTPRCICOD.AsString, '')));
+              ValorItem := StrToFloat(FormatFloat(FormatStrVlrVenda, RetornaPreco(SQLProduto, DM.SQLConfigVendaTPRCICOD.AsString, ClienteUsarParaVenda)));
 
               if SQLBalancaCFBLCTIPOPRECO.AsString = 'V' then
               begin
@@ -2765,6 +2765,7 @@ begin
       end
       else begin
         ClienteVenda := SQLLocate('CLIENTE', 'CLIEA10CODCONV', 'CLIEA13ID', '''' + EntradaDados.Text + '''');
+        ClienteUsarParaVenda  := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIECTPPRCVENDA', '''' + ClienteVenda + '''');
         if ClienteVenda = '' then
         begin
           InformaG('Códido do cliente não encontrado!');
@@ -3036,6 +3037,7 @@ begin
         else
         begin
           ClienteVenda := dm.SQLTerminalAtivoCLIEA13ID.Value;
+          ClienteUsarParaVenda  := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIECTPPRCVENDA', '''' + ClienteVenda + '''');
           rxClienteNome.caption := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIEA60RAZAOSOC', '''' + ClienteVenda + '''');
           rxClienteNome.update;
         end;
@@ -3545,7 +3547,11 @@ begin
               if Pergunta('SIM', 'Deseja gravar a Prevenda atual!') and (VendedorVenda > 0) and (dm.sqlterminalativoTERMCSOLCODVEND.value = 'S') then
               begin
                 if (ClienteVenda = '') and (dm.SQLTerminalAtivoCLIEA13ID.Value <> '') then
+                begin
                   ClienteVenda := dm.SQLTerminalAtivoCLIEA13ID.Value;
+                  ClienteUsarParaVenda  := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIECTPPRCVENDA', '''' + ClienteVenda + '''');
+                end;
+
                 if (PlanoVenda = NULL) or (PlanoVenda = 0) then
                   PlanoVenda := dm.SQLTerminalAtivoPLRCICOD.Value;
 
@@ -5424,6 +5430,7 @@ begin
   LblCLiente.Caption := '';
   LblConvenio.Caption := '';
   ClienteVenda := '';
+  ClienteUsarParaVenda := '';
   ClienteCadastro := '';
   UsaPrecoVenda := '';
   ClienteDependente := '';

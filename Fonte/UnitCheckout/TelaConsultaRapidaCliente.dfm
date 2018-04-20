@@ -465,6 +465,12 @@ object FormTelaConsultaRapidaCliente: TFormTelaConsultaRapidaCliente
       Size = 30
       Calculated = True
     end
+    object SQLClienteCLIECTPPRCVENDA: TStringField
+      FieldName = 'CLIECTPPRCVENDA'
+      Origin = 'DB.CLIENTE.CLIECTPPRCVENDA'
+      FixedChar = True
+      Size = 2
+    end
   end
   object SQLDependentes: TRxQuery
     OnCalcFields = SQLDependentesCalcFields

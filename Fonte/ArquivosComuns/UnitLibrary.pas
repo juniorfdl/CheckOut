@@ -92,6 +92,7 @@ var
   DescrLivreProd, Densidade, Medida, Espessura, Tecido,
   ClienteVenda,
   NomeClienteVenda,
+  ClienteUsarParaVenda,
   ClienteDependente,
   ClienteDependenteNome,
   EnderecoClienteVenda,

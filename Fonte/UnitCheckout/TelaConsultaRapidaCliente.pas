@@ -46,6 +46,7 @@ type
     SQLClienteTPCLICOD: TIntegerField;
     DBEdit1: TDBEdit;
     Label1: TLabel;
+    SQLClienteCLIECTPPRCVENDA: TStringField;
     procedure VALORKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -162,6 +163,7 @@ begin
     begin
       ClienteVenda := SQLCliente.FieldByName('CLIEA13ID').AsString ;
       ClienteRecto := SQLCliente.FieldByName('CLIEA13ID').AsString ;
+      ClienteUsarParaVenda := SQLCliente.FieldByName('CLIECTPPRCVENDA').AsString ;
 
       if Application.FindComponent('FormTelaFechamentoVenda') <> nil then
         if SQLCliente.FieldByName('CLIEA60NOMEFANT').AsString <> '' then
