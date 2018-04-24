@@ -1634,7 +1634,7 @@ begin
             SQLProduto.Open;
             if not SQLProduto.Eof then
             begin
-              ValorItem := StrToFloat(FormatFloat(FormatStrVlrVenda, RetornaPreco(SQLProduto, DM.SQLConfigVendaTPRCICOD.AsString, ClienteUsarParaVenda)));
+              ValorItem := StrToFloat(FormatFloat(FormatStrVlrVenda, RetornaPreco(SQLProduto, DM.SQLConfigVendaTPRCICOD.AsString, UsaPrecoVenda)));
 
               if SQLBalancaCFBLCTIPOPRECO.AsString = 'V' then
               begin
@@ -2764,8 +2764,8 @@ begin
         FormTelaConsultaRapidaCliente.ShowModal;
       end
       else begin
-        ClienteVenda := SQLLocate('CLIENTE', 'CLIEA10CODCONV', 'CLIEA13ID', '''' + EntradaDados.Text + '''');
-        ClienteUsarParaVenda  := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIECTPPRCVENDA', '''' + ClienteVenda + '''');
+        ClienteVenda  := SQLLocate('CLIENTE', 'CLIEA10CODCONV', 'CLIEA13ID', '''' + EntradaDados.Text + '''');
+        UsaPrecoVenda := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIECTPPRCVENDA', '''' + ClienteVenda + '''');
         if ClienteVenda = '' then
         begin
           InformaG('Códido do cliente não encontrado!');
@@ -3037,8 +3037,8 @@ begin
         else
         begin
           ClienteVenda := dm.SQLTerminalAtivoCLIEA13ID.Value;
-          ClienteUsarParaVenda  := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIECTPPRCVENDA', '''' + ClienteVenda + '''');
           rxClienteNome.caption := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIEA60RAZAOSOC', '''' + ClienteVenda + '''');
+          UsaPrecoVenda := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIECTPPRCVENDA', '''' + ClienteVenda + '''');
           rxClienteNome.update;
         end;
 
@@ -3385,22 +3385,29 @@ begin
                 Exit;
               end
               else
-                CriaFormulario(TFormCadastroCliente,
+              begin
+                if CriaFormulario(TFormCadastroCliente,
                   'FormCadastroCliente',
                   False,
                   True,
                   False,
-                  '');
-
+                  '',
+                  True) = 2 then
+                  rxClienteNome.caption := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIEA60RAZAOSOC', '''' + ClienteVenda + '''');
+              end;
             end;
           end
           else
-            CriaFormulario(TFormCadastroCliente,
+          begin
+            if CriaFormulario(TFormCadastroCliente,
               'FormCadastroCliente',
               False,
               True,
               False,
-              '');
+              '',
+              True) = 2 then
+              rxClienteNome.caption := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIEA60RAZAOSOC', '''' + ClienteVenda + '''');
+          end;
       end;
     VK_F12: begin
         if (TerminalModo = 'P') and (ECFAtual = '') then
@@ -3548,8 +3555,8 @@ begin
               begin
                 if (ClienteVenda = '') and (dm.SQLTerminalAtivoCLIEA13ID.Value <> '') then
                 begin
-                  ClienteVenda := dm.SQLTerminalAtivoCLIEA13ID.Value;
-                  ClienteUsarParaVenda  := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIECTPPRCVENDA', '''' + ClienteVenda + '''');
+                  ClienteVenda  := dm.SQLTerminalAtivoCLIEA13ID.Value;
+                  UsaPrecoVenda := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIECTPPRCVENDA', '''' + ClienteVenda + '''');
                 end;
 
                 if (PlanoVenda = NULL) or (PlanoVenda = 0) then
@@ -5430,7 +5437,6 @@ begin
   LblCLiente.Caption := '';
   LblConvenio.Caption := '';
   ClienteVenda := '';
-  ClienteUsarParaVenda := '';
   ClienteCadastro := '';
   UsaPrecoVenda := '';
   ClienteDependente := '';

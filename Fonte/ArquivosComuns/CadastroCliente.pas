@@ -2453,6 +2453,12 @@ begin
         Abort;}
       ClienteCadastro := SQLTemplateCLIEA13ID.AsString;
       UsaPrecoVenda   := copy(SQLTemplateCLIECTPPRCVENDA.AsString,1,1);
+
+      ClienteVenda := SQLTemplate.FieldByName('CLIEA13ID').AsString;
+      ClienteRecto := SQLTemplate.FieldByName('CLIEA13ID').AsString;
+
+      if UpperCase(ExtractFileName(Application.ExeName)) = 'CHECKOUT.EXE' then
+        ModalResult := mrOk;
   {  end;   }
   inherited;
 end;

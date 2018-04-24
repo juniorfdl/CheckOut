@@ -7,7 +7,7 @@ uses
   DataModulo, ExtCtrls, StdCtrls, DB, Menus, VarSys, RXQuery;
 
 function  ExisteFormulario(NomeFormulario : String) : Boolean;
-function  CriaFormulario(Formulario : TFormClass; NomeFormulario : String; Detail, Retorno, AbreTabela : Boolean;Titulo:String):Integer;
+function  CriaFormulario(Formulario : TFormClass; NomeFormulario : String; Detail, Retorno, AbreTabela : Boolean;Titulo:String; ShowModal: Boolean = False):Integer;
 procedure PreencherLookup(DataSet: TDataSet;
   Tabela: string; CampoChave, Valores: array of string; NumCampos: Integer;
   CampoLookup, CampoResultado: string);
@@ -39,7 +39,8 @@ begin
     end;
 end;
 
-function CriaFormulario(Formulario : TFormClass; NomeFormulario : String; Detail, Retorno, AbreTabela : Boolean;Titulo:String):Integer;
+function CriaFormulario(Formulario: TFormClass; NomeFormulario: String;
+  Detail, Retorno, AbreTabela: Boolean; Titulo: string; ShowModal: Boolean): Integer;
 var
   Form, Objeto, QueryTemplate : TObject;
   i            : integer;
@@ -128,11 +129,18 @@ begin
               (Objeto as TDataSource).DataSet.Active := True;
             end;
       End;
-    Result:=mrNone;
-   (Form as TForm).Show;
+
+    if not(ShowModal) then
+    begin
+      Result := mrNone;
+      (Form as TForm).Show;
+    end;
   finally
-    LockWindowUpdate(0) ;
-  end ;
+    LockWindowUpdate(0);
+
+    if ShowModal then
+      Result := (Form as TForm).ShowModal;
+  end;
   //========================================================================//
   // Autor: Jonas Loss          Data: 26/06/2003.
   // Verifica se o formulário tem TAG = 1
@@ -140,13 +148,13 @@ begin
   // Se não for um usuário MASTER não permite o acesso, somente a visualização.
   //========================================================================//
   if (Form as TForm).Tag = 1 then
+  begin
+    if AutenticaUsuario(UsuarioAtualNome,'USUACUSERMASTER',RetornoUser) <> 'S' then
     begin
-      if AutenticaUsuario(UsuarioAtualNome,'USUACUSERMASTER',RetornoUser) <> 'S' then
-        begin
-          Informa('Você não tem permissão para acessar este módulo!');
-          (Form as TForm).Free;
-        end;
+      Informa('Você não tem permissão para acessar este módulo!');
+      (Form as TForm).Free;
     end;
+  end;
 End;
 
 procedure PreencherLookup(DataSet: TDataSet;
