@@ -1,6 +1,6 @@
 inherited FormCadastroUsuario: TFormCadastroUsuario
-  Left = 259
-  Top = 118
+  Left = 252
+  Top = 77
   Caption = 'Cadastro de Usu'#225'rios'
   ClientHeight = 569
   ClientWidth = 837
@@ -41,13 +41,14 @@ inherited FormCadastroUsuario: TFormCadastroUsuario
           Width = 705
           Height = 495
           inherited PagePrincipal: TPageControl
-            Top = 160
+            Top = 138
             Width = 705
-            Height = 335
+            Height = 357
+            ActivePage = TabSheetDadosPrincipais
             inherited TabSheetConsulta: TTabSheet
               inherited DBGridLista: TDBGrid
                 Width = 697
-                Height = 262
+                Height = 284
                 Columns = <
                   item
                     Expanded = False
@@ -197,7 +198,7 @@ inherited FormCadastroUsuario: TFormCadastroUsuario
                   Top = 91
                   Width = 147
                   Height = 17
-                  Caption = 'Cancelar Cupom/Item'
+                  Caption = 'Cancelar Cupom'
                   DataField = 'USUACCANCVENDA'
                   DataSource = DSTemplate
                   Font.Charset = DEFAULT_CHARSET
@@ -715,7 +716,7 @@ inherited FormCadastroUsuario: TFormCadastroUsuario
                   ValueUnchecked = 'N'
                 end
                 object DBCheckBox39: TDBCheckBox
-                  Left = 323
+                  Left = 322
                   Top = 249
                   Width = 300
                   Height = 17
@@ -786,6 +787,24 @@ inherited FormCadastroUsuario: TFormCadastroUsuario
                   ValueChecked = 'S'
                   ValueUnchecked = 'N'
                 end
+                object DBCheckBox43: TDBCheckBox
+                  Left = 322
+                  Top = 265
+                  Width = 176
+                  Height = 17
+                  Caption = 'Cancelar Item do Cupom'
+                  DataField = 'USUACCANCITEMVENDA'
+                  DataSource = DSTemplate
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = 8404992
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = [fsBold]
+                  ParentFont = False
+                  TabOrder = 36
+                  ValueChecked = 'S'
+                  ValueUnchecked = 'N'
+                end
               end
               object DBEdit5: TDBEdit
                 Left = 156
@@ -803,6 +822,7 @@ inherited FormCadastroUsuario: TFormCadastroUsuario
           inherited PanelMaster: TPanel
             Top = 119
             Width = 705
+            Height = 19
           end
           inherited PanelCodigoDescricao: TPanel
             Width = 705
@@ -1446,6 +1466,12 @@ inherited FormCadastroUsuario: TFormCadastroUsuario
       FixedChar = True
       Size = 1
     end
+    object SQLTemplateUSUACCANCITEMVENDA: TStringField
+      FieldName = 'USUACCANCITEMVENDA'
+      Origin = 'DB.USUARIO.USUACCANCITEMVENDA'
+      FixedChar = True
+      Size = 1
+    end
   end
   inherited UpdateSQLTemplate: TUpdateSQL
     ModifySQL.Strings = (
@@ -1501,7 +1527,7 @@ inherited FormCadastroUsuario: TFormCadastroUsuario
     PrinterSetup.mmMarginTop = 14000
     PrinterSetup.mmPaperHeight = 279000
     PrinterSetup.mmPaperWidth = 216000
-    PrinterSetup.PaperSize = 1
+    PrinterSetup.PaperSize = 119
     Template.FileName = 'C:\TiagoAllfaro\Moreleh\EtiquetasMalaDireta\EtiquetaMoreleh.rtm'
     Units = utMillimeters
     DeviceType = 'Screen'
