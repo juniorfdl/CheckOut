@@ -64,8 +64,6 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       Font.Height = -27
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
-      HTMLText.Strings = (
-        'easy2solutions')
       ParentFont = False
       ReflectionSize = 20
       ReflectionAxis = -15

@@ -2001,11 +2001,19 @@ begin
         if FormTelaTipoDescontoItem.EditDesconto.Value > 0 then
         begin
           if FormTelaTipoDescontoItem.DescValor.Checked then
-            DescItemVlr := FormTelaTipoDescontoItem.EditDesconto.Value
+          begin
+            DescItemVlr := FormTelaTipoDescontoItem.EditDesconto.Value;
+            DescItemPerc := 0;
+          end
           else
+          begin
             DescItemPerc := FormTelaTipoDescontoItem.EditDesconto.Value;
+            DescItemVlr := 0;
+          end;
         end;
       end;
+      if DescItemPerc > 0 then
+        DescItemVlr := ValorItem * (DescItemPerc / 100);
 
       // Para que o Desconto seja Multiplicado pela Qtde Vendida
       if (QuantItem > 1) and (DescItemVlr > 0) then
@@ -2055,6 +2063,7 @@ begin
                 Informa('Você não tem permissão de dar este percentual de desconto!');
                 EntradaDados.Clear;
                 PreparaEstadoBalcao(InformandoItens);
+                AplicarDescontoItem := False;
                 exit;
               end;
             end
