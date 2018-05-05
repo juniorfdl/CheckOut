@@ -1592,7 +1592,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Width = 50
       Height = 21
       CharCase = ecUpperCase
-      DataField = 'CLRCA7LONGODDNP'
+      DataField = 'CLRCA7LONGODALT'
       DataSource = DSSQLClienteReceituario
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -1608,7 +1608,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Width = 50
       Height = 21
       CharCase = ecUpperCase
-      DataField = 'CLRCA7LONGOEDNP'
+      DataField = 'CLRCA7LONGOEALT'
       DataSource = DSSQLClienteReceituario
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -4679,6 +4679,18 @@ object FormTelaReceituario: TFormTelaReceituario
       FieldName = 'BairroCliCalcField'
       Size = 60
       Calculated = True
+    end
+    object SQLClienteReceituarioCLRCA7LONGODALT: TStringField
+      FieldName = 'CLRCA7LONGODALT'
+      Origin = 'EASY_GESTAO.CLIENTERECEITUARIO.CLRCA7LONGODALT'
+      FixedChar = True
+      Size = 7
+    end
+    object SQLClienteReceituarioCLRCA7LONGOEALT: TStringField
+      FieldName = 'CLRCA7LONGOEALT'
+      Origin = 'EASY_GESTAO.CLIENTERECEITUARIO.CLRCA7LONGOEALT'
+      FixedChar = True
+      Size = 7
     end
   end
   object DSSQLClienteReceituario: TDataSource
