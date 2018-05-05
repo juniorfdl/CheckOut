@@ -1,6 +1,6 @@
 object FormTelaReceituario: TFormTelaReceituario
-  Left = 87
-  Top = 22
+  Left = 216
+  Top = 30
   BorderIcons = [biSystemMenu]
   BorderStyle = bsNone
   Caption = 'Cadastro de Ordem de Servi'#231'os'
@@ -1220,6 +1220,20 @@ object FormTelaReceituario: TFormTelaReceituario
       ParentFont = False
       Transparent = True
     end
+    object Label1: TLabel
+      Left = 356
+      Top = 9
+      Width = 16
+      Height = 13
+      Caption = 'Alt'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 8404992
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = True
+    end
     object DBEdit3: TDBEdit
       Left = 79
       Top = 34
@@ -1250,7 +1264,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 4
+      TabOrder = 5
     end
     object DBEdit4: TDBEdit
       Left = 131
@@ -1282,7 +1296,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 5
+      TabOrder = 6
     end
     object DBEdit5: TDBEdit
       Left = 183
@@ -1314,7 +1328,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 6
+      TabOrder = 7
     end
     object DBEdit6: TDBEdit
       Left = 235
@@ -1346,7 +1360,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 7
+      TabOrder = 8
     end
     object DBEdit10: TDBEdit
       Left = 79
@@ -1362,7 +1376,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 8
+      TabOrder = 10
     end
     object DBEdit11: TDBEdit
       Left = 79
@@ -1378,7 +1392,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 13
+      TabOrder = 15
     end
     object DBEdit12: TDBEdit
       Left = 131
@@ -1394,7 +1408,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 9
+      TabOrder = 11
     end
     object DBEdit13: TDBEdit
       Left = 131
@@ -1410,7 +1424,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 14
+      TabOrder = 16
     end
     object DBEdit14: TDBEdit
       Left = 183
@@ -1426,7 +1440,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 10
+      TabOrder = 12
     end
     object DBEdit15: TDBEdit
       Left = 183
@@ -1442,7 +1456,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 15
+      TabOrder = 17
     end
     object DBEdit16: TDBEdit
       Left = 235
@@ -1458,7 +1472,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 11
+      TabOrder = 13
     end
     object DBEdit25: TDBEdit
       Left = 235
@@ -1474,7 +1488,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 16
+      TabOrder = 18
     end
     object DBEdit18: TDBEdit
       Left = 444
@@ -1490,7 +1504,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 19
+      TabOrder = 21
     end
     object DBEdit19: TDBEdit
       Left = 444
@@ -1506,7 +1520,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 20
+      TabOrder = 22
     end
     object DBEdit20: TDBEdit
       Left = 444
@@ -1522,7 +1536,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 21
+      TabOrder = 23
     end
     object DBEdit21: TDBEdit
       Left = 340
@@ -1538,7 +1552,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 18
+      TabOrder = 20
     end
     object DBEdit22: TDBEdit
       Left = 287
@@ -1554,7 +1568,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 12
+      TabOrder = 14
     end
     object DBEdit30: TDBEdit
       Left = 287
@@ -1570,7 +1584,39 @@ object FormTelaReceituario: TFormTelaReceituario
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 17
+      TabOrder = 19
+    end
+    object DBEdit32: TDBEdit
+      Left = 339
+      Top = 34
+      Width = 50
+      Height = 21
+      CharCase = ecUpperCase
+      DataField = 'CLRCA7LONGODDNP'
+      DataSource = DSSQLClienteReceituario
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 4
+    end
+    object DBEdit33: TDBEdit
+      Left = 339
+      Top = 57
+      Width = 50
+      Height = 21
+      CharCase = ecUpperCase
+      DataField = 'CLRCA7LONGOEDNP'
+      DataSource = DSSQLClienteReceituario
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 9
     end
   end
   object PanelRelogio: TPanel
@@ -4655,7 +4701,7 @@ object FormTelaReceituario: TFormTelaReceituario
     PrinterSetup.mmMarginTop = 1270
     PrinterSetup.mmPaperHeight = 190000
     PrinterSetup.mmPaperWidth = 250000
-    PrinterSetup.PaperSize = 139
+    PrinterSetup.PaperSize = 119
     Units = utMillimeters
     DeviceType = 'Printer'
     EmailSettings.ReportFormat = 'PDF'
@@ -5608,7 +5654,7 @@ object FormTelaReceituario: TFormTelaReceituario
     PrinterSetup.mmMarginTop = 1270
     PrinterSetup.mmPaperHeight = 210000
     PrinterSetup.mmPaperWidth = 250000
-    PrinterSetup.PaperSize = 139
+    PrinterSetup.PaperSize = 119
     Units = utMillimeters
     DeviceType = 'Printer'
     EmailSettings.ReportFormat = 'PDF'
@@ -6394,7 +6440,7 @@ object FormTelaReceituario: TFormTelaReceituario
     PrinterSetup.mmMarginTop = 1270
     PrinterSetup.mmPaperHeight = 240000
     PrinterSetup.mmPaperWidth = 250000
-    PrinterSetup.PaperSize = 139
+    PrinterSetup.PaperSize = 119
     Units = utMillimeters
     DeviceType = 'Printer'
     EmailSettings.ReportFormat = 'PDF'
