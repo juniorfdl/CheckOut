@@ -1,6 +1,6 @@
 object FormPrincipal: TFormPrincipal
-  Left = 407
-  Top = 253
+  Left = 680
+  Top = 185
   Width = 507
   Height = 87
   Caption = 'Impressao PreVenda'
@@ -71,10 +71,6 @@ object FormPrincipal: TFormPrincipal
       FieldName = 'Numerario'
       Size = 15
     end
-    object TblPedidoFinanceiroTipopadrao: TStringField
-      FieldName = 'Tipopadrao'
-      Size = 5
-    end
   end
   object TblPreVendaItem: TTable
     DatabaseName = 'Easy_Temp'
@@ -86,13 +82,17 @@ object FormPrincipal: TFormPrincipal
     end
     object TblPreVendaItemDescricao: TStringField
       FieldName = 'Descricao'
-      Size = 60
+      Size = 30
     end
-    object TblPreVendaItemValorUnitario: TFloatField
-      FieldName = 'ValorUnitario'
+    object TblPreVendaItemComplemento: TStringField
+      FieldName = 'Complemento'
+      Size = 200
     end
     object TblPreVendaItemQuantidade: TFloatField
       FieldName = 'Quantidade'
+    end
+    object TblPreVendaItemValorUnitario: TFloatField
+      FieldName = 'ValorUnitario'
     end
     object TblPreVendaItemValorTotal: TFloatField
       FieldName = 'ValorTotal'
@@ -108,17 +108,9 @@ object FormPrincipal: TFormPrincipal
       FieldName = 'Referencia'
       Size = 15
     end
-    object TblPreVendaItemUnidade: TStringField
-      FieldName = 'Unidade'
-      Size = 5
-    end
     object TblPreVendaItemTroca: TStringField
       FieldName = 'Troca'
       Size = 1
-    end
-    object TblPreVendaItemComplemento: TStringField
-      FieldName = 'Complemento'
-      Size = 60
     end
     object TblPreVendaItemImpCozinha: TStringField
       FieldName = 'ImpCozinha'
@@ -128,15 +120,280 @@ object FormPrincipal: TFormPrincipal
       FieldName = 'ImpVale'
       Size = 1
     end
+    object TblPreVendaItemPRODA30COZINHA: TStringField
+      FieldName = 'PRODA30COZINHA'
+      Size = 30
+    end
+    object TblPreVendaItemBORDA01: TStringField
+      FieldName = 'BORDA01'
+      Size = 60
+    end
+    object TblPreVendaItemBORDA02: TStringField
+      FieldName = 'BORDA02'
+      Size = 60
+    end
+    object TblPreVendaItemBORDA03: TStringField
+      FieldName = 'BORDA03'
+      Size = 60
+    end
+    object TblPreVendaItemSABOR01: TStringField
+      FieldName = 'SABOR01'
+      Size = 60
+    end
+    object TblPreVendaItemSABOR02: TStringField
+      FieldName = 'SABOR02'
+      Size = 60
+    end
+    object TblPreVendaItemSABOR03: TStringField
+      FieldName = 'SABOR03'
+      Size = 60
+    end
+    object TblPreVendaItemSABOR04: TStringField
+      FieldName = 'SABOR04'
+      Size = 60
+    end
+    object TblPreVendaItemSABOR05: TStringField
+      FieldName = 'SABOR05'
+      Size = 60
+    end
+    object TblPreVendaItemSABOR06: TStringField
+      FieldName = 'SABOR06'
+      Size = 60
+    end
   end
   object TblPreVendaCab: TTable
     DatabaseName = 'Easy_Temp'
+    FieldDefs = <
+      item
+        Name = 'TicketNumero'
+        DataType = ftString
+        Size = 13
+      end
+      item
+        Name = 'DataEmissao'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'Vendedor'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'Plano'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'Cliente'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'FoneCliente'
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'TotalNominal'
+        DataType = ftFloat
+      end
+      item
+        Name = 'TaxaCrediario'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Acrescimo'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Desconto'
+        DataType = ftFloat
+      end
+      item
+        Name = 'TotalGeral'
+        DataType = ftFloat
+      end
+      item
+        Name = 'NomeEmpresa'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'FoneEmpresa'
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'NroCreditCard'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'NumerarioPagto'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'Mensagem'
+        DataType = ftString
+        Size = 254
+      end
+      item
+        Name = 'DataEntrega'
+        DataType = ftString
+        Size = 30
+      end
+      item
+        Name = 'TipoVenda'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'PessoaRecebeNome'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'PessoaRecebeEnder'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'PessoaRecebeBai'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'PessoaRecebeCid'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'PessoaRecebeUF'
+        DataType = ftString
+        Size = 2
+      end
+      item
+        Name = 'PessoaRecebeFone'
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'Mensagem2'
+        DataType = ftMemo
+        Size = 240
+      end
+      item
+        Name = 'VlrEntrada'
+        DataType = ftFloat
+      end
+      item
+        Name = 'NomeClienteVenda'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'DocumentoClienteVenda'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'EnderecoClienteVenda'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'CidadeClienteVenda'
+        DataType = ftString
+        Size = 30
+      end
+      item
+        Name = 'OBSImpressaoCupom'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'TERMICOD'
+        DataType = ftInteger
+      end
+      item
+        Name = 'PRVDICOD'
+        DataType = ftInteger
+      end
+      item
+        Name = 'FoneClienteVenda'
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'UsuarioVendaSTR'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'ClienteDependente'
+        DataType = ftInteger
+      end
+      item
+        Name = 'PlacaVeiculo'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'MesaCodigo'
+        DataType = ftInteger
+      end
+      item
+        Name = 'ContaCodigo'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Troco'
+        DataType = ftFloat
+      end
+      item
+        Name = 'DisplayNumero'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Busca'
+        DataType = ftString
+        Size = 1
+      end
+      item
+        Name = 'LevarCasa'
+        DataType = ftString
+        Size = 1
+      end
+      item
+        Name = 'BairroClienteVenda'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'Motoboy'
+        DataType = ftString
+        Size = 30
+      end
+      item
+        Name = 'TaxaTele'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Sequencial'
+        DataType = ftInteger
+      end>
+    StoreDefs = True
     TableName = 'TicketPreVendaCab.DB'
-    Left = 3
-    Top = 8
+    Left = 5
+    Top = 9
     object TblPreVendaCabTicketNumero: TStringField
       FieldName = 'TicketNumero'
       Size = 13
+    end
+    object TblPreVendaCabDataEmissao: TStringField
+      FieldName = 'DataEmissao'
     end
     object TblPreVendaCabVendedor: TStringField
       FieldName = 'Vendedor'
@@ -168,6 +425,14 @@ object FormPrincipal: TFormPrincipal
     end
     object TblPreVendaCabTotalGeral: TFloatField
       FieldName = 'TotalGeral'
+    end
+    object TblPreVendaCabNomeEmpresa: TStringField
+      FieldName = 'NomeEmpresa'
+      Size = 60
+    end
+    object TblPreVendaCabFoneEmpresa: TStringField
+      FieldName = 'FoneEmpresa'
+      Size = 15
     end
     object TblPreVendaCabNroCreditCard: TStringField
       FieldName = 'NroCreditCard'
@@ -245,9 +510,6 @@ object FormPrincipal: TFormPrincipal
     object TblPreVendaCabPRVDICOD: TIntegerField
       FieldName = 'PRVDICOD'
     end
-    object TblPreVendaCabDataEmissao: TDateTimeField
-      FieldName = 'DataEmissao'
-    end
     object TblPreVendaCabFoneClienteVenda: TStringField
       FieldName = 'FoneClienteVenda'
       Size = 15
@@ -255,24 +517,28 @@ object FormPrincipal: TFormPrincipal
     object TblPreVendaCabUsuarioVendaSTR: TStringField
       FieldName = 'UsuarioVendaSTR'
     end
+    object TblPreVendaCabClienteDependente: TIntegerField
+      FieldName = 'ClienteDependente'
+    end
     object TblPreVendaCabPlacaVeiculo: TStringField
       FieldName = 'PlacaVeiculo'
       Size = 10
-    end
-    object TblPreVendaCabTroco: TFloatField
-      FieldName = 'Troco'
-    end
-    object TblPreVendaCabPEDIDOORCAMENTO: TStringField
-      FieldName = 'PEDIDOORCAMENTO'
-    end
-    object TblPreVendaCabDisplayNumero: TIntegerField
-      FieldName = 'DisplayNumero'
     end
     object TblPreVendaCabMesaCodigo: TIntegerField
       FieldName = 'MesaCodigo'
     end
     object TblPreVendaCabContaCodigo: TIntegerField
       FieldName = 'ContaCodigo'
+    end
+    object TblPreVendaCabTroco: TFloatField
+      FieldName = 'Troco'
+    end
+    object TblPreVendaCabDisplayNumero: TIntegerField
+      FieldName = 'DisplayNumero'
+    end
+    object TblPreVendaCabBusca: TStringField
+      FieldName = 'Busca'
+      Size = 1
     end
     object TblPreVendaCabLevarCasa: TStringField
       FieldName = 'LevarCasa'
@@ -282,36 +548,15 @@ object FormPrincipal: TFormPrincipal
       FieldName = 'BairroClienteVenda'
       Size = 60
     end
-    object TblPreVendaCabKM: TStringField
-      FieldName = 'KM'
-      Size = 10
-    end
-    object TblPreVendaCabEmpresaEmit: TStringField
-      FieldName = 'EmpresaEmit'
-      Size = 60
-    end
-    object TblPreVendaCabEmpresaEmit_Ender: TStringField
-      FieldName = 'EmpresaEmit_Ender'
-      Size = 60
-    end
-    object TblPreVendaCabEmpresaEmit_Bairro: TStringField
-      FieldName = 'EmpresaEmit_Bairro'
-      Size = 60
-    end
-    object TblPreVendaCabEmpresaEmit_Cidade: TStringField
-      FieldName = 'EmpresaEmit_Cidade'
-      Size = 60
-    end
-    object TblPreVendaCabEmpresaEmit_Fone: TStringField
-      FieldName = 'EmpresaEmit_Fone'
-      Size = 15
-    end
-    object TblPreVendaCabClienteDependente: TStringField
-      FieldName = 'ClienteDependente'
-    end
-    object TblPreVendaCabTerminal: TStringField
-      FieldName = 'Terminal'
+    object TblPreVendaCabMotoboy: TStringField
+      FieldName = 'Motoboy'
       Size = 30
+    end
+    object TblPreVendaCabTaxaTele: TFloatField
+      FieldName = 'TaxaTele'
+    end
+    object TblPreVendaCabSequencial: TIntegerField
+      FieldName = 'Sequencial'
     end
   end
   object ACBrPosPrinter: TACBrPosPrinter
