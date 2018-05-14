@@ -562,8 +562,6 @@ type
     MemoOBS: TDBMemo;
     TabSheet3: TTabSheet;
     DBMemo2: TDBMemo;
-    SQLTemplateCLIEN2RENDA: TBCDField;
-    SQLTemplateCLIEN2LIMITECRED: TBCDField;
     SQLTemplateCLIECATIVO: TStringField;
     SQLTemplateCLIEDCAD: TDateTimeField;
     SQLTemplateCLIECVNDCHEQ: TStringField;
@@ -575,7 +573,6 @@ type
     ComboAtivo: TRxDBComboBox;
     Label77: TLabel;
     DBDateEdit8: TDBDateEdit;
-    SQLTemplateCLIEN3VLRFRETE: TBCDField;
     ValorFrete: TEvDBNumEdit;
     Label4: TLabel;
     EvDBNumEdit1: TEvDBNumEdit;
@@ -583,10 +580,13 @@ type
     Label6: TLabel;
     DBEdit2: TDBEdit;
     SQLTemplateCLIEA35NROCARTCRED: TStringField;
-    SQLTemplateCLIEN2CONJUGERENDA: TBCDField;
     Label9: TLabel;
     DBEdit3: TDBEdit;
     SQLTemplateCLIEA14CGC: TStringField;
+    SQLTemplateCLIEN2RENDA: TFloatField;
+    SQLTemplateCLIEN2CONJUGERENDA: TFloatField;
+    SQLTemplateCLIEN2LIMITECRED: TFloatField;
+    SQLTemplateCLIEN3VLRFRETE: TFloatField;
     procedure FormCreate(Sender: TObject);
     procedure SQLTemplateNewRecord(DataSet: TDataSet);
     procedure Button1Click(Sender: TObject);

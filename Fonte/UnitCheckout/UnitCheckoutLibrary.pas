@@ -740,7 +740,7 @@ begin
     DM.TblTicketPreVendaItemQuantidade.Value    := SQLOrcamentoItem.FieldbyName('PVITN3QUANT').Value ;
     DM.TblTicketPreVendaItemValorUnitario.Value := SQLOrcamentoItem.FieldbyName('PVITN2VLRUNIT').Value ;
     DM.TblTicketPreVendaItemDesconto.Value      := SQLOrcamentoItem.FieldbyName('PVITN2VLRDESC').Value ;
-    DM.TblTicketPreVendaItemValorTotal.Value    := (SQLOrcamentoItem.FieldbyName('PVITN2VLRUNIT').Value-SQLOrcamentoItem.FieldbyName('PVITN2VLRDESC').Value)* SQLOrcamentoItem.FieldbyName('PVITN3QUANT').Value ;
+    DM.TblTicketPreVendaItemValorTotal.Value    := (SQLOrcamentoItem.FieldbyName('PVITN2VLRUNIT').Value * SQLOrcamentoItem.FieldbyName('PVITN3QUANT').Value) - SQLOrcamentoItem.FieldbyName('PVITN2VLRDESC').Value ;
     DM.TblTicketPreVendaItemComplemento.Value   := SQLOrcamentoItem.FieldbyName('PDVDA60OBS').Value ;
     DM.TblTicketPreVendaItem.Post ;
     SQLOrcamentoItem.Next ;

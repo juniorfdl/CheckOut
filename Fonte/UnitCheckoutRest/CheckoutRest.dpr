@@ -109,7 +109,8 @@ uses
   TelaVendedorCodigo in 'TelaVendedorCodigo.pas' {FormVendedorCodigo},
   TelaMotivoCancelamento in 'TelaMotivoCancelamento.pas' {FormTelaDadosCancelamento},
   Sigtron_FS345 in 'Sigtron_FS345.pas',
-  TelaContaCodigo in 'TelaContaCodigo.pas' {FormTelaContaCodigo};
+  TelaContaCodigo in 'TelaContaCodigo.pas' {FormTelaContaCodigo},
+  CadastroClienteRestaurante in 'CadastroClienteRestaurante.pas' {FormCadastroClienteRestaurante};
 
 {$R *.RES}
 

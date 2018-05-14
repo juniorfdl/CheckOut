@@ -2630,36 +2630,28 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
       FixedChar = True
       Size = 35
     end
-    object SQLTemplateCLIEN2RENDA: TBCDField
-      FieldName = 'CLIEN2RENDA'
-      Origin = 'DB.CLIENTE.CLIEN2RENDA'
-      Precision = 15
-      Size = 3
-    end
-    object SQLTemplateCLIEN2CONJUGERENDA: TBCDField
-      FieldName = 'CLIEN2CONJUGERENDA'
-      Origin = 'DB.CLIENTE.CLIEN2CONJUGERENDA'
-      Precision = 15
-      Size = 3
-    end
-    object SQLTemplateCLIEN2LIMITECRED: TBCDField
-      FieldName = 'CLIEN2LIMITECRED'
-      Origin = 'DB.CLIENTE.CLIEN2LIMITECRED'
-      Precision = 15
-      Size = 3
-    end
-    object SQLTemplateCLIEN3VLRFRETE: TBCDField
-      FieldName = 'CLIEN3VLRFRETE'
-      Origin = 'DB.CLIENTE.CLIEN3VLRFRETE'
-      Precision = 15
-      Size = 3
-    end
     object SQLTemplateCLIEA14CGC: TStringField
       DisplayLabel = 'Documento'
       FieldName = 'CLIEA14CGC'
       Origin = 'DB.CLIENTE.CLIEA14CGC'
       FixedChar = True
       Size = 14
+    end
+    object SQLTemplateCLIEN2RENDA: TFloatField
+      FieldName = 'CLIEN2RENDA'
+      Origin = 'DB.CLIENTE.CLIEN2RENDA'
+    end
+    object SQLTemplateCLIEN2CONJUGERENDA: TFloatField
+      FieldName = 'CLIEN2CONJUGERENDA'
+      Origin = 'DB.CLIENTE.CLIEN2CONJUGERENDA'
+    end
+    object SQLTemplateCLIEN2LIMITECRED: TFloatField
+      FieldName = 'CLIEN2LIMITECRED'
+      Origin = 'DB.CLIENTE.CLIEN2LIMITECRED'
+    end
+    object SQLTemplateCLIEN3VLRFRETE: TFloatField
+      FieldName = 'CLIEN3VLRFRETE'
+      Origin = 'DB.CLIENTE.CLIEN3VLRFRETE'
     end
   end
   inherited SQLExcluiDetalhes: TRxQuery
@@ -4404,7 +4396,7 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
     DataPipeline = PipeCliente
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'Letter'
+    PrinterSetup.PaperName = 'Legal'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.mmMarginBottom = 6350
     PrinterSetup.mmMarginLeft = 6350
@@ -7016,7 +7008,7 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
     DataPipeline = PipeCliente
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'Letter'
+    PrinterSetup.PaperName = 'Legal'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.mmMarginBottom = 6350
     PrinterSetup.mmMarginLeft = 6350

@@ -110,7 +110,7 @@ uses DataModulo;
 
 procedure TFormPrincipal.FormCreate(Sender: TObject);
 var Inifile: TInifile;
-var hostName, dataBase, CodCliente, NroReduzido, ImpMarca, ImpCaixaPorta, ImpCaixaVeloc, MostraDisplay, Cartao, NroVias, Obs_Venda : String;
+var hostName, dataBase, CodCliente, NroReduzido, ImpMarca, ImpCaixaPorta, ImpCaixaVeloc, MostraDisplay, Cartao, NroVias, Obs_Venda,UsaSenha : String;
 var TotDesc, TotConfissao, TotalTroca : Double;
 begin
   //ImprimirCodigo('LOCALHOST', 'C:\Easy2Solutions\dados\BANCO.FDB');
@@ -138,6 +138,7 @@ begin
     ImpCaixaVeloc       := IniFile.ReadString('Restaurante','ImpCaixaVeloc','9600');
     hostName            := IniFile.ReadString('PDV','HostName','');
     dataBase            := IniFile.ReadString('PDV','dataBase','');
+    UsaSenha            := IniFile.ReadString('PDV','usasenha','');
     IniFile.Free;
 
     if ImpMarca = 'EPSON'    then ACBrPosPrinter.Modelo := ppEscPosEpson;
@@ -150,7 +151,8 @@ begin
     ACBrPosPrinter.Device.Baud  := StrToint(ImpCaixaVeloc);
     ACBrPosPrinter.Desativar;
 
-    ImprimirCodigo(hostName, dataBase);
+    if UsaSenha = 'S' then
+      ImprimirCodigo(hostName, dataBase);
 
     memo.Lines.Add('</ce><e>'  +TblPreVendaCabEmpresaEmit.Value+'</e>');
     memo.Lines.Add('</fn></ce>'+TblPreVendaCabEmpresaEmit_Ender.Value);
@@ -194,7 +196,7 @@ begin
     memo.Lines.Add('</e></fn>');
     memo.Lines.Add('------------------------------------------------');
     memo.Lines.Add('Codigo Descricao                                ');
-    memo.Lines.Add('       Quantidade     Valor Unit       Vlr.Total');
+    memo.Lines.Add(' Quantidade   Valor Unit   Valor Desc  Vlr.Total');
     memo.Lines.Add('------------------------------------------------');
     TblPreVendaItem.First;
     While not TblPreVendaItem.eof Do
@@ -204,7 +206,10 @@ begin
             memo.Lines.Add('</ae>'+TblPreVendaItemCodigo.AsString + ' ' + TblPreVendaItemDescricao.AsString);
        {     if TblPreVendaItemComplemento.AsString<>'' then
               memo.Lines.Add('</ae>'+TblPreVendaItemComplemento.Value); }
-            memo.Lines.Add('</ad>'+FormatFloat('##00.00',TblPreVendaItemQuantidade.Value)+'     '+FormatFloat('R$ ##0.00',TblPreVendaItemValorUnitario.Value)+'     '+ FormatFloat('R$ ##0.00',TblPreVendaItemValorTotal.Value)+'   ');
+            memo.Lines.Add('</ad>'+FormatFloat('##00.00',TblPreVendaItemQuantidade.Value)+'     '
+                                  +FormatFloat('R$ ##0.00',TblPreVendaItemValorUnitario.Value)+ '     '
+                                  +FormatFloat('R$ ##0.00',TblPreVendaItemDesconto.Value)+'     '
+                                  +FormatFloat('R$ ##0.00',TblPreVendaItemValorTotal.Value)+' ');
           end;
         TblPreVendaItem.Next;
       End;
@@ -383,9 +388,13 @@ begin
     Query.SQLConnection := Connection;
 
     SQL := 'SELECT CODIGO FROM IMPRESSAO_PREVENDA WHERE DATA = ' + QuotedStr(FormatDateTime('dd.mm.yyyy 00:00:00', Now));
-
-    Query.SQL.Add(SQL);
-    Query.Open;
+    try
+      Query.SQL.Add(SQL);
+      Query.Open;
+    except
+      on e: Exception do
+      ShowMessage(e.ClassName + 'Erro gerado, com mensagem: ' + e.Message);
+    end;
 
     if not(Query.IsEmpty) then
     begin

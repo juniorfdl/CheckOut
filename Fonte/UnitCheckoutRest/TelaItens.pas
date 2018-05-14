@@ -362,6 +362,7 @@ type
     procedure CapturaCodigosIniciais ;
     function VerificaCartaoCredito : Boolean;
     procedure Inicia_NFe;
+    procedure CalcularImpostos(CodNCM, OrigemProduto: Integer; Valor: Currency);
     function Gerar_NFCe(idCupom:string): string;
     procedure LoadXML(MyMemo: TMemo; MyWebBrowser: TWebBrowser);
     function SN(sNum:string):string;
@@ -479,7 +480,8 @@ function TFormTelaItens.Gerar_NFCe(idCupom:string): string;
 var iCRT : integer;
 var iTipoPadrao : string;
 var eServico : boolean;
-var VlrDescNoTotal, VlrTroca, VlrTotalItens, PercDesc : double;
+var VlrDescNoTotal, VlrTroca, VlrTotalItens, PercDesc, TotalDesconto : double;
+var vaux, Total_vTotTrib : Currency;
 begin
   dm.sqlconsulta.close;
   dm.sqlconsulta.sql.clear;
@@ -576,7 +578,7 @@ begin
            {Carrega Produtos temporarios}
            dm.sqlconsulta.close;
            dm.sqlconsulta.sql.Clear;
-           dm.sqlconsulta.sql.Text := 'select PRODA30ADESCRREDUZ,PRODA60REFER,PRODIORIGEM, PRODISITTRIB, PRODA1TIPO, PRODA1MODBC,PRODA1MODBCST,PRODA1MODBCST from produto where prodicod='+ SQLImpressaoCupom.fieldbyname('PRODICOD').AsString;
+           dm.sqlconsulta.sql.Text := 'select NCMICOD, PRODA30ADESCRREDUZ,PRODA60REFER,PRODIORIGEM, PRODISITTRIB, PRODA1TIPO, PRODA1MODBC,PRODA1MODBCST,PRODA1MODBCST from produto where prodicod='+ SQLImpressaoCupom.fieldbyname('PRODICOD').AsString;
            dm.sqlconsulta.open;
 
            with Det.Add do
@@ -708,12 +710,28 @@ begin
                           ICMS.vICMSST := 0;
                         end;
                    end;
+                   vTotTrib := RetornaAliquotaMediaProduto(dm.sqlConsulta.fieldbyname('NCMICOD').AsInteger, dm.sqlConsulta.fieldbyname('PRODIORIGEM').AsInteger);
+                   CalcularImpostos(dm.sqlConsulta.fieldbyname('NCMICOD').AsInteger, dm.sqlConsulta.fieldbyname('PRODIORIGEM').AsInteger, Prod.vProd - Prod.vDesc);
+
+                  if vTotTrib > 0 then
+                    vTotTrib := (Prod.vProd * vTotTrib) / 100;
+
+                  vTotTrib := RoundTo(vTotTrib, -2);
+
+                  Total_vTotTrib := Total_vTotTrib + vTotTrib;
                  end;
+                 vaux := RoundTo(Total.ICMSTot.vProd, -2);
+                 vaux := RoundTo(Prod.vProd, -2);
+                 vaux := Total.ICMSTot.vProd + vaux;
+                 Total.ICMSTot.vProd := vaux;
+                 vaux := Prod.vDesc;
+                 TotalDesconto :=  TotalDesconto + vaux;
              end;
            SQLImpressaoCupom.next;
          end;
-
+      Total.ICMSTot.vDesc := TotalDesconto;
       {Totais da NFCe}
+      Total.ICMSTot.vTotTrib := Total_vTotTrib;
       SQLImpressaoCupom.Close;
       SQLImpressaoCupom.RequestLive := False;
       SQLImpressaoCupom.SQL.Clear;
@@ -3239,7 +3257,7 @@ begin
     begin
       DM.SQLTemplate.Close ;
       DM.SQLTemplate.SQL.Clear ;
-      DM.SQLTemplate.SQL.Add('Select * From CLIENTE') ;
+      DM.SQLTemplate.SQL.Add('Select CLIEA60RAZAOSOC,CLIEA15FONE1,CLIETOBS1,COALESCE(CLIEN3VLRFRETE,0) CLIEN3VLRFRETE From CLIENTE') ;
       DM.SQLTemplate.SQL.Add('Where') ;
       DM.SQLTemplate.SQL.Add('CLIEA13ID = "' + ClienteCadastro + '"') ;
       DM.SQLTemplate.Open ;
@@ -4756,6 +4774,25 @@ begin
   LblInstrucoes.Update;
   NumNFe := 0;
   dm.ACBrNFe.NotasFiscais.Clear;
+end;
+
+procedure TFormTelaItens.CalcularImpostos(CodNCM, OrigemProduto: Integer;
+  Valor: Currency);
+begin
+  with ExecSql('SELECT NCMN2ALIQNAC, ALIQESTADUAL, ALIQMUNICIPAL FROM NCM WHERE NCMICOD = ' + IntToStr(CodNCM)) do
+  try
+    if FieldByName('NCMN2ALIQNAC').AsCurrency > 0 then
+      dm.ACBrNFe.DANFE.vTribFed := dm.ACBrNFe.DANFE.vTribFed + ((Valor * FieldByName('NCMN2ALIQNAC').AsCurrency) / 100);
+
+    if FieldByName('ALIQESTADUAL').AsCurrency > 0 then
+      dm.ACBrNFe.DANFE.vTribEst := dm.ACBrNFe.DANFE.vTribEst + ((Valor * FieldByName('ALIQESTADUAL').AsCurrency) / 100);
+
+    if FieldByName('ALIQMUNICIPAL').AsCurrency > 0 then
+      dm.ACBrNFe.DANFE.vTribMun := dm.ACBrNFe.DANFE.vTribMun + ((Valor * FieldByName('ALIQMUNICIPAL').AsCurrency) / 100);
+
+  finally
+    free;
+  end;
 end;
 
 end.
