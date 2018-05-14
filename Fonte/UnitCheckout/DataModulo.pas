@@ -1318,6 +1318,9 @@ begin
   DataSistema := ExecSql('select current_timestamp from rdb$relations').fieldbyname('current_timestamp').AsDateTime;
   DataSistema := StrToDate(FormatDateTime('dd/mm/yyyy', DataSistema));
   GetDataValidadeSistema;
+
+  if DelphiAberto then
+    ACBrNFe.Configuracoes.WebServices.Ambiente := taHomologacao;
 end;
 
 procedure TDM.GetDataValidadeSistema;

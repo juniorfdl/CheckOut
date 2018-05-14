@@ -451,7 +451,7 @@ begin
   if (ECFAtual = 'NFCE A4') then dm.ACBrPosPrinter.Modelo := ppTexto;
   if (ECFAtual = 'NFCE EPSON') then dm.ACBrPosPrinter.Modelo := ppEscPosEpson;
   if (ECFAtual = 'NFCE BEMATECH') then dm.ACBrPosPrinter.Modelo := ppEscBematech;
-  if (ECFAtual = 'NFCE ELGIN') then dm.ACBrPosPrinter.Modelo := ppEscElgin;
+  if (ECFAtual = 'NFCE ELGIN') then dm.ACBrPosPrinter.Modelo := ppEscVox;
   if (ECFAtual = 'NFCE DR700') then dm.ACBrPosPrinter.Modelo := ppEscDaruma;
   if (ECFAtual = 'NFCE DR800') then
   begin
@@ -4692,6 +4692,7 @@ begin
               dm.SQLCupom.Open;
               if not dm.SQLCupom.IsEmpty then
               begin
+                dm.SQLCupom.RequestLive := True;
                 dm.SQLCupom.edit;
                 dm.SQLCupomCUPOINRO.Value := StrToInt(NroCupomFiscal);
                 dm.SQLCupom.Post;
@@ -4914,6 +4915,7 @@ begin
                             dm.SQLCupom.Open;
                           end;
 
+                          dm.SQLCupom.RequestLive := True;
                           dm.SQLCupom.edit;
                           dm.SQLCupomCHAVEACESSO.AsString := Chave;
                           dm.SQLCupom.Post;
@@ -4940,6 +4942,7 @@ begin
                           dm.SQLCupom.Open;
                         end;
 
+                        dm.SQLCupom.RequestLive := True;
                         dm.SQLCupom.edit;
                         dm.SQLCupomCHAVEACESSO.AsString := Chave;
                         dm.SQLCupom.Post;
@@ -6105,6 +6108,9 @@ end;
 
 procedure TFormTelaItens.FormShow(Sender: TObject);
 begin
+  dm.SQLCupom.RequestLive := True;
+  dm.SQLCupomItem.RequestLive := True;
+
   {Testa pra ver se tem caminho ao Servidor para definir se o PDV é Offline}
   if dm.ConectaServidor then
     shpStatusServidor.Brush.Color := clLime
