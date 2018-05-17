@@ -1,10 +1,10 @@
 object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
-  Left = -8
-  Top = -8
+  Left = -1025
+  Top = 95
   BorderIcons = []
   BorderStyle = bsSingle
-  ClientHeight = 706
-  ClientWidth = 1366
+  ClientHeight = 747
+  ClientWidth = 1020
   Color = 16249066
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -640,7 +640,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
     Left = 0
     Top = 72
     Width = 439
-    Height = 634
+    Height = 675
     Align = alLeft
     BevelOuter = bvNone
     BorderWidth = 3
@@ -658,7 +658,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       Left = 3
       Top = 3
       Width = 433
-      Height = 628
+      Height = 669
       ActivePage = TabNumerario
       Align = alClient
       MultiLine = True
@@ -708,11 +708,11 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
           Left = 0
           Top = 0
           Width = 425
-          Height = 597
+          Height = 638
           Align = alClient
           Color = 16249066
           DataSource = dsSQLNumerario
-          PanelHeight = 59
+          PanelHeight = 63
           PanelWidth = 408
           ParentColor = False
           ParentShowHint = False
@@ -770,7 +770,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
   object ptopo: TAdvOfficeStatusBar
     Left = 0
     Top = 0
-    Width = 1366
+    Width = 1020
     Height = 72
     AnchorHint = False
     Align = alTop
@@ -839,7 +839,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       Transparent = True
     end
     object AdvOfficeStatusBar1: TAdvOfficeStatusBar
-      Left = 1084
+      Left = 738
       Top = 0
       Width = 282
       Height = 72

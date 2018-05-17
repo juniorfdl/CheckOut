@@ -9946,9 +9946,9 @@ object FormTelaReceituario: TFormTelaReceituario
         Style = lsDouble
         Weight = 0.100000001490116100
         mmHeight = 1588
-        mmLeft = 39952
+        mmLeft = 36513
         mmTop = 177536
-        mmWidth = 170127
+        mmWidth = 158221
         BandType = 4
       end
       object ppLabel138: TppLabel
@@ -10094,10 +10094,38 @@ object FormTelaReceituario: TFormTelaReceituario
         TextAlignment = taCentered
         Transparent = True
         DataPipelineName = 'BDEPipe'
-        mmHeight = 4022
-        mmLeft = 65881
-        mmTop = 179652
+        mmHeight = 3969
+        mmLeft = 53711
+        mmTop = 179388
         mmWidth = 118534
+        BandType = 4
+      end
+      object ppShape1: TppShape
+        UserName = 'Shape1'
+        mmHeight = 5821
+        mmLeft = 28310
+        mmTop = 123561
+        mmWidth = 178330
+        BandType = 4
+      end
+      object ppLabel99: TppLabel
+        UserName = 'Label69'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
+        Caption = 'Servi'#231'o Solicitado'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Draft 17cpi'
+        Font.Size = 10
+        Font.Style = [fsBold]
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 4233
+        mmLeft = 101336
+        mmTop = 124354
+        mmWidth = 30427
         BandType = 4
       end
     end

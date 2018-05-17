@@ -451,7 +451,7 @@ begin
   if (ECFAtual = 'NFCE A4') then dm.ACBrPosPrinter.Modelo := ppTexto;
   if (ECFAtual = 'NFCE EPSON') then dm.ACBrPosPrinter.Modelo := ppEscPosEpson;
   if (ECFAtual = 'NFCE BEMATECH') then dm.ACBrPosPrinter.Modelo := ppEscBematech;
-  if (ECFAtual = 'NFCE ELGIN') then dm.ACBrPosPrinter.Modelo := ppEscVox;
+  if (ECFAtual = 'NFCE ELGIN') then dm.ACBrPosPrinter.Modelo := ppEscElgin;
   if (ECFAtual = 'NFCE DR700') then dm.ACBrPosPrinter.Modelo := ppEscDaruma;
   if (ECFAtual = 'NFCE DR800') then
   begin
@@ -4956,7 +4956,7 @@ begin
                   begin
                               { Cria o arquivo XML }
                     sXML := Gerar_NFCe(IDReimprimir);
-                    if (dm.ACBrNFe.WebServices.Consulta.cStat <> 613)and(dm.ACBrNFe.WebServices.Consulta.cStat <> 613) then
+                    if (dm.ACBrNFe.WebServices.Consulta.cStat <> 613)and(dm.ACBrNFe.WebServices.Consulta.cStat <> 217) then
                       chave := copy(dm.ACBrNFe.NotasFiscais.Items[0].NFe.infNFe.ID, (length(dm.ACBrNFe.NotasFiscais.Items[0].NFe.infNFe.ID) - 44) + 1, 44);
                       
                     LblInstrucoes.Caption := 'Assinando NFCe...' + intToStr(NumNFe);

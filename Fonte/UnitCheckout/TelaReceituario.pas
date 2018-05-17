@@ -556,6 +556,8 @@ type
     ppDBText133: TppDBText;
     raCodeModule1: TraCodeModule;
     ppParameterList1: TppParameterList;
+    ppLabel99: TppLabel;
+    ppShape1: TppShape;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
