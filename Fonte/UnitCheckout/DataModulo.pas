@@ -1319,8 +1319,8 @@ begin
   DataSistema := StrToDate(FormatDateTime('dd/mm/yyyy', DataSistema));
   GetDataValidadeSistema;
 
-//  if DelphiAberto then
-//    ACBrNFe.Configuracoes.WebServices.Ambiente := taHomologacao;
+  if DelphiAberto then
+    ACBrNFe.Configuracoes.WebServices.Ambiente := taHomologacao;
 end;
 
 procedure TDM.GetDataValidadeSistema;
