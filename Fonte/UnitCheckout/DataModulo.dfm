@@ -3,9 +3,8 @@ inherited DM: TDM
   Left = 65528
   Top = 65528
   Height = 744
-  Width = 1382
+  Width = 1378
   inherited DB: TDatabase
-    Connected = False
     AfterConnect = DBAfterConnect
     Left = 32
     Top = 8
