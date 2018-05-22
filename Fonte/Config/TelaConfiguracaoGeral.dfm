@@ -48,7 +48,7 @@ inherited FormTelaConfiguracaoGeral: TFormTelaConfiguracaoGeral
       end
       object GroupBox4: TGroupBox
         Left = 135
-        Top = 193
+        Top = 218
         Width = 460
         Height = 44
         Caption = ' Localiza'#231#227'o dos arquivos de relat'#243'rios '
@@ -124,7 +124,7 @@ inherited FormTelaConfiguracaoGeral: TFormTelaConfiguracaoGeral
       end
       object GroupBox1: TGroupBox
         Left = 135
-        Top = 238
+        Top = 263
         Width = 460
         Height = 44
         Caption = 'Localiza'#231#227'o do aplicativo para impress'#227'o de duplicatas'
@@ -211,13 +211,13 @@ inherited FormTelaConfiguracaoGeral: TFormTelaConfiguracaoGeral
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 8
+        TabOrder = 9
         ValueChecked = 'S'
         ValueUnchecked = 'N'
       end
       object DBRadioGroup1: TDBRadioGroup
         Left = 135
-        Top = 136
+        Top = 161
         Width = 460
         Height = 57
         Caption = 'Margem de lucro X pre'#231'o de venda'
@@ -232,14 +232,14 @@ inherited FormTelaConfiguracaoGeral: TFormTelaConfiguracaoGeral
           'Usar margem l'#237'quida para o c'#225'lculo do pre'#231'o de venda'
           'Usar margem bruta para o c'#225'lculo do pre'#231'o de venda')
         ParentFont = False
-        TabOrder = 9
+        TabOrder = 10
         Values.Strings = (
           'L'
           'B')
       end
       object GroupBox2: TGroupBox
         Left = 136
-        Top = 283
+        Top = 308
         Width = 457
         Height = 105
         Caption = 'Opera'#231#227'o de Estoque para Transfer'#234'ncia de Produtos'
@@ -249,7 +249,7 @@ inherited FormTelaConfiguracaoGeral: TFormTelaConfiguracaoGeral
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 10
+        TabOrder = 11
         object Label11: TLabel
           Left = 9
           Top = 20
@@ -325,7 +325,7 @@ inherited FormTelaConfiguracaoGeral: TFormTelaConfiguracaoGeral
       end
       object GroupBox3: TGroupBox
         Left = 136
-        Top = 393
+        Top = 418
         Width = 185
         Height = 45
         Caption = ' Ultimo Bonus p/Cliente'
@@ -335,7 +335,7 @@ inherited FormTelaConfiguracaoGeral: TFormTelaConfiguracaoGeral
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 11
+        TabOrder = 12
         object DBEdit7: TDBEdit
           Left = 11
           Top = 17
@@ -351,6 +351,24 @@ inherited FormTelaConfiguracaoGeral: TFormTelaConfiguracaoGeral
           ParentFont = False
           TabOrder = 0
         end
+      end
+      object DBCheckBox6: TDBCheckBox
+        Left = 134
+        Top = 137
+        Width = 411
+        Height = 18
+        Caption = 'Solicitar troco na abertura do Caixa'
+        DataField = 'SOLICITA_TROCO_ABERTURA'
+        DataSource = DSSQLConfigGeral
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 8404992
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 8
+        ValueChecked = 'N'
+        ValueUnchecked = 'S'
       end
     end
     inherited ScrollBoxTopo: TScrollBox
@@ -646,6 +664,12 @@ inherited FormTelaConfiguracaoGeral: TFormTelaConfiguracaoGeral
     object SQLConfigGeralCFGEIULTBONUS: TIntegerField
       FieldName = 'CFGEIULTBONUS'
       Origin = 'DB.CONFIGGERAL.CFGEIULTBONUS'
+    end
+    object SQLConfigGeralSOLICITA_TROCO_ABERTURA: TStringField
+      FieldName = 'SOLICITA_TROCO_ABERTURA'
+      Origin = 'DB.CONFIGGERAL.SOLICITA_TROCO_ABERTURA'
+      FixedChar = True
+      Size = 1
     end
   end
   object DSSQLConfigGeral: TDataSource

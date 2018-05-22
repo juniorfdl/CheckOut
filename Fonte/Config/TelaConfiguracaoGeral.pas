@@ -80,6 +80,8 @@ type
     DBEdit7: TDBEdit;
     SQLConfigGeralCFGEIULTBONUS: TIntegerField;
     BotaoGravar: TSpeedButton;
+    DBCheckBox6: TDBCheckBox;
+    SQLConfigGeralSOLICITA_TROCO_ABERTURA: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure BotaoGravarClick(Sender: TObject);
     procedure DSSQLConfigGeralDataChange(Sender: TObject; Field: TField);
