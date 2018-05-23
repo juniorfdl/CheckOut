@@ -120,6 +120,7 @@ type
     procedure SQLOperacaoCaixaOPCXICODChange(Sender: TField);
   private
     { Private declarations }
+    FSOLICITA_TROCO_ABERTURA, FJaInseriuTroco: Boolean;
     procedure HabilitaFechamento;
     procedure GravarFechamentoCupom;
     procedure MostraMsg(Mensagem : string) ;
@@ -181,6 +182,9 @@ end;
 
 procedure TFormTelaMovimentoCaixa.BtnCancelarClick(Sender: TObject);
 begin
+  if FSOLICITA_TROCO_ABERTURA then
+    Exit;
+    
   Close ;
 end;
 
@@ -1306,6 +1310,25 @@ begin
       EstornoRecebimento ;
     end ;
 
+  if (FSOLICITA_TROCO_ABERTURA) and (SQLOperacaoCaixa.FieldByName('OPCXA5SIGLA').AsString = 'ABERT') and not(FJaInseriuTroco) then
+  begin
+    FJaInseriuTroco := True;
+
+    with ExecSql('SELECT OPCXICOD FROM OPERACAOCAIXA WHERE OPCXA5SIGLA = ''TROCO''') do
+    try
+      EditTipMov.Text := FieldByName('OPCXICOD').AsString;
+      EditTipMovExit(EditTipMov);
+    finally
+      Free;
+    end;
+
+    ComboOperacaoCaixaExit(ComboOperacaoCaixa);
+    EditTipMov.Enabled := False;
+    ComboOperacaoCaixa.Enabled := False;
+    EditValor.SetFocus;
+    Exit;
+  end;
+
   MoviCaixConcluido := True ;
   Close ;
 end;
@@ -1559,7 +1582,12 @@ end;
 procedure TFormTelaMovimentoCaixa.FormShow(Sender: TObject);
 begin
   EditTipMov.SetFocus;
-
+  with ExecSql('SELECT SOLICITA_TROCO_ABERTURA FROM CONFIGGERAL') do
+  try
+    FSOLICITA_TROCO_ABERTURA := FieldByName('SOLICITA_TROCO_ABERTURA').AsString = 'S';
+  finally
+    Free;
+  end;
 end;
 
 procedure TFormTelaMovimentoCaixa.GravarFechamentoCupom;
