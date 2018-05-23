@@ -1,6 +1,6 @@
 object FormPrincipal: TFormPrincipal
-  Left = 680
-  Top = 185
+  Left = 367
+  Top = 240
   Width = 507
   Height = 87
   Caption = 'Impressao PreVenda'

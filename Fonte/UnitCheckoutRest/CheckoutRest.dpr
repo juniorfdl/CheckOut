@@ -110,7 +110,9 @@ uses
   TelaMotivoCancelamento in 'TelaMotivoCancelamento.pas' {FormTelaDadosCancelamento},
   Sigtron_FS345 in 'Sigtron_FS345.pas',
   TelaContaCodigo in 'TelaContaCodigo.pas' {FormTelaContaCodigo},
-  CadastroClienteRestaurante in 'CadastroClienteRestaurante.pas' {FormCadastroClienteRestaurante};
+  CadastroClienteRestaurante in 'CadastroClienteRestaurante.pas' {FormCadastroClienteRestaurante},
+  RelatorioCupomEmitido in 'RelatorioCupomEmitido.pas',
+  RelatorioTemplate in 'RelatorioTemplate.pas' {FormRelatorioTEMPLATE};
 
 {$R *.RES}
 

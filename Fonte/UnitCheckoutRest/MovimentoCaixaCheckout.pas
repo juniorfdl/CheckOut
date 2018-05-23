@@ -48,17 +48,19 @@ type
     ComboNumerario: TRxDBLookupCombo;
     SQLOperacaoCaixaOPCXCDEBITOCREDITO: TStringField;
     SQLEstornoCrediario: TRxQuery;
+    SQLOperacaoCaixaOPCXCOPINTERNA: TStringField;
+    AdvOfficeStatusBarOfficeStyler1: TAdvOfficeStatusBarOfficeStyler;
+    ptopo: TAdvOfficeStatusBar;
+    RxLabel5: TRxLabel;
     ReportAutentic: TppReport;
     ppDetailBand1: TppDetailBand;
     ppLabel1: TppLabel;
-    ppLabel2: TppLabel;
     ppLabel3: TppLabel;
     ppLabel10: TppLabel;
     ppSystemVariable1: TppSystemVariable;
     ppLabel13: TppLabel;
     ppLabel14: TppLabel;
     Empresa: TppLabel;
-    Data: TppLabel;
     Operacao: TppLabel;
     ppLabel5: TppLabel;
     Valor: TppLabel;
@@ -68,10 +70,6 @@ type
     ppLabel8: TppLabel;
     Operador: TppLabel;
     Obs: TppMemo;
-    SQLOperacaoCaixaOPCXCOPINTERNA: TStringField;
-    AdvOfficeStatusBarOfficeStyler1: TAdvOfficeStatusBarOfficeStyler;
-    ptopo: TAdvOfficeStatusBar;
-    RxLabel5: TRxLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDeactivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -458,7 +456,9 @@ begin
                   dm.ACBrPosPrinter.Device.Ativar;
                   dm.ACBrPosPrinter.Imprimir(FormTelaItens.MemoRetornoNFE.Lines.Text);
                 except
-                  Application.ProcessMessages;
+                  on E : Exception do
+                    ShowMessage('Ocorreu um erro ao imprimir!' + #13 + 'Erro: ' + #13 + e.Message);
+//                  Application.ProcessMessages;
                 end;
                 if Pergunta('SIM','Imprimir 2 Via Autenticação!') then
                   begin
@@ -1096,7 +1096,7 @@ procedure TFormTelaMovimentoCaixa.ReportAutenticBeforePrint(
   Sender: TObject);
 begin
   Empresa.Caption   := EmpresaAtualNome;
-  Data.Caption      := FormatDateTime('dd/mm/yyyy',EditData.Date);
+//  Data.Caption      := FormatDateTime('dd/mm/yyyy',EditData.Date);
   Operacao.Caption  := ComboOperacaoCaixa.Text;
   OBS.Text          := DBEditObs.Text;
   Valor.Caption     := FormatFloat('#,##0.00',EditValor.Value);

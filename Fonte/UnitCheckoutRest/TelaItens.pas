@@ -414,7 +414,8 @@ uses DataModulo, UnitLibrary, TelaTipoDescontoItem,TelaConsultaRapidaItem,
      DataModuloTemplate, TelaPrecoAlterado,TelaConsultaRapidaCupom, Daruma_Framework_FISCAL,
      TelaRecargaCartao, TelaMesa, TelaObsProduto, TelaMesaCodigo, pcnNFe, pcnConversaoNFe,
      ACBrDFeConfiguracoes, pcnAuxiliar, ACBrDFeSSL, pcnNFeRTXT, ACBrNFeNotasFiscais,
-    TelaSabores, TelaBordas, TelaVendedorCodigo, TelaContaCodigo;
+    TelaSabores, TelaBordas, TelaVendedorCodigo, TelaContaCodigo,
+  RelatorioCupomEmitido;
 
 {$R *.DFM}
 
@@ -2860,7 +2861,9 @@ begin
                   end;
               end ;
           'F':begin
-                //LIVRE
+                EntradaDados.SetFocus;
+                Application.CreateForm(TFormRelatorioCupomEmitido, FormRelatorioCupomEmitido) ;
+                FormRelatorioCupomEmitido.ShowModal;
               end ;
           //ABRIR GAVETA
           'G':begin
