@@ -2938,7 +2938,7 @@ begin
               end ;
           //livre
           'H':begin
-                // livre
+                AtualizaStatusMesas;
               end;
           //LIVRE - antes era pra INFORMAR ITENS DE DEVOLUCAO
           'E':begin
