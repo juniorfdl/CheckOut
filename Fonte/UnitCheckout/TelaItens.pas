@@ -281,6 +281,8 @@ type
     Shape1: TShape;
     AdvSmoothPanel5: TAdvSmoothPanel;
     slideshow: TAdvSmoothSlideShow;
+    RxLabel8: TRxLabel;
+    LBSaldo: TRxLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure EntradaDadosKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -1493,8 +1495,8 @@ begin
             if DM.SQLTemplate.FieldByName('QUANT').asstring <> '' then
             begin
               SaldoEstoqueAtual := DM.SQLTemplate.FieldByName('QUANT').Value;
-//            LBSaldo.Caption := FormatFloat('##0.000', DM.SQLTemplate.FieldByName('QUANT').Value);
-//            LBSaldo.Update;
+              LBSaldo.Caption := FormatFloat('##0.000', DM.SQLTemplate.FieldByName('QUANT').Value);
+              LBSaldo.Update;
             end;
 //          else
 //          begin
@@ -1791,8 +1793,8 @@ begin
         if DM.SQLTemplate.FieldByName('QUANT').asstring <> '' then
         begin
           SaldoEstoqueAtual := DM.SQLTemplate.FieldByName('QUANT').Value;
-//        LBSaldo.Caption := FormatFloat('##0.000', DM.SQLTemplate.FieldByName('QUANT').Value);
-//        LBSaldo.Update;
+          LBSaldo.Caption := FormatFloat('##0.000', DM.SQLTemplate.FieldByName('QUANT').Value);
+          LBSaldo.Update;
         end;
 
 //        else
