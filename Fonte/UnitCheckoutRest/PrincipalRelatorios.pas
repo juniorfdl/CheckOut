@@ -583,7 +583,7 @@ begin
       if (ECFAtual = 'DR700')         then DM.ACBrPosPrinter.Modelo := ppEscDaruma;
       if (ECFAtual = 'DR800')         then DM.ACBrPosPrinter.Modelo := ppEscDaruma;
       if (ECFAtual = 'NFCE EPSON')    then DM.ACBrPosPrinter.Modelo := ppEscPosEpson;
-      if (ECFAtual = 'NFCE ELGIN')    then DM.ACBrPosPrinter.Modelo := ppEscElgin;
+      if (ECFAtual = 'NFCE ELGIN')    then DM.ACBrPosPrinter.Modelo := ppEscVox;
 
       if dm.SQLTerminalAtivoTERMA5ECFPORTACOM.Value = 'USB' then
         DM.ACBrPosPrinter.Device.Porta := '\\localhost\nfce'
@@ -705,7 +705,7 @@ begin
       if (ECFAtual = 'NFCE BEMATECH') then DM.ACBrPosPrinter.Modelo := ppEscBematech;
       if (ECFAtual = 'NFCE DARUMA')   then DM.ACBrPosPrinter.Modelo := ppEscDaruma;
       if (ECFAtual = 'NFCE EPSON')    then DM.ACBrPosPrinter.Modelo := ppEscPosEpson;
-      if (ECFAtual = 'NFCE ELGIN')    then DM.ACBrPosPrinter.Modelo := ppEscElgin;
+      if (ECFAtual = 'NFCE ELGIN')    then DM.ACBrPosPrinter.Modelo := ppEscVox;
 
       if dm.SQLTerminalAtivoTERMA5ECFPORTACOM.Value <> 'USB' then
         DM.ACBrPosPrinter.Device.Porta := dm.SQLTerminalAtivoTERMA5ECFPORTACOM.Value

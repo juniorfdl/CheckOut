@@ -5,7 +5,6 @@ inherited DM: TDM
   Height = 744
   Width = 1382
   inherited DB: TDatabase
-    Connected = False
     AfterConnect = DBAfterConnect
     Left = 32
     Top = 8
@@ -2991,6 +2990,10 @@ inherited DM: TDM
       Origin = 'DB.EMPRESA.TOKEN'
       Size = 60
     end
+    object SQLEmpresaVERSAO: TStringField
+      FieldName = 'VERSAO'
+      Size = 1
+    end
   end
   object TblTicketPreVendaCab: TTable
     DatabaseName = 'Easy_Temp'
@@ -4825,7 +4828,7 @@ inherited DM: TDM
     PassSetting = psTwoPass
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 210 x 297 mm'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.mmMarginBottom = 6350
     PrinterSetup.mmMarginLeft = 6350
@@ -6787,7 +6790,6 @@ inherited DM: TDM
     Configuracoes.WebServices.Tentativas = 1
     Configuracoes.WebServices.AjustaAguardaConsultaRet = True
     Configuracoes.WebServices.QuebradeLinha = '|'
-    Configuracoes.WebServices.TimeoutIntegrador = 0
     DANFE = ACBrNFeDANFeESCPOS
     Left = 729
     Top = 13

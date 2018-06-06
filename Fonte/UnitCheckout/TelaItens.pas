@@ -11,7 +11,7 @@ uses
   Menus, ESkinPlus, AdvGlowButton, AdvOfficeStatusBar, AdvOfficeStatusBarStylers,
   AdvSmoothPanel, AdvReflectionLabel, AdvSmoothSlideShow, ComCtrls, TFlatPanelUnit,
   OleCtrls, SHDocVw, ACBrBAL, XMLIntf, XMLDoc, zlib, ACBrNFe, ACBrMail, ACBrBase, ACBrPosPrinter,
-  pcnConversao, ACBrUtil, ACBrDevice, RXClock, cxStyles, dxSkinsCore;
+  pcnConversao, ACBrUtil, ACBrDevice, RXClock, cxStyles, dxSkinsCore, pcnConversaoNFe;
 
 const
   //AS VARIAVEIS ABAIXO FORAM CRIADAS PARA NÃO CORRER O RISCO DE DIGITAR ERRADO
@@ -413,7 +413,7 @@ uses DataModulo, UnitLibrary, TelaTipoDescontoItem, TelaConsultaRapidaItem,
   TelaTransferenciaMercadoria, PrincipalRelatorios, TelaConsultaContratosCliente, TelaLembreteTarefa,
   Epson_Termica, TelaPrecoAlterado, BalancaFilizola, BalancaToledo, BalancaUrano, TelaPrestacaoContas,
   TelaConsultaPlaca, TelaProdutoNaoEncontrado, TelaConsultaRapidaCupom, Daruma_Framework_FISCAL,
-  pcnNFe, pcnConversaoNFe, ACBrDFeConfiguracoes, pcnAuxiliar, ACBrDFeSSL, pcnNFeRTXT,
+  pcnNFe, ACBrDFeConfiguracoes, pcnAuxiliar, ACBrDFeSSL, pcnNFeRTXT,
   ACBrNFeNotasFiscais, TelaDadosCliente, TelaImpressaoPreVenda,
   ACBrNFeWebServices, ACBrDFeWebService, TelaProdutoDimensao;
 
@@ -442,6 +442,11 @@ begin
   dm.ACBrNFe.Configuracoes.Certificados.Senha := dm.sqlEmpresa.FieldByName('EMPRA35CERTIFSENHA').AsString;
 {$ENDIF}
 
+  if dm.sqlEmpresa.FieldByName('VERSAO').AsString = '4' then
+    dm.ACBrNFe.Configuracoes.Geral.VersaoDF := ve400
+  else
+    dm.ACBrNFe.Configuracoes.Geral.VersaoDF := ve310;
+
   dm.ACBrNFe.Configuracoes.Geral.IdCSC := dm.sqlEmpresa.FieldByName('idTOKEN').AsString;
   dm.ACBrNFe.Configuracoes.Geral.CSC := dm.sqlEmpresa.FieldByName('TOKEN').AsString;
 
@@ -451,7 +456,7 @@ begin
   if (ECFAtual = 'NFCE A4') then dm.ACBrPosPrinter.Modelo := ppTexto;
   if (ECFAtual = 'NFCE EPSON') then dm.ACBrPosPrinter.Modelo := ppEscPosEpson;
   if (ECFAtual = 'NFCE BEMATECH') then dm.ACBrPosPrinter.Modelo := ppEscBematech;
-  if (ECFAtual = 'NFCE ELGIN') then dm.ACBrPosPrinter.Modelo := ppEscElgin;
+  if (ECFAtual = 'NFCE ELGIN') then dm.ACBrPosPrinter.Modelo := ppEscVox;
   if (ECFAtual = 'NFCE DR700') then dm.ACBrPosPrinter.Modelo := ppEscDaruma;
   if (ECFAtual = 'NFCE DR800') then
   begin
