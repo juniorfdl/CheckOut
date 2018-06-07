@@ -13,7 +13,7 @@ uses
   ZConnection, ZAbstractRODataset, ZAbstractDataset, ZDataset, ACBrBase,
   ACBrBAL, ACBrPosPrinter, ACBrNFeDANFEClass, ACBrNFeDANFeESCPOS, ACBrDFe,
   ACBrNFe, pcnConversao, ACBrUtil, ACBrMail, ACBrNFeDANFeRLClass, ACBrDevice,
-  ZAbstractConnection, DBClient, RestClient, RestUtils;
+  ZAbstractConnection, DBClient, RestClient, RestUtils, pcnConversaoNFe;
 
 type
   TDM = class(TDMTemplate)
@@ -1150,6 +1150,7 @@ type
     SQLConfigGeralDATA_INI_SEM_NET: TDateTimeField;
     SQLConfigGeralNAO_OBRIGA_FECHAR_CAIXA: TStringField;
     SQLUsuarioUSUACCANCITEMVENDA: TStringField;
+    SQLEmpresaVERSAO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure SQLCupomNewRecord(DataSet: TDataSet);
     procedure SQLCupomBeforePost(DataSet: TDataSet);
@@ -1321,6 +1322,12 @@ begin
 
   if DelphiAberto then
     ACBrNFe.Configuracoes.WebServices.Ambiente := taHomologacao;
+
+  if sqlEmpresa.FieldByName('VERSAO').AsString = '4' then
+    ACBrNFe.Configuracoes.Geral.VersaoDF := ve400
+  else
+    ACBrNFe.Configuracoes.Geral.VersaoDF := ve310;
+
 end;
 
 procedure TDM.GetDataValidadeSistema;

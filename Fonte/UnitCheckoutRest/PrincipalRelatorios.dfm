@@ -1348,8 +1348,9 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 0
     PrinterSetup.mmPaperWidth = 0
-    PrinterSetup.PaperSize = 0
+    PrinterSetup.PaperSize = 256
     DeviceType = 'Screen'
+    EmailSettings.ReportFormat = 'PDF'
     OnPreviewFormCreate = ReportTotaisPreviewFormCreate
     OutlineSettings.CreateNode = True
     OutlineSettings.CreatePageNodes = True
@@ -1359,7 +1360,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     TextSearchSettings.Enabled = False
     Left = 343
     Top = 220
-    Version = '7.04'
+    Version = '10.06'
     mmColumnWidth = 0
     DataPipelineName = 'PipeOperacao'
     object ppHeaderBand1: TppHeaderBand
@@ -1369,6 +1370,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       object ppLabel1: TppLabel
         UserName = 'ppLabel1'
         AutoSize = False
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Resumo de Caixa'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1384,6 +1389,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppLabel2: TppLabel
         UserName = 'ppLabel2'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Pe'#237'odo:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1400,6 +1409,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppLabel3: TppLabel
         UserName = 'ppLabel3'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Terminal:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1415,6 +1428,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppLabel4: TppLabel
         UserName = 'ppLabel4'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Emiss'#227'o:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1431,6 +1448,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       object ppLabel5: TppLabel
         UserName = 'ppLabel5'
         AutoSize = False
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Total Por Opera'#231#227'o'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1446,6 +1467,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppLabel7: TppLabel
         UserName = 'ppLabel7'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Cr'#233'dito'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1462,6 +1487,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppLabel8: TppLabel
         UserName = 'ppLabel8'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'D'#233'bito'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1478,6 +1507,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object LbPeriodo: TppLabel
         UserName = 'LbPeriodo'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'LbPeriodo'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1493,6 +1526,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object LbTerminal: TppLabel
         UserName = 'LbTerminal'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'LbTerminal'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1508,6 +1545,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppSystemVariable2: TppSystemVariable
         UserName = 'ppSystemVariable2'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         VarType = vtDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1523,6 +1564,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppLabel13: TppLabel
         UserName = 'ppLabel13'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Saldo'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1545,6 +1590,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       mmPrintPosition = 0
       object ppDBText1: TppDBText
         UserName = 'ppDBText1'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = PipeOperacao
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1562,6 +1611,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppDBText2: TppDBText
         UserName = 'ppDBText2'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = PipeOperacao
         DisplayFormat = '#,0.00;-#,0.00'
         Font.Charset = DEFAULT_CHARSET
@@ -1581,6 +1634,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppDBText3: TppDBText
         UserName = 'ppDBText3'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = PipeOperacao
         DisplayFormat = '#,0.00;-#,0.00'
         Font.Charset = DEFAULT_CHARSET
@@ -1600,6 +1657,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppDBText8: TppDBText
         UserName = 'ppDBText8'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = PipeNumerario
         DisplayFormat = '#,0.00;-#,0.00'
         Font.Charset = DEFAULT_CHARSET
@@ -1624,6 +1685,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       object ppSystemVariable1: TppSystemVariable
         UserName = 'ppSystemVariable1'
         AutoSize = False
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1673,8 +1738,8 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
           PrinterSetup.mmMarginTop = 6350
           PrinterSetup.mmPaperHeight = 0
           PrinterSetup.mmPaperWidth = 0
-          PrinterSetup.PaperSize = 0
-          Version = '7.04'
+          PrinterSetup.PaperSize = 256
+          Version = '10.06'
           mmColumnWidth = 0
           DataPipelineName = 'PipeNumerario'
           object ppTitleBand1: TppTitleBand
@@ -1684,6 +1749,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             object ppLabel6: TppLabel
               UserName = 'ppLabel6'
               AutoSize = False
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = 'Total Por Numer'#225'rio'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -1699,6 +1768,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             end
             object ppLabel9: TppLabel
               UserName = 'ppLabel9'
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = 'Cr'#233'dito'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -1715,6 +1788,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             end
             object ppLabel14: TppLabel
               UserName = 'ppLabel14'
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = 'D'#233'bito'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -1731,6 +1808,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             end
             object ppLabel15: TppLabel
               UserName = 'ppLabel15'
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = 'Saldo'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -1752,6 +1833,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             mmPrintPosition = 0
             object ppDBText4: TppDBText
               UserName = 'ppDBText4'
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               DataPipeline = PipeNumerario
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -1768,6 +1853,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             end
             object ppDBText5: TppDBText
               UserName = 'ppDBText5'
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               DataPipeline = PipeNumerario
               DisplayFormat = '#,0.00;-#,0.00'
               Font.Charset = DEFAULT_CHARSET
@@ -1786,6 +1875,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             end
             object ppDBText6: TppDBText
               UserName = 'ppDBText6'
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               DataPipeline = PipeNumerario
               DisplayFormat = '#,0.00;-#,0.00'
               Font.Charset = DEFAULT_CHARSET
@@ -1804,6 +1897,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             end
             object ppDBText7: TppDBText
               UserName = 'ppDBText7'
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               DataPipeline = PipeNumerario
               DisplayFormat = '#,0.00;-#,0.00'
               Font.Charset = DEFAULT_CHARSET
@@ -1828,6 +1925,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             object ppDBCalc3: TppDBCalc
               UserName = 'ppDBCalc3'
               AutoSize = True
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               DataPipeline = PipeNumerario
               DisplayFormat = '#,0.00;-#,0.00'
               Font.Charset = DEFAULT_CHARSET
@@ -1847,6 +1948,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             object ppLabel25: TppLabel
               UserName = 'ppLabel25'
               AutoSize = False
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = 'Resumo Gerencial'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -1863,6 +1968,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             object ppLabel26: TppLabel
               UserName = 'ppLabel26'
               AutoSize = False
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = 'Vendas Balc'#227'o =>'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -1879,6 +1988,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             object ppLabel27: TppLabel
               UserName = 'ppLabel27'
               AutoSize = False
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = 'Vendas Tele =>'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -1895,6 +2008,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             object ppLabel28: TppLabel
               UserName = 'ppLabel28'
               AutoSize = False
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = 'Servi'#231'os Balc'#227'o =>'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -1911,6 +2028,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             object ppLabel29: TppLabel
               UserName = 'ppLabel29'
               AutoSize = False
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = 'Servi'#231'os Tele =>'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -1926,6 +2047,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             end
             object lbTotalVendaBalcao: TppLabel
               UserName = 'lbTotalVendaBalcao'
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = '0,00'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -1942,6 +2067,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             end
             object lbTotalServicosBalcao: TppLabel
               UserName = 'lbTotalServicosBalcao'
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = '0,00'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -1958,6 +2087,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             end
             object lbTotalVendaTele: TppLabel
               UserName = 'lbTotalVendaTele'
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = '0,00'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -1974,6 +2107,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             end
             object lbTotalServicosTele: TppLabel
               UserName = 'lbTotalServicosTele'
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = '0,00'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -1991,6 +2128,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             object ppLabel30: TppLabel
               UserName = 'ppLabel30'
               AutoSize = False
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = 'Geral de Vendas =>'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -2007,6 +2148,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             object ppLabel31: TppLabel
               UserName = 'ppLabel31'
               AutoSize = False
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = 'Geral de Servi'#231'os =>'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -2022,6 +2167,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             end
             object lbTotalVendas: TppLabel
               UserName = 'lbTotalVendas'
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = '0,00'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -2038,6 +2187,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             end
             object lbTotalServicos: TppLabel
               UserName = 'lbTotalServicos'
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = '0,00'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -2055,6 +2208,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             object ppLabel32: TppLabel
               UserName = 'ppLabel32'
               AutoSize = False
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = 'Vendas Mesas =>'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -2071,6 +2228,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             object ppLabel33: TppLabel
               UserName = 'ppLabel33'
               AutoSize = False
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = 'Servi'#231'os Mesas =>'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -2086,6 +2247,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             end
             object lbTotalVendaMesas: TppLabel
               UserName = 'lbTotalVendaMesas'
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = '0,00'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -2102,6 +2267,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             end
             object lbTotalServicosMesas: TppLabel
               UserName = 'lbTotalServicosMesas'
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = '0,00'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -2119,6 +2288,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             object ppLabel10: TppLabel
               UserName = 'ppLabel10'
               AutoSize = False
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = 'Vendas Dinheiro =>'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -2135,6 +2308,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             object ppLabel34: TppLabel
               UserName = 'ppLabel34'
               AutoSize = False
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = 'Vendas Cart'#245'es  =>'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -2150,6 +2327,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             end
             object lbTotalDin: TppLabel
               UserName = 'lbTotalDin'
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = '0,00'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -2166,6 +2347,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
             end
             object lbTotalCrt: TppLabel
               UserName = 'lbTotalCrt'
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
               Caption = '0,00'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -2188,6 +2373,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object TotalCredito: TppDBCalc
         UserName = 'TotalCredito'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = PipeOperacao
         DisplayFormat = '#,0.00;-#,0.00'
         Font.Charset = DEFAULT_CHARSET
@@ -2206,6 +2395,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object TotalDebito: TppDBCalc
         UserName = 'TotalDebito'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = PipeOperacao
         DisplayFormat = '#,0.00;-#,0.00'
         Font.Charset = DEFAULT_CHARSET
@@ -2224,6 +2417,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppLine5: TppLine
         UserName = 'ppLine5'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Weight = 0.750000000000000000
         mmHeight = 139965
         mmLeft = 210080
@@ -2234,6 +2431,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       object ppDBCalc1: TppDBCalc
         UserName = 'ppDBCalc1'
         AutoSize = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = PipeOperacao
         DisplayFormat = '#,0.00;-#,0.00'
         Font.Charset = DEFAULT_CHARSET
@@ -2529,8 +2730,9 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 0
     PrinterSetup.mmPaperWidth = 0
-    PrinterSetup.PaperSize = 0
+    PrinterSetup.PaperSize = 256
     DeviceType = 'Screen'
+    EmailSettings.ReportFormat = 'PDF'
     OnPreviewFormCreate = ReportTelePreviewFormCreate
     OutlineSettings.CreateNode = True
     OutlineSettings.CreatePageNodes = True
@@ -2540,7 +2742,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     TextSearchSettings.Enabled = False
     Left = 263
     Top = 360
-    Version = '7.04'
+    Version = '10.06'
     mmColumnWidth = 0
     DataPipelineName = 'PipeVendas'
     object ppHeaderBand2: TppHeaderBand
@@ -2550,6 +2752,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       object ppLabel16: TppLabel
         UserName = 'ppLabel16'
         AutoSize = False
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Vendas Tele por Periodo'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2565,6 +2771,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppLabel17: TppLabel
         UserName = 'ppLabel17'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Pe'#237'odo:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2581,6 +2791,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object LbPeriodoTele: TppLabel
         UserName = 'LbPeriodoTele'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'LbPeriodoTele'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2596,6 +2810,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object LbTerminalTele: TppLabel
         UserName = 'LbTerminalTele'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'LbTerminalTele'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2611,6 +2829,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppLabel20: TppLabel
         UserName = 'ppLabel20'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Terminal:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2626,6 +2848,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppLabel21: TppLabel
         UserName = 'ppLabel21'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Emiss'#227'o:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2641,6 +2867,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppSystemVariable3: TppSystemVariable
         UserName = 'ppSystemVariable3'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         VarType = vtDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2656,6 +2886,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppLabel18: TppLabel
         UserName = 'ppLabel18'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Cliente'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2671,6 +2905,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppLabel19: TppLabel
         UserName = 'ppLabel19'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Motoboy'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2686,6 +2924,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppLabel22: TppLabel
         UserName = 'ppLabel22'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Valor Venda'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2701,6 +2943,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppLabel23: TppLabel
         UserName = 'ppLabel23'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Valor Tele'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2721,6 +2967,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       mmPrintPosition = 0
       object ppDBText9: TppDBText
         UserName = 'ppDBText9'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = PipeVendas
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2738,6 +2988,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppDBText11: TppDBText
         UserName = 'ppDBText11'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = PipeVendas
         DisplayFormat = '##0.00'
         Font.Charset = DEFAULT_CHARSET
@@ -2757,6 +3011,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppDBText12: TppDBText
         UserName = 'ppDBText12'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = PipeVendas
         DisplayFormat = '##0.00'
         Font.Charset = DEFAULT_CHARSET
@@ -2776,6 +3034,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppDBText13: TppDBText
         UserName = 'ppDBText13'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = PipeVendas
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2793,6 +3055,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object lbMotoboy: TppLabel
         UserName = 'lbMotoboy'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'lbMotoboy'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2814,6 +3080,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       object ppSystemVariable4: TppSystemVariable
         UserName = 'ppSystemVariable4'
         AutoSize = False
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2835,6 +3105,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       mmPrintPosition = 0
       object ppDBCalc2: TppDBCalc
         UserName = 'ppDBCalc2'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = PipeVendas
         DisplayFormat = '#,0.00;-#,0.00'
         Font.Charset = DEFAULT_CHARSET
@@ -2853,6 +3127,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppLabel24: TppLabel
         UserName = 'ppLabel24'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Totais:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2869,6 +3147,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppLine6: TppLine
         UserName = 'ppLine6'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Weight = 0.750000000000000000
         mmHeight = 279930
         mmLeft = 4130154
@@ -2878,6 +3160,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       end
       object ppDBCalc4: TppDBCalc
         UserName = 'ppDBCalc4'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = PipeVendas
         DisplayFormat = '#,0.00;-#,0.00'
         Font.Charset = DEFAULT_CHARSET
