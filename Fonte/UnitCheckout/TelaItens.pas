@@ -417,7 +417,7 @@ uses DataModulo, UnitLibrary, TelaTipoDescontoItem, TelaConsultaRapidaItem,
   TelaConsultaPlaca, TelaProdutoNaoEncontrado, TelaConsultaRapidaCupom, Daruma_Framework_FISCAL,
   pcnNFe, ACBrDFeConfiguracoes, pcnAuxiliar, ACBrDFeSSL, pcnNFeRTXT,
   ACBrNFeNotasFiscais, TelaDadosCliente, TelaImpressaoPreVenda,
-  ACBrNFeWebServices, ACBrDFeWebService, TelaProdutoDimensao;
+  ACBrNFeWebServices, ACBrDFeWebService, TelaProdutoDimensao, udmECF;
 
 {$R *.DFM}
 
@@ -435,6 +435,13 @@ end;
 
 procedure TFormTelaItens.Inicia_NFe();
 begin
+
+  if ECFAtual = 'ECF' then
+  begin
+    dmECF := TdmECF.Create(Application);    
+    exit;
+  end;
+
 {$IFDEF ACBrNFeOpenSSL}
   dm.ACBrNFe.Configuracoes.Certificados.ArquivoPFX := dm.sqlEmpresa.FieldByName('EMPRA100CERTIFSERIE').AsString;
   dm.ACBrNFe.Configuracoes.Certificados.Certificado := dm.sqlEmpresa.FieldByName('EMPRA100CERTIFSERIE').AsString;

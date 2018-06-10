@@ -192,7 +192,8 @@ uses
   CadastroProdutos in '..\ArquivosComuns\CadastroProdutos.pas' {FormCadastroProduto},
   JsonToDataSetConverter in '..\..\..\Program Files (x86)\Borland\Componentes\rest-client-api\src\JsonToDataSetConverter.pas',
   ACBrNFeDANFeESCPOS in '..\..\..\..\..\Acbr\trunk2\Fontes\ACBrDFe\ACBrNFe\DANFE\NFCe\EscPos\ACBrNFeDANFeESCPOS.pas',
-  TelaItensCrediario in 'TelaItensCrediario.pas' {FormTelaItensCrediario};
+  TelaItensCrediario in 'TelaItensCrediario.pas' {FormTelaItensCrediario},
+  udmECF in 'udmECF.pas' {dmECF: TDataModule};
 
 {$R *.RES}
 
@@ -230,7 +231,7 @@ begin
   F12 := Vk_F12;
   Application.Title := 'Cupom Fiscal';
   Application.CreateForm(TDM, DM);
-
+  Application.CreateForm(TdmECF, dmECF);
   if (DM.OBSAutorizacao <> '') or (dm.SQLConfigGeralCFGECBLOQ.AsString = 'S') and(not DelphiAberto) then
   begin
     FormTelaAtivacao := TFormTelaAtivacao.Create(Application);

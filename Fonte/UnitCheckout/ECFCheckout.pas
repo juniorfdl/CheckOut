@@ -50,10 +50,16 @@ var
 implementation
 
 uses BemaFi32, Sigtron_FS345, UnitLibrary, SWEDA7000_AFRAC, Elgin_FIT, Epson_Termica, Sweda_Termica,
-     SWEDA7000, DataModulo, Schalter_SCF_ECF, Corisco_CT7000_V3, TelaImportaItens, TelaItens, WaitWindow, Urano_1EFC, Urano_LoggerII;
+     SWEDA7000, DataModulo, Schalter_SCF_ECF, Corisco_CT7000_V3, TelaImportaItens, TelaItens, WaitWindow, Urano_1EFC, Urano_LoggerII,
+  udmECF;
 
 function VerificaECFLigada(Impressora, Porta : String) : Boolean ;
 begin
+  if Impressora = 'ECF' then
+  begin
+    Result := dmECF.AbrirPorta;
+  end
+  else
   if Impressora = 'DARUMA FRAMEWORK' then
     VerificaECFLigada := VerificaECFLigada_DARUMA_FRAMEWORK ;
   if Impressora = 'EPSON TERMICA' then
@@ -68,6 +74,12 @@ end;
 
 function AbrirPortaECF(Impressora, Porta : String) : Boolean ;
 begin
+  if Impressora = 'ECF' then
+  begin
+    Result := dmECF.AbrirPorta;
+    exit;
+  end;
+
   if FileExists('TesteECF.Arq') then
     begin
       exit ;
@@ -130,6 +142,12 @@ end ;
 
 function FecharPortaECF(Impressora, Porta : String) : Boolean ;
 begin
+  if Impressora = 'ECF' then
+  begin
+    Result := dmECF.FecharPortaECF;
+    exit;
+  end;
+
   if FileExists('TesteECF.Arq') then
      exit ;
 
@@ -176,8 +194,14 @@ begin
   end;
 end ;
 
-function  Leitura_X(Impressora, Porta : String) : Boolean ;
+function Leitura_X(Impressora, Porta : String) : Boolean ;
 begin
+  if Impressora = 'ECF' then
+  begin
+    Result := dmECF.Leitura_X;
+    exit;
+  end;
+
   if FileExists('TesteECF.Arq') then
   begin
     ShowMessage('Leitura X') ;
@@ -335,6 +359,13 @@ end;
 
 function FechamentoRelatorioGerencial(Impressora, Porta : String) : boolean;
 begin
+
+  if Impressora = 'ECF' then
+  begin
+    Result := dmECF.FechamentoRelatorioGerencial;
+    exit;
+  end;
+
   AbrirPortaECF(Impressora,Porta);
 
   if Impressora = 'BEMATECH MP-25 FI' then
@@ -360,6 +391,12 @@ end;
 
 function AbrirCupomFiscal(Impressora, Porta : String; Var NroCupom : string) : Boolean ;
 begin
+  if Impressora = 'ECF' then
+  begin
+    Result := dmECF.AbrirCupomFiscal(NroCupom);
+    exit;
+  end;
+
   AbrirPortaECF(Impressora, Porta) ;
 
   if Impressora = 'BEMATECH MP-25 FI' then
@@ -411,6 +448,12 @@ var
  VlUnit,
  Preco : String;
 begin
+  if Impressora = 'ECF' then
+  begin
+    Result := dmECF.ImprimeItemECF(Numitem, Codigo, Descricao, Tributo, TipoDesc, Unid, Qtde, Valor, Percdesc, Vlrdesco, NumDecQuant);
+    exit;
+  end;
+
   AbrirPortaECF(Impressora, Porta) ;
 
   if Impressora = 'BEMATECH MP-25 FI' then
@@ -553,6 +596,13 @@ end ;
 
 function CancelarItemECF(Impressora, Porta, Posicao : string) : boolean ;
 begin
+  if Impressora = 'ECF' then
+  begin
+    Result := dmECF.CancelarItemECF(Posicao);
+    exit;
+  end;
+
+
   AbrirPortaECF(Impressora, Porta) ;
 
   if Impressora = 'BEMATECH MP-25 FI' then
@@ -626,6 +676,12 @@ begin
           VlrImpostoMedio  := (Valor + VlrAcresc - VlrDesc) * AliqOlhoImpostoSimples / 100;
         end;
     end;
+
+  if Impressora = 'ECF' then
+  begin
+    Result := dmECF.FecharCupomFiscal;
+    exit;
+  end;                               
 
   //------------------------------------------------------
 
@@ -1162,6 +1218,12 @@ end ;
 
 function CancelarCupomFiscal(Impressora, Porta : String) : Boolean ;
 begin
+  if Impressora = 'ECF' then
+  begin
+    result := dmECF.CancelarCupomFiscal;
+    exit;
+  end;
+
   AbrirPortaECF(Impressora, Porta) ;
 
   if Impressora = 'BEMATECH MP-25 FI' then
@@ -1451,6 +1513,12 @@ end ;
 
 function FecharCNFV(Impressora, Porta : string) : Boolean ;
 begin
+  if Impressora = 'ECF' then
+  begin
+    Result := dmECF.FecharCNFV;
+    exit;
+  end;
+
   AbrirPortaECF(Impressora, Porta) ;
 
   if Impressora = 'BEMATECH MP-25 FI' then
@@ -1495,6 +1563,12 @@ end;
 function AbrirGaveta(Impressora, Porta : String) : Boolean;
 begin
   AbrirGaveta := True;
+
+  if Impressora = 'ECF' then
+  begin
+    Result := dmECF.AbrirGaveta;
+    exit;
+  end;
 
   AbrirPortaECF(Impressora, Porta) ;
 
