@@ -38,7 +38,6 @@ uses
   TelaExportacaoCaixaEstrategia in 'TelaExportacaoCaixaEstrategia.pas' {FormTelaExportacaoCaixaEstrategia},
   TelaImportacaoFarmaciasProdutos in 'TelaImportacaoFarmaciasProdutos.pas' {FormTelaImportacaoFarmaciaProduto},
   TelaAutenticaUsuario in '..\UnitCheckout\TelaAutenticaUsuario.pas' {FormTelaAutenticaUsuario},
-  backup in '..\..\Instaladores\Componentes D6\Backup\backup.pas',
   TelaExportacaoSPED in 'TelaExportacaoSPED.pas' {FormTelaExportacaoSped},
   TelaExportacaoProsoft in 'TelaExportacaoProsoft.pas' {FormTelaExportacaoProsoft},
   TelaImportaSPEDDaruma in 'TelaImportaSPEDDaruma.pas' {FormImportaSPEDDaruma},
@@ -46,7 +45,8 @@ uses
   TelaExportacaoSeller in 'TelaExportacaoSeller.pas' {FormTelaExportacaoSeller},
   TelaImportacaoSeller in 'TelaImportacaoSeller.pas' {FormTelaImportacaoSeller},
   TelaSplash in '..\ArquivosComuns\TelaSplash.pas' {FormSplash},
-  CadastroEmpresa in '..\Config\CadastroEmpresa.pas' {FormCadastroEmpresa};
+  CadastroEmpresa in '..\Config\CadastroEmpresa.pas' {FormCadastroEmpresa},
+  backup in 'backup.pas';
 
 {$R *.RES}
 var

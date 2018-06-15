@@ -438,7 +438,7 @@ begin
 
   if ECFAtual = 'ECF' then
   begin
-    dmECF := TdmECF.Create(Application);    
+    dmECF := TdmECF.Create(Application);
     exit;
   end;
 
@@ -3119,6 +3119,15 @@ begin
           end;
         end;
 
+        if (ECFAtual = 'ECF') and (not FileExists('Confirma.txt')) then
+        begin
+          try
+            dmECF.SubTotal;
+          except
+            Application.ProcessMessages;
+          end;
+        end;
+
         if (ECFAtual = 'DARUMA FRAMEWORK') and (not FileExists('Confirma.txt')) then
         begin
           try
@@ -4426,7 +4435,7 @@ begin
                     SQLImpressaoCupom.fieldbyname('PRODICOD').AsString, {Codigo}
                     DescrLivreProd, {Descricao}
                     RetornaTotalizadorIcmsECF(Ecf_ID, CodICMS), {Tributo}
-                    'V', {TipoDesc}
+                    '$',//'V', {TipoDesc}
                     SQLLocate('UNIDADE', 'UNIDICOD', 'UNIDA5DESCR', SQLLocate('PRODUTO', 'PRODICOD', 'UNIDICOD', SQLImpressaoCupom.fieldbyname('PRODICOD').AsString)), {Unid}
                     SQLImpressaoCupom.fieldbyname('CPITN3QTD').Value, {Qtde}
                     SQLImpressaoCupom.fieldbyname('CPITN3VLRUNIT').Value, {ValorUnitario}
@@ -4454,6 +4463,14 @@ begin
                   Bematech_FI_SubTotal(dm.SubTotal_ECF);
                   dm.SubTotal_ECF := FormatFloat(FormatStrVlrVenda, (StrToInt(dm.SubTotal_ECF) / 100));
                   VlrTotalECF := StrToFloat(dm.SubTotal_ECF);
+                except
+                  Application.ProcessMessages;
+                end;
+              end;
+              if (ECFAtual = 'ECF') and (FileExists('Confirma.txt')) then
+              begin
+                try
+                  dmECF.SubTotal;
                 except
                   Application.ProcessMessages;
                 end;
@@ -4507,7 +4524,6 @@ begin
                     SQLParcelasVistaVendaTempVALORPARC.Value := SQLImpressaoCupom.fieldbyname('CPNMN2VLR').Value;
                   SQLParcelasVistaVendaTempTIPOPADR.Value := SQLLocate('NUMERARIO', 'NUMEICOD', 'NUMEA5TIPO', SQLImpressaoCupom.fieldbyname('NUMEICOD').AsString);
                   SQLParcelasVistaVendaTemp.Post;
-
                   if SQLParcelasVistaVendaTempTIPOPADR.Value = 'CRT' then
                   begin
                     TipoPadrao := SQLParcelasVistaVendaTempTIPOPADR.Value;
@@ -4518,6 +4534,7 @@ begin
                   end;
 
                   VlrTotalSistema := VlrTotalSistema + SQLParcelasVistaVendaTempVALORPARC.Value;
+                  dmECF.ACBrECF1.EfetuaPagamento(IntToStr(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger),SQLImpressaoCupom.fieldbyname('CPNMN2VLR').Value,'',False);
 
                   SQLImpressaoCupom.next;
                 end;
@@ -4568,6 +4585,8 @@ begin
                   SQLImpressaoCupom.Next;
 
                   VlrTotalSistema := VlrTotalSistema + SQLParcelasPrazoVendaTempVALORVENCTO.Value;
+                  dmECF.ACBrECF1.EfetuaPagamento(IntToStr(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger),SQLImpressaoCupom.fieldbyname('CPNMN2VLR').Value,'',False);
+
                 end;
                 SQLParcelasPrazoVendaTemp.Close;
                 SQLParcelasPrazoVendaTemp.MacroByName('MFiltro').Value := 'TERMICOD = ' + SQLImpressaoCupom.fieldbyname('TERMICOD').AsString;
@@ -4629,7 +4648,6 @@ begin
               end;
 
               VarValorTroco := SQLImpressaoCupom.fieldbyname('TROCO').Value;
-
               if DocumentoClienteVenda = '' then
                 DocumentoClienteVenda := SQLImpressaoCupom.fieldbyname('CLIENTECNPJ').AsString;
               repeat

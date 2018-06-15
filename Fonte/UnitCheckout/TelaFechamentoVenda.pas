@@ -372,7 +372,8 @@ uses TelaItens, TelaConsultaRapidaCliente, DataModulo,
      TelaImpressaoPreVenda, CadastroCliente, TelaImpressaoCarne, TelaCadastroDadosVenda, TelaImpressaoDadosVenda, TelaTipoDescontoItem,
      ImportarPreVenda, TelaFechamentoOrcamento, TelaDadosCliente, TelaCadastroObs, UnitLibrary, TelaConsultaLiberacaoCredito, DataModuloTemplate,
      IMPNAOFISCAL, TelaDadosCartaoCreditoManual, TelaTroco, TelaAssistenteLancamentoContasReceber, TelaAssistenteLancamentoPlanoVariavelCheckout,
-     TelaConsultaRapidaDependente, LeitorCodigoBarrasCheckout, TelaGeracaoXMLVendas, TelaDataEntrega;
+     TelaConsultaRapidaDependente, LeitorCodigoBarrasCheckout, TelaGeracaoXMLVendas, TelaDataEntrega,
+  udmECF;
 
 {$R *.DFM}
 procedure TFormTelaFechamentoVenda.FormCreate(Sender: TObject);
@@ -1332,7 +1333,8 @@ begin
                   SQLParcelasVistaVendaTempTIPOPADR.Value  := TipoPadrao ;
                   SQLParcelasVistaVendaTemp.Post ;
                 end ;
-
+              if (ECFAtual = 'ECF') and (not FileExists('Confirma.txt')) then
+                dmECF.ACBrECF1.EfetuaPagamento('1',SQLParcelasVistaVendaTempVALORPARC.Value,'',False);
               SQLParcelasVistaVendaTemp.Close ;
               SQLParcelasVistaVendaTemp.SQL.Clear ;
               SQLParcelasVistaVendaTemp.SQL.Add('select * from PARCELASVISTAVENDATEMP') ;
@@ -2241,7 +2243,7 @@ begin
                   if ImprimeConfDivida = True then
                     begin
                       SQLParcelasVistaVendaTemp.Last;
-                      if (ECFAtual <> 'BEMATECH MP-20 FI') then
+                      if (ECFAtual <> 'BEMATECH MP-20 FI') or (ECFAtual <> 'ECF')  then
                         if TipoPadrao = 'CRD' then
                           TotNumECF := RetornaTotalizadorNumerarioECF(Ecf_ID, SQLParcelasPrazoVendaTempNUMEICOD.AsString)
                         else
@@ -2258,7 +2260,7 @@ begin
                         NomeNumerario := 'Dinheiro';
                       /////////////////////////
 
-                      if (TotNumECF <> '') or (ECFAtual = 'BEMATECH MP-20 FI') then
+                      if (TotNumECF <> '') or (ECFAtual = 'BEMATECH MP-20 FI') or (ECFAtual = 'ECF')  then
                         begin
                           LblInstrucoes.Caption := 'Emitindo Confissão de Dívida' ;
                           LblInstrucoes.Refresh ;
@@ -6632,6 +6634,7 @@ begin
     shpStatusServidor.Brush.Color := clLime
   else
     shpStatusServidor.Brush.Color := clRed;
+
 end;
 
 procedure TFormTelaFechamentoVenda.AtualizarSaldoEdit;

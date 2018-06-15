@@ -10,7 +10,15 @@ uses
   JvMemoryDataset, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData,
   cxDataStorage, cxEdit, cxDBData, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGridLevel, cxClasses, cxControls, cxGridCustomView,
-  cxGrid, dxSkinsCore;
+  cxGrid, dxSkinsCore, dxSkinBlack, dxSkinBlue, dxSkinCaramel,
+  dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide, dxSkinFoggy,
+  dxSkinGlassOceans, dxSkiniMaginary, dxSkinLilian, dxSkinLiquidSky,
+  dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMoneyTwins,
+  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
+  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinPumpkin, dxSkinSeven,
+  dxSkinSharp, dxSkinSilver, dxSkinSpringTime, dxSkinStardust,
+  dxSkinSummer2008, dxSkinsDefaultPainters, dxSkinValentine,
+  dxSkinXmas2008Blue, dxSkinscxPCPainter;
 type
   TFormTelaMovimentoCaixa = class(TForm)
     SQLOperacaoCaixa: TRxQuery;
@@ -139,7 +147,7 @@ implementation
 uses DataModulo, UnitLibrary, ECFCheckout, UnitCheckoutLibrary, Epson_Termica,
   TelaFechamentoCaixa, TelaConsultaRapidaCupom, Corisco_CT7000_V3, ACBrPosPrinter,
   IMPNAOFISCAL, Sigtron_FS345, Bematech_MP20_FI_II, BemaFi32, Elgin_FIT,
-  TelaItens;
+  TelaItens, udmECF;
 
 {$R *.DFM}
 procedure TFormTelaMovimentoCaixa.FormClose(Sender: TObject;

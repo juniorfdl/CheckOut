@@ -123,6 +123,8 @@ end;
 
 function TdmECF.FecharCupomFiscal(): Boolean;
 begin
+//  SubTotal;
+//  ACBrECF1.EfetuaPagamento('1',1,'',False);
   ACBrECF1.FechaCupom();
   Result := True;
 end;
@@ -137,7 +139,7 @@ function TdmECF.ImprimeItemECF(Numitem, Codigo, Descricao, Tributo,
   TipoDesc, Unid: String; Qtde, Valor, Percdesc, Vlrdesco: Double;
   NumDecQuant: integer): Boolean;
 begin
-  ACBrECF1.VendeItem(Codigo, Descricao, Tributo, Qtde, Valor, Vlrdesco, Unid, TipoDesc);
+  ACBrECF1.VendeItem(Codigo, Descricao, 'NN', Qtde, Valor, Vlrdesco, Unid, TipoDesc);
   Result := true;
 end;
 
