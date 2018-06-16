@@ -68,7 +68,8 @@ var
   TipoOperacao : TInfoOperacaoProvedor;
 implementation
 
-uses WaitWindow, UnitLibrary, WindowsLibrary, DataModulo, DB, TelaFechamentoVenda, VarSYS ;
+uses WaitWindow, UnitLibrary, WindowsLibrary, DataModulo, DB, TelaFechamentoVenda, VarSYS ,
+  udmECF;
 
 //****************************************************************************//
 // MÉTODO QUE ALIMENTA AS VARIAVEIS SENDDIRECTORY E RECEIVEDIRETORY           //
@@ -563,7 +564,10 @@ begin
                 AbreRelatorioGerencial(infoimpressora.ecfatual, infoimpressora.portaecfatual);
                 for Linhas := 0 to Retorno.Print.Count - 1 do
                   begin
-                    Result := RelatorioGerencial(InfoImpressora.ECFAtual,
+                    //if ECFAtual = 'ECF' then
+                    //  Result := dmECF.ImprimirRelatorioGerencial(Retorno.Print)
+                    //else
+                      Result := RelatorioGerencial(InfoImpressora.ECFAtual,
                                                  InfoImpressora.PortaECFAtual,
                                                  Retorno.Print.Strings[Linhas] + Chr(10));
                     if not Result then

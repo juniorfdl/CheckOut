@@ -10,15 +10,7 @@ uses
   JvMemoryDataset, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData,
   cxDataStorage, cxEdit, cxDBData, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGridLevel, cxClasses, cxControls, cxGridCustomView,
-  cxGrid, dxSkinsCore, dxSkinBlack, dxSkinBlue, dxSkinCaramel,
-  dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide, dxSkinFoggy,
-  dxSkinGlassOceans, dxSkiniMaginary, dxSkinLilian, dxSkinLiquidSky,
-  dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMoneyTwins,
-  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
-  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinPumpkin, dxSkinSeven,
-  dxSkinSharp, dxSkinSilver, dxSkinSpringTime, dxSkinStardust,
-  dxSkinSummer2008, dxSkinsDefaultPainters, dxSkinValentine,
-  dxSkinXmas2008Blue, dxSkinscxPCPainter;
+  cxGrid, dxSkinsCore;
 type
   TFormTelaMovimentoCaixa = class(TForm)
     SQLOperacaoCaixa: TRxQuery;
@@ -818,11 +810,18 @@ begin
       FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
       FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
       FormTelaItens.MemoRetornoNFE.Lines.Add('</corte_parcial>');
-      dm.ACBrPosPrinter.Device.Desativar;
-      dm.ACBrPosPrinter.Device.Ativar;
-      dm.ACBrPosPrinter.Imprimir(FormTelaItens.MemoRetornoNFE.Lines.Text);
-      FormTelaItens.MemoRetornoNFE.Lines.Clear;
-      dm.ACBrPosPrinter.Device.Desativar;
+
+      if ECFAtual = 'ECF' then
+      begin
+        dmECF.ImprimirRelatorioGerencial(FormTelaItens.MemoRetornoNFE.Lines);
+      end
+      else begin
+        dm.ACBrPosPrinter.Device.Desativar;
+        dm.ACBrPosPrinter.Device.Ativar;
+        dm.ACBrPosPrinter.Imprimir(FormTelaItens.MemoRetornoNFE.Lines.Text);
+        FormTelaItens.MemoRetornoNFE.Lines.Clear;
+        dm.ACBrPosPrinter.Device.Desativar;
+      end;
     end;
   end;
 

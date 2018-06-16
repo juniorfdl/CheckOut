@@ -28,10 +28,11 @@ function VerificaPapel_NAOFISCAL(Impressora:string) : boolean ;
 
 implementation
 
-uses BEMATECH_MP20_CI;
+uses BEMATECH_MP20_CI, udmECF, UnitLibrary;
 
 function AbrirPortaNAOFISCAL(Impressora, Porta : String) : Boolean ;
 begin
+  //
   Try
     if (Impressora = 'BEMATECH MP-20 CI') or (Impressora = 'BEMATECH MP-20 TH') then
       AbrirPortaNAOFISCAL := AbrirPorta_NAOFISCAL_Bematech_MP20_CI(Porta) ;
@@ -45,6 +46,12 @@ function AbrirGaveta_NAOFISCAL(Impressora,Porta : String) : Boolean;
 var IntRet : integer;
 begin
   Try
+    if ECFAtual = 'ECF' then
+    begin
+      Result := dmECF.AbrirGaveta_NAOFISCAL();
+      exit;
+    end;
+
     if (Impressora = 'BEMATECH MP-20 CI') or (Impressora = 'BEMATECH MP-20 TH') then
       AbrirGaveta_NAOFISCAL := AbrirGaveta_NAOFISCAL_Bematech_MP20_CI(Porta);
 
@@ -63,6 +70,12 @@ end;
 
 function FecharPortaNAOFISCAL(Impressora: String) : Boolean ;
 begin
+  if ECFAtual = 'ECF' then
+  begin
+    Result := dmECF.FecharPortaNAOFISCAL;
+    exit;
+  end;
+
   Try
     if (Impressora = 'BEMATECH MP-20 CI') or (Impressora = 'BEMATECH MP-20 TH') then
       FecharPortaNAOFISCAL := FecharPorta_NAOFISCAL_Bematech_MP20_CI ;
@@ -74,6 +87,12 @@ end ;
 
 function ImprimeTextoSimples_NAOFISCAL(Impressora,Texto:string) : boolean ;
 begin
+  if ECFAtual = 'ECF' then
+  begin
+    Result := dmECF.ImprimeTextoSimples_NAOFISCAL(Texto);
+    exit;
+  end;
+
   Try
     if (Impressora = 'BEMATECH MP-20 CI') or (Impressora = 'BEMATECH MP-20 TH') then
       ImprimeTextoSimples_NAOFISCAL := ImprimeTextoSimples_NAOFISCAL_Bematech_MP20_CI(Texto) ;
@@ -87,6 +106,12 @@ var TestaRetorno  : Integer;
     TextoBematech : String;
 begin
   Try
+    if (ECFAtual = 'ECF') then
+    begin
+      Result := dmECF.ImprimeTextoFormatado_NAOFISCAL(Texto);
+      Exit;
+    end;
+
     if (Impressora = 'BEMATECH MP-20 CI') or (Impressora = 'BEMATECH MP-20 TH') then
       begin
         TextoBematech := Texto+chr(10);
@@ -111,6 +136,12 @@ end;
 function EnviaComando_NAOFISCAL(Impressora,Texto:string; TamBuffer:integer) : boolean ;
 begin
   Try
+    if (ECFAtual = 'ECF') then
+    begin
+      Result := dmECF.EnviaComando_NAOFISCAL(Texto);
+      Exit;
+    end;
+
     if (Impressora = 'BEMATECH MP-20 CI') or (Impressora = 'BEMATECH MP-20 TH') then
       EnviaComando_NAOFISCAL := EnviaComando_NAOFISCAL_Bematech_MP20_CI(Texto, TamBuffer) ;
   Except
@@ -221,6 +252,12 @@ end;
 function AcionaGuilhotina_NAOFISCAL(Impressora:string; Modo:integer) : boolean ;
 begin
   Try
+    if (ECFAtual = 'ECF') then
+    begin
+      Result := dmECF.AcionaGuilhotina_NAOFISCAL(Modo);
+      Exit;
+    end;
+
     if Impressora = 'BEMATECH MP-20 TH' then
       AcionaGuilhotina_NAOFISCAL := AcionaGuilhotina_NAOFISCAL_Bematech_MP20_CI(Modo) ;
   Except

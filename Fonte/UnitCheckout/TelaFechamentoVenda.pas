@@ -1332,9 +1332,11 @@ begin
 
                   SQLParcelasVistaVendaTempTIPOPADR.Value  := TipoPadrao ;
                   SQLParcelasVistaVendaTemp.Post ;
-                end ;
+                end;
+
               if (ECFAtual = 'ECF') and (not FileExists('Confirma.txt')) then
-                dmECF.ACBrECF1.EfetuaPagamento('1',SQLParcelasVistaVendaTempVALORPARC.Value,'',False);
+                dmECF.ACBrECF1.EfetuaPagamento(IntToStr(NumerarioAtual),SQLParcelasVistaVendaTempVALORPARC.Value,'',False);
+
               SQLParcelasVistaVendaTemp.Close ;
               SQLParcelasVistaVendaTemp.SQL.Clear ;
               SQLParcelasVistaVendaTemp.SQL.Add('select * from PARCELASVISTAVENDATEMP') ;
@@ -2235,7 +2237,7 @@ begin
                   end ;
 
               //EMITIR CONFISS3ÃO DE DÍVIDA
-              if ((TipoPadrao = 'CRD') or (TipoPadrao = 'CRTF')) and (DM.SQLTerminalAtivoTERMCIMPCONFDIVIDA.Value = 'S') then
+              if ((TipoPadrao = 'CRD') or (TipoPadrao = 'CRTF')or (ECFAtual = 'ECF') ) and (DM.SQLTerminalAtivoTERMCIMPCONFDIVIDA.Value = 'S') then
                 begin
                   ImprimeConfDivida := True;
                   If DM.SQLTerminalAtivoTERMCECFIMPRCONFDIVPERGUNTA.Value = 'S' then
@@ -2811,7 +2813,7 @@ begin
                  end;
 
               //EMITIR CONFISSAO DE DÍVIDA PARA CUPOM FISCAL
-              if ((TipoPadrao = 'CRD') or (TipoPadrao = 'CRTF') or (TipoPadrao = 'CHQP')) and (DM.SQLTerminalAtivoTERMCIMPCONFDIVIDA.Value = 'S') then
+              if ((TipoPadrao = 'CRD') or (TipoPadrao = 'CRTF') or (TipoPadrao = 'CHQP')or (ECFAtual = 'ECF') ) and (DM.SQLTerminalAtivoTERMCIMPCONFDIVIDA.Value = 'S') then
                 begin
                   ImprimeConfDivida := True;
                   If DM.SQLTerminalAtivoTERMCECFIMPRCONFDIVPERGUNTA.Value = 'S' then
@@ -2837,7 +2839,7 @@ begin
                       if (ECFAtual = 'DARUMA FS345') or (ECFAtual = 'BEMATECH MP-25 FI') then
                         NomeNumerarioDaruma345 := RetornaTotalizadorNumerarioECFDarumaFS345(Ecf_ID, SQLParcelasPrazoVendaTempNUMEICOD.AsString);
 
-                      if (TotNumECF <> '') or (ECFAtual = 'BEMATECH MP-20 FI') then
+                      if (TotNumECF <> '') or (ECFAtual = 'BEMATECH MP-20 FI') or (ECFAtual = 'ECF')  then
                         begin
                           LblInstrucoes.Caption := 'Emitindo Confissão de Dívida';
                           LblInstrucoes.Refresh ;
@@ -2855,7 +2857,7 @@ begin
                           /////////////////////////////////////
                           if (ECFAtual <> 'CORISCO CT7000 V3') and (ECFAtual <> 'SWEDAS7000') and (ECFAtual <> 'URANO_1EFC') then
                             begin
-                              if ((ECFAtual <> 'DARUMA FS345') and (ECFAtual <> 'BEMATECH MP-25 FI')) then
+                              if ((ECFAtual <> 'DARUMA FS345') and (ECFAtual <> 'BEMATECH MP-25 FI')and (ECFAtual <> 'ECF')) then
                                 begin
                                   if TipoPadrao <> 'CRTF' then
                                     AbrirCNFV(ECFAtual,
@@ -2877,6 +2879,8 @@ begin
                                               ValorCartaoFidelizacao);
                                 end
                               else
+                              if (ECFAtual <> 'ECF') then
+                              begin
                                 AbrirCNFV(ECFAtual,
                                           PortaECFAtual,
                                           TotNumECF[1],
@@ -2885,6 +2889,7 @@ begin
                                           NroCupomFiscal,
                                           NomeNumerarioDaruma345,
                                           ValorTotalVenda.Value);
+                              end;
 
                               if (ECFAtual <> 'SIGTRON FS300') then
                                 begin
@@ -3074,8 +3079,8 @@ begin
                   end;
               end ;
 
-            if (ECFAtual = '') and (ImpNaoFiscalAtual <> '') and
-               ((TipoPadrao = 'CRD') or (TipoPadrao = 'CRTF')) and (DM.SQLTerminalAtivoTERMCIMPCONFDIVIDA.Value = 'S') then
+            if ((ECFAtual = 'ECF')or(ECFAtual = '') and (ImpNaoFiscalAtual <> '') and  
+               ((TipoPadrao = 'CRD') or (TipoPadrao = 'CRTF'))) and (DM.SQLTerminalAtivoTERMCIMPCONFDIVIDA.Value = 'S') then
               begin
                 ImprimeConfDivida := True;
                 If DM.SQLTerminalAtivoTERMCECFIMPRCONFDIVPERGUNTA.Value = 'S' then
@@ -3428,6 +3433,9 @@ begin
             LblInstrucoes.Refresh ;
             InformaG('ANOTE O CÓDIGO DO ORÇAMENTO :' + #13 + '* * * [ ' + DM.CodNextOrc + ' ] * * *') ;
           end ;
+
+        if ECFAtual = 'ECF' then
+          NroCupomFiscal := dmECF.GetNroCupomFiscal; 
 
         if (NroCupomFiscal = '') and (ECFAtual <> '') and (not E_Orcamento) and (copy(EcfAtual,1,4) <> 'NFCE') then
           begin
@@ -5018,6 +5026,8 @@ begin
       if DM.SQLCupomCUPON2DESCITENS.isnull then
         DM.SQLCupomCUPON2DESCITENS.value := 0;
 
+      if ECFAtual = 'ECF' then
+        NroCupomFiscal := dmECF.GetNroCupomFiscal;
 
       if (ECFAtual = 'SIGTRON FS300') then
         NroCupomFiscal := RetornaNroCupomFiscal(ECFAtual,PortaECFAtual);

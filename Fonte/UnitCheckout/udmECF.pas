@@ -3,12 +3,15 @@ unit udmECF;
 interface
 
 uses
-  SysUtils, Classes, ACBrBase, ACBrECF, IniFiles, Forms;
+  SysUtils, Classes, ACBrBase, ACBrECF, IniFiles, Forms, dialogs;
 
 type
   TdmECF = class(TDataModule)
     ACBrECF1: TACBrECF;
     procedure DataModuleCreate(Sender: TObject);
+    procedure DataModuleDestroy(Sender: TObject);
+    procedure ACBrECF1MsgPoucoPapel(Sender: TObject);
+    procedure ACBrECF1ErrorCancelaCupom(var Tratado: Boolean);
   private
     fModelo: Integer;
     fECFVirtual: Integer;
@@ -26,6 +29,7 @@ type
     fMensagemAguarde: String;
     fOperador: String;
     fBandWidth: Integer;
+    fRelatorioGerencial:TStringList;
     procedure LerINI;
     { Private declarations }
   public
@@ -58,7 +62,20 @@ type
     function Leitura_X() : Boolean ;
     function AbrirGaveta:Boolean;
     function FecharCupomFiscal():Boolean ;
+    function GetNroCupomFiscal:String;
 
+    function AbrirGaveta_NAOFISCAL() : Boolean;
+    function ImprimeTextoSimples_NAOFISCAL(Texto:string) : boolean ;
+    function ImprimeTextoFormatado_NAOFISCAL(Texto:string) : boolean;
+    Function ImprimirRelatorioGerencial:boolean; overload;
+    Function ImprimirRelatorioGerencial(pDados:TStrings):boolean; overload;
+
+    function FecharPortaNAOFISCAL:Boolean;
+    function EnviaComando_NAOFISCAL(Texto:String):Boolean;
+    function AutenticaDoc_NAOFISCAL(Texto:String):Boolean;
+    function AcionaGuilhotina_NAOFISCAL(Modo:integer) : boolean ;
+    function Reducao_Z:Boolean;
+    procedure IdentificaConsumidor(DocumentoCli, NomeCli, EnderecoCli:String);
   end;
 
 var
@@ -76,6 +93,14 @@ end;
 
 function TdmECF.AbrirGaveta: Boolean;
 begin
+  AbrirPorta;
+  ACBrECF1.AbreGaveta;
+  Result := True;
+end;
+
+function TdmECF.AbrirGaveta_NAOFISCAL(): Boolean;
+begin
+  AbrirPorta;
   ACBrECF1.AbreGaveta;
   Result := True;
 end;
@@ -92,8 +117,23 @@ begin
   Result := ACBrECF1.Ativo;
 end;
 
-function TdmECF.CancelarCupomFiscal: boolean;
+function TdmECF.AcionaGuilhotina_NAOFISCAL(Modo: integer): boolean;
 begin
+  AbrirPorta;
+  ACBrECF1.CortaPapel();
+  Result := True;
+end;
+
+function TdmECF.AutenticaDoc_NAOFISCAL(Texto: String): Boolean;
+begin
+  AbrirPorta;
+  fRelatorioGerencial.Add(Texto);
+  Result := True;
+end;
+
+function TdmECF.CancelarCupomFiscal: boolean;
+begin   
+  AbrirPorta;
   ACBrECF1.CancelaCupom();
   Result := True;
 end;
@@ -107,17 +147,25 @@ end;
 procedure TdmECF.DataModuleCreate(Sender: TObject);
 begin
   LerINI;
+  fRelatorioGerencial:= TStringList.Create;
+end;
+
+function TdmECF.EnviaComando_NAOFISCAL(Texto: String): Boolean;
+begin
+  AbrirPorta;
+  ACBrECF1.EnviaComando(Texto);
+  Result := True;
 end;
 
 function TdmECF.FechamentoRelatorioGerencial: Boolean;
 begin
-  
+  AbrirPorta;
   Result := True;
 end;
 
 function TdmECF.FecharCNFV: Boolean;
 begin
-  //ACBrECF1.FechaCupom();
+  ImprimirRelatorioGerencial;
   Result := True;
 end;
 
@@ -135,6 +183,17 @@ begin
   Result := True;
 end;
 
+function TdmECF.FecharPortaNAOFISCAL: Boolean;
+begin
+  ImprimirRelatorioGerencial;
+end;
+
+function TdmECF.GetNroCupomFiscal: String;
+begin
+  AbrirPorta;
+  Result := ACBrECF1.NumCupom;
+end;
+
 function TdmECF.ImprimeItemECF(Numitem, Codigo, Descricao, Tributo,
   TipoDesc, Unid: String; Qtde, Valor, Percdesc, Vlrdesco: Double;
   NumDecQuant: integer): Boolean;
@@ -143,8 +202,48 @@ begin
   Result := true;
 end;
 
+function TdmECF.ImprimeTextoFormatado_NAOFISCAL(Texto: string): boolean;
+begin
+  AbrirPorta;
+  fRelatorioGerencial.Add(Texto);
+  Result := True;
+end;
+
+function TdmECF.ImprimeTextoSimples_NAOFISCAL(Texto: string): boolean;
+begin
+  AbrirPorta;
+  fRelatorioGerencial.Add(Texto);
+  Result := True;
+end;
+
+function TdmECF.ImprimirRelatorioGerencial: boolean;
+begin
+  AbrirPorta;
+  if fRelatorioGerencial.Count > 0 then
+  begin
+    //ACBrECF1.AbreRelatorioGerencial();
+    ACBrECF1.RelatorioGerencial(fRelatorioGerencial);
+    //ACBrECF1.FechaRelatorio;
+    fRelatorioGerencial.Clear;
+  end;
+  Result := True;
+end;
+
+function TdmECF.ImprimirRelatorioGerencial(pDados: TStrings): boolean;
+begin
+  AbrirPorta;
+  if pDados.Count > 0 then
+  begin
+    ACBrECF1.AbreRelatorioGerencial();
+    ACBrECF1.RelatorioGerencial(pDados);
+    ACBrECF1.FechaRelatorio;
+  end;
+  Result := True;
+end;
+
 function TdmECF.Leitura_X: Boolean;
 begin
+  AbrirPorta;
   ACBrECF1.LeituraX;
   Result := True;
 end;
@@ -182,10 +281,42 @@ begin
   end;
 end;
 
+function TdmECF.Reducao_Z: Boolean;
+begin
+  AbrirPorta;
+  ACBrECF1.ReducaoZ;
+  Result := True;
+end;
+
 function TdmECF.SubTotal: boolean;
 begin
   ACBrECF1.SubtotalizaCupom();
   Result := True;
+end;
+
+procedure TdmECF.DataModuleDestroy(Sender: TObject);
+begin
+  if ACBrECF1.Ativo then
+    ACBrECF1.Desativar;
+end;
+
+procedure TdmECF.ACBrECF1MsgPoucoPapel(Sender: TObject);
+begin
+  ShowMessage('ATENÇÃO... POUCO PAPEL');
+end;
+
+procedure TdmECF.ACBrECF1ErrorCancelaCupom(var Tratado: Boolean);
+begin
+  //Tratado := True;      
+  ShowMessage('Problema ao cancelar o cupom!'+#13+'Após emitir um relatório gerencial(Confissão de Divida) não é possivel cancelar o cupom!');  
+end;
+
+procedure TdmECF.IdentificaConsumidor(DocumentoCli, NomeCli, EnderecoCli:String);
+begin
+  if length(Trim(EnderecoCli)) < 8 then
+    EnderecoCli := '';
+
+  ACBrECF1.IdentificaConsumidor(DocumentoCli, NomeCli, EnderecoCli);
 end;
 
 end.

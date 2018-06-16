@@ -324,6 +324,7 @@ type
     procedure btnF9Click(Sender: TObject);
     procedure btnF5Click(Sender: TObject);
     procedure SQLItensVendaTempAfterPost(DataSet: TDataSet);
+    procedure FormDestroy(Sender: TObject);
 
   private
     { Private declarations }
@@ -435,12 +436,6 @@ end;
 
 procedure TFormTelaItens.Inicia_NFe();
 begin
-
-  if ECFAtual = 'ECF' then
-  begin
-    dmECF := TdmECF.Create(Application);
-    exit;
-  end;
 
 {$IFDEF ACBrNFeOpenSSL}
   dm.ACBrNFe.Configuracoes.Certificados.ArquivoPFX := dm.sqlEmpresa.FieldByName('EMPRA100CERTIFSERIE').AsString;
@@ -6616,6 +6611,10 @@ begin
 
 end;
 
+procedure TFormTelaItens.FormDestroy(Sender: TObject);
+begin
+  FreeAndNil(dmECF);
+end;
+
 end.
-d.
 

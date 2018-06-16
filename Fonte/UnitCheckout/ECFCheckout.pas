@@ -55,7 +55,7 @@ uses BemaFi32, Sigtron_FS345, UnitLibrary, SWEDA7000_AFRAC, Elgin_FIT, Epson_Ter
 
 function VerificaECFLigada(Impressora, Porta : String) : Boolean ;
 begin
-  if Impressora = 'ECF' then
+  if ECFAtual = 'ECF' then
   begin
     Result := dmECF.AbrirPorta;
   end
@@ -74,7 +74,7 @@ end;
 
 function AbrirPortaECF(Impressora, Porta : String) : Boolean ;
 begin
-  if Impressora = 'ECF' then
+  if ECFAtual = 'ECF' then
   begin
     Result := dmECF.AbrirPorta;
     exit;
@@ -142,7 +142,7 @@ end ;
 
 function FecharPortaECF(Impressora, Porta : String) : Boolean ;
 begin
-  if Impressora = 'ECF' then
+  if ECFAtual = 'ECF' then
   begin
     Result := dmECF.FecharPortaECF;
     exit;
@@ -196,9 +196,10 @@ end ;
 
 function Leitura_X(Impressora, Porta : String) : Boolean ;
 begin
-  if Impressora = 'ECF' then
+  if ECFAtual = 'ECF' then
   begin
     Result := dmECF.Leitura_X;
+    FecharPortaECF(Impressora, Porta) ;
     exit;
   end;
 
@@ -277,6 +278,13 @@ function Reducao_Z(Impressora, Porta : String) : Boolean ;
 begin
   AbrirPortaECF(Impressora, Porta) ;
 
+  if ECFAtual = 'ECF' then
+  begin
+    Result := dmECF.Reducao_Z;
+    FecharPortaECF(Impressora, Porta);
+    exit;
+  end;    
+
   if Impressora = 'BEMATECH MP-25 FI' then
     Bematech_FI_ReducaoZ('','');
 
@@ -336,6 +344,12 @@ function RelatorioGerencial(Impressora, Porta, Texto : String) : Boolean;
 begin
   AbrirPortaECF(Impressora,Porta);
 
+  if ECFAtual = 'ECF' then
+  begin
+    Result := dmECF.ImprimeTextoFormatado_NAOFISCAL(Texto);
+    exit;
+  end;
+
   if Impressora = 'BEMATECH MP-25 FI' then
     RelatorioGerencial := EmiteRelatorioGerencial_Bematech_MP25_FI(Texto);
 
@@ -360,7 +374,7 @@ end;
 function FechamentoRelatorioGerencial(Impressora, Porta : String) : boolean;
 begin
 
-  if Impressora = 'ECF' then
+  if ECFAtual = 'ECF' then
   begin
     Result := dmECF.FechamentoRelatorioGerencial;
     exit;
@@ -391,7 +405,7 @@ end;
 
 function AbrirCupomFiscal(Impressora, Porta : String; Var NroCupom : string) : Boolean ;
 begin
-  if Impressora = 'ECF' then
+  if ECFAtual = 'ECF' then
   begin
     Result := dmECF.AbrirCupomFiscal(NroCupom);
     exit;
@@ -448,7 +462,7 @@ var
  VlUnit,
  Preco : String;
 begin
-  if Impressora = 'ECF' then
+  if ECFAtual = 'ECF' then
   begin
     Result := dmECF.ImprimeItemECF(Numitem, Codigo, Descricao, Tributo, TipoDesc, Unid, Qtde, Valor, Percdesc, Vlrdesco, NumDecQuant);
     exit;
@@ -596,12 +610,11 @@ end ;
 
 function CancelarItemECF(Impressora, Porta, Posicao : string) : boolean ;
 begin
-  if Impressora = 'ECF' then
+  if ECFAtual = 'ECF' then
   begin
     Result := dmECF.CancelarItemECF(Posicao);
     exit;
-  end;
-
+  end;    
 
   AbrirPortaECF(Impressora, Porta) ;
 
@@ -677,8 +690,13 @@ begin
         end;
     end;
 
-  if Impressora = 'ECF' then
+  if ECFAtual = 'ECF' then
   begin
+    if DocumentoCli <> '' then
+    begin
+      dmECF.IdentificaConsumidor(DocumentoCli, NomeCli, EnderecoCli+' - '+CidadeCli);
+    end;
+
     Result := dmECF.FecharCupomFiscal;
     exit;
   end;                               
@@ -1218,7 +1236,7 @@ end ;
 
 function CancelarCupomFiscal(Impressora, Porta : String) : Boolean ;
 begin
-  if Impressora = 'ECF' then
+  if ECFAtual = 'ECF' then
   begin
     result := dmECF.CancelarCupomFiscal;
     exit;
@@ -1483,6 +1501,13 @@ begin
   LinhaTextoLivre := False;
   AbrirPortaECF(Impressora, Porta) ;
 
+  if ECFAtual = 'ECF' then
+  begin
+    dmECF.ImprimeTextoFormatado_NAOFISCAL(Texto);
+    FecharPortaECF(Impressora, Porta) ;
+    exit;
+  end;
+
   if Impressora = 'BEMATECH MP-25 FI' then
     LinhaTextoLivre := LinhaTextoLivre_Bematech_MP25_FI(Texto);
 
@@ -1513,7 +1538,7 @@ end ;
 
 function FecharCNFV(Impressora, Porta : string) : Boolean ;
 begin
-  if Impressora = 'ECF' then
+  if ECFAtual = 'ECF' then
   begin
     Result := dmECF.FecharCNFV;
     exit;
@@ -1564,7 +1589,7 @@ function AbrirGaveta(Impressora, Porta : String) : Boolean;
 begin
   AbrirGaveta := True;
 
-  if Impressora = 'ECF' then
+  if ECFAtual = 'ECF' then
   begin
     Result := dmECF.AbrirGaveta;
     exit;
@@ -1611,7 +1636,13 @@ end;
 function  EmiteCNFV_Corisco(Impressora,Porta,Titulo,Texto:String):Boolean;
 begin
   AbrirPortaECF(Impressora,Porta);
-  EmiteCNFV_Corisco := EmiteCNFV_Corisco_CT3000_V3(Titulo,Texto);
+
+  if ECFAtual = 'ECF' then
+  begin
+    dmECF.ImprimeTextoFormatado_NAOFISCAL(Texto);
+  end
+  else
+    EmiteCNFV_Corisco := EmiteCNFV_Corisco_CT3000_V3(Titulo,Texto);
   FecharPortaECF(Impressora,Porta);
 end;
 

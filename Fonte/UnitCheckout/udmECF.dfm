@@ -1,6 +1,7 @@
 object dmECF: TdmECF
   OldCreateOrder = False
   OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
   Left = 442
   Top = 125
   Height = 492
@@ -15,6 +16,8 @@ object dmECF: TdmECF
     MsgRelatorio = 'Imprimindo %s  %d'#170' Via '
     MsgPausaRelatorio = 'Destaque a %d'#170' via, <ENTER> proxima, %d seg.'
     PaginaDeCodigo = 850
+    OnMsgPoucoPapel = ACBrECF1MsgPoucoPapel
+    OnErrorCancelaCupom = ACBrECF1ErrorCancelaCupom
     DecimaisPreco = 2
     MemoParams.Strings = (
       '[Cabecalho]'
