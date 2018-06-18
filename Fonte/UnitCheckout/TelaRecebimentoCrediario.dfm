@@ -1,11 +1,11 @@
 object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
-  Left = 259
-  Top = 95
+  Left = 403
+  Top = 78
   BorderIcons = []
   BorderStyle = bsSingle
   ClientHeight = 583
   ClientWidth = 785
-  Color = 14731440
+  Color = 5278518
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -30,7 +30,7 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     Alignment = taCenter
     AutoSize = False
     Caption = 'Recebimento de Credi'#225'rio'
-    Color = clNavy
+    Color = clGreen
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
     Font.Height = -29
@@ -52,7 +52,7 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     Caption = 'LblInstrucoes'
     Color = clBlack
     Font.Charset = ANSI_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -16
     Font.Name = 'Verdana'
     Font.Style = [fsBold]
@@ -67,11 +67,11 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     Left = 0
     Top = 33
     Width = 785
-    Height = 23
+    Height = 28
     Align = alTop
     Alignment = taCenter
     Caption = 'Parcela(s) '#224' receber'
-    Color = clNavy
+    Color = clGreen
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
     Font.Height = -19
@@ -105,7 +105,7 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     Height = 392
     BevelOuter = bvNone
     BorderWidth = 3
-    Color = 10053171
+    Color = 5278518
     Ctl3D = False
     Font.Charset = ANSI_CHARSET
     Font.Color = clBlack
@@ -121,11 +121,13 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       Width = 135
       Height = 23
       Caption = 'TOTAL '#192' PAGAR'
+      Color = clGreen
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
       Font.Height = -19
       Font.Name = 'Tahoma'
       Font.Style = []
+      ParentColor = False
       ParentFont = False
     end
     object LblNUMERARIO: TLabel
@@ -134,11 +136,13 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       Width = 106
       Height = 23
       Caption = 'NUMERARIO'
+      Color = clGreen
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
       Font.Height = -19
       Font.Name = 'Tahoma'
       Font.Style = []
+      ParentColor = False
       ParentFont = False
     end
     object Label15: TLabel
@@ -147,11 +151,13 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       Width = 26
       Height = 23
       Caption = 'em'
+      Color = clGreen
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
       Font.Height = -19
       Font.Name = 'Tahoma'
       Font.Style = []
+      ParentColor = False
       ParentFont = False
     end
     object Panel2: TPanel
@@ -166,10 +172,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         Left = 0
         Top = 0
         Width = 765
-        Height = 44
+        Height = 46
         Align = alTop
         BevelOuter = bvNone
-        Color = 10053171
+        Color = clGreen
         TabOrder = 0
         object Label2: TLabel
           Left = 4
@@ -177,11 +183,13 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
           Width = 31
           Height = 21
           Caption = 'Pos.'
+          Color = clGreen
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
           Font.Height = -17
           Font.Name = 'Tahoma'
           Font.Style = []
+          ParentColor = False
           ParentFont = False
         end
         object Label3: TLabel
@@ -190,11 +198,13 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
           Width = 99
           Height = 21
           Caption = 'Nome Cliente'
+          Color = clGreen
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
           Font.Height = -17
           Font.Name = 'Tahoma'
           Font.Style = []
+          ParentColor = False
           ParentFont = False
         end
         object Label4: TLabel
@@ -203,11 +213,13 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
           Width = 128
           Height = 21
           Caption = 'Documento-Parc.'
+          Color = clGreen
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
           Font.Height = -17
           Font.Name = 'Tahoma'
           Font.Style = []
+          ParentColor = False
           ParentFont = False
         end
         object Label5: TLabel
@@ -218,11 +230,13 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'Dt.Vencto.'
+          Color = clGreen
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
           Font.Height = -17
           Font.Name = 'Tahoma'
           Font.Style = []
+          ParentColor = False
           ParentFont = False
         end
         object Label6: TLabel
@@ -233,11 +247,13 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'Vl.Vencto.'
+          Color = clGreen
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
           Font.Height = -17
           Font.Name = 'Tahoma'
           Font.Style = []
+          ParentColor = False
           ParentFont = False
         end
         object Label7: TLabel
@@ -248,11 +264,13 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'Vl.Juros'
+          Color = clGreen
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
           Font.Height = -17
           Font.Name = 'Tahoma'
           Font.Style = []
+          ParentColor = False
           ParentFont = False
         end
         object Label8: TLabel
@@ -263,11 +281,13 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'Atr.'
+          Color = clGreen
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
           Font.Height = -17
           Font.Name = 'Tahoma'
           Font.Style = []
+          ParentColor = False
           ParentFont = False
         end
         object Label9: TLabel
@@ -278,11 +298,13 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'Vl.Multa'
+          Color = clGreen
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
           Font.Height = -17
           Font.Name = 'Tahoma'
           Font.Style = []
+          ParentColor = False
           ParentFont = False
         end
         object Label10: TLabel
@@ -293,11 +315,13 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'Vl.Desc.'
+          Color = clGreen
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
           Font.Height = -17
           Font.Name = 'Tahoma'
           Font.Style = []
+          ParentColor = False
           ParentFont = False
         end
         object Label11: TLabel
@@ -308,11 +332,13 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'Vl. '#224' Pagar'
+          Color = clGreen
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
           Font.Height = -17
           Font.Name = 'Tahoma'
           Font.Style = []
+          ParentColor = False
           ParentFont = False
         end
         object Label12: TLabel
@@ -323,11 +349,13 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'Vl.Abatido'
+          Color = clGreen
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
           Font.Height = -17
           Font.Name = 'Tahoma'
           Font.Style = []
+          ParentColor = False
           ParentFont = False
         end
         object Label13: TLabel
@@ -338,11 +366,13 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'Tx.Cobr.'
+          Color = clGreen
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
           Font.Height = -17
           Font.Name = 'Tahoma'
           Font.Style = []
+          ParentColor = False
           ParentFont = False
         end
         object Label14: TLabel
@@ -351,24 +381,26 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
           Width = 91
           Height = 21
           Caption = 'Tipo Parcela'
+          Color = clGreen
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
           Font.Height = -17
           Font.Name = 'Tahoma'
           Font.Style = []
+          ParentColor = False
           ParentFont = False
         end
       end
       object DBCtrlGridParcelas: TDBCtrlGrid
         Left = 0
-        Top = 44
+        Top = 46
         Width = 784
-        Height = 319
+        Height = 317
         Align = alLeft
         Color = clWhite
         DataSource = DSSQLParcelasReceberTemp
         PanelBorder = gbNone
-        PanelHeight = 53
+        PanelHeight = 52
         PanelWidth = 767
         ParentColor = False
         TabOrder = 1
@@ -606,12 +638,12 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       TabStop = False
       AutoSize = False
       BorderStyle = bsNone
+      Color = clGreen
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
       Font.Height = -19
       Font.Name = 'Tahoma'
       Font.Style = []
-      ParentColor = True
       ParentFont = False
       ReadOnly = True
       TabOrder = 1
@@ -1714,7 +1746,7 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     PassSetting = psTwoPass
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'Custom'
+    PrinterSetup.PaperName = 'Letter'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.mmMarginBottom = 6350
     PrinterSetup.mmMarginLeft = 0
@@ -2512,7 +2544,7 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     PrinterSetup.BinName = 'Default'
     PrinterSetup.Copies = 2
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'Custom'
+    PrinterSetup.PaperName = 'Letter'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.mmMarginBottom = 6350
     PrinterSetup.mmMarginLeft = 0

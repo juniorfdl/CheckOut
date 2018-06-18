@@ -27,7 +27,7 @@ object FormTelaConsultaTemplate: TFormTelaConsultaTemplate
     Left = 0
     Top = 0
     Width = 767
-    Height = 441
+    Height = 442
     Align = alClient
     TabOrder = 0
     object PanelCentral: TPanel
@@ -140,7 +140,7 @@ object FormTelaConsultaTemplate: TFormTelaConsultaTemplate
         BorderStyle = bsNone
         Color = clWhite
         DataSource = DSTemplate
-        FixedColor = 10053171
+        FixedColor = clGreen
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -160,7 +160,7 @@ object FormTelaConsultaTemplate: TFormTelaConsultaTemplate
     object ScrollBoxTopo: TScrollBox
       Left = 0
       Top = 0
-      Width = 749
+      Width = 763
       Height = 80
       Align = alTop
       BevelInner = bvNone
@@ -172,7 +172,7 @@ object FormTelaConsultaTemplate: TFormTelaConsultaTemplate
       object PanelCabecalho: TPanel
         Left = 0
         Top = 0
-        Width = 749
+        Width = 763
         Height = 80
         Align = alTop
         BevelOuter = bvNone
@@ -228,7 +228,7 @@ object FormTelaConsultaTemplate: TFormTelaConsultaTemplate
         object PanelNavigator: TPanel
           Left = 0
           Top = 48
-          Width = 749
+          Width = 763
           Height = 32
           Align = alBottom
           BevelOuter = bvNone
@@ -237,7 +237,7 @@ object FormTelaConsultaTemplate: TFormTelaConsultaTemplate
           object AdvPanelNavigator: TAdvOfficeStatusBar
             Left = 0
             Top = 0
-            Width = 749
+            Width = 763
             Height = 32
             AnchorHint = False
             Align = alClient
@@ -451,18 +451,18 @@ object FormTelaConsultaTemplate: TFormTelaConsultaTemplate
     Top = 11
   end
   object AdvOfficeStatusBarOfficeStyler1: TAdvOfficeStatusBarOfficeStyler
-    BorderColor = 14986888
-    PanelAppearanceLight.BorderColor = 14922381
+    BorderColor = clGreen
+    PanelAppearanceLight.BorderColor = clGreen
     PanelAppearanceLight.BorderColorHot = clGray
     PanelAppearanceLight.BorderColorDown = 10240783
-    PanelAppearanceLight.Color = 16440774
-    PanelAppearanceLight.ColorTo = 14854530
+    PanelAppearanceLight.Color = clGreen
+    PanelAppearanceLight.ColorTo = clMoneyGreen
     PanelAppearanceLight.ColorHot = 13958143
     PanelAppearanceLight.ColorHotTo = 6538487
     PanelAppearanceLight.ColorDown = 9232890
     PanelAppearanceLight.ColorDownTo = 1940207
-    PanelAppearanceLight.ColorMirror = 14854530
-    PanelAppearanceLight.ColorMirrorTo = 14854530
+    PanelAppearanceLight.ColorMirror = clMoneyGreen
+    PanelAppearanceLight.ColorMirrorTo = clGreen
     PanelAppearanceLight.ColorMirrorHot = 6538487
     PanelAppearanceLight.ColorMirrorHotTo = 6538487
     PanelAppearanceLight.ColorMirrorDown = 1940207

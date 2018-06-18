@@ -1,11 +1,11 @@
 object FormTelaTeclasAtalhoTelaItens: TFormTelaTeclasAtalhoTelaItens
-  Left = -9
-  Top = 21
+  Left = 204
+  Top = 26
   BorderIcons = []
   BorderStyle = bsNone
   ClientHeight = 585
   ClientWidth = 804
-  Color = 14731440
+  Color = 5278518
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

@@ -1,12 +1,12 @@
 object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
-  Left = 536
-  Top = 76
+  Left = 308
+  Top = 40
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'FormTelaImportarPreVenda'
   ClientHeight = 605
   ClientWidth = 804
-  Color = 14731440
+  Color = 5278518
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -43,17 +43,19 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
   end
   object Label1: TLabel
     Left = 224
-    Top = 37
+    Top = 38
     Width = 475
     Height = 13
     Caption = 
       '[ENTER] Importar Pr'#233'-venda - [F5] Reimprimir Pr'#233'-venda - [F6] De' +
       'sativar Pr'#233'-venda'
+    Color = 13225421
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
+    ParentColor = False
     ParentFont = False
   end
   object Label2: TLabel
@@ -63,7 +65,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Height = 20
     Caption = 'Dados do Cliente Corrente:'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -16
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold, fsUnderline]
@@ -76,7 +78,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Height = 13
     Caption = 'Nome'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
@@ -89,7 +91,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Height = 13
     Caption = 'Endere'#231'o'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
@@ -102,7 +104,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Height = 13
     Caption = 'Cidade'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
@@ -115,7 +117,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Height = 13
     Caption = 'Obs Cadastro'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
@@ -127,11 +129,13 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Width = 221
     Height = 13
     Caption = '*** Verifique os dados com aten'#231#227'o ***'
+    Color = clActiveBorder
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clRed
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
+    ParentColor = False
     ParentFont = False
   end
   object Label8: TLabel
@@ -141,7 +145,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Height = 13
     Caption = 'Dt.Cadastro'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
@@ -154,7 +158,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Height = 13
     Caption = 'Dt.1'#170' Compra'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
@@ -167,7 +171,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Height = 13
     Caption = 'Dt.ULT Compra'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
@@ -180,7 +184,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Height = 13
     Caption = 'Documento'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
@@ -193,7 +197,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Height = 13
     Caption = 'Data Nasc'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
@@ -206,7 +210,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Height = 13
     Caption = 'Total Compras'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
@@ -232,7 +236,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Height = 13
     Caption = 'Renda Familiar'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
@@ -245,7 +249,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Height = 13
     Caption = 'Limite Compras'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
@@ -258,7 +262,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Height = 20
     Caption = 'Dados da Venda Corrente:'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -16
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold, fsUnderline]
@@ -271,7 +275,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Height = 13
     Caption = 'Terminal'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
@@ -284,7 +288,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Height = 13
     Caption = 'Nro.Prevenda'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
@@ -297,7 +301,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Height = 13
     Caption = 'Cond.Pgto'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
@@ -310,7 +314,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Height = 20
     Caption = 'Rela'#231#227'o de Produtos:'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -16
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold, fsUnderline]
@@ -335,11 +339,13 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Width = 119
     Height = 13
     Caption = 'Data/Hora da Venda'
+    Color = clActiveBorder
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clRed
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
+    ParentColor = False
     ParentFont = False
   end
   object Label24: TLabel
@@ -349,7 +355,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Height = 13
     Caption = 'Autorizado'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
@@ -362,7 +368,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Height = 13
     Caption = 'Situa'#231#227'o'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
@@ -375,7 +381,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Height = 20
     Caption = 'Recalcular Pre'#231'os pela tabela abaixo:'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -16
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold, fsUnderline]
@@ -390,7 +396,7 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
     Color = clWhite
     Ctl3D = False
     DataSource = DSMemPrevenda
-    FixedColor = 10053171
+    FixedColor = clGreen
     Font.Charset = ANSI_CHARSET
     Font.Color = clBlack
     Font.Height = -19
@@ -415,8 +421,9 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
       item
         Expanded = False
         FieldName = 'Vendedor'
+        Title.Color = 13225421
         Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWhite
+        Title.Font.Color = clBlack
         Title.Font.Height = -19
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
@@ -426,8 +433,9 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
       item
         Expanded = False
         FieldName = 'ClienteNome'
+        Title.Color = 13225421
         Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWhite
+        Title.Font.Color = clBlack
         Title.Font.Height = -19
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
@@ -438,8 +446,9 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
         Expanded = False
         FieldName = 'PRVDN2TOTITENS'
         Title.Alignment = taRightJustify
+        Title.Color = 13225421
         Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWhite
+        Title.Font.Color = clBlack
         Title.Font.Height = -19
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
@@ -451,8 +460,9 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
         Expanded = False
         FieldName = 'PRVDCMARCADO'
         Title.Alignment = taCenter
+        Title.Color = 13225421
         Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWhite
+        Title.Font.Color = clBlack
         Title.Font.Height = -19
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
@@ -759,8 +769,9 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
         Expanded = False
         FieldName = 'PRODICOD'
         Title.Caption = 'C'#243'd'
+        Title.Color = 13225421
         Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWhite
+        Title.Font.Color = clBlack
         Title.Font.Height = -13
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
@@ -771,8 +782,9 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
         Expanded = False
         FieldName = 'DescricaoRed'
         Title.Caption = 'Descri'#231#227'o'
+        Title.Color = 13225421
         Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWhite
+        Title.Font.Color = clBlack
         Title.Font.Height = -13
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
@@ -784,8 +796,9 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
         Expanded = False
         FieldName = 'PVITN3QTD'
         Title.Caption = 'Qtde'
+        Title.Color = 13225421
         Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWhite
+        Title.Font.Color = clBlack
         Title.Font.Height = -13
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
@@ -797,8 +810,9 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
         Expanded = False
         FieldName = 'PVITN3QTDTROCA'
         Title.Caption = 'Troca'
+        Title.Color = 13225421
         Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWhite
+        Title.Font.Color = clBlack
         Title.Font.Height = -13
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
@@ -809,8 +823,9 @@ object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
         Expanded = False
         FieldName = 'PVITN3VLRUNIT'
         Title.Caption = 'Vlr.Unit'
+        Title.Color = 13225421
         Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWhite
+        Title.Font.Color = clBlack
         Title.Font.Height = -13
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]

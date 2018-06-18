@@ -1,6 +1,6 @@
 object FormTelaReceituario: TFormTelaReceituario
-  Left = 429
-  Top = 71
+  Left = 369
+  Top = 70
   BorderIcons = [biSystemMenu]
   BorderStyle = bsNone
   Caption = 'Cadastro de Ordem de Servi'#231'os'
@@ -41,7 +41,7 @@ object FormTelaReceituario: TFormTelaReceituario
     Width = 668
     Height = 299
     Align = alTop
-    Color = 14536396
+    Color = 13225421
     TabOrder = 0
     object RxLabel1: TRxLabel
       Left = 129
@@ -83,7 +83,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Height = 13
       Caption = 'Data Entrega'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -111,7 +111,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Height = 13
       Caption = 'Servi'#231'o Realizado'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -125,7 +125,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Height = 13
       Caption = 'Total'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -139,7 +139,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Height = 13
       Caption = 'Sinal'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -153,7 +153,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Height = 13
       Caption = 'Saldo'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -167,7 +167,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Height = 13
       Caption = 'Data Retirada'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -611,7 +611,7 @@ object FormTelaReceituario: TFormTelaReceituario
       TabStop = False
       AutoSize = False
       BorderStyle = bsNone
-      Color = 15461355
+      Color = 13225421
       DataField = 'VendedorCalcField'
       DataSource = DSSQLClienteReceituario
       Font.Charset = DEFAULT_CHARSET
@@ -854,7 +854,7 @@ object FormTelaReceituario: TFormTelaReceituario
         TabStop = False
         BorderStyle = bsNone
         CharCase = ecUpperCase
-        Color = 15461355
+        Color = 13225421
         DataField = 'ClienteCalcField'
         DataSource = DSSQLClienteReceituario
         Font.Charset = ANSI_CHARSET
@@ -874,7 +874,7 @@ object FormTelaReceituario: TFormTelaReceituario
         TabStop = False
         BorderStyle = bsNone
         CharCase = ecUpperCase
-        Color = 15461355
+        Color = 13225421
         DataField = 'EndCliCalcField'
         DataSource = DSSQLClienteReceituario
         Font.Charset = ANSI_CHARSET
@@ -894,7 +894,7 @@ object FormTelaReceituario: TFormTelaReceituario
         TabStop = False
         BorderStyle = bsNone
         CharCase = ecUpperCase
-        Color = 15461355
+        Color = 13225421
         DataField = 'FoneCliCalcField'
         DataSource = DSSQLClienteReceituario
         Font.Charset = ANSI_CHARSET
@@ -914,7 +914,7 @@ object FormTelaReceituario: TFormTelaReceituario
         TabStop = False
         BorderStyle = bsNone
         CharCase = ecUpperCase
-        Color = 15461355
+        Color = 13225421
         DataField = 'BairroCliCalcField'
         DataSource = DSSQLClienteReceituario
         Font.Charset = ANSI_CHARSET
@@ -968,7 +968,7 @@ object FormTelaReceituario: TFormTelaReceituario
     Width = 668
     Height = 151
     Align = alTop
-    Color = 12572888
+    Color = 13225421
     TabOrder = 2
     object Shape5: TShape
       Left = 3
@@ -1001,7 +1001,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Height = 13
       Caption = 'Esf'#233'rico'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -1015,7 +1015,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Height = 13
       Caption = 'Cil'#237'ndrico'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -1029,7 +1029,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Height = 13
       Caption = 'Eixo'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -1043,7 +1043,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Height = 13
       Caption = 'DNP'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -1058,7 +1058,7 @@ object FormTelaReceituario: TFormTelaReceituario
       AutoSize = False
       Caption = 'PARA LONGE'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -1074,7 +1074,7 @@ object FormTelaReceituario: TFormTelaReceituario
       AutoSize = False
       Caption = 'PARA PERTO'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -1089,7 +1089,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Height = 13
       Caption = 'O.D.'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -1104,7 +1104,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Height = 13
       Caption = 'O.E.'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -1119,7 +1119,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Height = 13
       Caption = 'O.D.'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -1134,7 +1134,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Height = 13
       Caption = 'O.E.'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -1149,7 +1149,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Height = 13
       Caption = 'Lentes'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -1163,7 +1163,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Height = 13
       Caption = 'Arma'#231#227'o'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -1177,7 +1177,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Height = 13
       Caption = 'Cor'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -1199,7 +1199,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Height = 13
       Caption = 'Adi'#231#227'o'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -1213,7 +1213,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Height = 13
       Caption = 'ANP'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -1227,7 +1227,7 @@ object FormTelaReceituario: TFormTelaReceituario
       Height = 13
       Caption = 'Alt'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 8404992
+      Font.Color = -1
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -1625,7 +1625,7 @@ object FormTelaReceituario: TFormTelaReceituario
     Width = 668
     Height = 76
     Align = alTop
-    Color = 12572888
+    Color = 13225421
     TabOrder = 1
     object Label11: TLabel
       Left = 5

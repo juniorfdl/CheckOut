@@ -1,11 +1,11 @@
 object FormTelaConsultaRapidaCliente: TFormTelaConsultaRapidaCliente
-  Left = 58
-  Top = 58
+  Left = 220
+  Top = 95
   BorderIcons = []
   BorderStyle = bsSingle
   ClientHeight = 466
   ClientWidth = 692
-  Color = 14731440
+  Color = 5278518
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -28,7 +28,7 @@ object FormTelaConsultaRapidaCliente: TFormTelaConsultaRapidaCliente
     Align = alTop
     Alignment = taCenter
     Caption = 'Consulta de Clientes'
-    Color = 10567680
+    Color = 5278518
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
     Font.Height = -37
@@ -48,7 +48,7 @@ object FormTelaConsultaRapidaCliente: TFormTelaConsultaRapidaCliente
     Height = 13
     Caption = 'Tipo de Cliente'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clNavy
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
@@ -61,7 +61,7 @@ object FormTelaConsultaRapidaCliente: TFormTelaConsultaRapidaCliente
     Height = 13
     Caption = 'Motivo de Bloqueio'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clRed
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
@@ -121,9 +121,9 @@ object FormTelaConsultaRapidaCliente: TFormTelaConsultaRapidaCliente
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         Title.Caption = 'ID Cliente'
-        Title.Color = 10567680
+        Title.Color = 13225421
         Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWhite
+        Title.Font.Color = clBlack
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
@@ -139,9 +139,9 @@ object FormTelaConsultaRapidaCliente: TFormTelaConsultaRapidaCliente
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         Title.Caption = 'Nome'
-        Title.Color = 10567680
+        Title.Color = 13225421
         Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWhite
+        Title.Font.Color = clBlack
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
@@ -156,9 +156,9 @@ object FormTelaConsultaRapidaCliente: TFormTelaConsultaRapidaCliente
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
-        Title.Color = 10567680
+        Title.Color = 13225421
         Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWhite
+        Title.Font.Color = clBlack
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
@@ -173,9 +173,9 @@ object FormTelaConsultaRapidaCliente: TFormTelaConsultaRapidaCliente
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
-        Title.Color = 10567680
+        Title.Color = 13225421
         Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWhite
+        Title.Font.Color = clBlack
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
@@ -192,9 +192,9 @@ object FormTelaConsultaRapidaCliente: TFormTelaConsultaRapidaCliente
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         Title.Alignment = taCenter
-        Title.Color = 10567680
+        Title.Color = 13225421
         Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWhite
+        Title.Font.Color = clBlack
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
@@ -211,9 +211,9 @@ object FormTelaConsultaRapidaCliente: TFormTelaConsultaRapidaCliente
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         Title.Alignment = taCenter
-        Title.Color = 10567680
+        Title.Color = 13225421
         Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWhite
+        Title.Font.Color = clBlack
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
@@ -230,9 +230,9 @@ object FormTelaConsultaRapidaCliente: TFormTelaConsultaRapidaCliente
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         Title.Alignment = taCenter
-        Title.Color = 10567680
+        Title.Color = 13225421
         Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWhite
+        Title.Font.Color = clBlack
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
@@ -270,9 +270,9 @@ object FormTelaConsultaRapidaCliente: TFormTelaConsultaRapidaCliente
       item
         Expanded = False
         FieldName = 'CLDPA60NOME'
-        Title.Color = 10567680
+        Title.Color = 13225421
         Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWhite
+        Title.Font.Color = clBlack
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
@@ -282,9 +282,9 @@ object FormTelaConsultaRapidaCliente: TFormTelaConsultaRapidaCliente
       item
         Expanded = False
         FieldName = 'CLDPA15PARENTESCO'
-        Title.Color = 10567680
+        Title.Color = 13225421
         Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWhite
+        Title.Font.Color = clBlack
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
@@ -294,9 +294,9 @@ object FormTelaConsultaRapidaCliente: TFormTelaConsultaRapidaCliente
       item
         Expanded = False
         FieldName = 'AutorizadoCalcField'
-        Title.Color = 10567680
+        Title.Color = 13225421
         Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWhite
+        Title.Font.Color = clBlack
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]

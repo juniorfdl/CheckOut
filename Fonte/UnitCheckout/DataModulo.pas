@@ -1125,7 +1125,6 @@ type
     SQLCupomItemTECIDO: TStringField;
     ACBrPosPrinter: TACBrPosPrinter;
     ACBrNFe: TACBrNFe;
-    ACBrNFeDANFeESCPOS: TACBrNFeDANFeESCPOS;
     SQLPedidoVendaUSUAA60LOGIN: TStringField;
     SQLCupomItemM3_LARGURA: TFloatField;
     SQLCupomItemM3_COMPRI: TFloatField;
@@ -1151,6 +1150,8 @@ type
     SQLConfigGeralNAO_OBRIGA_FECHAR_CAIXA: TStringField;
     SQLUsuarioUSUACCANCITEMVENDA: TStringField;
     SQLEmpresaVERSAO: TStringField;
+    ACBrNFeDANFeRL1: TACBrNFeDANFeRL;
+    ACBrNFeDANFeESCPOS: TACBrNFeDANFeESCPOS;
     procedure DataModuleCreate(Sender: TObject);
     procedure SQLCupomNewRecord(DataSet: TDataSet);
     procedure SQLCupomBeforePost(DataSet: TDataSet);
