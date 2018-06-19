@@ -458,6 +458,10 @@ begin
         else
           Exit;
 
+      if ECFAtual = 'ECF' then
+       if Pergunta('SIM','Imprimir Sangria!') then
+        dmECF.Sangria(EditValor.Value, 'SANGRIA', 'SANGRIA', IntToStr(ComboNumerario.KeyValue), 0);
+
       if ECFAtual = 'DARUMA FRAMEWORK' then
         if Pergunta('SIM','Imprimir Sangria!') then
           Sangria_Daruma_Framework(EditValor.Value, IntToStr(ComboNumerario.KeyValue));
@@ -520,6 +524,10 @@ begin
           end
         else
           Exit;
+
+      if ECFAtual = 'ECF' then
+        if Pergunta('SIM','Deseja Imprimir Suprimento/Troco Inicial!') then
+          dmECF.Suprimento(EditValor.Value, IntToStr(ComboNumerario.KeyValue));
 
       if ECFAtual = 'DARUMA FRAMEWORK' then
         if Pergunta('SIM','Deseja Imprimir Suprimento/Troco Inicial!') then

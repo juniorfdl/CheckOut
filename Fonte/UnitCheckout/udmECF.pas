@@ -76,6 +76,9 @@ type
     function AcionaGuilhotina_NAOFISCAL(Modo:integer) : boolean ;
     function Reducao_Z:Boolean;
     procedure IdentificaConsumidor(DocumentoCli, NomeCli, EnderecoCli:String);
+    function Sangria(Valor: Double; Obs: AnsiString;
+      DescricaoCNF: String; DescricaoFPG: String; IndiceBMP: Integer ) : boolean ;
+    function Suprimento(Valor: Double; DescricaoFPG: String) : boolean ;
   end;
 
 var
@@ -317,6 +320,21 @@ begin
     EnderecoCli := '';
 
   ACBrECF1.IdentificaConsumidor(DocumentoCli, NomeCli, EnderecoCli);
+end;
+
+function TdmECF.Sangria(Valor: Double; Obs: AnsiString;
+   DescricaoCNF: String; DescricaoFPG: String; IndiceBMP: Integer ): boolean;
+begin
+  AbrirPorta;
+  ACBrECF1.Sangria(Valor, Obs, DescricaoCNF, DescricaoFPG, IndiceBMP);
+  Result := True;
+end;
+
+function TdmECF.Suprimento(Valor: Double; DescricaoFPG: String): boolean;
+begin
+  AbrirPorta;
+  ACBrECF1.Suprimento(Valor, 'SUPRIMENTO', 'SUPRIMENTO', DescricaoFPG);
+  Result := True;
 end;
 
 end.
