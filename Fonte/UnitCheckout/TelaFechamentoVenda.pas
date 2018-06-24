@@ -6596,6 +6596,7 @@ begin
         ImprimeTextoFormatado_NAOFISCAL(Impressora,'-----------------------------------------------'+chr(10),2,0,0,0,0);
         ImprimeTextoFormatado_NAOFISCAL(Impressora,LblNomeCliente.Caption,1,0,0,0,0);
         ImprimeTextoFormatado_NAOFISCAL(Impressora,Chr(10),1,0,0,0,0);
+{        ImprimeTextoFormatado_NAOFISCAL(Impressora,Chr(10),1,0,0,0,0);
         ImprimeTextoFormatado_NAOFISCAL(Impressora,Chr(10),1,0,0,0,0);
         ImprimeTextoFormatado_NAOFISCAL(Impressora,Chr(10),1,0,0,0,0);
         ImprimeTextoFormatado_NAOFISCAL(Impressora,Chr(10),1,0,0,0,0);
@@ -6603,8 +6604,7 @@ begin
         ImprimeTextoFormatado_NAOFISCAL(Impressora,Chr(10),1,0,0,0,0);
         ImprimeTextoFormatado_NAOFISCAL(Impressora,Chr(10),1,0,0,0,0);
         ImprimeTextoFormatado_NAOFISCAL(Impressora,Chr(10),1,0,0,0,0);
-        ImprimeTextoFormatado_NAOFISCAL(Impressora,Chr(10),1,0,0,0,0);
-        ImprimeTextoFormatado_NAOFISCAL(Impressora,Chr(10),1,0,0,0,0);
+        ImprimeTextoFormatado_NAOFISCAL(Impressora,Chr(10),1,0,0,0,0);}
       end;
     FecharPortaNAOFISCAL(Impressora);
     ImprimeConfissaoDividaNAOFISCAL := True;

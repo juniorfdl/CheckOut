@@ -1422,7 +1422,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       object LblVendedor: TRxLabel
         Left = 28
         Top = 91
-        Width = 92
+        Width = 91
         Height = 20
         Caption = 'Vendedor:'
         Color = 10567680
@@ -1519,7 +1519,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       object LblBonusTroca: TRxLabel
         Left = 569
         Top = 91
-        Width = 115
+        Width = 113
         Height = 20
         Caption = 'B'#244'nus Troca:'
         Color = 10567680
@@ -2019,8 +2019,8 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       object LblTotalVenda: TRxLabel
         Left = 10
         Top = 56
-        Width = 92
-        Height = 34
+        Width = 86
+        Height = 32
         Caption = 'TOTAL'
         Color = 32767
         Font.Charset = ANSI_CHARSET
@@ -2038,8 +2038,8 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       object LblValorDescontoAcrescimo: TRxLabel
         Left = 10
         Top = 117
-        Width = 142
-        Height = 31
+        Width = 139
+        Height = 29
         Caption = 'DESCONTO'
         Color = 32767
         Font.Charset = ANSI_CHARSET
@@ -2057,8 +2057,8 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       object LblEntrada: TRxLabel
         Left = 10
         Top = 177
-        Width = 120
-        Height = 31
+        Width = 118
+        Height = 29
         Caption = 'ENTRADA'
         Color = 32767
         Font.Charset = ANSI_CHARSET
@@ -2076,8 +2076,8 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       object LblRecebido: TRxLabel
         Left = 10
         Top = 239
-        Width = 132
-        Height = 31
+        Width = 130
+        Height = 29
         Caption = 'RECEBIDO'
         Color = 32767
         Font.Charset = ANSI_CHARSET
@@ -2095,8 +2095,8 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       object LblTroco: TRxLabel
         Left = 10
         Top = 296
-        Width = 108
-        Height = 37
+        Width = 106
+        Height = 35
         Caption = 'TROCO'
         Color = 32767
         Font.Charset = ANSI_CHARSET
