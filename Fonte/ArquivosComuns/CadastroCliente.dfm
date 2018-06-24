@@ -1,6 +1,6 @@
 inherited FormCadastroCliente: TFormCadastroCliente
-  Left = 158
-  Top = 23
+  Left = 138
+  Top = 20
   Caption = 'Cadastro de Clientes'
   ClientHeight = 672
   ClientWidth = 1092
@@ -711,7 +711,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
           Width = 130
           Height = 131
           Align = alBottom
-          Color = 5278518
+          Color = 14731440
           ParentColor = False
           TabOrder = 0
           object FotoCliente: TImage
@@ -733,7 +733,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
             Align = alBottom
             BevelOuter = bvNone
             Caption = 'Foto Cliente'
-            Color = 5278518
+            Color = 10053171
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWhite
             Font.Height = -11
@@ -758,7 +758,6 @@ inherited FormCadastroCliente: TFormCadastroCliente
               inherited DBGridLista: TDBGrid
                 Width = 952
                 Height = 483
-                FixedColor = 5278518
                 Columns = <
                   item
                     Expanded = False
@@ -918,8 +917,6 @@ inherited FormCadastroCliente: TFormCadastroCliente
               end
               inherited PanelProcura: TPanel
                 Width = 952
-                Color = 13225421
-                ParentColor = False
                 inherited PanelBetween: TPanel
                   Width = 558
                   inherited AdvPanel1: TAdvPanel
@@ -931,21 +928,11 @@ inherited FormCadastroCliente: TFormCadastroCliente
                   Width = 558
                   inherited AdvPanelEditProcura: TAdvPanel
                     Width = 558
-                    Color = 13225421
-                    ColorTo = 13225421
-                    ColorMirror = 13225421
-                    ColorMirrorTo = 13225421
-                    StatusBar.Color = 13225421
-                    StatusBar.ColorTo = 13225421
                     FullHeight = 0
                   end
                 end
                 inherited PanelIndice: TPanel
                   inherited AdvPanelIndice: TAdvPanel
-                    Color = 13225421
-                    ColorTo = 13225421
-                    ColorMirror = 13225421
-                    ColorMirrorTo = 13225421
                     FullHeight = 0
                   end
                 end
@@ -6758,7 +6745,6 @@ inherited FormCadastroCliente: TFormCadastroCliente
           end
           inherited PanelCodigoDescricao: TPanel
             Width = 960
-            Color = 13225421
             object Label1: TLabel
               Left = 9
               Top = 3
@@ -9407,7 +9393,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     PassSetting = psTwoPass
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'Letter'
+    PrinterSetup.PaperName = 'Custom'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.mmMarginBottom = 6350
     PrinterSetup.mmMarginLeft = 6350
@@ -12376,7 +12362,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     PassSetting = psTwoPass
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'Letter'
+    PrinterSetup.PaperName = 'Custom'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.mmMarginBottom = 6350
     PrinterSetup.mmMarginLeft = 6350

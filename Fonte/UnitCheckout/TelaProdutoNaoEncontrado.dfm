@@ -1,11 +1,11 @@
 object FormTelaProdutoNaoEncontrado: TFormTelaProdutoNaoEncontrado
-  Left = 542
-  Top = 114
+  Left = 280
+  Top = 144
   BorderIcons = []
   BorderStyle = bsSingle
   ClientHeight = 284
   ClientWidth = 564
-  Color = 5278518
+  Color = 14731440
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -29,9 +29,9 @@ object FormTelaProdutoNaoEncontrado: TFormTelaProdutoNaoEncontrado
     Alignment = taCenter
     AutoSize = False
     Caption = 'Pressione ENTER para Voltar'
-    Color = 5278518
+    Color = 14731440
     Font.Charset = ANSI_CHARSET
-    Font.Color = clBlack
+    Font.Color = clNavy
     Font.Height = -24
     Font.Name = 'Tahoma'
     Font.Style = []
@@ -53,7 +53,7 @@ object FormTelaProdutoNaoEncontrado: TFormTelaProdutoNaoEncontrado
     Caption = 'Produto n'#227'o Encontrado!!!'
     Color = clHighlightText
     Font.Charset = ANSI_CHARSET
-    Font.Color = clBlack
+    Font.Color = clNavy
     Font.Height = -24
     Font.Name = 'Tahoma'
     Font.Style = []
@@ -120,18 +120,18 @@ object FormTelaProdutoNaoEncontrado: TFormTelaProdutoNaoEncontrado
     end
   end
   object AdvOfficeStatusBarOfficeStyler1: TAdvOfficeStatusBarOfficeStyler
-    BorderColor = 5278518
-    PanelAppearanceLight.BorderColor = 5278518
+    BorderColor = 14986888
+    PanelAppearanceLight.BorderColor = 14922381
     PanelAppearanceLight.BorderColorHot = clGray
     PanelAppearanceLight.BorderColorDown = 10240783
-    PanelAppearanceLight.Color = 5278518
-    PanelAppearanceLight.ColorTo = 5278518
+    PanelAppearanceLight.Color = 16440774
+    PanelAppearanceLight.ColorTo = 14854530
     PanelAppearanceLight.ColorHot = 13958143
     PanelAppearanceLight.ColorHotTo = 6538487
     PanelAppearanceLight.ColorDown = 9232890
     PanelAppearanceLight.ColorDownTo = 1940207
-    PanelAppearanceLight.ColorMirror = 5278518
-    PanelAppearanceLight.ColorMirrorTo = 5278518
+    PanelAppearanceLight.ColorMirror = 14854530
+    PanelAppearanceLight.ColorMirrorTo = 14854530
     PanelAppearanceLight.ColorMirrorHot = 6538487
     PanelAppearanceLight.ColorMirrorHotTo = 6538487
     PanelAppearanceLight.ColorMirrorDown = 1940207

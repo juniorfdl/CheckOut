@@ -1,7 +1,7 @@
 inherited DM: TDM
   OldCreateOrder = True
-  Left = 65515
-  Top = 27
+  Left = 65461
+  Top = 203
   Height = 744
   Width = 1382
   inherited DB: TDatabase
@@ -6910,7 +6910,6 @@ inherited DM: TDM
     LogoemCima = False
     TamanhoFonteEndereco = 0
     RecuoLogo = 0
-    PosPrinter = ACBrPosPrinter
     Left = 952
     Top = 248
   end

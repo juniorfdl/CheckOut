@@ -1,6 +1,6 @@
 object FormTelaConsultaRapidaNumerario: TFormTelaConsultaRapidaNumerario
-  Left = 396
-  Top = 134
+  Left = 253
+  Top = 158
   BorderIcons = []
   BorderStyle = bsSingle
   ClientHeight = 557
@@ -26,14 +26,14 @@ object FormTelaConsultaRapidaNumerario: TFormTelaConsultaRapidaNumerario
     Height = 557
     Align = alClient
     BorderStyle = bsNone
-    Color = 5278518
+    Color = 10053171
     ParentColor = False
     TabOrder = 0
     object LblTituloTela: TRxLabel
       Left = 0
       Top = 0
       Width = 740
-      Height = 40
+      Height = 38
       Align = alTop
       Alignment = taCenter
       Caption = 'Forma de Pagamento'
@@ -69,12 +69,12 @@ object FormTelaConsultaRapidaNumerario: TFormTelaConsultaRapidaNumerario
       Caption.ColorStart = 11563548
       Caption.ColorEnd = 10446362
       Caption.Line = False
-      Fill.Color = 13225421
-      Fill.ColorTo = 13225421
-      Fill.ColorMirror = 13225421
-      Fill.ColorMirrorTo = 13158600
+      Fill.Color = 16445929
+      Fill.ColorTo = 15587527
+      Fill.ColorMirror = 15587527
+      Fill.ColorMirrorTo = 16773863
       Fill.GradientMirrorType = gtVertical
-      Fill.BorderColor = 6723891
+      Fill.BorderColor = 14922381
       Fill.Rounding = 10
       Fill.ShadowColor = 3355443
       Fill.ShadowOffset = 10
@@ -89,7 +89,7 @@ object FormTelaConsultaRapidaNumerario: TFormTelaConsultaRapidaNumerario
         Color = clWhite
         Ctl3D = False
         DataSource = DSTemplate
-        FixedColor = 13225421
+        FixedColor = 10053171
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -37
