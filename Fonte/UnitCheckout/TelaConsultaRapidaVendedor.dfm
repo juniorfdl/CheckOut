@@ -1,11 +1,11 @@
 object FormTelaConsultaRapidaVendedor: TFormTelaConsultaRapidaVendedor
-  Left = 56
-  Top = 65
+  Left = 317
+  Top = 87
   BorderIcons = []
   BorderStyle = bsSingle
   ClientHeight = 466
   ClientWidth = 803
-  Color = 14731440
+  Color = 5278518
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -70,7 +70,7 @@ object FormTelaConsultaRapidaVendedor: TFormTelaConsultaRapidaVendedor
     Color = clWhite
     Ctl3D = False
     DataSource = DSTemplate
-    FixedColor = 10053171
+    FixedColor = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clBlack
     Font.Height = -37

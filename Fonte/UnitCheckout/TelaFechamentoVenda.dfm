@@ -1584,7 +1584,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
         Ctl3D = True
         DisplayFormat = ',0.00;-,0.00'
         Font.Charset = ANSI_CHARSET
-        Font.Color = clNavy
+        Font.Color = clBlack
         Font.Height = -17
         Font.Name = 'Verdana'
         Font.Style = []
@@ -1606,7 +1606,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
         Ctl3D = True
         DisplayFormat = ',0.00;-,0.00'
         Font.Charset = ANSI_CHARSET
-        Font.Color = clNavy
+        Font.Color = clBlack
         Font.Height = -17
         Font.Name = 'Verdana'
         Font.Style = []
@@ -1627,7 +1627,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
         Ctl3D = True
         DisplayFormat = ',0.00;-,0.00'
         Font.Charset = ANSI_CHARSET
-        Font.Color = clNavy
+        Font.Color = clBlack
         Font.Height = -17
         Font.Name = 'Verdana'
         Font.Style = []
@@ -1953,7 +1953,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
         Caption = 'Servidor'
         Color = clWhite
         Font.Charset = ANSI_CHARSET
-        Font.Color = clNavy
+        Font.Color = clBlack
         Font.Height = -13
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
@@ -2017,10 +2017,10 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       Version = '1.0.9.0'
       TabOrder = 7
       object LblTotalVenda: TRxLabel
-        Left = 10
-        Top = 56
-        Width = 92
-        Height = 34
+        Left = 5
+        Top = 55
+        Width = 90
+        Height = 32
         Caption = 'TOTAL'
         Color = 32767
         Font.Charset = ANSI_CHARSET
@@ -2036,10 +2036,10 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
         Transparent = True
       end
       object LblValorDescontoAcrescimo: TRxLabel
-        Left = 10
-        Top = 117
-        Width = 142
-        Height = 31
+        Left = 5
+        Top = 118
+        Width = 140
+        Height = 29
         Caption = 'DESCONTO'
         Color = 32767
         Font.Charset = ANSI_CHARSET
@@ -2055,10 +2055,10 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
         Transparent = True
       end
       object LblEntrada: TRxLabel
-        Left = 10
-        Top = 177
-        Width = 120
-        Height = 31
+        Left = 5
+        Top = 178
+        Width = 118
+        Height = 29
         Caption = 'ENTRADA'
         Color = 32767
         Font.Charset = ANSI_CHARSET
@@ -2074,10 +2074,10 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
         Transparent = True
       end
       object LblRecebido: TRxLabel
-        Left = 10
-        Top = 239
-        Width = 132
-        Height = 31
+        Left = 5
+        Top = 241
+        Width = 130
+        Height = 29
         Caption = 'RECEBIDO'
         Color = 32767
         Font.Charset = ANSI_CHARSET
@@ -2093,10 +2093,10 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
         Transparent = True
       end
       object LblTroco: TRxLabel
-        Left = 10
-        Top = 296
-        Width = 108
-        Height = 37
+        Left = 5
+        Top = 300
+        Width = 106
+        Height = 35
         Caption = 'TROCO'
         Color = 32767
         Font.Charset = ANSI_CHARSET
@@ -2122,7 +2122,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
         Color = clMoneyGreen
         Ctl3D = True
         Font.Charset = ANSI_CHARSET
-        Font.Color = clNavy
+        Font.Color = clBlack
         Font.Height = -24
         Font.Name = 'Verdana'
         Font.Style = []
@@ -2143,7 +2143,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
         Color = clMoneyGreen
         Ctl3D = True
         Font.Charset = ANSI_CHARSET
-        Font.Color = clNavy
+        Font.Color = clBlack
         Font.Height = -24
         Font.Name = 'Verdana'
         Font.Style = []
@@ -2186,7 +2186,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
         Color = clMoneyGreen
         Ctl3D = True
         Font.Charset = ANSI_CHARSET
-        Font.Color = clNavy
+        Font.Color = clBlack
         Font.Height = -24
         Font.Name = 'Verdana'
         Font.Style = []
@@ -2228,7 +2228,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
         Color = clMoneyGreen
         Ctl3D = True
         Font.Charset = ANSI_CHARSET
-        Font.Color = clNavy
+        Font.Color = clBlack
         Font.Height = -24
         Font.Name = 'Verdana'
         Font.Style = []

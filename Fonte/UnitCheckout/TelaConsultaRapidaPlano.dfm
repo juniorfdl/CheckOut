@@ -1,6 +1,6 @@
 object FormTelaConsultaRapidaPlano: TFormTelaConsultaRapidaPlano
-  Left = 146
-  Top = 101
+  Left = 325
+  Top = 66
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'ADVANCED CONTROL'
@@ -28,7 +28,7 @@ object FormTelaConsultaRapidaPlano: TFormTelaConsultaRapidaPlano
     Height = 563
     Align = alClient
     BorderStyle = bsNone
-    Color = 10053171
+    Color = 5278518
     ParentColor = False
     TabOrder = 0
     object LblNomeSistema: TRxLabel
@@ -39,7 +39,7 @@ object FormTelaConsultaRapidaPlano: TFormTelaConsultaRapidaPlano
       Align = alTop
       Alignment = taCenter
       Caption = 'Condi'#231#245'es de Pagamento'
-      Color = clNavy
+      Color = 5278518
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
       Font.Height = -32
@@ -71,12 +71,12 @@ object FormTelaConsultaRapidaPlano: TFormTelaConsultaRapidaPlano
       Caption.ColorStart = 11563548
       Caption.ColorEnd = 10446362
       Caption.Line = False
-      Fill.Color = 16445929
-      Fill.ColorTo = 15587527
-      Fill.ColorMirror = 15587527
-      Fill.ColorMirrorTo = 16773863
+      Fill.Color = 13225421
+      Fill.ColorTo = 13225421
+      Fill.ColorMirror = 13225421
+      Fill.ColorMirrorTo = 13225421
       Fill.GradientMirrorType = gtVertical
-      Fill.BorderColor = 14922381
+      Fill.BorderColor = clGray
       Fill.Rounding = 10
       Fill.ShadowColor = 3355443
       Fill.ShadowOffset = 10
@@ -91,7 +91,7 @@ object FormTelaConsultaRapidaPlano: TFormTelaConsultaRapidaPlano
         Color = clWhite
         Ctl3D = False
         DataSource = DSTemplate
-        FixedColor = clNavy
+        FixedColor = clGray
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -27
@@ -172,14 +172,15 @@ object FormTelaConsultaRapidaPlano: TFormTelaConsultaRapidaPlano
       Caption.Font.Height = -16
       Caption.Font.Name = 'Tahoma'
       Caption.Font.Style = []
-      Caption.ColorStart = 11563548
-      Caption.ColorEnd = 10446362
-      Fill.Color = 16445929
-      Fill.ColorTo = 15587527
-      Fill.ColorMirror = 15587527
-      Fill.ColorMirrorTo = 16773863
+      Caption.ColorStart = -1
+      Caption.ColorEnd = -1
+      Caption.LineColor = -1
+      Fill.Color = 13225421
+      Fill.ColorTo = 13225421
+      Fill.ColorMirror = 13225421
+      Fill.ColorMirrorTo = 13225421
       Fill.GradientMirrorType = gtVertical
-      Fill.BorderColor = 14922381
+      Fill.BorderColor = 10066329
       Fill.Rounding = 10
       Fill.ShadowColor = 3355443
       Fill.ShadowOffset = 10
@@ -194,7 +195,7 @@ object FormTelaConsultaRapidaPlano: TFormTelaConsultaRapidaPlano
         Color = clWhite
         Ctl3D = False
         DataSource = DSSQLParcelasPrazoVendaTemp
-        FixedColor = clNavy
+        FixedColor = clGray
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -11

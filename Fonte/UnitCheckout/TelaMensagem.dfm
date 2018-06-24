@@ -1,6 +1,6 @@
 object FormTelaMensagem: TFormTelaMensagem
-  Left = 603
-  Top = 171
+  Left = 424
+  Top = 154
   BorderIcons = []
   BorderStyle = bsSingle
   ClientHeight = 334

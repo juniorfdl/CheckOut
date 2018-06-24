@@ -1,6 +1,6 @@
 object FormPrincipalRelatorios: TFormPrincipalRelatorios
-  Left = 388
-  Top = 179
+  Left = 289
+  Top = 134
   Width = 685
   Height = 383
   AutoSize = True
@@ -94,12 +94,12 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     Caption.ColorStart = 11563548
     Caption.ColorEnd = 10446362
     Caption.Line = False
-    Fill.Color = 5278518
-    Fill.ColorTo = 5278518
-    Fill.ColorMirror = 5278518
-    Fill.ColorMirrorTo = 5278518
+    Fill.Color = 13225421
+    Fill.ColorTo = 13225421
+    Fill.ColorMirror = 13225421
+    Fill.ColorMirrorTo = 13158600
     Fill.GradientMirrorType = gtVertical
-    Fill.BorderColor = clGreen
+    Fill.BorderColor = clGray
     Fill.BorderWidth = 3
     Fill.Rounding = 10
     Fill.ShadowColor = clBlack
@@ -1122,7 +1122,9 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       'select'
       '  MOVIMENTOCAIXA.OPCXICOD,'
       '  OPERACAOCAIXA.OPCXA60DESCR,'
-      '  sum(MOVIMENTOCAIXA.MVCXN2VLRCRED) as CREDITOS,'
+      
+        '  sum(MOVIMENTOCAIXA.MVCXN2VLRCRED + MOVIMENTOCAIXA.MVCXN2VLRJUR' +
+        'O + MOVIMENTOCAIXA.MVCXN2VLRMULTA) as CREDITOS,'
       '  sum(MOVIMENTOCAIXA.MVCXN2VLRDEB) as DEBITOS,'
       
         '  sum(MOVIMENTOCAIXA.MVCXN2VLRCRED - MOVIMENTOCAIXA.MVCXN2VLRDEB' +
@@ -1203,13 +1205,19 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     DatabaseName = 'DB'
     SQL.Strings = (
       'select'
+      '    NUMEICOD,'
+      '    NUMEA30DESCR,'
+      '    VlrCredito,'
+      '    VlrDebito,'
+      '    coalesce(VlrCredito, 0) - coalesce(VlrDebito, 0) as Saldo'
+      'from('
+      'select'
       '  MOVIMENTOCAIXA.NUMEICOD,'
       '  NUMERARIO.NUMEA30DESCR,'
-      '  sum(MOVIMENTOCAIXA.MVCXN2VLRCRED) as VlrCredito,'
-      '  sum(MOVIMENTOCAIXA.MVCXN2VLRDEB)  as VlrDebito,'
       
-        '  sum(MOVIMENTOCAIXA.MVCXN2VLRCRED - MOVIMENTOCAIXA.MVCXN2VLRDEB' +
-        ') as Saldo'
+        '  sum(MOVIMENTOCAIXA.MVCXN2VLRCRED + MOVIMENTOCAIXA.MVCXN2VLRJUR' +
+        'O + MOVIMENTOCAIXA.MVCXN2VLRMULTA) as VlrCredito,'
+      '  sum(MOVIMENTOCAIXA.MVCXN2VLRDEB)  as VlrDebito'
       'from'
       '  MOVIMENTOCAIXA, NUMERARIO'
       'where'
@@ -1219,7 +1227,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       '  (%MTerminal) and'
       '  (%MOperador)'
       'group by'
-      '  MOVIMENTOCAIXA.NUMEICOD, NUMERARIO.NUMEA30DESCR')
+      '  MOVIMENTOCAIXA.NUMEICOD, NUMERARIO.NUMEA30DESCR)')
     Macros = <
       item
         DataType = ftString
@@ -3177,7 +3185,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     Top = 74
   end
   object AdvOfficeStatusBarOfficeStyler1: TAdvOfficeStatusBarOfficeStyler
-    BorderColor = 14986888
+    BorderColor = clGreen
     PanelAppearanceLight.BorderColor = 5278518
     PanelAppearanceLight.BorderColorHot = clGray
     PanelAppearanceLight.BorderColorDown = 10240783
