@@ -328,7 +328,7 @@ type
 
   private
     { Private declarations }
-    vNaoPedeMaisParaFechar:Boolean;
+    vNaoPedeMaisParaFechar: Boolean;
     WNumItem, ItemCancelado: integer;
     FormatStrQuant, FormatStrVlrVenda,
       InfDesc,
@@ -358,6 +358,9 @@ type
     function SN(sNum: string): string;
     procedure VoltaParaEntradaDados;
     procedure CalcularImpostos(CodNCM, OrigemProduto: Integer; Valor: Currency);
+    procedure ExecutarCtrlQ;
+    procedure ExecutarF2;
+    procedure ExecutarPessagemAutomatica;
   public
     { Public declarations }
     CodICMS,
@@ -476,7 +479,7 @@ begin
   if not FileExists('COMUNICACAO_OFFLINE.TXT') then
     dm.ACBrPosPrinter.Device.Baud := dm.SQLTerminalAtivoECF_VELOC.Value
   else
-   begin
+  begin
     dm.ACBrPosPrinter.Device.Porta := ExtractFilePath(application.ExeName) + '\nfceOffline.txt';
     dm.ACBrPosPrinter.ControlePorta := False;
     dm.ACBrPosPrinter.Device.DeviceType := dtFile;
@@ -778,7 +781,7 @@ begin
           if vTotTrib > 0 then
             vTotTrib := (Prod.vProd * vTotTrib) / 100;
 
-          vTotTrib := RoundTo(vTotTrib, -2);  
+          vTotTrib := RoundTo(vTotTrib, -2);
 
           Total_vTotTrib := Total_vTotTrib + vTotTrib;
         end;
@@ -788,7 +791,7 @@ begin
         vaux := Total.ICMSTot.vProd + vaux;
         Total.ICMSTot.vProd := vaux;
         vaux := Prod.vDesc;
-        TotalDesconto :=  TotalDesconto + vaux;
+        TotalDesconto := TotalDesconto + vaux;
       end;
       SQLImpressaoCupom.next;
     end;
@@ -846,8 +849,8 @@ begin
     end
     else
       with ExecSql(' select a.CTRCN2VLR, a.ctrca5tipopadrao, b.numecvistaprazo from CONTASRECEBER A LEFT JOIN Numerario B ON B.numeicod = A.numeicod '
-         + ' where CUPOA13ID = ' + QuotedStr(idCupom)
-         + ' union all select cpnmn2vlr, ''DIN'', ''V'' from cupomnumerario where cupoa13id = '+ QuotedStr(idCupom)) do
+        + ' where CUPOA13ID = ' + QuotedStr(idCupom)
+        + ' union all select cpnmn2vlr, ''DIN'', ''V'' from cupomnumerario where cupoa13id = ' + QuotedStr(idCupom)) do
       begin
         if IsEmpty then
         begin
@@ -888,20 +891,20 @@ begin
               if fieldbyname('ctrca5tipopadrao').AsString = 'DIN' then
                 tPag := fpDinheiro
               else
-              if fieldbyname('ctrca5tipopadrao').AsString = 'CRT' then
-              begin
-                if fieldbyname('numecvistaprazo').AsString = 'P' then
-                  tPag := fpCartaoCredito
+                if fieldbyname('ctrca5tipopadrao').AsString = 'CRT' then
+                begin
+                  if fieldbyname('numecvistaprazo').AsString = 'P' then
+                    tPag := fpCartaoCredito
+                  else
+                    tPag := fpCartaoDebito
+                end
                 else
-                  tPag := fpCartaoDebito
-              end
-              else
-              if fieldbyname('ctrca5tipopadrao').AsString = 'CRD' then
-                tPag := fpOutro
-              else if fieldbyname('ctrca5tipopadrao').AsString = 'CHQV' then
-                tPag := fpCheque
-              else
-                tPag := fpDinheiro;
+                  if fieldbyname('ctrca5tipopadrao').AsString = 'CRD' then
+                    tPag := fpOutro
+                  else if fieldbyname('ctrca5tipopadrao').AsString = 'CHQV' then
+                    tPag := fpCheque
+                  else
+                    tPag := fpDinheiro;
 
               vPag := fieldbyname('CTRCN2VLR').AsFloat;
             end;
@@ -1599,19 +1602,7 @@ begin
       end;
     end;
 
-    if (EntradaDados.Text <> '') and (IsNumeric(EntradaDados.Text, 'Integer')) then
-    begin
-      DM.SQLTemplate.Close;
-      DM.SQLTemplate.SQL.Clear;
-      DM.SQLTemplate.SQL.Add('select PRODUTO.PESAGEM_AUTOMATICA');
-      DM.SQLTemplate.SQL.Add('from PRODUTO');
-      DM.SQLTemplate.SQL.Add('where PRODUTO.PRODICOD = ' + EntradaDados.Text);
-      DM.SQLTemplate.Open;
-
-      Q := 81;
-      if DM.SQLTemplate.FieldByName('PESAGEM_AUTOMATICA').AsString = 'S' then
-        FormKeyDown(Sender, Q, [ssCtrl]);
-    end;
+    ExecutarPessagemAutomatica;
 
     {* * * * INFORMADO ITENS * * * *}
     if (EstadoPDVChk = InformandoItens) or (EstadoPDVChk = InformandoItensTroca) then
@@ -1735,7 +1726,7 @@ begin
               EnviaTecladoTextoDisplay65('Atencao!', 'Procurar pela Descricao do Produto');
             Application.CreateForm(TFormTelaConsultaRapidaItem, FormTelaConsultaRapidaItem);
             FormTelaConsultaRapidaItem.ShowModal;
-			
+
             if FormTelaConsultaRapidaItem.ModalResult = MrOk then
             begin
               SQLProduto.Close;
@@ -2782,7 +2773,7 @@ begin
         FormTelaConsultaRapidaCliente.ShowModal;
       end
       else begin
-        ClienteVenda  := SQLLocate('CLIENTE', 'CLIEA10CODCONV', 'CLIEA13ID', '''' + EntradaDados.Text + '''');
+        ClienteVenda := SQLLocate('CLIENTE', 'CLIEA10CODCONV', 'CLIEA13ID', '''' + EntradaDados.Text + '''');
         UsaPrecoVenda := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIECTPPRCVENDA', '''' + ClienteVenda + '''');
         if ClienteVenda = '' then
         begin
@@ -2831,244 +2822,7 @@ begin
       end;
     VK_F2: begin //INICIANDO NOVA VENDA
              {Testa pra ver se tem caminho ao Servidor para definir se o PDV é Offline}
-
-        DocumentoClienteVenda := '';
-
-        if dm.ConectaServidor then
-          shpStatusServidor.Brush.Color := clLime
-        else
-          shpStatusServidor.Brush.Color := clRed;
-
-        if MostraPublicidade then
-        begin
-          slideshow.Visible := False;
-          AdvSmoothPanel5.Visible := False;
-          slideshow.Animation := True;
-          PagePrincipal.ActivePage := TabVenda;
-        end;
-
-        UsuarioAutorizouOperacao := '';
-        ImpCupomAutomatico := false;
-        E_Orcamento := false;
-        TemProdutoSemSubsTrib := False;
-        TemProdutoComSubsTrib := False;
-        CodigoAntigoCupom := '';
-        SaldoEstoqueAtual := 0;
-        ItemCancelado := 0;
-        if SQLItensVendaTemp.RecordCount > 0 then
-        begin
-          SQLItensVendaTemp.Last;
-          NroUltItem := SQLItensVendaTempNUMITEM.Value;
-          SQLItensVendaTemp.First;
-        end
-        else
-          NroUltItem := 0;
-
-        if EstadoPDVChk = InformandoItens then
-        begin
-          InformaG('Esta venda já foi iniciada!');
-          EntradaDados.SelectAll;
-          exit;
-        end;
-
-        if DM.SQLConfigVendaOPESICODCUPOM.Value > 0 then
-        else begin
-          InformaG('Não há nenhuma Operacao de Estoque padrão configurada para Venda Cupom. Você deve ajustar esta configuração antes de iniciar uma nova venda!');
-          EntradaDados.SelectAll;
-          exit;
-        end;
-
-        if DM.SQLConfigVendaOPESICODCANCCUPOM.Value > 0 then
-        else begin
-          InformaG('Não há nenhuma Operacao de Estpoque padrão configurada para Cancelamanto Venda Cupom. Você deve ajustar esta configuração antes de iniciar uma nova venda!');
-          EntradaDados.SelectAll;
-          exit;
-        end;
-
-        if (F2_AUTOMATICO = 'S') and (DM.SQLterminalativoTERMIQTDEPADRAO.Value <> EditQtde.Value) and (EditQtde.Value > 0) then
-        begin
-                 {mantenho a qtde digitada, pois pode ser balanca ou digitado pelo usuario}
-        end
-        else
-        begin
-          if (DM.SQLterminalativoTERMIQTDEPADRAO.Value > 0) then
-            EditQtde.Text := DM.SQLterminalativoTERMIQTDEPADRAO.AsString
-          else
-            EditQtde.Value := 0;
-        end;
-
-        AlterarUsuario := false;
-
-        if TerminalModo = 'C' then
-        begin
-          TestaStatusCaixa;
-          if VerCaixa then
-            exit;
-        end;
-
-        CupomOrigemTroca := '';
-        TipoVenda := 0;
-        DataEntregaVenda := '';
-
-        CapturaCodigosIniciais;
-
-        LblInstrucoes.Caption := '';
-        LblInstrucoes.Refresh;
-
-        LimparVariaveis;
-
-        NroCupomFiscal := '000000';
-
-        if (ECFAtual <> '') and (copy(EcfAtual, 1, 4) <> 'NFCE') and (not FileExists('Confirma.txt')) then
-        begin
-          NroCupomFiscal := '';
-          if not AbrirCupomFiscal(ECFAtual, PortaECFAtual, NroCupomFiscal) and (ECFAtual <> 'SIGTRON FS300') then
-          begin
-            InformaG('Problemas ao tentar abrir o cupom!');
-            EntradaDados.SelectAll;
-            exit;
-          end;
-          if (NroCupomFiscal = '000000') and (ECFAtual <> 'SIGTRON FS300') then
-          begin
-            InformaG('Não foi possível capturar o número do Cupom Fiscal');
-            EntradaDados.SelectAll;
-            NroCupomFiscal := '000000';
-          end;
-        end;
-        SolicitarPreco := False;
-        SolicitarPrecoQDeveriaSerVendido := False;
-             // Solicita preço de produto automaticamente
-        if (Dm.SQLConfigVendaCFVECPEDEVLRPRODUTO.AsString = 'S') and (not ImportandoPreVenda) then
-          SolicitarPreco := True;
-        if (Dm.SQLConfigVendaCFVECINFVLRDEVCVEN.AsString = 'S') and (not ImportandoPreVenda) then
-          SolicitarPrecoQDeveriaSerVendido := True;
-
-        PedidosImportados := '';
-        ValorItem := 0;
-        {     if (not SQLItensVendaTemp.IsEmpty) and (Saldo = 0) then
-               CancelarVenda;}
-
-             // Informa o Usuario que irá iniciar a Venda
-        if FileExists('SolicitaUsuarioACadaVenda.txt') then
-        begin
-          try
-            NroCupomFiscal := InputBox('Atenção!', 'Informe o Usuário Corrente...', '');
-            if (StrToInt(NroCupomFiscal) <> UsuarioCorrente) and (NroCupomFiscal <> '0') then
-            begin
-              if DM.SQLUsuario.Locate('USUAICOD', NroCupomFiscal, []) then
-              begin
-                DM.UsuarioAtual := DM.SQLUsuarioUSUAICOD.AsInteger;
-                if DM.SQLUsuarioUSUACUSERMASTER.AsString = 'S' then
-                  UsuarioMaster := True
-                else
-                  UsuarioMaster := False;
-                UsuarioCorrente := DM.SQLUsuarioUSUAICOD.AsInteger;
-                UsuarioAtualNome := DM.SQLUsuarioUSUAA60LOGIN.AsString;
-              end
-              else
-              begin
-                InformaG('Usuário Selecionado é Inválido!');
-                EntradaDados.SelectAll;
-                exit;
-              end;
-
-            end;
-          except
-            Application.ProcessMessages;
-          end;
-        end;
-
-             // Informa a Senha do Vendedor que irá iniciar a Venda
-        if FileExists('SolicitaVendedorACadaVenda.txt') then
-        begin
-          RetornoCampoUsuario := AutenticaVendedor(UsuarioAtualNome, 'VENDICOD', RetornoUser);
-          if RetornoCampoUsuario <> '' then
-            VendedorVenda := strtoint(RetornoCampoUsuario)
-          else
-          begin
-            InformaG('Vendedor Selecionado é Inválido!');
-            EntradaDados.SelectAll;
-            EstadoPDVChk := AguardandoNovaVenda;
-            PreparaEstadoBalcao(EstadoPDVChk);
-            exit;
-          end;
-        end;
-
-             // Informa o Nro Cupom => Darvami precisava lancar os cupons retroativos
-        if FileExists('SolicitaNroCupom.txt') then
-        begin
-          try
-            NroCupomFiscal := '0';
-            NroCupomFiscal := InputBox('Atenção!', 'Informe o número do cupom fiscal desta venda:', '');
-            StrToInt(NroCupomFiscal);
-          except
-            NroCupomFiscal := '0';
-          end;
-        end;
-
-             // Informa Vendedor
-        if (dm.sqlterminalativoTERMCSOLCODVEND.value = 'S') and
-          (not ContinuarPrevenda) and (not vImportarPrevenda) and (not ImportandoPreVenda) then
-        begin
-          try
-            VendedorVenda := StrToInt(InputBox('Informar o Vendedor', 'Digite o Código do Vendedor', ''));
-          except
-            Application.ProcessMessages; end;
-        end;
-        if (dm.sqlterminalativoTERMCSOLCODVEND.value = 'S') then
-          if (VendedorVenda > 0) then
-          begin
-            rxVendedor.Visible := True;
-            rxVendedor.Caption := SQLLocate('VENDEDOR', 'VENDICOD', 'VENDA60NOME', IntToStr(VendedorVenda));
-            rxVendedor.Update;
-          end
-          else
-          begin
-            rxVendedor.Caption := 'Não Encontrado';
-            rxVendedor.Update;
-          end;
-
-        if (FileExists('SolicitaCliente.txt')) and (not ImportandoPreVenda) then
-        begin
-          Application.CreateForm(TFormTelaConsultaRapidaCliente, FormTelaConsultaRapidaCliente);
-          FormTelaConsultaRapidaCliente.ShowModal;
-          IniFile := TIniFile.Create(dm.PathAplicacao + 'SolicitaCliente.txt');
-          if IniFile.ReadString('VECONTAS', 'VERADICIONAIS', 'N') = 'S' then
-          begin
-            ObsCliente := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIETOBS1', '''' + ClienteVenda + '''');
-            if Obscliente <> '' then
-              ShowMessage(obscliente);
-          end;
-          if (DM.SQLConfigVendaCFVECTESTALIMTCRED.AsString = 'S') then
-          begin
-            if not VerificaLimiteCredito(ClienteVenda, 0, DM.SQLParcelas, DM.SQLCliente) then
-            begin
-              if IniFile.ReadString('VECONTAS', 'VER', 'N') = 'S' then
-                vercontas;
-            end;
-          end;
-          UsaPrecoVenda := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIECTPPRCVENDA', '''' + ClienteVenda + '''');
-          rxClienteNome.caption := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIEA60RAZAOSOC', '''' + ClienteVenda + '''');
-          rxClienteNome.update;
-          IniFile.Free;
-        end
-        else
-        begin
-          ClienteVenda := dm.SQLTerminalAtivoCLIEA13ID.Value;
-          rxClienteNome.caption := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIEA60RAZAOSOC', '''' + ClienteVenda + '''');
-          UsaPrecoVenda := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIECTPPRCVENDA', '''' + ClienteVenda + '''');
-          rxClienteNome.update;
-        end;
-
-             // MANDA DADOS DISPLAY TECLADO
-        if TecladoReduzidoModelo = 'TEC44DIS' then
-          EnviaTecladoTextoDisplay44('Informe o Produto', '');
-        if TecladoReduzidoModelo = 'TEC65' then
-          EnviaTecladoTextoDisplay65('Informe o Produto', '');
-
-        EstadoPDVChk := InformandoItens;
-        PreparaEstadoBalcao(EstadoPDVChk);
-        VoltaParaEntradaDados;
+        ExecutarF2;
       end;
     VK_F3: begin //FECHAMENTO DE VENDA
         if EstadoPDVChk <> InformandoItens then
@@ -3582,7 +3336,7 @@ begin
               begin
                 if (ClienteVenda = '') and (dm.SQLTerminalAtivoCLIEA13ID.Value <> '') then
                 begin
-                  ClienteVenda  := dm.SQLTerminalAtivoCLIEA13ID.Value;
+                  ClienteVenda := dm.SQLTerminalAtivoCLIEA13ID.Value;
                   UsaPrecoVenda := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIECTPPRCVENDA', '''' + ClienteVenda + '''');
                 end;
 
@@ -3996,117 +3750,7 @@ begin
           end;
           //TROCAR QUANTIDADE
         'Q': begin
-            if FileExists('BalancaCheckoutFilizola.txt') or FileExists('BalancaCheckoutToledo.txt') or FileExists('BalancaCheckoutUrano.txt') then
-            begin
-              if (EstadoPDVChk = AguardandoNovaVenda) and (F2_AUTOMATICO = 'S') then
-                FormKeyDown(Sender, F2, [ssAlt]);
-              Application.CreateForm(TFormBalancaFilizola, FormBalancaFilizola);
-              FormBalancaFilizola.ShowModal;
-            end;
-            if FileExists('BalancaCheckoutToledoDireto.txt') then
-            begin
-              LblInstrucoes.Caption := 'Lendo Balança Toledo...';
-              LblInstrucoes.Refresh;
-              ACBrBAL1.Desativar;
-
-                    // configura porta de comunicação
-              ACBrBAL1.Modelo := balToledo;
-              ACBrBAL1.Device.HandShake := TACBrHandShake(0);
-              ACBrBAL1.Device.Parity := TACBrSerialParity(0); {zero}
-              ACBrBAL1.Device.Stop := TACBrSerialStop(0); {s1}
-              ACBrBAL1.Device.Data := 8; {8}
-              if Toledo_Porta = 0 then
-                ACBrBAL1.Device.Porta := 'COM1';
-              if Toledo_Porta = 1 then
-                ACBrBAL1.Device.Porta := 'COM2';
-              if Toledo_Porta = 2 then
-                ACBrBAL1.Device.Porta := 'COM3';
-              if Toledo_Porta = 3 then
-                ACBrBAL1.Device.Porta := 'COM4';
-              if Toledo_Porta = 4 then
-                ACBrBAL1.Device.Porta := 'COM5';
-              if Toledo_Porta = 5 then
-                ACBrBAL1.Device.Porta := 'COM6';
-              if Toledo_Porta = 6 then
-                ACBrBAL1.Device.Porta := 'COM7';
-              if Toledo_Porta = 7 then
-                ACBrBAL1.Device.Porta := 'COM8';
-
-              if Toledo_Baud = 0 then
-                ACBrBAL1.Device.Baud := 2400;
-              if Toledo_Baud = 1 then
-                ACBrBAL1.Device.Baud := 4800;
-              if Toledo_Baud = 2 then
-                ACBrBAL1.Device.Baud := 9600;
-              if Toledo_Baud = 3 then
-                ACBrBAL1.Device.Baud := 1200;
-              if Toledo_Baud = 4 then
-                ACBrBAL1.Device.Baud := 19200;
-
-                    // Conecta com a balança
-              ACBrBAL1.Ativar;
-              EditQtde.Value := ACBrBAL1.LePeso(ACBrBAL1.Intervalo);
-              ACBrBAL1.Desativar;
-
-              LblInstrucoes.Caption := 'Informando Produto';
-              LblInstrucoes.Refresh;
-            end;
-
-            if FileExists('BalancaCheckoutUranoDireto.txt') then
-            begin
-              LblInstrucoes.Caption := 'Comunicando com a Balança Urano...';
-              LblInstrucoes.Refresh;
-                    // Abre Porta Serial
-              _AlteraModeloBalanca(Urano_Modelo);
-              _AlteraModoOperacao(0);
-
-              if _AbrePortaSerial(Urano_Porta) < 1 then
-                informaG('Problema de Comunicação com a Balança!')
-              else
-              begin
-                        // Grava Peso no arquivo txt, para tirar as sujeiras que vem da dll.
-                PesoSTR := _LePeso();
-                AssignFile(Urano_PesoLido, 'C:\Easy2Solutions\Gestao\PesoLido.txt');
-                Rewrite(Urano_PesoLido); //abre o arquivo para escrita
-                Writeln(Urano_PesoLido, PesoSTR); //escreve no arquivo e desce uma linha
-                Closefile(Urano_PesoLido); //fecha o handle de arquivo
-
-                        // Le peso do txt
-                PesoSTR := '';
-                AssignFile(Urano_PesoLido, 'C:\Easy2Solutions\Gestao\PesoLido.txt');
-                Reset(Urano_PesoLido);
-                ReadLn(Urano_PesoLido, PesoSTR);
-                CloseFile(Urano_PesoLido);
-
-                while pos('P', PesoSTR) > 0 do
-                  Delete(PesoSTR, pos('P', PesoSTR), 1);
-                while pos('E', PesoSTR) > 0 do
-                  Delete(PesoSTR, pos('E', PesoSTR), 1);
-                while pos('S', PesoSTR) > 0 do
-                  Delete(PesoSTR, pos('S', PesoSTR), 1);
-                while pos('O', PesoSTR) > 0 do
-                  Delete(PesoSTR, pos('O', PesoSTR), 1);
-                while pos(':', PesoSTR) > 0 do
-                  Delete(PesoSTR, pos(':', PesoSTR), 1);
-                while pos(' ', PesoSTR) > 0 do
-                  Delete(PesoSTR, pos(' ', PesoSTR), 1);
-                while pos('g', PesoSTR) > 0 do
-                  Delete(PesoSTR, pos('g', PesoSTR), 1);
-                while pos('*', PesoSTR) > 0 do
-                  Delete(PesoSTR, pos('*', PesoSTR), 1);
-
-                PesoSTR := FormatFloat('##0.000', (StrToFloat(PesoSTR) / 1000));
-                Peso := StrToFloat(PesoSTR);
-                EditQtde.Value := Peso;
-
-                        // Fecha Porta
-                if _FechaPortaSerial > 0 then
-                  Application.ProcessMessages;
-
-                LblInstrucoes.Caption := 'Informando Produto';
-                LblInstrucoes.Refresh;
-              end;
-            end;
+            ExecutarCtrlQ;
           end;
           //TROCAR PRECO ITEM
         'P': begin
@@ -4430,7 +4074,7 @@ begin
                     SQLImpressaoCupom.fieldbyname('PRODICOD').AsString, {Codigo}
                     DescrLivreProd, {Descricao}
                     RetornaTotalizadorIcmsECF(Ecf_ID, CodICMS), {Tributo}
-                    '$',//'V', {TipoDesc}
+                    '$', //'V', {TipoDesc}
                     SQLLocate('UNIDADE', 'UNIDICOD', 'UNIDA5DESCR', SQLLocate('PRODUTO', 'PRODICOD', 'UNIDICOD', SQLImpressaoCupom.fieldbyname('PRODICOD').AsString)), {Unid}
                     SQLImpressaoCupom.fieldbyname('CPITN3QTD').Value, {Qtde}
                     SQLImpressaoCupom.fieldbyname('CPITN3VLRUNIT').Value, {ValorUnitario}
@@ -4529,7 +4173,7 @@ begin
                   end;
 
                   VlrTotalSistema := VlrTotalSistema + SQLParcelasVistaVendaTempVALORPARC.Value;
-                  dmECF.ACBrECF1.EfetuaPagamento(IntToStr(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger),SQLImpressaoCupom.fieldbyname('CPNMN2VLR').Value,'',False);
+                  dmECF.ACBrECF1.EfetuaPagamento(IntToStr(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger), SQLImpressaoCupom.fieldbyname('CPNMN2VLR').Value, '', False);
 
                   SQLImpressaoCupom.next;
                 end;
@@ -4580,7 +4224,7 @@ begin
                   SQLImpressaoCupom.Next;
 
                   VlrTotalSistema := VlrTotalSistema + SQLParcelasPrazoVendaTempVALORVENCTO.Value;
-                  dmECF.ACBrECF1.EfetuaPagamento(IntToStr(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger),SQLImpressaoCupom.fieldbyname('CPNMN2VLR').Value,'',False);
+                  dmECF.ACBrECF1.EfetuaPagamento(IntToStr(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger), SQLImpressaoCupom.fieldbyname('CPNMN2VLR').Value, '', False);
 
                 end;
                 SQLParcelasPrazoVendaTemp.Close;
@@ -4826,8 +4470,8 @@ begin
             end;
             {REIMPRIME ÚLTIMO CUPOM}
           'I': begin
-               if FileExists('ImpressaoPreVenda.exe') then
-                  WinExec(Pchar('ImpressaoPreVenda.exe'), sw_Show);
+              if FileExists('ImpressaoPreVenda.exe') then
+                WinExec(Pchar('ImpressaoPreVenda.exe'), sw_Show);
               {Exit;
               if FileExists(ExtractFilePath(Application.ExeName) + '\NoBreak.txt') then
               begin
@@ -4866,8 +4510,8 @@ begin
                 '');
             end;
           'T': begin
-                  {Tela Transf. entre Filiais}     
-              FormTelaTransferencia:= TFormTelaTransferencia.Create(nil);
+                  {Tela Transf. entre Filiais}
+              FormTelaTransferencia := TFormTelaTransferencia.Create(nil);
               try
                 FormTelaTransferencia.ShowModal;
               finally
@@ -4983,9 +4627,9 @@ begin
                   begin
                               { Cria o arquivo XML }
                     sXML := Gerar_NFCe(IDReimprimir);
-                    if (dm.ACBrNFe.WebServices.Consulta.cStat <> 613)and(dm.ACBrNFe.WebServices.Consulta.cStat <> 217) then
+                    if (dm.ACBrNFe.WebServices.Consulta.cStat <> 613) and (dm.ACBrNFe.WebServices.Consulta.cStat <> 217) then
                       chave := copy(dm.ACBrNFe.NotasFiscais.Items[0].NFe.infNFe.ID, (length(dm.ACBrNFe.NotasFiscais.Items[0].NFe.infNFe.ID) - 44) + 1, 44);
-                      
+
                     LblInstrucoes.Caption := 'Assinando NFCe...' + intToStr(NumNFe);
                     LblInstrucoes.Update;
                     dm.ACBrNFe.NotasFiscais.Assinar;
@@ -5224,14 +4868,14 @@ begin
       end;
     end
     else
-      if (DM.SQLTemplate.FieldByName('TERMDSTATUSCAIXA').Value <> StrToDate(TerminalAtualData))and(not vNaoPedeMaisParaFechar) then
+      if (DM.SQLTemplate.FieldByName('TERMDSTATUSCAIXA').Value <> StrToDate(TerminalAtualData)) and (not vNaoPedeMaisParaFechar) then
       begin
         if dm.SQLConfigGeralNAO_OBRIGA_FECHAR_CAIXA.asstring = 'S' then
         begin
           if Pergunta('SIM', 'O Caixa não foi fechado em ' + DM.SQLTemplate.FieldByName('TERMDSTATUSCAIXA').AsString
-            +#13+'Deseja fechar agora?') then
+            + #13 + 'Deseja fechar agora?') then
             VerCaixa := True
-          else vNaoPedeMaisParaFechar:= True;  
+          else vNaoPedeMaisParaFechar := True;
         end
         else begin
           InformaG('O Caixa não foi fechado em ' + DM.SQLTemplate.FieldByName('TERMDSTATUSCAIXA').AsString);
@@ -5249,7 +4893,7 @@ begin
       FormTelaMovimentoCaixa.EditData.Text := TerminalAtualData;
       FormTelaMovimentoCaixa.ShowModal;
       VoltaParaEntradaDados;
-    end;                                                                 
+    end;
   end;
 end;
 
@@ -6614,6 +6258,379 @@ end;
 procedure TFormTelaItens.FormDestroy(Sender: TObject);
 begin
   FreeAndNil(dmECF);
+end;
+
+procedure TFormTelaItens.ExecutarCtrlQ;
+begin
+  if FileExists('BalancaCheckoutFilizola.txt') or FileExists('BalancaCheckoutToledo.txt') or FileExists('BalancaCheckoutUrano.txt') then
+  begin
+    if (EstadoPDVChk = AguardandoNovaVenda) and (F2_AUTOMATICO = 'S') then
+      ExecutarF2;
+    Application.CreateForm(TFormBalancaFilizola, FormBalancaFilizola);
+    FormBalancaFilizola.ShowModal;
+  end;
+  if FileExists('BalancaCheckoutToledoDireto.txt') then
+  begin
+    LblInstrucoes.Caption := 'Lendo Balança Toledo...';
+    LblInstrucoes.Refresh;
+    ACBrBAL1.Desativar;
+
+                    // configura porta de comunicação
+    ACBrBAL1.Modelo := balToledo;
+    ACBrBAL1.Device.HandShake := TACBrHandShake(0);
+    ACBrBAL1.Device.Parity := TACBrSerialParity(0); {zero}
+    ACBrBAL1.Device.Stop := TACBrSerialStop(0); {s1}
+    ACBrBAL1.Device.Data := 8; {8}
+    if Toledo_Porta = 0 then
+      ACBrBAL1.Device.Porta := 'COM1';
+    if Toledo_Porta = 1 then
+      ACBrBAL1.Device.Porta := 'COM2';
+    if Toledo_Porta = 2 then
+      ACBrBAL1.Device.Porta := 'COM3';
+    if Toledo_Porta = 3 then
+      ACBrBAL1.Device.Porta := 'COM4';
+    if Toledo_Porta = 4 then
+      ACBrBAL1.Device.Porta := 'COM5';
+    if Toledo_Porta = 5 then
+      ACBrBAL1.Device.Porta := 'COM6';
+    if Toledo_Porta = 6 then
+      ACBrBAL1.Device.Porta := 'COM7';
+    if Toledo_Porta = 7 then
+      ACBrBAL1.Device.Porta := 'COM8';
+
+    if Toledo_Baud = 0 then
+      ACBrBAL1.Device.Baud := 2400;
+    if Toledo_Baud = 1 then
+      ACBrBAL1.Device.Baud := 4800;
+    if Toledo_Baud = 2 then
+      ACBrBAL1.Device.Baud := 9600;
+    if Toledo_Baud = 3 then
+      ACBrBAL1.Device.Baud := 1200;
+    if Toledo_Baud = 4 then
+      ACBrBAL1.Device.Baud := 19200;
+
+                    // Conecta com a balança
+    ACBrBAL1.Ativar;
+    EditQtde.Value := ACBrBAL1.LePeso(ACBrBAL1.Intervalo);
+    ACBrBAL1.Desativar;
+
+    LblInstrucoes.Caption := 'Informando Produto';
+    LblInstrucoes.Refresh;
+  end;
+
+  if FileExists('BalancaCheckoutUranoDireto.txt') then
+  begin
+    LblInstrucoes.Caption := 'Comunicando com a Balança Urano...';
+    LblInstrucoes.Refresh;
+                    // Abre Porta Serial
+    _AlteraModeloBalanca(Urano_Modelo);
+    _AlteraModoOperacao(0);
+
+    if _AbrePortaSerial(Urano_Porta) < 1 then
+      informaG('Problema de Comunicação com a Balança!')
+    else
+    begin
+                        // Grava Peso no arquivo txt, para tirar as sujeiras que vem da dll.
+      PesoSTR := _LePeso();
+      AssignFile(Urano_PesoLido, 'C:\Easy2Solutions\Gestao\PesoLido.txt');
+      Rewrite(Urano_PesoLido); //abre o arquivo para escrita
+      Writeln(Urano_PesoLido, PesoSTR); //escreve no arquivo e desce uma linha
+      Closefile(Urano_PesoLido); //fecha o handle de arquivo
+
+                        // Le peso do txt
+      PesoSTR := '';
+      AssignFile(Urano_PesoLido, 'C:\Easy2Solutions\Gestao\PesoLido.txt');
+      Reset(Urano_PesoLido);
+      ReadLn(Urano_PesoLido, PesoSTR);
+      CloseFile(Urano_PesoLido);
+
+      while pos('P', PesoSTR) > 0 do
+        Delete(PesoSTR, pos('P', PesoSTR), 1);
+      while pos('E', PesoSTR) > 0 do
+        Delete(PesoSTR, pos('E', PesoSTR), 1);
+      while pos('S', PesoSTR) > 0 do
+        Delete(PesoSTR, pos('S', PesoSTR), 1);
+      while pos('O', PesoSTR) > 0 do
+        Delete(PesoSTR, pos('O', PesoSTR), 1);
+      while pos(':', PesoSTR) > 0 do
+        Delete(PesoSTR, pos(':', PesoSTR), 1);
+      while pos(' ', PesoSTR) > 0 do
+        Delete(PesoSTR, pos(' ', PesoSTR), 1);
+      while pos('g', PesoSTR) > 0 do
+        Delete(PesoSTR, pos('g', PesoSTR), 1);
+      while pos('*', PesoSTR) > 0 do
+        Delete(PesoSTR, pos('*', PesoSTR), 1);
+
+      PesoSTR := FormatFloat('##0.000', (StrToFloat(PesoSTR) / 1000));
+      Peso := StrToFloat(PesoSTR);
+      EditQtde.Value := Peso;
+
+                        // Fecha Porta
+      if _FechaPortaSerial > 0 then
+        Application.ProcessMessages;
+
+      LblInstrucoes.Caption := 'Informando Produto';
+      LblInstrucoes.Refresh;
+    end;
+  end;
+end;
+
+procedure TFormTelaItens.ExecutarF2;
+var
+  RetornoUser: TInfoRetornoUser;
+begin
+  DocumentoClienteVenda := '';
+
+  if dm.ConectaServidor then
+    shpStatusServidor.Brush.Color := clLime
+  else
+    shpStatusServidor.Brush.Color := clRed;
+
+  if MostraPublicidade then
+  begin
+    slideshow.Visible := False;
+    AdvSmoothPanel5.Visible := False;
+    slideshow.Animation := True;
+    PagePrincipal.ActivePage := TabVenda;
+  end;
+
+  UsuarioAutorizouOperacao := '';
+  ImpCupomAutomatico := false;
+  E_Orcamento := false;
+  TemProdutoSemSubsTrib := False;
+  TemProdutoComSubsTrib := False;
+  CodigoAntigoCupom := '';
+  SaldoEstoqueAtual := 0;
+  ItemCancelado := 0;
+  if SQLItensVendaTemp.RecordCount > 0 then
+  begin
+    SQLItensVendaTemp.Last;
+    NroUltItem := SQLItensVendaTempNUMITEM.Value;
+    SQLItensVendaTemp.First;
+  end
+  else
+    NroUltItem := 0;
+
+  if EstadoPDVChk = InformandoItens then
+  begin
+    InformaG('Esta venda já foi iniciada!');
+    EntradaDados.SelectAll;
+    exit;
+  end;
+
+  if DM.SQLConfigVendaOPESICODCUPOM.Value > 0 then
+  else begin
+    InformaG('Não há nenhuma Operacao de Estoque padrão configurada para Venda Cupom. Você deve ajustar esta configuração antes de iniciar uma nova venda!');
+    EntradaDados.SelectAll;
+    exit;
+  end;
+
+  if DM.SQLConfigVendaOPESICODCANCCUPOM.Value > 0 then
+  else begin
+    InformaG('Não há nenhuma Operacao de Estpoque padrão configurada para Cancelamanto Venda Cupom. Você deve ajustar esta configuração antes de iniciar uma nova venda!');
+    EntradaDados.SelectAll;
+    exit;
+  end;
+
+  if (F2_AUTOMATICO = 'S') and (DM.SQLterminalativoTERMIQTDEPADRAO.Value <> EditQtde.Value) and (EditQtde.Value > 0) then
+  begin
+                 {mantenho a qtde digitada, pois pode ser balanca ou digitado pelo usuario}
+  end
+  else
+  begin
+    if (DM.SQLterminalativoTERMIQTDEPADRAO.Value > 0) then
+      EditQtde.Text := DM.SQLterminalativoTERMIQTDEPADRAO.AsString
+    else
+      EditQtde.Value := 0;
+  end;
+
+  AlterarUsuario := false;
+
+  if TerminalModo = 'C' then
+  begin
+    TestaStatusCaixa;
+    if VerCaixa then
+      exit;
+  end;
+
+  CupomOrigemTroca := '';
+  TipoVenda := 0;
+  DataEntregaVenda := '';
+
+  CapturaCodigosIniciais;
+
+  LblInstrucoes.Caption := '';
+  LblInstrucoes.Refresh;
+
+  LimparVariaveis;
+
+  NroCupomFiscal := '000000';
+
+  if (ECFAtual <> '') and (copy(EcfAtual, 1, 4) <> 'NFCE') and (not FileExists('Confirma.txt')) then
+  begin
+    NroCupomFiscal := '';
+    if not AbrirCupomFiscal(ECFAtual, PortaECFAtual, NroCupomFiscal) and (ECFAtual <> 'SIGTRON FS300') then
+    begin
+      InformaG('Problemas ao tentar abrir o cupom!');
+      EntradaDados.SelectAll;
+      exit;
+    end;
+    if (NroCupomFiscal = '000000') and (ECFAtual <> 'SIGTRON FS300') then
+    begin
+      InformaG('Não foi possível capturar o número do Cupom Fiscal');
+      EntradaDados.SelectAll;
+      NroCupomFiscal := '000000';
+    end;
+  end;
+  SolicitarPreco := False;
+  SolicitarPrecoQDeveriaSerVendido := False;
+             // Solicita preço de produto automaticamente
+  if (Dm.SQLConfigVendaCFVECPEDEVLRPRODUTO.AsString = 'S') and (not ImportandoPreVenda) then
+    SolicitarPreco := True;
+  if (Dm.SQLConfigVendaCFVECINFVLRDEVCVEN.AsString = 'S') and (not ImportandoPreVenda) then
+    SolicitarPrecoQDeveriaSerVendido := True;
+
+  PedidosImportados := '';
+  ValorItem := 0;
+        {     if (not SQLItensVendaTemp.IsEmpty) and (Saldo = 0) then
+               CancelarVenda;}
+
+             // Informa o Usuario que irá iniciar a Venda
+  if FileExists('SolicitaUsuarioACadaVenda.txt') then
+  begin
+    try
+      NroCupomFiscal := InputBox('Atenção!', 'Informe o Usuário Corrente...', '');
+      if (StrToInt(NroCupomFiscal) <> UsuarioCorrente) and (NroCupomFiscal <> '0') then
+      begin
+        if DM.SQLUsuario.Locate('USUAICOD', NroCupomFiscal, []) then
+        begin
+          DM.UsuarioAtual := DM.SQLUsuarioUSUAICOD.AsInteger;
+          if DM.SQLUsuarioUSUACUSERMASTER.AsString = 'S' then
+            UsuarioMaster := True
+          else
+            UsuarioMaster := False;
+          UsuarioCorrente := DM.SQLUsuarioUSUAICOD.AsInteger;
+          UsuarioAtualNome := DM.SQLUsuarioUSUAA60LOGIN.AsString;
+        end
+        else
+        begin
+          InformaG('Usuário Selecionado é Inválido!');
+          EntradaDados.SelectAll;
+          exit;
+        end;
+
+      end;
+    except
+      Application.ProcessMessages;
+    end;
+  end;
+
+             // Informa a Senha do Vendedor que irá iniciar a Venda
+  if FileExists('SolicitaVendedorACadaVenda.txt') then
+  begin
+    RetornoCampoUsuario := AutenticaVendedor(UsuarioAtualNome, 'VENDICOD', RetornoUser);
+    if RetornoCampoUsuario <> '' then
+      VendedorVenda := strtoint(RetornoCampoUsuario)
+    else
+    begin
+      InformaG('Vendedor Selecionado é Inválido!');
+      EntradaDados.SelectAll;
+      EstadoPDVChk := AguardandoNovaVenda;
+      PreparaEstadoBalcao(EstadoPDVChk);
+      exit;
+    end;
+  end;
+
+             // Informa o Nro Cupom => Darvami precisava lancar os cupons retroativos
+  if FileExists('SolicitaNroCupom.txt') then
+  begin
+    try
+      NroCupomFiscal := '0';
+      NroCupomFiscal := InputBox('Atenção!', 'Informe o número do cupom fiscal desta venda:', '');
+      StrToInt(NroCupomFiscal);
+    except
+      NroCupomFiscal := '0';
+    end;
+  end;
+
+             // Informa Vendedor
+  if (dm.sqlterminalativoTERMCSOLCODVEND.value = 'S') and
+    (not ContinuarPrevenda) and (not vImportarPrevenda) and (not ImportandoPreVenda) then
+  begin
+    try
+      VendedorVenda := StrToInt(InputBox('Informar o Vendedor', 'Digite o Código do Vendedor', ''));
+    except
+      Application.ProcessMessages; end;
+  end;
+  if (dm.sqlterminalativoTERMCSOLCODVEND.value = 'S') then
+    if (VendedorVenda > 0) then
+    begin
+      rxVendedor.Visible := True;
+      rxVendedor.Caption := SQLLocate('VENDEDOR', 'VENDICOD', 'VENDA60NOME', IntToStr(VendedorVenda));
+      rxVendedor.Update;
+    end
+    else
+    begin
+      rxVendedor.Caption := 'Não Encontrado';
+      rxVendedor.Update;
+    end;
+
+  if (FileExists('SolicitaCliente.txt')) and (not ImportandoPreVenda) then
+  begin
+    Application.CreateForm(TFormTelaConsultaRapidaCliente, FormTelaConsultaRapidaCliente);
+    FormTelaConsultaRapidaCliente.ShowModal;
+    IniFile := TIniFile.Create(dm.PathAplicacao + 'SolicitaCliente.txt');
+    if IniFile.ReadString('VECONTAS', 'VERADICIONAIS', 'N') = 'S' then
+    begin
+      ObsCliente := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIETOBS1', '''' + ClienteVenda + '''');
+      if Obscliente <> '' then
+        ShowMessage(obscliente);
+    end;
+    if (DM.SQLConfigVendaCFVECTESTALIMTCRED.AsString = 'S') then
+    begin
+      if not VerificaLimiteCredito(ClienteVenda, 0, DM.SQLParcelas, DM.SQLCliente) then
+      begin
+        if IniFile.ReadString('VECONTAS', 'VER', 'N') = 'S' then
+          vercontas;
+      end;
+    end;
+    UsaPrecoVenda := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIECTPPRCVENDA', '''' + ClienteVenda + '''');
+    rxClienteNome.caption := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIEA60RAZAOSOC', '''' + ClienteVenda + '''');
+    rxClienteNome.update;
+    IniFile.Free;
+  end
+  else
+  begin
+    ClienteVenda := dm.SQLTerminalAtivoCLIEA13ID.Value;
+    rxClienteNome.caption := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIEA60RAZAOSOC', '''' + ClienteVenda + '''');
+    UsaPrecoVenda := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIECTPPRCVENDA', '''' + ClienteVenda + '''');
+    rxClienteNome.update;
+  end;
+
+             // MANDA DADOS DISPLAY TECLADO
+  if TecladoReduzidoModelo = 'TEC44DIS' then
+    EnviaTecladoTextoDisplay44('Informe o Produto', '');
+  if TecladoReduzidoModelo = 'TEC65' then
+    EnviaTecladoTextoDisplay65('Informe o Produto', '');
+
+  EstadoPDVChk := InformandoItens;
+  PreparaEstadoBalcao(EstadoPDVChk);
+  VoltaParaEntradaDados;
+end;
+
+procedure TFormTelaItens.ExecutarPessagemAutomatica;
+begin
+  if (StrToIntDef(EntradaDados.Text, -1) <> -1) then
+  begin
+    try
+      if ExecSql('select PRODUTO.PESAGEM_AUTOMATICA from PRODUTO where PRODUTO.PRODICOD = '
+        + EntradaDados.Text).FieldByName('PESAGEM_AUTOMATICA').AsString = 'S' then
+        ExecutarCtrlQ;
+    except
+      on e: Exception do
+        raise Exception.Create('Executar Pessagem Automatica: ' + e.Message);
+    end;
+  end;
 end;
 
 end.
