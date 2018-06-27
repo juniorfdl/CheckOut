@@ -79,6 +79,7 @@ type
     function Sangria(Valor: Double; Obs: AnsiString;
       DescricaoCNF: String; DescricaoFPG: String; IndiceBMP: Integer ) : boolean ;
     function Suprimento(Valor: Double; DescricaoFPG: String) : boolean ;
+    procedure EfetuaPagamento(FormaPagamento:Integer; Valor:Double);
   end;
 
 var
@@ -335,6 +336,13 @@ begin
   AbrirPorta;
   ACBrECF1.Suprimento(Valor, 'SUPRIMENTO', 'SUPRIMENTO', DescricaoFPG);
   Result := True;
+end;
+
+procedure TdmECF.EfetuaPagamento(FormaPagamento: Integer; Valor: Double);
+begin
+  AbrirPorta;
+  
+  ACBrECF1.EfetuaPagamento(IntToStr(FormaPagamento), Valor);
 end;
 
 end.

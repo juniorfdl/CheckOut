@@ -345,6 +345,7 @@ type
     Urano_Porta: string;
     Urano_PesoLido: TextFile;
 
+    function GetCPNMN2VLR(pnumeicod:Integer):Double;
     function GravaCupom: Boolean;
     function GravaCupomItem: Boolean;
     function GravarOrcamento: boolean;
@@ -4157,10 +4158,11 @@ begin
                   SQLParcelasVistaVendaTempTERMICOD.AsString := IntToStr(StrToInt(copy(IDReimprimir, 4, 3)));
                   SQLParcelasVistaVendaTempNROITEM.Value := SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger;
                   SQLParcelasVistaVendaTempNUMEICOD.Value := SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger;
+
                   if (SQLParcelasVistaVendaTemp.RecNo = 1) and (VarValorTroco > 0) then
-                    SQLParcelasVistaVendaTempVALORPARC.Value := SQLImpressaoCupom.fieldbyname('CPNMN2VLR').Value + VarValorTroco
+                    SQLParcelasVistaVendaTempVALORPARC.Value :=  GetCPNMN2VLR(SQLParcelasVistaVendaTempNUMEICOD.Value) + VarValorTroco
                   else
-                    SQLParcelasVistaVendaTempVALORPARC.Value := SQLImpressaoCupom.fieldbyname('CPNMN2VLR').Value;
+                    SQLParcelasVistaVendaTempVALORPARC.Value := GetCPNMN2VLR(SQLParcelasVistaVendaTempNUMEICOD.Value);
                   SQLParcelasVistaVendaTempTIPOPADR.Value := SQLLocate('NUMERARIO', 'NUMEICOD', 'NUMEA5TIPO', SQLImpressaoCupom.fieldbyname('NUMEICOD').AsString);
                   SQLParcelasVistaVendaTemp.Post;
                   if SQLParcelasVistaVendaTempTIPOPADR.Value = 'CRT' then
@@ -4173,7 +4175,9 @@ begin
                   end;
 
                   VlrTotalSistema := VlrTotalSistema + SQLParcelasVistaVendaTempVALORPARC.Value;
-                  dmECF.ACBrECF1.EfetuaPagamento(IntToStr(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger), SQLImpressaoCupom.fieldbyname('CPNMN2VLR').Value, '', False);
+                  
+                  dmECF.EfetuaPagamento(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger,
+                    GetCPNMN2VLR(SQLParcelasVistaVendaTempNUMEICOD.Value));
 
                   SQLImpressaoCupom.next;
                 end;
@@ -4224,7 +4228,9 @@ begin
                   SQLImpressaoCupom.Next;
 
                   VlrTotalSistema := VlrTotalSistema + SQLParcelasPrazoVendaTempVALORVENCTO.Value;
-                  dmECF.ACBrECF1.EfetuaPagamento(IntToStr(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger), SQLImpressaoCupom.fieldbyname('CPNMN2VLR').Value, '', False);
+                  
+                  dmECF.EfetuaPagamento(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger,
+                  GetCPNMN2VLR(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger));
 
                 end;
                 SQLParcelasPrazoVendaTemp.Close;
@@ -5957,7 +5963,7 @@ begin
     sTipoPadrao := SQLLocate('NUMERARIO', 'NUMEICOD', 'NUMEA5TIPO', SQLImpressaoCupom.fieldbyname('NUMEICOD').AsString);
     if (sTipoPadrao = 'CRT') then
     begin
-      dm.TotalCartao := dm.TotalCartao + SQLImpressaoCupom.fieldbyname('CPNMN2VLR').Value;
+      dm.TotalCartao := dm.TotalCartao + GetCPNMN2VLR(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger);
       ProvedorCartao := SQLLocate('NUMERARIO', 'NUMEICOD', 'PRCAA13ID', SQLImpressaoCupom.fieldbyname('NUMEICOD').AsString);
       dm.NumerarioCartao := SQLImpressaoCupom.fieldbyname('NUMEICOD').AsString;
       NomeNumerarioCartao := SQLLocate('NUMERARIO', 'NUMEICOD', 'NUMEA30DESCR', SQLImpressaoCupom.fieldbyname('NUMEICOD').AsString);
@@ -6631,6 +6637,12 @@ begin
         raise Exception.Create('Executar Pessagem Automatica: ' + e.Message);
     end;
   end;
+end;
+
+function TFormTelaItens.GetCPNMN2VLR(pnumeicod: Integer): Double;
+begin
+  result := ExecSql(' select CPNMN2VLR from cupomnumerario where numeicod = '
+  + IntToStr(pnumeicod)).FieldByName('CPNMN2VLR').AsFloat;
 end;
 
 end.

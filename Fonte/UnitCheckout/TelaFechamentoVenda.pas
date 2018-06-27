@@ -1335,7 +1335,11 @@ begin
                 end;
 
               if (ECFAtual = 'ECF') and (not FileExists('Confirma.txt')) then
-                dmECF.ACBrECF1.EfetuaPagamento(IntToStr(NumerarioAtual),SQLParcelasVistaVendaTempVALORPARC.Value,'',False);
+              begin
+                if NumerarioAtual = 0 then
+                  showmessage('Numerario não informado: '+ inttostr(NumerarioAtual) + ':' + EntradaDados.text);
+                dmECF.EfetuaPagamento(NumerarioAtual,SQLParcelasVistaVendaTempVALORPARC.Value);
+              end;
 
               SQLParcelasVistaVendaTemp.Close ;
               SQLParcelasVistaVendaTemp.SQL.Clear ;
