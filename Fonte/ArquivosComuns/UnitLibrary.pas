@@ -326,6 +326,7 @@ function  PadL(Str : String; Tamanho : Integer) : String;
 function  Left(Str:String; Nro: Integer): String;
 function  Right(Str:String; Nro: Integer): String;
 function MontaString(x: string; Tamanho: integer; tipo: Integer = 0; CompletarCom: string = ' '): string;
+procedure addLog(Erro: string; Arquivo: string = '');
 
 implementation
 
@@ -5903,6 +5904,32 @@ begin
     Result := s + x
   else
     Result := x + s;
+end;
+
+procedure addLog(Erro: string; Arquivo: string = '');
+begin
+  try
+    if FileExists(ExtractFilePath(Application.ExeName) + 'log.txt') then
+      with TStringList.Create do
+      try
+
+        if Arquivo = '' then
+          Arquivo := ExtractFilePath(Application.ExeName)+'LogErro_' + FormatDateTime('yyyymmdd', now) + '.txt';
+
+        //Arquivo := CaminhoPrograma + Arquivo;
+
+        if FileExists(arquivo) then
+          LoadFromFile(arquivo);
+
+        Add(#13 + DateTimeToStr(now) + #13 + erro);
+
+        SaveToFile(arquivo);
+
+      finally
+        Free;
+      end;
+  except
+  end;
 end;
 
 end.

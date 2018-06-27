@@ -1389,6 +1389,9 @@ begin
       Urano_Porta := IniFile.ReadString('Configuracao', 'IPortaSerial', 'COM4');
       Urano_Modelo := IniFile.ReadInteger('Configuracao', 'IModeloBalanca', 0);
       Urano_Operacao := IniFile.ReadInteger('Configuracao', 'IModoOperacao', 0);
+      addLog('Urano Porta: ' + Urano_Porta,ExtractFilePath(Application.ExeName) + 'LogPesaUrano.txt');
+      addLog('Urano Modelo: ' + IntToStr(Urano_Modelo),ExtractFilePath(Application.ExeName) + 'LogPesaUrano.txt');
+      addLog('Urano Operação: ' + IntToStr(Urano_Operacao),ExtractFilePath(Application.ExeName) + 'LogPesaUrano.txt');
     finally
       IniFile.Free;
     end;
@@ -6328,6 +6331,7 @@ begin
   begin
     LblInstrucoes.Caption := 'Comunicando com a Balança Urano...';
     LblInstrucoes.Refresh;
+    addLog('Comunicação OK',ExtractFilePath(Application.ExeName) + 'LogPesaUrano.txt');
                     // Abre Porta Serial
     _AlteraModeloBalanca(Urano_Modelo);
     _AlteraModoOperacao(0);
