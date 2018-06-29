@@ -341,7 +341,10 @@ end;
 procedure TdmECF.EfetuaPagamento(FormaPagamento: Integer; Valor: Double);
 begin
   AbrirPorta;
-  
+
+  if Valor = 0 then
+    Valor := ACBrECF1.GrandeTotal;
+
   ACBrECF1.EfetuaPagamento(IntToStr(FormaPagamento), Valor);
 end;
 

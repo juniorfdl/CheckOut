@@ -345,7 +345,7 @@ type
     Urano_Porta: string;
     Urano_PesoLido: TextFile;
 
-    function GetCPNMN2VLR(pnumeicod:Integer):Double;
+    function GetCPNMN2VLR(pCUPOA13ID:String; pnumeicod: Integer):Double;
     function GravaCupom: Boolean;
     function GravaCupomItem: Boolean;
     function GravarOrcamento: boolean;
@@ -4163,9 +4163,9 @@ begin
                   SQLParcelasVistaVendaTempNUMEICOD.Value := SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger;
 
                   if (SQLParcelasVistaVendaTemp.RecNo = 1) and (VarValorTroco > 0) then
-                    SQLParcelasVistaVendaTempVALORPARC.Value :=  GetCPNMN2VLR(SQLParcelasVistaVendaTempNUMEICOD.Value) + VarValorTroco
+                    SQLParcelasVistaVendaTempVALORPARC.Value :=  GetCPNMN2VLR(IDReimprimir, SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger) + VarValorTroco
                   else
-                    SQLParcelasVistaVendaTempVALORPARC.Value := GetCPNMN2VLR(SQLParcelasVistaVendaTempNUMEICOD.Value);
+                    SQLParcelasVistaVendaTempVALORPARC.Value := GetCPNMN2VLR(IDReimprimir, SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger);
                   SQLParcelasVistaVendaTempTIPOPADR.Value := SQLLocate('NUMERARIO', 'NUMEICOD', 'NUMEA5TIPO', SQLImpressaoCupom.fieldbyname('NUMEICOD').AsString);
                   SQLParcelasVistaVendaTemp.Post;
                   if SQLParcelasVistaVendaTempTIPOPADR.Value = 'CRT' then
@@ -4178,9 +4178,9 @@ begin
                   end;
 
                   VlrTotalSistema := VlrTotalSistema + SQLParcelasVistaVendaTempVALORPARC.Value;
-                  
-                  dmECF.EfetuaPagamento(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger,
-                    GetCPNMN2VLR(SQLParcelasVistaVendaTempNUMEICOD.Value));
+
+                  if (ECFAtual = 'ECF') then
+                    dmECF.EfetuaPagamento(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger,SQLParcelasVistaVendaTempVALORPARC.Value);
 
                   SQLImpressaoCupom.next;
                 end;
@@ -4231,11 +4231,11 @@ begin
                   SQLImpressaoCupom.Next;
 
                   VlrTotalSistema := VlrTotalSistema + SQLParcelasPrazoVendaTempVALORVENCTO.Value;
-                  
-                  dmECF.EfetuaPagamento(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger,
-                  GetCPNMN2VLR(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger));
 
+                  if (ECFAtual = 'ECF') then
+                    dmECF.EfetuaPagamento(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger,SQLParcelasPrazoVendaTempVALORVENCTO.Value);
                 end;
+
                 SQLParcelasPrazoVendaTemp.Close;
                 SQLParcelasPrazoVendaTemp.MacroByName('MFiltro').Value := 'TERMICOD = ' + SQLImpressaoCupom.fieldbyname('TERMICOD').AsString;
                 SQLParcelasPrazoVendaTemp.Open;
@@ -5966,7 +5966,7 @@ begin
     sTipoPadrao := SQLLocate('NUMERARIO', 'NUMEICOD', 'NUMEA5TIPO', SQLImpressaoCupom.fieldbyname('NUMEICOD').AsString);
     if (sTipoPadrao = 'CRT') then
     begin
-      dm.TotalCartao := dm.TotalCartao + GetCPNMN2VLR(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger);
+      dm.TotalCartao := dm.TotalCartao + GetCPNMN2VLR(idCupom,SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger);
       ProvedorCartao := SQLLocate('NUMERARIO', 'NUMEICOD', 'PRCAA13ID', SQLImpressaoCupom.fieldbyname('NUMEICOD').AsString);
       dm.NumerarioCartao := SQLImpressaoCupom.fieldbyname('NUMEICOD').AsString;
       NomeNumerarioCartao := SQLLocate('NUMERARIO', 'NUMEICOD', 'NUMEA30DESCR', SQLImpressaoCupom.fieldbyname('NUMEICOD').AsString);
@@ -6643,10 +6643,13 @@ begin
   end;
 end;
 
-function TFormTelaItens.GetCPNMN2VLR(pnumeicod: Integer): Double;
-begin
-  result := ExecSql(' select CPNMN2VLR from cupomnumerario where numeicod = '
-  + IntToStr(pnumeicod)).FieldByName('CPNMN2VLR').AsFloat;
+function TFormTelaItens.GetCPNMN2VLR(pCUPOA13ID: String; pnumeicod: Integer): Double;
+begin   
+  if pCUPOA13ID <> '' then
+    result := ExecSql(' select CPNMN2VLR from cupomnumerario where CUPOA13ID = '
+     + QuotedStr(pCUPOA13ID)
+     +IIf(pnumeicod > 0, ' AND numeicod = '+ inttostr(pnumeicod), '')
+      ).FieldByName('CPNMN2VLR').AsFloat;
 end;
 
 end.
