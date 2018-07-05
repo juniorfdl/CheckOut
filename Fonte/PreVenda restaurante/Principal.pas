@@ -148,7 +148,7 @@ begin
 
     if ImpMarca = 'EPSON'    then ACBrPosPrinter.Modelo := ppEscPosEpson;
     if ImpMarca = 'BEMATECH' then ACBrPosPrinter.Modelo := ppEscBematech;
-    if ImpMarca = 'ELGIN'    then ACBrPosPrinter.Modelo := ppEscElgin;
+    if ImpMarca = 'ELGIN'    then ACBrPosPrinter.Modelo := ppEscVox;
     if ImpMarca = 'DR700'    then ACBrPosPrinter.Modelo := ppEscDaruma;
     if ImpMarca = 'DR800'    then ACBrPosPrinter.Modelo := ppEscDaruma;
 
@@ -158,11 +158,13 @@ begin
 
 //    ImprimirCodigo(hostName, dataBase);
 
+    memo.Lines.Add('</ce><e>'  +TblPreVendaCabNomeEmpresa.Value+'</e>');
+    memo.Lines.Add('</ce><e>'  +TblPreVendaCabFoneEmpresa.Value+'</e>');
 //    memo.Lines.Add('</ce><e>'  +TblPreVendaCabEmpresaEmit.Value+'</e>');
 //    memo.Lines.Add('</fn></ce>'+TblPreVendaCabEmpresaEmit_Ender.Value);
 //    memo.Lines.Add('</fn></ce>'+TblPreVendaCabEmpresaEmit_Cidade.Value);
 //    memo.Lines.Add('</fn></ce>'+TblPreVendaCabEmpresaEmit_Fone.Value);
-//    memo.Lines.Add(' ');
+ //   memo.Lines.Add(' ');
 
 //    if TblPreVendaCabPEDIDOORCAMENTO.Value = 'ORCAMENTO' then
 //      memo.Lines.Add('</ce><e>Orcamento: '+TblPreVendaCabDisplayNumero.AsString+'</e>')

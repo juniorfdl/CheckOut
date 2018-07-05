@@ -325,6 +325,7 @@ type
     procedure btnF5Click(Sender: TObject);
     procedure SQLItensVendaTempAfterPost(DataSet: TDataSet);
     procedure FormDestroy(Sender: TObject);
+    procedure GridItensEnter(Sender: TObject);
 
   private
     { Private declarations }
@@ -1612,6 +1613,13 @@ begin
     if (EstadoPDVChk = InformandoItens) or (EstadoPDVChk = InformandoItensTroca) then
     begin
       if (Enter_Vazio = 'N') and (EntradaDados.Text = '') then exit;
+
+      if (EntradaDados.Text <> '') and (Enter_Vazio = 'N') and (not EncontrouProduto(trim(EntradaDados.Text), SQLProduto)) then
+      begin
+         ProdutoNaoCadastrado;
+         EntradaDados.Clear;
+         exit;
+      end;
 
       if not SQLItensVendaTemp.Active then exit;
       LblInstrucoes.Caption := 'Aguarde, Procurando Produto...';
@@ -6650,6 +6658,11 @@ begin
      + QuotedStr(pCUPOA13ID)
      +IIf(pnumeicod > 0, ' AND numeicod = '+ inttostr(pnumeicod), '')
       ).FieldByName('CPNMN2VLR').AsFloat;
+end;
+
+procedure TFormTelaItens.GridItensEnter(Sender: TObject);
+begin
+  EntradaDados.SetFocus;
 end;
 
 end.
