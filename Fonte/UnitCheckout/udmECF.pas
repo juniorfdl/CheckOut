@@ -91,6 +91,7 @@ implementation
 
 function TdmECF.AbrirCupomFiscal(var NroCupom: String): boolean;
 begin
+  AbrirPorta;
   ACBrECF1.AbreCupom();
   Result := True;
 end;
@@ -317,6 +318,7 @@ end;
 
 procedure TdmECF.IdentificaConsumidor(DocumentoCli, NomeCli, EnderecoCli:String);
 begin
+  AbrirPorta;
   if length(Trim(EnderecoCli)) < 8 then
     EnderecoCli := '';
 
