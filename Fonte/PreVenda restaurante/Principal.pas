@@ -160,25 +160,8 @@ begin
 
     memo.Lines.Add('</ce><e>'  +TblPreVendaCabNomeEmpresa.Value+'</e>');
     memo.Lines.Add('</ce><e>'  +TblPreVendaCabFoneEmpresa.Value+'</e>');
-//    memo.Lines.Add('</ce><e>'  +TblPreVendaCabEmpresaEmit.Value+'</e>');
-//    memo.Lines.Add('</fn></ce>'+TblPreVendaCabEmpresaEmit_Ender.Value);
-//    memo.Lines.Add('</fn></ce>'+TblPreVendaCabEmpresaEmit_Cidade.Value);
-//    memo.Lines.Add('</fn></ce>'+TblPreVendaCabEmpresaEmit_Fone.Value);
- //   memo.Lines.Add(' ');
-
-//    if TblPreVendaCabPEDIDOORCAMENTO.Value = 'ORCAMENTO' then
-//      memo.Lines.Add('</ce><e>Orcamento: '+TblPreVendaCabDisplayNumero.AsString+'</e>')
-//    else
-//      begin
-//        if (MostraDisplay = 'S') and (TblPreVendaCabDisplayNumero.Value>0) then
-//          memo.Lines.Add('</ce><e>Comprovante: '+Sequencial+'</e>')
-//          memo.Lines.Add('</ce><e>Comprovante: '+TblPreVendaCabDisplayNumero.AsString+'</e>')
-//        else
-//          memo.Lines.Add('<ce><e>ID: '+TblPreVendaCabTicketNumero.AsString+'</e></ce>');
-//      end;
     memo.Lines.Add('</fn>------------------------------------------------');
     memo.Lines.Add('</ae>Data: '+FormatDateTime('dd/mm/yy hh:nn:ss',now));
-    // memo.Lines.Add('Terminal: '+TblPreVendaCabTerminal.Value);
     memo.Lines.Add('Operador: '+TblPreVendaCabUsuarioVendaSTR.AsString);
     memo.Lines.Add('Vendedor: '+TblPreVendaCabVendedor.AsString);
     memo.Lines.Add('</fn>------------------------------------------------');
@@ -212,7 +195,7 @@ begin
             memo.Lines.Add('</ae>'+TblPreVendaItemCodigo.AsString + ' ' + TblPreVendaItemDescricao.AsString);
        {     if TblPreVendaItemComplemento.AsString<>'' then
               memo.Lines.Add('</ae>'+TblPreVendaItemComplemento.Value); }
-            memo.Lines.Add('</ad>'+FormatFloat('##00.00',TblPreVendaItemQuantidade.Value)+'     '+FormatFloat('R$ ##0.00',TblPreVendaItemValorUnitario.Value)+'     '+ FormatFloat('R$ ##0.00',TblPreVendaItemValorTotal.Value)+'   ');
+            memo.Lines.Add('</ad>'+FormatFloat('##00.00',TblPreVendaItemQuantidade.Value)+'       '+FormatFloat('R$ ##0.00',TblPreVendaItemValorUnitario.Value)+'        '+ FormatFloat('R$ ##0.00',TblPreVendaItemValorTotal.Value)+'');
           end;
         TblPreVendaItem.Next;
       End;

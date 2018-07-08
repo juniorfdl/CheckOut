@@ -1414,6 +1414,7 @@ end;
 procedure TFormTelaItens.EntradaDadosKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 var
   RetornoUser: TInfoRetornoUser;
+  CodigoBalanca : Boolean;
 begin
   // EntradaDados.Text := Alltrim(EntradaDados.Text);
   if Key = VK_Escape then
@@ -1614,7 +1615,11 @@ begin
     begin
       if (Enter_Vazio = 'N') and (EntradaDados.Text = '') then exit;
 
-      if (EntradaDados.Text <> '') and (Enter_Vazio = 'N') and (not EncontrouProduto(trim(EntradaDados.Text), SQLProduto)) then
+      CodigoBalanca := False;
+      if (Length(EntradaDados.Text) = 13) and (copy(EntradaDados.Text, 1, 1) = '2') then
+        CodigoBalanca := true;
+
+      if (EntradaDados.Text <> '') and (Enter_Vazio = 'N') and (not EncontrouProduto(trim(EntradaDados.Text), SQLProduto)) and not (CodigoBalanca) then
       begin
          ProdutoNaoCadastrado;
          EntradaDados.Clear;

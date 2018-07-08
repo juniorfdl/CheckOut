@@ -1128,7 +1128,8 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       '  sum(MOVIMENTOCAIXA.MVCXN2VLRDEB) as DEBITOS,'
       
         '  sum(MOVIMENTOCAIXA.MVCXN2VLRCRED - MOVIMENTOCAIXA.MVCXN2VLRDEB' +
-        ') as Saldo'
+        ' + MOVIMENTOCAIXA.MVCXN2VLRJURO + MOVIMENTOCAIXA.MVCXN2VLRMULTA)' +
+        ' as Saldo'
       'from'
       '  MOVIMENTOCAIXA, OPERACAOCAIXA'
       'where'
@@ -1452,7 +1453,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 297000
     PrinterSetup.mmPaperWidth = 210000
-    PrinterSetup.PaperSize = 9
+    PrinterSetup.PaperSize = 256
     DeviceType = 'Screen'
     EmailSettings.ReportFormat = 'PDF'
     OnPreviewFormClose = ReportTotaisPreviewFormClose
@@ -1884,7 +1885,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
           PrinterSetup.mmMarginTop = 6350
           PrinterSetup.mmPaperHeight = 297000
           PrinterSetup.mmPaperWidth = 210000
-          PrinterSetup.PaperSize = 9
+          PrinterSetup.PaperSize = 256
           Version = '10.06'
           mmColumnWidth = 0
           DataPipelineName = 'PipeNumerario'
@@ -2173,7 +2174,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                 PrinterSetup.mmMarginTop = 6350
                 PrinterSetup.mmPaperHeight = 297000
                 PrinterSetup.mmPaperWidth = 210000
-                PrinterSetup.PaperSize = 9
+                PrinterSetup.PaperSize = 256
                 Version = '10.06'
                 mmColumnWidth = 0
                 DataPipelineName = 'PipeItensVendidos'
@@ -2365,7 +2366,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                       PrinterSetup.mmMarginTop = 6350
                       PrinterSetup.mmPaperHeight = 297000
                       PrinterSetup.mmPaperWidth = 210000
-                      PrinterSetup.PaperSize = 9
+                      PrinterSetup.PaperSize = 256
                       Version = '10.06'
                       mmColumnWidth = 0
                       DataPipelineName = 'PipeVendasCartoesCheques'

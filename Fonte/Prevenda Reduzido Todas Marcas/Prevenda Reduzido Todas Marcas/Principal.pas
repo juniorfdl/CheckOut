@@ -143,7 +143,7 @@ begin
 
     if ImpMarca = 'EPSON'    then ACBrPosPrinter.Modelo := ppEscPosEpson;
     if ImpMarca = 'BEMATECH' then ACBrPosPrinter.Modelo := ppEscBematech;
-    if ImpMarca = 'ELGIN'    then ACBrPosPrinter.Modelo := ppEscElgin;
+    if ImpMarca = 'ELGIN'    then ACBrPosPrinter.Modelo := ppEscVox;
     if ImpMarca = 'DR700'    then ACBrPosPrinter.Modelo := ppEscDaruma;
     if ImpMarca = 'DR800'    then ACBrPosPrinter.Modelo := ppEscDaruma;
 

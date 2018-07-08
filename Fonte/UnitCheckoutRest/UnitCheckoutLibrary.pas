@@ -314,8 +314,6 @@ begin
     DM.TblTicketPreVendaItemImpCozinha.Value    := SQLLocate('PRODUTO', 'PRODICOD', 'PRODCIMPCOZINHA', SQLCupomIt.FieldbyName('PRODICOD').AsString) ;
     DM.TblTicketPreVendaItemImpVale.Value       := SQLLocate('PRODUTO', 'PRODICOD', 'PRODCIMPVALE', SQLCupomIt.FieldbyName('PRODICOD').AsString) ;
     DM.TblTicketPreVendaItemPRODA30COZINHA.Value:= SQLLocate('PRODUTO', 'PRODICOD', 'PRODA30COZINHA', SQLCupomIt.FieldbyName('PRODICOD').AsString) ;
-
-
     if SQLCupomIt.FieldbyName('CPITN3QTD').Value > 0 then
       begin
         DM.TblTicketPreVendaItemQuantidade.Value := SQLCupomIt.FieldbyName('CPITN3QTD').Value ;
@@ -387,8 +385,9 @@ begin
     Application.ProcessMessages;
   end;
 
-  if FileExists('IMPRESSAOPREVENDA.EXE') then
-    WinExec(Pchar('IMPRESSAOPREVENDA.EXE'),sw_Show);
+  if Pergunta('SIM', '* * * CONFIRMA A IMPRESSAO DO CUPOM ? * * *') then
+    if FileExists('IMPRESSAOPREVENDA.EXE') then
+      WinExec(Pchar('IMPRESSAOPREVENDA.EXE'),sw_Show);
 
   if FileExists('VALEBEBIDA.EXE') then
     WinExec(Pchar('VALEBEBIDA.EXE'),sw_Show);
