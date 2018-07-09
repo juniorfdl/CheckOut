@@ -6674,6 +6674,7 @@ begin
     MemoRetornoNFE.Lines.Clear;
     dm.ACBrPosPrinter.Device.Desativar;
   end;
+end;  
 
 procedure TFormTelaItens.GridItensEnter(Sender: TObject);
 begin
