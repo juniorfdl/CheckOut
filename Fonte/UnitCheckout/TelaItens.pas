@@ -393,6 +393,7 @@ type
     procedure TefAdm;
     procedure StatusServicoNFE;
     function Transmite_NFCe(idCupom: string): Boolean;
+    procedure ImprimirConfissaoDeDivida(pTotalPrazo:Double);
   end;
 
 var
@@ -5270,7 +5271,12 @@ end;
 
 procedure TFormTelaItens.TimerLeitorTimer(Sender: TObject);
 begin
-  try
+
+  if (FileExists('TelaAtiva.txt'))and(Screen.ActiveForm.active) then
+    Screen.ActiveForm.BringToFront;
+
+  try              
+
    { PanelDataHora.Caption := FormatDateTime('ddddddddddddd hh:mm:ss', Now);
     PanelDataHora.Update; }
     {if (LeitorCodigoBarras <> '') then
@@ -6053,43 +6059,7 @@ begin
   end;
 
   {imprime se tiver confissao divida e tiver TotalPrazo seja Cheq, Crediario ou Fidelizacao}
-  if (DM.SQLTerminalAtivoTERMCIMPCONFDIVIDA.Value = 'S') and (TotalPrazo > 0) then
-  begin
-    try
-      MemoRetornoNFE.Lines.Clear;
-      MemoRetornoNFE.Lines.Add(' ');
-      MemoRetornoNFE.Lines.Add('</ce><e>' + dm.SQLEmpresaEMPRA60NOMEFANT.Value + '</e>');
-      MemoRetornoNFE.Lines.Add(' ');
-      MemoRetornoNFE.Lines.Add('</ae></fn>Terminal: ' + dm.SQLTerminalAtivoTERMA60DESCR.Value);
-      MemoRetornoNFE.Lines.Add('Usuario : ' + dm.SQLUsuarioUSUAA60LOGIN.Value);
-      MemoRetornoNFE.Lines.Add('Impresso em ' + FormatDateTime('dd/mm/yy hh:mm', now));
-      MemoRetornoNFE.Lines.Add(' ');
-      MemoRetornoNFE.Lines.Add('</ce><e>CONFISSAO DE DIVIDA</e>');
-      MemoRetornoNFE.Lines.Add(' ');
-      MemoRetornoNFE.Lines.Add('</ae></fn>NFCe Nro: ' + inttostr(NumNFe));
-      MemoRetornoNFE.Lines.Add(' ');
-      MemoRetornoNFE.Lines.Add('</ae></fn>DECLARO PARA OS DEVIDOS FINS QUE RECEBI A(S)');
-      MemoRetornoNFE.Lines.Add('</ae></fn>MERCADORIA(S) CONSTANTE(S)  NO  CUPOM FISCAL');
-      MemoRetornoNFE.Lines.Add('</ae></fn>VINCULADO A ESTE.   CONFESSO-ME DEVEDOR(A) E');
-      MemoRetornoNFE.Lines.Add('</ae></fn>AUTORIZO  A  EMISSAO DE COBRANCA  DECORRENTE');
-      MemoRetornoNFE.Lines.Add('</ae></fn>DA PRESENTE COMPRA DE R$ ' + FormatFloat('##0.00', TotalPrazo));
-      MemoRetornoNFE.Lines.Add(' ');
-      MemoRetornoNFE.Lines.Add(' ');
-      MemoRetornoNFE.Lines.Add('</ae></fn>Ass.________________________________________');
-      MemoRetornoNFE.Lines.Add(' ');
-      MemoRetornoNFE.Lines.Add(' ');
-      MemoRetornoNFE.Lines.Add(' ');
-      MemoRetornoNFE.Lines.Add(' ');
-      MemoRetornoNFE.Lines.Add('</corte_parcial>');
-      dm.ACBrPosPrinter.Device.Desativar;
-      dm.ACBrPosPrinter.Device.Ativar;
-      dm.ACBrPosPrinter.Imprimir(FormTelaItens.MemoRetornoNFE.Lines.Text);
-    except
-      Application.ProcessMessages;
-    end;
-    MemoRetornoNFE.Lines.Clear;
-    dm.ACBrPosPrinter.Device.Desativar;
-  end;
+  ImprimirConfissaoDeDivida(TotalPrazo);
 
   LblInstrucoes.Caption := 'Enviando ao Sefaz RS NFCe: ' + inttostr(NumNFe);
   LblInstrucoes.Update;
@@ -6650,6 +6620,47 @@ begin
      + QuotedStr(pCUPOA13ID)
      +IIf(pnumeicod > 0, ' AND numeicod = '+ inttostr(pnumeicod), '')
       ).FieldByName('CPNMN2VLR').AsFloat;
+end;
+
+procedure TFormTelaItens.ImprimirConfissaoDeDivida(pTotalPrazo:Double);
+begin
+  if (DM.SQLTerminalAtivoTERMCIMPCONFDIVIDA.Value = 'S') and (pTotalPrazo > 0) then
+  begin
+    try
+      MemoRetornoNFE.Lines.Clear;
+      MemoRetornoNFE.Lines.Add(' ');
+      MemoRetornoNFE.Lines.Add('</ce><e>' + dm.SQLEmpresaEMPRA60NOMEFANT.Value + '</e>');
+      MemoRetornoNFE.Lines.Add(' ');
+      MemoRetornoNFE.Lines.Add('</ae></fn>Terminal: ' + dm.SQLTerminalAtivoTERMA60DESCR.Value);
+      MemoRetornoNFE.Lines.Add('Usuario : ' + dm.SQLUsuarioUSUAA60LOGIN.Value);
+      MemoRetornoNFE.Lines.Add('Impresso em ' + FormatDateTime('dd/mm/yy hh:mm', now));
+      MemoRetornoNFE.Lines.Add(' ');
+      MemoRetornoNFE.Lines.Add('</ce><e>CONFISSAO DE DIVIDA</e>');
+      MemoRetornoNFE.Lines.Add(' ');
+      MemoRetornoNFE.Lines.Add('</ae></fn>NFCe Nro: ' + inttostr(NumNFe));
+      MemoRetornoNFE.Lines.Add(' ');
+      MemoRetornoNFE.Lines.Add('</ae></fn>DECLARO PARA OS DEVIDOS FINS QUE RECEBI A(S)');
+      MemoRetornoNFE.Lines.Add('</ae></fn>MERCADORIA(S) CONSTANTE(S)  NO  CUPOM FISCAL');
+      MemoRetornoNFE.Lines.Add('</ae></fn>VINCULADO A ESTE.   CONFESSO-ME DEVEDOR(A) E');
+      MemoRetornoNFE.Lines.Add('</ae></fn>AUTORIZO  A  EMISSAO DE COBRANCA  DECORRENTE');
+      MemoRetornoNFE.Lines.Add('</ae></fn>DA PRESENTE COMPRA DE R$ ' + FormatFloat('##0.00', pTotalPrazo));
+      MemoRetornoNFE.Lines.Add(' ');
+      MemoRetornoNFE.Lines.Add(' ');
+      MemoRetornoNFE.Lines.Add('</ae></fn>Ass.________________________________________');
+      MemoRetornoNFE.Lines.Add(' ');
+      MemoRetornoNFE.Lines.Add(' ');
+      MemoRetornoNFE.Lines.Add(' ');
+      MemoRetornoNFE.Lines.Add(' ');
+      MemoRetornoNFE.Lines.Add('</corte_parcial>');
+      dm.ACBrPosPrinter.Device.Desativar;
+      dm.ACBrPosPrinter.Device.Ativar;
+      dm.ACBrPosPrinter.Imprimir(FormTelaItens.MemoRetornoNFE.Lines.Text);
+    except
+      Application.ProcessMessages;
+    end;
+    MemoRetornoNFE.Lines.Clear;
+    dm.ACBrPosPrinter.Device.Desativar;
+  end;
 end;
 
 end.

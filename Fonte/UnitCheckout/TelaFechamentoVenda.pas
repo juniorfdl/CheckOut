@@ -2188,6 +2188,10 @@ begin
                   Informa('Problemas ao imprimir o item no ECF !') ;
                   exit ;
                 end ;
+
+               if (ECFAtual = 'ECF') then
+                 dmECF.EfetuaPagamento(NumerarioPrazo,ValorTotalVenda.Value);
+
               //EMITIR FECHAMENTO CUPOM FISCAL
               if (LblValorDescontoAcrescimo.Caption = 'DESCONTO') or
                  ((VlrBonusTroca > 0) or (VlrRetConfig_SldCad > 0)) then
@@ -2722,6 +2726,9 @@ begin
                 if (LblValorDescontoAcrescimo.Caption = 'DESCONTO') or
                    ((VlrBonusTroca > 0) or (VlrRetConfig_SldCad > 0)) then
                   begin
+                    if (ECFAtual = 'ECF')and(NumerarioPrazo > 0) then
+                      dmECF.EfetuaPagamento(NumerarioPrazo,ValorTotalVenda.Value);
+
                     if not FecharCupomFiscal(ECFAtual,
                                              PortaECFAtual,
                                              Ecf_CNFV,
@@ -2861,7 +2868,7 @@ begin
                           /////////////////////////////////////
                           if (ECFAtual <> 'CORISCO CT7000 V3') and (ECFAtual <> 'SWEDAS7000') and (ECFAtual <> 'URANO_1EFC') then
                             begin
-                              if ((ECFAtual <> 'DARUMA FS345') and (ECFAtual <> 'BEMATECH MP-25 FI')and (ECFAtual <> 'ECF')) then
+                              if ((ECFAtual <> 'DARUMA FS345') and (ECFAtual <> 'BEMATECH MP-25 FI') {and (ECFAtual <> 'ECF')}) then
                                 begin
                                   if TipoPadrao <> 'CRTF' then
                                     AbrirCNFV(ECFAtual,

@@ -34,6 +34,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    EmitiuPagamento: Boolean;
     property Modelo:Integer read fModelo write fModelo;
     property ECFVirtual:Integer read fECFVirtual write fECFVirtual;
     property Porta:String read fPorta write fPorta;
@@ -94,6 +95,7 @@ begin
   AbrirPorta;
   ACBrECF1.AbreCupom();
   Result := True;
+  EmitiuPagamento:= False;
 end;
 
 function TdmECF.AbrirGaveta: Boolean;
@@ -153,6 +155,7 @@ procedure TdmECF.DataModuleCreate(Sender: TObject);
 begin
   LerINI;
   fRelatorioGerencial:= TStringList.Create;
+  EmitiuPagamento:= False;
 end;
 
 function TdmECF.EnviaComando_NAOFISCAL(Texto: String): Boolean;
@@ -180,6 +183,7 @@ begin
 //  ACBrECF1.EfetuaPagamento('1',1,'',False);
   ACBrECF1.FechaCupom();
   Result := True;
+  EmitiuPagamento:= False;
 end;
 
 function TdmECF.FecharPortaECF: Boolean;
@@ -348,6 +352,7 @@ begin
     Valor := ACBrECF1.GrandeTotal;
 
   ACBrECF1.EfetuaPagamento(IntToStr(FormaPagamento), Valor);
+  EmitiuPagamento:= True;
 end;
 
 end.
