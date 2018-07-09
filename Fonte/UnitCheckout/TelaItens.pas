@@ -325,6 +325,7 @@ type
     procedure btnF5Click(Sender: TObject);
     procedure SQLItensVendaTempAfterPost(DataSet: TDataSet);
     procedure FormDestroy(Sender: TObject);
+    procedure GridItensEnter(Sender: TObject);
 
   private
     { Private declarations }
@@ -1414,6 +1415,7 @@ end;
 procedure TFormTelaItens.EntradaDadosKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 var
   RetornoUser: TInfoRetornoUser;
+  CodigoBalanca : Boolean;
 begin
   // EntradaDados.Text := Alltrim(EntradaDados.Text);
   if Key = VK_Escape then
@@ -1613,6 +1615,17 @@ begin
     if (EstadoPDVChk = InformandoItens) or (EstadoPDVChk = InformandoItensTroca) then
     begin
       if (Enter_Vazio = 'N') and (EntradaDados.Text = '') then exit;
+
+      CodigoBalanca := False;
+      if (Length(EntradaDados.Text) = 13) and (copy(EntradaDados.Text, 1, 1) = '2') then
+        CodigoBalanca := true;
+
+      if (EntradaDados.Text <> '') and (Enter_Vazio = 'N') and (not EncontrouProduto(trim(EntradaDados.Text), SQLProduto)) and not (CodigoBalanca) then
+      begin
+         ProdutoNaoCadastrado;
+         EntradaDados.Clear;
+         exit;
+      end;
 
       if not SQLItensVendaTemp.Active then exit;
       LblInstrucoes.Caption := 'Aguarde, Procurando Produto...';
@@ -6661,6 +6674,10 @@ begin
     MemoRetornoNFE.Lines.Clear;
     dm.ACBrPosPrinter.Device.Desativar;
   end;
+
+procedure TFormTelaItens.GridItensEnter(Sender: TObject);
+begin
+  EntradaDados.SetFocus;
 end;
 
 end.

@@ -1,12 +1,12 @@
 object FormTelaConsultaContratosCliente: TFormTelaConsultaContratosCliente
-  Left = 386
+  Left = 345
   Top = 51
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Advanced Control Cash'
   ClientHeight = 585
   ClientWidth = 804
-  Color = 14731440
+  Color = 8166488
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -144,9 +144,9 @@ object FormTelaConsultaContratosCliente: TFormTelaConsultaContratosCliente
             Expanded = False
             FieldName = 'CUPODEMIS'
             Title.Alignment = taCenter
-            Title.Color = 10053171
+            Title.Color = 13158600
             Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWhite
+            Title.Font.Color = -1
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
@@ -158,9 +158,9 @@ object FormTelaConsultaContratosCliente: TFormTelaConsultaContratosCliente
             Expanded = False
             FieldName = 'CTRCINROPARC'
             Title.Alignment = taCenter
-            Title.Color = 10053171
+            Title.Color = 13158600
             Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWhite
+            Title.Font.Color = -1
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
@@ -171,9 +171,9 @@ object FormTelaConsultaContratosCliente: TFormTelaConsultaContratosCliente
             Expanded = False
             FieldName = 'CTRCDVENC'
             Title.Alignment = taCenter
-            Title.Color = 10053171
+            Title.Color = 13158600
             Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWhite
+            Title.Font.Color = -1
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
@@ -184,9 +184,9 @@ object FormTelaConsultaContratosCliente: TFormTelaConsultaContratosCliente
             Expanded = False
             FieldName = 'CTRCN2VLR'
             Title.Alignment = taRightJustify
-            Title.Color = 10053171
+            Title.Color = 13158600
             Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWhite
+            Title.Font.Color = -1
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
@@ -199,9 +199,9 @@ object FormTelaConsultaContratosCliente: TFormTelaConsultaContratosCliente
             FieldName = 'Baixar'
             ReadOnly = False
             Title.Alignment = taCenter
-            Title.Color = 10053171
+            Title.Color = 13158600
             Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWhite
+            Title.Font.Color = -1
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
@@ -212,9 +212,9 @@ object FormTelaConsultaContratosCliente: TFormTelaConsultaContratosCliente
             Expanded = False
             FieldName = 'CTRCN2VLRJURO'
             Title.Alignment = taRightJustify
-            Title.Color = 10053171
+            Title.Color = 13158600
             Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWhite
+            Title.Font.Color = -1
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
@@ -225,9 +225,9 @@ object FormTelaConsultaContratosCliente: TFormTelaConsultaContratosCliente
             Expanded = False
             FieldName = 'CTRCN2VLRMULTA'
             Title.Alignment = taRightJustify
-            Title.Color = 10053171
+            Title.Color = 13158600
             Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWhite
+            Title.Font.Color = -1
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
@@ -238,9 +238,9 @@ object FormTelaConsultaContratosCliente: TFormTelaConsultaContratosCliente
             Expanded = False
             FieldName = 'CTRCN2VLRDESC'
             Title.Alignment = taRightJustify
-            Title.Color = 10053171
+            Title.Color = 13158600
             Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWhite
+            Title.Font.Color = -1
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
@@ -250,9 +250,9 @@ object FormTelaConsultaContratosCliente: TFormTelaConsultaContratosCliente
           item
             Expanded = False
             FieldName = 'ValorOrigem'
-            Title.Color = 10053171
+            Title.Color = 13158600
             Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWhite
+            Title.Font.Color = -1
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
@@ -264,9 +264,9 @@ object FormTelaConsultaContratosCliente: TFormTelaConsultaContratosCliente
             Expanded = False
             FieldName = 'CUPOA13ID'
             Title.Alignment = taCenter
-            Title.Color = 10053171
+            Title.Color = 13158600
             Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWhite
+            Title.Font.Color = -1
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
@@ -277,9 +277,9 @@ object FormTelaConsultaContratosCliente: TFormTelaConsultaContratosCliente
             Expanded = False
             FieldName = 'CTRCA13ID'
             Title.Caption = 'ID Parcela'
-            Title.Color = 10053171
+            Title.Color = 13158600
             Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWhite
+            Title.Font.Color = -1
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
@@ -298,7 +298,7 @@ object FormTelaConsultaContratosCliente: TFormTelaConsultaContratosCliente
     object RxLabel1: TRxLabel
       Left = 131
       Top = 6
-      Width = 92
+      Width = 93
       Height = 16
       Caption = 'Valor '#224' &Quitar'
       Font.Charset = ANSI_CHARSET
@@ -312,7 +312,7 @@ object FormTelaConsultaContratosCliente: TFormTelaConsultaContratosCliente
     object RxLabel2: TRxLabel
       Left = 9
       Top = 6
-      Width = 83
+      Width = 84
       Height = 16
       Caption = 'Valor Devido'
       Font.Charset = ANSI_CHARSET
