@@ -42,7 +42,6 @@ type
     SQLTotaNumerarioVLRCREDITO: TFloatField;
     SQLTotaNumerarioVLRDEBITO: TFloatField;
     SQLTotaNumerarioSALDO: TFloatField;
-    ReportTotais: TppReport;
     PipeOperacao: TppBDEPipeline;
     PipeOperacaoppField1: TppField;
     PipeOperacaoppField2: TppField;
@@ -55,10 +54,6 @@ type
     PipeNumerarioppField3: TppField;
     PipeNumerarioppField4: TppField;
     PipeNumerarioppField5: TppField;
-    GroupBox4: TGroupBox;
-    ComboMotoboy: TRxDBLookupCombo;
-    Label2: TLabel;
-    btVendasTele: TSpeedButton;
     dsMotoboy: TDataSource;
     sqlMotoboy: TRxQuery;
     sqlMotoboyMTBYICOD: TIntegerField;
@@ -119,7 +114,43 @@ type
     SQLTotaNumerarioNUMEA5TIPO: TStringField;
     ckBobina: TCheckBox;
     rdp: TRDprint;
-    ppParameterList1: TppParameterList;
+    AdvOfficeStatusBarOfficeStyler1: TAdvOfficeStatusBarOfficeStyler;
+    ptopo: TAdvOfficeStatusBar;
+    LblNomeSistema: TRxLabel;
+    ImgDesligar: TImage;
+    Memo: TMemo;
+    SQLVendasPorVendedor: TRxQuery;
+    SQLVendasPorVendedorTOTALVENDEDOR: TFloatField;
+    SQLVendasPorVendedorVENDICOD: TIntegerField;
+    ckItensVendidos: TCheckBox;
+    dsSQLItensVendidos: TDataSource;
+    SQLItensVendidos: TRxQuery;
+    SQLItensVendidosPRODICOD: TIntegerField;
+    SQLItensVendidosCPITN3VLRUNIT: TFloatField;
+    SQLItensVendidosQTDE: TFloatField;
+    SQLItensVendidosVLRTOTALITEM: TFloatField;
+    SQLVendasCanceladas: TRxQuery;
+    SQLVendasCanceladasID: TIntegerField;
+    SQLVendasCanceladasEMPRICOD: TIntegerField;
+    SQLVendasCanceladasTERMICOD: TIntegerField;
+    SQLVendasCanceladasCUPOA13ID: TStringField;
+    SQLVendasCanceladasPRVDICOD: TIntegerField;
+    SQLVendasCanceladasMESAICOD: TIntegerField;
+    SQLVendasCanceladasCONTAICOD: TIntegerField;
+    SQLVendasCanceladasPRODICOD: TIntegerField;
+    SQLVendasCanceladasREGISTRO: TDateTimeField;
+    SQLVendasCanceladasCLIENTENOME: TStringField;
+    SQLVendasCanceladasCLIENTEFONE: TStringField;
+    SQLVendasCanceladasMOTIVO: TStringField;
+    SQLVendasCanceladasUSUAICOD: TIntegerField;
+    SQLVendasCanceladasVENDICOD: TIntegerField;
+    SQLVendasCanceladasPRODUTO: TStringField;
+    SQLVendasCanceladasTOTALITEM: TFloatField;
+    GroupBox5: TGroupBox;
+    ComboOperador: TRxDBLookupCombo;
+    SQLOperador: TRxQuery;
+    DSSQLOperador: TDataSource;
+    ReportTotais: TppReport;
     ppHeaderBand1: TppHeaderBand;
     ppLabel1: TppLabel;
     ppLabel2: TppLabel;
@@ -181,45 +212,13 @@ type
     ppLine5: TppLine;
     ppDBCalc1: TppDBCalc;
     raCodeModule2: TraCodeModule;
-    AdvOfficeStatusBarOfficeStyler1: TAdvOfficeStatusBarOfficeStyler;
-    ptopo: TAdvOfficeStatusBar;
-    LblNomeSistema: TRxLabel;
-    ImgDesligar: TImage;
-    Memo: TMemo;
-    SQLVendasPorVendedor: TRxQuery;
-    SQLVendasPorVendedorTOTALVENDEDOR: TFloatField;
-    SQLVendasPorVendedorVENDICOD: TIntegerField;
-    ckItensVendidos: TCheckBox;
-    dsSQLItensVendidos: TDataSource;
-    SQLItensVendidos: TRxQuery;
-    SQLItensVendidosPRODICOD: TIntegerField;
-    SQLItensVendidosCPITN3VLRUNIT: TFloatField;
-    SQLItensVendidosQTDE: TFloatField;
-    SQLItensVendidosVLRTOTALITEM: TFloatField;
-    SQLVendasCanceladas: TRxQuery;
-    SQLVendasCanceladasID: TIntegerField;
-    SQLVendasCanceladasEMPRICOD: TIntegerField;
-    SQLVendasCanceladasTERMICOD: TIntegerField;
-    SQLVendasCanceladasCUPOA13ID: TStringField;
-    SQLVendasCanceladasPRVDICOD: TIntegerField;
-    SQLVendasCanceladasMESAICOD: TIntegerField;
-    SQLVendasCanceladasCONTAICOD: TIntegerField;
-    SQLVendasCanceladasPRODICOD: TIntegerField;
-    SQLVendasCanceladasREGISTRO: TDateTimeField;
-    SQLVendasCanceladasCLIENTENOME: TStringField;
-    SQLVendasCanceladasCLIENTEFONE: TStringField;
-    SQLVendasCanceladasMOTIVO: TStringField;
-    SQLVendasCanceladasUSUAICOD: TIntegerField;
-    SQLVendasCanceladasVENDICOD: TIntegerField;
-    SQLVendasCanceladasPRODUTO: TStringField;
-    SQLVendasCanceladasTOTALITEM: TFloatField;
+    ppParameterList1: TppParameterList;
     procedure FormCreate(Sender: TObject);
     procedure BtnVisualizarClick(Sender: TObject);
     procedure ReportTotaisPreviewFormCreate(Sender: TObject);
     procedure ppHeaderBand1BeforePrint(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure btVendasTeleClick(Sender: TObject);
     procedure ReportTelePreviewFormCreate(Sender: TObject);
     procedure ppHeaderBand2BeforePrint(Sender: TObject);
     procedure ppDetailBand3BeforePrint(Sender: TObject);
@@ -246,6 +245,7 @@ procedure TFormPrincipalRelatorios.FormCreate(Sender: TObject);
 begin
   SQLTerminal.Open;
   sqlMotoboy.Open;
+  SQLOperador.Open;
   de.Date  := Date;
   Ate.Date := Date;
 
@@ -276,6 +276,12 @@ begin
   if ComboTerminal2.Value <> '' then
     SQLTotaNumerario.MacroByName('MTerminal').Value := SQLTotaNumerario.MacroByName('MTerminal').Value + ' or ' +
                                                        'MOVIMENTOCAIXA.TERMICOD = ' + ComboTerminal2.Value;
+  if ComboOperador.Value <> '' then
+    SQLTotaNumerario.MacroByName('MOperador').Value := 'MOVIMENTOCAIXA.USUAICOD = ' + ComboOperador.Value
+  else
+    SQLTotaNumerario.MacroByName('MOperador').Value := '0=0';
+
+
   SQLTotaNumerario.Open;
 
   {Somar todos tipos de cartoes}
@@ -307,6 +313,11 @@ begin
 
   if ComboTerminal2.Value <> '' then
     SQLTotalOperacao.MacroByName('MTerminal').Value := SQLTotalOperacao.MacroByName('MTerminal').Value + ' or MOVIMENTOCAIXA.TERMICOD = ' + ComboTerminal2.Value;
+
+  if ComboOperador.Value <> '' then
+    SQLTotalOperacao.MacroByName('MOperador').Value := 'MOVIMENTOCAIXA.USUAICOD = ' + ComboOperador.Value
+  else
+    SQLTotalOperacao.MacroByName('MOperador').Value := '0=0';
 
   SQLTotalOperacao.Open ;
 
@@ -421,6 +432,7 @@ begin
       else
         memo.Lines.Add('</ae>Periodo: ' + de.Text+' '+HoraInicial.Text+' até ' + Ate.Text+' '+HoraFinal.Text);
       memo.Lines.Add('Terminais: ' + ComboTerminal.Text + ' - ' + ComboTerminal2.Text);
+      memo.Lines.Add('Operador: ' + ComboOperador.Text);
       memo.Lines.Add(' ');
       memo.Lines.Add('</ae><n>Totais por Operacoes                   Vlr.Saldo</n>');
       SQLTotalOperacao.First;
@@ -631,104 +643,6 @@ procedure TFormPrincipalRelatorios.FormKeyDown(Sender: TObject;
 begin
   if Key = VK_RETURN then
     Perform(Wm_NextDlgCtl,0,0);
-end;
-
-procedure TFormPrincipalRelatorios.btVendasTeleClick(Sender: TObject);
-var vMotoboyNome : string;
-var vTotVenda, vTotVendaMotoboy : double;
-begin
-  SQLVendas.Close ;
-
-  SQLVendas.MacroByName('ORIGEMVENDA').Value := 'ORIGEMVENDA = "TELE"';
-  SQLVendas.MacroByName('MTerminal').Value := '0=0';
-  SQLVendas.MacroByName('MMotoboy').Value  := '0=0';
-
-  if (HoraInicial.Text = '') and (HoraFinal.Text = '') then
-    SQLVendas.MacroByName('MData').Value := 'CUPODEMIS >= "' + FormatDateTime('mm/dd/yyyy', De.Date) + '" and ' +
-                                            'CUPODEMIS <= "' + FormatDateTime('mm/dd/yyyy', Ate.Date) + '"'
-  else
-    SQLVendas.MacroByName('MData').Value := 'REGISTRO >= "' + FormatDateTime('mm/dd/yyyy ', De.Date) + HoraInicial.Text + '" and ' +
-                                            'REGISTRO <= "' + FormatDateTime('mm/dd/yyyy ', Ate.Date)+ HoraFinal.Text   + '"';
-
-
-  if ComboTerminal.Value <> '' then
-    SQLVendas.MacroByName('MTerminal').Value := 'TERMICOD = ' + ComboTerminal.Value;
-
-  if ComboTerminal2.Value <> '' then
-    SQLVendas.MacroByName('MTerminal').Value := SQLVendas.MacroByName('MTerminal').Value + ' or ' +
-                                                'TERMICOD = ' + ComboTerminal2.Value;
-
-  if ComboMotoboy.Value <> '' then
-    SQLVendas.MacroByName('MMotoboy').Value := 'MTBYICOD = ' + ComboMotoboy.Value;
-
-  SQLVendas.Open;
-
-  if not ckBobina.checked then
-    ReportTele.Print
-  else
-    begin
-      {Impressao em formato Bobina}
-      vTotVenda := 0; vTotVendaMotoboy := 0;
-      vMotoboyNome := dm.SQLLocate('MOTOBOY','MTBYICOD','MTBYA30DESCR',SQLVendasMTBYICOD.AsString);
-      memo.Lines.Clear;
-      memo.Lines.Add(' ');
-      memo.Lines.Add('</ce><e>Vendas Tele por Periodo</e>');
-      memo.Lines.Add(' ');
-      if HoraInicial.Text = '' then
-        memo.Lines.Add('<ae><fn>Periodo: ' + de.Text + ' até ' + Ate.Text)
-      else
-        memo.Lines.Add('Periodo: ' + de.Text+' '+HoraInicial.Text+' até ' + Ate.Text+' '+HoraFinal.Text);
-      memo.Lines.Add('Terminais: ' + ComboTerminal.Text + ' - ' + ComboTerminal2.Text);
-      memo.Lines.Add('Motoboy  : ' + vMotoboyNome);
-      memo.Lines.Add('------------------------------------------------');
-      memo.Lines.Add('Cliente                                         ');
-      memo.Lines.Add('                    Valor Venda       Valor Tele');
-      SQLvendas.First;
-      while not SQLvendas.eof do
-        begin
-          memo.Lines.Add(copy(SQLVendasCLIENTENOME.Value,1,30) +' - '+SQLVendasCLIENTEFONE.Value);
-          memo.Lines.Add('<ad><fn>' + FormatFloat('R$ ##0.00',SQLVendasCUPON2TOTITENS.Value) + '          ' + FormatFloat('R$ ##0.00',SQLVendasCUPON3CREDTAXA.Value) + '</fn></ad>');
-          vTotVenda := vTotVenda + SQLVendasCUPON2TOTITENS.Value;
-          vTotVendaMotoboy := vTotVendaMotoboy + SQLVendasCUPON3CREDTAXA.Value;
-          SQLVendas.next;
-        end;
-      memo.Lines.Add('<ae><fn>------------------------------------------------</fn></ae>');
-      memo.Lines.Add('<ad><fn><n>TOTAL => ' + FormatFloat('R$ ##0.00',vTotVenda) + '          ' + FormatFloat('R$ ##0.00',vTotVendaMotoboy) + '</n></fn></ad>');
-      memo.Lines.Add('<ae><fn>------------------------------------------------</fn></ae>');
-      memo.Lines.Add(' ');
-      memo.Lines.Add(' ');
-      memo.Lines.Add(' ');
-      memo.Lines.Add(' ');
-      memo.Lines.Add(' ');
-      memo.Lines.Add(' ');
-
-      if (ECFAtual = 'NFCE BEMATECH') then DM.ACBrPosPrinter.Modelo := ppEscBematech;
-      if (ECFAtual = 'NFCE DARUMA')   then DM.ACBrPosPrinter.Modelo := ppEscDaruma;
-      if (ECFAtual = 'NFCE EPSON')    then DM.ACBrPosPrinter.Modelo := ppEscPosEpson;
-      if (ECFAtual = 'NFCE ELGIN')    then DM.ACBrPosPrinter.Modelo := ppEscVox;
-
-      if dm.SQLTerminalAtivoTERMA5ECFPORTACOM.Value <> 'USB' then
-        DM.ACBrPosPrinter.Device.Porta := dm.SQLTerminalAtivoTERMA5ECFPORTACOM.Value
-      else
-        DM.ACBrPosPrinter.Device.Porta := '\\localhost\nfce' ;
-
-      DM.ACBrPosPrinter.Device.Baud  := dm.SQLTerminalAtivoECF_VELOC.Value;
-      DM.ACBrPosPrinter.Device.Ativar;
-
-      try
-        DM.ACBrPosPrinter.Imprimir(Memo.Lines.Text);
-      finally
-        DM.ACBrPosPrinter.Device.Desativar;
-      end;
-      {corta papel}
-      DM.ACBrPosPrinter.Device.Ativar;
-      try
-        DM.ACBrPosPrinter.Imprimir('</corte_total>');
-      finally
-        DM.ACBrPosPrinter.Device.Desativar;
-      end;
-
-    end;
 end;
 
 procedure TFormPrincipalRelatorios.ReportTelePreviewFormCreate(

@@ -2245,7 +2245,8 @@ begin
                   end ;
 
               //EMITIR CONFISS3ÃO DE DÍVIDA
-              if ((TipoPadrao = 'CRD') or (TipoPadrao = 'CRTF')or (ECFAtual = 'ECF') ) and (DM.SQLTerminalAtivoTERMCIMPCONFDIVIDA.Value = 'S') then
+              if ((TipoPadrao = 'CRD') or (TipoPadrao = 'CRTF') or ((ECFAtual = 'ECF') and (TipoPadrao = 'CRD'))) and
+                  (DM.SQLTerminalAtivoTERMCIMPCONFDIVIDA.Value = 'S') then
                 begin
                   ImprimeConfDivida := True;
                   If DM.SQLTerminalAtivoTERMCECFIMPRCONFDIVPERGUNTA.Value = 'S' then
@@ -2722,13 +2723,12 @@ begin
               //EMITIR FECHAMENTO CUPOM FISCAL
               FechouCupomFiscal   := False;
               EnviouNumerariosECF := False;
+             if (ECFAtual = 'ECF')and(NumerarioPrazo > 0) then
+                 dmECF.EfetuaPagamento(NumerarioPrazo,ValorTotalVenda.Value);
               repeat
                 if (LblValorDescontoAcrescimo.Caption = 'DESCONTO') or
                    ((VlrBonusTroca > 0) or (VlrRetConfig_SldCad > 0)) then
                   begin
-                    if (ECFAtual = 'ECF')and(NumerarioPrazo > 0) then
-                      dmECF.EfetuaPagamento(NumerarioPrazo,ValorTotalVenda.Value);
-
                     if not FecharCupomFiscal(ECFAtual,
                                              PortaECFAtual,
                                              Ecf_CNFV,
@@ -2824,7 +2824,8 @@ begin
                  end;
 
               //EMITIR CONFISSAO DE DÍVIDA PARA CUPOM FISCAL
-              if ((TipoPadrao = 'CRD') or (TipoPadrao = 'CRTF') or (TipoPadrao = 'CHQP')or (ECFAtual = 'ECF') ) and (DM.SQLTerminalAtivoTERMCIMPCONFDIVIDA.Value = 'S') then
+              if ((TipoPadrao = 'CRD') or (TipoPadrao = 'CRTF') or (TipoPadrao = 'CHQP') or ((ECFAtual = 'ECF') and (TipoPadrao = 'CRD'))) and
+                  (DM.SQLTerminalAtivoTERMCIMPCONFDIVIDA.Value = 'S') then
                 begin
                   ImprimeConfDivida := True;
                   If DM.SQLTerminalAtivoTERMCECFIMPRCONFDIVPERGUNTA.Value = 'S' then

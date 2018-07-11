@@ -788,7 +788,7 @@ begin
         end;
     end;
   ValorTotal := 0;
-  if (SQLOperacaoCaixaOPCXA5SIGLA.AsString = 'FECHA') then
+  if (SQLOperacaoCaixaOPCXA5SIGLA.AsString = 'FECHA') AND (ECFAtual <> 'ECF') then
   begin
     if Pergunta('SIM','Imprimir Fechamento?') then
     begin

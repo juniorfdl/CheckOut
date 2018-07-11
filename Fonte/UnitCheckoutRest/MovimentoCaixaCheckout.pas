@@ -487,12 +487,12 @@ begin
       begin
         if DM.SQLTerminalAtivoTERMA60IMPPEDIDO.AsString <> '' then
           begin
-            if Pergunta('SIM', 'DESEJA IMPRIMIR COMPROVANTE ?') then
-              begin
-                ReportAutentic.Print;
-                if Pergunta('SIM', 'DESEJA IMPRIMIR SEGUNDA VIA DO COMPROVANTE ?') then
-                  ReportAutentic.Print;
-              end;
+//            if Pergunta('SIM', 'DESEJA IMPRIMIR COMPROVANTE ?') then
+//              begin
+//                ReportAutentic.Print;
+//                if Pergunta('SIM', 'DESEJA IMPRIMIR SEGUNDA VIA DO COMPROVANTE ?') then
+//                  ReportAutentic.Print;
+//              end;
           end;
         // Para Daruma DR700
         if (ImpNaoFiscalAtual <> '') then

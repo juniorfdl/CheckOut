@@ -1,9 +1,9 @@
 object FormPrincipal: TFormPrincipal
-  Left = 367
-  Top = 240
+  Left = 433
+  Top = 248
   Width = 507
   Height = 87
-  Caption = 'Impressao PreVenda'
+  Caption = 'm e'
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -571,29 +571,5 @@ object FormPrincipal: TFormPrincipal
     ControlePorta = True
     Left = 401
     Top = 13
-  end
-  object Connection: TSQLConnection
-    ConnectionName = 'IBConnection'
-    DriverName = 'Interbase'
-    GetDriverFunc = 'getSQLDriverINTERBASE'
-    LibraryName = 'dbexpint.dll'
-    LoginPrompt = False
-    Params.Strings = (
-      'DriverName=Interbase'
-      'Database=database.gdb'
-      'RoleName=RoleName'
-      'User_Name=sysdba'
-      'Password=masterkey'
-      'ServerCharSet='
-      'SQLDialect=1'
-      'ErrorResourceFile='
-      'LocaleCode=0000'
-      'BlobSize=-1'
-      'CommitRetain=False'
-      'WaitOnLocks=True'
-      'Interbase TransIsolation=ReadCommited'
-      'Trim Char=False')
-    VendorLib = 'gds32.dll'
-    Left = 240
   end
 end
