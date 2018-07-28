@@ -806,12 +806,16 @@ begin
     dm.ACBrNFe.Configuracoes.Certificados.Senha       := SQLLocate('EMPRESA','EMPRICOD','EMPRA35CERTIFSENHA',SQLTemplateEMPRICOD.AsString);
   {$ENDIF}
 
+  if dm.sqlEmpresa.FieldByName('VERSAO').AsString = '4' then
+    dm.ACBrNFe.Configuracoes.Geral.VersaoDF := ve400
+  else
+    dm.ACBrNFe.Configuracoes.Geral.VersaoDF := ve310;
+
   dm.ACBrNFe.Configuracoes.Geral.IdCSC := SQLLocate('EMPRESA','EMPRICOD','idTOKEN',SQLTemplateEMPRICOD.AsString);
   dm.ACBrNFe.Configuracoes.Geral.CSC   := SQLLocate('EMPRESA','EMPRICOD','TOKEN',SQLTemplateEMPRICOD.AsString);
 
   dm.ACBrNFe.DANFE.ViaConsumidor := True;
   dm.ACBrNFe.DANFE.ImprimirItens := True;
-
 
   nfce_tentativa := 0 ;
   if sqltemplatestnfe.Value = '100' then
