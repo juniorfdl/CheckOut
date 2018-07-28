@@ -5,6 +5,7 @@ inherited DM: TDM
   Height = 744
   Width = 1382
   inherited DB: TDatabase
+    Connected = False
     AfterConnect = DBAfterConnect
     Left = 32
     Top = 8

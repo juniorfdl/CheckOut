@@ -1,8 +1,9 @@
 object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
-  Left = 403
-  Top = 78
+  Left = 317
+  Top = 107
   BorderIcons = []
   BorderStyle = bsSingle
+  Caption = ' '
   ClientHeight = 583
   ClientWidth = 785
   Color = 5278518
@@ -67,7 +68,7 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     Left = 0
     Top = 33
     Width = 785
-    Height = 28
+    Height = 23
     Align = alTop
     Alignment = taCenter
     Caption = 'Parcela(s) '#224' receber'
@@ -1056,6 +1057,12 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       FieldName = 'CTRCN2TOTCORRECAO'
       Origin = 'DB.PARCELASRECEBERTEMP.CTRCN2TOTCORRECAO'
     end
+    object SQLParcelasReceberTempBAIXAR_PARCELA: TStringField
+      FieldName = 'BAIXAR_PARCELA'
+      Origin = 'DB.PARCELASRECEBERTEMP.BAIXAR_PARCELA'
+      FixedChar = True
+      Size = 1
+    end
   end
   object DSSQLParcelasReceberTemp: TDataSource
     DataSet = SQLParcelasReceberTemp
@@ -1239,9 +1246,7 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     DataSource = DSSQLCupom
     SQL.Strings = (
       'select '
-      
-        '  (CTRCN2VLR + (select valor from SP_BUSCAR_MOV_CAIXA(CONTASRECE' +
-        'BER.CUPOA13ID))) AS CTRCN2VLR, CONTASRECEBER.*'
+      '  * '
       'from '
       '  CONTASRECEBER'
       'where '
@@ -1249,7 +1254,7 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       'and'
       ' (CTRCA5TIPOPADRAO not in ('#39'CRT'#39','#39'CHQ'#39','#39'CHQP'#39','#39'CHQV'#39'))'
       'order by '
-      '  CTRCINROPARC')
+      '  CTRCDVENC')
     Macros = <
       item
         DataType = ftString
@@ -1746,7 +1751,7 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     PassSetting = psTwoPass
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'Letter'
+    PrinterSetup.PaperName = 'Custom'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.mmMarginBottom = 6350
     PrinterSetup.mmMarginLeft = 0
@@ -1754,7 +1759,7 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 0
     PrinterSetup.mmPaperWidth = 0
-    PrinterSetup.PaperSize = 119
+    PrinterSetup.PaperSize = 256
     Units = utMillimeters
     AllowPrintToFile = True
     BeforePrint = ReportAutenticBeforePrint
@@ -2319,155 +2324,6 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     UserName = 'DBPipeParc'
     Left = 92
     Top = 63
-    object DBPipeParcppField1: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'TERMICOD'
-      FieldName = 'TERMICOD'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 0
-    end
-    object DBPipeParcppField2: TppField
-      FieldAlias = 'A13CUPOID'
-      FieldName = 'A13CUPOID'
-      FieldLength = 13
-      DisplayWidth = 13
-      Position = 1
-    end
-    object DBPipeParcppField3: TppField
-      FieldAlias = 'A13NRODOC'
-      FieldName = 'A13NRODOC'
-      FieldLength = 13
-      DisplayWidth = 13
-      Position = 2
-    end
-    object DBPipeParcppField4: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'IPOSICAO'
-      FieldName = 'IPOSICAO'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 3
-    end
-    object DBPipeParcppField5: TppField
-      FieldAlias = 'CLIEA13ID'
-      FieldName = 'CLIEA13ID'
-      FieldLength = 13
-      DisplayWidth = 13
-      Position = 4
-    end
-    object DBPipeParcppField6: TppField
-      FieldAlias = 'CTRCA13ID'
-      FieldName = 'CTRCA13ID'
-      FieldLength = 13
-      DisplayWidth = 13
-      Position = 5
-    end
-    object DBPipeParcppField7: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'INROPARC'
-      FieldName = 'INROPARC'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 6
-    end
-    object DBPipeParcppField8: TppField
-      FieldAlias = 'DVENC'
-      FieldName = 'DVENC'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 7
-    end
-    object DBPipeParcppField9: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'N2VLRVENC'
-      FieldName = 'N2VLRVENC'
-      FieldLength = 3
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 8
-    end
-    object DBPipeParcppField10: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'N2VLRJURO'
-      FieldName = 'N2VLRJURO'
-      FieldLength = 3
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 9
-    end
-    object DBPipeParcppField11: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'N2VLRMULTA'
-      FieldName = 'N2VLRMULTA'
-      FieldLength = 3
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 10
-    end
-    object DBPipeParcppField12: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'N2VLRDESC'
-      FieldName = 'N2VLRDESC'
-      FieldLength = 3
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 11
-    end
-    object DBPipeParcppField13: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'N2VLRTXCOBR'
-      FieldName = 'N2VLRTXCOBR'
-      FieldLength = 3
-      DataType = dtDouble
-      DisplayWidth = 16
-      Position = 12
-    end
-    object DBPipeParcppField14: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'N2VLRPAGAR'
-      FieldName = 'N2VLRPAGAR'
-      FieldLength = 3
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 13
-    end
-    object DBPipeParcppField15: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'INRODIASATRAS'
-      FieldName = 'INRODIASATRAS'
-      FieldLength = 4
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 14
-    end
-    object DBPipeParcppField16: TppField
-      FieldAlias = 'Doc_Parc_CalcField'
-      FieldName = 'Doc_Parc_CalcField'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 15
-    end
-    object DBPipeParcppField17: TppField
-      FieldAlias = 'NOMECLIENTE'
-      FieldName = 'NOMECLIENTE'
-      FieldLength = 60
-      DisplayWidth = 60
-      Position = 16
-    end
-    object DBPipeParcppField18: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'N2VLRAMORT'
-      FieldName = 'N2VLRAMORT'
-      FieldLength = 3
-      DataType = dtDouble
-      DisplayWidth = 16
-      Position = 17
-    end
   end
   object SQLHistorico: TRxQuery
     DatabaseName = 'DB'
@@ -2544,7 +2400,7 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     PrinterSetup.BinName = 'Default'
     PrinterSetup.Copies = 2
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'Letter'
+    PrinterSetup.PaperName = 'Custom'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.mmMarginBottom = 6350
     PrinterSetup.mmMarginLeft = 0
@@ -2552,7 +2408,7 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 0
     PrinterSetup.mmPaperWidth = 0
-    PrinterSetup.PaperSize = 119
+    PrinterSetup.PaperSize = 256
     Units = utMillimeters
     AllowPrintToFile = True
     BeforePrint = ReportAutenticBeforePrint
@@ -3126,5 +2982,376 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       end>
     Left = 176
     Top = 35
+  end
+  object SQLRenegociacao: TRxQuery
+    DatabaseName = 'DB'
+    RequestLive = True
+    SQL.Strings = (
+      'select '
+      '  * '
+      'from '
+      '  CONTASRECEBER'
+      'where '
+      '  (%MFiltro)'
+      'order by '
+      '  CTRCINROPARC')
+    UpdateObject = UdpateRenegociacao
+    Macros = <
+      item
+        DataType = ftString
+        Name = 'MFiltro'
+        ParamType = ptInput
+        Value = '0=0'
+      end>
+    Left = 204
+    Top = 35
+    object SQLRenegociacaoCTRCA13ID: TStringField
+      FieldName = 'CTRCA13ID'
+      Origin = 'DB.CONTASRECEBER.CTRCA13ID'
+      FixedChar = True
+      Size = 13
+    end
+    object SQLRenegociacaoEMPRICOD: TIntegerField
+      FieldName = 'EMPRICOD'
+      Origin = 'DB.CONTASRECEBER.EMPRICOD'
+    end
+    object SQLRenegociacaoTERMICOD: TIntegerField
+      FieldName = 'TERMICOD'
+      Origin = 'DB.CONTASRECEBER.TERMICOD'
+    end
+    object SQLRenegociacaoCTRCICOD: TIntegerField
+      FieldName = 'CTRCICOD'
+      Origin = 'DB.CONTASRECEBER.CTRCICOD'
+    end
+    object SQLRenegociacaoCLIEA13ID: TStringField
+      FieldName = 'CLIEA13ID'
+      Origin = 'DB.CONTASRECEBER.CLIEA13ID'
+      FixedChar = True
+      Size = 13
+    end
+    object SQLRenegociacaoCTRCCSTATUS: TStringField
+      FieldName = 'CTRCCSTATUS'
+      Origin = 'DB.CONTASRECEBER.CTRCCSTATUS'
+      FixedChar = True
+      Size = 1
+    end
+    object SQLRenegociacaoCTRCINROPARC: TIntegerField
+      FieldName = 'CTRCINROPARC'
+      Origin = 'DB.CONTASRECEBER.CTRCINROPARC'
+    end
+    object SQLRenegociacaoCTRCDVENC: TDateTimeField
+      FieldName = 'CTRCDVENC'
+      Origin = 'DB.CONTASRECEBER.CTRCDVENC'
+    end
+    object SQLRenegociacaoCTRCN2VLR: TFloatField
+      FieldName = 'CTRCN2VLR'
+      Origin = 'DB.CONTASRECEBER.CTRCN2VLR'
+    end
+    object SQLRenegociacaoCTRCN2DESCFIN: TFloatField
+      FieldName = 'CTRCN2DESCFIN'
+      Origin = 'DB.CONTASRECEBER.CTRCN2DESCFIN'
+    end
+    object SQLRenegociacaoNUMEICOD: TIntegerField
+      FieldName = 'NUMEICOD'
+      Origin = 'DB.CONTASRECEBER.NUMEICOD'
+    end
+    object SQLRenegociacaoPORTICOD: TIntegerField
+      FieldName = 'PORTICOD'
+      Origin = 'DB.CONTASRECEBER.PORTICOD'
+    end
+    object SQLRenegociacaoCTRCN2TXJURO: TFloatField
+      FieldName = 'CTRCN2TXJURO'
+      Origin = 'DB.CONTASRECEBER.CTRCN2TXJURO'
+    end
+    object SQLRenegociacaoCTRCN2TXMULTA: TFloatField
+      FieldName = 'CTRCN2TXMULTA'
+      Origin = 'DB.CONTASRECEBER.CTRCN2TXMULTA'
+    end
+    object SQLRenegociacaoCTRCA5TIPOPADRAO: TStringField
+      FieldName = 'CTRCA5TIPOPADRAO'
+      Origin = 'DB.CONTASRECEBER.CTRCA5TIPOPADRAO'
+      FixedChar = True
+      Size = 5
+    end
+    object SQLRenegociacaoCTRCDULTREC: TDateTimeField
+      FieldName = 'CTRCDULTREC'
+      Origin = 'DB.CONTASRECEBER.CTRCDULTREC'
+    end
+    object SQLRenegociacaoCTRCN2TOTREC: TFloatField
+      FieldName = 'CTRCN2TOTREC'
+      Origin = 'DB.CONTASRECEBER.CTRCN2TOTREC'
+    end
+    object SQLRenegociacaoCTRCN2TOTJUROREC: TFloatField
+      FieldName = 'CTRCN2TOTJUROREC'
+      Origin = 'DB.CONTASRECEBER.CTRCN2TOTJUROREC'
+    end
+    object SQLRenegociacaoCTRCN2TOTMULTAREC: TFloatField
+      FieldName = 'CTRCN2TOTMULTAREC'
+      Origin = 'DB.CONTASRECEBER.CTRCN2TOTMULTAREC'
+    end
+    object SQLRenegociacaoCTRCN2TOTDESCREC: TFloatField
+      FieldName = 'CTRCN2TOTDESCREC'
+      Origin = 'DB.CONTASRECEBER.CTRCN2TOTDESCREC'
+    end
+    object SQLRenegociacaoCTRCN2TOTMULTACOBR: TFloatField
+      FieldName = 'CTRCN2TOTMULTACOBR'
+      Origin = 'DB.CONTASRECEBER.CTRCN2TOTMULTACOBR'
+    end
+    object SQLRenegociacaoEMPRICODULTREC: TIntegerField
+      FieldName = 'EMPRICODULTREC'
+      Origin = 'DB.CONTASRECEBER.EMPRICODULTREC'
+    end
+    object SQLRenegociacaoCUPOA13ID: TStringField
+      FieldName = 'CUPOA13ID'
+      Origin = 'DB.CONTASRECEBER.CUPOA13ID'
+      FixedChar = True
+      Size = 13
+    end
+    object SQLRenegociacaoTPDCICOD: TIntegerField
+      FieldName = 'TPDCICOD'
+      Origin = 'DB.CONTASRECEBER.TPDCICOD'
+    end
+    object SQLRenegociacaoPLCTA15COD: TStringField
+      FieldName = 'PLCTA15COD'
+      Origin = 'DB.CONTASRECEBER.PLCTA15COD'
+      FixedChar = True
+      Size = 15
+    end
+    object SQLRenegociacaoCTRCA30NRODUPLICBANCO: TStringField
+      FieldName = 'CTRCA30NRODUPLICBANCO'
+      Origin = 'DB.CONTASRECEBER.CTRCA30NRODUPLICBANCO'
+      FixedChar = True
+      Size = 30
+    end
+    object SQLRenegociacaoNOFIA13ID: TStringField
+      FieldName = 'NOFIA13ID'
+      Origin = 'DB.CONTASRECEBER.NOFIA13ID'
+      FixedChar = True
+      Size = 13
+    end
+    object SQLRenegociacaoCTRCDEMIS: TDateTimeField
+      FieldName = 'CTRCDEMIS'
+      Origin = 'DB.CONTASRECEBER.CTRCDEMIS'
+    end
+    object SQLRenegociacaoPENDENTE: TStringField
+      FieldName = 'PENDENTE'
+      Origin = 'DB.CONTASRECEBER.PENDENTE'
+      FixedChar = True
+      Size = 1
+    end
+    object SQLRenegociacaoREGISTRO: TDateTimeField
+      FieldName = 'REGISTRO'
+      Origin = 'DB.CONTASRECEBER.REGISTRO'
+    end
+    object SQLRenegociacaoCTRCDREABILSPC: TDateTimeField
+      FieldName = 'CTRCDREABILSPC'
+      Origin = 'DB.CONTASRECEBER.CTRCDREABILSPC'
+    end
+    object SQLRenegociacaoBANCA5CODCHQ: TStringField
+      FieldName = 'BANCA5CODCHQ'
+      Origin = 'DB.CONTASRECEBER.BANCA5CODCHQ'
+      FixedChar = True
+      Size = 5
+    end
+    object SQLRenegociacaoCTRCA10AGENCIACHQ: TStringField
+      FieldName = 'CTRCA10AGENCIACHQ'
+      Origin = 'DB.CONTASRECEBER.CTRCA10AGENCIACHQ'
+      FixedChar = True
+      Size = 10
+    end
+    object SQLRenegociacaoCTRCA15CONTACHQ: TStringField
+      FieldName = 'CTRCA15CONTACHQ'
+      Origin = 'DB.CONTASRECEBER.CTRCA15CONTACHQ'
+      FixedChar = True
+      Size = 15
+    end
+    object SQLRenegociacaoCTRCA15NROCHQ: TStringField
+      FieldName = 'CTRCA15NROCHQ'
+      Origin = 'DB.CONTASRECEBER.CTRCA15NROCHQ'
+      FixedChar = True
+      Size = 15
+    end
+    object SQLRenegociacaoCTRCA60TITULARCHQ: TStringField
+      FieldName = 'CTRCA60TITULARCHQ'
+      Origin = 'DB.CONTASRECEBER.CTRCA60TITULARCHQ'
+      FixedChar = True
+      Size = 60
+    end
+    object SQLRenegociacaoCTRCA20CGCCPFCHQ: TStringField
+      FieldName = 'CTRCA20CGCCPFCHQ'
+      Origin = 'DB.CONTASRECEBER.CTRCA20CGCCPFCHQ'
+      FixedChar = True
+    end
+    object SQLRenegociacaoCTRCDDEPOSCHQ: TDateTimeField
+      FieldName = 'CTRCDDEPOSCHQ'
+      Origin = 'DB.CONTASRECEBER.CTRCDDEPOSCHQ'
+    end
+    object SQLRenegociacaoALINICOD: TIntegerField
+      FieldName = 'ALINICOD'
+      Origin = 'DB.CONTASRECEBER.ALINICOD'
+    end
+    object SQLRenegociacaoPDVDA13ID: TStringField
+      FieldName = 'PDVDA13ID'
+      Origin = 'DB.CONTASRECEBER.PDVDA13ID'
+      FixedChar = True
+      Size = 13
+    end
+    object SQLRenegociacaoCTRCDESTORNO: TDateTimeField
+      FieldName = 'CTRCDESTORNO'
+      Origin = 'DB.CONTASRECEBER.CTRCDESTORNO'
+    end
+    object SQLRenegociacaoFRETA13ID: TStringField
+      FieldName = 'FRETA13ID'
+      Origin = 'DB.CONTASRECEBER.FRETA13ID'
+      FixedChar = True
+      Size = 13
+    end
+    object SQLRenegociacaoCTRCCTEMREGRECEBER: TStringField
+      FieldName = 'CTRCCTEMREGRECEBER'
+      Origin = 'DB.CONTASRECEBER.CTRCCTEMREGRECEBER'
+      FixedChar = True
+      Size = 1
+    end
+    object SQLRenegociacaoCOBRA13ID: TStringField
+      FieldName = 'COBRA13ID'
+      Origin = 'DB.CONTASRECEBER.COBRA13ID'
+      FixedChar = True
+      Size = 13
+    end
+    object SQLRenegociacaoCTRCDENVIOCOBRANCA: TDateTimeField
+      FieldName = 'CTRCDENVIOCOBRANCA'
+      Origin = 'DB.CONTASRECEBER.CTRCDENVIOCOBRANCA'
+    end
+    object SQLRenegociacaoCTRCA254HIST: TStringField
+      FieldName = 'CTRCA254HIST'
+      Origin = 'DB.CONTASRECEBER.CTRCA254HIST'
+      FixedChar = True
+      Size = 254
+    end
+    object SQLRenegociacaoDUPLA13ID: TStringField
+      FieldName = 'DUPLA13ID'
+      Origin = 'DB.CONTASRECEBER.DUPLA13ID'
+      FixedChar = True
+      Size = 13
+    end
+    object SQLRenegociacaoAVALA13ID: TStringField
+      FieldName = 'AVALA13ID'
+      Origin = 'DB.CONTASRECEBER.AVALA13ID'
+      FixedChar = True
+      Size = 13
+    end
+    object SQLRenegociacaoCTRCCTIPOREGISTRO: TStringField
+      FieldName = 'CTRCCTIPOREGISTRO'
+      Origin = 'DB.CONTASRECEBER.CTRCCTIPOREGISTRO'
+      FixedChar = True
+      Size = 1
+    end
+    object SQLRenegociacaoHTPDICOD: TIntegerField
+      FieldName = 'HTPDICOD'
+      Origin = 'DB.CONTASRECEBER.HTPDICOD'
+    end
+    object SQLRenegociacaoPLCTA15CODDEBITO: TStringField
+      FieldName = 'PLCTA15CODDEBITO'
+      Origin = 'DB.CONTASRECEBER.PLCTA15CODDEBITO'
+      FixedChar = True
+      Size = 15
+    end
+    object SQLRenegociacaoCONTA13ID: TStringField
+      FieldName = 'CONTA13ID'
+      Origin = 'DB.CONTASRECEBER.CONTA13ID'
+      FixedChar = True
+      Size = 13
+    end
+    object SQLRenegociacaoCTRCA13CTRCAIDCHQ: TStringField
+      FieldName = 'CTRCA13CTRCAIDCHQ'
+      Origin = 'DB.CONTASRECEBER.CTRCA13CTRCAIDCHQ'
+      Size = 13
+    end
+    object SQLRenegociacaoCTRCCEMITIDOBOLETO: TStringField
+      FieldName = 'CTRCCEMITIDOBOLETO'
+      Origin = 'DB.CONTASRECEBER.CTRCCEMITIDOBOLETO'
+      FixedChar = True
+      Size = 1
+    end
+    object SQLRenegociacaoCTRCA2MESCOMP: TStringField
+      FieldName = 'CTRCA2MESCOMP'
+      Origin = 'DB.CONTASRECEBER.CTRCA2MESCOMP'
+      FixedChar = True
+      Size = 2
+    end
+    object SQLRenegociacaoCTRCA4ANOCOMP: TStringField
+      FieldName = 'CTRCA4ANOCOMP'
+      Origin = 'DB.CONTASRECEBER.CTRCA4ANOCOMP'
+      FixedChar = True
+      Size = 4
+    end
+    object SQLRenegociacaoPRCHICOD: TIntegerField
+      FieldName = 'PRCHICOD'
+      Origin = 'DB.CONTASRECEBER.PRCHICOD'
+    end
+    object SQLRenegociacaoCTRCA15TELECHQ: TStringField
+      FieldName = 'CTRCA15TELECHQ'
+      Origin = 'DB.CONTASRECEBER.CTRCA15TELECHQ'
+      FixedChar = True
+      Size = 15
+    end
+    object SQLRenegociacaoCLDPICOD: TIntegerField
+      FieldName = 'CLDPICOD'
+      Origin = 'DB.CONTASRECEBER.CLDPICOD'
+    end
+    object SQLRenegociacaoCTRCN2TOTCORRECAO: TFloatField
+      FieldName = 'CTRCN2TOTCORRECAO'
+      Origin = 'DB.CONTASRECEBER.CTRCN2TOTCORRECAO'
+    end
+    object SQLRenegociacaoCTRCA15NOSSONUMERO: TStringField
+      FieldName = 'CTRCA15NOSSONUMERO'
+      Origin = 'DB.CONTASRECEBER.CTRCA15NOSSONUMERO'
+      Size = 15
+    end
+    object SQLRenegociacaoCTRCA5NOSSONUMERO: TStringField
+      FieldName = 'CTRCA5NOSSONUMERO'
+      Origin = 'DB.CONTASRECEBER.CTRCA5NOSSONUMERO'
+      Size = 5
+    end
+    object SQLRenegociacaoLOTEREMESSABANCO: TIntegerField
+      FieldName = 'LOTEREMESSABANCO'
+      Origin = 'DB.CONTASRECEBER.LOTEREMESSABANCO'
+    end
+    object SQLRenegociacaoAUTORIZACAO: TIntegerField
+      FieldName = 'AUTORIZACAO'
+      Origin = 'DB.CONTASRECEBER.AUTORIZACAO'
+    end
+    object SQLRenegociacaoCODIGOBARRA: TStringField
+      FieldName = 'CODIGOBARRA'
+      Origin = 'DB.CONTASRECEBER.CODIGOBARRA'
+      Size = 55
+    end
+    object SQLRenegociacaoCTRCN2VLRTAXA: TFloatField
+      FieldName = 'CTRCN2VLRTAXA'
+      Origin = 'DB.CONTASRECEBER.CTRCN2VLRTAXA'
+    end
+    object SQLRenegociacaoNSU: TStringField
+      FieldName = 'NSU'
+      Origin = 'DB.CONTASRECEBER.NSU'
+      Size = 15
+    end
+    object SQLRenegociacaoTAXA_OPERADORA: TFloatField
+      FieldName = 'TAXA_OPERADORA'
+      Origin = 'DB.CONTASRECEBER.TAXA_OPERADORA'
+    end
+    object SQLRenegociacaoVALOR_LIQUIDO: TFloatField
+      FieldName = 'VALOR_LIQUIDO'
+      Origin = 'DB.CONTASRECEBER.VALOR_LIQUIDO'
+    end
+    object SQLRenegociacaoID_CTRCA13ID: TStringField
+      FieldName = 'ID_CTRCA13ID'
+      Origin = 'DB.CONTASRECEBER.ID_CTRCA13ID'
+      FixedChar = True
+      Size = 13
+    end
+  end
+  object UdpateRenegociacao: TUpdateSQL
+    Left = 232
+    Top = 36
   end
 end

@@ -283,6 +283,7 @@ type
     slideshow: TAdvSmoothSlideShow;
     RxLabel8: TRxLabel;
     LBSaldo: TRxLabel;
+    SQLProdutoPESAGEM_AUTOMATICA: TStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure EntradaDadosKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -468,11 +469,11 @@ begin
   if (ECFAtual = 'NFCE BEMATECH') then dm.ACBrPosPrinter.Modelo := ppEscBematech;
   if (ECFAtual = 'NFCE ELGIN') then dm.ACBrPosPrinter.Modelo := ppEscVox;
   if (ECFAtual = 'NFCE DR700') then dm.ACBrPosPrinter.Modelo := ppEscDaruma;
-  if (ECFAtual = 'NFCE DR800') then
-  begin
-    dm.ACBrPosPrinter.Modelo := ppEscDaruma;
-    dm.ACBrPosPrinter.ControlePorta := False;
-  end;
+  if (ECFAtual = 'NFCE DR800') then dm.ACBrPosPrinter.Modelo := ppEscDaruma;
+//  begin
+//    dm.ACBrPosPrinter.Modelo := ppEscDaruma;
+//    dm.ACBrPosPrinter.ControlePorta := False;
+//  end;
 
   if dm.SQLTerminalAtivoTERMA5ECFPORTACOM.Value <> 'USB' then
     dm.ACBrPosPrinter.Device.Porta := dm.SQLTerminalAtivoTERMA5ECFPORTACOM.Value
@@ -1608,8 +1609,8 @@ begin
         EntradaDados.Clear;
       end;
     end;
-
-    ExecutarPessagemAutomatica;
+   if (Length(EntradaDados.Text) = 13) or ((Length(EntradaDados.Text) = 13) and (copy(EntradaDados.Text, 1, 1) = '2') and (EncontrouProduto(trim(EntradaDados.Text), SQLProduto))) then
+     ExecutarPessagemAutomatica;
 
     {* * * * INFORMADO ITENS * * * *}
     if (EstadoPDVChk = InformandoItens) or (EstadoPDVChk = InformandoItensTroca) then
@@ -6615,13 +6616,10 @@ procedure TFormTelaItens.ExecutarPessagemAutomatica;
 begin
   if (StrToIntDef(EntradaDados.Text, -1) <> -1) then
   begin
-    try
-      if ExecSql('select PRODUTO.PESAGEM_AUTOMATICA from PRODUTO where PRODUTO.PRODICOD = '
-        + EntradaDados.Text).FieldByName('PESAGEM_AUTOMATICA').AsString = 'S' then
+    if EncontrouProduto(trim(EntradaDados.Text), SQLProduto) then
+    begin
+      if PesagemAutomatica = 'S' then
         ExecutarCtrlQ;
-    except
-      on e: Exception do
-        raise Exception.Create('Executar Pessagem Automatica: ' + e.Message);
     end;
   end;
 end;

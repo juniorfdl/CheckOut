@@ -53,6 +53,7 @@ var
   EstadoFechVendaAnt,
   CodigoProduto,
   CodigoBarrasProduto,
+  PesagemAutomatica,
   ClienteAtual,
   TerminalModo, OrigemVenda,
   EmpresaPadrao,
@@ -3352,6 +3353,7 @@ var Cod : double ;
 var PrimeiroChar, SegundoChar : string;
 begin
   EncontrouProduto := false ;
+  PesagemAutomatica := '';
   PrimeiroChar := copy(Codigo,1,1);
   SegundoChar  := copy(Codigo,2,1);
   if (PrimeiroChar = 'F') and ((SegundoChar='0') or (SegundoChar='1') or (SegundoChar='2') or (SegundoChar='3') or (SegundoChar='4')
@@ -3373,6 +3375,7 @@ begin
       begin
         EncontrouProduto    := True;
         CodigoBarrasProduto := (Tabela as TQuery).FieldbyName('PRODA60CODBAR').Value;
+        PesagemAutomatica := (Tabela as TQuery).FieldbyName('PESAGEM_AUTOMATICA').Value;
         Exit;
       end
     else

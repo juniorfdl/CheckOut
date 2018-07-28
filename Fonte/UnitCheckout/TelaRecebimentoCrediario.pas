@@ -1,4 +1,4 @@
- unit TelaRecebimentoCrediario;
+unit TelaRecebimentoCrediario;
 
 interface
 
@@ -277,6 +277,79 @@ type
     SQLPesquisa: TRxQuery;
     ppLabel15: TppLabel;
     LblTROCO: TLabel;
+    SQLParcelasReceberTempBAIXAR_PARCELA: TStringField;
+    SQLRenegociacao: TRxQuery;
+    SQLRenegociacaoCTRCA13ID: TStringField;
+    SQLRenegociacaoEMPRICOD: TIntegerField;
+    SQLRenegociacaoTERMICOD: TIntegerField;
+    SQLRenegociacaoCTRCICOD: TIntegerField;
+    SQLRenegociacaoCLIEA13ID: TStringField;
+    SQLRenegociacaoCTRCCSTATUS: TStringField;
+    SQLRenegociacaoCTRCINROPARC: TIntegerField;
+    SQLRenegociacaoCTRCDVENC: TDateTimeField;
+    SQLRenegociacaoCTRCN2VLR: TFloatField;
+    SQLRenegociacaoCTRCN2DESCFIN: TFloatField;
+    SQLRenegociacaoNUMEICOD: TIntegerField;
+    SQLRenegociacaoPORTICOD: TIntegerField;
+    SQLRenegociacaoCTRCN2TXJURO: TFloatField;
+    SQLRenegociacaoCTRCN2TXMULTA: TFloatField;
+    SQLRenegociacaoCTRCA5TIPOPADRAO: TStringField;
+    SQLRenegociacaoCTRCDULTREC: TDateTimeField;
+    SQLRenegociacaoCTRCN2TOTREC: TFloatField;
+    SQLRenegociacaoCTRCN2TOTJUROREC: TFloatField;
+    SQLRenegociacaoCTRCN2TOTMULTAREC: TFloatField;
+    SQLRenegociacaoCTRCN2TOTDESCREC: TFloatField;
+    SQLRenegociacaoCTRCN2TOTMULTACOBR: TFloatField;
+    SQLRenegociacaoEMPRICODULTREC: TIntegerField;
+    SQLRenegociacaoCUPOA13ID: TStringField;
+    SQLRenegociacaoTPDCICOD: TIntegerField;
+    SQLRenegociacaoPLCTA15COD: TStringField;
+    SQLRenegociacaoCTRCA30NRODUPLICBANCO: TStringField;
+    SQLRenegociacaoNOFIA13ID: TStringField;
+    SQLRenegociacaoCTRCDEMIS: TDateTimeField;
+    SQLRenegociacaoPENDENTE: TStringField;
+    SQLRenegociacaoREGISTRO: TDateTimeField;
+    SQLRenegociacaoCTRCDREABILSPC: TDateTimeField;
+    SQLRenegociacaoBANCA5CODCHQ: TStringField;
+    SQLRenegociacaoCTRCA10AGENCIACHQ: TStringField;
+    SQLRenegociacaoCTRCA15CONTACHQ: TStringField;
+    SQLRenegociacaoCTRCA15NROCHQ: TStringField;
+    SQLRenegociacaoCTRCA60TITULARCHQ: TStringField;
+    SQLRenegociacaoCTRCA20CGCCPFCHQ: TStringField;
+    SQLRenegociacaoCTRCDDEPOSCHQ: TDateTimeField;
+    SQLRenegociacaoALINICOD: TIntegerField;
+    SQLRenegociacaoPDVDA13ID: TStringField;
+    SQLRenegociacaoCTRCDESTORNO: TDateTimeField;
+    SQLRenegociacaoFRETA13ID: TStringField;
+    SQLRenegociacaoCTRCCTEMREGRECEBER: TStringField;
+    SQLRenegociacaoCOBRA13ID: TStringField;
+    SQLRenegociacaoCTRCDENVIOCOBRANCA: TDateTimeField;
+    SQLRenegociacaoCTRCA254HIST: TStringField;
+    SQLRenegociacaoDUPLA13ID: TStringField;
+    SQLRenegociacaoAVALA13ID: TStringField;
+    SQLRenegociacaoCTRCCTIPOREGISTRO: TStringField;
+    SQLRenegociacaoHTPDICOD: TIntegerField;
+    SQLRenegociacaoPLCTA15CODDEBITO: TStringField;
+    SQLRenegociacaoCONTA13ID: TStringField;
+    SQLRenegociacaoCTRCA13CTRCAIDCHQ: TStringField;
+    SQLRenegociacaoCTRCCEMITIDOBOLETO: TStringField;
+    SQLRenegociacaoCTRCA2MESCOMP: TStringField;
+    SQLRenegociacaoCTRCA4ANOCOMP: TStringField;
+    SQLRenegociacaoPRCHICOD: TIntegerField;
+    SQLRenegociacaoCTRCA15TELECHQ: TStringField;
+    SQLRenegociacaoCLDPICOD: TIntegerField;
+    SQLRenegociacaoCTRCN2TOTCORRECAO: TFloatField;
+    SQLRenegociacaoCTRCA15NOSSONUMERO: TStringField;
+    SQLRenegociacaoCTRCA5NOSSONUMERO: TStringField;
+    SQLRenegociacaoLOTEREMESSABANCO: TIntegerField;
+    SQLRenegociacaoAUTORIZACAO: TIntegerField;
+    SQLRenegociacaoCODIGOBARRA: TStringField;
+    SQLRenegociacaoCTRCN2VLRTAXA: TFloatField;
+    SQLRenegociacaoNSU: TStringField;
+    SQLRenegociacaoTAXA_OPERADORA: TFloatField;
+    SQLRenegociacaoVALOR_LIQUIDO: TFloatField;
+    UdpateRenegociacao: TUpdateSQL;
+    SQLRenegociacaoID_CTRCA13ID: TStringField;
     procedure EntradaDadosKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure FormCreate(Sender: TObject);
@@ -310,6 +383,7 @@ type
     function AutenticaDocumentoImpressoaNaoFiscal : Boolean;
     function VerificaCartaoCredito : Boolean;
     Procedure RDPrintAutentica ;
+    Procedure GravarRenegociacao(id : String);
   public
     { Public declarations }
     NumerarioCod,
@@ -324,7 +398,8 @@ type
     RetornoCartao : TInfoRetorno;
     DadosImpressora : TInfoImpressao;
     xIniFile : TIniFile;
-    nImpressora, nPorta, nForma : String;
+    nImpressora, nPorta, nForma, NroParcela : String;
+    BaixarParcela : Boolean;
     procedure PreparaEstadoRec(Estado : string) ;
     function TotalParc : Currency ;
     Function StrTm(xStr:String; Tamanho:Integer; Preenchecom:String; Posicao:Integer):String;
@@ -332,6 +407,7 @@ type
 
 var
   FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario;
+  const Alfabeto : String = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 implementation
 
@@ -357,7 +433,7 @@ Var
   TemOBS  : boolean;
   DiasAdiant,
   ProxCodRec : integer;
-  HistCx, ObsCliente, CodNextContaRec : string;
+  HistCx, ObsCliente, CodNextContaRec, vFiltro : string;
   iniFile : TextFile;
   AutenticaTxt : String;
   TotalRecibo : array of array of string;
@@ -366,6 +442,7 @@ Var
   TotalRecbto, TotalDescto, TotalJuros: Extended;
 begin
   v_Abatimento_Original := 0;
+  vFiltro := '';
 
   if (Key = VK_Return) or (key = vk_down) then
     begin
@@ -442,7 +519,10 @@ begin
           if (not ParcelaAvulsa) and (Entra) then
             begin
               SQLContasReceber.Close;
-              SQLContasReceber.MacroByName('MFiltro').AsString := ' CUPOA13ID = "' + SQLCupomCUPOA13ID.AsString + '" and (CTRCCSTATUS = "A" or CTRCCSTATUS = "N")';
+              vFiltro := ' CUPOA13ID = "' + SQLCupomCUPOA13ID.AsString + '" and (CTRCCSTATUS = "A" or CTRCCSTATUS = "N")';
+              if NroParcela <> '' then
+                vFiltro := vFiltro + ' and CTRCA13ID = ' + QuotedStr(NroParcela);
+              SQLContasReceber.MacroByName('MFiltro').AsString := vFiltro;
               SQLContasReceber.Open;
             end;
 
@@ -783,20 +863,21 @@ begin
                                              SQLContasReceberCTRCN2TOTREC.Value );
                 SQLContasReceber.Next;
               end;
-              
+
               if TotParcRec > 0 then
                 begin
                   SQLContasReceber.First;
                   while not SQLContasReceber.EOF do
                     begin
                       SQLPesquisa.Close;
-                      SQLPesquisa.SQL.Text := 'select * from CONTASRECEBER where CTRCA13ID = ' + SQLContasReceberCTRCA13ID.AsString;
+                      SQLPesquisa.SQL.Text := 'select * from CONTASRECEBER where CTRCA13ID = ' + QuotedStr(SQLContasReceberCTRCA13ID.AsString);
                       SQLPesquisa.Open;
 
-                      if SQLContasReceberCTRCN2VLR.Value > SQLPesquisa.FieldByName('CTRCN2VLR').Value then
-                        Saldo := SQLPesquisa.FieldByName('CTRCN2VLR').Value
-                      else Saldo := SQLContasReceberCTRCN2VLR.Value - SQLContasReceberCTRCN2TOTREC.Value;
-                      
+//                      if SQLContasReceberCTRCN2VLR.Value > SQLPesquisa.FieldByName('CTRCN2VLR').Value then
+//                        Saldo := SQLPesquisa.FieldByName('CTRCN2VLR').Value
+//                      else Saldo := SQLContasReceberCTRCN2VLR.Value - SQLContasReceberCTRCN2TOTREC.Value;
+                      Saldo := SQLContasReceberCTRCN2VLR.Value - SQLContasReceberCTRCN2TOTREC.Value;
+
                       if Saldo > 0 then
                         begin
                           DM.MemCtRecParc.Append ;
@@ -899,24 +980,23 @@ begin
                         begin
                           if SQLParcelasReceberTemp.Locate('CTRCA13ID', FormTelaConsultaContratosCliente.IDParcela,[]) then
                             begin
+
                               SQLParcelasReceberTemp.Edit;
                               SQLParcelasReceberTempN2VLRAMORT.AsFloat := FormTelaConsultaContratosCliente.ValorSaldo.Value -
                                                                           ((SQLParcelasReceberTempN2VLRJURO.AsFloat     +
                                                                             SQLParcelasReceberTempN2VLRMULTA.AsFloat    +
                                                                             SQLParcelasReceberTempN2VLRTXCOBR.AsFloat)  -
                                                                             SQLParcelasReceberTempN2VLRDESC.AsFloat);
-
+                              if (FormTelaConsultaContratosCliente.ValorSaldo.Value < (SQLParcelasReceberTempN2VLRJURO.AsFloat + SQLParcelasReceberTempN2VLRMULTA.AsFloat)) then
+                                SQLParcelasReceberTempBAIXAR_PARCELA.AsString := 'S'; 
                               if SQLParcelasReceberTempN2VLRAMORT.AsFloat < 0 then
                               begin
-                                v_Abatimento_Original                    := SQLParcelasReceberTempN2VLRAMORT.AsFloat;
+//                                v_Abatimento_Original                    := SQLParcelasReceberTempN2VLRAMORT.AsFloat;
+                                v_Abatimento_Original                    := 0;
                                 SQLParcelasReceberTempN2VLRAMORT.AsFloat := FormTelaConsultaContratosCliente.ValorSaldo.Value;
                               end;
-
                               SQLParcelasReceberTemp.Post;
-
-                              if v_Abatimento_Original = 0 then
-                                TotalPagar.Value := TotalPagar.Value-(SQLParcelasReceberTempN2VLRVENC.AsFloat-SQLParcelasReceberTempN2VLRAMORT.AsFloat)
-                              else TotalPagar.Value := TotalPagar.Value-(SQLParcelasReceberTempN2VLRVENC.AsFloat-v_Abatimento_Original);
+                              TotalPagar.Value := FormTelaConsultaContratosCliente.ValorPagar.Value;
                             end;
                         end;
                     end;
@@ -1100,7 +1180,9 @@ begin
           DM.SQLTemplate.SQL.Clear ;
           DM.SQLTemplate.SQL.Add('select * from NUMERARIO') ;
           DM.SQLTemplate.SQL.Add('where') ;
+
           DM.SQLTemplate.SQL.Add('NUMEICOD = ' + EntradaDados.text) ;
+
           DM.SQLTemplate.Open ;
 
           DM.SQLTemplate.First ;
@@ -1485,7 +1567,7 @@ begin
 
 
               try
-                DataVencto := SQLLocate('CONTASRECEBER','CTRCA13ID','CTRCDEMIS',SQLParcelasReceberTempCTRCA13ID.AsString);
+                DataVencto := SQLLocate('CONTASRECEBER','CTRCA13ID','CTRCDEMIS',QuotedStr(SQLParcelasReceberTempCTRCA13ID.AsString));
               except
                 DataVencto := SQLParcelasReceberTempDVENC.AsString;
               end;
@@ -1511,12 +1593,12 @@ begin
                   SQLRecebimentoRECEDRECTO.Value     := DataBaixa ;
                   SQLRecebimentoRECEDDATAMOV.Value   := DataBaixa ;
                   SQLRecebimentoCLIEA13ID.Value      := SQLParcelasReceberTempCLIEA13ID.Value ;
-                  SQLRecebimentoRECEN2VLRRECTO.Value := SQLParcelasReceberTempN2VLRAMORT.Value ;
-                  SQLRecebimentoRECEN2VLRJURO.Value  := fCompoemValorJuros(SQLParcelasReceberTempN2VLRJURO.Value,
-                                                                           SQLParcelasReceberTempN2VLRMULTA.Value,
-                                                                           SQLParcelasReceberTempN2VLRAMORT.Value) ;
-                  SQLRecebimentoRECEN2VLRMULTA.Value := fCompoemValorMulta(SQLParcelasReceberTempN2VLRMULTA.Value,
-                                                                           SQLParcelasReceberTempN2VLRAMORT.Value) ;
+                  if SQLParcelasReceberTempBAIXAR_PARCELA.Value = 'S' then
+                    SQLRecebimentoRECEN2VLRRECTO.Value := SQLParcelasReceberTempN2VLRVENC.Value
+                  else
+                    SQLRecebimentoRECEN2VLRRECTO.Value := SQLParcelasReceberTempN2VLRAMORT.Value ;
+                  SQLRecebimentoRECEN2VLRJURO.Value  := SQLParcelasReceberTempN2VLRJURO.Value;
+                  SQLRecebimentoRECEN2VLRMULTA.Value := SQLParcelasReceberTempN2VLRMULTA.Value;
                   SQLRecebimentoRECEN2DESC.Value     := SQLParcelasReceberTempN2VLRDESC.Value ;
                   SQLRecebimentoRECEN2MULTACOBR.Value:= SQLParcelasReceberTempN2VLRTXCOBR.Value ;
                   SQLRecebimentoEMPRICODREC.Value    := StrToInt(EmpresaPadrao) ;
@@ -1547,6 +1629,8 @@ begin
                   TotalDescto := TotalDescto + SQLParcelasReceberTempN2VLRDESC.value;
                   TotalJuros  := TotalJuros  + SQLParcelasReceberTempN2VLRJURO.value;
 
+                  if SQLParcelasReceberTempBAIXAR_PARCELA.AsString = 'S' then
+                    GravarRenegociacao(SQLParcelasReceberTempCTRCA13ID.Value);
                   //ATUALIZA TOTAIS CABECALHO CONTAS RECEBER
                   AtualizaTotaisCabecalhoContasReceber(SQLParcelasReceberTempCTRCA13ID.Value) ;
                   // ATUALIZA DATA DE QUITACAO DO CUPOM
@@ -1581,9 +1665,7 @@ begin
                                                IntToStr(DM.UsuarioAtual),
                                                SQLParcelasReceberTempA13CUPOID.Value + '/' +
                                                SQLParcelasReceberTempINROPARC.AsString,
-                                               fCompoemValor(SQLParcelasReceberTempN2VLRJURO.Value,
-                                                             SQLParcelasReceberTempN2VLRMULTA.Value,
-                                                             SQLParcelasReceberTempN2VLRAMORT.Value),
+                                               SQLParcelasReceberTempN2VLRAMORT.Value,
                                                SQLParcelasReceberTempN2VLRJURO.Value,  //WMOVICAIXN2VLRJURO
                                                SQLParcelasReceberTempN2VLRMULTA.Value, //WMOVICAIXN2VLRMULTA
                                                SQLParcelasReceberTempN2VLRDESC.Value,  //WMOVICAIXN2VLRDEC
@@ -1594,11 +1676,8 @@ begin
                                                '') ;
                         end ;
                       //GRAVAR MOVIMENTO CAIXA REF. AO JURO DA PARCELA
-                      if (SQLParcelasReceberTempN2VLRJURO.Value > 0) and
-                        (fCompoemValorJuros(SQLParcelasReceberTempN2VLRJURO.Value,
-                                           SQLParcelasReceberTempN2VLRMULTA.Value,
-                                           SQLParcelasReceberTempN2VLRAMORT.Value) > 0) then
-                        begin
+                      if (SQLParcelasReceberTempN2VLRJURO.Value > 0) then
+                      begin
                           DM.SQLTemplate.Close ;
                           DM.SQLTemplate.SQL.Clear ;
                           DM.SQLTemplate.SQL.Add('select OPCXICOD from OPERACAOCAIXA') ;
@@ -1615,9 +1694,7 @@ begin
                                                  IntToStr(DM.UsuarioAtual),
                                                  SQLParcelasReceberTempA13CUPOID.Value + '/' +
                                                  SQLParcelasReceberTempINROPARC.AsString,
-                                                 fCompoemValorJuros(SQLParcelasReceberTempN2VLRJURO.Value,
-                                                                    SQLParcelasReceberTempN2VLRMULTA.Value,
-                                                                    SQLParcelasReceberTempN2VLRAMORT.Value),
+                                                 SQLParcelasReceberTempN2VLRJURO.Value,
                                                  0,//WMOVICAIXN2VLRJURO
                                                  0,//WMOVICAIXN2VLRMULTA
                                                  0,//WMOVICAIXN2VLRDEC
@@ -1626,12 +1703,10 @@ begin
                                                  SQLParcelasReceberTempNOMECLIENTE.Value,{WMVCXA255HIST}
                                                  'N',
                                                  '') ;
-                        end ;
+                      end ;
                       //GRAVAR MOVIMENTO CAIXA REF. A MULTA DA PARCELA
-                      if (SQLParcelasReceberTempN2VLRMULTA.Value > 0) and
-                        (fCompoemValorMulta(SQLParcelasReceberTempN2VLRMULTA.Value,
-                                            SQLParcelasReceberTempN2VLRAMORT.Value) > 0) then
-                        begin
+                      if (SQLParcelasReceberTempN2VLRMULTA.Value > 0) then
+                      begin
                           DM.SQLTemplate.Close ;
                           DM.SQLTemplate.SQL.Clear ;
                           DM.SQLTemplate.SQL.Add('select OPCXICOD from OPERACAOCAIXA') ;
@@ -1648,8 +1723,7 @@ begin
                                                  IntToStr(DM.UsuarioAtual),
                                                  SQLParcelasReceberTempA13CUPOID.Value + '/' +
                                                  SQLParcelasReceberTempINROPARC.AsString,
-                                                 fCompoemValorMulta(SQLParcelasReceberTempN2VLRMULTA.Value,
-                                                                    SQLParcelasReceberTempN2VLRAMORT.Value),
+                                                 SQLParcelasReceberTempN2VLRMULTA.Value,
                                                  0,//WMOVICAIXN2VLRJURO
                                                  0,//WMOVICAIXN2VLRMULTA
                                                  0,//WMOVICAIXN2VLRDEC
@@ -1658,7 +1732,7 @@ begin
                                                  SQLParcelasReceberTempNOMECLIENTE.Value {WMVCXA255HIST},
                                                  'N',
                                                  '') ;
-                        end ;
+                      end ;
                       //GRAVAR MOVIMENTO CAIXA REF. AO DESCONTO DA PARCELA
                       if SQLParcelasReceberTempN2VLRDESC.Value > 0 then
                         begin
@@ -1728,7 +1802,7 @@ begin
                               except
                                 Application.ProcessMessages;
                               end;
-                              if Pergunta('SIM','Imprimir 2 Via Recibo!') then
+                              if Pergunta('SIM','Imprimir 2 Via Recibo da baixa nº: ' + IntToStr(SQLParcelasReceberTempIPOSICAO.Value)) then
                                 begin
                                   try
                                     dm.ACBrPosPrinter.Device.Desativar;
@@ -1760,7 +1834,7 @@ begin
                                           + ' M' + FormatFloat('#0.00',SQLParcelasReceberTempN2VLRMULTA.Value)
                                           + ' J' + FormatFloat('#0.00',SQLParcelasReceberTempN2VLRJURO.Value));    //NumerarioCod
 
-                          if Pergunta('Nao','Deseja Reimprimir o Recibo Prestação!') then
+                         { if Pergunta('Nao','Deseja Reimprimir o Recibo Prestação!') then
                             begin
                               if copy(ECFAtual,1,4) = 'NFCE' then
                                 begin
@@ -1825,7 +1899,7 @@ begin
                                               + ' V' + FormatFloat('##0.00',SQLParcelasReceberTempN2VLRAMORT.Value)
                                               + ' M' + FormatFloat('#0.00',SQLParcelasReceberTempN2VLRMULTA.Value)
                                               + ' J' + FormatFloat('#0.00',SQLParcelasReceberTempN2VLRJURO.Value));    //NumerarioCod
-                            end;
+                            end;    }
                         end
                       else
                         begin
@@ -2419,12 +2493,17 @@ begin
   if (v_Abatimento_Original = 0) then
   begin
     if SQLParcelasReceberTempN2VLRVENC.Value > SQLParcelasReceberTempN2VLRAMORT.Value then
-      SQLParcelasReceberTempN2VLRPAGAR.Value := SQLParcelasReceberTempN2VLRVENC.Value -
-                                                (SQLParcelasReceberTempN2VLRVENC.Value - SQLParcelasReceberTempN2VLRAMORT.Value) +
-                                                SQLParcelasReceberTempN2VLRJURO.Value +
-                                                SQLParcelasReceberTempN2VLRMULTA.Value +
-                                                SQLParcelasReceberTempN2VLRTXCOBR.Value -
-                                                SQLParcelasReceberTempN2VLRDESC.Value
+    begin
+      if SQLParcelasReceberTempN2VLRAMORT.Value < (SQLParcelasReceberTempN2VLRJURO.Value + SQLParcelasReceberTempN2VLRMULTA.Value) then
+        SQLParcelasReceberTempN2VLRPAGAR.Value := SQLParcelasReceberTempN2VLRAMORT.Value
+      else
+        SQLParcelasReceberTempN2VLRPAGAR.Value := SQLParcelasReceberTempN2VLRVENC.Value -
+                                                  (SQLParcelasReceberTempN2VLRVENC.Value - SQLParcelasReceberTempN2VLRAMORT.Value) +
+                                                  SQLParcelasReceberTempN2VLRJURO.Value +
+                                                  SQLParcelasReceberTempN2VLRMULTA.Value +
+                                                  SQLParcelasReceberTempN2VLRTXCOBR.Value -
+                                                  SQLParcelasReceberTempN2VLRDESC.Value;
+    end
     else
       SQLParcelasReceberTempN2VLRPAGAR.Value := SQLParcelasReceberTempN2VLRVENC.Value +
                                                 SQLParcelasReceberTempN2VLRJURO.Value +
@@ -3120,6 +3199,65 @@ begin
     Result := (AValorPago - (AJuros + AMulta));
     Exit;
   end;
+end;
+
+procedure TFormTelaRecebimentoCrediario.GravarRenegociacao(id : string);
+var
+  i : Integer;
+  parcela : String;
+begin
+  SQLPesquisa.Close;
+  SQLPesquisa.SQL.Text := 'select * from CONTASRECEBER where CTRCA13ID = ' + QuotedStr(id);
+  SQLPesquisa.Open;
+
+  parcela := Copy(SQLPesquisa.FieldByName('CTRCA13ID').Value,1,1);
+  if parcela = '0' then
+    parcela := 'A'
+  else
+    begin
+      i := Pos(parcela,Alfabeto);
+      parcela := Copy(Alfabeto,1+1,1);
+    end;
+  SQLRenegociacao.Close;
+  SQLRenegociacao.MacroByName('MFiltro').AsString := ' 0 = 1';
+  SQLRenegociacao.Open;
+  SQLRenegociacao.Insert;
+  SQLRenegociacaoCTRCA13ID.Value := Parcela + '/' + Copy(SQLPesquisa.FieldByName('CTRCA13ID').Value,3,11);
+  SQLRenegociacaoID_CTRCA13ID.Value := SQLPesquisa.FieldByName('CTRCA13ID').Value;
+  SQLRenegociacaoEMPRICOD.Value := SQLPesquisa.FieldByName('EMPRICOD').Value;
+  SQLRenegociacaoTERMICOD.Value := SQLPesquisa.FieldByName('TERMICOD').Value;
+  SQLRenegociacaoCTRCICOD.Value := SQLPesquisa.FieldByName('CTRCICOD').Value;
+  SQLRenegociacaoCLIEA13ID.Value := SQLPesquisa.FieldByName('CLIEA13ID').Value;
+  SQLRenegociacaoCTRCCSTATUS.Value := SQLPesquisa.FieldByName('CTRCCSTATUS').Value;
+  SQLRenegociacaoCTRCINROPARC.Value := SQLPesquisa.FieldByName('CTRCINROPARC').Value;
+  SQLRenegociacaoCTRCN2TOTREC.Value := 0;
+  SQLRenegociacaoCTRCN2TOTJUROREC.Value := 0;
+  SQLRenegociacaoCTRCN2TOTMULTAREC.Value := 0;
+  SQLRenegociacaoCTRCN2TOTMULTACOBR.Value := 0;
+  SQLRenegociacaoCTRCN2DESCFIN.Value := 0;
+  SQLRenegociacaoCTRCN2TOTDESCREC.Value := 0;
+  SQLRenegociacaoCTRCDVENC.Value := Now;
+  SQLRenegociacaoCTRCN2VLR.Value := SQLParcelasReceberTempN2VLRVENC.Value + SQLParcelasReceberTempN2VLRJURO.Value +
+                                    SQLParcelasReceberTempN2VLRMULTA.Value - SQLParcelasReceberTempN2VLRAMORT.Value;
+  SQLRenegociacaoCTRCN2DESCFIN.Value := SQLPesquisa.FieldByName('CTRCN2DESCFIN').Value;
+  SQLRenegociacaoNUMEICOD.Value := SQLPesquisa.FieldByName('NUMEICOD').Value;
+  SQLRenegociacaoCTRCN2TXJURO.Value := SQLPesquisa.FieldByName('CTRCN2TXJURO').Value;
+  SQLRenegociacaoCTRCN2TXMULTA.Value := SQLPesquisa.FieldByName('CTRCN2TXMULTA').Value;
+  SQLRenegociacaoCTRCA5TIPOPADRAO.Value := SQLPesquisa.FieldByName('CTRCA5TIPOPADRAO').Value;
+  if SQLPesquisa.FieldByName('EMPRICODULTREC').Value > 0 then
+    SQLRenegociacaoEMPRICODULTREC.Value := SQLPesquisa.FieldByName('EMPRICODULTREC').Value;
+  SQLRenegociacaoCUPOA13ID.Value := SQLPesquisa.FieldByName('CUPOA13ID').Value;
+  SQLRenegociacaoPLCTA15COD.Value := SQLPesquisa.FieldByName('PLCTA15COD').Value;
+  SQLRenegociacaoCTRCA30NRODUPLICBANCO.Value := SQLPesquisa.FieldByName('CTRCA30NRODUPLICBANCO').Value;
+  SQLRenegociacaoCTRCDEMIS.Value := SQLPesquisa.FieldByName('CTRCDEMIS').Value;
+  SQLRenegociacaoPENDENTE.Value := SQLPesquisa.FieldByName('PENDENTE').Value;
+  SQLRenegociacaoREGISTRO.Value := SQLPesquisa.FieldByName('REGISTRO').Value;
+  SQLRenegociacaoCTRCCTIPOREGISTRO.Value := SQLPesquisa.FieldByName('CTRCCTIPOREGISTRO').Value;
+  SQLRenegociacaoCTRCCEMITIDOBOLETO.Value := SQLPesquisa.FieldByName('CTRCCEMITIDOBOLETO').Value;
+  SQLRenegociacaoCTRCA2MESCOMP.Value := SQLPesquisa.FieldByName('CTRCA2MESCOMP').Value;
+  SQLRenegociacaoCTRCA4ANOCOMP.Value := SQLPesquisa.FieldByName('CTRCA4ANOCOMP').Value;
+  SQLRenegociacaoCTRCA254HIST.Value := 'Renegociacao: ' + SQLPesquisa.FieldByName('CTRCA13ID').Value;
+  SQLRenegociacao.Post;
 end;
 
 end.

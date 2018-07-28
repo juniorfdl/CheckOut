@@ -3534,7 +3534,7 @@ inherited FormCadastroCupom: TFormCadastroCupom
     PrinterSetup.mmMarginTop = 0
     PrinterSetup.mmPaperHeight = 0
     PrinterSetup.mmPaperWidth = 0
-    PrinterSetup.PaperSize = 139
+    PrinterSetup.PaperSize = 256
     Units = utMillimeters
     DeviceType = 'Screen'
     EmailSettings.ReportFormat = 'PDF'
@@ -4150,7 +4150,7 @@ inherited FormCadastroCupom: TFormCadastroCupom
           PrinterSetup.mmMarginTop = 0
           PrinterSetup.mmPaperHeight = 0
           PrinterSetup.mmPaperWidth = 0
-          PrinterSetup.PaperSize = 139
+          PrinterSetup.PaperSize = 256
           Units = utMillimeters
           Version = '10.06'
           mmColumnWidth = 0
@@ -4237,7 +4237,7 @@ inherited FormCadastroCupom: TFormCadastroCupom
           PrinterSetup.mmMarginTop = 0
           PrinterSetup.mmPaperHeight = 0
           PrinterSetup.mmPaperWidth = 0
-          PrinterSetup.PaperSize = 139
+          PrinterSetup.PaperSize = 256
           Units = utMillimeters
           Version = '10.06'
           mmColumnWidth = 0
@@ -5392,7 +5392,7 @@ inherited FormCadastroCupom: TFormCadastroCupom
     PrinterSetup.mmMarginTop = 0
     PrinterSetup.mmPaperHeight = 0
     PrinterSetup.mmPaperWidth = 0
-    PrinterSetup.PaperSize = 9
+    PrinterSetup.PaperSize = 256
     Units = utMillimeters
     DeviceType = 'Screen'
     EmailSettings.ReportFormat = 'PDF'

@@ -112,6 +112,7 @@ procedure TFormPrincipal.FormCreate(Sender: TObject);
 var Inifile: TInifile;
 var hostName, dataBase, CodCliente, NroReduzido, ImpMarca, ImpCaixaPorta, ImpCaixaVeloc, MostraDisplay, Cartao, NroVias, Obs_Venda,UsaSenha : String;
 var TotDesc, TotConfissao, TotalTroca : Double;
+
 begin
   //ImprimirCodigo('LOCALHOST', 'C:\Easy2Solutions\dados\BANCO.FDB');
 
@@ -199,6 +200,7 @@ begin
     memo.Lines.Add(' Quantidade   Valor Unit   Valor Desc  Vlr.Total');
     memo.Lines.Add('------------------------------------------------');
     TblPreVendaItem.First;
+
     While not TblPreVendaItem.eof Do
       Begin
         if TblPreVendaItemTroca.value <> 'S' then
@@ -335,11 +337,8 @@ begin
 
     Application.Terminate;
   except
-    TblPreVendacab.Close;
-    TblPreVendaItem.Close;
-    TblPedidoFinanceiro.Close;
-
-    Application.Terminate;
+    on E : Exception do
+      ShowMessage('Erro ao abrir tabela temporária! ' + #13 + 'Erro: ' + #13 + e.Message);
   end;
 end;
 

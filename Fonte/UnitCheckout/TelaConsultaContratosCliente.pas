@@ -60,7 +60,7 @@ var
 implementation
 
 uses TelaFechamentoVenda, UnitLibrary, TelaRecebimentoCrediario,
-  DataModulo, TelaItens, TelaItensCrediario;
+  DataModulo, TelaItens, TelaItensCrediario, Math;
 
 {$R *.DFM}
 
@@ -252,6 +252,7 @@ begin
                 begin
                   FormTelaRecebimentoCrediario.ParcelaAvulsa := False;
                   FormTelaRecebimentoCrediario.EntradaDados.Text := DM.MemCtRecParcCUPOA13ID.AsString;
+                  FormTelaRecebimentoCrediario.NroParcela := DM.MemCtRecParcCTRCA13ID.AsString;
                 end
               else
                 begin
@@ -302,7 +303,7 @@ begin
   DM.MemCtRecParc.First;
   while not DM.MemCtRecParc.Eof do
     begin
-      ValorCalculado := Dm.MemCtRecParcCTRCN2VLR.AsFloat;
+      ValorCalculado := RoundTo(Dm.MemCtRecParcCTRCN2VLR.AsFloat, -2);
       Soma := ValorCalculado + ValorApurado;
       if ValorApurado < ValorPagar.Value then
         if Soma <= ValorPagar.Value then

@@ -81,6 +81,7 @@ type
       DescricaoCNF: String; DescricaoFPG: String; IndiceBMP: Integer ) : boolean ;
     function Suprimento(Valor: Double; DescricaoFPG: String) : boolean ;
     procedure EfetuaPagamento(FormaPagamento:Integer; Valor:Double);
+    procedure EstornarPagamento(FormaPagamento:Integer; Valor:Double);
   end;
 
 var
@@ -353,6 +354,14 @@ begin
 
   ACBrECF1.EfetuaPagamento(IntToStr(FormaPagamento), Valor);
   EmitiuPagamento:= True;
+end;
+
+procedure TdmECF.EstornarPagamento(FormaPagamento: Integer; Valor: Double);
+begin
+  AbrirPorta;
+
+  ACBrECF1.EstornaPagamento(IntToStr(FormaPagamento), IntToStr(FormaPagamento), Valor);
+  EmitiuPagamento := False;
 end;
 
 end.
