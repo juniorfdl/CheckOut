@@ -1,7 +1,7 @@
 inherited FormCadastroCupom: TFormCadastroCupom
   Left = -8
   Top = -8
-  Caption = 'Cupons'
+  Caption = 'sqlcupo'
   ClientHeight = 706
   ClientWidth = 1366
   OldCreateOrder = True
@@ -2138,7 +2138,7 @@ inherited FormCadastroCupom: TFormCadastroCupom
   end
   inherited PopupMenuImpressao: TPopupMenu
     object CupomEletronicoNFCe1: TMenuItem
-      Caption = 'Cupom Eletronico (NFCe)'
+      Caption = 'l'
       OnClick = CupomEletronicoNFCe1Click
     end
     object MnReimprimirvendaatual: TMenuItem
@@ -5384,7 +5384,7 @@ inherited FormCadastroCupom: TFormCadastroCupom
     PassSetting = psTwoPass
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Etiquetas Adesiva'
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'Custom'
     PrinterSetup.PrinterName = 'Microsoft XPS Document Writer'
     PrinterSetup.mmMarginBottom = 0
     PrinterSetup.mmMarginLeft = 0

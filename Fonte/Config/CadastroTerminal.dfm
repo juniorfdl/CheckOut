@@ -172,6 +172,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
             Top = 54
             Width = 762
             Height = 412
+            ActivePage = TabSheetDadosPrincipais
             inherited TabSheetConsulta: TTabSheet
               inherited DBGridLista: TDBGrid
                 Width = 754
@@ -1730,12 +1731,14 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 ItemHeight = 13
                 Items.Strings = (
                   '2 Casas'
-                  '3 Casas')
+                  '3 Casas'
+                  '4 Casas')
                 ParentCtl3D = False
                 TabOrder = 10
                 Values.Strings = (
                   '2'
-                  '3')
+                  '3'
+                  '4')
               end
               object BTLimpaPortaSerial: TButton
                 Left = 666

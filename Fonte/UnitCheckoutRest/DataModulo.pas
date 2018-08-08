@@ -10,7 +10,7 @@ uses
   ExtCtrls, IBDatabase, IBCustomDataSet, IBQuery, IBUpdateSQL, IdComponent,
   IdTCPConnection, IdTCPClient, IdMessageClient, IdSMTP, IdBaseComponent,
   IdMessage, DBXpress, ZConnection, SqlExpr, ZAbstractRODataset,
-  ZAbstractDataset, ZDataset, ACBrNFeDANFEClass, ACBrNFeDANFeESCPOS,
+  ZAbstractDataset, ZDataset, ACBrNFeDANFEClass, ACBrNFeDANFeESCPOS, pcnConversaoNFe,
   ACBrDFe, ACBrNFe, ACBrBase, ACBrPosPrinter, ZAbstractConnection;
 
 type
@@ -1045,6 +1045,7 @@ type
     SQLUsuarioCANCMESA: TStringField;
     SQLMesaStatusVENDICOD: TIntegerField;
     SQLMesaStatusNOMECLIENTE: TStringField;
+    SQLEmpresaVERSAO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure SQLCupomNewRecord(DataSet: TDataSet);
     procedure SQLCupomBeforePost(DataSet: TDataSet);
@@ -1183,6 +1184,11 @@ begin
       ShowMessage('Erro! O sistema precisa ser atualizado, entre em contato com o suporte!');
       Application.Terminate;
     end;
+
+  if sqlEmpresa.FieldByName('VERSAO').AsString = '4' then
+    ACBrNFe.Configuracoes.Geral.VersaoDF := ve400
+  else
+    ACBrNFe.Configuracoes.Geral.VersaoDF := ve310;
 
   FormSplash.lbDados.Caption := 'Licença de uso Válida até => '+FormatDateTime('dd/mm/yyyy',SQLConfigGeralCFGEDBLOQ.Value) ; FormSplash.lbDados.Update;
   Sleep(2000);

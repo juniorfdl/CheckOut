@@ -1,17 +1,16 @@
-
 unit CadastroCupom;
 
 interface
 
 uses
-  VarSYS, Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, CadastroTEMPLATE, DBActns, ActnList, ImgList, DB, DBTables,
-  RxQuery, Menus, StdCtrls, Mask, Grids, DBGrids, ComCtrls, ExtCtrls,
-  RXCtrls, Buttons, jpeg, ToolEdit, RXDBCtrl, DBCtrls, EDBNum, RxRichEd,
-  DBRichEd, RxDBComb, RxLookup, ppDB, ppDBPipe, ppDBBDE, ppCtrls, ppStrtch,
-  ppMemo, ppBands, ppVar, ppPrnabl, ppClass, ppCache, ppComm, ppRelatv,
-  ppProd, ppReport, ppSubRpt, Serial, AdvOfficeStatusBar, AdvPanel, AdvOfficeStatusBarStylers,
-  pcnConversao, pcnConversaoNFe ;
+  VarSYS, Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls,
+  Forms, Dialogs, CadastroTEMPLATE, DBActns, ActnList, ImgList, DB, DBTables,
+  RxQuery, Menus, StdCtrls, Mask, Grids, DBGrids, ComCtrls, ExtCtrls, RXCtrls,
+  Buttons, jpeg, ToolEdit, RXDBCtrl, DBCtrls, EDBNum, RxRichEd, DBRichEd,
+  RxDBComb, RxLookup, ppDB, ppDBPipe, ppDBBDE, ppCtrls, ppStrtch, ppMemo,
+  ppBands, ppVar, ppPrnabl, ppClass, ppCache, ppComm, ppRelatv, ppProd, ppReport,
+  ppSubRpt, Serial, AdvOfficeStatusBar, AdvPanel, AdvOfficeStatusBarStylers,
+  pcnConversao, pcnConversaoNFe;
 
 type
   TFormCadastroCupom = class(TFormCadastroTEMPLATE)
@@ -412,8 +411,7 @@ type
     procedure CancelarCupomClick(Sender: TObject);
     procedure DSTemplateDataChange(Sender: TObject; Field: TField);
     procedure DSTemplateStateChange(Sender: TObject);
-    procedure DBGridListaDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridListaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure ppTitleBand1BeforePrint(Sender: TObject);
     procedure MnReimprimirvendaatualClick(Sender: TObject);
     procedure MnEtiquetaAdesivaFabricacaoClick(Sender: TObject);
@@ -423,8 +421,8 @@ type
     procedure CorrigeProblemaCadterm603para661Click(Sender: TObject);
   private
     { Private declarations }
-    chave, PathPastaMensal, sXML : string;
-    function Montar_NFCe(idCupom : string): string;
+    chave, PathPastaMensal, sXML: string;
+    function Montar_NFCe(idCupom: string): string;
   public
     { Public declarations }
   end;
@@ -434,184 +432,175 @@ var
 
 implementation
 
-uses UnitLibrary, DataModulo, DataModuloTemplate, TelaImpressaoDadosVenda, WaitWindow;
+uses
+  UnitLibrary, DataModulo, DataModuloTemplate, TelaImpressaoDadosVenda,
+  WaitWindow;
 
 {$R *.dfm}
 
 procedure TFormCadastroCupom.FormCreate(Sender: TObject);
 begin
   inherited;
-  Tabela := 'CUPOM' ;
+  Tabela := 'CUPOM';
 end;
 
 procedure TFormCadastroCupom.SQLTemplateCalcFields(DataSet: TDataSet);
 begin
   inherited;
   if SQLTemplateCUPOCTIPOPADRAO.Value = 'VISTA' then
-    SQLTemplateTipoPadraoCalcField.Value := 'À Vista' ;
+    SQLTemplateTipoPadraoCalcField.Value := 'À Vista';
   if SQLTemplateCUPOCTIPOPADRAO.Value = 'DIN' then
-    SQLTemplateTipoPadraoCalcField.Value := 'Dinheiro' ;
+    SQLTemplateTipoPadraoCalcField.Value := 'Dinheiro';
   if SQLTemplateCUPOCTIPOPADRAO.Value = 'CHQ' then
-    SQLTemplateTipoPadraoCalcField.Value := 'Cheque' ;
+    SQLTemplateTipoPadraoCalcField.Value := 'Cheque';
   if SQLTemplateCUPOCTIPOPADRAO.Value = 'CHQV' then
-    SQLTemplateTipoPadraoCalcField.Value := 'Cheque À Vista' ;
+    SQLTemplateTipoPadraoCalcField.Value := 'Cheque À Vista';
   if SQLTemplateCUPOCTIPOPADRAO.Value = 'CHQP' then
-    SQLTemplateTipoPadraoCalcField.Value := 'Cheque À Prazo' ;
+    SQLTemplateTipoPadraoCalcField.Value := 'Cheque À Prazo';
   if SQLTemplateCUPOCTIPOPADRAO.Value = 'CRD' then
-    SQLTemplateTipoPadraoCalcField.Value := 'Crediário' ;
+    SQLTemplateTipoPadraoCalcField.Value := 'Crediário';
   if SQLTemplateCUPOCTIPOPADRAO.Value = 'CNV' then
-    SQLTemplateTipoPadraoCalcField.Value := 'Convênio' ;
+    SQLTemplateTipoPadraoCalcField.Value := 'Convênio';
   if SQLTemplateCUPOCTIPOPADRAO.Value = 'CRT' then
-    SQLTemplateTipoPadraoCalcField.Value := 'Cartão' ;
+    SQLTemplateTipoPadraoCalcField.Value := 'Cartão';
   if SQLTemplateCUPOCTIPOPADRAO.Value = 'CRTF' then
-    SQLTemplateTipoPadraoCalcField.Value := 'Cartão Fidelização' ;
+    SQLTemplateTipoPadraoCalcField.Value := 'Cartão Fidelização';
   if SQLTemplateCUPOCTIPOPADRAO.Value = 'RTC' then
-    SQLTemplateTipoPadraoCalcField.Value := 'Consignando' ;
+    SQLTemplateTipoPadraoCalcField.Value := 'Consignando';
 
   if SQLTemplateCUPOCSTATUS.Value = 'A' then
-    SQLTemplateStatusCalcField.Value := 'Ativo' ;
+    SQLTemplateStatusCalcField.Value := 'Ativo';
 
   if SQLTemplateCUPOCSTATUS.Value = 'C' then
-    SQLTemplateStatusCalcField.Value := 'Cancelado' ;
+    SQLTemplateStatusCalcField.Value := 'Cancelado';
 
   if SQLTemplateCUPOCSTATUS.Value = 'E' then
-    SQLTemplateStatusCalcField.Value := 'Encerrado' ;
+    SQLTemplateStatusCalcField.Value := 'Encerrado';
 
   if SQLTemplateCUPOCSTATUS.Value = 'N' then
-    SQLTemplateStatusCalcField.Value := 'Negociado' ;
+    SQLTemplateStatusCalcField.Value := 'Negociado';
 
+  SQLTemplateTotalGeral.Value := SQLTemplateCUPON2TOTITENS.Value + SQLTemplateCUPON3CREDTAXA.Value + SQLTemplateCUPON2ACRESC.Value - SQLTemplateCUPON2DESC.Value - SQLTemplateCUPON3BONUSTROCA.Value;
 
-  SQLTemplateTotalGeral.Value := SQLTemplateCUPON2TOTITENS.Value +
-                                 SQLTemplateCUPON3CREDTAXA.Value +
-                                 SQLTemplateCUPON2ACRESC.Value -
-                                 SQLTemplateCUPON2DESC.Value -
-                                 SQLTemplateCUPON3BONUSTROCA.Value ;
-
-  SQLTemplateTotalBruto.Value := SQLTemplateCUPON2TOTITENS.Value +
-                                 SQLTemplateCUPON3CREDTAXA.Value +
-                                 SQLTemplateCUPON2ACRESC.Value ;
+  SQLTemplateTotalBruto.Value := SQLTemplateCUPON2TOTITENS.Value + SQLTemplateCUPON3CREDTAXA.Value + SQLTemplateCUPON2ACRESC.Value;
 
   if DataSet.FieldByName('CLIEA13ID').AsVariant <> null then
-    if DM.ProcuraRegistro('CLIENTE',['CLIEA13ID'],[DataSet.FieldByName('CLIEA13ID').AsString],1) then
-      DataSet.FieldByName('ClienteLookup').AsVariant    := DM.SQLTemplate.FindField('CLIEA60RAZAOSOC').AsVariant
+    if DM.ProcuraRegistro('CLIENTE', ['CLIEA13ID'], [DataSet.FieldByName('CLIEA13ID').AsString], 1) then
+      DataSet.FieldByName('ClienteLookup').AsVariant := DM.SQLTemplate.FindField('CLIEA60RAZAOSOC').AsVariant
     else
       DataSet.FieldByName('ClienteLookup').asString := MensagemLookUp
   else
-    DataSet.FieldByName('ClienteLookup').AsVariant  := Null;
+    DataSet.FieldByName('ClienteLookup').AsVariant := Null;
 end;
 
 procedure TFormCadastroCupom.Button1Click(Sender: TObject);
 begin
   inherited;
   if TRxSpeedButton(Sender).Name = 'Button3' then
-    begin
-      PagePrincipal.ActivePage := TabSheetDadosFinanceiros ;
-      if not SQLCupomNumerario.Active then
-        SQLCupomNumerario.Open ;
-      if not SQLContasReceber.Active then
-        SQLContasReceber.Open ;
-      if not SQLRecebimento.Active then
-        SQLRecebimento.Open ;
-    end ;
+  begin
+    PagePrincipal.ActivePage := TabSheetDadosFinanceiros;
+    if not SQLCupomNumerario.Active then
+      SQLCupomNumerario.Open;
+    if not SQLContasReceber.Active then
+      SQLContasReceber.Open;
+    if not SQLRecebimento.Active then
+      SQLRecebimento.Open;
+  end;
   if TRxSpeedButton(Sender).Name = 'Button4' then
-    begin
-      PagePrincipal.ActivePage := TabSheetCheques ;
-      SQLCheques.Open ;
-    end ;
+  begin
+    PagePrincipal.ActivePage := TabSheetCheques;
+    SQLCheques.Open;
+  end;
 end;
 
 procedure TFormCadastroCupom.CancelarCupomClick(Sender: TObject);
 begin
   inherited;
   if SQLLocate('USUARIO', 'USUAICOD', 'USUACCANCVENDA', IntToStr(DM.UsuarioAtual)) <> 'S' then
-    begin
-      Informa('Você não tem permissão para cancelar esta venda!') ;
-      exit ;
-    end ;
+  begin
+    Informa('Você não tem permissão para cancelar esta venda!');
+    exit;
+  end;
 
   if SQLTemplateCUPODEMIS.Value = Date then
   begin
-    Informa('Este cupom foi emitido hoje deve ser cancelado no terminal onde foi feito.') ;
-    exit ;
-  end ;
+    Informa('Este cupom foi emitido hoje deve ser cancelado no terminal onde foi feito.');
+    exit;
+  end;
 
   if SQLTemplateCUPOCSTATUS.AsString <> 'C' then
+  begin
+    if Pergunta('NAO', 'Confirma o cancelamento do cupom ' + SQLTemplateCUPOA13ID.Value + ' ?') then
     begin
-      if Pergunta('NAO','Confirma o cancelamento do cupom ' + SQLTemplateCUPOA13ID.Value + ' ?') then
+      if CancelamentoCupom(SQLTemplateCUPOA13ID.Value, IntToStr(DM.UsuarioAtual)) then
+      begin
+        if (SQLTemplateCHAVEACESSO.AsString <> '') and (SQLTemplatePROTOCOLO.Value <> '') then
         begin
-          if CancelamentoCupom(SQLTemplateCUPOA13ID.Value, IntToStr(DM.UsuarioAtual)) then
+          dm.ACBrNFe.NotasFiscais.Clear;
+          dm.ACBrNFe.Consultar(SQLTemplateCHAVEACESSO.AsString);
+          if (dm.ACBrNFe.WebServices.Consulta.cStat = 100) then
+          begin
+            dm.ACBrNFe.EventoNFe.Evento.Clear;
+            with dm.ACBrNFe.EventoNFe.Evento.Add do
             begin
-              if (SQLTemplateCHAVEACESSO.AsString <>'') and (SQLTemplatePROTOCOLO.Value <> '') then
-                begin
-                  dm.ACBrNFe.NotasFiscais.Clear;
-                  dm.ACBrNFe.Consultar(SQLTemplateCHAVEACESSO.AsString);
-                  if (dm.ACBrNFe.WebServices.Consulta.cStat = 100) then
-                    begin
-                      dm.ACBrNFe.EventoNFe.Evento.Clear;
-                      with dm.ACBrNFe.EventoNFe.Evento.Add do
-                        begin
-                          InfEvento.chNFe      := SQLTemplateCHAVEACESSO.AsString ;
-                          InfEvento.CNPJ       := dm.SQLEmpresaEMPRA14CGC.Value;
-                          InfEvento.dhEvento   := Now;
-                          InfEvento.tpEvento   := teCancelamento;
-                          InfEvento.detEvento.xJust := 'Cancelamento por erro no preenchimento dos dados da nfe.'; // Justificativa;
-                          InfEvento.detEvento.nProt := SQLTemplatePROTOCOLO.Value;
-                        end;
+              InfEvento.chNFe := SQLTemplateCHAVEACESSO.AsString;
+              InfEvento.CNPJ := dm.SQLEmpresaEMPRA14CGC.Value;
+              InfEvento.dhEvento := Now;
+              InfEvento.tpEvento := teCancelamento;
+              InfEvento.detEvento.xJust := 'Cancelamento por erro no preenchimento dos dados da nfe.'; // Justificativa;
+              InfEvento.detEvento.nProt := SQLTemplatePROTOCOLO.Value;
+            end;
 
                       // Envia o Cancelamento
-                      dm.ACBrNFe.EnviarEvento(1);    {trunk2}
+            dm.ACBrNFe.EnviarEvento(1);    {trunk2}
 
                       // Refaz Consulta pra ver se NFCe foi Cancelado se sim
-                      dm.ACBrNFe.NotasFiscais.Clear;
-                      dm.ACBrNFe.Consultar(SQLTemplateCHAVEACESSO.AsString);
-                      if (dm.ACBrNFe.WebServices.Consulta.cStat = 101) then  {101 = Cancelamento Homologado}
-                        begin
-                          dm.SQLConsulta.Close;
-                          dm.SQLConsulta.RequestLive := False;
-                          dm.SQLConsulta.SQL.Text    := 'Update CUPOM Set STNFE='+IntToStr(dm.ACBrNFe.WebServices.consulta.cStat)+
-                                                        ' Where CUPOA13ID ="'+SQLTemplateCUPOA13ID.AsString+'"';
-                          dm.SQLConsulta.ExecSQL;
-                        end;
-                    end;
-                end;
-
-              Informa('Cupom cancelado com sucesso !');
-            end
-          else
-            Informa('Problemas ao cancelar cupom!') ;
+            dm.ACBrNFe.NotasFiscais.Clear;
+            dm.ACBrNFe.Consultar(SQLTemplateCHAVEACESSO.AsString);
+            if (dm.ACBrNFe.WebServices.Consulta.cStat = 101) then  {101 = Cancelamento Homologado}
+            begin
+              dm.SQLConsulta.Close;
+              dm.SQLConsulta.RequestLive := False;
+              dm.SQLConsulta.SQL.Text := 'Update CUPOM Set STNFE=' + IntToStr(dm.ACBrNFe.WebServices.consulta.cStat) + ' Where CUPOA13ID ="' + SQLTemplateCUPOA13ID.AsString + '"';
+              dm.SQLConsulta.ExecSQL;
+            end;
+          end;
         end;
-    end
-  else
-    begin
-      Informa('Este cupom já foi cancelado!');
-      Abort;
+
+        Informa('Cupom cancelado com sucesso !');
+      end
+      else
+        Informa('Problemas ao cancelar cupom!');
     end;
+  end
+  else
+  begin
+    Informa('Este cupom já foi cancelado!');
+    Abort;
+  end;
 end;
 
-procedure TFormCadastroCupom.DSTemplateDataChange(Sender: TObject;
-  Field: TField);
+procedure TFormCadastroCupom.DSTemplateDataChange(Sender: TObject; Field: TField);
 begin
   inherited;
   SQLCupomItem.Close;
-  SQLCupomItem.Open ;
+  SQLCupomItem.Open;
 end;
 
 procedure TFormCadastroCupom.DSTemplateStateChange(Sender: TObject);
 begin
   inherited;
-  DesabilitarBotoes(True,True,True,True,True);
+  DesabilitarBotoes(True, True, True, True, True);
 end;
 
-procedure TFormCadastroCupom.DBGridListaDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+procedure TFormCadastroCupom.DBGridListaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   inherited;
-  If (SQLCupomItemCPITN3QTDTROCA.Value > 0) Then
-    begin
-       DBGrid4.Canvas.Font.Color:=clRed;
-       DBGrid4.DefaultDrawColumnCell(Rect,DataCol,Column,State);
-    end;
+  if (SQLCupomItemCPITN3QTDTROCA.Value > 0) then
+  begin
+    DBGrid4.Canvas.Font.Color := clRed;
+    DBGrid4.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+  end;
 end;
 
 procedure TFormCadastroCupom.ppTitleBand1BeforePrint(Sender: TObject);
@@ -626,148 +615,147 @@ begin
   // CHAMAR EXEC DE IMPRESSAO PASSANDO PARAMETRO CUPOM PARA MONTAGEM SEM USAR TAB TEMPORARIA, VERTEBRALLE
   try
     if FileExists(DM.PathAplicacao + '\ImpressaoViaParametro.EXE') then
-      begin
-        WinExec(Pchar(DM.PathAplicacao + '\ImpressaoViaParametro.EXE ' + SQLTemplateCUPOA13ID.AsString),sw_Show);
-        exit;  {Caso consiga imprimir nem perde tempo carregando tab temp}
-      end;
+    begin
+      WinExec(Pchar(DM.PathAplicacao + '\ImpressaoViaParametro.EXE ' + SQLTemplateCUPOA13ID.AsString), sw_Show);
+      exit;  {Caso consiga imprimir nem perde tempo carregando tab temp}
+    end;
   except
     Application.ProcessMessages;
   end;
 
-  DM.TblTicketPreVendaCab.Close ;
+  DM.TblTicketPreVendaCab.Close;
   try
-    DM.TblTicketPreVendaCab.DeleteTable ;
+    DM.TblTicketPreVendaCab.DeleteTable;
   except
-  end ;
-  DM.TblTicketPreVendaCab.CreateTable ;
-  DM.TblTicketPreVendaCab.Open ;
+  end;
+  DM.TblTicketPreVendaCab.CreateTable;
+  DM.TblTicketPreVendaCab.Open;
 
-  DM.TblTicketPreVendaItem.Close ;
+  DM.TblTicketPreVendaItem.Close;
   try
-    DM.TblTicketPreVendaItem.DeleteTable ;
+    DM.TblTicketPreVendaItem.DeleteTable;
   except
-  end ;
-  DM.TblTicketPreVendaItem.CreateTable ;
-  DM.TblTicketPreVendaItem.Open ;
+  end;
+  DM.TblTicketPreVendaItem.CreateTable;
+  DM.TblTicketPreVendaItem.Open;
 
-  DM.TblTicketPreVendaFin.Close ;
+  DM.TblTicketPreVendaFin.Close;
   try
-    DM.TblTicketPreVendaFin.DeleteTable ;
+    DM.TblTicketPreVendaFin.DeleteTable;
   except
-  end ;
-  DM.TblTicketPreVendaFin.CreateTable ;
-  DM.TblTicketPreVendaFin.Open ;
+  end;
+  DM.TblTicketPreVendaFin.CreateTable;
+  DM.TblTicketPreVendaFin.Open;
 
   //GRAVAR CABECALHO TICKET
-  DM.TblTicketPreVendaCab.Append ;
-  DM.TblTicketPreVendaCabUsuarioVendaSTR.Value  := UsuarioAtualNome;
-  DM.TblTicketPreVendaCabDataEmissao.AsString   := SQLTemplateCUPODEMIS.AsString;
-  DM.TblTicketPreVendaCabTicketNumero.AsString  := SQLTemplateCUPOA13ID.AsString ;
-  DM.TblTicketPreVendaCabDisplayNumero.AsString := SQLTemplateDISPICOD.AsString ;
-  DM.TblTicketPreVendaCabVendedor.AsString      := SQLTemplateVendedorLookup.Value ;
-  DM.TblTicketPreVendaCabPlano.AsString         := SQLTemplatePlanoLookup.Value ;
-  DM.TblTicketPreVendaCabCliente.AsString       := SQLTemplateCLIEA13ID.Value + ' ' + SQLTemplateCLIENTENOME.Value;
-  DM.TblTicketPreVendaCabClienteDependente.AsString  := SQLTemplateCLDPICOD.AssTring ;
+  DM.TblTicketPreVendaCab.Append;
+  DM.TblTicketPreVendaCabUsuarioVendaSTR.Value := UsuarioAtualNome;
+  DM.TblTicketPreVendaCabDataEmissao.AsString := SQLTemplateCUPODEMIS.AsString;
+  DM.TblTicketPreVendaCabTicketNumero.AsString := SQLTemplateCUPOA13ID.AsString;
+  DM.TblTicketPreVendaCabDisplayNumero.AsString := SQLTemplateDISPICOD.AsString;
+  DM.TblTicketPreVendaCabVendedor.AsString := SQLTemplateVendedorLookup.Value;
+  DM.TblTicketPreVendaCabPlano.AsString := SQLTemplatePlanoLookup.Value;
+  DM.TblTicketPreVendaCabCliente.AsString := SQLTemplateCLIEA13ID.Value + ' ' + SQLTemplateCLIENTENOME.Value;
+  DM.TblTicketPreVendaCabClienteDependente.AsString := SQLTemplateCLDPICOD.AssTring;
 
-  DM.TblTicketPreVendaCabTotalNominal.Value     := SQLTemplateCUPON2TOTITENS.Value + SQLTemplateCUPON2DESCITENS.Value ;
-  DM.TblTicketPreVendaCabTaxaCrediario.Value    := 0 ;
-  DM.TblTicketPreVendaCabAcrescimo.AsString     := SQLTemplateCUPON2ACRESC.AsString ;
-  DM.TblTicketPreVendaCabDesconto.AsString      := SQLTemplateCUPON2DESC.AsString ;
-  DM.TblTicketPreVendaCabTotalGeral.Value       := SQLTemplateCUPON2TOTITENS.Value -
-                                                   SQLTemplateCUPON2DESC.Value -
-                                                   SQLTemplateCUPON3BONUSTROCA.Value;
+  DM.TblTicketPreVendaCabTotalNominal.Value := SQLTemplateCUPON2TOTITENS.Value + SQLTemplateCUPON2DESCITENS.Value;
+  DM.TblTicketPreVendaCabTaxaCrediario.Value := 0;
+  DM.TblTicketPreVendaCabAcrescimo.AsString := SQLTemplateCUPON2ACRESC.AsString;
+  DM.TblTicketPreVendaCabDesconto.AsString := SQLTemplateCUPON2DESC.AsString;
+  DM.TblTicketPreVendaCabTotalGeral.Value := SQLTemplateCUPON2TOTITENS.Value - SQLTemplateCUPON2DESC.Value - SQLTemplateCUPON3BONUSTROCA.Value;
 
-  DM.TblTicketPreVendaCabTroco.AsString         := SQLTemplateTROCO.AsString ;
-  DM.TblTicketPreVendaCabDisplayNumero.AsString := SQLTemplateDISPICOD.AsString ;
-  DM.TblTicketPreVendaCabTipoVenda.Value        := SQLTemplateORIGEMVENDA.AsString ;
-  DM.TblTicketPreVendaCabLevarCasa.value        := SQLTemplateCUPOCLEVAR.AsString ;
-  DM.TblTicketPreVendaCabMesaCodigo.AsString    := SQLTemplateMESAICOD.AsString ;
-  DM.TblTicketPreVendaCabContaCodigo.AsString   := SQLTemplateCONTAICOD.AsString ;
+  DM.TblTicketPreVendaCabTroco.AsString := SQLTemplateTROCO.AsString;
+  DM.TblTicketPreVendaCabDisplayNumero.AsString := SQLTemplateDISPICOD.AsString;
+  DM.TblTicketPreVendaCabTipoVenda.Value := SQLTemplateORIGEMVENDA.AsString;
+  DM.TblTicketPreVendaCabLevarCasa.value := SQLTemplateCUPOCLEVAR.AsString;
+  DM.TblTicketPreVendaCabMesaCodigo.AsString := SQLTemplateMESAICOD.AsString;
+  DM.TblTicketPreVendaCabContaCodigo.AsString := SQLTemplateCONTAICOD.AsString;
 
-  DM.TblTicketPreVendaCabNomeClienteVenda.AsString      := SQLTemplateCLIENTENOME.AsString ;
-  DM.TblTicketPreVendaCabDocumentoClienteVenda.AsString := SQLTemplateCLIENTECNPJ.AsString ;
-  DM.TblTicketPreVendaCabEnderecoClienteVenda.AsString  := SQLTemplateCLIENTEENDE.AsString ;
-  DM.TblTicketPreVendaCabCidadeClienteVenda.AsString    := SQLTemplateCLIENTECIDA.AsString ;
-  DM.TblTicketPreVendaCabFoneClienteVenda.AsString      := SQLTemplateCLIENTEFONE.AsString ;
-  DM.TblTicketPreVendaCabOBSImpressaoCupom.AsString     := SQLTemplateCUPOV254OBS.AsString ;
-  DM.TblTicketPreVendaCabPlacaVeiculo.AsString          := SQLTemplateCUPOA8PLACAVEIC.AsString ;
-  DM.TblTicketPreVendaCabTipoVenda.AsString             := SQLTemplateCUPOCTIPOPADRAO.AsString ;
+  DM.TblTicketPreVendaCabNomeClienteVenda.AsString := SQLTemplateCLIENTENOME.AsString;
+  DM.TblTicketPreVendaCabDocumentoClienteVenda.AsString := SQLTemplateCLIENTECNPJ.AsString;
+  DM.TblTicketPreVendaCabEnderecoClienteVenda.AsString := SQLTemplateCLIENTEENDE.AsString;
+  DM.TblTicketPreVendaCabCidadeClienteVenda.AsString := SQLTemplateCLIENTECIDA.AsString;
+  DM.TblTicketPreVendaCabFoneClienteVenda.AsString := SQLTemplateCLIENTEFONE.AsString;
+  DM.TblTicketPreVendaCabOBSImpressaoCupom.AsString := SQLTemplateCUPOV254OBS.AsString;
+  DM.TblTicketPreVendaCabPlacaVeiculo.AsString := SQLTemplateCUPOA8PLACAVEIC.AsString;
+  DM.TblTicketPreVendaCabTipoVenda.AsString := SQLTemplateCUPOCTIPOPADRAO.AsString;
 
-  DM.TblTicketPreVendaCab.Post ;
+  DM.TblTicketPreVendaCab.Post;
 
   if not SQLCupomItem.Active then
-    SQLCupomItem.Open ;
+    SQLCupomItem.Open;
 
   SQLCupomItem.First;
   while not SQLCupomItem.EOF do
   begin
     if SQLCupomItemCPITCSTATUS.Value = 'A' then
+    begin
+      DM.TblTicketPreVendaItem.Append;
+      DM.TblTicketPreVendaItemCodigo.Value := SQLCupomItemPRODICOD.Value;
+      DM.TblTicketPreVendaItemDescricao.Value := SQLCupomItemPRODA60DESCR.AsString;
+      DM.TblTicketPreVendaItemComplemento.Value := SQLCupomItemCPITTOBS.Value;
+      DM.TblTicketPreVendaItemImpCozinha.Value := SQLLocate('PRODUTO', 'PRODICOD', 'PRODCIMPCOZINHA', SQLCupomItemPRODICOD.AsString);
+      DM.TblTicketPreVendaItemImpVale.Value := SQLLocate('PRODUTO', 'PRODICOD', 'PRODCIMPVALE', SQLCupomItemPRODICOD.AsString);
+
+      if SQLCupomItemCPITN3QTD.Value > 0 then
       begin
-        DM.TblTicketPreVendaItem.Append ;
-        DM.TblTicketPreVendaItemCodigo.Value        := SQLCupomItemPRODICOD.Value ;
-        DM.TblTicketPreVendaItemDescricao.Value     := SQLCupomItemPRODA60DESCR.AsString ;
-        DM.TblTicketPreVendaItemComplemento.Value   := SQLCupomItemCPITTOBS.Value ;
-        DM.TblTicketPreVendaItemImpCozinha.Value    := SQLLocate('PRODUTO', 'PRODICOD', 'PRODCIMPCOZINHA', SQLCupomItemPRODICOD.AsString) ;
-        DM.TblTicketPreVendaItemImpVale.Value       := SQLLocate('PRODUTO', 'PRODICOD', 'PRODCIMPVALE', SQLCupomItemPRODICOD.AsString) ;
-
-        if SQLCupomItemCPITN3QTD.Value > 0 then
-          begin
-            DM.TblTicketPreVendaItemQuantidade.Value := SQLCupomItemCPITN3QTD.Value ;
-            DM.TblTicketPreVendaItemTroca.Value      := 'N';
-          end;
-        if SQLCupomItemCPITN3QTDTROCA.Value > 0 then
-          begin
-            DM.TblTicketPreVendaItemQuantidade.Value := SQLCupomItemCPITN3QTDTROCA.Value ;
-            DM.TblTicketPreVendaItemTroca.Value      := 'S';
-          end;
-
-        DM.TblTicketPreVendaItemValorUnitario.Value := SQLCupomItemCPITN3VLRUNIT.Value ;
-        DM.TblTicketPreVendaItemValorTotal.Value    := (SQLCupomItemCPITN3VLRUNIT.Value*SQLCupomItemCPITN3QTD.Value)-SQLCupomItemCPITN2DESC.Value;
-        DM.TblTicketPreVendaItemDesconto.Value      := SQLCupomItemCPITN2DESC.Value ;
-        DM.TblTicketPreVendaItem.Post ;
+        DM.TblTicketPreVendaItemQuantidade.Value := SQLCupomItemCPITN3QTD.Value;
+        DM.TblTicketPreVendaItemTroca.Value := 'N';
       end;
+      if SQLCupomItemCPITN3QTDTROCA.Value > 0 then
+      begin
+        DM.TblTicketPreVendaItemQuantidade.Value := SQLCupomItemCPITN3QTDTROCA.Value;
+        DM.TblTicketPreVendaItemTroca.Value := 'S';
+      end;
+
+      DM.TblTicketPreVendaItemValorUnitario.Value := SQLCupomItemCPITN3VLRUNIT.Value;
+      DM.TblTicketPreVendaItemValorTotal.Value := (SQLCupomItemCPITN3VLRUNIT.Value * SQLCupomItemCPITN3QTD.Value) - SQLCupomItemCPITN2DESC.Value;
+      DM.TblTicketPreVendaItemDesconto.Value := SQLCupomItemCPITN2DESC.Value;
+      DM.TblTicketPreVendaItem.Post;
+    end;
     SQLCupomItem.Next;
   end;
   SQLCupomItem.Close;
 
   // Parcelas a vista
-  if not SQLCupomNumerario.Active then SQLCupomNumerario.open;
-  SQLCupomNumerario.First ;
+  if not SQLCupomNumerario.Active then
+    SQLCupomNumerario.open;
+  SQLCupomNumerario.First;
   while not SQLCupomNumerario.EOF do
-    begin
-      DM.TblTicketPreVendaFin.Append;
-      DM.TblTicketPreVendaFinPedICod.Value         := SQLTemplateCUPOA13ID.Value;
-      DM.TblTicketPreVendaFinValor.AsVariant       := SQLCupomNumerarioCPNMN2VLR.AsVariant;
-      DM.TblTicketPreVendaFinNumerario.AsVariant   := SQLCupomNumerarioNumerarioLookup.AsVariant;
-      DM.TblTicketPreVendaFinVencimento.Value      := SQLTemplateCUPODEMIS.Value;
-      DM.TblTicketPreVendaFin.Post;
-      SQLCupomNumerario.Next ;
-    end;
+  begin
+    DM.TblTicketPreVendaFin.Append;
+    DM.TblTicketPreVendaFinPedICod.Value := SQLTemplateCUPOA13ID.Value;
+    DM.TblTicketPreVendaFinValor.AsVariant := SQLCupomNumerarioCPNMN2VLR.AsVariant;
+    DM.TblTicketPreVendaFinNumerario.AsVariant := SQLCupomNumerarioNumerarioLookup.AsVariant;
+    DM.TblTicketPreVendaFinVencimento.Value := SQLTemplateCUPODEMIS.Value;
+    DM.TblTicketPreVendaFin.Post;
+    SQLCupomNumerario.Next;
+  end;
   SQLCupomNumerario.Close;
   // Parcelas a Prazo
-  if not SQLContasReceber.Active then SQLContasReceber.open;
-  SQLContasReceber.First ;
+  if not SQLContasReceber.Active then
+    SQLContasReceber.open;
+  SQLContasReceber.First;
   while not SQLContasReceber.EOF do
-    begin
-      DM.TblTicketPreVendaFin.Append;
-      DM.TblTicketPreVendaFinPedICod.Value         := SQLTemplateCUPOA13ID.Value;
-      DM.TblTicketPreVendaFinValor.AsVariant       := SQLContasReceberCTRCN2VLR.AsVariant;
-      DM.TblTicketPreVendaFinNumerario.AsVariant   := SQLContasReceberNumerarioLookup.AsVariant;
-      DM.TblTicketPreVendaFinVencimento.Value      := SQLContasReceberCTRCDVENC.Value;
-      DM.TblTicketPreVendaFin.Post;
-      SQLContasReceber.Next ;
-    end;
+  begin
+    DM.TblTicketPreVendaFin.Append;
+    DM.TblTicketPreVendaFinPedICod.Value := SQLTemplateCUPOA13ID.Value;
+    DM.TblTicketPreVendaFinValor.AsVariant := SQLContasReceberCTRCN2VLR.AsVariant;
+    DM.TblTicketPreVendaFinNumerario.AsVariant := SQLContasReceberNumerarioLookup.AsVariant;
+    DM.TblTicketPreVendaFinVencimento.Value := SQLContasReceberCTRCDVENC.Value;
+    DM.TblTicketPreVendaFin.Post;
+    SQLContasReceber.Next;
+  end;
   SQLContasReceber.Close;
 
   if (DM.SQLTerminalAtivoTERMCIMPPREVENDA.AsString = 'S') then
     if FileExists('IMPRESSAOPREVENDA.EXE') then
-      WinExec(Pchar('IMPRESSAOPREVENDA.EXE'),sw_Show)
+      WinExec(Pchar('IMPRESSAOPREVENDA.EXE'), sw_Show)
     else
       ppReport1.Print;
 end;
 
-procedure TFormCadastroCupom.MnEtiquetaAdesivaFabricacaoClick(
-  Sender: TObject);
+procedure TFormCadastroCupom.MnEtiquetaAdesivaFabricacaoClick(Sender: TObject);
 begin
   inherited;
   ppEtiq.Print;
@@ -777,94 +765,143 @@ procedure TFormCadastroCupom.ppLinhaBeforePrint(Sender: TObject);
 begin
   inherited;
   ppLBEmpresa1.Caption := DM.SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRA60NOMEFANT', SQLTemplateEMPRICOD.AsString);
-  pplbtamanho.caption  := RetornaTamanhoProduto(DM.SQLLocate('produto', 'prodicod', 'gradicod', SQLCupomItemPRODICOD.AsString),
-                                                DM.SQLLocate('produto', 'prodicod', 'grtmicod', SQLCupomItemPRODICOD.AsString));
+  pplbtamanho.caption := RetornaTamanhoProduto(DM.SQLLocate('produto', 'prodicod', 'gradicod', SQLCupomItemPRODICOD.AsString), DM.SQLLocate('produto', 'prodicod', 'grtmicod', SQLCupomItemPRODICOD.AsString));
 end;
 
 procedure TFormCadastroCupom.CupomEletronicoNFCe1Click(Sender: TObject);
 begin
   inherited;
   chave := SQLTemplateCHAVEACESSO.AsString;
-  PathPastaMensal := FormatDateTime('yyyymm',SQLTemplateCUPODEMIS.Value);
+  PathPastaMensal := FormatDateTime('yyyymm', SQLTemplateCUPODEMIS.Value);
 
   dm.ACBrNFe.NotasFiscais.Clear;
-  dm.ACBrNFe.NotasFiscais.LoadFromFile('c:\easy2solutions\nfce\'+PathPastaMensal+'\'+chave+'-NFe.xml');
+  dm.ACBrNFe.NotasFiscais.LoadFromFile('c:\easy2solutions\nfce\' + PathPastaMensal + '\' + chave + '-NFe.xml');
   dm.ACBrNFe.NotasFiscais.Imprimir;
   dm.ACBrNFe.NotasFiscais.Clear;
 end;
 
 procedure TFormCadastroCupom.MnadmRetransmitirNFCeClick(Sender: TObject);
-var nfce_tentativa : integer;
+var
+  nfce_tentativa: integer;
 begin
   inherited;
   {$IFDEF ACBrNFeOpenSSL}
-    dm.ACBrNFe.Configuracoes.Certificados.ArquivoPFX  := SQLLocate('EMPRESA','EMPRICOD','EMPRA100CERTIFSERIE',SQLTemplateEMPRICOD.AsString);
-    dm.ACBrNFe.Configuracoes.Certificados.Certificado := SQLLocate('EMPRESA','EMPRICOD','EMPRA100CERTIFSERIE',SQLTemplateEMPRICOD.AsString);
-    dm.ACBrNFe.Configuracoes.Certificados.Senha       := SQLLocate('EMPRESA','EMPRICOD','EMPRA35CERTIFSENHA',SQLTemplateEMPRICOD.AsString);
+  dm.ACBrNFe.Configuracoes.Certificados.ArquivoPFX := SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRA100CERTIFSERIE', SQLTemplateEMPRICOD.AsString);
+  dm.ACBrNFe.Configuracoes.Certificados.Certificado := SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRA100CERTIFSERIE', SQLTemplateEMPRICOD.AsString);
+  dm.ACBrNFe.Configuracoes.Certificados.Senha := SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRA35CERTIFSENHA', SQLTemplateEMPRICOD.AsString);
   {$ELSE}
-    dm.ACBrNFe.Configuracoes.Certificados.NumeroSerie := SQLLocate('EMPRESA','EMPRICOD','EMPRA100CERTIFSERIE',SQLTemplateEMPRICOD.AsString);
-    dm.ACBrNFe.Configuracoes.Certificados.Senha       := SQLLocate('EMPRESA','EMPRICOD','EMPRA35CERTIFSENHA',SQLTemplateEMPRICOD.AsString);
+  dm.ACBrNFe.Configuracoes.Certificados.NumeroSerie := SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRA100CERTIFSERIE', SQLTemplateEMPRICOD.AsString);
+  dm.ACBrNFe.Configuracoes.Certificados.Senha := SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRA35CERTIFSENHA', SQLTemplateEMPRICOD.AsString);
   {$ENDIF}
-
-  dm.ACBrNFe.Configuracoes.Geral.IdCSC := SQLLocate('EMPRESA','EMPRICOD','idTOKEN',SQLTemplateEMPRICOD.AsString);
-  dm.ACBrNFe.Configuracoes.Geral.CSC   := SQLLocate('EMPRESA','EMPRICOD','TOKEN',SQLTemplateEMPRICOD.AsString);
+  dm.ACBrNFe.Configuracoes.Geral.IdCSC := SQLLocate('EMPRESA', 'EMPRICOD', 'idTOKEN', SQLTemplateEMPRICOD.AsString);
+  dm.ACBrNFe.Configuracoes.Geral.CSC := SQLLocate('EMPRESA', 'EMPRICOD', 'TOKEN', SQLTemplateEMPRICOD.AsString);
 
   dm.ACBrNFe.DANFE.ViaConsumidor := True;
   dm.ACBrNFe.DANFE.ImprimirItens := True;
 
-
-  nfce_tentativa := 0 ;
+  nfce_tentativa := 0;
   if sqltemplatestnfe.Value = '100' then
-    begin
-      ShowMessage('NFCe ja Autorizado na Sefaz!!!');
-      Exit;
-    end;
+  begin
+    ShowMessage('NFCe ja Autorizado na Sefaz!!!');
+    Exit;
+  end;
   if (sqltemplatestnfe.Value <> '100') and (SQLTemplateCHAVEACESSO.Value <> '') then
+  begin
+    while (nfce_tentativa <= 5) do
     begin
-      while (nfce_tentativa<=5) do
-        begin
-          nfce_tentativa := nfce_tentativa + 1;
-          LabelRegistros.Caption := 'Consultando Retorno Sefaz RS NFCe: '+sqltemplateCUPOINRO.AsString+' - Tentativa N.'+intToStr(nfce_tentativa) ;
-          LabelRegistros.Update;
-          dm.ACBrNFe.NotasFiscais.Clear;
-          dm.ACBrNFe.Consultar(SQLTemplateCHAVEACESSO.Value);
-          if (dm.ACBrNFe.WebServices.Consulta.cStat = 217) then
-            begin
-              LabelRegistros.Caption := 'Enviando ao Sefaz RS NFCe: ' + sqltemplateCUPOINRO.AsString ;
-              LabelRegistros.Update ;
-              { Cria o arquivo XML }
-              sXML := Montar_NFCe(SQLTemplateCUPOA13ID.Value);
-              dm.ACBrNFe.NotasFiscais.Assinar;
-              dm.ACBrNFe.NotasFiscais.Validar;
-              dm.ACBrNFe.Enviar('1', False, False);
-              {refaz a consulta}
-              dm.ACBrNFe.NotasFiscais.Clear;
-              dm.ACBrNFe.Consultar(SQLTemplateCHAVEACESSO.Value);
-            end;
-          if (dm.ACBrNFe.WebServices.Consulta.cStat = 100) then
-            begin
-              LabelRegistros.Caption := 'Envio ao Sefaz RS NFCe: '+sqltemplateCUPOINRO.AsString +' Autorizado com sucesso!';
-              LabelRegistros.Update;
-              SQLImpressaoCupom.Close;
-              SQLImpressaoCupom.RequestLive := False;
-              SQLImpressaoCupom.SQL.Text := 'Update CUPOM Set STNFE='+IntToStr(dm.ACBrNFe.WebServices.consulta.cStat)+
-                                            ', PROTOCOLO="'+dm.ACBrNFe.WebServices.consulta.Protocolo +'"'+
-                                            ' Where CUPOA13ID ="'+SQLTemplateCUPOA13ID.Value+'"';
-              SQLImpressaoCupom.ExecSQL;
+      nfce_tentativa := nfce_tentativa + 1;
+      LabelRegistros.Caption := 'Consultando Retorno Sefaz RS NFCe: ' + sqltemplateCUPOINRO.AsString + ' - Tentativa N.' + intToStr(nfce_tentativa);
+      LabelRegistros.Update;
+      dm.ACBrNFe.NotasFiscais.Clear;
+      dm.ACBrNFe.Consultar(SQLTemplateCHAVEACESSO.Value);
+      if dm.ACBrNFe.WebServices.Consulta.cStat <> 100 then
+        addLog('Cupom nº: ' + sqltemplateCUPOINRO.AsString + ' Status: ' + IntToStr(dm.ACBrNFe.WebServices.Consulta.cStat));
 
-              nfce_tentativa := 9;
+      if (dm.ACBrNFe.WebServices.Consulta.cStat = 613) or (dm.ACBrNFe.WebServices.Consulta.cStat = 539) then
+      begin
+        if dm.ACBrNFe.WebServices.Consulta.XMotivo <> '' then
+        begin
+          if pos('NF-e [', dm.ACBrNFe.WebServices.Consulta.XMotivo) > 0 then
+          begin
+            Chave := Copy(dm.ACBrNFe.WebServices.Consulta.XMotivo, pos('NF-e [', dm.ACBrNFe.WebServices.Consulta.XMotivo), 200);
+            Chave := StringReplace(Chave, 'NF-e [', '', [rfReplaceAll, rfIgnoreCase]);
+            Chave := StringReplace(Chave, ']', '', [rfReplaceAll]);
+            if Chave <> '' then
+            begin
+              if dm.SQLCupom.IsEmpty then
+              begin
+                dm.SQLCupom.close;
+                dm.SQLCupom.macrobyname('MFiltro').Value := 'CUPOA13ID = ''' + SQLTemplateCUPOA13ID.AsString + '''';
+                dm.SQLCupom.Open;
+              end;
+
+              dm.SQLCupom.RequestLive := True;
+              dm.SQLCupom.edit;
+              dm.SQLCupomCHAVEACESSO.AsString := Chave;
+              dm.SQLCupom.Post;
+              dm.SQLCupom.Close;
             end;
+          end;
+        end
+        else if dm.ACBrNFe.WebServices.Consulta.protNFe.xMotivo <> '' then
+        begin
+          Chave := Copy(dm.ACBrNFe.WebServices.Consulta.XMotivo, pos('[chNFe:', dm.ACBrNFe.WebServices.Consulta.XMotivo), 200);
+          Chave := StringReplace(Chave, '[chNFe:', '', [rfReplaceAll, rfIgnoreCase]);
+          Chave := StringReplace(Chave, ']', '', [rfReplaceAll]);
+
+          if Chave <> '' then
+          begin
+            if dm.SQLCupom.IsEmpty then
+            begin
+              dm.SQLCupom.close;
+              dm.SQLCupom.macrobyname('MFiltro').Value := 'CUPOA13ID = ''' + SQLTemplateCUPOA13ID.AsString + '''';
+              dm.SQLCupom.Open;
+            end;
+            dm.SQLCupom.RequestLive := True;
+            dm.SQLCupom.edit;
+            dm.SQLCupomCHAVEACESSO.AsString := Chave;
+            dm.SQLCupom.Post;
+            dm.SQLCupom.Close;
+          end;
         end;
+      end;
+      if (dm.ACBrNFe.WebServices.Consulta.cStat = 217) then
+      begin
+        LabelRegistros.Caption := 'Enviando ao Sefaz RS NFCe: ' + sqltemplateCUPOINRO.AsString;
+        LabelRegistros.Update;
+              { Cria o arquivo XML }
+        sXML := Montar_NFCe(SQLTemplateCUPOA13ID.Value);
+        dm.ACBrNFe.NotasFiscais.Assinar;
+        dm.ACBrNFe.NotasFiscais.Validar;
+        dm.ACBrNFe.Enviar('1', False, False);
+              {refaz a consulta}
+        dm.ACBrNFe.NotasFiscais.Clear;
+        dm.ACBrNFe.Consultar(SQLTemplateCHAVEACESSO.Value);
+      end;
+      if (dm.ACBrNFe.WebServices.Consulta.cStat = 100) then
+      begin
+        LabelRegistros.Caption := 'Envio ao Sefaz RS NFCe: ' + sqltemplateCUPOINRO.AsString + ' Autorizado com sucesso!';
+        LabelRegistros.Update;
+        SQLImpressaoCupom.Close;
+        SQLImpressaoCupom.RequestLive := False;
+        SQLImpressaoCupom.SQL.Text := 'Update CUPOM Set STNFE=' + IntToStr(dm.ACBrNFe.WebServices.consulta.cStat) + ', PROTOCOLO="' + dm.ACBrNFe.WebServices.consulta.Protocolo + '"' + ' Where CUPOA13ID ="' + SQLTemplateCUPOA13ID.Value + '"';
+        SQLImpressaoCupom.ExecSQL;
+
+        nfce_tentativa := 9;
+      end;
     end;
+  end;
 end;
 
-function TFormCadastroCupom.Montar_NFCe(idCupom : string): string;
-var VlrDescNoTotal, VlrTroca, VlrTotalItens, PercDesc : double;
-var iCRT : integer;
+function TFormCadastroCupom.Montar_NFCe(idCupom: string): string;
+var
+  VlrDescNoTotal, VlrTroca, VlrTotalItens, PercDesc: double;
+var
+  iCRT: integer;
 begin
-  VlrTotalItens  := 0;
+  VlrTotalItens := 0;
   VlrDescNoTotal := 0;
-  VlrTroca       := 0;
+  VlrTroca := 0;
   if SQLTemplateCUPON2TOTITENS.Value > 0 then
     VlrTotalItens := SQLTemplateCUPON2TOTITENS.Value;
   if SQLTemplateCUPON2DESC.Value > 0 then
@@ -874,295 +911,326 @@ begin
 
   dm.ACBrNFe.NotasFiscais.Clear;
   with dm.ACBrNFe.NotasFiscais.Add.NFe do
-     begin
-       Ide.cNF       := SQLTemplateCUPOINRO.Value;
-       Ide.natOp     := 'VENDA CONSUMIDOR';
-       Ide.modelo    := 65;
-       Ide.serie     := SQLTemplateTERMICOD.Value;
-       Ide.nNF       := SQLTemplateCUPOINRO.Value;
-       Ide.dEmi      := SQLTemplateCUPODEMIS.Value;
-       Ide.dSaiEnt   := SQLTemplateREGISTRO.Value;
-       Ide.tpNF      := tnSaida;
-       Ide.tpEmis    := teOffLine; // teNormal;
-       Ide.cUF       := StrToInt(SQLLocate('EMPRESA','EMPRICOD','EMPRIUFCODFED', SQLTemplateEMPRICOD.AsString));
-       Ide.cMunFG    := StrToInt(SQLLocate('EMPRESA','EMPRICOD','EMPRIMUNICODFED', SQLTemplateEMPRICOD.AsString));
-       Ide.finNFe    := fnNormal;
-       Ide.tpImp     := tiNFCe;
-       Ide.indFinal  := cfConsumidorFinal;
-       Ide.indPres   := pcPresencial;
+  begin
+    Ide.cNF := SQLTemplateCUPOINRO.Value;
+    Ide.natOp := 'VENDA CONSUMIDOR';
+    Ide.modelo := 65;
+    Ide.serie := SQLTemplateTERMICOD.Value;
+    Ide.nNF := SQLTemplateCUPOINRO.Value;
+    Ide.dEmi := SQLTemplateCUPODEMIS.Value;
+    Ide.dSaiEnt := SQLTemplateREGISTRO.Value;
+    Ide.tpNF := tnSaida;
+    Ide.tpEmis := teOffLine; // teNormal;
+    Ide.cUF := StrToInt(SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRIUFCODFED', SQLTemplateEMPRICOD.AsString));
+    Ide.cMunFG := StrToInt(SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRIMUNICODFED', SQLTemplateEMPRICOD.AsString));
+    Ide.finNFe := fnNormal;
+    Ide.tpImp := tiNFCe;
+    Ide.indFinal := cfConsumidorFinal;
+    Ide.indPres := pcPresencial;
 
-       ide.dhCont    := SQLTemplateREGISTRO.Value;
-       ide.xJust     := 'Entrada em contingencia por falhas na conexao com o web service.'; 
+    ide.dhCont := SQLTemplateREGISTRO.Value;
+    ide.xJust := 'Entrada em contingencia por falhas na conexao com o web service.';
 
-       Emit.CNPJCPF           := SQLLocate('EMPRESA','EMPRICOD','EMPRA14CGC',SQLTemplateEMPRICOD.AsString);
-       Emit.IE                := SQLLocate('EMPRESA','EMPRICOD','EMPRA20IE',SQLTemplateEMPRICOD.AsString);
-       Emit.xNome             := SQLLocate('EMPRESA','EMPRICOD','EMPRA60RAZAOSOC',SQLTemplateEMPRICOD.AsString);
-       Emit.xFant             := SQLLocate('EMPRESA','EMPRICOD','EMPRA60NOMEFANT',SQLTemplateEMPRICOD.AsString);
-       Emit.EnderEmit.fone    := SQLLocate('EMPRESA','EMPRICOD','EMPRA20FONE',SQLTemplateEMPRICOD.AsString);
-       Emit.EnderEmit.CEP     := StrToInt(SQLLocate('EMPRESA','EMPRICOD','EMPRA8CEP',SQLTemplateEMPRICOD.AsString));
-       Emit.EnderEmit.xLgr    := SQLLocate('EMPRESA','EMPRICOD','EMPRA60END',SQLTemplateEMPRICOD.AsString);
-       Emit.EnderEmit.nro     := SQLLocate('EMPRESA','EMPRICOD','EMPRIENDNRO',SQLTemplateEMPRICOD.AsString);
-       Emit.EnderEmit.xCpl    := ''; // Complemento
-       Emit.EnderEmit.xBairro := SQLLocate('EMPRESA','EMPRICOD','EMPRA60BAI',SQLTemplateEMPRICOD.AsString);
-       Emit.EnderEmit.cMun    := StrToInt(SQLLocate('EMPRESA','EMPRICOD','EMPRIMUNICODFED',SQLTemplateEMPRICOD.AsString));
-       Emit.EnderEmit.xMun    := SQLLocate('EMPRESA','EMPRICOD','EMPRA60CID',SQLTemplateEMPRICOD.AsString);
-       Emit.EnderEmit.UF      := SQLLocate('EMPRESA','EMPRICOD','EMPRA2UF',SQLTemplateEMPRICOD.AsString);
-       Emit.enderEmit.cPais   := 1058;
-       Emit.enderEmit.xPais   := 'BRASIL';
-       Emit.IEST              := '';
+    Emit.CNPJCPF := SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRA14CGC', SQLTemplateEMPRICOD.AsString);
+    Emit.IE := SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRA20IE', SQLTemplateEMPRICOD.AsString);
+    Emit.xNome := SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRA60RAZAOSOC', SQLTemplateEMPRICOD.AsString);
+    Emit.xFant := SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRA60NOMEFANT', SQLTemplateEMPRICOD.AsString);
+    Emit.EnderEmit.fone := SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRA20FONE', SQLTemplateEMPRICOD.AsString);
+    Emit.EnderEmit.CEP := StrToInt(SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRA8CEP', SQLTemplateEMPRICOD.AsString));
+    Emit.EnderEmit.xLgr := SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRA60END', SQLTemplateEMPRICOD.AsString);
+    Emit.EnderEmit.nro := SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRIENDNRO', SQLTemplateEMPRICOD.AsString);
+    Emit.EnderEmit.xCpl := ''; // Complemento
+    Emit.EnderEmit.xBairro := SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRA60BAI', SQLTemplateEMPRICOD.AsString);
+    Emit.EnderEmit.cMun := StrToInt(SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRIMUNICODFED', SQLTemplateEMPRICOD.AsString));
+    Emit.EnderEmit.xMun := SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRA60CID', SQLTemplateEMPRICOD.AsString);
+    Emit.EnderEmit.UF := SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRA2UF', SQLTemplateEMPRICOD.AsString);
+    Emit.enderEmit.cPais := 1058;
+    Emit.enderEmit.xPais := 'BRASIL';
+    Emit.IEST := '';
 
-       iCRT := StrToInt(SQLLocate('EMPRESA','EMPRICOD','EMPRA3CRT',SQLTemplateEMPRICOD.AsString));
-       IF iCRT = 1 Then
-         Emit.CRT      := crtSimplesNacional  else
-       IF iCRT = 2 Then
-         Emit.CRT      := crtSimplesExcessoReceita  else
-       IF iCRT = 3 Then
-         Emit.CRT      := crtRegimeNormal;
+    iCRT := StrToInt(SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRA3CRT', SQLTemplateEMPRICOD.AsString));
+    if iCRT = 1 then
+      Emit.CRT := crtSimplesNacional
+    else if iCRT = 2 then
+      Emit.CRT := crtSimplesExcessoReceita
+    else if iCRT = 3 then
+      Emit.CRT := crtRegimeNormal;
 
-       Dest.CNPJCPF           := sqltemplateCLIENTECNPJ.Value;
-       Dest.xNome             := SQLTemplateCLIENTENOME.Value;
-       Dest.indIEDest         := inNaoContribuinte; {Pq NFCe nao informa Destinatario}
+    Dest.CNPJCPF := sqltemplateCLIENTECNPJ.Value;
+    Dest.xNome := SQLTemplateCLIENTENOME.Value;
+    Dest.indIEDest := inNaoContribuinte; {Pq NFCe nao informa Destinatario}
+    SQLCupomItem.Close;
+    SQLCupomItem.Open;
+    SQLCupomItem.First;
 
-       SQLCupomItem.Close;
-       SQLCupomItem.Open;
-       SQLCupomItem.First;
-
-       Total.ICMSTot.vBC   := 0;
-       Total.ICMSTot.vICMS := 0;
-       While not SQLCupomItem.Eof do
-         begin
+    Total.ICMSTot.vBC := 0;
+    Total.ICMSTot.vICMS := 0;
+    while not SQLCupomItem.Eof do
+    begin
            {Carrega Produtos temporarios}
-           dm.sqlconsulta.close;
-           dm.sqlconsulta.sql.Clear;
-           dm.sqlconsulta.sql.Text := 'select PRODA30ADESCRREDUZ,PRODA60CODBAR,PRODA60REFER,PRODIORIGEM, PRODISITTRIB, PRODA1TIPO, PRODA1MODBC,PRODA1MODBCST,PRODA1MODBCST,TABCEST from produto where prodicod='+ SQLCupomItemPRODICOD.AsString;
-           dm.sqlconsulta.open;
+      dm.sqlconsulta.close;
+      dm.sqlconsulta.sql.Clear;
+      dm.sqlconsulta.sql.Text := 'select PRODA30ADESCRREDUZ,PRODA60CODBAR,PRODA60REFER,PRODIORIGEM, PRODISITTRIB, PRODA1TIPO, PRODA1MODBC,PRODA1MODBCST,PRODA1MODBCST,TABCEST from produto where prodicod=' + SQLCupomItemPRODICOD.AsString;
+      dm.sqlconsulta.open;
 
-           with Det.Add do
-             begin
-               Prod.nItem    := SQLCupomItemCPITIPOS.AsInteger;
-               Prod.cProd    := SQLCupomItemPRODICOD.AsString;
-               if length(dm.sqlConsulta.fieldbyname('PRODA60CODBAR').AsString) > 9 then
-                 Prod.cEAN   := dm.sqlConsulta.fieldbyname('PRODA60CODBAR').AsString;
-               if length(dm.sqlConsulta.fieldbyname('PRODA60CODBAR').AsString) > 7 then
-                 Prod.cEANTrib := dm.sqlConsulta.fieldbyname('PRODA60CODBAR').AsString;
-               Prod.xProd    := dm.sqlConsulta.fieldbyname('PRODA30ADESCRREDUZ').AsString;
+      with Det.Add do
+      begin
+        Prod.nItem := SQLCupomItemCPITIPOS.AsInteger;
+        Prod.cProd := SQLCupomItemPRODICOD.AsString;
+        if length(dm.sqlConsulta.fieldbyname('PRODA60CODBAR').AsString) > 9 then
+          Prod.cEAN := dm.sqlConsulta.fieldbyname('PRODA60CODBAR').AsString;
+        if length(dm.sqlConsulta.fieldbyname('PRODA60CODBAR').AsString) > 7 then
+          Prod.cEANTrib := dm.sqlConsulta.fieldbyname('PRODA60CODBAR').AsString;
+        Prod.xProd := dm.sqlConsulta.fieldbyname('PRODA30ADESCRREDUZ').AsString;
 
-               Prod.NCM      := SQLLocate('NCM','NCMICOD','NCMA30CODIGO',SQLLocate('PRODUTO','PRODICOD','NCMICOD',SQLCupomItemPRODICOD.AsString));
-               Prod.EXTIPI   := '';
-               if (dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '60') or (dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '500') then
-                 begin
-                   Prod.CFOP     := '5405';
-                   Prod.CEST := dm.sqlConsulta.fieldbyname('TABCEST').AsString;
-                 end
-               else
-                 Prod.CFOP     := '5102';
+        Prod.NCM := SQLLocate('NCM', 'NCMICOD', 'NCMA30CODIGO', SQLLocate('PRODUTO', 'PRODICOD', 'NCMICOD', SQLCupomItemPRODICOD.AsString));
+        Prod.EXTIPI := '';
+        if (dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '60') or (dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '500') then
+        begin
+          Prod.CFOP := '5405';
+          Prod.CEST := dm.sqlConsulta.fieldbyname('TABCEST').AsString;
+        end
+        else
+          Prod.CFOP := '5102';
 
-               Prod.uCom     := SQLLocate('UNIDADE','UNIDICOD','UNIDA5DESCR',SQLLocate('PRODUTO','PRODICOD','UNIDICOD',SQLCupomItemPRODICOD.AsString));
-               Prod.qCom     := SQLCupomItemCPITN3QTD.AsFloat ;
-               Prod.vUnCom   := SQLCupomItemCPITN3VLRUNIT.AsFloat;
-               Prod.vProd    := SQLCupomItemCPITN3VLRUNIT.AsFloat * SQLCupomItemCPITN3QTD.AsFloat ;
+        Prod.uCom := SQLLocate('UNIDADE', 'UNIDICOD', 'UNIDA5DESCR', SQLLocate('PRODUTO', 'PRODICOD', 'UNIDICOD', SQLCupomItemPRODICOD.AsString));
+        Prod.qCom := SQLCupomItemCPITN3QTD.AsFloat;
+        Prod.vUnCom := SQLCupomItemCPITN3VLRUNIT.AsFloat;
+        Prod.vProd := SQLCupomItemCPITN3VLRUNIT.AsFloat * SQLCupomItemCPITN3QTD.AsFloat;
 
-               Prod.uTrib     := SQLLocate('UNIDADE','UNIDICOD','UNIDA5DESCR',SQLLocate('PRODUTO','PRODICOD','UNIDICOD',SQLCupomItemPRODICOD.AsString));
-               Prod.qTrib     := SQLCupomItemCPITN3QTD.AsFloat;
-               Prod.vUnTrib   := SQLCupomItemCPITN3VLRUNIT.AsFloat;
+        Prod.uTrib := SQLLocate('UNIDADE', 'UNIDICOD', 'UNIDA5DESCR', SQLLocate('PRODUTO', 'PRODICOD', 'UNIDICOD', SQLCupomItemPRODICOD.AsString));
+        Prod.qTrib := SQLCupomItemCPITN3QTD.AsFloat;
+        Prod.vUnTrib := SQLCupomItemCPITN3VLRUNIT.AsFloat;
 
-               Prod.vOutro    := 0;
-               Prod.vFrete    := 0;
-               Prod.vSeg      := 0;
-               Prod.vDesc     := 0;
+        Prod.vOutro := 0;
+        Prod.vFrete := 0;
+        Prod.vSeg := 0;
+        Prod.vDesc := 0;
 
-               if SQLCupomItemCPITN2DESC.AsFloat>0 then
-                 Prod.vDesc := SQLCupomItemCPITN2DESC.AsFloat ;
+        if SQLCupomItemCPITN2DESC.AsFloat > 0 then
+          Prod.vDesc := SQLCupomItemCPITN2DESC.AsFloat;
 
-               if (PercDesc>0) then
-                 Prod.vDesc := ((Prod.vProd*PercDesc)/100) + SQLCupomItemCPITN2DESC.AsFloat;
+        if (PercDesc > 0) then
+          Prod.vDesc := ((Prod.vProd * PercDesc) / 100) + SQLCupomItemCPITN2DESC.AsFloat;
 
-               with Imposto do
-                 begin
+        with Imposto do
+        begin
                    // lei da transparencia nos impostos
-                   vTotTrib := 0;
+          vTotTrib := 0;
 
-                   if dm.sqlConsulta.fieldbyname('PRODIORIGEM').AsString = '0' then
-                     ICMS.orig  := oeNacional else
-                   if dm.sqlConsulta.fieldbyname('PRODIORIGEM').AsString = '1' then
-                     ICMS.orig  := oeEstrangeiraImportacaoDireta else
-                   if dm.sqlConsulta.fieldbyname('PRODIORIGEM').AsString = '2' then
-                     ICMS.orig  := oeEstrangeiraAdquiridaBrasil;
+          if dm.sqlConsulta.fieldbyname('PRODIORIGEM').AsString = '0' then
+            ICMS.orig := oeNacional
+          else if dm.sqlConsulta.fieldbyname('PRODIORIGEM').AsString = '1' then
+            ICMS.orig := oeEstrangeiraImportacaoDireta
+          else if dm.sqlConsulta.fieldbyname('PRODIORIGEM').AsString = '2' then
+            ICMS.orig := oeEstrangeiraAdquiridaBrasil;
 
-                   case iCRT of
-                      1:begin  // Linhas para o simples nacional
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').AsString = '101' then ICMS.CSOSN :=  csosn101;
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '102' then ICMS.CSOSN :=  csosn102;
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '103' then ICMS.CSOSN :=  csosn103;
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '300' then ICMS.CSOSN :=  csosn300;
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '400' then ICMS.CSOSN :=  csosn400;
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '201' then ICMS.CSOSN :=  csosn201;
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '202' then ICMS.CSOSN :=  csosn202;
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '500' then ICMS.CSOSN :=  csosn500;
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '900' then ICMS.CSOSN :=  csosn900;
+          case iCRT of
+            1:
+              begin  // Linhas para o simples nacional
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').AsString = '101' then
+                  ICMS.CSOSN := csosn101;
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '102' then
+                  ICMS.CSOSN := csosn102;
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '103' then
+                  ICMS.CSOSN := csosn103;
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '300' then
+                  ICMS.CSOSN := csosn300;
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '400' then
+                  ICMS.CSOSN := csosn400;
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '201' then
+                  ICMS.CSOSN := csosn201;
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '202' then
+                  ICMS.CSOSN := csosn202;
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '500' then
+                  ICMS.CSOSN := csosn500;
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '900' then
+                  ICMS.CSOSN := csosn900;
 
-                          case ICMS.CSOSN of
-                            csosn101 : begin
-                                         ICMS.pCredSN     := 0.0; // Colocar o percentual do Crédito
-                                         ICMS.vCredICMSSN := 0.0; // Colocar o valor do Crédito
-                                       end;
-                            csosn102 : begin
-                                       end;
-                            csosn103 : begin
-                                       end;
-                            csosn300 : begin
-                                       end;
-                            csosn400 : begin
-                                       end;
-                            csosn201 : begin
-                                         ICMS.modBCST     := dbisMargemValorAgregado;
-                                         ICMS.pMVAST      := 0; // Adilson, verificar melhor
-                                         ICMS.pRedBCST    := 0;
-                                         ICMS.vBCST       := 0; // Adilson, verificar melhor
-                                         ICMS.pICMSST     := 0;
-                                         ICMS.vICMSST     := 0; // Adilson, verificar melhor
-                                         ICMS.pCredSN     := 0; // Colocar o percentual do Crédito
-                                         ICMS.vCredICMSSN := 0; // Colocar o valor do Crédito
-                                       end;
-                            csosn202 : begin
-                                         ICMS.modBCST  := dbisMargemValorAgregado;
-                                         ICMS.pMVAST   := 0; // Adilson, verificar melhor
-                                         ICMS.pRedBCST := 0;
-                                         ICMS.vBCST    := 0; // Adilson, verificar melhor
-                                         ICMS.pICMSST  := 0; // Adilson, verificar melhor
-                                         ICMS.vICMSST  := 0; // Adilson, verificar melhor
-                                       end;
-                            csosn500 : begin
-                                         ICMS.vBCSTRet   := 0; // Adilson, verificar melhor
-                                         ICMS.vICMSSTRet := 0; // Adilson, verificar melhor
-                                       end;
-                          end; // fim do case icms.csosn
-                        end;
+                case ICMS.CSOSN of
+                  csosn101:
+                    begin
+                      ICMS.pCredSN := 0.0; // Colocar o percentual do Crédito
+                      ICMS.vCredICMSSN := 0.0; // Colocar o valor do Crédito
+                    end;
+                  csosn102:
+                    begin
+                    end;
+                  csosn103:
+                    begin
+                    end;
+                  csosn300:
+                    begin
+                    end;
+                  csosn400:
+                    begin
+                    end;
+                  csosn201:
+                    begin
+                      ICMS.modBCST := dbisMargemValorAgregado;
+                      ICMS.pMVAST := 0; // Adilson, verificar melhor
+                      ICMS.pRedBCST := 0;
+                      ICMS.vBCST := 0; // Adilson, verificar melhor
+                      ICMS.pICMSST := 0;
+                      ICMS.vICMSST := 0; // Adilson, verificar melhor
+                      ICMS.pCredSN := 0; // Colocar o percentual do Crédito
+                      ICMS.vCredICMSSN := 0; // Colocar o valor do Crédito
+                    end;
+                  csosn202:
+                    begin
+                      ICMS.modBCST := dbisMargemValorAgregado;
+                      ICMS.pMVAST := 0; // Adilson, verificar melhor
+                      ICMS.pRedBCST := 0;
+                      ICMS.vBCST := 0; // Adilson, verificar melhor
+                      ICMS.pICMSST := 0; // Adilson, verificar melhor
+                      ICMS.vICMSST := 0; // Adilson, verificar melhor
+                    end;
+                  csosn500:
+                    begin
+                      ICMS.vBCSTRet := 0; // Adilson, verificar melhor
+                      ICMS.vICMSSTRet := 0; // Adilson, verificar melhor
+                    end;
+                end; // fim do case icms.csosn
+              end;
 
-                      2:begin
+            2:
+              begin
                           //        (...)
-                        end;
+              end;
 
-                      3:begin
+            3:
+              begin
                           // Cst ICMS
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring =  '0' then ICMS.CST := cst00;
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '10' then ICMS.CST := cst10;
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '20' then ICMS.CST := cst20;
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '30' then ICMS.CST := cst30;
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '40' then ICMS.CST := cst40;
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '41' then ICMS.CST := cst41;
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '50' then ICMS.CST := cst50;
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '51' then ICMS.CST := cst51;
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '60' then ICMS.CST := cst60;
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '70' then ICMS.CST := cst70;
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '80' then ICMS.CST := cst80;
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '81' then ICMS.CST := cst81;
-                          if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '90' then ICMS.CST := cst90;
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '0' then
+                  ICMS.CST := cst00;
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '10' then
+                  ICMS.CST := cst10;
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '20' then
+                  ICMS.CST := cst20;
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '30' then
+                  ICMS.CST := cst30;
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '40' then
+                  ICMS.CST := cst40;
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '41' then
+                  ICMS.CST := cst41;
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '50' then
+                  ICMS.CST := cst50;
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '51' then
+                  ICMS.CST := cst51;
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '60' then
+                  ICMS.CST := cst60;
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '70' then
+                  ICMS.CST := cst70;
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '80' then
+                  ICMS.CST := cst80;
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '81' then
+                  ICMS.CST := cst81;
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '90' then
+                  ICMS.CST := cst90;
 
                           // Base Calculo
-                          if dm.sqlConsulta.fieldbyname('PRODA1MODBC').AsString = '0' then
-                            ICMS.modBC  := dbiMargemValorAgregado else
-                          if dm.sqlConsulta.fieldbyname('PRODA1MODBC').AsString = '1' then
-                            ICMS.modBC  := dbiPauta else
-                          if dm.sqlConsulta.fieldbyname('PRODA1MODBC').AsString = '2' then
-                            ICMS.modBC  := dbiPrecoTabelado else
-                          if dm.sqlConsulta.fieldbyname('PRODA1MODBC').AsString = '3' then
-                            ICMS.modBC  := dbiValorOperacao;
+                if dm.sqlConsulta.fieldbyname('PRODA1MODBC').AsString = '0' then
+                  ICMS.modBC := dbiMargemValorAgregado
+                else if dm.sqlConsulta.fieldbyname('PRODA1MODBC').AsString = '1' then
+                  ICMS.modBC := dbiPauta
+                else if dm.sqlConsulta.fieldbyname('PRODA1MODBC').AsString = '2' then
+                  ICMS.modBC := dbiPrecoTabelado
+                else if dm.sqlConsulta.fieldbyname('PRODA1MODBC').AsString = '3' then
+                  ICMS.modBC := dbiValorOperacao;
 
-                          ICMS.vBC     := sqlcupomitemCPITN2BASEICMS.AsFloat;
-                          ICMS.pICMS   := sqlcupomitemCOITN2ICMSALIQ.AsFloat;
-                          ICMS.vICMS   := sqlcupomitemCPITN2VLRICMS.AsFloat;
+                ICMS.vBC := sqlcupomitemCPITN2BASEICMS.AsFloat;
+                ICMS.pICMS := sqlcupomitemCOITN2ICMSALIQ.AsFloat;
+                ICMS.vICMS := sqlcupomitemCPITN2VLRICMS.AsFloat;
 
-                          Total.ICMSTot.vBC   := Total.ICMSTot.vBC   + ICMS.vBC;
-                          Total.ICMSTot.vICMS := Total.ICMSTot.vICMS + ICMS.vICMS;
+                Total.ICMSTot.vBC := Total.ICMSTot.vBC + ICMS.vBC;
+                Total.ICMSTot.vICMS := Total.ICMSTot.vICMS + ICMS.vICMS;
 
-                          ICMS.vBCST   := 0;
-                          ICMS.pICMSST := 0;
-                          ICMS.vICMSST := 0;
-                        end;
-                   end;
-                 end;
-               Total.ICMSTot.vProd := Total.ICMSTot.vProd + Prod.vProd ;
-               Total.ICMSTot.vDesc := Total.ICMSTot.vDesc + Prod.vDesc ;
-             end;
-           SQLCupomItem.next;
-         end;
+                ICMS.vBCST := 0;
+                ICMS.pICMSST := 0;
+                ICMS.vICMSST := 0;
+              end;
+          end;
+        end;
+        Total.ICMSTot.vProd := Total.ICMSTot.vProd + Prod.vProd;
+        Total.ICMSTot.vDesc := Total.ICMSTot.vDesc + Prod.vDesc;
+      end;
+      SQLCupomItem.next;
+    end;
 
       {Totais da NFCe}
-      Total.ICMSTot.vBCST   := 0;
-      Total.ICMSTot.vST     := 0;
-      Total.ICMSTot.vFrete  := 0;
-      Total.ICMSTot.vSeg    := 0;
-      Total.ICMSTot.vII     := 0;
-      Total.ICMSTot.vIPI    := 0;
-      Total.ICMSTot.vPIS    := 0;
-      Total.ICMSTot.vCOFINS := 0;
-      Total.ICMSTot.vOutro  := SQLTemplateCUPON2ACRESC.AsFloat;
-      Total.ICMSTot.vNF     := Total.ICMSTot.vProd - Total.ICMSTot.vDesc;
+    Total.ICMSTot.vBCST := 0;
+    Total.ICMSTot.vST := 0;
+    Total.ICMSTot.vFrete := 0;
+    Total.ICMSTot.vSeg := 0;
+    Total.ICMSTot.vII := 0;
+    Total.ICMSTot.vIPI := 0;
+    Total.ICMSTot.vPIS := 0;
+    Total.ICMSTot.vCOFINS := 0;
+    Total.ICMSTot.vOutro := SQLTemplateCUPON2ACRESC.AsFloat;
+    Total.ICMSTot.vNF := Total.ICMSTot.vProd - Total.ICMSTot.vDesc;
 
-      Total.ISSQNtot.vServ   := 0;
-      Total.ISSQNTot.vBC     := 0;
-      Total.ISSQNTot.vISS    := 0;
-      Total.ISSQNTot.vPIS    := 0;
-      Total.ISSQNTot.vCOFINS := 0;
+    Total.ISSQNtot.vServ := 0;
+    Total.ISSQNTot.vBC := 0;
+    Total.ISSQNTot.vISS := 0;
+    Total.ISSQNTot.vPIS := 0;
+    Total.ISSQNTot.vCOFINS := 0;
 
-      Transp.modFrete := mfSemFrete; // NFC-e não pode ter FRETE
+    Transp.modFrete := mfSemFrete; // NFC-e não pode ter FRETE
 
       //PAGAMENTOS apenas para NFC-e
-      with pag.Add do
-        begin
-           if (sqltemplateCUPOCTIPOPADRAO.AsString = 'VISTA') or
-             (sqltemplateCUPOCTIPOPADRAO.AsString = 'DIN') then
-            begin
-              Ide.indPag := ipVista;
-              tPag       := fpDinheiro;
-            end;
-          if sqltemplateCUPOCTIPOPADRAO.AsString = 'CRT' then
-            begin
-              Ide.indPag := ipPrazo;
-              tPag       := fpCartaoCredito;
-            end;
-          if (sqltemplateCUPOCTIPOPADRAO.AsString = 'CRTF') or
-             (sqltemplateCUPOCTIPOPADRAO.AsString = 'CRD') then
-            begin
-              Ide.indPag := ipPrazo;
-              tPag       := fpCreditoLoja;
-            end;
-          if (sqltemplateCUPOCTIPOPADRAO.AsString = 'CHQV') or
-             (sqltemplateCUPOCTIPOPADRAO.AsString = 'CHQP') then
-            begin
-              Ide.indPag := ipPrazo;
-              tPag       := fpCheque;
-            end;
-          vPag := Total.ICMSTot.vNF ;
-        end;
+    with pag.Add do
+    begin
+      if (sqltemplateCUPOCTIPOPADRAO.AsString = 'VISTA') or (sqltemplateCUPOCTIPOPADRAO.AsString = 'DIN') then
+      begin
+        Ide.indPag := ipVista;
+        tPag := fpDinheiro;
+      end;
+      if sqltemplateCUPOCTIPOPADRAO.AsString = 'CRT' then
+      begin
+        Ide.indPag := ipPrazo;
+        tPag := fpCartaoCredito;
+      end;
+      if (sqltemplateCUPOCTIPOPADRAO.AsString = 'CRTF') or (sqltemplateCUPOCTIPOPADRAO.AsString = 'CRD') then
+      begin
+        Ide.indPag := ipPrazo;
+        tPag := fpCreditoLoja;
+      end;
+      if (sqltemplateCUPOCTIPOPADRAO.AsString = 'CHQV') or (sqltemplateCUPOCTIPOPADRAO.AsString = 'CHQP') then
+      begin
+        Ide.indPag := ipPrazo;
+        tPag := fpCheque;
+      end;
+      vPag := Total.ICMSTot.vNF;
+    end;
 
-      InfAdic.infCpl     :=  '';
-      InfAdic.infAdFisco :=  '';
+    InfAdic.infCpl := '';
+    InfAdic.infAdFisco := '';
       {Dados do Cliente}
-      if SQLTemplateCLIENTENOME.AsString <> '' then
-        InfAdic.infCpl     := InfAdic.infCpl + SQLTemplateCLIENTENOME.AsString +', ' ;
-      if SQLTemplateCLIENTECNPJ.AsString <> '' then
-        InfAdic.infCpl     := InfAdic.infCpl + SQLTemplateCLIENTECNPJ.AsString +', ' ;
-      if SQLTemplateCLIENTEFONE.AsString <> '' then
-        InfAdic.infCpl     := InfAdic.infCpl + SQLTemplateCLIENTEFONE.AsString +', ' ;
-      if SQLTemplateCLIENTECIDA.AsString <> '' then
-        InfAdic.infCpl     := InfAdic.infCpl + SQLTemplateCLIENTECIDA.AsString +', ' ;
-      if SQLTemplateCLIENTEENDE.AsString <> '' then
-        InfAdic.infCpl     := InfAdic.infCpl + SQLTemplateCLIENTEENDE.AsString +', ' ;
-      if SQLTemplateCLIENTEBAIRRO.AsString <> '' then
-        InfAdic.infCpl     := InfAdic.infCpl + SQLTemplateCLIENTEBAIRRO.AsString ;
+    if SQLTemplateCLIENTENOME.AsString <> '' then
+      InfAdic.infCpl := InfAdic.infCpl + SQLTemplateCLIENTENOME.AsString + ', ';
+    if SQLTemplateCLIENTECNPJ.AsString <> '' then
+      InfAdic.infCpl := InfAdic.infCpl + SQLTemplateCLIENTECNPJ.AsString + ', ';
+    if SQLTemplateCLIENTEFONE.AsString <> '' then
+      InfAdic.infCpl := InfAdic.infCpl + SQLTemplateCLIENTEFONE.AsString + ', ';
+    if SQLTemplateCLIENTECIDA.AsString <> '' then
+      InfAdic.infCpl := InfAdic.infCpl + SQLTemplateCLIENTECIDA.AsString + ', ';
+    if SQLTemplateCLIENTEENDE.AsString <> '' then
+      InfAdic.infCpl := InfAdic.infCpl + SQLTemplateCLIENTEENDE.AsString + ', ';
+    if SQLTemplateCLIENTEBAIRRO.AsString <> '' then
+      InfAdic.infCpl := InfAdic.infCpl + SQLTemplateCLIENTEBAIRRO.AsString;
 
       // Gerar XML
-      dm.ACBrNFe.NotasFiscais.GerarNFe;
-   end;
+    dm.ACBrNFe.NotasFiscais.GerarNFe;
+  end;
 end;
 
-procedure TFormCadastroCupom.CorrigeProblemaCadterm603para661Click(
-  Sender: TObject);
-var DataCupom, DataCupomItem : String;
-var TotalCupom : Double;
-var i : integer;
+procedure TFormCadastroCupom.CorrigeProblemaCadterm603para661Click(Sender: TObject);
+var
+  DataCupom, DataCupomItem: string;
+var
+  TotalCupom: Double;
+var
+  i: integer;
 begin
   inherited;
 
@@ -1225,15 +1293,15 @@ begin
   dm.SQLConsulta.sql.text := 'select cupoa13id from cupomitem where termicod=66';
   dm.SQLConsulta.Open;
   while not dm.SQLConsulta.eof do
-    begin
-      LabelRegistros.Caption := 'Corrigindo Cupom ID: ' + dm.SQLConsulta.fieldbyname('cupoa13id').Value ;
-      LabelRegistros.Update;
-      dm.SQLConsulta.edit;
-      dm.SQLConsulta.fieldbyname('cupoa13id').Value := '006066' + copy(dm.SQLConsulta.fieldbyname('cupoa13id').Value,7,7);
-      dm.SQLConsulta.post;
-      dm.SQLConsulta.next;
-      application.ProcessMessages;
-    end;
+  begin
+    LabelRegistros.Caption := 'Corrigindo Cupom ID: ' + dm.SQLConsulta.fieldbyname('cupoa13id').Value;
+    LabelRegistros.Update;
+    dm.SQLConsulta.edit;
+    dm.SQLConsulta.fieldbyname('cupoa13id').Value := '006066' + copy(dm.SQLConsulta.fieldbyname('cupoa13id').Value, 7, 7);
+    dm.SQLConsulta.post;
+    dm.SQLConsulta.next;
+    application.ProcessMessages;
+  end;
   dm.SQLConsulta.RequestLive := false;
   Showmessage('Concluido com sucesso!');
 end;

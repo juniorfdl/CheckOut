@@ -281,6 +281,7 @@ type
     BtnF5: TSpeedButton;
     BtnF7: TSpeedButton;
     BtnF6: TSpeedButton;
+    SQLProdutoPESAGEM_AUTOMATICA: TStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure EntradaDadosKeyDown(Sender: TObject; var Key: Word;Shift: TShiftState);
@@ -440,6 +441,12 @@ begin
     dm.ACBrNFe.Configuracoes.Certificados.NumeroSerie  := dm.sqlEmpresa.FieldByName('EMPRA100CERTIFSERIE').AsString;
     dm.ACBrNFe.Configuracoes.Certificados.Senha        := dm.sqlEmpresa.FieldByName('EMPRA35CERTIFSENHA').AsString;
   {$ENDIF}
+
+  if dm.sqlEmpresa.FieldByName('VERSAO').AsString = '4' then
+    dm.ACBrNFe.Configuracoes.Geral.VersaoDF := ve400
+  else
+    dm.ACBrNFe.Configuracoes.Geral.VersaoDF := ve310;
+
 
   dm.ACBrNFe.Configuracoes.Geral.IdCSC  := dm.sqlEmpresa.FieldByName('idTOKEN').AsString;
   dm.ACBrNFe.Configuracoes.Geral.CSC    := dm.sqlEmpresa.FieldByName('TOKEN').AsString;

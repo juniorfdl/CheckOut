@@ -799,6 +799,8 @@ begin
       end;
       SQLImpressaoCupom.next;
     end;
+    if (VlrDescNoTotal > 0) and (TotalDesconto = 0) then
+      TotalDesconto := VlrDescNoTotal;
 
     Total.ICMSTot.vDesc := TotalDesconto;
       {Totais da NFCe}
@@ -1199,6 +1201,7 @@ begin
   case Dm.SQLConfigVendaCFVEINROCASASDEC.AsInteger of
     2: SQLItensVendaTempVLRUNITBRUT.DisplayFormat := '##0.00##';
     3: SQLItensVendaTempVLRUNITBRUT.DisplayFormat := '###0.000';
+    4: SQLItensVendaTempVLRUNITBRUT.DisplayFormat := '###0.0000';
   end;
   FormatStrVlrVenda := SQLItensVendaTempVLRUNITBRUT.DisplayFormat;
 
@@ -1609,7 +1612,7 @@ begin
         EntradaDados.Clear;
       end;
     end;
-   if (Length(EntradaDados.Text) = 13) or ((Length(EntradaDados.Text) = 13) and (copy(EntradaDados.Text, 1, 1) = '2') and (EncontrouProduto(trim(EntradaDados.Text), SQLProduto))) then
+   if (Length(EntradaDados.Text) = 13) or (StrToIntDef(EntradaDados.Text, -1) <> -1) then
      ExecutarPessagemAutomatica;
 
     {* * * * INFORMADO ITENS * * * *}
@@ -6614,13 +6617,30 @@ end;
 
 procedure TFormTelaItens.ExecutarPessagemAutomatica;
 begin
-  if (StrToIntDef(EntradaDados.Text, -1) <> -1) then
+  if (EncontrouProduto(trim(EntradaDados.Text), SQLProduto) and (Length(EntradaDados.Text) = 13)) then
   begin
-    if EncontrouProduto(trim(EntradaDados.Text), SQLProduto) then
+    if PesagemAutomatica = 'S' then
+      ExecutarCtrlQ;
+  end
+  else
+  begin
+    DM.SQLTemplate.Close;
+    DM.SQLTemplate.SQL.Clear;
+    DM.SQLTemplate.SQL.Add('select PRODUTO.PESAGEM_AUTOMATICA');
+    DM.SQLTemplate.SQL.Add('from PRODUTO');
+    DM.SQLTemplate.SQL.Add('where PRODUTO.PRODA60CODBAR = ''' + EntradaDados.Text + '''');
+    DM.SQLTemplate.Open;
+    if DM.SQLTemplate.IsEmpty then
     begin
-      if PesagemAutomatica = 'S' then
-        ExecutarCtrlQ;
+      DM.SQLTemplate.Close;
+      DM.SQLTemplate.SQL.Clear;
+      DM.SQLTemplate.SQL.Add('select PRODUTO.PESAGEM_AUTOMATICA');
+      DM.SQLTemplate.SQL.Add('from PRODUTO');
+      DM.SQLTemplate.SQL.Add('where PRODUTO.PRODICOD = ' + EntradaDados.Text);
+      DM.SQLTemplate.Open;
     end;
+    if DM.SQLTemplate.FieldByName('PESAGEM_AUTOMATICA').AsString = 'S' then
+       ExecutarCtrlQ;
   end;
 end;
 

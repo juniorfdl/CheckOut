@@ -5,6 +5,7 @@ inherited DM: TDM
   Height = 724
   Width = 859
   inherited DB: TDatabase
+    Connected = False
     Left = 32
   end
   inherited SQLTemplate: TRxQuery
@@ -2919,6 +2920,12 @@ inherited DM: TDM
       Origin = 'DB.EMPRESA.EMPRA75EMAILUSUARIO'
       Size = 75
     end
+    object SQLEmpresaVERSAO: TStringField
+      FieldName = 'VERSAO'
+      Origin = 'DB.EMPRESA.VERSAO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object TblTicketPreVendaCab: TTable
     DatabaseName = 'Easy_Temp'
@@ -5572,7 +5579,9 @@ inherited DM: TDM
     Configuracoes.Geral.ValidarDigest = False
     Configuracoes.Geral.ModeloDF = moNFCe
     Configuracoes.Geral.AtualizarXMLCancelado = True
+    Configuracoes.Geral.VersaoQRCode = veqr000
     Configuracoes.Arquivos.PathSalvar = 'c:\easy2solutions\nfce\'
+    Configuracoes.Arquivos.OrdenacaoPath = <>
     Configuracoes.Arquivos.SepararPorMes = True
     Configuracoes.Arquivos.PathNFe = 'c:\easy2solutions\nfce\'
     Configuracoes.Arquivos.PathInu = 'c:\easy2solutions\nfce\'
@@ -5623,7 +5632,6 @@ inherited DM: TDM
     LogoemCima = False
     TamanhoFonteEndereco = 0
     RecuoLogo = 0
-    TributosSeparadamente = False
     FonteTributos = 'IBPT'
     ImprimeEmUmaLinha = False
     ImprimeDescAcrescItem = False

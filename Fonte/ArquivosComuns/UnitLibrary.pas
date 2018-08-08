@@ -3375,7 +3375,8 @@ begin
       begin
         EncontrouProduto    := True;
         CodigoBarrasProduto := (Tabela as TQuery).FieldbyName('PRODA60CODBAR').Value;
-        PesagemAutomatica := (Tabela as TQuery).FieldbyName('PESAGEM_AUTOMATICA').Value;
+        if (Tabela as TQuery).FieldbyName('PESAGEM_AUTOMATICA').Value <> null then
+          PesagemAutomatica := (Tabela as TQuery).FieldbyName('PESAGEM_AUTOMATICA').Value;
         Exit;
       end
     else
