@@ -500,7 +500,7 @@ begin
 end;
 
 function TFormTelaItens.Gerar_NFCe(idCupom: string): string;
-var xCliente, xDocumento, xPlano: string;
+var xCliente, xDocumento, xPlano, vTotaItem: string;
 var iCRT: integer;
 var VlrDescNoTotal, VlrTroca, VlrTotalItens, PercDesc, TotalDesconto: double;
   vaux, Total_vTotTrib: Currency;
@@ -632,8 +632,13 @@ begin
         begin
           if length(dm.sqlConsulta.fieldbyname('PRODA60CODBAR').AsString) > 9 then
             Prod.cEAN := dm.sqlConsulta.fieldbyname('PRODA60CODBAR').AsString;
+          if Length(dm.sqlConsulta.fieldbyname('PRODA60CODBAR').AsString) < 10 then
+            Prod.cEAN := 'SEM GTIN';
+
           if length(dm.sqlConsulta.fieldbyname('PRODA60CODBAR').AsString) > 7 then
             Prod.cEANTrib := dm.sqlConsulta.fieldbyname('PRODA60CODBAR').AsString;
+          if Length(dm.sqlConsulta.fieldbyname('PRODA60CODBAR').AsString) < 8 then
+            Prod.cEANTrib := 'SEM GTIN';
         end;
         Prod.xProd := dm.sqlConsulta.fieldbyname('PRODA30ADESCRREDUZ').AsString;
                // Prod.xProd    := 'NOTA FISCAL EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL';
@@ -649,7 +654,11 @@ begin
         Prod.qCom := SQLImpressaoCupom.fieldbyname('CPITN3QTD').AsFloat;
         Prod.vUnCom := SQLImpressaoCupom.fieldbyname('CPITN3VLRUNIT').AsFloat;
         Prod.vProd := SQLImpressaoCupom.fieldbyname('CPITN3VLRUNIT').AsCurrency * SQLImpressaoCupom.fieldbyname('CPITN3QTD').AsCurrency;
-        vaux := RoundTo(Prod.vProd, -2);
+        vaux := SQLImpressaoCupom.fieldbyname('CPITN3VLRUNIT').AsCurrency * SQLImpressaoCupom.fieldbyname('CPITN3QTD').AsCurrency;
+        vTotaItem := FloatToStr(SQLImpressaoCupom.fieldbyname('CPITN3VLRUNIT').AsCurrency * SQLImpressaoCupom.fieldbyname('CPITN3QTD').AsCurrency);
+        vTotaItem := FloatToStr(RoundTo(StrToFloat(vTotaItem), -2));
+//        vaux := RoundTo(Prod.vProd, -2);
+        vaux := StrToFloat(vTotaItem);
         Prod.vProd := vaux;
 
         Prod.uTrib := SQLLocate('UNIDADE', 'UNIDICOD', 'UNIDA5DESCR', SQLLocate('PRODUTO', 'PRODICOD', 'UNIDICOD', SQLImpressaoCupom.fieldbyname('PRODICOD').AsString));
