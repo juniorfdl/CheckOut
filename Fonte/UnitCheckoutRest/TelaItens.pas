@@ -1949,12 +1949,12 @@ begin
 
              AlterarUsuario  := false ;
 
-         {    if TerminalModo = 'C' then
+             if TerminalModo = 'C' then
              begin
                TestaStatusCaixa ;
                if VerCaixa then
                  exit ;
-             end ;  }
+             end ;
 
              TipoVenda        := 0 ;
 
@@ -2451,6 +2451,13 @@ begin
              EditTxTele.Text := '';
              EditTxTele.Update;
 
+             if TerminalModo = 'C' then
+             begin
+               TestaStatusCaixa ;
+               if VerCaixa then
+                 exit ;
+             end ;
+
              LblNomeSistema.Caption := 'EM VENDA TELE...';
              LblNomeSistema.Update;
 
@@ -2533,6 +2540,13 @@ begin
              CodMesa := 0; CodConta := 0; VendPreVenda := 0;
              ckLevarCasa.Checked    := false;
              ckBusca.Checked        := false;
+
+             if TerminalModo = 'C' then
+             begin
+               TestaStatusCaixa ;
+               if VerCaixa then
+                 exit ;
+             end ;
 
              LblNomeSistema.Caption := 'EM PEDIDO...';
              LblNomeSistema.Update;

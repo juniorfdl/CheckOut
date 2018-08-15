@@ -221,7 +221,7 @@ begin
     // Final Venda
     memo.Lines.Add('</ae>------------------------------------------------');
     memo.Lines.Add('</ad>ITENS R$ ' + FormatFloat('##0.00',TblPreVendaCabTotalNominal.Value)+'   ');
-    memo.Lines.Add('Trocas  R$ ' + FormatFloat('##0.00',TotalTroca)+'   ');
+    memo.Lines.Add('Troco   R$ ' + FormatFloat('##0.00',TblPreVendaCabTroco.Value)+'   ');
     memo.Lines.Add('Descto  R$ ' + FormatFloat('##0.00',TblPreVendaCabDesconto.Value+TotDesc)+'   ');
     memo.Lines.Add('TOTAL   R$ ' + FormatFloat('##0.00',TblPreVendaCabTotalGeral.Value)+'   ');
     TblPedidoFinanceiro.First;

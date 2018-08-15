@@ -36,26 +36,26 @@ implementation
 procedure TFormTelaDadosCancelamento.BtnGravarClick(Sender: TObject);
 var erro: boolean;
 begin
-  erro := False;
-   if Length(EditClienteNomeMotivoCancelamento.Text) < 2 then
-     begin
-       ShowMessage('Necessario Informar Nome do Cliente!');
-       erro := True;
-     end;
-
-   if length(EditClienteFoneCancelamento.Text) < 8 then
-     begin
-       ShowMessage('Necessario Informar Telefone do Cliente!');
-       erro := True;
-     end;
-
-   if length(EditMotivoCancelamento.Text) < 10 then
-     begin
-       ShowMessage('Necessario Informar o Motivo');
-       erro := True;
-     end;
-   if not erro then
-     ModalResult := MrOK;  
+//  erro := False;
+//   if Length(EditClienteNomeMotivoCancelamento.Text) < 2 then
+//     begin
+//       ShowMessage('Necessario Informar Nome do Cliente!');
+//       erro := True;
+//     end;
+//
+//   if length(EditClienteFoneCancelamento.Text) < 8 then
+//     begin
+//       ShowMessage('Necessario Informar Telefone do Cliente!');
+//       erro := True;
+//     end;
+//
+//   if length(EditMotivoCancelamento.Text) < 10 then
+//     begin
+//       ShowMessage('Necessario Informar o Motivo');
+//       erro := True;
+//     end;
+//   if not erro then
+     ModalResult := MrOK;
 end;
 
 end.

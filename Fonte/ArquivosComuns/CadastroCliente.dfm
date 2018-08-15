@@ -754,6 +754,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
             Top = 42
             Width = 960
             Height = 556
+            ActivePage = TabSheetDadosPrincipais
             inherited TabSheetConsulta: TTabSheet
               inherited DBGridLista: TDBGrid
                 Width = 952
@@ -6998,7 +6999,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     end
   end
   inherited SQLTemplate: TRxQuery
-    Tag = 2
+    Tag = 4
     AfterInsert = SQLTemplateAfterInsert
     AfterEdit = SQLTemplateAfterEdit
     SQL.Strings = (
@@ -9401,7 +9402,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 0
     PrinterSetup.mmPaperWidth = 0
-    PrinterSetup.PaperSize = 119
+    PrinterSetup.PaperSize = 256
     DeviceType = 'Screen'
     EmailSettings.ReportFormat = 'PDF'
     OutlineSettings.CreateNode = True
@@ -12370,7 +12371,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 0
     PrinterSetup.mmPaperWidth = 0
-    PrinterSetup.PaperSize = 119
+    PrinterSetup.PaperSize = 256
     DeviceType = 'Screen'
     EmailSettings.ReportFormat = 'PDF'
     OutlineSettings.CreateNode = True
@@ -12685,7 +12686,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     PassSetting = psTwoPass
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'Custom'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.mmMarginBottom = 6350
     PrinterSetup.mmMarginLeft = 6350
@@ -12693,7 +12694,7 @@ inherited FormCadastroCliente: TFormCadastroCliente
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 0
     PrinterSetup.mmPaperWidth = 0
-    PrinterSetup.PaperSize = 9
+    PrinterSetup.PaperSize = 256
     DeviceType = 'Screen'
     EmailSettings.ReportFormat = 'PDF'
     OnPreviewFormCreate = ppExtratoCreditoResumidoPreviewFormCreate

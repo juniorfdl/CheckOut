@@ -1,6 +1,6 @@
 object FormTelaDadosCancelamento: TFormTelaDadosCancelamento
-  Left = 424
-  Top = 102
+  Left = 291
+  Top = 75
   BorderStyle = bsNone
   ClientHeight = 442
   ClientWidth = 662

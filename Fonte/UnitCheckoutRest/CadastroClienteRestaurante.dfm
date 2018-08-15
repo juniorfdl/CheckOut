@@ -1,37 +1,41 @@
 inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
-  Left = 420
-  Top = 55
+  Left = -8
+  Top = -8
   Caption = 'Cadastro de Clientes'
-  ClientWidth = 787
+  ClientHeight = 706
+  ClientWidth = 1366
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited ScrollBoxFundo: TScrollBox
-    Width = 787
+    Width = 1366
+    Height = 706
     inherited PanelCabecalho: TPanel
-      Width = 785
+      Width = 1364
       inherited ScrollBoxPanelCabecalho: TScrollBox
-        Width = 785
+        Width = 1364
         inherited Panel1: TPanel
-          Width = 783
+          Width = 1362
           inherited PanelNavigator: TPanel
-            Width = 783
+            Width = 1362
             inherited AdvPanelNavigator: TAdvOfficeStatusBar
-              Width = 783
+              Width = 1362
               inherited BtnFecharTela: TSpeedButton
                 Left = 704
               end
             end
           end
           inherited PanelLeft: TPanel
-            Left = 326
+            Left = 905
           end
         end
       end
     end
     inherited PanelCentral: TPanel
-      Width = 785
+      Width = 1364
+      Height = 632
       inherited PanelBarra: TPanel
+        Height = 632
         inherited Button3: TRxSpeedButton
           Tag = 4
           Caption = '&3 Credi'#225'rio'
@@ -161,7 +165,7 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
         end
         object FotoCliente: TImage
           Left = 0
-          Top = 318
+          Top = 501
           Width = 130
           Height = 113
           Align = alBottom
@@ -173,7 +177,7 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
         end
         object Panel4: TPanel
           Left = 0
-          Top = 431
+          Top = 614
           Width = 130
           Height = 18
           Align = alBottom
@@ -191,18 +195,20 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
         end
       end
       inherited PanelFundoDados: TPanel
-        Width = 655
+        Width = 1234
+        Height = 632
         inherited Panel5: TPanel
-          Width = 655
+          Width = 1234
+          Height = 632
           inherited PagePrincipal: TPageControl
             Top = 42
-            Width = 655
-            Height = 407
+            Width = 1234
+            Height = 590
             ActivePage = TabSheetDadosPrincipais
             inherited TabSheetConsulta: TTabSheet
               inherited DBGridLista: TDBGrid
-                Width = 647
-                Height = 334
+                Width = 1226
+                Height = 517
                 Columns = <
                   item
                     Expanded = False
@@ -251,18 +257,18 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
                   end>
               end
               inherited PanelProcura: TPanel
-                Width = 647
+                Width = 1226
                 inherited PanelBetween: TPanel
-                  Width = 253
+                  Width = 832
                   inherited AdvPanel1: TAdvPanel
-                    Width = 253
+                    Width = 832
                     FullHeight = 0
                   end
                 end
                 inherited PanelEditProcura: TPanel
-                  Width = 253
+                  Width = 832
                   inherited AdvPanelEditProcura: TAdvPanel
-                    Width = 253
+                    Width = 832
                     FullHeight = 0
                   end
                 end
@@ -287,7 +293,7 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
               object PanelTop: TPanel
                 Left = 0
                 Top = 0
-                Width = 647
+                Width = 1226
                 Height = 361
                 Align = alTop
                 BevelOuter = bvNone
@@ -334,7 +340,7 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
                   ParentFont = False
                 end
                 object Label42: TLabel
-                  Left = 3
+                  Left = 4
                   Top = 35
                   Width = 34
                   Height = 13
@@ -348,7 +354,7 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
                   ParentFont = False
                 end
                 object Label7: TLabel
-                  Left = 3
+                  Left = 4
                   Top = 71
                   Width = 37
                   Height = 13
@@ -403,7 +409,7 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
                   ParentFont = False
                 end
                 object Label77: TLabel
-                  Left = 5
+                  Left = 4
                   Top = 109
                   Width = 76
                   Height = 13
@@ -456,7 +462,7 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
                   ParentFont = False
                 end
                 object DBEditEnd: TDBEdit
-                  Left = 0
+                  Left = 4
                   Top = 13
                   Width = 593
                   Height = 21
@@ -547,7 +553,7 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
                     'EX')
                 end
                 object DBEdit21: TDBEdit
-                  Left = 0
+                  Left = 4
                   Top = 48
                   Width = 243
                   Height = 21
@@ -556,7 +562,7 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
                   TabOrder = 1
                 end
                 object DBEdit4: TDBEdit
-                  Left = 1
+                  Left = 4
                   Top = 84
                   Width = 120
                   Height = 21
@@ -591,15 +597,15 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
                   TabOrder = 6
                 end
                 object PageControl1: TPageControl
-                  Left = 5
-                  Top = 157
+                  Left = 4
+                  Top = 177
                   Width = 638
                   Height = 145
                   ActivePage = TabSheet2
                   Images = ImageList2
                   MultiLine = True
                   Style = tsFlatButtons
-                  TabOrder = 12
+                  TabOrder = 13
                   object TabSheet2: TTabSheet
                     Caption = 'Observa'#231#227'o 1'
                     object MemoOBS: TDBMemo
@@ -654,7 +660,7 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
                     'N')
                 end
                 object DBDateEdit8: TDBDateEdit
-                  Left = 2
+                  Left = 4
                   Top = 122
                   Width = 120
                   Height = 21
@@ -781,6 +787,24 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
                   TabOrder = 10
                   OnExit = DBEdit2Exit
                 end
+                object DBCheckBox3: TDBCheckBox
+                  Left = 4
+                  Top = 150
+                  Width = 201
+                  Height = 17
+                  Caption = 'Permite Venda Cr'#233'diario/Boleto'
+                  DataField = 'CLIECVNDCRED'
+                  DataSource = DSTemplate
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clRed
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = [fsBold]
+                  ParentFont = False
+                  TabOrder = 12
+                  ValueChecked = 'S'
+                  ValueUnchecked = 'N'
+                end
               end
             end
             object TabSheetDadosCompra: TTabSheet
@@ -789,8 +813,8 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
               object PageControlDadosCompra: TPageControl
                 Left = 0
                 Top = 0
-                Width = 647
-                Height = 381
+                Width = 1226
+                Height = 564
                 ActivePage = TabCarne
                 Align = alClient
                 Images = ImageList2
@@ -803,8 +827,8 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
                   object DBGridDadosCompra: TDBGrid
                     Left = 0
                     Top = 37
-                    Width = 639
-                    Height = 192
+                    Width = 1218
+                    Height = 375
                     Hint = 
                       '>>>> Clique com o bot'#227'o direito para lan'#231'ar um hist'#243'rico...'#13#10'>>>' +
                       '> Clique na coluna em uma das colunas branco para reorganizar o ' +
@@ -1018,8 +1042,8 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
                   end
                   object GroupBoxCupomObs: TGroupBox
                     Left = 0
-                    Top = 229
-                    Width = 639
+                    Top = 412
+                    Width = 1218
                     Height = 42
                     Align = alBottom
                     Caption = ' Observa'#231#227'o '
@@ -1053,8 +1077,8 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
                   end
                   object GroupBox2: TGroupBox
                     Left = 0
-                    Top = 271
-                    Width = 639
+                    Top = 454
+                    Width = 1218
                     Height = 78
                     Align = alBottom
                     TabOrder = 2
@@ -1508,7 +1532,7 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
                   object GroupLegenda: TGroupBox
                     Left = 0
                     Top = 0
-                    Width = 639
+                    Width = 1218
                     Height = 37
                     Align = alTop
                     Font.Charset = ANSI_CHARSET
@@ -1647,8 +1671,8 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
                   object DBGridCheque: TDBGrid
                     Left = 0
                     Top = 0
-                    Width = 639
-                    Height = 304
+                    Width = 1218
+                    Height = 487
                     Align = alClient
                     BorderStyle = bsNone
                     Color = clWhite
@@ -1753,8 +1777,8 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
                   end
                   object GroupBox4: TGroupBox
                     Left = 0
-                    Top = 304
-                    Width = 639
+                    Top = 487
+                    Width = 1218
                     Height = 45
                     Align = alBottom
                     TabOrder = 1
@@ -1895,8 +1919,8 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
                   object DBGrid1: TDBGrid
                     Left = 0
                     Top = 0
-                    Width = 639
-                    Height = 304
+                    Width = 1218
+                    Height = 487
                     Align = alClient
                     BorderStyle = bsNone
                     Color = clWhite
@@ -1974,8 +1998,8 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
                   end
                   object GroupBox10: TGroupBox
                     Left = 0
-                    Top = 304
-                    Width = 639
+                    Top = 487
+                    Width = 1218
                     Height = 45
                     Align = alBottom
                     TabOrder = 1
@@ -2132,8 +2156,8 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
               object DBGridItens: TDBGrid
                 Left = 0
                 Top = 41
-                Width = 647
-                Height = 340
+                Width = 1226
+                Height = 523
                 Align = alClient
                 BorderStyle = bsNone
                 Color = clWhite
@@ -2220,7 +2244,7 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
               object PanelPesquisa: TPanel
                 Left = 0
                 Top = 0
-                Width = 647
+                Width = 1226
                 Height = 41
                 Align = alTop
                 BevelOuter = bvNone
@@ -2316,11 +2340,11 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
             end
           end
           inherited PanelMaster: TPanel
-            Width = 655
+            Width = 1234
             Height = 1
           end
           inherited PanelCodigoDescricao: TPanel
-            Width = 655
+            Width = 1234
             object Label1: TLabel
               Left = 8
               Top = 4
@@ -2350,7 +2374,7 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
               ParentFont = False
             end
             object Label9: TLabel
-              Left = 473
+              Left = 468
               Top = 4
               Width = 65
               Height = 13
@@ -2364,7 +2388,7 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
               ParentFont = False
             end
             object DBEdit1: TDBEdit
-              Left = 4
+              Left = 8
               Top = 17
               Width = 87
               Height = 21
@@ -2374,7 +2398,7 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
               TabOrder = 0
             end
             object DBEditNome: TDBEdit
-              Left = 95
+              Left = 98
               Top = 17
               Width = 368
               Height = 21
@@ -4404,7 +4428,7 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 279401
     PrinterSetup.mmPaperWidth = 215900
-    PrinterSetup.PaperSize = 120
+    PrinterSetup.PaperSize = 256
     DeviceType = 'Screen'
     EmailSettings.ReportFormat = 'PDF'
     OutlineSettings.CreateNode = True
@@ -7016,7 +7040,7 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 279401
     PrinterSetup.mmPaperWidth = 215900
-    PrinterSetup.PaperSize = 120
+    PrinterSetup.PaperSize = 256
     DeviceType = 'Screen'
     EmailSettings.ReportFormat = 'PDF'
     OutlineSettings.CreateNode = True

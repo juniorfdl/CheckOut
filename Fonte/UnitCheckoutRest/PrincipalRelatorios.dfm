@@ -292,8 +292,8 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     object LblNomeSistema: TRxLabel
       Left = 0
       Top = 0
-      Width = 536
-      Height = 49
+      Width = 224
+      Height = 39
       Align = alClient
       Alignment = taCenter
       Caption = 'Resumo de Caixa'
@@ -1273,7 +1273,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       FieldName = 'OPCXICOD'
       FieldLength = 0
       DataType = dtInteger
-      DisplayWidth = 0
+      DisplayWidth = 10
       Position = 0
     end
     object PipeOperacaoppField2: TppField
@@ -1287,24 +1287,26 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       Alignment = taRightJustify
       FieldAlias = 'CREDITOS'
       FieldName = 'CREDITOS'
-      FieldLength = 3
+      FieldLength = 0
       DataType = dtDouble
-      DisplayWidth = 16
+      DisplayWidth = 10
       Position = 2
     end
     object PipeOperacaoppField4: TppField
       Alignment = taRightJustify
       FieldAlias = 'DEBITOS'
       FieldName = 'DEBITOS'
-      FieldLength = 3
+      FieldLength = 0
       DataType = dtDouble
-      DisplayWidth = 16
+      DisplayWidth = 10
       Position = 3
     end
     object PipeOperacaoppField5: TppField
+      Alignment = taRightJustify
       FieldAlias = 'SALDO'
       FieldName = 'SALDO'
-      FieldLength = 10
+      FieldLength = 0
+      DataType = dtDouble
       DisplayWidth = 10
       Position = 4
     end
@@ -1320,7 +1322,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       FieldName = 'NUMEICOD'
       FieldLength = 0
       DataType = dtInteger
-      DisplayWidth = 0
+      DisplayWidth = 10
       Position = 0
     end
     object PipeNumerarioppField2: TppField
@@ -1331,31 +1333,38 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       Position = 1
     end
     object PipeNumerarioppField3: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'VLRCREDITO'
-      FieldName = 'VLRCREDITO'
-      FieldLength = 3
-      DataType = dtDouble
-      DisplayWidth = 16
+      FieldAlias = 'NUMEA5TIPO'
+      FieldName = 'NUMEA5TIPO'
+      FieldLength = 5
+      DisplayWidth = 5
       Position = 2
     end
     object PipeNumerarioppField4: TppField
       Alignment = taRightJustify
-      FieldAlias = 'VLRDEBITO'
-      FieldName = 'VLRDEBITO'
-      FieldLength = 3
+      FieldAlias = 'VLRCREDITO'
+      FieldName = 'VLRCREDITO'
+      FieldLength = 0
       DataType = dtDouble
-      DisplayWidth = 16
+      DisplayWidth = 10
       Position = 3
     end
     object PipeNumerarioppField5: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'VLRDEBITO'
+      FieldName = 'VLRDEBITO'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 4
+    end
+    object PipeNumerarioppField6: TppField
       Alignment = taRightJustify
       FieldAlias = 'SALDO'
       FieldName = 'SALDO'
       FieldLength = 0
       DataType = dtDouble
       DisplayWidth = 10
-      Position = 4
+      Position = 5
     end
   end
   object dsMotoboy: TDataSource
@@ -1534,7 +1543,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 0
     PrinterSetup.mmPaperWidth = 0
-    PrinterSetup.PaperSize = 256
+    PrinterSetup.PaperSize = 177
     DeviceType = 'Screen'
     EmailSettings.ReportFormat = 'PDF'
     OnPreviewFormCreate = ReportTelePreviewFormCreate
@@ -1607,7 +1616,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Style = []
         Transparent = True
         mmHeight = 951973
-        mmLeft = 3990189
+        mmLeft = 0
         mmTop = 1890187
         mmWidth = 5398834
         BandType = 0
@@ -1626,7 +1635,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Style = []
         Transparent = True
         mmHeight = 951973
-        mmLeft = 4830243
+        mmLeft = 0
         mmTop = 3010171
         mmWidth = 5678763
         BandType = 0
@@ -1683,7 +1692,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Style = []
         Transparent = True
         mmHeight = 1008065
-        mmLeft = 4340234
+        mmLeft = 0
         mmTop = 4200269
         mmWidth = 7941220
         BandType = 0
@@ -1702,7 +1711,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Style = [fsBold]
         Transparent = True
         mmHeight = 1119983
-        mmLeft = 210080
+        mmLeft = 0
         mmTop = 6160306
         mmWidth = 3248296
         BandType = 0
@@ -1721,7 +1730,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Style = [fsBold]
         Transparent = True
         mmHeight = 1119983
-        mmLeft = 12110797
+        mmLeft = 0
         mmTop = 6160306
         mmWidth = 4043371
         BandType = 0
@@ -1740,7 +1749,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Style = [fsBold]
         Transparent = True
         mmHeight = 1119983
-        mmLeft = 4620428
+        mmLeft = 0
         mmTop = 7630599
         mmWidth = 5600447
         BandType = 0
@@ -1759,7 +1768,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Style = [fsBold]
         Transparent = True
         mmHeight = 1119983
-        mmLeft = 11690902
+        mmLeft = 0
         mmTop = 7630599
         mmWidth = 4690278
         BandType = 0
@@ -1785,7 +1794,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Transparent = True
         DataPipelineName = 'PipeVendas'
         mmHeight = 910168
-        mmLeft = 139965
+        mmLeft = 0
         mmTop = 70115
         mmWidth = 10780734
         BandType = 4
@@ -1808,7 +1817,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Transparent = True
         DataPipelineName = 'PipeVendas'
         mmHeight = 907258
-        mmLeft = 5740411
+        mmLeft = 0
         mmTop = 1050133
         mmWidth = 4130154
         BandType = 4
@@ -1831,7 +1840,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Transparent = True
         DataPipelineName = 'PipeVendas'
         mmHeight = 907258
-        mmLeft = 11200629
+        mmLeft = 0
         mmTop = 1050133
         mmWidth = 4830243
         BandType = 4
@@ -1852,7 +1861,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Transparent = True
         DataPipelineName = 'PipeVendas'
         mmHeight = 910168
-        mmLeft = 279930
+        mmLeft = 0
         mmTop = 1050133
         mmWidth = 4900358
         BandType = 4
@@ -1871,7 +1880,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Style = []
         Transparent = True
         mmHeight = 907258
-        mmLeft = 12390727
+        mmLeft = 0
         mmTop = 70115
         mmWidth = 3404930
         BandType = 4
@@ -1924,7 +1933,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Transparent = True
         DataPipelineName = 'PipeVendas'
         mmHeight = 907258
-        mmLeft = 10990814
+        mmLeft = 0
         mmTop = 490009
         mmWidth = 4970208
         BandType = 7
@@ -1944,7 +1953,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 1119983
-        mmLeft = 420159
+        mmLeft = 0
         mmTop = 279930
         mmWidth = 3220250
         BandType = 7
@@ -1957,7 +1966,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Border.Visible = False
         Weight = 0.750000000000000000
         mmHeight = 279930
-        mmLeft = 4130154
+        mmLeft = 0
         mmTop = 139965
         mmWidth = 11340858
         BandType = 7
@@ -1979,7 +1988,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Transparent = True
         DataPipelineName = 'PipeVendas'
         mmHeight = 907258
-        mmLeft = 4200269
+        mmLeft = 0
         mmTop = 490009
         mmWidth = 5670297
         BandType = 7
@@ -2533,7 +2542,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     DataPipeline = PipeOperacao
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'Custom'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.mmMarginBottom = 6350
     PrinterSetup.mmMarginLeft = 6350
@@ -2541,7 +2550,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 297000
     PrinterSetup.mmPaperWidth = 210000
-    PrinterSetup.PaperSize = 256
+    PrinterSetup.PaperSize = 9
     DeviceType = 'Screen'
     EmailSettings.ReportFormat = 'PDF'
     OnPreviewFormCreate = ReportTotaisPreviewFormCreate
@@ -2552,7 +2561,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     TextSearchSettings.DefaultString = '<FindText>'
     TextSearchSettings.Enabled = False
     Left = 343
-    Top = 252
+    Top = 256
     Version = '10.06'
     mmColumnWidth = 0
     DataPipelineName = 'PipeOperacao'
@@ -2926,7 +2935,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
           DataPipeline = PipeNumerario
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
-          PrinterSetup.PaperName = 'Custom'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.mmMarginBottom = 6350
           PrinterSetup.mmMarginLeft = 6350
@@ -2934,7 +2943,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
           PrinterSetup.mmMarginTop = 6350
           PrinterSetup.mmPaperHeight = 297000
           PrinterSetup.mmPaperWidth = 210000
-          PrinterSetup.PaperSize = 256
+          PrinterSetup.PaperSize = 9
           Version = '10.06'
           mmColumnWidth = 0
           DataPipelineName = 'PipeNumerario'
@@ -3118,7 +3127,9 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               BandType = 4
             end
           end
-          object ppSummaryBand2: TppSummaryBand
+          object SumarioNumerarios: TppSummaryBand
+            BeforePrint = SumarioNumerariosBeforePrint
+            PrintHeight = phDynamic
             mmBottomOffset = 0
             mmHeight = 98954
             mmPrintPosition = 0
@@ -3141,9 +3152,9 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               Transparent = True
               DataPipelineName = 'PipeNumerario'
               mmHeight = 4233
-              mmLeft = 41010
+              mmLeft = 44566
               mmTop = 529
-              mmWidth = 26670
+              mmWidth = 23114
               BandType = 7
             end
             object ppLabel25: TppLabel
@@ -3566,6 +3577,351 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               mmWidth = 7832
               BandType = 7
             end
+            object ppSubReport2: TppSubReport
+              UserName = 'SubReport2'
+              ExpandAll = False
+              NewPrintJob = False
+              OutlineSettings.CreateNode = True
+              TraverseAllData = False
+              DataPipelineName = 'PipeItensVendidos'
+              mmHeight = 5027
+              mmLeft = 0
+              mmTop = 93927
+              mmWidth = 197300
+              BandType = 7
+              mmBottomOffset = 0
+              mmOverFlowOffset = 0
+              mmStopPosition = 0
+              object ppChildReport2: TppChildReport
+                AutoStop = False
+                DataPipeline = PipeItensVendidos
+                PrinterSetup.BinName = 'Default'
+                PrinterSetup.DocumentName = 'Report'
+                PrinterSetup.PaperName = 'A4'
+                PrinterSetup.PrinterName = 'Default'
+                PrinterSetup.mmMarginBottom = 6350
+                PrinterSetup.mmMarginLeft = 6350
+                PrinterSetup.mmMarginRight = 6350
+                PrinterSetup.mmMarginTop = 6350
+                PrinterSetup.mmPaperHeight = 297000
+                PrinterSetup.mmPaperWidth = 210000
+                PrinterSetup.PaperSize = 9
+                Version = '10.06'
+                mmColumnWidth = 0
+                DataPipelineName = 'PipeItensVendidos'
+                object TituloProdutosVendidos: TppTitleBand
+                  mmBottomOffset = 0
+                  mmHeight = 4233
+                  mmPrintPosition = 0
+                  object ppLabel43: TppLabel
+                    UserName = 'Label1'
+                    AutoSize = False
+                    Border.BorderPositions = []
+                    Border.Color = clBlack
+                    Border.Style = psSolid
+                    Border.Visible = False
+                    Caption = 'Produtos Vendidos'
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clBlack
+                    Font.Name = 'Tahoma'
+                    Font.Size = 10
+                    Font.Style = [fsBold, fsUnderline]
+                    Transparent = True
+                    mmHeight = 4318
+                    mmLeft = 0
+                    mmTop = 0
+                    mmWidth = 110861
+                    BandType = 1
+                  end
+                  object ppLabel11: TppLabel
+                    UserName = 'Label302'
+                    Border.BorderPositions = []
+                    Border.Color = clBlack
+                    Border.Style = psSolid
+                    Border.Visible = False
+                    Caption = 'Vlr.U.Venda'
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clBlack
+                    Font.Name = 'Tahoma'
+                    Font.Size = 10
+                    Font.Style = [fsBold, fsUnderline]
+                    TextAlignment = taRightJustified
+                    Transparent = True
+                    mmHeight = 4233
+                    mmLeft = 129382
+                    mmTop = 0
+                    mmWidth = 20743
+                    BandType = 1
+                  end
+                  object ppLabel42: TppLabel
+                    UserName = 'Label2'
+                    Border.BorderPositions = []
+                    Border.Color = clBlack
+                    Border.Style = psSolid
+                    Border.Visible = False
+                    Caption = 'Quantidade'
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clBlack
+                    Font.Name = 'Tahoma'
+                    Font.Size = 10
+                    Font.Style = [fsBold, fsUnderline]
+                    TextAlignment = taRightJustified
+                    Transparent = True
+                    mmHeight = 4233
+                    mmLeft = 150548
+                    mmTop = 0
+                    mmWidth = 20405
+                    BandType = 1
+                  end
+                  object ppLabel41: TppLabel
+                    UserName = 'Label3'
+                    Border.BorderPositions = []
+                    Border.Color = clBlack
+                    Border.Style = psSolid
+                    Border.Visible = False
+                    Caption = 'Vlr.Total Item'
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clBlack
+                    Font.Name = 'Tahoma'
+                    Font.Size = 10
+                    Font.Style = [fsBold, fsUnderline]
+                    TextAlignment = taRightJustified
+                    Transparent = True
+                    mmHeight = 4233
+                    mmLeft = 171450
+                    mmTop = 0
+                    mmWidth = 24553
+                    BandType = 1
+                  end
+                end
+                object DetalheProdutosVendidos: TppDetailBand
+                  BeforePrint = DetalheProdutosVendidosBeforePrint
+                  mmBottomOffset = 0
+                  mmHeight = 265
+                  mmPrintPosition = 0
+                  object ppDBText27: TppDBText
+                    UserName = 'DBText10'
+                    AutoSize = True
+                    Border.BorderPositions = []
+                    Border.Color = clBlack
+                    Border.Style = psSolid
+                    Border.Visible = False
+                    DataField = 'QTDE'
+                    DataPipeline = PipeItensVendidos
+                    DisplayFormat = '#0.000'
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clBlack
+                    Font.Name = 'Tahoma'
+                    Font.Size = 8
+                    Font.Style = []
+                    TextAlignment = taRightJustified
+                    Transparent = True
+                    DataPipelineName = 'PipeItensVendidos'
+                    mmHeight = 0
+                    mmLeft = 161132
+                    mmTop = 0
+                    mmWidth = 7154
+                    BandType = 4
+                  end
+                  object ppDBText28: TppDBText
+                    UserName = 'DBText101'
+                    AutoSize = True
+                    Border.BorderPositions = []
+                    Border.Color = clBlack
+                    Border.Style = psSolid
+                    Border.Visible = False
+                    DataField = 'VLRTOTALITEM'
+                    DataPipeline = PipeItensVendidos
+                    DisplayFormat = '#0.00'
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clBlack
+                    Font.Name = 'Tahoma'
+                    Font.Size = 8
+                    Font.Style = []
+                    TextAlignment = taRightJustified
+                    Transparent = True
+                    DataPipelineName = 'PipeItensVendidos'
+                    mmHeight = 0
+                    mmLeft = 175155
+                    mmTop = 0
+                    mmWidth = 19770
+                    BandType = 4
+                  end
+                end
+                object ppSummaryBand4: TppSummaryBand
+                  mmBottomOffset = 0
+                  mmHeight = 529
+                  mmPrintPosition = 0
+                  object ppLine1: TppLine
+                    UserName = 'Line1'
+                    Border.BorderPositions = []
+                    Border.Color = clBlack
+                    Border.Style = psSolid
+                    Border.Visible = False
+                    Pen.Style = psDot
+                    Weight = 0.750000000000000000
+                    mmHeight = 529
+                    mmLeft = 529
+                    mmTop = 0
+                    mmWidth = 197115
+                    BandType = 7
+                  end
+                end
+                object ppGroup1: TppGroup
+                  BreakName = 'PRODICOD'
+                  DataPipeline = PipeItensVendidos
+                  KeepTogether = True
+                  OutlineSettings.CreateNode = True
+                  UserName = 'Group1'
+                  mmNewColumnThreshold = 0
+                  mmNewPageThreshold = 0
+                  DataPipelineName = 'PipeItensVendidos'
+                  object ppGroupHeaderBand1: TppGroupHeaderBand
+                    mmBottomOffset = 0
+                    mmHeight = 794
+                    mmPrintPosition = 0
+                  end
+                  object TotalProdutosVendidos: TppGroupFooterBand
+                    mmBottomOffset = 0
+                    mmHeight = 3704
+                    mmPrintPosition = 0
+                    object ppDBText26: TppDBText
+                      UserName = 'DBText9'
+                      Border.BorderPositions = []
+                      Border.Color = clBlack
+                      Border.Style = psSolid
+                      Border.Visible = False
+                      DataField = 'PRODICOD'
+                      DataPipeline = PipeItensVendidos
+                      DisplayFormat = '#####00000'
+                      Font.Charset = DEFAULT_CHARSET
+                      Font.Color = clBlack
+                      Font.Name = 'Tahoma'
+                      Font.Size = 8
+                      Font.Style = []
+                      Transparent = True
+                      DataPipelineName = 'PipeItensVendidos'
+                      mmHeight = 3440
+                      mmLeft = 529
+                      mmTop = 264
+                      mmWidth = 17198
+                      BandType = 5
+                      GroupNo = 0
+                    end
+                    object Produto: TppLabel
+                      UserName = 'Produto'
+                      AutoSize = False
+                      Border.BorderPositions = []
+                      Border.Color = clBlack
+                      Border.Style = psSolid
+                      Border.Visible = False
+                      Caption = 'Produto'
+                      Font.Charset = DEFAULT_CHARSET
+                      Font.Color = clBlack
+                      Font.Name = 'Tahoma'
+                      Font.Size = 8
+                      Font.Style = []
+                      Transparent = True
+                      mmHeight = 3440
+                      mmLeft = 19050
+                      mmTop = 264
+                      mmWidth = 92604
+                      BandType = 5
+                      GroupNo = 0
+                    end
+                    object ppDBText20: TppDBText
+                      UserName = 'DBText102'
+                      AutoSize = True
+                      Border.BorderPositions = []
+                      Border.Color = clBlack
+                      Border.Style = psSolid
+                      Border.Visible = False
+                      DataField = 'CPITN3VLRUNIT'
+                      DataPipeline = PipeItensVendidos
+                      DisplayFormat = '#0.000'
+                      Font.Charset = DEFAULT_CHARSET
+                      Font.Color = clBlack
+                      Font.Name = 'Tahoma'
+                      Font.Size = 8
+                      Font.Style = []
+                      TextAlignment = taRightJustified
+                      Transparent = True
+                      DataPipelineName = 'PipeItensVendidos'
+                      mmHeight = 3440
+                      mmLeft = 130704
+                      mmTop = 264
+                      mmWidth = 19579
+                      BandType = 5
+                      GroupNo = 0
+                    end
+                    object ppDBCalc5: TppDBCalc
+                      UserName = 'DBCalc4'
+                      Border.BorderPositions = []
+                      Border.Color = clBlack
+                      Border.Style = psSolid
+                      Border.Visible = False
+                      DataField = 'QTDE'
+                      DataPipeline = PipeItensVendidos
+                      DisplayFormat = '##0.000'
+                      Font.Charset = DEFAULT_CHARSET
+                      Font.Color = clBlack
+                      Font.Name = 'Tahoma'
+                      Font.Size = 8
+                      Font.Style = []
+                      ResetGroup = ppGroup1
+                      TextAlignment = taRightJustified
+                      Transparent = True
+                      DataPipelineName = 'PipeItensVendidos'
+                      mmHeight = 3440
+                      mmLeft = 151871
+                      mmTop = 264
+                      mmWidth = 16669
+                      BandType = 5
+                      GroupNo = 0
+                    end
+                    object ppDBCalc6: TppDBCalc
+                      UserName = 'DBCalc2'
+                      Border.BorderPositions = []
+                      Border.Color = clBlack
+                      Border.Style = psSolid
+                      Border.Visible = False
+                      DataField = 'VLRTOTALITEM'
+                      DataPipeline = PipeItensVendidos
+                      DisplayFormat = '##0.00'
+                      Font.Charset = DEFAULT_CHARSET
+                      Font.Color = clBlack
+                      Font.Name = 'Tahoma'
+                      Font.Size = 8
+                      Font.Style = []
+                      ResetGroup = ppGroup1
+                      TextAlignment = taRightJustified
+                      Transparent = True
+                      DataPipelineName = 'PipeItensVendidos'
+                      mmHeight = 3429
+                      mmLeft = 173832
+                      mmTop = 265
+                      mmWidth = 21167
+                      BandType = 5
+                      GroupNo = 0
+                    end
+                  end
+                end
+              end
+            end
+            object ppLine4: TppLine
+              UserName = 'Line4'
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
+              Pen.Style = psDot
+              Weight = 0.750000000000000000
+              mmHeight = 1852
+              mmLeft = 529
+              mmTop = 93398
+              mmWidth = 197115
+              BandType = 7
+            end
           end
           object raCodeModule1: TraCodeModule
             ProgramStream = {00}
@@ -3650,16 +4006,59 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Transparent = True
         DataPipelineName = 'PipeOperacao'
         mmHeight = 4233
-        mmLeft = 48101
+        mmLeft = 46683
         mmTop = 1588
-        mmWidth = 21696
+        mmWidth = 23114
         BandType = 7
       end
     end
-    object raCodeModule2: TraCodeModule
-      ProgramStream = {00}
-    end
     object ppParameterList1: TppParameterList
+    end
+  end
+  object PipeItensVendidos: TppBDEPipeline
+    DataSource = dsSQLItensVendidos
+    UserName = 'PipeItensVendidos'
+    Left = 428
+    Top = 259
+    object PipeItensVendidosppField1: TppField
+      FieldAlias = 'PRODICOD'
+      FieldName = 'PRODICOD'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 0
+      Searchable = False
+      Sortable = False
+    end
+    object PipeItensVendidosppField2: TppField
+      FieldAlias = 'CPITN3VLRUNIT'
+      FieldName = 'CPITN3VLRUNIT'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 1
+      Searchable = False
+      Sortable = False
+    end
+    object PipeItensVendidosppField3: TppField
+      FieldAlias = 'QTDE'
+      FieldName = 'QTDE'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 2
+      Searchable = False
+      Sortable = False
+    end
+    object PipeItensVendidosppField4: TppField
+      FieldAlias = 'VLRTOTALITEM'
+      FieldName = 'VLRTOTALITEM'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 3
+      Searchable = False
+      Sortable = False
     end
   end
 end

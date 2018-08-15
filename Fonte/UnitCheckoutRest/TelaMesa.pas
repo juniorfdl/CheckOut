@@ -1133,7 +1133,15 @@ begin
       Troco := (TotalRecebido+EditValorPago.Value) - (EditTotal.Value-EditDesconto.Value);
       FormTelaTroco.labeltroco.Caption :=  FormatFloat('R$ ##0.00',Troco);
       if Troco > 0 then
+      begin
         FormTelaTroco.ShowModal;
+        DM.TblTicketPreVendaCab.Close;
+        DM.TblTicketPreVendaCab.Open;
+        DM.TblTicketPreVendaCab.Edit;
+        DM.TblTicketPreVendaCabTroco.Value := Troco;
+        DM.TblTicketPreVendaCab.Post;
+      end;
+
 
       // Gravar Cabecalho Cupom
       // ErroGravando := True;

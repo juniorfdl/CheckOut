@@ -1,6 +1,6 @@
 object FormTelaImportarPreVenda: TFormTelaImportarPreVenda
-  Left = 338
-  Top = 0
+  Left = 135
+  Top = 21
   BorderIcons = []
   BorderStyle = bsSingle
   ClientHeight = 730
