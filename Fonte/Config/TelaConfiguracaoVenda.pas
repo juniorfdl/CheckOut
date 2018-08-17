@@ -140,6 +140,9 @@ type
     ComboOrdemImp: TRxDBComboBox;
     SQLConfigVendaCFVEA20ORDIMPVEND: TStringField;
     BotaoGravar: TSpeedButton;
+    SQLConfigVendaVALOR_LIMITE_PAGTO: TFloatField;
+    GroupBox6: TGroupBox;
+    DBEdit6: TDBEdit;
     procedure BotaoGravarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

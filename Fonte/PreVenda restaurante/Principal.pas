@@ -238,7 +238,7 @@ begin
     ACBrPosPrinter.Imprimir(Memo.Lines.Text);
     if ImpMarca = 'DR800' then sleep(100);
     ACBrPosPrinter.Desativar;
-    ShowMessage('Impressão concluída!');
+//    ShowMessage('Impressão concluída!');
 //    memo.Lines.SaveToFile('C:\ImpressaoPreVenda.txt');
     // Segunda Via
     if NroVias = '2' then

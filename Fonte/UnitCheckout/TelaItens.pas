@@ -327,6 +327,7 @@ type
     procedure SQLItensVendaTempAfterPost(DataSet: TDataSet);
     procedure FormDestroy(Sender: TObject);
     procedure GridItensEnter(Sender: TObject);
+    procedure PagePrincipalChange(Sender: TObject);
 
   private
     { Private declarations }
@@ -5401,11 +5402,20 @@ end;
 
 procedure TFormTelaItens.EditQtdeKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
+var
+  vDouble: Double;
 begin
   if Key = VK_Return then
   begin
     if (EditQtde.Value > 0) then
     begin
+      vDouble := StrToFloat(EditQtde.Text);
+      if vDouble >= 1000 then
+      begin
+        InformaG('Valor informado excede o limite permitido. Favor verificar!');
+        EditQtde.SetFocus;
+        Exit;
+      end;
       if (EntradaDados.Text <> '') then
       begin
         VoltaParaEntradaDados;
@@ -6706,6 +6716,12 @@ end;
 procedure TFormTelaItens.GridItensEnter(Sender: TObject);
 begin
   EntradaDados.SetFocus;
+end;
+
+procedure TFormTelaItens.PagePrincipalChange(Sender: TObject);
+begin
+  if PagePrincipal.ActivePage = TabPublicidade then
+    PagePrincipal.ActivePage := TabVenda;
 end;
 
 end.

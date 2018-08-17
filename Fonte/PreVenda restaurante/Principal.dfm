@@ -1,8 +1,8 @@
 object FormPrincipal: TFormPrincipal
-  Left = 433
-  Top = 248
+  Left = 714
+  Top = 259
   Width = 507
-  Height = 87
+  Height = 118
   Caption = 'Impressao PreVenda'
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET

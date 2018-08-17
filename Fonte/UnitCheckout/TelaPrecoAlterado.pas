@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Buttons, ExtCtrls, RXCtrls, ComCtrls, Grids, DBGrids, RXDBCtrl, Mask,
-  ToolEdit, CurrEdit;
+  ToolEdit, CurrEdit, UnitCheckoutLibrary;
 
 type
   TFormTelaPrecoAlterado = class(TForm)
@@ -50,8 +50,13 @@ begin
     if EditValorTotal.Text <> '' then
     begin
       vDouble := StrToFloat(EditValorTotal.Text);
-      if vDouble <= 0 then
+      if (vDouble <= 0) then
       begin
+        ModalResult := mrCancel;
+      end;
+      if (vDouble >= DM.SQLConfigVendaVALOR_LIMITE_PAGTO.AsFloat) and (DM.SQLConfigVendaVALOR_LIMITE_PAGTO.AsFloat > 0) then
+      begin
+        InformaG('Valor informado excede o limite permitido. Favor verificar!');
         ModalResult := mrCancel;
       end;
     end

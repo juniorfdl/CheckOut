@@ -11,19 +11,19 @@ inherited FormTelaConfiguracaoVenda: TFormTelaConfiguracaoVenda
   TextHeight = 13
   inherited ScrollBoxFundo: TScrollBox
     Width = 796
-    Height = 561
+    Height = 562
     inherited PanelCentral: TPanel
       Width = 792
-      Height = 477
+      Height = 478
       inherited PanelBarra: TPanel
         Width = 1
-        Height = 477
+        Height = 478
       end
       object PageControl1: TPageControl
         Left = 1
         Top = 0
         Width = 791
-        Height = 477
+        Height = 478
         ActivePage = TabConfiguracoes
         Align = alClient
         Style = tsFlatButtons
@@ -641,6 +641,29 @@ inherited FormTelaConfiguracaoVenda: TFormTelaConfiguracaoVenda
                 'PDVDDHVENDA Desc'
                 'MESAICOD, PRVDICOD Asc'
                 'PDVDDHVENDA Asc')
+            end
+          end
+          object GroupBox6: TGroupBox
+            Left = 558
+            Top = 217
+            Width = 182
+            Height = 48
+            Caption = 'Valor Limite Pagamento'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 6
+            object DBEdit6: TDBEdit
+              Left = 8
+              Top = 18
+              Width = 163
+              Height = 21
+              DataField = 'VALOR_LIMITE_PAGTO'
+              DataSource = DSSQLConfigVenda
+              TabOrder = 0
             end
           end
         end
@@ -1387,6 +1410,12 @@ inherited FormTelaConfiguracaoVenda: TFormTelaConfiguracaoVenda
       FieldName = 'CFVEA20ORDIMPVEND'
       Origin = 'DB.CONFIGVENDA.CFVEA20ORDIMPVEND'
       FixedChar = True
+    end
+    object SQLConfigVendaVALOR_LIMITE_PAGTO: TFloatField
+      FieldName = 'VALOR_LIMITE_PAGTO'
+      Origin = 'DB.CONFIGVENDA.VALOR_LIMITE_PAGTO'
+      DisplayFormat = '##0.00'
+      EditFormat = '##0.00'
     end
   end
   object ActionList1: TActionList

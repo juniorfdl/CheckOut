@@ -1273,6 +1273,23 @@ begin
               exit ;
             end ;
 
+          if (TipoPadrao = 'CRT') and (StrToFloat(EntradaDados.Text) > ValorEntrada.Value) then
+          begin
+            Informa('Valor Informado excede o permitido!') ;
+            EntradaDados.SelectAll ;
+            exit ;
+          end;
+
+          if dm.SQLConfigVendaVALOR_LIMITE_PAGTO.AsFloat > 0 then
+          begin
+            if (StrToFloat(EntradaDados.Text) >= dm.SQLConfigVendaVALOR_LIMITE_PAGTO.AsFloat) then
+            begin
+              Informa('Valor Informado excede o permitido, verifique nos parâmetros de venda!') ;
+              EntradaDados.SelectAll ;
+              exit ;
+            end;
+          end;
+
           // MANDA DADOS DISPLAY TECLADO
           IF TecladoReduzidoModelo = 'TEC44DIS' THEN
             EnviaTecladoTextoDisplay44('Valor Recebido',EntradaDados.Text);

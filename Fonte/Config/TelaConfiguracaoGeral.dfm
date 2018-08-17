@@ -1,19 +1,19 @@
 inherited FormTelaConfiguracaoGeral: TFormTelaConfiguracaoGeral
-  Left = 360
-  Top = 125
-  Width = 780
-  Height = 584
+  Left = -8
+  Top = -8
+  Width = 1382
+  Height = 744
   Caption = 'Configura'#231#245'es Gerais'
   OldCreateOrder = True
   Position = poScreenCenter
   PixelsPerInch = 96
   TextHeight = 13
   inherited ScrollBoxFundo: TScrollBox
-    Width = 764
-    Height = 546
+    Width = 1366
+    Height = 706
     inherited PanelCentral: TPanel
-      Width = 760
-      Height = 462
+      Width = 1362
+      Height = 622
       ParentFont = False
       object Label1: TLabel [0]
         Left = 134
@@ -30,7 +30,7 @@ inherited FormTelaConfiguracaoGeral: TFormTelaConfiguracaoGeral
         ParentFont = False
       end
       inherited PanelBarra: TPanel
-        Height = 462
+        Height = 622
       end
       object ComboEmpresa: TRxDBLookupCombo
         Left = 134
@@ -326,7 +326,7 @@ inherited FormTelaConfiguracaoGeral: TFormTelaConfiguracaoGeral
       object GroupBox3: TGroupBox
         Left = 136
         Top = 418
-        Width = 185
+        Width = 193
         Height = 45
         Caption = ' Ultimo Bonus p/Cliente'
         Font.Charset = ANSI_CHARSET
@@ -370,15 +370,44 @@ inherited FormTelaConfiguracaoGeral: TFormTelaConfiguracaoGeral
         ValueChecked = 'N'
         ValueUnchecked = 'S'
       end
+      object GroupBox6: TGroupBox
+        Left = 400
+        Top = 418
+        Width = 193
+        Height = 45
+        Caption = 'Dias Aviso Bloqueio'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 13
+        object DBEdit2: TDBEdit
+          Left = 11
+          Top = 17
+          Width = 130
+          Height = 21
+          DataField = 'DIAS_AVISO'
+          DataSource = DSSQLConfigGeral
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+        end
+      end
     end
     inherited ScrollBoxTopo: TScrollBox
-      Width = 760
+      Width = 1362
       inherited PanelCabecalho: TPanel
-        Width = 760
+        Width = 1362
         inherited PanelNavigator: TPanel
-          Width = 760
+          Width = 1362
           inherited AdvPanelNavigator: TAdvOfficeStatusBar
-            Width = 760
+            Width = 1362
             inherited BtnFecharTela: TSpeedButton
               Left = 494
             end
@@ -670,6 +699,10 @@ inherited FormTelaConfiguracaoGeral: TFormTelaConfiguracaoGeral
       Origin = 'DB.CONFIGGERAL.SOLICITA_TROCO_ABERTURA'
       FixedChar = True
       Size = 1
+    end
+    object SQLConfigGeralDIAS_AVISO: TIntegerField
+      FieldName = 'DIAS_AVISO'
+      Origin = 'DB.CONFIGGERAL.DIAS_AVISO'
     end
   end
   object DSSQLConfigGeral: TDataSource

@@ -1152,6 +1152,7 @@ type
     SQLEmpresaVERSAO: TStringField;
     ACBrNFeDANFeRL1: TACBrNFeDANFeRL;
     ACBrNFeDANFeESCPOS: TACBrNFeDANFeESCPOS;
+    SQLConfigVendaVALOR_LIMITE_PAGTO: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure SQLCupomNewRecord(DataSet: TDataSet);
     procedure SQLCupomBeforePost(DataSet: TDataSet);

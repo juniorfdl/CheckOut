@@ -1796,12 +1796,13 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 0
     PrinterSetup.mmPaperWidth = 0
-    PrinterSetup.PaperSize = 0
+    PrinterSetup.PaperSize = 256
     Units = utMillimeters
     AllowPrintToFile = True
     BeforePrint = ReportAutenticBeforePrint
     CachePages = True
     DeviceType = 'Printer'
+    EmailSettings.ReportFormat = 'PDF'
     OutlineSettings.CreateNode = True
     OutlineSettings.CreatePageNodes = True
     OutlineSettings.Enabled = False
@@ -1812,7 +1813,7 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     TextSearchSettings.Enabled = False
     Left = 64
     Top = 63
-    Version = '7.04'
+    Version = '10.06'
     mmColumnWidth = 0
     DataPipelineName = 'DBPipeParc'
     object ppDetailBand1: TppDetailBand
@@ -1824,6 +1825,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppLabel1'
         SaveOrder = 10
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Recibo de pagamento'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1841,6 +1846,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppLabel2'
         SaveOrder = 16
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Cliente:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1859,6 +1868,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         CharWrap = True
         SaveOrder = 0
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = DBPipeParc
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1878,6 +1891,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         SaveOrder = 1
         Save = True
         AutoSize = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = DBPipeParc
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1896,6 +1913,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppLabel3'
         SaveOrder = 17
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Contrato:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1914,6 +1935,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         SaveOrder = 2
         Save = True
         AutoSize = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = DBPipeParc
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1932,6 +1957,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppLabel4'
         SaveOrder = 18
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Vencimento:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1950,6 +1979,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         SaveOrder = 3
         Save = True
         AutoSize = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = DBPipeParc
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1968,6 +2001,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppLabel5'
         SaveOrder = 19
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Presta'#231#227'o:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1986,6 +2023,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         SaveOrder = 4
         Save = True
         AutoSize = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = DBPipeParc
         DisplayFormat = '###0.00'
         Font.Charset = ANSI_CHARSET
@@ -2006,6 +2047,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppLabel6'
         SaveOrder = 20
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Juros:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2024,6 +2069,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         SaveOrder = 5
         Save = True
         AutoSize = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = DBPipeParc
         DisplayFormat = '###0.00'
         Font.Charset = ANSI_CHARSET
@@ -2044,6 +2093,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppLabel7'
         SaveOrder = 21
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Multa:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2062,6 +2115,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         SaveOrder = 6
         Save = True
         AutoSize = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = DBPipeParc
         DisplayFormat = '###0.00'
         Font.Charset = ANSI_CHARSET
@@ -2082,6 +2139,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppLabel8'
         SaveOrder = 22
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Desconto:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2100,6 +2161,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         SaveOrder = 7
         Save = True
         AutoSize = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = DBPipeParc
         DisplayFormat = '###0.00'
         Font.Charset = ANSI_CHARSET
@@ -2120,6 +2185,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppLabel9'
         SaveOrder = 23
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Total:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2138,6 +2207,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         SaveOrder = 8
         Save = True
         AutoSize = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = DBPipeParc
         DisplayFormat = '###0.00'
         Font.Charset = ANSI_CHARSET
@@ -2158,6 +2231,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppLabel10'
         SaveOrder = 11
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Emitido em:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2175,6 +2252,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppSystemVariable1'
         SaveOrder = 24
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         VarType = vtDateTime
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2192,6 +2273,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppLabel11'
         SaveOrder = 12
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = '----------------------------------------------'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2209,6 +2294,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppLabel13'
         SaveOrder = 13
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = '----------------------------------------------'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2226,6 +2315,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppLabel14'
         SaveOrder = 14
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = '----------------------------------------------'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2243,6 +2336,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'Empresa'
         SaveOrder = 9
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Empresa'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2260,6 +2357,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppLabel15'
         SaveOrder = 15
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = '..'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2275,6 +2376,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
       end
       object ppDBText10: TppDBText
         UserName = 'ppDBText10'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         DataPipeline = DBPipeParc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2530,12 +2635,13 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 0
     PrinterSetup.mmPaperWidth = 0
-    PrinterSetup.PaperSize = 0
+    PrinterSetup.PaperSize = 256
     Units = utMillimeters
     AllowPrintToFile = True
     BeforePrint = ReportAutenticBeforePrint
     CachePages = True
     DeviceType = 'Printer'
+    EmailSettings.ReportFormat = 'PDF'
     OutlineSettings.CreateNode = True
     OutlineSettings.CreatePageNodes = True
     OutlineSettings.Enabled = False
@@ -2546,7 +2652,7 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
     TextSearchSettings.Enabled = False
     Left = 8
     Top = 91
-    Version = '7.04'
+    Version = '10.06'
     mmColumnWidth = 0
     object ppTitleBand1: TppTitleBand
       mmBottomOffset = 0
@@ -2556,6 +2662,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'lbTotal'
         SaveOrder = 0
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Valor Recebido: '
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2573,6 +2683,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppLabel24'
         SaveOrder = 1
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Emitido em:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2590,6 +2704,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppSystemVariable2'
         SaveOrder = 2
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         VarType = vtDateTime
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2607,6 +2725,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppLabel25'
         SaveOrder = 3
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = '----------------------------------------------'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2624,6 +2746,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppLabel27'
         SaveOrder = 4
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = '----------------------------------------------'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2641,6 +2767,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'lbEmpresa'
         SaveOrder = 5
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'lbEmpresa'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2658,6 +2788,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppLabel29'
         SaveOrder = 6
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = '..'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2675,6 +2809,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppLabel12'
         SaveOrder = 7
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'DOCUMENTO NAO FISCAL'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2692,6 +2830,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppLabel16'
         SaveOrder = 8
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'RECEBIMENTO'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2709,6 +2851,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'lbCliente'
         SaveOrder = 9
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Cliente:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2726,6 +2872,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'ppLabel17'
         SaveOrder = 10
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Cliente:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2743,6 +2893,10 @@ object FormTelaRecebimentoCrediario: TFormTelaRecebimentoCrediario
         UserName = 'lbOperador'
         SaveOrder = 11
         Save = True
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
         Caption = 'Operador:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack

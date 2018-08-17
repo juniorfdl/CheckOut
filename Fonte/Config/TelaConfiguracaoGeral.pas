@@ -82,6 +82,9 @@ type
     BotaoGravar: TSpeedButton;
     DBCheckBox6: TDBCheckBox;
     SQLConfigGeralSOLICITA_TROCO_ABERTURA: TStringField;
+    GroupBox6: TGroupBox;
+    DBEdit2: TDBEdit;
+    SQLConfigGeralDIAS_AVISO: TIntegerField;
     procedure FormCreate(Sender: TObject);
     procedure BotaoGravarClick(Sender: TObject);
     procedure DSSQLConfigGeralDataChange(Sender: TObject; Field: TField);

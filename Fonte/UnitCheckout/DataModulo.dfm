@@ -5,6 +5,7 @@ inherited DM: TDM
   Height = 744
   Width = 1382
   inherited DB: TDatabase
+    Connected = False
     AfterConnect = DBAfterConnect
     Left = 32
     Top = 8
@@ -1794,6 +1795,10 @@ inherited DM: TDM
       Origin = 'DB.CONFIGVENDA.CFVECVENDEDOREXIGE'
       FixedChar = True
       Size = 1
+    end
+    object SQLConfigVendaVALOR_LIMITE_PAGTO: TFloatField
+      FieldName = 'VALOR_LIMITE_PAGTO'
+      Origin = 'DB.CONFIGVENDA.VALOR_LIMITE_PAGTO'
     end
   end
   object DatabaseTerm: TDatabase
@@ -4836,7 +4841,7 @@ inherited DM: TDM
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 0
     PrinterSetup.mmPaperWidth = 0
-    PrinterSetup.PaperSize = 256
+    PrinterSetup.PaperSize = 177
     DeviceType = 'Screen'
     EmailSettings.ReportFormat = 'PDF'
     OutlineSettings.CreateNode = True

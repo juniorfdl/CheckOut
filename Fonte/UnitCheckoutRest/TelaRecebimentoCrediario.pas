@@ -768,8 +768,10 @@ begin
               end;
 
               DM.MemCtRecParc.CreateTable;
-              DM.MemCtRecParc.AddIndex('RecTemp','CTRCDVENC;CUPODEMIS;CUPOA13ID;CTRCA13ID;CTRCINROPARC', [ixPrimary]);
-              DM.MemCtRecParc.IndexFieldNames :=  'CTRCDVENC;CUPODEMIS;CUPOA13ID;CTRCA13ID;CTRCINROPARC';
+//              DM.MemCtRecParc.AddIndex('RecTemp','CTRCDVEN0C;CUPODEMIS;CUPOA13ID;CTRCA13ID;CTRCINROPARC', [ixPrimary]);
+//              DM.MemCtRecParc.IndexFieldNames :=  'CTRCDVENC;CUPODEMIS;CUPOA13ID;CTRCA13ID;CTRCINROPARC';
+              DM.MemCtRecParc.AddIndex('RecTemp','CTRCDVENC;CUPOA13ID;CTRCA13ID;CTRCINROPARC', [ixPrimary]);
+              DM.MemCtRecParc.IndexFieldNames :=  'CTRCDVENC;CUPOA13ID;CTRCA13ID;CTRCINROPARC';
               DM.MemCtRecParc.Open;
 
               SQLContasReceber.Close;

@@ -5,6 +5,7 @@ inherited DM: TDM
   Height = 404
   Width = 679
   inherited DB: TDatabase
+    Connected = False
     Left = 44
   end
   inherited SQLTemplate: TRxQuery

@@ -1,11 +1,10 @@
 inherited DM: TDM
   OldCreateOrder = True
-  Left = 449
-  Top = 4
+  Left = 626
+  Top = 68
   Height = 724
   Width = 859
   inherited DB: TDatabase
-    Connected = False
     Left = 32
   end
   inherited SQLTemplate: TRxQuery
