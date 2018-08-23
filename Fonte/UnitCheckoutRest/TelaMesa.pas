@@ -642,10 +642,14 @@ begin
 
       // PLANO DE CONTAS
       if DM.ProcuraRegistro('NUMERARIO',['NUMEICOD'],[SQLParcelasVistaVendaTempNUMEICOD.AsString],1) then
-        begin
-          if DM.SQLTemplate.FieldByName('PLCTA15CODCRED').AsString <> '' then
-            DM.SQLCupomNumerarioPLCTA15COD.AsString  := DM.SQLTemplate.FieldByName('PLCTA15CODCRED').AsString;
-        end;
+       begin
+         if DM.SQLTemplate.FieldByName('PLCTA15CODCRED').AsString <> '' then
+         begin
+           DM.SQLCupomNumerarioPLCTA15COD.AsString  := DM.SQLTemplate.FieldByName('PLCTA15CODCRED').AsString;
+         end;
+       end;
+      TipoPadrao := DM.SQLTemplate.FieldByName('NUMEA5TIPO').AsString;
+
       try
         DM.SQLCupomNumerario.Post ;
         GravaCupomNumerario := True;
@@ -1305,6 +1309,8 @@ begin
       DM.SQLTemplate.SQL.Add('delete from PARCELASVISTAVENDATEMP') ;
       DM.SQLTemplate.SQL.Add('where TERMICOD = ' + IntToStr(TerminalAtual)) ;
       DM.SQLTemplate.ExecSQL ;
+      if TipoPadrao = 'CRT' then
+        ImpCupomAutomatico := True;
 
       if TblMemPrevendaitem.IsEmpty then
         close;

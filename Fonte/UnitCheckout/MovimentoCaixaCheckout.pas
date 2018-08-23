@@ -249,8 +249,16 @@ begin
       if (ImpNaoFiscalAtual <> '') then
         AbrirGaveta_NAOFISCAL(ImpNaoFiscalAtual,PortaImpNaoFiscalAtual);
 
-      if FileExists('GAVETA.EXE') then
-        WinExec(Pchar('GAVETA.EXE'),sw_Show);
+      if SQLOperacaoCaixaOPCXA5SIGLA.Value = 'SANGR' Then {Sangria}
+      begin
+        if (DM.SQLUsuario.FieldByName('USUACPERMSANGRIA').AsString = 'S') and (FileExists('GAVETA.EXE')) then
+          WinExec(Pchar('GAVETA.EXE'),sw_Show);
+      end
+      else
+      begin
+        if FileExists('GAVETA.EXE') then
+          WinExec(Pchar('GAVETA.EXE'),sw_Show);
+      end;
 
       if (EcfAtual = 'NFCE DR800') and not (FileExists('GAVETA.EXE')) then
         begin
@@ -259,7 +267,7 @@ begin
           try
             DM.ACBrPosPrinter.AbrirGaveta;
           except
-            Application.ProcessMessages;
+            Application.ProcessMessages;            
           end;
         end;
     end ;

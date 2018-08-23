@@ -5,7 +5,7 @@ uses
   StdCtrls, Mask, DBCtrls, ExtCtrls, Buttons, ToolEdit, CurrEdit, RXLookup,
   RxDBComb, Db, DBTables, ConerBtn, Grids, DBGrids, RXCtrls, RxQuery,
   ppVar, ppPrnabl, ppClass, ppCtrls, ppCache, ppBands, ppComm, ppRelatv,
-  ppProd, ppReport, ppStrtch, ppMemo, AdvOfficeStatusBar,
+  ppProd, ppReport, ppStrtch, ppMemo, AdvOfficeStatusBar, pcnConversao,
   AdvOfficeStatusBarStylers ;
 type
   TFormTelaMovimentoCaixa = class(TForm)
@@ -678,6 +678,42 @@ begin
           Informa('Este cupom já está cancelado !');
           exit;
         end;
+
+        if (DM.SQLTemplate.FieldByName('CHAVEACESSO').AsString <>'') and (DM.SQLTemplate.FieldByName('PROTOCOLO').Value <> '') then
+          begin
+            dm.ACBrNFe.NotasFiscais.Clear;
+            dm.ACBrNFe.Consultar(DM.SQLTemplate.FieldByName('CHAVEACESSO').AsString);
+            if (dm.ACBrNFe.WebServices.Consulta.cStat = 100) then
+              begin
+                dm.ACBrNFe.EventoNFe.Evento.Clear;
+                with dm.ACBrNFe.EventoNFe.Evento.Add do
+                  begin
+                    InfEvento.chNFe      := DM.SQLTemplate.FieldByName('CHAVEACESSO').AsString ;
+                    InfEvento.CNPJ       := dm.SQLEmpresaEMPRA14CGC.Value;
+                    InfEvento.dhEvento   := Now;
+                    InfEvento.tpEvento   := teCancelamento;
+                    InfEvento.detEvento.xJust := 'Cancelamento por erro no preenchimento dos dados da nfe.'; // Justificativa;
+                    InfEvento.detEvento.nProt := DM.SQLTemplate.FieldByName('PROTOCOLO').Value;
+                  end;
+
+                // Envia o Cancelamento
+                dm.ACBrNFe.EnviarEvento(1);    {trunk2}
+
+                // Refaz Consulta pra ver se NFCe foi Cancelado se sim
+                dm.ACBrNFe.EventoNFe.Evento.Clear;
+                dm.ACBrNFe.NotasFiscais.Clear;
+                dm.ACBrNFe.Consultar(DM.SQLTemplate.FieldByName('CHAVEACESSO').AsString);
+                if (dm.ACBrNFe.WebServices.Consulta.cStat = 101) then
+                  begin
+                    dm.SQLConsulta.Close;
+                    dm.SQLConsulta.RequestLive := False;
+                    dm.SQLConsulta.SQL.Text    := 'Update CUPOM Set STNFE='+IntToStr(dm.ACBrNFe.WebServices.consulta.cStat)+
+                                                  ' Where CUPOA13ID ="'+DM.SQLTemplate.FieldByName('CUPOA13ID').AsString+'"';
+                    dm.SQLConsulta.ExecSQL;
+                  end;
+              end;
+          end;
+
 
         MostraMsg('Aguarde, cancelando venda...');
         if (ECFAtual <> '') and

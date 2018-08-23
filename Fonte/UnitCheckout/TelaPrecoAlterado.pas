@@ -19,6 +19,7 @@ type
   private
     { Private declarations }
   public
+    RetornoCampoUsuario : String;
     { Public declarations }
   end;
 
@@ -28,7 +29,7 @@ var
 implementation
 
 uses
-  DataModulo;
+  DataModulo, UnitLibrary;
 
 {$R *.DFM}
 
@@ -40,6 +41,7 @@ end;
 procedure TFormTelaPrecoAlterado.RxDBGrid1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 var
   vDouble: Double;
+  RetornoUser : TInfoRetornoUser;
 begin
   if Key = 13 then
     ModalResult := MrOK;
@@ -57,7 +59,9 @@ begin
       if (vDouble >= DM.SQLConfigVendaVALOR_LIMITE_PAGTO.AsFloat) and (DM.SQLConfigVendaVALOR_LIMITE_PAGTO.AsFloat > 0) then
       begin
         InformaG('Valor informado excede o limite permitido. Favor verificar!');
-        ModalResult := mrCancel;
+        EditValorTotal.SetFocus;
+        EditValorTotal.SelectAll;
+        ModalResult := 0;
       end;
     end
     else

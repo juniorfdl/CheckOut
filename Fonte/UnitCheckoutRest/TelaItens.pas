@@ -282,6 +282,8 @@ type
     BtnF7: TSpeedButton;
     BtnF6: TSpeedButton;
     SQLProdutoPESAGEM_AUTOMATICA: TStringField;
+    btnF10: TSpeedButton;
+    btnCrtlX: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure EntradaDadosKeyDown(Sender: TObject; var Key: Word;Shift: TShiftState);
@@ -349,6 +351,8 @@ type
     procedure RxSaboresClick(Sender: TObject);
     procedure BtnResumoCaixaClick(Sender: TObject);
     procedure BtnF7Click(Sender: TObject);
+    procedure btnF10Click(Sender: TObject);
+    procedure btnCrtlXClick(Sender: TObject);
   private
     { Private declarations }
     WNumItem, ItemCancelado : integer ;
@@ -3783,6 +3787,10 @@ begin
       Application.CreateForm(TFormTelaMesa, FormTelaMesa) ;
       FormTelaMesa.lbEmpresa.Caption := 'Fechamento da Mesa => ' + intToStr(CodMesa);
       FormTelaMesa.ShowModal ;
+      if ImpCupomAutomatico then
+        LblNomeSistemaClick(Sender);
+      ImpCupomAutomatico := False;
+
       AtualizaStatusMesas;
     end
   else
@@ -4669,7 +4677,7 @@ begin
   SQLImpressaoCupom.SQL.Clear;
   SQLImpressaoCupom.SQL.Add('Select CUPOINRO, TROCO, CHAVEACESSO, PROTOCOLO, STNFE From CUPOM Where CUPOA13ID ="'+idCupom+'"');
   SQLImpressaoCupom.Open;
-  VarValorTroco := SQLImpressaoCupom.fieldbyname('TROCO').Value;
+  VarValorTroco := SQLImpressaoCupom.fieldbyname('TROCO').AsFloat;
   dm.ACBrNFe.DANFE.vTroco := VarValorTroco;
 
   dm.TotalCartao  := 0;
@@ -4817,6 +4825,16 @@ begin
   finally
     free;
   end;
+end;
+
+procedure TFormTelaItens.btnF10Click(Sender: TObject);
+begin
+  keybd_event(121,121,0,0);
+end;
+
+procedure TFormTelaItens.btnCrtlXClick(Sender: TObject);
+begin
+  LblNomeSistemaClick(Sender);
 end;
 
 end.

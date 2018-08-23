@@ -1,7 +1,7 @@
 inherited FormCadastroCupom: TFormCadastroCupom
-  Left = -8
-  Top = -8
-  Caption = 'sqlcupo'
+  Left = 2
+  Top = 15
+  Caption = 'Consulta Cupom'
   ClientHeight = 706
   ClientWidth = 1366
   OldCreateOrder = True

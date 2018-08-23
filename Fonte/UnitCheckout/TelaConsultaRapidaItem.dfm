@@ -103,8 +103,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object LblBonusTroca: TRxLabel
         Left = 13
         Top = 25
-        Width = 95
-        Height = 24
+        Width = 94
+        Height = 23
         Caption = 'Descri'#231#227'o'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
@@ -121,8 +121,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object RxLabel22: TRxLabel
         Left = 259
         Top = 25
-        Width = 127
-        Height = 24
+        Width = 126
+        Height = 23
         Caption = 'Desc.T'#233'cnica'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
@@ -139,8 +139,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object RxLabel23: TRxLabel
         Left = 441
         Top = 25
-        Width = 102
-        Height = 24
+        Width = 101
+        Height = 23
         Caption = 'Referencia'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
@@ -157,8 +157,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object RxLabel24: TRxLabel
         Left = 577
         Top = 25
-        Width = 59
-        Height = 24
+        Width = 58
+        Height = 23
         Caption = 'Marca'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
@@ -175,8 +175,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object RxLabel25: TRxLabel
         Left = 828
         Top = 25
-        Width = 138
-        Height = 24
+        Width = 137
+        Height = 23
         Caption = 'Pav/Rua/Prate'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
@@ -384,7 +384,7 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
             Expanded = False
             FieldName = 'PRODICOD'
             Font.Charset = ANSI_CHARSET
-            Font.Color = 8166488
+            Font.Color = clBlack
             Font.Height = -13
             Font.Name = 'Arial'
             Font.Style = [fsBold]
@@ -402,7 +402,7 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
             Expanded = False
             FieldName = 'PRODA60DESCR'
             Font.Charset = ANSI_CHARSET
-            Font.Color = 8166488
+            Font.Color = clBlack
             Font.Height = -13
             Font.Name = 'Arial'
             Font.Style = [fsBold]
@@ -420,7 +420,7 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
             Expanded = False
             FieldName = 'PRODA60REFER'
             Font.Charset = ANSI_CHARSET
-            Font.Color = 8166488
+            Font.Color = clBlack
             Font.Height = -13
             Font.Name = 'Arial'
             Font.Style = [fsBold]
@@ -437,7 +437,7 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
             Expanded = False
             FieldName = 'MarcaLookup'
             Font.Charset = ANSI_CHARSET
-            Font.Color = 8166488
+            Font.Color = clBlack
             Font.Height = -13
             Font.Name = 'Arial'
             Font.Style = [fsBold]
@@ -455,7 +455,7 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
             Expanded = False
             FieldName = 'PRODN3VLRVENDA'
             Font.Charset = ANSI_CHARSET
-            Font.Color = 8166488
+            Font.Color = clBlack
             Font.Height = -13
             Font.Name = 'Arial'
             Font.Style = [fsBold]
@@ -474,7 +474,7 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
             Expanded = False
             FieldName = 'PRODN3VLRVENDA2'
             Font.Charset = ANSI_CHARSET
-            Font.Color = 8166488
+            Font.Color = clBlack
             Font.Height = -13
             Font.Name = 'Arial'
             Font.Style = [fsBold]
@@ -493,7 +493,7 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
             Expanded = False
             FieldName = 'PRODN2VLRVENDA2835D'
             Font.Charset = ANSI_CHARSET
-            Font.Color = 8166488
+            Font.Color = clBlack
             Font.Height = -11
             Font.Name = 'Arial'
             Font.Style = [fsBold]
@@ -512,7 +512,7 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
             Expanded = False
             FieldName = 'PRODN2VLRVENDA283542D'
             Font.Charset = ANSI_CHARSET
-            Font.Color = 8166488
+            Font.Color = clBlack
             Font.Height = -11
             Font.Name = 'Arial'
             Font.Style = [fsBold]
@@ -627,8 +627,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object RxLabel1: TRxLabel
         Left = 14
         Top = 4
-        Width = 103
-        Height = 24
+        Width = 102
+        Height = 23
         Caption = 'Cd. Barras'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
@@ -645,8 +645,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object RxLabel3: TRxLabel
         Left = 197
         Top = 4
-        Width = 36
-        Height = 24
+        Width = 35
+        Height = 23
         Caption = 'Cor'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
@@ -663,8 +663,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object RxLabel4: TRxLabel
         Left = 14
         Top = 54
-        Width = 62
-        Height = 24
+        Width = 61
+        Height = 23
         Caption = 'Grupo'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
@@ -681,8 +681,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object RxLabel5: TRxLabel
         Left = 197
         Top = 54
-        Width = 99
-        Height = 24
+        Width = 98
+        Height = 23
         Caption = 'SubGrupo'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
@@ -699,8 +699,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object RxLabel6: TRxLabel
         Left = 15
         Top = 107
-        Width = 285
-        Height = 24
+        Width = 284
+        Height = 23
         Caption = 'Descri'#231#227'o T'#233'cnica / Aplica'#231#227'o'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
@@ -768,8 +768,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object lbVerFoto: TRxLabel
         Left = 433
         Top = 107
-        Width = 84
-        Height = 24
+        Width = 83
+        Height = 23
         Caption = 'Ver Foto'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -786,8 +786,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object RxLabel7: TRxLabel
         Left = 395
         Top = 54
-        Width = 137
-        Height = 24
+        Width = 136
+        Height = 23
         Caption = 'Vlr. Promo'#231#227'o'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
@@ -804,8 +804,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object RxLabel8: TRxLabel
         Left = 396
         Top = 4
-        Width = 44
-        Height = 24
+        Width = 43
+        Height = 23
         Caption = 'Tam'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
@@ -822,8 +822,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object RxLabel9: TRxLabel
         Left = 472
         Top = 4
-        Width = 46
-        Height = 24
+        Width = 45
+        Height = 23
         Caption = 'Unid'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
@@ -876,8 +876,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object RxLabel11: TRxLabel
         Left = 540
         Top = 4
-        Width = 97
-        Height = 24
+        Width = 96
+        Height = 23
         Caption = 'Dimens'#227'o'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
@@ -894,8 +894,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object RxLabel12: TRxLabel
         Left = 655
         Top = 4
-        Width = 134
-        Height = 24
+        Width = 133
+        Height = 23
         Caption = 'Estoque Atual'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
@@ -948,8 +948,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object RxLabel13: TRxLabel
         Left = 540
         Top = 54
-        Width = 101
-        Height = 24
+        Width = 100
+        Height = 23
         Caption = 'Pavimento'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
@@ -966,8 +966,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object RxLabel14: TRxLabel
         Left = 656
         Top = 54
-        Width = 131
-        Height = 24
+        Width = 130
+        Height = 23
         Caption = 'Prev. Entrega'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
@@ -1020,8 +1020,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object RxLabel15: TRxLabel
         Left = 542
         Top = 107
-        Width = 39
-        Height = 24
+        Width = 38
+        Height = 23
         Caption = 'Rua'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
@@ -1038,8 +1038,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object RxLabel16: TRxLabel
         Left = 653
         Top = 107
-        Width = 139
-        Height = 24
+        Width = 138
+        Height = 23
         Caption = 'Dt.Ult.Compra'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
@@ -1092,8 +1092,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object RxLabel17: TRxLabel
         Left = 654
         Top = 160
-        Width = 132
-        Height = 24
+        Width = 131
+        Height = 23
         Caption = 'Q.Ult.Compra'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
@@ -1110,8 +1110,8 @@ object FormTelaConsultaRapidaItem: TFormTelaConsultaRapidaItem
       object RxLabel18: TRxLabel
         Left = 542
         Top = 160
-        Width = 91
-        Height = 24
+        Width = 90
+        Height = 23
         Caption = 'Prateleira'
         Color = 10567680
         Font.Charset = ANSI_CHARSET
