@@ -396,7 +396,7 @@ type
     procedure TefAdm;
     procedure StatusServicoNFE;
     function Transmite_NFCe(idCupom: string): Boolean;
-    procedure ImprimirConfissaoDeDivida(pTotalPrazo:Double);
+    procedure ImprimirConfissaoDeDivida(pTotalPrazo:Double; nomeCliente:String);
   end;
 
 var
@@ -502,7 +502,7 @@ end;
 
 function TFormTelaItens.Gerar_NFCe(idCupom: string): string;
 var xCliente, xDocumento, xPlano, vTotaItem: string;
-var iCRT: integer;
+var iCRT, vCont, vUltimo: integer;
 var VlrDescNoTotal, VlrTroca, VlrTotalItens, PercDesc, TotalDesconto: double;
   vaux, Total_vTotTrib: Currency;
 begin
@@ -614,11 +614,13 @@ begin
     SQLImpressaoCupom.SQL.Add('Order by i.CPITIPOS');
     SQLImpressaoCupom.Open;
     SQLImpressaoCupom.First;
-
+    vUltimo := 0;
     Total.ICMSTot.vBC := 0;
     Total.ICMSTot.vICMS := 0;
+    vCont := SQLImpressaoCupom.RecordCount;
     while not SQLImpressaoCupom.Eof do
     begin
+      vUltimo := vUltimo + 1;
            {Carrega Produtos temporarios}
       dm.sqlconsulta.close;
       dm.sqlconsulta.sql.Clear;
@@ -806,10 +808,15 @@ begin
         Total.ICMSTot.vProd := vaux;
         vaux := Prod.vDesc;
         TotalDesconto := TotalDesconto + vaux;
+        if (vCont = vUltimo) and (TotalDesconto <> VlrDescNoTotal) then
+        begin
+          Prod.vDesc := (Prod.vDesc - (TotalDesconto - VlrDescNoTotal));
+        end;
       end;
       SQLImpressaoCupom.next;
     end;
-    if (VlrDescNoTotal > 0) and (TotalDesconto = 0) then
+//    if (VlrDescNoTotal > 0) and (TotalDesconto = 0) then
+    if (VlrDescNoTotal > 0) and (VlrDescNoTotal <> TotalDesconto) then
       TotalDesconto := VlrDescNoTotal;
 
     Total.ICMSTot.vDesc := TotalDesconto;
@@ -921,8 +928,10 @@ begin
                     tPag := fpCheque
                   else
                     tPag := fpDinheiro;
-
-              vPag := fieldbyname('CTRCN2VLR').AsFloat;
+//              vPag := fieldbyname('CTRCN2VLR').AsFloat;
+                vPag := VarValorRecebido;
+                if VarValorTroco > 0 then
+                  pag.vTroco := VarValorTroco;
             end;
             next;
           end;
@@ -5981,7 +5990,7 @@ end;
 
 function TFormTelaItens.Transmite_NFCe(idCupom: string): Boolean;
 var Tentativa: integer;
-  sTipoPadrao: string;
+  sTipoPadrao, xNomeCliente: string;
   TotalPrazo: Double;
 begin
   Inicia_NFe;
@@ -6005,6 +6014,7 @@ begin
   SQLImpressaoCupom.Open;
   while not SQLImpressaoCupom.eof do
   begin
+    xNomeCliente := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIEA60RAZAOSOC', '''' + SQLImpressaoCupom.fieldbyname('CLIEA13ID').AsString + '''');
     sTipoPadrao := SQLLocate('NUMERARIO', 'NUMEICOD', 'NUMEA5TIPO', SQLImpressaoCupom.fieldbyname('NUMEICOD').AsString);
     if (sTipoPadrao = 'CRT') then
     begin
@@ -6023,6 +6033,7 @@ begin
   SQLImpressaoCupom.open;
   while not SQLImpressaoCupom.eof do
   begin
+    xNomeCliente := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIEA60RAZAOSOC', '''' + SQLImpressaoCupom.fieldbyname('CLIEA13ID').AsString + '''');
     sTipoPadrao := SQLLocate('NUMERARIO', 'NUMEICOD', 'NUMEA5TIPO', SQLImpressaoCupom.fieldbyname('NUMEICOD').AsString);
     if (sTipoPadrao = 'CRT') then
     begin
@@ -6095,7 +6106,7 @@ begin
   end;
 
   {imprime se tiver confissao divida e tiver TotalPrazo seja Cheq, Crediario ou Fidelizacao}
-  ImprimirConfissaoDeDivida(TotalPrazo);
+  ImprimirConfissaoDeDivida(TotalPrazo,xNomeCliente);
 
   LblInstrucoes.Caption := 'Enviando ao Sefaz RS NFCe: ' + inttostr(NumNFe);
   LblInstrucoes.Update;
@@ -6672,7 +6683,7 @@ begin
       ).FieldByName('CPNMN2VLR').AsFloat;
 end;
 
-procedure TFormTelaItens.ImprimirConfissaoDeDivida(pTotalPrazo:Double);
+procedure TFormTelaItens.ImprimirConfissaoDeDivida(pTotalPrazo:Double;nomeCliente:String);
 begin
   if (DM.SQLTerminalAtivoTERMCIMPCONFDIVIDA.Value = 'S') and (pTotalPrazo > 0) then
   begin
@@ -6687,6 +6698,8 @@ begin
       MemoRetornoNFE.Lines.Add(' ');
       MemoRetornoNFE.Lines.Add('</ce><e>CONFISSAO DE DIVIDA</e>');
       MemoRetornoNFE.Lines.Add(' ');
+      MemoRetornoNFE.Lines.Add('</ae></fn>Cliente: ' + nomeCliente);
+      MemoRetornoNFE.Lines.Add(' ');
       MemoRetornoNFE.Lines.Add('</ae></fn>NFCe Nro: ' + inttostr(NumNFe));
       MemoRetornoNFE.Lines.Add(' ');
       MemoRetornoNFE.Lines.Add('</ae></fn>DECLARO PARA OS DEVIDOS FINS QUE RECEBI A(S)');
@@ -6697,6 +6710,7 @@ begin
       MemoRetornoNFE.Lines.Add(' ');
       MemoRetornoNFE.Lines.Add(' ');
       MemoRetornoNFE.Lines.Add('</ae></fn>Ass.________________________________________');
+      MemoRetornoNFE.Lines.Add('</ae></fn>       ' + nomeCliente);
       MemoRetornoNFE.Lines.Add(' ');
       MemoRetornoNFE.Lines.Add(' ');
       MemoRetornoNFE.Lines.Add(' ');
