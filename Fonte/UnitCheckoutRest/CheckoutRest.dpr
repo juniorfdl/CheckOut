@@ -112,7 +112,10 @@ uses
   TelaContaCodigo in 'TelaContaCodigo.pas' {FormTelaContaCodigo},
   CadastroClienteRestaurante in 'CadastroClienteRestaurante.pas' {FormCadastroClienteRestaurante},
   RelatorioCupomEmitido in 'RelatorioCupomEmitido.pas',
-  RelatorioTemplate in 'RelatorioTemplate.pas' {FormRelatorioTEMPLATE};
+  RelatorioTemplate in 'RelatorioTemplate.pas' {FormRelatorioTEMPLATE},
+  BalancaFilizola in '..\UnitCheckout\BalancaFilizola.pas' {FormBalancaFilizola},
+  BalancaUrano in '..\UnitCheckout\BalancaUrano.pas',
+  BalancaToledo in '..\UnitCheckout\BalancaToledo.pas';
 
 {$R *.RES}
 

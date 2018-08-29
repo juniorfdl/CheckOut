@@ -8,7 +8,7 @@ uses
   CurrEdit, ConerBtn, DBCtrls, RXCtrls, RxQuery, EWall, ComObj, Serial, Math, ShellApi,
   RxCalc, ppDB, ppDBPipe, ppDBBDE, ppBands, ppCtrls, ppPrnabl, ppClass, CartaoCredito,
   ppCache, ppComm, ppRelatv, ppProd, ppReport, CRLabel, dbcgrids, Menus, IniFiles,
-  ComCtrls, RxGIF, ESkinPlus, RzPanel, dxGDIPlusClasses,
+  ComCtrls, RxGIF, ESkinPlus, RzPanel, dxGDIPlusClasses,ACBrBAL,ACBrDevice,
   AdvOfficeStatusBar, AdvOfficeStatusBarStylers, AdvSmoothPanel, OleCtrls,
   SHDocVw, ACBrNFe, pcnConversao, ACBrUtil, ACBrNFeDANFEClass, ACBrNFeDANFeESCPOS,
   ACBrBase, ACBrDFe, XMLIntf, XMLDoc, zlib, ACBrMail, ACBrNFeDANFeRLClass,
@@ -284,6 +284,7 @@ type
     SQLProdutoPESAGEM_AUTOMATICA: TStringField;
     btnF10: TSpeedButton;
     btnCrtlX: TSpeedButton;
+    ACBrBAL1: TACBrBAL;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure EntradaDadosKeyDown(Sender: TObject; var Key: Word;Shift: TShiftState);
@@ -363,6 +364,14 @@ type
     Tecla : Word;
     RetornoCartao : TInfoRetorno;
     DadosImpressora : TInfoImpressao;
+    Peso: Double;
+    PesoP05A: array[0..5] of char;
+    PesoP05B: array[0..7] of char;
+    Toledo_Dir, PesoSTR: string;
+    Toledo_Porta, Toledo_Baud, Toledo_Paridade, Toledo_DataBits, Toledo_OpcoesDiponibilizar, Toledo_TipoLeitura: Integer;
+    Urano_Modelo, Urano_Operacao: Integer;
+    Urano_Porta: string;
+    Urano_PesoLido: TextFile;
     procedure CalculaTotal ;
     procedure CapturaCodigosIniciais ;
     function VerificaCartaoCredito : Boolean;
@@ -370,6 +379,8 @@ type
     procedure CalcularImpostos(CodNCM, OrigemProduto: Integer; Valor: Currency);
     function Gerar_NFCe(idCupom:string): string;
     procedure LoadXML(MyMemo: TMemo; MyWebBrowser: TWebBrowser);
+    procedure ExecutarCtrlQ;
+    procedure VoltaParaEntradaDados;
     function SN(sNum:string):string;
   public
     { Public declarations }
@@ -405,6 +416,7 @@ type
 
 var
   FormTelaItens: TFormTelaItens;
+  IniFile: TIniFile;
 implementation
 
 uses DataModulo, UnitLibrary, TelaTipoDescontoItem,TelaConsultaRapidaItem,
@@ -419,8 +431,8 @@ uses DataModulo, UnitLibrary, TelaTipoDescontoItem,TelaConsultaRapidaItem,
      DataModuloTemplate, TelaPrecoAlterado,TelaConsultaRapidaCupom, Daruma_Framework_FISCAL,
      TelaRecargaCartao, TelaMesa, TelaObsProduto, TelaMesaCodigo, pcnNFe, pcnConversaoNFe,
      ACBrDFeConfiguracoes, pcnAuxiliar, ACBrDFeSSL, pcnNFeRTXT, ACBrNFeNotasFiscais,
-    TelaSabores, TelaBordas, TelaVendedorCodigo, TelaContaCodigo,
-  RelatorioCupomEmitido;
+    TelaSabores, TelaBordas, TelaVendedorCodigo, TelaContaCodigo,BalancaToledo,
+  RelatorioCupomEmitido, BalancaFilizola,BalancaUrano;
 
 {$R *.DFM}
 
@@ -975,6 +987,38 @@ begin
       LblInstrucoes.Caption := 'CAIXA FECHADO';
       LblInstrucoes.Update;
     end;
+
+  if FileExists('BalancaCheckoutToledo.txt') or FileExists('BalancaCheckoutToledoDireto.txt') then
+  begin
+    IniFile := TIniFile.Create(ExtractFilePath(ParamStr(0)) + cArquivoINI);
+    try
+      Toledo_Porta := IniFile.ReadInteger(cSessaoConf, cPorta, 0);
+      Toledo_Baud := IniFile.ReadInteger(cSessaoConf, cBaudRate, 0);
+      Toledo_Paridade := IniFile.ReadInteger(cSessaoConf, cParidade, 2);
+      Toledo_DataBits := IniFile.ReadInteger(cSessaoConf, cDataBits, 0);
+      Toledo_OpcoesDiponibilizar := IniFile.ReadInteger(cSessaoConf, cDiponibi, 0);
+      Toledo_TipoLeitura := IniFile.ReadInteger(cSessaoConf, cTipoLeitura, 0);
+      Toledo_Dir := IniFile.ReadString(cSessaoConf, cDirPESO, ExtractFilePath(ParamStr(0)));
+    finally
+      IniFile.Free;
+    end;
+  end;
+
+  // Pega Configs do arquivo LerPesoUrano.INI
+  if FileExists('BalancaCheckoutUranoDireto.txt') then
+  begin
+    IniFile := TIniFile.Create(dm.PathAplicacao + 'LePesoUrano.INI');
+    try
+      Urano_Porta := IniFile.ReadString('Configuracao', 'IPortaSerial', 'COM4');
+      Urano_Modelo := IniFile.ReadInteger('Configuracao', 'IModeloBalanca', 0);
+      Urano_Operacao := IniFile.ReadInteger('Configuracao', 'IModoOperacao', 0);
+      addLog('Urano Porta: ' + Urano_Porta,ExtractFilePath(Application.ExeName) + 'LogPesaUrano.txt');
+      addLog('Urano Modelo: ' + IntToStr(Urano_Modelo),ExtractFilePath(Application.ExeName) + 'LogPesaUrano.txt');
+      addLog('Urano Operação: ' + IntToStr(Urano_Operacao),ExtractFilePath(Application.ExeName) + 'LogPesaUrano.txt');
+    finally
+      IniFile.Free;
+    end;
+  end;
 
   if TabInicial = 'TabLogo' then PageControlPrincipal.ActivePage := TabLogo;
   if TabInicial = 'TabProdutos' then PageControlPrincipal.ActivePage := TabProdutos;
@@ -2975,7 +3019,7 @@ begin
                 // Livre
               end ;
           'L':begin
-                // Livre
+                EditQtde.SetFocus;
               end ;
           'M':begin
                 // Consulta de Mesas
@@ -2988,7 +3032,8 @@ begin
               end ;
           //TROCAR QUANTIDADE
           'Q':begin
-                EditQtde.SetFocus;
+                if (EstadoPDVChk = InformandoItens) then
+                  ExecutarCtrlQ;
               end ;
           //TROCAR PRECO ITEM
           'P':begin
@@ -4835,6 +4880,131 @@ end;
 procedure TFormTelaItens.btnCrtlXClick(Sender: TObject);
 begin
   LblNomeSistemaClick(Sender);
+end;
+
+procedure TFormTelaItens.ExecutarCtrlQ;
+begin
+  if FileExists('BalancaCheckoutFilizola.txt') or FileExists('BalancaCheckoutToledo.txt') or FileExists('BalancaCheckoutUrano.txt') then
+  begin
+//    if (EstadoPDVChk = AguardandoNovaVenda) and (F2_AUTOMATICO = 'S') then
+//      ExecutarF2;
+    Application.CreateForm(TFormBalancaFilizola, FormBalancaFilizola);
+    FormBalancaFilizola.ShowModal;
+  end;
+  if FileExists('BalancaCheckoutToledoDireto.txt') then
+  begin
+    LblInstrucoes.Caption := 'Lendo Balança Toledo...';
+    LblInstrucoes.Refresh;
+    ACBrBAL1.Desativar;
+
+                    // configura porta de comunicação
+    ACBrBAL1.Modelo := balToledo;
+    ACBrBAL1.Device.HandShake := TACBrHandShake(0);
+    ACBrBAL1.Device.Parity := TACBrSerialParity(0); {zero}
+    ACBrBAL1.Device.Stop := TACBrSerialStop(0); {s1}
+    ACBrBAL1.Device.Data := 8; {8}
+    if Toledo_Porta = 0 then
+      ACBrBAL1.Device.Porta := 'COM1';
+    if Toledo_Porta = 1 then
+      ACBrBAL1.Device.Porta := 'COM2';
+    if Toledo_Porta = 2 then
+      ACBrBAL1.Device.Porta := 'COM3';
+    if Toledo_Porta = 3 then
+      ACBrBAL1.Device.Porta := 'COM4';
+    if Toledo_Porta = 4 then
+      ACBrBAL1.Device.Porta := 'COM5';
+    if Toledo_Porta = 5 then
+      ACBrBAL1.Device.Porta := 'COM6';
+    if Toledo_Porta = 6 then
+      ACBrBAL1.Device.Porta := 'COM7';
+    if Toledo_Porta = 7 then
+      ACBrBAL1.Device.Porta := 'COM8';
+
+    if Toledo_Baud = 0 then
+      ACBrBAL1.Device.Baud := 2400;
+    if Toledo_Baud = 1 then
+      ACBrBAL1.Device.Baud := 4800;
+    if Toledo_Baud = 2 then
+      ACBrBAL1.Device.Baud := 9600;
+    if Toledo_Baud = 3 then
+      ACBrBAL1.Device.Baud := 1200;
+    if Toledo_Baud = 4 then
+      ACBrBAL1.Device.Baud := 19200;
+                    // Conecta com a balança
+    ACBrBAL1.Ativar;
+    EditQtde.Value := ACBrBAL1.LePeso(ACBrBAL1.Intervalo);
+    ACBrBAL1.Desativar;
+
+    LblInstrucoes.Caption := 'Informando Produto';
+    LblInstrucoes.Refresh;
+  end;
+
+  if FileExists('BalancaCheckoutUranoDireto.txt') then
+  begin
+    LblInstrucoes.Caption := 'Comunicando com a Balança Urano...';
+    LblInstrucoes.Refresh;
+    addLog('Comunicação OK',ExtractFilePath(Application.ExeName) + 'LogPesaUrano.txt');
+                    // Abre Porta Serial
+    _AlteraModeloBalanca(Urano_Modelo);
+    _AlteraModoOperacao(0);
+
+    if _AbrePortaSerial(Urano_Porta) < 1 then
+      informaG('Problema de Comunicação com a Balança!')
+    else
+    begin
+                        // Grava Peso no arquivo txt, para tirar as sujeiras que vem da dll.
+      PesoSTR := _LePeso();
+      AssignFile(Urano_PesoLido, 'C:\Easy2Solutions\Gestao\PesoLido.txt');
+      Rewrite(Urano_PesoLido); //abre o arquivo para escrita
+      Writeln(Urano_PesoLido, PesoSTR); //escreve no arquivo e desce uma linha
+      Closefile(Urano_PesoLido); //fecha o handle de arquivo
+
+                        // Le peso do txt
+      PesoSTR := '';
+      AssignFile(Urano_PesoLido, 'C:\Easy2Solutions\Gestao\PesoLido.txt');
+      Reset(Urano_PesoLido);
+      ReadLn(Urano_PesoLido, PesoSTR);
+      CloseFile(Urano_PesoLido);
+
+      while pos('P', PesoSTR) > 0 do
+        Delete(PesoSTR, pos('P', PesoSTR), 1);
+      while pos('E', PesoSTR) > 0 do
+        Delete(PesoSTR, pos('E', PesoSTR), 1);
+      while pos('S', PesoSTR) > 0 do
+        Delete(PesoSTR, pos('S', PesoSTR), 1);
+      while pos('O', PesoSTR) > 0 do
+        Delete(PesoSTR, pos('O', PesoSTR), 1);
+      while pos(':', PesoSTR) > 0 do
+        Delete(PesoSTR, pos(':', PesoSTR), 1);
+      while pos(' ', PesoSTR) > 0 do
+        Delete(PesoSTR, pos(' ', PesoSTR), 1);
+      while pos('g', PesoSTR) > 0 do
+        Delete(PesoSTR, pos('g', PesoSTR), 1);
+      while pos('*', PesoSTR) > 0 do
+        Delete(PesoSTR, pos('*', PesoSTR), 1);
+
+      PesoSTR := FormatFloat('##0.000', (StrToFloat(PesoSTR) / 1000));
+      Peso := StrToFloat(PesoSTR);
+      EditQtde.Value := Peso;
+
+                        // Fecha Porta
+      if _FechaPortaSerial > 0 then
+        Application.ProcessMessages;
+
+      LblInstrucoes.Caption := 'Informando Produto';
+      LblInstrucoes.Refresh;
+    end;
+  end;
+end;
+
+procedure TFormTelaItens.VoltaParaEntradaDados;
+begin
+  try
+    if not EntradaDados.Focused then
+      EntradaDados.SetFocus;
+
+  except
+  end;
 end;
 
 end.

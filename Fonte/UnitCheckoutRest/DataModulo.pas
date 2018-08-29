@@ -1077,6 +1077,7 @@ type
     SerieAtualPedidos, VeiculoAtualPedidos, LinhaTXT : String;
     VendedorAtualPedidos, RotaAtualPedidos, TranspAtualPedidos : Integer;
     Texto : TextFile;
+    function ConectaServidor : boolean ;
     function BloquearTerminal(Usuario, Terminal : string ) : boolean ;
     procedure DesbloquearTerminal(Terminal : string) ;
   end;
@@ -1341,6 +1342,15 @@ begin
   DataSet.FieldByName('REGISTRO').AsDateTime := Now;
   if DataSet.FieldByName('TELEA1016MENSG').AsString = '' then
     DataSet.FieldByName('TELEA1016MENSG').AsString := 'MENSAGEM';
+end;
+
+function TDM.ConectaServidor: boolean;
+begin
+  {Tenta conectar pra ver se o servidor esta Online se estiver inicia a transmissao!}
+  if FileExists('Online.txt') then
+    result := true
+  else
+    result := false;
 end;
 
 end.
