@@ -1,7 +1,7 @@
 inherited DM: TDM
   OldCreateOrder = True
-  Left = 65515
-  Top = 27
+  Left = 65509
+  Top = 36
   Height = 744
   Width = 1382
   inherited DB: TDatabase
@@ -6918,5 +6918,57 @@ inherited DM: TDM
     PosPrinter = ACBrPosPrinter
     Left = 952
     Top = 248
+  end
+  object SQLProduto_Descontos: TRxQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select'
+      'first (1) *'
+      'from'
+      ' PRODUTO_DESCONTOS'
+      'where'
+      ' (%PRODUTO)'
+      ' and'
+      ' (%QTDE)'
+      ' and'
+      ' (%DATA)'
+      'order by QUANTIDADE desc'
+      #9#9#9'  ')
+    Macros = <
+      item
+        DataType = ftString
+        Name = 'PRODUTO'
+        ParamType = ptInput
+        Value = '0=0'
+      end
+      item
+        DataType = ftString
+        Name = 'QTDE'
+        ParamType = ptInput
+        Value = '0=0'
+      end
+      item
+        DataType = ftString
+        Name = 'DATA'
+        ParamType = ptInput
+        Value = '0=0'
+      end>
+    Left = 520
+    Top = 560
+    object SQLProduto_DescontosCOD_PRODUTODESCONTOS: TIntegerField
+      FieldName = 'COD_PRODUTODESCONTOS'
+    end
+    object SQLProduto_DescontosPRODICOD: TIntegerField
+      FieldName = 'PRODICOD'
+    end
+    object SQLProduto_DescontosQUANTIDADE: TFloatField
+      FieldName = 'QUANTIDADE'
+    end
+    object SQLProduto_DescontosPRECO: TFloatField
+      FieldName = 'PRECO'
+    end
+    object SQLProduto_DescontosDATA_VALIDADE: TDateTimeField
+      FieldName = 'DATA_VALIDADE'
+    end
   end
 end

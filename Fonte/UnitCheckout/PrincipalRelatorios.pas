@@ -236,8 +236,12 @@ procedure TFormPrincipalRelatorios.BtnVisualizarClick(Sender: TObject);
 var
   vSaldoTotal, vValorSangria : double;
   x,y : string;
-
+  espaco : Integer;
 begin
+  if ECFAtual = 'NFCE BEMATECH' then
+    espaco := 24
+  else
+    espaco := 20;
   SQLTotaNumerario.Close ;
   SQLTotaNumerario.MacrobyName('MEmpresa').Value  := 'EMPRICOD  = ' + EmpresaPadrao;
   SQLTotaNumerario.MacroByName('MTerminal').Value := '0=0';
@@ -365,14 +369,17 @@ begin
       memo.Lines.Add('Terminais: ' + ComboTerminal.Text + ' - ' + ComboTerminal2.Text);
       memo.Lines.Add('Operador: ' + ComboOperador.Text);
       memo.Lines.Add(' ');
-      memo.Lines.Add('<n>Totais por Operacoes                Vlr.Saldo</n>');
+      if ECFAtual = 'NFCE BEMATECH' then
+        memo.Lines.Add('<n>Totais por Operacoes             Vlr.Saldo</n>')
+      else
+        memo.Lines.Add('<n>Totais por Operacoes                Vlr.Saldo</n>');
       if SQLTotalOperacao.IsEmpty then
         ShowMessage('Nenhuma Operação inicial informada!');
       SQLTotalOperacao.First;
       while not SQLTotalOperacao.eof do
         begin
           x := MontaString(SQLTotalOperacaoOPCXA60DESCR.Value,21,1,' ');
-          y := MontaString(FormatFloat('R$ ##0.00',SQLTotalOperacaoSALDO.Value),24,0,' ');
+          y := MontaString(FormatFloat('R$ ##0.00',SQLTotalOperacaoSALDO.Value),espaco,0,' ');
           x := x + y;
           memo.Lines.Add('<ad></fn>' + x + '</ad>');
 //          memo.Lines.Add('<ad></fn>' + FormatFloat('R$ ##0.00',SQLTotalOperacaoSALDO.Value) + '</ad>');
@@ -390,7 +397,7 @@ begin
       while not SQLTotaNumerario.eof do
         begin
           x := MontaString(SQLTotaNumerarioNUMEA30DESCR.Value,21,1,' ');
-          y := MontaString(FormatFloat('R$ ##0.00',SQLTotaNumerarioSALDO.Value),24,0,' ');
+          y := MontaString(FormatFloat('R$ ##0.00',SQLTotaNumerarioSALDO.Value),espaco,0,' ');
           x := x + y;
           memo.Lines.Add('<ad></fn>' + x + '</ad>');
           vSaldoTotal := vSaldoTotal + SQLTotaNumerarioSALDO.Value;

@@ -891,7 +891,8 @@ begin
                     dm.ACBrPosPrinter.Imprimir(FormTelaItens.MemoRetornoNFE.Lines.Text);
                     // dm.ACBrPosPrinter.AbrirGaveta;
                   except
-                    Application.ProcessMessages;
+                    //Application.ProcessMessages;
+                    Informa('Problemas na impressão! '+ #13 +ComboOperacaoCaixa.Text+ ' Gravado mas não impresso!');
                   end;
                   if Pergunta('SIM','Imprimir 2 Via Autenticação!') then
                     begin
@@ -1630,7 +1631,7 @@ begin
   WITH ExecSql('SELECT gen_id(G_CUPOM_FECHAMENTO,1) AS ID FROM RDB$DATABASE') do
   try
     i := StrToInt(FieldByName('ID').AsString);
-    COD_CUPOM_FECHAMENTO :=  FormatFloat('000',TerminalAtual) + FormatFloat('00000',i);
+    COD_CUPOM_FECHAMENTO :=  QuotedStr(FormatFloat('000',TerminalAtual) + FormatFloat('00000',i));
   finally
     free;
   end;
@@ -1645,12 +1646,23 @@ begin
   else
     STATUS := QuotedStr(DM.SQLTerminalAtivoTERMCSTATUSCAIXA.AsString);
 
-  ExecSql('INSERT INTO CUPOM_FECHAMENTO (COD_CUPOM_FECHAMENTO, STATUS,DATA_STATUS, DATA_MOVIMENTO, OPERACAO_CAIXA, OBSERVACOES, TERMICOD)VALUES('
-  +COD_CUPOM_FECHAMENTO+','+STATUS+','+
-  QuotedStr(FormatDateTime('mm/dd/yyyy', DM.SQLTerminalAtivoTERMDSTATUSCAIXA.AsDateTime))
-  +','+QuotedStr(FormatDateTime('mm/dd/yyyy', EditData.Date))
-  +','+SQLOperacaoCaixaOPCXICOD.AsString+','+  (OBSERVACOES)+','+ IntToStr(TerminalAtual) +')',1);
-
+  try
+{    ExecSql('INSERT INTO CUPOM_FECHAMENTO (CUPOA13ID,COD_CUPOM_FECHAMENTO, STATUS,DATA_STATUS, DATA_MOVIMENTO, OPERACAO_CAIXA, OBSERVACOES, TERMICOD)VALUES('
+    +COD_CUPOM_FECHAMENTO+','+ QuotedStr(IntToStr(i)) +','+STATUS+','+
+    QuotedStr(FormatDateTime('mm/dd/yyyy', DM.SQLTerminalAtivoTERMDSTATUSCAIXA.AsDateTime))
+    +','+QuotedStr(FormatDateTime('mm/dd/yyyy', EditData.Date))
+    +','+SQLOperacaoCaixaOPCXICOD.AsString+','+  (OBSERVACOES)+','+ IntToStr(TerminalAtual) +')',1);}
+    DM.SQLTemplate.Close ;
+    DM.SQLTemplate.SQL.Clear ;
+    DM.SQLTemplate.SQL.Text := 'INSERT INTO CUPOM_FECHAMENTO (CUPOA13ID,COD_CUPOM_FECHAMENTO, STATUS,DATA_STATUS, DATA_MOVIMENTO, OPERACAO_CAIXA, OBSERVACOES, TERMICOD)VALUES(';
+    DM.SQLTemplate.SQL.Text := DM.SQLTemplate.SQL.Text + COD_CUPOM_FECHAMENTO+','+ QuotedStr(IntToStr(i)) +','+STATUS+',';
+    DM.SQLTemplate.SQL.Text := DM.SQLTemplate.SQL.Text + QuotedStr(FormatDateTime('mm/dd/yyyy', DM.SQLTerminalAtivoTERMDSTATUSCAIXA.AsDateTime));
+    DM.SQLTemplate.SQL.Text := DM.SQLTemplate.SQL.Text + ','+QuotedStr(FormatDateTime('mm/dd/yyyy', EditData.Date));
+    DM.SQLTemplate.SQL.Text := DM.SQLTemplate.SQL.Text + ','+SQLOperacaoCaixaOPCXICOD.AsString+','+  (OBSERVACOES)+','+ IntToStr(TerminalAtual) +')';
+    DM.SQLTemplate.ExecSQL ;
+  except on e: Exception do
+    ShowMessage('Erro ao gravar o fechamento do cupom: '+ e.Message);
+  end;
   cdsValores.First;
   while not cdsValores.eof do
   begin
@@ -1664,7 +1676,7 @@ begin
         DM.SQLTemplate.Close ;
         DM.SQLTemplate.SQL.Clear ;
         DM.SQLTemplate.SQL.Text := 'INSERT INTO CUPOM_FECHAMENTO_ITEM(COD_CUPOM_FECHAMENTO,COD_CPRZ,VALOR)VALUES('
-        +COD_CUPOM_FECHAMENTO+','+cdsValoresnumeicod.asstring+','+
+        +QuotedStr(IntToStr(i))+','+cdsValoresnumeicod.asstring+','+
         QuotedStr(StringReplace(FormatFloat('0.00', cdsValoresValor.AsCurrency),',','.',[]))
         +')';
         DM.SQLTemplate.ExecSQL ;

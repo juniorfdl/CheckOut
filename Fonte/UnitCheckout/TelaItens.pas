@@ -505,11 +505,12 @@ var xCliente, xDocumento, xPlano, vTotaItem: string;
 var iCRT, vCont, vUltimo: integer;
 var VlrDescNoTotal, VlrTroca, VlrTotalItens, PercDesc, TotalDesconto: double;
   vaux, Total_vTotTrib: Currency;
+var vDescTodosItens : Boolean;
 begin
   dm.ACBrNFe.DANFE.vTribFed := 0;
   dm.ACBrNFe.DANFE.vTribEst := 0;
   dm.ACBrNFe.DANFE.vTribMun := 0;
-
+  vDescTodosItens := True;
   VlrTotalItens := 0;
   VlrDescNoTotal := 0;
   VlrTroca := 0;
@@ -808,7 +809,7 @@ begin
         Total.ICMSTot.vProd := vaux;
         vaux := Prod.vDesc;
         TotalDesconto := TotalDesconto + vaux;
-        if (vCont = vUltimo) and (TotalDesconto <> VlrDescNoTotal) then
+        if (vCont = vUltimo) and (TotalDesconto <> VlrDescNoTotal) and (VlrDescNoTotal > 0) then
         begin
           Prod.vDesc := (Prod.vDesc - (TotalDesconto - VlrDescNoTotal));
         end;
@@ -928,8 +929,12 @@ begin
                     tPag := fpCheque
                   else
                     tPag := fpDinheiro;
-//              vPag := fieldbyname('CTRCN2VLR').AsFloat;
-                vPag := VarValorRecebido;
+
+                if VarValorRecebido > 0 then
+                  vPag := VarValorRecebido
+                else
+                  vPag := fieldbyname('CTRCN2VLR').AsFloat;
+
                 if VarValorTroco > 0 then
                   pag.vTroco := VarValorTroco;
             end;
@@ -956,6 +961,8 @@ begin
       InfAdic.infCpl := InfAdic.infCpl + SQLImpressaoCupom.fieldbyname('CLIENTEENDE').AsString + ', ';
     if SQLImpressaoCupom.fieldbyname('CLIENTEBAIRRO').AsString <> '' then
       InfAdic.infCpl := InfAdic.infCpl + SQLImpressaoCupom.fieldbyname('CLIENTEBAIRRO').AsString;
+    if SQLImpressaoCupom.fieldbyname('VENDICOD').AsString <> '' then
+      InfAdic.infCpl := InfAdic.infCpl + #13 + 'Vendedor: ' + SQLLocate('VENDEDOR', 'VENDICOD', 'VENDA60NOME', SQLImpressaoCupom.fieldbyname('VENDICOD').AsString);
 
     if Obs_Venda <> '' then
       InfAdic.infCpl := InfAdic.infCpl + #13 + Obs_Venda;
@@ -1973,6 +1980,21 @@ begin
       if (ValorItem = 0) then
         ValorItem := StrToFloat(FormatFloat(FormatStrVlrVenda, RetornaPreco(SQLProduto, DM.SQLConfigVendaTPRCICOD.AsString, UsaPrecoVenda)));
 
+      //Busca desconto no produto
+      DM.SQLProduto_Descontos.Close;
+      DM.SQLProduto_Descontos.MacroByName('PRODUTO').Value := ' PRODICOD = ' + SQLProdutoPRODICOD.AsString;
+      DM.SQLProduto_Descontos.MacroByName('QTDE').Value := 'QUANTIDADE <= ' + TrocaVirgulaPorPonto(FormatFloat('0.00',EditQtde.Value));
+      DM.SQLProduto_Descontos.MacroByName('DATA').Value := 'DATA_VALIDADE >= ''' + FormatDateTime('mm/dd/yyyy', Now) + '''';
+      addLog('sql desconto_produto: ' + dm.SQLProduto_Descontos.SQL.Text ,ExtractFilePath(Application.ExeName) + 'LogDescontoProduto.txt');
+      addLog('produto: ' + DM.SQLProduto_Descontos.MacroByName('PRODUTO').Value ,ExtractFilePath(Application.ExeName) + 'LogDescontoProduto.txt');
+      addLog('qtde: ' +  DM.SQLProduto_Descontos.MacroByName('QTDE').Value  ,ExtractFilePath(Application.ExeName) + 'LogDescontoProduto.txt');
+      addLog('data: ' + DM.SQLProduto_Descontos.MacroByName('DATA').Value ,ExtractFilePath(Application.ExeName) + 'LogDescontoProduto.txt');
+      DM.SQLProduto_Descontos.Open;
+      if not (DM.SQLProduto_Descontos.IsEmpty) then
+      begin
+        ValorItem := DM.SQLProduto_DescontosPRECO.AsFloat;
+        addLog('Validade: ' + dm.SQLProduto_DescontosPRECO.AsString ,ExtractFilePath(Application.ExeName) + 'LogDescontoProduto.txt');
+      end;
       CodICMS := '';
       CodICMS := SQLProdutoICMSICOD.AsString;
       DescricaoProduto.Caption := SQLProdutoPRODA60DESCR.Value;

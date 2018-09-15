@@ -113,7 +113,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       Height = 25
       Cursor = crHandPoint
       Hint = 'Visualizar Relat'#243'rio'
-      Caption = '&Visualizar Relat'#243'rio'
+      Caption = 'co : integer'
       Flat = True
       Font.Charset = ANSI_CHARSET
       Font.Color = clBlack
@@ -1445,7 +1445,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     DataPipeline = PipeOperacao
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'Custom'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.mmMarginBottom = 6350
     PrinterSetup.mmMarginLeft = 6350
@@ -1877,7 +1877,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
           DataPipeline = PipeNumerario
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.PaperName = 'Custom'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.mmMarginBottom = 6350
           PrinterSetup.mmMarginLeft = 6350
@@ -2166,7 +2166,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                 DataPipeline = PipeItensVendidos
                 PrinterSetup.BinName = 'Default'
                 PrinterSetup.DocumentName = 'Report'
-                PrinterSetup.PaperName = 'A4'
+                PrinterSetup.PaperName = 'Custom'
                 PrinterSetup.PrinterName = 'Default'
                 PrinterSetup.mmMarginBottom = 6350
                 PrinterSetup.mmMarginLeft = 6350
@@ -2358,7 +2358,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                       DataPipeline = PipeVendasCartoesCheques
                       PrinterSetup.BinName = 'Default'
                       PrinterSetup.DocumentName = 'Report'
-                      PrinterSetup.PaperName = 'A4'
+                      PrinterSetup.PaperName = 'Custom'
                       PrinterSetup.PrinterName = 'Default'
                       PrinterSetup.mmMarginBottom = 6350
                       PrinterSetup.mmMarginLeft = 6350

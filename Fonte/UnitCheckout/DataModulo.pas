@@ -1153,6 +1153,12 @@ type
     ACBrNFeDANFeRL1: TACBrNFeDANFeRL;
     ACBrNFeDANFeESCPOS: TACBrNFeDANFeESCPOS;
     SQLConfigVendaVALOR_LIMITE_PAGTO: TFloatField;
+    SQLProduto_Descontos: TRxQuery;
+    SQLProduto_DescontosCOD_PRODUTODESCONTOS: TIntegerField;
+    SQLProduto_DescontosPRODICOD: TIntegerField;
+    SQLProduto_DescontosQUANTIDADE: TFloatField;
+    SQLProduto_DescontosPRECO: TFloatField;
+    SQLProduto_DescontosDATA_VALIDADE: TDateTimeField;
     procedure DataModuleCreate(Sender: TObject);
     procedure SQLCupomNewRecord(DataSet: TDataSet);
     procedure SQLCupomBeforePost(DataSet: TDataSet);
