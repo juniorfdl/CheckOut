@@ -11,7 +11,8 @@ uses
   IdTCPConnection, IdTCPClient, IdMessageClient, IdSMTP, IdBaseComponent,
   IdMessage, DBXpress, ZConnection, SqlExpr, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, ACBrNFeDANFEClass, ACBrNFeDANFeESCPOS, pcnConversaoNFe,
-  ACBrDFe, ACBrNFe, ACBrBase, ACBrPosPrinter, ZAbstractConnection;
+  ACBrDFe, ACBrNFe, ACBrBase, ACBrPosPrinter, ZAbstractConnection,
+  RestClient, RestUtils, DBClient, UnitLibrary;
 
 type
   TDM = class(TDMTemplate)
@@ -1046,6 +1047,13 @@ type
     SQLMesaStatusVENDICOD: TIntegerField;
     SQLMesaStatusNOMECLIENTE: TStringField;
     SQLEmpresaVERSAO: TStringField;
+    RestClient: TRestClient;
+    SQLConfigGeralDIAS_AVISO: TIntegerField;
+    SQLConfigGeralDATA_INI_SEM_NET: TDateTimeField;
+    cdsAPIAutorizacao: TClientDataSet;
+    cdsAPIAutorizacaoOBS_AUTORIZACAO: TStringField;
+    cdsAPIAutorizacaoDIAS_AVISO: TStringField;
+    cdsAPIAutorizacaoDATA_AUTORIZACAO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure SQLCupomNewRecord(DataSet: TDataSet);
     procedure SQLCupomBeforePost(DataSet: TDataSet);
@@ -1061,9 +1069,14 @@ type
     procedure SQLFechamentoCaixaBeforePost(DataSet: TDataSet);
     procedure SQLTeleEntregaBeforePost(DataSet: TDataSet);
   private
+    procedure GetDataValidadeSistema;
+    procedure GetDataValidadeSistemaWebApi;
     { Private declarations }
   public
     { Public declarations }
+    vSEM_INTERNET:Boolean;
+    DataSistema: TDate;
+    OBSAutorizacao: string;
     CodNextOrc,
     CodNextCupom,
     ConfigEtiqueta, NumerarioCartao, SubTotal_ECF : string ;
@@ -1087,7 +1100,7 @@ var
 
 implementation
 
-uses TelaSplash;
+uses TelaSplash, DateUtils, TelaAtivacao;
 
 {$R *.DFM}
 
@@ -1177,15 +1190,18 @@ begin
     begin
       if ((SQLConfigGeralCFGEDBLOQ.Value - Now) < 5) and ((SQLConfigGeralCFGEDBLOQ.Value - Now) > 0) then
         ShowMessage('Atenção! Faltam menos de 05 dias para o sistema expirar o funcionamento! Entre em contato com o suporte!');
-    end; }
+    end;
 
   DiaSemana := FormatDateTime('ddd',now);
   if (SQLConfigGeralCFGECBLOQ.Value = 'S') and (DiaSemana <> 'sáb') and (DiaSemana <> 'dom') then
     begin
       ShowMessage('Erro! O sistema precisa ser atualizado, entre em contato com o suporte!');
       Application.Terminate;
-    end;
+    end; }
 
+  DataSistema := ExecSql('select current_timestamp from rdb$relations').fieldbyname('current_timestamp').AsDateTime;
+  DataSistema := StrToDate(FormatDateTime('dd/mm/yyyy', DataSistema));
+  GetDataValidadeSistema;
   if sqlEmpresa.FieldByName('VERSAO').AsString = '4' then
     ACBrNFe.Configuracoes.Geral.VersaoDF := ve400
   else
@@ -1351,6 +1367,95 @@ begin
     result := true
   else
     result := false;
+end;
+
+procedure TDM.GetDataValidadeSistema;
+var
+  Data : TDateTime;
+  DiasVencimento : Integer;
+begin
+  vSEM_INTERNET := False;
+  OBSAutorizacao := '';
+  if DM.SQLConfigGeralCFGEDBLOQ.AsDateTime < DataSistema then
+  begin
+    GetDataValidadeSistemaWebApi;
+  end;
+  DM.SQLConfigGeral.Edit;
+  if not vSEM_INTERNET then
+    DM.SQLConfigGeralDATA_INI_SEM_NET.Clear
+  else begin
+    if DM.SQLConfigGeralDATA_INI_SEM_NET.IsNull then
+      DM.SQLConfigGeralDATA_INI_SEM_NET.AsDateTime := DataSistema;
+  end;
+  if DM.SQLConfigGeralCFGEDBLOQ.AsDateTime < DataSistema then
+    DM.SQLConfigGeralCFGECBLOQ.Value := 'S'
+  else begin
+    DM.SQLConfigGeralCFGECBLOQ.Value := '';
+    if DM.SQLConfigGeralDIAS_AVISO.Value > 0 then
+    begin
+      DiasVencimento := DaysBetween(dm.SQLConfigGeralCFGEDBLOQ.AsDateTime, DataSistema);
+      if DM.SQLConfigGeralDIAS_AVISO.Value >= DiasVencimento then
+      begin
+        if DiasVencimento = 1 then
+          OBSAutorizacao := '01 dia'
+        else
+          OBSAutorizacao := FormatFloat('00', DiasVencimento) + ' dias';
+      end;
+    end;
+  end;
+  dm.SQLConfigGeral.Post;
+
+end;
+
+procedure TDM.GetDataValidadeSistemaWebApi;
+var
+  Data : TDate;
+  xhttp: String;
+begin
+  if not DM.SQLEmpresa.Active then
+    DM.SQLEmpresa.Open;
+  cdsAPIAutorizacao.Close;
+  cdsAPIAutorizacao.CreateDataSet;
+  xhttp := 'http://200.98.170.118/Automafour/api/cad_pessoa/documento/' + DM.SQLEmpresaEMPRA14CGC.AsString;
+
+  try
+    try
+      RestClient.Resource(xhttp).Accept(RestUtils.MediaType_Json).GetAsDataSet(cdsAPIAutorizacao);
+    except
+      on E: Exception do
+      begin
+        vSEM_INTERNET := True;
+        Exit;
+      end;
+    end;
+    if cdsAPIAutorizacao.Active then
+    begin
+      if cdsAPIAutorizacaoDATA_AUTORIZACAO.AsString <> '' then
+      begin
+        Data := StrToDate(Copy(cdsAPIAutorizacaoDATA_AUTORIZACAO.Value,9,2) + '/' + Copy(cdsAPIAutorizacaoDATA_AUTORIZACAO.Value, 6, 2)
+        + '/' + Copy(cdsAPIAutorizacaoDATA_AUTORIZACAO.Value,1,4));
+        DM.SQLConfigGeral.Edit;
+        DM.SQLConfigGeralCFGEDBLOQ.Value := Data;
+        DM.SQLConfigGeralDIAS_AVISO.AsInteger := StrToIntDef(cdsAPIAutorizacaoDIAS_AVISO.AsString, 0);
+        DM.SQLConfigGeral.Post;
+      end;
+    end;
+  finally
+    if not ((DM.vSEM_INTERNET)and((DM.DataSistema-DM.SQLConfigGeralDATA_INI_SEM_NET.AsDateTime) <= 7)) then
+    if (not cdsAPIAutorizacao.Active) or (cdsAPIAutorizacaoDATA_AUTORIZACAO.AsString = '') then
+    begin
+      FormTelaAtivacao := TFormTelaAtivacao.Create(Application);
+      FormTelaAtivacao.lblMensagem.Font.Size := 17;
+      FormTelaAtivacao.lblMensagem.Caption := 'Cadastro não encontrado na Base de Dados da Automafour!';
+      FormTelaAtivacao.ShowModal;
+      Application.Terminate;
+    end;
+  end;
+
+
+
+
+
 end;
 
 end.

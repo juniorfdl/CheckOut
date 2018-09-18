@@ -115,7 +115,8 @@ uses
   RelatorioTemplate in 'RelatorioTemplate.pas' {FormRelatorioTEMPLATE},
   BalancaFilizola in '..\UnitCheckout\BalancaFilizola.pas' {FormBalancaFilizola},
   BalancaUrano in '..\UnitCheckout\BalancaUrano.pas',
-  BalancaToledo in '..\UnitCheckout\BalancaToledo.pas';
+  BalancaToledo in '..\UnitCheckout\BalancaToledo.pas',
+  TelaAtivacao in '..\Ativador\TelaAtivacao.pas' {FormTelaAtivacao};
 
 {$R *.RES}
 
@@ -155,22 +156,27 @@ begin
   Application.Title := 'PDV Restaurante';
 
   Application.CreateForm(TDM, DM);
-  if dm.SQLConfigGeralCFGECBLOQ.AsString = 'S' then
-    begin
-      ShowMessage('Sistema Bloqueado!!! Ligue para a Suporte');
-      DM.DB.Close;
-      DM.zdb.Connected := False;
-      application.terminate;
-    end
-  else
-    begin
+  if (DM.OBSAutorizacao <> '') or (dm.SQLConfigGeralCFGECBLOQ.AsString = 'S') and(not DelphiAberto) then
+  begin
+    FormTelaAtivacao := TFormTelaAtivacao.Create(Application);
+    FormTelaAtivacao.ShowModal;
 
-      FormTelaLogin := TFormTelaLogin.Create(Application);
-      FormTelaLogin.Caption := 'Bem Vindo ao PDV Restaurante' ;
-      if FormTelaLogin.ShowModal = idOk then
-        begin
-          Application.CreateForm(TFormTelaItens, FormTelaItens);
-          Application.Run ;
-        end;
+    if (DM.vSEM_INTERNET)and((DM.DataSistema-DM.SQLConfigGeralDATA_INI_SEM_NET.AsDateTime) <= 7) then
+    begin
+    end
+    else
+    if (dm.SQLConfigGeralCFGECBLOQ.AsString = 'S') then
+    begin
+      Application.terminate;
+      Exit;
     end;
+  end;
+  FormTelaLogin := TFormTelaLogin.Create(Application);
+  FormTelaLogin.Caption := 'Bem Vindo ao PDV Restaurante' ;
+  if FormTelaLogin.ShowModal = idOk then
+  begin
+    Application.CreateForm(TFormTelaItens, FormTelaItens);
+    Application.Run ;
+  end;
+
 end.

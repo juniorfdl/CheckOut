@@ -259,6 +259,15 @@ type
     cxDBTextEdit10: TcxDBTextEdit;
     SQLTemplateVERSAO: TStringField;
     cxDBRadioGroup2: TcxDBRadioGroup;
+    cxGroupBox2: TcxGroupBox;
+    Label24: TLabel;
+    Label25: TLabel;
+    cxDBTextEdit11: TcxDBTextEdit;
+    cxDBTextEdit12: TcxDBTextEdit;
+    cxDBCheckBox4: TcxDBCheckBox;
+    SQLTemplateUSUARIO_BRT: TStringField;
+    SQLTemplateSENHA_BRT: TStringField;
+    SQLTemplateBUSCAR_PRODUTO_BRT: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure SQLTemplateBeforePost(DataSet: TDataSet);
     procedure SQLTemplateAfterPost(DataSet: TDataSet);

@@ -1,7 +1,7 @@
 inherited DM: TDM
   OldCreateOrder = True
-  Left = 626
-  Top = 68
+  Left = 129
+  Top = 1
   Height = 724
   Width = 859
   inherited DB: TDatabase
@@ -1001,6 +1001,7 @@ inherited DM: TDM
   end
   object SQLConfigGeral: TRxQuery
     DatabaseName = 'DB'
+    RequestLive = True
     SQL.Strings = (
       'Select * from CONFIGGERAL')
     Macros = <>
@@ -1235,6 +1236,14 @@ inherited DM: TDM
     object SQLConfigGeralCFGEDBLOQ: TDateTimeField
       FieldName = 'CFGEDBLOQ'
       Origin = 'DB.CONFIGGERAL.CFGEDBLOQ'
+    end
+    object SQLConfigGeralDIAS_AVISO: TIntegerField
+      FieldName = 'DIAS_AVISO'
+      Origin = 'DB.CONFIGGERAL.DIAS_AVISO'
+    end
+    object SQLConfigGeralDATA_INI_SEM_NET: TDateTimeField
+      FieldName = 'DATA_INI_SEM_NET'
+      Origin = 'DB.CONFIGGERAL.DATA_INI_SEM_NET'
     end
   end
   object MemCtRecParc: TTable
@@ -5637,5 +5646,29 @@ inherited DM: TDM
     PosPrinter = ACBrPosPrinter
     Left = 72
     Top = 597
+  end
+  object RestClient: TRestClient
+    ConnectionType = hctIndy
+    EnabledCompression = False
+    Left = 664
+    Top = 448
+  end
+  object cdsAPIAutorizacao: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 728
+    Top = 536
+    object cdsAPIAutorizacaoDATA_AUTORIZACAO: TStringField
+      FieldName = 'DATA_AUTORIZACAO'
+      Size = 15
+    end
+    object cdsAPIAutorizacaoOBS_AUTORIZACAO: TStringField
+      FieldName = 'OBS_AUTORIZACAO'
+      Size = 250
+    end
+    object cdsAPIAutorizacaoDIAS_AVISO: TStringField
+      FieldName = 'DIAS_AVISO'
+      Size = 15
+    end
   end
 end
