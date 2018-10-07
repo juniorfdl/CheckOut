@@ -110,7 +110,7 @@ uses DataModulo;
 
 procedure TFormPrincipal.FormCreate(Sender: TObject);
 var Inifile: TInifile;
-var hostName, dataBase, CodCliente, NroReduzido, ImpMarca, ImpCaixaPorta, ImpCaixaVeloc, MostraDisplay, Cartao, NroVias, Obs_Venda,UsaSenha : String;
+var hostName, dataBase, CodCliente, NroReduzido, ImpMarca, ImpCaixaPorta, ImpCaixaVeloc, MostraDisplay, Cartao, NroVias, Obs_Venda,UsaSenha,Saltar  : String;
 var TotDesc, TotConfissao, TotalTroca : Double;
 
 begin
@@ -134,6 +134,7 @@ begin
     NroVias             := IniFile.ReadString('IB_Software','NroViasImpVenda','');
     MostraDisplay       := IniFile.ReadString('IB_Software','GravarDisplaySequencial','');
     Obs_Venda           := IniFile.ReadString('IB_Software','Obs_Venda','');
+    Saltar              := Inifile.ReadString('IB_SOFTWARE','Saltar','');
     ImpMarca            := IniFile.ReadString('Restaurante','ImpMarca','');
     ImpCaixaPorta       := IniFile.ReadString('Restaurante','ImpCaixaPorta','');
     ImpCaixaVeloc       := IniFile.ReadString('Restaurante','ImpCaixaVeloc','9600');
@@ -148,9 +149,9 @@ begin
     if ImpMarca = 'DR700'    then ACBrPosPrinter.Modelo := ppEscDaruma;
     if ImpMarca = 'DR800'    then ACBrPosPrinter.Modelo := ppEscDaruma;
 
+    ACBrPosPrinter.Desativar;
     ACBrPosPrinter.Device.Porta := ImpCaixaPorta;
     ACBrPosPrinter.Device.Baud  := StrToint(ImpCaixaVeloc);
-    ACBrPosPrinter.Desativar;
 
     if UsaSenha = 'S' then
       ImprimirCodigo(hostName, dataBase);
@@ -314,6 +315,7 @@ begin
       end;
 
     ACBrPosPrinter.Ativar;
+    ACBrPosPrinter.LinhasEntreCupons := StrToInt(Saltar);
     ACBrPosPrinter.Imprimir(Memo.Lines.Text);
     if ImpMarca = 'DR800' then sleep(100);
     ACBrPosPrinter.Desativar;

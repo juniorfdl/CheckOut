@@ -472,10 +472,10 @@ begin
   if (ECFAtual = 'NFCE ELGIN') then dm.ACBrPosPrinter.Modelo := ppEscVox;
   if (ECFAtual = 'NFCE DR700') then dm.ACBrPosPrinter.Modelo := ppEscDaruma;
   if (ECFAtual = 'NFCE DR800') then dm.ACBrPosPrinter.Modelo := ppEscDaruma;
-//  begin
-//    dm.ACBrPosPrinter.Modelo := ppEscDaruma;
-//    dm.ACBrPosPrinter.ControlePorta := False;
-//  end;
+{  begin
+    dm.ACBrPosPrinter.Modelo := ppEscDaruma;
+    dm.ACBrPosPrinter.ControlePorta := False;
+  end;}
 
   if dm.SQLTerminalAtivoTERMA5ECFPORTACOM.Value <> 'USB' then
     dm.ACBrPosPrinter.Device.Porta := dm.SQLTerminalAtivoTERMA5ECFPORTACOM.Value
@@ -493,6 +493,10 @@ begin
 
   dm.ACBrNFeDANFeESCPOS.ImprimeEmUmaLinha := False;
   dm.ACBrNFeDANFeESCPOS.ImprimeDescAcrescItem := True;
+//  if dm.ACBrPosPrinter.ControlePorta then
+//    ShowMessage('Controle de porta Ativa')
+//  else
+//    ShowMessage('Controle de porta Inativa');
 end;
 
 procedure TFormTelaItens.LoadXML(MyMemo: TMemo; MyWebBrowser: TWebBrowser);
@@ -931,9 +935,9 @@ begin
                   else
                     tPag := fpDinheiro;
 
-                if VarValorRecebido > 0 then
-                  vPag := VarValorRecebido
-                else
+//                if VarValorRecebido > 0 then            //Tirei pq quando era pago com dois tipos de pagamento a tag vpag ficava com o mesmo valor
+//                  vPag := VarValorRecebido
+//                else
                   vPag := fieldbyname('CTRCN2VLR').AsFloat;
 
                 if VarValorTroco > 0 then

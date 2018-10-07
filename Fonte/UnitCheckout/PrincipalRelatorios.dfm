@@ -1,9 +1,8 @@
 object FormPrincipalRelatorios: TFormPrincipalRelatorios
-  Left = 289
-  Top = 134
-  Width = 685
-  Height = 383
-  AutoSize = True
+  Left = 326
+  Top = 179
+  Width = 612
+  Height = 394
   Caption = 'Relat'#243'rio para Resumo de Caixa'
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
@@ -13,8 +12,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
   Font.Style = []
   KeyPreview = True
   OldCreateOrder = False
-  Position = poScreenCenter
-  PrintScale = poNone
+  Position = poDesktopCenter
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   PixelsPerInch = 96
@@ -22,7 +20,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
   object ptopo: TAdvOfficeStatusBar
     Left = 0
     Top = 0
-    Width = 669
+    Width = 596
     Height = 49
     AnchorHint = False
     Align = alTop
@@ -59,8 +57,8 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     object RxLabel2: TRxLabel
       Left = 0
       Top = 0
-      Width = 414
-      Height = 39
+      Width = 596
+      Height = 49
       Align = alClient
       Alignment = taCenter
       Caption = 'Relat'#243'rio para Resumo de Caixa'
@@ -79,7 +77,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     Left = 29
     Top = 56
     Width = 538
-    Height = 289
+    Height = 293
     Cursor = crDefault
     Caption.HTMLFont.Charset = DEFAULT_CHARSET
     Caption.HTMLFont.Color = clWindowText
@@ -113,7 +111,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       Height = 25
       Cursor = crHandPoint
       Hint = 'Visualizar Relat'#243'rio'
-      Caption = 'co : integer'
+      Caption = 'Resumo de Caixa'
       Flat = True
       Font.Charset = ANSI_CHARSET
       Font.Color = clBlack
@@ -375,7 +373,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     end
     object CKImpVendaCartoes: TCheckBox
       Left = 62
-      Top = 210
+      Top = 199
       Width = 134
       Height = 17
       Caption = 'Imprimir Venda Cartoes'
@@ -383,7 +381,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     end
     object ckImpProdutosVendidos: TCheckBox
       Left = 62
-      Top = 229
+      Top = 217
       Width = 151
       Height = 17
       Caption = 'Imprimir Produtos Vendidos'
@@ -391,7 +389,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     end
     object ckBobina: TCheckBox
       Left = 62
-      Top = 247
+      Top = 235
       Width = 103
       Height = 17
       Caption = 'Layout Bobina'
@@ -403,12 +401,22 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       ParentFont = False
       TabOrder = 6
     end
+    object ckImpNumerario: TCheckBox
+      Left = 62
+      Top = 253
+      Width = 134
+      Height = 17
+      Caption = 'Imprimir Total Numer'#225'rio'
+      Checked = True
+      State = cbChecked
+      TabOrder = 7
+    end
   end
   object Memo: TMemo
     Left = 37
-    Top = 314
+    Top = 330
     Width = 504
-    Height = 14
+    Height = 4
     Lines.Strings = (
       'T'
       'E'
@@ -1084,18 +1092,18 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
   end
   object DSTblTemporaria: TDataSource
     DataSet = TblTemporaria
-    Left = 102
-    Top = 312
+    Left = 86
+    Top = 80
   end
   object TblTemporaria: TTable
     DatabaseName = 'UNITGESTAO_TEMP'
-    Left = 74
-    Top = 312
+    Left = 58
+    Top = 80
   end
   object BatchMove: TBatchMove
     Mode = batCopy
-    Left = 46
-    Top = 312
+    Left = 30
+    Top = 80
   end
   object SQLOperador: TRxQuery
     DatabaseName = 'DB'
@@ -1113,8 +1121,8 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
   end
   object DSSQLTotalOperacao: TDataSource
     DataSet = SQLTotalOperacao
-    Left = 277
-    Top = 257
+    Left = 325
+    Top = 33
   end
   object SQLTotalOperacao: TRxQuery
     DatabaseName = 'DB'
@@ -1169,8 +1177,8 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         ParamType = ptInput
         Value = '0=0'
       end>
-    Left = 249
-    Top = 257
+    Left = 297
+    Top = 33
     object SQLTotalOperacaoOPCXICOD: TIntegerField
       FieldName = 'OPCXICOD'
       Origin = 'DB.MOVIMENTOCAIXA.OPCXICOD'
@@ -1199,8 +1207,8 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
   end
   object DSSQLTotaNumrario: TDataSource
     DataSet = SQLTotaNumerario
-    Left = 221
-    Top = 257
+    Left = 269
+    Top = 33
   end
   object SQLTotaNumerario: TRxQuery
     DatabaseName = 'DB'
@@ -1254,8 +1262,8 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         ParamType = ptInput
         Value = '0=0'
       end>
-    Left = 193
-    Top = 257
+    Left = 241
+    Top = 33
     object SQLTotaNumerarioNUMEICOD: TIntegerField
       FieldName = 'NUMEICOD'
     end
@@ -1329,8 +1337,8 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         ParamType = ptInput
         Value = '0=0'
       end>
-    Left = 363
-    Top = 257
+    Left = 411
+    Top = 33
     object SQLVendaCartoesChequesCTRCN2VLR: TFloatField
       FieldName = 'CTRCN2VLR'
     end
@@ -1368,8 +1376,8 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
   end
   object dsSQLVendaCartoesCheques: TDataSource
     DataSet = SQLVendaCartoesCheques
-    Left = 391
-    Top = 257
+    Left = 439
+    Top = 33
   end
   object SQLItensVendidos: TRxQuery
     DatabaseName = 'DB'
@@ -1420,8 +1428,8 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         ParamType = ptInput
         Value = '0=0'
       end>
-    Left = 306
-    Top = 257
+    Left = 354
+    Top = 33
     object SQLItensVendidosPRODICOD: TIntegerField
       FieldName = 'PRODICOD'
     end
@@ -1437,8 +1445,8 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
   end
   object dsSQLItensVendidos: TDataSource
     DataSet = SQLItensVendidos
-    Left = 334
-    Top = 257
+    Left = 382
+    Top = 33
   end
   object ReportTotais: TppReport
     AutoStop = False

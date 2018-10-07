@@ -1309,7 +1309,7 @@ begin
       DM.SQLTemplate.SQL.Add('delete from PARCELASVISTAVENDATEMP') ;
       DM.SQLTemplate.SQL.Add('where TERMICOD = ' + IntToStr(TerminalAtual)) ;
       DM.SQLTemplate.ExecSQL ;
-      if TipoPadrao = 'CRT' then
+      if (TipoPadrao = 'CRT') or (not FileExists('Confirma.txt')) then
         ImpCupomAutomatico := True;
 
       if TblMemPrevendaitem.IsEmpty then

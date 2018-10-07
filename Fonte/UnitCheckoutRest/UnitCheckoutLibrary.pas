@@ -385,9 +385,14 @@ begin
     Application.ProcessMessages;
   end;
 
-  if Pergunta('SIM', '* * * CONFIRMA A IMPRESSAO DO CUPOM ? * * *') then
+  if FileExists('ImprimirSempre.txt') then
+    WinExec(Pchar('IMPRESSAOPREVENDA.EXE'),sw_Show)
+  else
+  begin
+   if Pergunta('SIM', '* * * CONFIRMA A IMPRESSAO DO CUPOM ? * * *') then
     if FileExists('IMPRESSAOPREVENDA.EXE') then
       WinExec(Pchar('IMPRESSAOPREVENDA.EXE'),sw_Show);
+  end;
 
   if FileExists('VALEBEBIDA.EXE') then
     WinExec(Pchar('VALEBEBIDA.EXE'),sw_Show);

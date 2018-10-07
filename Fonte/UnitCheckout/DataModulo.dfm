@@ -1,11 +1,10 @@
 inherited DM: TDM
   OldCreateOrder = True
-  Left = 65509
-  Top = 36
+  Left = 8
+  Top = 6
   Height = 744
   Width = 1382
   inherited DB: TDatabase
-    Connected = False
     AfterConnect = DBAfterConnect
     Left = 32
     Top = 8
@@ -4841,7 +4840,7 @@ inherited DM: TDM
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 0
     PrinterSetup.mmPaperWidth = 0
-    PrinterSetup.PaperSize = 177
+    PrinterSetup.PaperSize = 256
     DeviceType = 'Screen'
     EmailSettings.ReportFormat = 'PDF'
     OutlineSettings.CreateNode = True
@@ -6797,7 +6796,7 @@ inherited DM: TDM
     Configuracoes.WebServices.AjustaAguardaConsultaRet = True
     Configuracoes.WebServices.QuebradeLinha = '|'
     DANFE = ACBrNFeDANFeESCPOS
-    Left = 729
+    Left = 713
     Top = 13
   end
   object RestClient: TRestClient

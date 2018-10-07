@@ -250,7 +250,8 @@ begin
   DM.TblTicketPreVendaCab.Append;
   DM.TblTicketPreVendaCabEmpresaEmit.Value        := SQLLocate('EMPRESA','EMPRICOD','EMPRA60NOMEFANT',EmpresaPadrao);
   DM.TblTicketPreVendaCabEmpresaEmit_Fone.Value   := SQLLocate('EMPRESA','EMPRICOD','EMPRA20FONE',EmpresaPadrao);
-  DM.TblTicketPreVendaCabEmpresaEmit_Ender.Value  := SQLLocate('EMPRESA','EMPRICOD','EMPRA60END',EmpresaPadrao);
+  DM.TblTicketPreVendaCabEmpresaEmit_Ender.Value  := SQLLocate('EMPRESA','EMPRICOD','EMPRA60END',EmpresaPadrao)  + ', ' + SQLLocate('EMPRESA','EMPRICOD','EMPRIENDNRO',EmpresaPadrao);
+  DM.TblTicketPreVendaCabEmpresaEmit_Cidade.Value  := SQLLocate('EMPRESA','EMPRICOD','EMPRA60BAI',EmpresaPadrao) + ',' + SQLLocate('EMPRESA','EMPRICOD','EMPRA60CID',EmpresaPadrao);
 
   DM.TblTicketPreVendaCabUsuarioVendaSTR.Value  := UsuarioAtualNome;
   DM.TblTicketPreVendaCabTERMICOD.Value         := TerminalAtual;

@@ -2158,8 +2158,9 @@ begin
         CodConta               := 0 ;
         FormTelaItens.LblInstrucoes.Caption := 'CAIXA LIVRE';
         FormTelaItens.LblInstrucoes.Update;
-
         Close ;
+        if not FileExists('Confirma.txt') then
+          ImpCupomAutomatico := True;
       end ;
     end ;
 end;

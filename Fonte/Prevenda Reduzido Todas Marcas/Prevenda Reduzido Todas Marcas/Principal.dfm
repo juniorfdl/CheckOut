@@ -323,7 +323,6 @@ object FormPrincipal: TFormPrincipal
     ConfigQRCode.LarguraModulo = 4
     ConfigQRCode.ErrorLevel = 0
     LinhasEntreCupons = 0
-    ControlePorta = True
     Left = 401
     Top = 13
   end

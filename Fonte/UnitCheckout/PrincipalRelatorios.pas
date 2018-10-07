@@ -1,16 +1,15 @@
-
 unit PrincipalRelatorios;
 
 interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, RxLookup, Mask, ToolEdit, DBTables, DB,
-  ppCtrls, ppBands, ppReport, ppStrtch, ppSubRpt, ppVar, ppPrnabl, ppClass,
-  ppCache, ppProd, ppDB, ppComm, ppRelatv, ppDBPipe, ppDBBDE, RxQuery, ppViewr,
-  ppModule, raCodMod, ppMemo, Placemnt, AdvSmoothPanel, RXCtrls,
-  AdvOfficeStatusBar, AdvOfficeStatusBarStylers, ACBrNFeDANFEClass,
-  ACBrNFeDANFeESCPOS, ACBrBase, ACBrPosPrinter;
+  Dialogs, StdCtrls, Buttons, RxLookup, Mask, ToolEdit, DBTables, DB, ppCtrls,
+  ppBands, ppReport, ppStrtch, ppSubRpt, ppVar, ppPrnabl, ppClass, ppCache,
+  ppProd, ppDB, ppComm, ppRelatv, ppDBPipe, ppDBBDE, RxQuery, ppViewr, ppModule,
+  raCodMod, ppMemo, Placemnt, AdvSmoothPanel, RXCtrls, AdvOfficeStatusBar,
+  AdvOfficeStatusBarStylers, ACBrNFeDANFEClass, ACBrNFeDANFeESCPOS, ACBrBase,
+  ACBrPosPrinter;
 
 type
   TFormPrincipalRelatorios = class(TForm)
@@ -186,12 +185,12 @@ type
     ckImpProdutosVendidos: TCheckBox;
     ckBobina: TCheckBox;
     Memo: TMemo;
+    ckImpNumerario: TCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure BtnVisualizarClick(Sender: TObject);
     procedure ReportTotaisPreviewFormCreate(Sender: TObject);
     procedure ppHeaderBand1BeforePrint(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure ppTitleBand1BeforePrint(Sender: TObject);
     procedure SumarioNumerariosBeforePrint(Sender: TObject);
     procedure SumarioProdutosVendidosBeforePrint(Sender: TObject);
@@ -208,7 +207,8 @@ var
 
 implementation
 
-uses DataModulo, UnitLibrary;
+uses
+  DataModulo, UnitLibrary;
 
 {$R *.dfm}
 
@@ -216,42 +216,40 @@ procedure TFormPrincipalRelatorios.FormCreate(Sender: TObject);
 begin
   SQLOperador.Open;
   SQLTerminal.Open;
-  de.Date  := Date;
+  de.Date := Date;
   Ate.Date := Date;
 
   if dm.SQLUsuarioUSUACPERMVMOVCX.Value <> 'S' then
-    begin
-      de.Enabled  := False;
-      ate.Enabled := False;
+  begin
+    de.Enabled := False;
+    ate.Enabled := False;
 
-      ComboTerminal.keyValue := TerminalAtual;
-      ComboOperador.keyValue := dm.SQLUsuarioUSUAICOD.Value;
-      ComboTerminal.Enabled  := False;
-      ComboTerminal2.Enabled := False;
-      ComboOperador.Enabled  := False;
-    end;
+    ComboTerminal.keyValue := TerminalAtual;
+    ComboOperador.keyValue := dm.SQLUsuarioUSUAICOD.Value;
+    ComboTerminal.Enabled := False;
+    ComboTerminal2.Enabled := False;
+    ComboOperador.Enabled := False;
+  end;
 end;
 
 procedure TFormPrincipalRelatorios.BtnVisualizarClick(Sender: TObject);
 var
-  vSaldoTotal, vValorSangria : double;
-  x,y : string;
-  espaco : Integer;
+  vSaldoTotal, vValorSangria: double;
+  x, y: string;
+  espaco: Integer;
 begin
   if ECFAtual = 'NFCE BEMATECH' then
     espaco := 24
   else
     espaco := 20;
-  SQLTotaNumerario.Close ;
-  SQLTotaNumerario.MacrobyName('MEmpresa').Value  := 'EMPRICOD  = ' + EmpresaPadrao;
+  SQLTotaNumerario.Close;
+  SQLTotaNumerario.MacrobyName('MEmpresa').Value := 'EMPRICOD  = ' + EmpresaPadrao;
   SQLTotaNumerario.MacroByName('MTerminal').Value := '0=0';
 
   if (HoraInicial.Text = '') and (HoraInicial.Text = '') then
-    SQLTotaNumerario.MacroByName('MData').Value := 'MOVIMENTOCAIXA.MVCXDMOV >= "' + FormatDateTime('mm/dd/yyyy', De.Date)  + '" and ' +
-                                                   'MOVIMENTOCAIXA.MVCXDMOV <= "' + FormatDateTime('mm/dd/yyyy', Ate.Date) + '"'
+    SQLTotaNumerario.MacroByName('MData').Value := 'MOVIMENTOCAIXA.MVCXDMOV >= "' + FormatDateTime('mm/dd/yyyy', De.Date) + '" and ' + 'MOVIMENTOCAIXA.MVCXDMOV <= "' + FormatDateTime('mm/dd/yyyy', Ate.Date) + '"'
   else
-    SQLTotaNumerario.MacroByName('MData').Value := 'MOVIMENTOCAIXA.REGISTRO >= "' + FormatDateTime('mm/dd/yyyy ', De.Date) + HoraInicial.Text + '" and ' +
-                                                   'MOVIMENTOCAIXA.REGISTRO <= "' + FormatDateTime('mm/dd/yyyy ', Ate.Date)+ HoraFinal.Text   + '"';
+    SQLTotaNumerario.MacroByName('MData').Value := 'MOVIMENTOCAIXA.REGISTRO >= "' + FormatDateTime('mm/dd/yyyy ', De.Date) + HoraInicial.Text + '" and ' + 'MOVIMENTOCAIXA.REGISTRO <= "' + FormatDateTime('mm/dd/yyyy ', Ate.Date) + HoraFinal.Text + '"';
 
   SQLTotaNumerario.MacroByName('MTerminal').Value := '0=0';
 
@@ -259,8 +257,7 @@ begin
     SQLTotaNumerario.MacroByName('MTerminal').Value := 'MOVIMENTOCAIXA.TERMICOD = ' + ComboTerminal.Value;
 
   if ComboTerminal2.Value <> '' then
-    SQLTotaNumerario.MacroByName('MTerminal').Value := SQLTotaNumerario.MacroByName('MTerminal').Value + ' or ' +
-                                                       'MOVIMENTOCAIXA.TERMICOD = ' + ComboTerminal2.Value;
+    SQLTotaNumerario.MacroByName('MTerminal').Value := SQLTotaNumerario.MacroByName('MTerminal').Value + ' or ' + 'MOVIMENTOCAIXA.TERMICOD = ' + ComboTerminal2.Value;
 
   if ComboOperador.Value <> '' then
     SQLTotaNumerario.MacroByName('MOperador').Value := 'MOVIMENTOCAIXA.USUAICOD = ' + ComboOperador.Value
@@ -270,30 +267,26 @@ begin
   SQLTotaNumerario.Open;
 
   SQLTotalOperacao.Close;
-  SQLTotalOperacao.MacrobyName('MEmpresa').Value  := 'EMPRICOD  = ' + EmpresaPadrao;
+  SQLTotalOperacao.MacrobyName('MEmpresa').Value := 'EMPRICOD  = ' + EmpresaPadrao;
   SQLTotalOperacao.MacroByName('MTerminal').Value := '0=0';
 
   if (HoraInicial.Text = '') and (HoraInicial.Text = '') then
-    SQLTotalOperacao.MacroByName('MData').Value := 'MOVIMENTOCAIXA.MVCXDMOV >= "' + FormatDateTime('mm/dd/yyyy', De.Date) + '" and ' +
-                                                   'MOVIMENTOCAIXA.MVCXDMOV <= "' + FormatDateTime('mm/dd/yyyy', Ate.Date) + '"'
+    SQLTotalOperacao.MacroByName('MData').Value := 'MOVIMENTOCAIXA.MVCXDMOV >= "' + FormatDateTime('mm/dd/yyyy', De.Date) + '" and ' + 'MOVIMENTOCAIXA.MVCXDMOV <= "' + FormatDateTime('mm/dd/yyyy', Ate.Date) + '"'
   else
-    SQLTotalOperacao.MacroByName('MData').Value := 'MOVIMENTOCAIXA.REGISTRO >= "' + FormatDateTime('mm/dd/yyyy ', De.Date) + HoraInicial.Text + '" and ' +
-                                                   'MOVIMENTOCAIXA.REGISTRO <= "' + FormatDateTime('mm/dd/yyyy ', Ate.Date)+ HoraFinal.Text   + '"';
-
+    SQLTotalOperacao.MacroByName('MData').Value := 'MOVIMENTOCAIXA.REGISTRO >= "' + FormatDateTime('mm/dd/yyyy ', De.Date) + HoraInicial.Text + '" and ' + 'MOVIMENTOCAIXA.REGISTRO <= "' + FormatDateTime('mm/dd/yyyy ', Ate.Date) + HoraFinal.Text + '"';
 
   if ComboTerminal.Value <> '' then
     SQLTotalOperacao.MacroByName('MTerminal').Value := 'MOVIMENTOCAIXA.TERMICOD = ' + ComboTerminal.Value;
 
   if ComboTerminal2.Value <> '' then
-    SQLTotalOperacao.MacroByName('MTerminal').Value := SQLTotalOperacao.MacroByName('MTerminal').Value + ' or ' +
-                                                       'MOVIMENTOCAIXA.TERMICOD = ' + ComboTerminal2.Value;
+    SQLTotalOperacao.MacroByName('MTerminal').Value := SQLTotalOperacao.MacroByName('MTerminal').Value + ' or ' + 'MOVIMENTOCAIXA.TERMICOD = ' + ComboTerminal2.Value;
 
   if ComboOperador.Value <> '' then
     SQLTotalOperacao.MacroByName('MOperador').Value := 'MOVIMENTOCAIXA.USUAICOD = ' + ComboOperador.Value
   else
     SQLTotalOperacao.MacroByName('MOperador').Value := '0=0';
 
-  SQLTotalOperacao.Open ;
+  SQLTotalOperacao.Open;
 
   // Produtos Vendidos
   SQLItensVendidos.Close;
@@ -301,11 +294,9 @@ begin
   SQLItensVendidos.MacrobyName('MEmpresa').Value := 'EMPRICOD  = ' + EmpresaPadrao;
 
   if (HoraInicial.Text = '') and (HoraInicial.Text = '') then
-    SQLItensVendidos.MacroByName('MData').Value := 'CUPOM.CUPODEMIS >= "' + FormatDateTime('mm/dd/yyyy', De.Date) + '" and ' +
-                                                   'CUPOM.CUPODEMIS <= "' + FormatDateTime('mm/dd/yyyy', Ate.Date) + '"'
+    SQLItensVendidos.MacroByName('MData').Value := 'CUPOM.CUPODEMIS >= "' + FormatDateTime('mm/dd/yyyy', De.Date) + '" and ' + 'CUPOM.CUPODEMIS <= "' + FormatDateTime('mm/dd/yyyy', Ate.Date) + '"'
   else
-    SQLItensVendidos.MacroByName('MData').Value := 'CUPOM.CUPODEMIS >= "' + FormatDateTime('mm/dd/yyyy ', De.Date) + HoraInicial.Text + '" and ' +
-                                                   'CUPOM.CUPODEMIS <= "' + FormatDateTime('mm/dd/yyyy ', Ate.Date)+ HoraFinal.Text   + '"';
+    SQLItensVendidos.MacroByName('MData').Value := 'CUPOM.REGISTRO >= "' + FormatDateTime('mm/dd/yyyy ', De.Date) + HoraInicial.Text + '" and ' + 'CUPOM.REGISTRO <= "' + FormatDateTime('mm/dd/yyyy ', Ate.Date) + HoraFinal.Text + '"';
 
   SQLItensVendidos.MacroByName('MTerminal').Value := '0=0';
 
@@ -313,15 +304,14 @@ begin
     SQLItensVendidos.MacroByName('MTerminal').Value := 'CUPOM.TERMICOD = ' + ComboTerminal.Value;
 
   if ComboTerminal2.Value <> '' then
-    SQLItensVendidos.MacroByName('MTerminal').Value := SQLItensVendidos.MacroByName('MTerminal').Value + ' or ' +
-                                                       'CUPOM.TERMICOD = ' + ComboTerminal2.Value;
+    SQLItensVendidos.MacroByName('MTerminal').Value := SQLItensVendidos.MacroByName('MTerminal').Value + ' or ' + 'CUPOM.TERMICOD = ' + ComboTerminal2.Value;
 
   if ComboOperador.Value <> '' then
     SQLItensVendidos.MacroByName('MOperador').Value := 'CUPOM.USUAICODVENDA = ' + ComboOperador.Value
   else
     SQLItensVendidos.MacroByName('MOperador').Value := '0=0';
 
-  SQLItensVendidos.Open ;
+  SQLItensVendidos.Open;
 
  // Venda Cartoes , Cheques e Crediario
   SQLVendaCartoesCheques.Close;
@@ -329,11 +319,9 @@ begin
   SQLVendaCartoesCheques.MacrobyName('MEmpresa').Value := 'EMPRICOD  = ' + EmpresaPadrao;
 
   if (HoraInicial.Text = '') and (HoraInicial.Text = '') then
-    SQLVendaCartoesCheques.MacroByName('MData').Value := 'CUPOM.CUPODEMIS >= "' + FormatDateTime('mm/dd/yyyy', De.Date) + '" and ' +
-                                                         'CUPOM.CUPODEMIS <= "' + FormatDateTime('mm/dd/yyyy', Ate.Date) + '"'
+    SQLVendaCartoesCheques.MacroByName('MData').Value := 'CUPOM.CUPODEMIS >= "' + FormatDateTime('mm/dd/yyyy', De.Date) + '" and ' + 'CUPOM.CUPODEMIS <= "' + FormatDateTime('mm/dd/yyyy', Ate.Date) + '"'
   else
-    SQLVendaCartoesCheques.MacroByName('MData').Value := 'CUPOM.CUPODEMIS >= "' + FormatDateTime('mm/dd/yyyy ', De.Date) + HoraInicial.Text + '" and ' +
-                                                         'CUPOM.CUPODEMIS <= "' + FormatDateTime('mm/dd/yyyy ', Ate.Date)+ HoraFinal.Text   + '"';
+    SQLVendaCartoesCheques.MacroByName('MData').Value := 'CUPOM.CUPODEMIS >= "' + FormatDateTime('mm/dd/yyyy ', De.Date) + HoraInicial.Text + '" and ' + 'CUPOM.CUPODEMIS <= "' + FormatDateTime('mm/dd/yyyy ', Ate.Date) + HoraFinal.Text + '"';
 
   SQLVendaCartoesCheques.MacroByName('MTerminal').Value := '0=0';
 
@@ -341,162 +329,186 @@ begin
     SQLVendaCartoesCheques.MacroByName('MTerminal').Value := 'CUPOM.TERMICOD = ' + ComboTerminal.Value;
 
   if ComboTerminal2.Value <> '' then
-    SQLVendaCartoesCheques.MacroByName('MTerminal').Value := SQLItensVendidos.MacroByName('MTerminal').Value + ' or ' +
-                                                             'CUPOM.TERMICOD = ' + ComboTerminal2.Value;
+    SQLVendaCartoesCheques.MacroByName('MTerminal').Value := SQLItensVendidos.MacroByName('MTerminal').Value + ' or ' + 'CUPOM.TERMICOD = ' + ComboTerminal2.Value;
 
   if ComboOperador.Value <> '' then
     SQLVendaCartoesCheques.MacroByName('MOperador').Value := 'CUPOM.USUAICODVENDA = ' + ComboOperador.Value
   else
     SQLVendaCartoesCheques.MacroByName('MOperador').Value := '0=0';
 
-  SQLVendaCartoesCheques.Open ;
+  SQLVendaCartoesCheques.Open;
 
   if not ckBobina.checked then
     ReportTotais.Print
   else
-    begin
+  begin
       {Impressao em formato Bobina}
-      vSaldoTotal := 0;
-      vValorSangria := 0;
-      memo.Lines.Clear;
-      memo.Lines.Add(' ');
-      memo.Lines.Add('<ce><e>Resumo de Caixa</e></ce>');
-      memo.Lines.Add(' ');
-      if HoraInicial.Text = '' then
-        memo.Lines.Add('</ae></fn>Periodo: ' + de.Text + ' até ' + Ate.Text)
-      else
-        memo.Lines.Add('</ae></fn>Periodo: ' + de.Text+' '+HoraInicial.Text+' até ' + Ate.Text+' '+HoraFinal.Text);
-      memo.Lines.Add('Terminais: ' + ComboTerminal.Text + ' - ' + ComboTerminal2.Text);
-      memo.Lines.Add('Operador: ' + ComboOperador.Text);
-      memo.Lines.Add(' ');
-      if ECFAtual = 'NFCE BEMATECH' then
-        memo.Lines.Add('<n>Totais por Operacoes             Vlr.Saldo</n>')
-      else
-        memo.Lines.Add('<n>Totais por Operacoes                Vlr.Saldo</n>');
-      if SQLTotalOperacao.IsEmpty then
-        ShowMessage('Nenhuma Operação inicial informada!');
-      SQLTotalOperacao.First;
-      while not SQLTotalOperacao.eof do
-        begin
-          x := MontaString(SQLTotalOperacaoOPCXA60DESCR.Value,21,1,' ');
-          y := MontaString(FormatFloat('R$ ##0.00',SQLTotalOperacaoSALDO.Value),espaco,0,' ');
-          x := x + y;
-          memo.Lines.Add('<ad></fn>' + x + '</ad>');
+    vSaldoTotal := 0;
+    vValorSangria := 0;
+    memo.Lines.Clear;
+    memo.Lines.Add(' ');
+    memo.Lines.Add('<ce><e>Resumo de Caixa</e></ce>');
+    memo.Lines.Add(' ');
+    if HoraInicial.Text = '' then
+      memo.Lines.Add('</ae></fn>Periodo: ' + de.Text + ' até ' + Ate.Text)
+    else
+      memo.Lines.Add('</ae></fn>Periodo: ' + de.Text + ' ' + HoraInicial.Text + ' até ' + Ate.Text + ' ' + HoraFinal.Text);
+    memo.Lines.Add('Terminais: ' + ComboTerminal.Text + ' - ' + ComboTerminal2.Text);
+    memo.Lines.Add('Operador: ' + ComboOperador.Text);
+    memo.Lines.Add('</ae>Impresso em: ' + FormatDateTime('dd/mm/yy hh:nn:ss', now));
+    memo.Lines.Add(' ');
+    if ECFAtual = 'NFCE BEMATECH' then
+      memo.Lines.Add('<n>Totais por Operacoes             Vlr.Saldo</n>')
+    else
+      memo.Lines.Add('<n>Totais por Operacoes                Vlr.Saldo</n>');
+    if SQLTotalOperacao.IsEmpty then
+      ShowMessage('Nenhuma Operação inicial informada!');
+    SQLTotalOperacao.First;
+    while not SQLTotalOperacao.eof do
+    begin
+      x := MontaString(SQLTotalOperacaoOPCXA60DESCR.Value, 21, 1, ' ');
+      y := MontaString(FormatFloat('R$ ##0.00', SQLTotalOperacaoSALDO.Value), espaco, 0, ' ');
+      x := x + y;
+      memo.Lines.Add('<ad></fn>' + x + '</ad>');
 //          memo.Lines.Add('<ad></fn>' + FormatFloat('R$ ##0.00',SQLTotalOperacaoSALDO.Value) + '</ad>');
-          vValorSangria := vValorSangria + (SQLTotalOperacaoSALDO.AsFloat * -1);
-          SQLTotalOperacao.next;
-        end;
-//      memo.Lines.Add('------------------------------------------------');
-//      memo.Lines.Add('<ad><n>TOTAL => ' + FormatFloat('R$ ##0.00',vSaldoTotal) + '</n></ad>');
-      SQLTotalOperacao.First;
+      vValorSangria := vValorSangria + (SQLTotalOperacaoSALDO.AsFloat *  - 1);
+      if ckImpNumerario.Checked then
+        vSaldoTotal := vSaldoTotal + SQLTotalOperacaoSALDO.Value;
+      SQLTotalOperacao.next;
+    end;
+    if ckImpNumerario.Checked then
+    begin
+      memo.Lines.Add('</fn>------------------------------------------------');
+      memo.Lines.Add('</ad><e><n>TOTAL => ' + FormatFloat('R$ ##0.00', vSaldoTotal) + '</n></e>');
+    end;
+    SQLTotalOperacao.First;
 
-      vSaldoTotal := 0;
-      memo.Lines.Add('------------------------------------------------');
-      memo.Lines.Add('<n>Totais por Numerarios               Vlr.Saldo</n>');
-      SQLTotaNumerario.First;
-      while not SQLTotaNumerario.eof do
+    vSaldoTotal := 0;
+    memo.Lines.Add('------------------------------------------------');
+    memo.Lines.Add('<n>Totais por Numerarios               Vlr.Saldo</n>');
+    SQLTotaNumerario.First;
+    while not SQLTotaNumerario.eof do
+    begin
+      x := MontaString(SQLTotaNumerarioNUMEA30DESCR.Value, 21, 1, ' ');
+      y := MontaString(FormatFloat('R$ ##0.00', SQLTotaNumerarioSALDO.Value), espaco, 0, ' ');
+      x := x + y;
+      memo.Lines.Add('<ad></fn>' + x + '</ad>');
+      vSaldoTotal := vSaldoTotal + SQLTotaNumerarioSALDO.Value;
+      SQLTotaNumerario.next;
+    end;
+    memo.Lines.Add('------------------------------------------------');
+    memo.Lines.Add('<ad><n>TOTAL => ' + FormatFloat('R$ ##0.00', vSaldoTotal) + '</n></ad>');
+    memo.Lines.Add('------------------------------------------------');
+    vValorSangria := vSaldoTotal + vValorSangria;
+    memo.Lines.Add('<ad><n>TOTAL DE VENDA => ' + FormatFloat('R$ ##0.00', vValorSangria) + '</n></ad>');
+
+
+      // Produtos Vendidos
+    if ckImpProdutosVendidos.Checked then
+    begin
+      if not SQLItensVendidos.IsEmpty then
+      begin
+        memo.Lines.Add('</fn>------------------------------------------------');
+        memo.Lines.Add('</ae><n>Produtos Vendidos               Qtde    Valor</n>');
+        memo.Lines.Add('</fn>------------------------------------------------');
+        SQLItensVendidos.First;
+        while not SQLItensVendidos.eof do
         begin
-          x := MontaString(SQLTotaNumerarioNUMEA30DESCR.Value,21,1,' ');
-          y := MontaString(FormatFloat('R$ ##0.00',SQLTotaNumerarioSALDO.Value),espaco,0,' ');
-          x := x + y;
-          memo.Lines.Add('<ad></fn>' + x + '</ad>');
-          vSaldoTotal := vSaldoTotal + SQLTotaNumerarioSALDO.Value;
-          SQLTotaNumerario.next;
+          memo.Lines.Add('</ae></fn>' + SQLItensVendidosPRODICOD.AsString + '-' + copy(SQLLocate('produto', 'prodicod', 'proda60descr', SQLItensVendidosPRODICOD.AsString), 1, 30));
+          memo.Lines.Add('</ad></fn>' + FormatFloat('R$ ##0.00', SQLItensVendidosQTDE.Value) + '    ' + FormatFloat('R$ ##0.00', SQLItensVendidosVLRTOTALITEM.Value));
+          SQLItensVendidos.Next;
         end;
-      memo.Lines.Add('------------------------------------------------');
-      memo.Lines.Add('<ad><n>TOTAL => ' + FormatFloat('R$ ##0.00',vSaldoTotal) + '</n></ad>');
-      memo.Lines.Add('------------------------------------------------');
-      vValorSangria := vSaldoTotal + vValorSangria;
-      memo.Lines.Add('<ad><n>TOTAL DE VENDA => ' + FormatFloat('R$ ##0.00',vValorSangria) + '</n></ad>');
-
-      memo.Lines.Add(' ');
-      memo.Lines.Add(' ');
-      memo.Lines.Add(' ');
-      memo.Lines.Add(' ');
-      memo.Lines.Add(' ');
-      memo.Lines.Add('</corte_parcial>');
-
-      try
-        dm.ACBrPosPrinter.Device.Desativar;
-        dm.ACBrPosPrinter.Device.Ativar;
-        dm.ACBrPosPrinter.Imprimir(Memo.Lines.Text);
-      except
-        Application.ProcessMessages;
+        memo.Lines.Add('</fn>------------------------------------------------');
+        SQLItensVendidos.close;
       end;
     end;
+
+    memo.Lines.Add(' ');
+    memo.Lines.Add(' ');
+    memo.Lines.Add(' ');
+    memo.Lines.Add(' ');
+    memo.Lines.Add(' ');
+    memo.Lines.Add('</corte_parcial>');
+
+    try
+      dm.ACBrPosPrinter.Device.Desativar;
+      dm.ACBrPosPrinter.Device.Ativar;
+      dm.ACBrPosPrinter.Imprimir(Memo.Lines.Text);
+      if (ECFAtual = 'NFCE DR800') then
+      begin
+        sleep(100);
+        dm.ACBrPosPrinter.Device.Desativar;
+      end;
+    except
+      Application.ProcessMessages;
+    end;
+  end;
 end;
 
-procedure TFormPrincipalRelatorios.ReportTotaisPreviewFormCreate(
-  Sender: TObject);
+procedure TFormPrincipalRelatorios.ReportTotaisPreviewFormCreate(Sender: TObject);
 begin
   ReportTotais.PreviewForm.WindowState := wsMaximized;
   TppViewer(ReportTotais.PreviewForm.Viewer).ZoomPercentage := 100;
 end;
 
-procedure TFormPrincipalRelatorios.ppHeaderBand1BeforePrint(
-  Sender: TObject);
+procedure TFormPrincipalRelatorios.ppHeaderBand1BeforePrint(Sender: TObject);
 begin
   ReportTotais.PreviewForm.WindowState := wsMaximized;
 end;
 
-procedure TFormPrincipalRelatorios.FormKeyDown(Sender: TObject;
-  var Key: Word; Shift: TShiftState);
+procedure TFormPrincipalRelatorios.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if Key = VK_RETURN then
-    Perform(Wm_NextDlgCtl,0,0);
+    Perform(Wm_NextDlgCtl, 0, 0);
 end;
 
-procedure TFormPrincipalRelatorios.ppTitleBand1BeforePrint(
-  Sender: TObject);
+procedure TFormPrincipalRelatorios.ppTitleBand1BeforePrint(Sender: TObject);
 begin
   ReportTotais.PreviewForm.WindowState := wsMaximized;
-  LbPeriodo.Caption  := de.Text + ' até ' + Ate.Text;
+  LbPeriodo.Caption := de.Text + ' até ' + Ate.Text;
   LbTerminal.Caption := ComboTerminal.Text + ' - ' + ComboTerminal2.Text;
   ppOperador.Caption := 'Operador: ' + ComboOperador.Text;
 end;
 
-procedure TFormPrincipalRelatorios.SumarioNumerariosBeforePrint(
-  Sender: TObject);
+procedure TFormPrincipalRelatorios.SumarioNumerariosBeforePrint(Sender: TObject);
 begin
   if not ckImpProdutosVendidos.Checked then
-    begin
-      TituloProdutosVendidos.Visible  := False;
+  begin
+    TituloProdutosVendidos.Visible := False;
     //  DetalheProdutosVendidos.Visible := False;
-      TotalProdutosVendidos.Visible   := False;
-    end
+    TotalProdutosVendidos.Visible := False;
+  end
   else
-    begin
-      TituloProdutosVendidos.Visible  := True;
+  begin
+    TituloProdutosVendidos.Visible := True;
     //  DetalheProdutosVendidos.Visible := True;
-      TotalProdutosVendidos.Visible   := True;
-    end;
+    TotalProdutosVendidos.Visible := True;
+  end;
 end;
 
-procedure TFormPrincipalRelatorios.SumarioProdutosVendidosBeforePrint(
-  Sender: TObject);
+procedure TFormPrincipalRelatorios.SumarioProdutosVendidosBeforePrint(Sender: TObject);
 begin
   if not CKImpVendaCartoes.Checked then
-    begin
-      TituloVendaCartoes.Visible  := False;
-      DetalheVendaCartoes.Visible := False;
-    end
+  begin
+    TituloVendaCartoes.Visible := False;
+    DetalheVendaCartoes.Visible := False;
+  end
   else
-    begin
-      TituloVendaCartoes.Visible  := True;
-      DetalheVendaCartoes.Visible := True;
-    end;
+  begin
+    TituloVendaCartoes.Visible := True;
+    DetalheVendaCartoes.Visible := True;
+  end;
 end;
 
-procedure TFormPrincipalRelatorios.DetalheProdutosVendidosBeforePrint(
-  Sender: TObject);
+procedure TFormPrincipalRelatorios.DetalheProdutosVendidosBeforePrint(Sender: TObject);
 begin
-  PRODUTO.Caption    := SQLLocate('PRODUTO','PRODICOD','PRODA60DESCR',SQLItensVendidosPRODICOD.AsString);
+  PRODUTO.Caption := SQLLocate('PRODUTO', 'PRODICOD', 'PRODA60DESCR', SQLItensVendidosPRODICOD.AsString);
 end;
 
-procedure TFormPrincipalRelatorios.ReportTotaisPreviewFormClose(
-  Sender: TObject);
+procedure TFormPrincipalRelatorios.ReportTotaisPreviewFormClose(Sender: TObject);
 begin
-  Close ;
+  Close;
 end;
 
 end.
+
