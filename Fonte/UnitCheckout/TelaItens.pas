@@ -348,6 +348,7 @@ type
     Urano_Porta: string;
     Urano_PesoLido: TextFile;
 
+    procedure Exec_SP_ACERTO_TOTAL_CUPOM;
     function GetCPNMN2VLR(pCUPOA13ID:String; pnumeicod: Integer):Double;
     function GravaCupom: Boolean;
     function GravaCupomItem: Boolean;
@@ -4443,6 +4444,8 @@ begin
               LblInstrucoes.Caption := 'CAIXA LIVRE - Próximo Cliente';
               LblInstrucoes.Update;
 
+              Exec_SP_ACERTO_TOTAL_CUPOM;
+
               exit;
             end;
 
@@ -6665,6 +6668,8 @@ begin
   EstadoPDVChk := InformandoItens;
   PreparaEstadoBalcao(EstadoPDVChk);
   VoltaParaEntradaDados;
+
+  Exec_SP_ACERTO_TOTAL_CUPOM;
 end;
 
 procedure TFormTelaItens.ExecutarPessagemAutomatica;
@@ -6758,6 +6763,11 @@ procedure TFormTelaItens.PagePrincipalChange(Sender: TObject);
 begin
   if PagePrincipal.ActivePage = TabPublicidade then
     PagePrincipal.ActivePage := TabVenda;
+end;
+
+procedure TFormTelaItens.Exec_SP_ACERTO_TOTAL_CUPOM;
+begin
+  ExecSql(' execute procedure SP_ACERTO_TOTAL_CUPOM; ', 1);
 end;
 
 end.
