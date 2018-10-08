@@ -6771,7 +6771,12 @@ end;
 
 procedure TFormTelaItens.Exec_SP_ACERTO_TOTAL_CUPOM;
 begin
-  ExecSql(' execute procedure SP_ACERTO_TOTAL_CUPOM; ', 1);
+  ExecSql(' alter trigger TG_CUPOMITEM_BIU0 inactive; ');
+  try 
+    ExecSql(' execute procedure SP_ACERTO_TOTAL_CUPOM; ', 1);
+  finally
+    ExecSql(' alter trigger TG_CUPOMITEM_BIU0 active; ');
+  end;
 end;
 
 end.
