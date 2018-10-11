@@ -846,6 +846,10 @@ inherited DM: TDM
       FieldName = 'ECF_VELOC'
       Origin = 'DBTERM.TERMINAL.ECF_VELOC'
     end
+    object SQLTerminalAtivoVALOR_LIMITE_SANGRIA: TFloatField
+      FieldName = 'VALOR_LIMITE_SANGRIA'
+      Origin = 'DBTERM.TERMINAL.VALOR_LIMITE_SANGRIA'
+    end
   end
   object SQLExtratoProduto: TRxQuery
     DatabaseName = 'DB'
@@ -1802,6 +1806,7 @@ inherited DM: TDM
   end
   object DatabaseTerm: TDatabase
     AliasName = 'Easy_Gestao'
+    Connected = True
     DatabaseName = 'DBTerm'
     LoginPrompt = False
     Params.Strings = (
@@ -4840,7 +4845,7 @@ inherited DM: TDM
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 0
     PrinterSetup.mmPaperWidth = 0
-    PrinterSetup.PaperSize = 256
+    PrinterSetup.PaperSize = 177
     DeviceType = 'Screen'
     EmailSettings.ReportFormat = 'PDF'
     OutlineSettings.CreateNode = True

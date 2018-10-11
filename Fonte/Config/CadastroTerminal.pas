@@ -289,6 +289,9 @@ type
     ComboVelocidadeECF: TDBComboBox;
     SQLTemplateUSATABLET: TStringField;
     DBCheckBox5: TDBCheckBox;
+    SQLTemplateVALOR_LIMITE_SANGRIA: TFloatField;
+    DBEdit20: TDBEdit;
+    Label3: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure SQLTemplateCalcFields(DataSet: TDataSet);
     procedure RetornaEmpresaClick(Sender: TObject);

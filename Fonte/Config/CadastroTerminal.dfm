@@ -1,38 +1,38 @@
 inherited FormCadastroTerminais: TFormCadastroTerminais
-  Left = 317
-  Top = 119
+  Left = -8
+  Top = -8
   Caption = 'Cadastro de Terminais'
-  ClientHeight = 540
-  ClientWidth = 894
+  ClientHeight = 706
+  ClientWidth = 1366
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited ScrollBoxFundo: TScrollBox
-    Width = 894
-    Height = 540
+    Width = 1366
+    Height = 706
     inherited PanelCabecalho: TPanel
-      Width = 892
+      Width = 1364
       inherited ScrollBoxPanelCabecalho: TScrollBox
-        Width = 892
+        Width = 1364
         inherited Panel1: TPanel
-          Width = 890
+          Width = 1362
           inherited PanelNavigator: TPanel
-            Width = 890
+            Width = 1362
             inherited AdvPanelNavigator: TAdvOfficeStatusBar
-              Width = 890
+              Width = 1362
             end
           end
           inherited PanelLeft: TPanel
-            Left = 433
+            Left = 905
           end
         end
       end
     end
     inherited PanelCentral: TPanel
-      Width = 892
-      Height = 466
+      Width = 1364
+      Height = 632
       inherited PanelBarra: TPanel
-        Height = 466
+        Height = 632
         inherited Button3: TRxSpeedButton
           Tag = 4
           Caption = '&3 Impress'#245'es'
@@ -163,20 +163,20 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
         end
       end
       inherited PanelFundoDados: TPanel
-        Width = 762
-        Height = 466
+        Width = 1234
+        Height = 632
         inherited Panel5: TPanel
-          Width = 762
-          Height = 466
+          Width = 1234
+          Height = 632
           inherited PagePrincipal: TPageControl
             Top = 54
-            Width = 762
-            Height = 412
+            Width = 1234
+            Height = 578
             ActivePage = TabSheetDadosPrincipais
             inherited TabSheetConsulta: TTabSheet
               inherited DBGridLista: TDBGrid
-                Width = 754
-                Height = 339
+                Width = 1226
+                Height = 505
                 Columns = <
                   item
                     Expanded = False
@@ -406,18 +406,18 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   end>
               end
               inherited PanelProcura: TPanel
-                Width = 754
+                Width = 1226
                 inherited PanelBetween: TPanel
-                  Width = 360
+                  Width = 832
                   inherited AdvPanel1: TAdvPanel
-                    Width = 360
+                    Width = 832
                     FullHeight = 0
                   end
                 end
                 inherited PanelEditProcura: TPanel
-                  Width = 360
+                  Width = 832
                   inherited AdvPanelEditProcura: TAdvPanel
-                    Width = 360
+                    Width = 832
                     FullHeight = 0
                   end
                 end
@@ -712,6 +712,20 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 Height = 13
                 Caption = 'Velocidade ECF'
                 FocusControl = DBEdit4
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = 8404992
+                Font.Height = -11
+                Font.Name = 'Tahoma'
+                Font.Style = [fsBold]
+                ParentFont = False
+              end
+              object Label3: TLabel
+                Left = 6
+                Top = 382
+                Width = 126
+                Height = 13
+                Caption = 'Valor Limite p/Sangria'
+                FocusControl = DBEdit20
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = 8404992
                 Font.Height = -11
@@ -1812,6 +1826,23 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 ParentCtl3D = False
                 TabOrder = 6
               end
+              object DBEdit20: TDBEdit
+                Left = 2
+                Top = 395
+                Width = 134
+                Height = 19
+                Ctl3D = False
+                DataField = 'VALOR_LIMITE_SANGRIA'
+                DataSource = DSTemplate
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Tahoma'
+                Font.Style = []
+                ParentCtl3D = False
+                ParentFont = False
+                TabOrder = 20
+              end
             end
             object TabSheetAdicional: TTabSheet
               Caption = 'Adicional'
@@ -2660,7 +2691,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
               object GroupBox9: TGroupBox
                 Left = 0
                 Top = 0
-                Width = 754
+                Width = 1226
                 Height = 59
                 Align = alTop
                 Caption = ' Modelo de Impressora de Cheques '
@@ -2763,11 +2794,11 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
           end
           inherited PanelMaster: TPanel
             Top = 40
-            Width = 762
+            Width = 1234
             Height = 14
           end
           inherited PanelCodigoDescricao: TPanel
-            Width = 762
+            Width = 1234
             Height = 40
             object Label1: TLabel
               Left = 8
@@ -3621,6 +3652,11 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
       Origin = 'DB.TERMINAL.USATABLET'
       FixedChar = True
       Size = 1
+    end
+    object SQLTemplateVALOR_LIMITE_SANGRIA: TFloatField
+      FieldName = 'VALOR_LIMITE_SANGRIA'
+      Origin = 'DB.TERMINAL.VALOR_LIMITE_SANGRIA'
+      DisplayFormat = '##0.00'
     end
   end
   inherited UpdateSQLTemplate: TUpdateSQL

@@ -3005,6 +3005,29 @@ begin
           if (copy(ECFAtual, 1, 4) = 'NFCE') and ImpCupomAutomatico then
             Transmite_NFCe(dm.CodNextCupom);
 
+        {Verifica se mostra o valor limite para sangria}
+        if (DM.SQLTerminalAtivoVALOR_LIMITE_SANGRIA.AsFloat > 0) then
+        begin
+          dm.sqlconsulta.close;
+          dm.sqlconsulta.sql.clear;
+          dm.sqlconsulta.sql.text := 'select cast(sum(MVCXN2VLRCRED) - COALESCE((select sum(MVCXN2VLRDEB) from MOVIMENTOCAIXA'
+                                    +' inner join OPERACAOCAIXA on OPERACAOCAIXA.OPCXICOD = MOVIMENTOCAIXA.OPCXICOD'
+                                    + ' where OPCXA5SIGLA = ' + QuotedStr('SANGR')
+                                    + ' and MOVIMENTOCAIXA.TERMICOD = ' + DM.SQLTerminalAtivoTERMICOD.AsString
+                                    + ' and MOVIMENTOCAIXA.MVCXDMOV = ''' + FormatDateTime('mm/dd/yyyy', Now) + ''''
+                                    + ' ),0)as numeric(15,2)) TOTAL_SANGRIA'
+                                    + ' from MOVIMENTOCAIXA'
+                                    + ' inner join OPERACAOCAIXA on OPERACAOCAIXA.OPCXICOD = MOVIMENTOCAIXA.OPCXICOD'
+                                    + ' where OPERACAOCAIXA.OPCXA5SIGLA <> ' + QuotedStr('SANGR')
+                                    + ' and MOVIMENTOCAIXA.TERMICOD = ' + DM.SQLTerminalAtivoTERMICOD.AsString
+                                    + ' and MOVIMENTOCAIXA.MVCXDMOV = ''' + FormatDateTime('mm/dd/yyyy', Now) + '''';
+          dm.sqlConsulta.Open;
+          if dm.sqlconsulta.fieldbyname('TOTAL_SANGRIA').AsFloat > DM.SQLTerminalAtivoVALOR_LIMITE_SANGRIA.AsFloat then
+          begin
+           InformaG('Valor limite para sangria excedido!');
+          end;
+        end;
+
             { exit ;}
       end;
     VK_F4: begin
@@ -6771,11 +6794,11 @@ end;
 
 procedure TFormTelaItens.Exec_SP_ACERTO_TOTAL_CUPOM;
 begin
-  ExecSql(' alter trigger TG_CUPOMITEM_BIU0 inactive; ');
-  try 
+  ExecSql(' alter trigger TG_CUPOMITEM_BIU0 inactive; ',1);
+  try
     ExecSql(' execute procedure SP_ACERTO_TOTAL_CUPOM; ', 1);
   finally
-    ExecSql(' alter trigger TG_CUPOMITEM_BIU0 active; ');
+    ExecSql(' alter trigger TG_CUPOMITEM_BIU0 active; ', 1);
   end;
 end;
 
