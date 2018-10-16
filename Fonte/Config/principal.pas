@@ -167,6 +167,10 @@ type
     MenuItem77: TMenuItem;
     MenuItem78: TMenuItem;
     MenuItem79: TMenuItem;
+    Servio1: TMenuItem;
+    Parmetros2: TMenuItem;
+    Servio2: TMenuItem;
+    Parmetros3: TMenuItem;
     procedure MnEmpresaClick(Sender: TObject);
     procedure MnTerminaisClick(Sender: TObject);
     procedure MnPlanosdeRecebimentoClick(Sender: TObject);
@@ -227,6 +231,7 @@ type
     procedure ManutenodaAgenda1Click(Sender: TObject);
     procedure MnProfissionaisClick(Sender: TObject);
     procedure MnConfigRestClick(Sender: TObject);
+    procedure Parmetros3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -258,7 +263,7 @@ uses DataModulo, FormResources, CadastroEmpresa, CadastroCep,
   CadastroMotivoNFecVenda, CadastroPalm, CadastroEspecialidade,
   CadastroFeriados, CadastroMotivoNaoAtendimento, CadastroConfigAgenda,
   TelaGeracaoHorario, TelaManutHorario, CadastroProfissional,
-  TelaConfigRestaurante;
+  TelaConfigRestaurante, CadastroConfigNotaServico;
 
 {$R *.dfm}
 
@@ -816,6 +821,15 @@ begin
   inherited;
   if DM.Acesso((Sender as TMenuItem).Name) > 0 then
     CriaFormulario(TFormTelaConfigRestaurante, 'FormTelaConfigRestaurante',False,False,True,'')
+  else
+    SoundPlay('Acesso Negado.wav',Sender);
+end;
+
+procedure TFormPrincipal.Parmetros3Click(Sender: TObject);
+begin
+  inherited;
+  if DM.Acesso((Sender as TMenuItem).Name) > 0 then
+    CriaFormulario(TFormCadastroNotaServico, 'FormCadastroNotaServico',False,False,True,'')
   else
     SoundPlay('Acesso Negado.wav',Sender);
 end;

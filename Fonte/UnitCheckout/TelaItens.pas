@@ -462,6 +462,7 @@ begin
 
   dm.ACBrNFe.Configuracoes.Geral.IdCSC := dm.sqlEmpresa.FieldByName('idTOKEN').AsString;
   dm.ACBrNFe.Configuracoes.Geral.CSC := dm.sqlEmpresa.FieldByName('TOKEN').AsString;
+  DM.ACBrNFe.Configuracoes.Geral.VersaoQRCode := veqr200;
 
   dm.ACBrNFe.DANFE.ViaConsumidor := True;
   dm.ACBrNFe.DANFE.ImprimirItens := True;

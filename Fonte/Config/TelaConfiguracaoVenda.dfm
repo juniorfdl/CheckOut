@@ -1106,6 +1106,7 @@ inherited FormTelaConfiguracaoVenda: TFormTelaConfiguracaoVenda
               Margin = 0
               ParentFont = False
               Spacing = 1
+              OnClick = BotaoGravarClick
             end
           end
         end

@@ -99,7 +99,8 @@ uses
   TelaSplash in '..\ArquivosComuns\TelaSplash.pas' {FormSplash},
   uDebugEx in '..\..\Template\uDebugEx.pas',
   UnSoundPlay in '..\..\Template\UnSoundPlay.pas',
-  TelaGerenciamentoAcesso in '..\..\Template\TelaGerenciamentoAcesso.pas' {FormTelaGerenciamentoAcesso};
+  TelaGerenciamentoAcesso in '..\..\Template\TelaGerenciamentoAcesso.pas' {FormTelaGerenciamentoAcesso},
+  CadastroConfigNotaServico in 'CadastroConfigNotaServico.pas' {FormCadastroNotaServico};
 
 {$R *.res}
 
