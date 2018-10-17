@@ -1,6 +1,6 @@
 inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
-  Left = 147
-  Top = 5
+  Left = 148
+  Top = 0
   Caption = 'Opera'#231#245'es de Estoque'
   ClientHeight = 696
   ClientWidth = 955
@@ -620,11 +620,24 @@ inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
                   ParentFont = False
                 end
                 object Label11: TLabel
-                  Left = 365
-                  Top = 18
-                  Width = 125
+                  Left = 300
+                  Top = 16
+                  Width = 102
                   Height = 13
-                  Caption = 'Movimenta Financeiro'
+                  Caption = 'Movim. Financeiro'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = 8404992
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = [fsBold]
+                  ParentFont = False
+                end
+                object Label13: TLabel
+                  Left = 420
+                  Top = 15
+                  Width = 152
+                  Height = 13
+                  Caption = 'Movimenta'#231#227'o Consignado'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = 8404992
                   Font.Height = -11
@@ -636,7 +649,7 @@ inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
                   Tag = 1
                   Left = 182
                   Top = 31
-                  Width = 179
+                  Width = 115
                   Height = 21
                   Style = csDropDownList
                   DataField = 'OPESCORIGEMDESTINO'
@@ -677,9 +690,9 @@ inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
                     'D')
                 end
                 object RxDBComboBox5: TRxDBComboBox
-                  Left = 365
-                  Top = 32
-                  Width = 172
+                  Left = 300
+                  Top = 31
+                  Width = 115
                   Height = 21
                   Style = csDropDownList
                   DataField = 'OPESCGERAFINANCEIRO'
@@ -691,6 +704,27 @@ inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
                     'N'#227'o')
                   TabOrder = 2
                   Values.Strings = (
+                    'S'
+                    'N')
+                end
+                object RxDBComboBox9: TRxDBComboBox
+                  Tag = 1
+                  Left = 420
+                  Top = 31
+                  Width = 172
+                  Height = 21
+                  Style = csDropDownList
+                  DataField = 'MOVIMENTA_CONSIGNADO'
+                  DataSource = DSTemplate
+                  EnableValues = True
+                  ItemHeight = 13
+                  Items.Strings = (
+                    'Entrada'
+                    'Sa'#237'da'
+                    'N'#227'o Movimenta')
+                  TabOrder = 3
+                  Values.Strings = (
+                    'E'
                     'S'
                     'N')
                 end
@@ -1317,6 +1351,12 @@ inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
     end
     object SQLTemplateOPESCCOMISSAO: TStringField
       FieldName = 'OPESCCOMISSAO'
+      Size = 1
+    end
+    object SQLTemplateMOVIMENTA_CONSIGNADO: TStringField
+      FieldName = 'MOVIMENTA_CONSIGNADO'
+      Origin = 'DB.OPERACAOESTOQUE.MOVIMENTA_CONSIGNADO'
+      FixedChar = True
       Size = 1
     end
   end

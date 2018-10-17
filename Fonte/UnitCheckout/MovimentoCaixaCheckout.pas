@@ -1275,8 +1275,47 @@ begin
                                '');
           SQLMovimentoCaixa.Next;
         end;
-      SQLMovimentoCaixa.Close;
-    end;
+        SQLMovimentoCaixa.Close;
+
+        if Pergunta('SIM','Imprimir cancelamento!') then
+        begin
+          try
+            dm.sqlConsulta.Close;
+            dm.sqlConsulta.sql.text := 'select CUP.CUPOA13ID, US.USUAA60LOGIN, CUP.CUPODEMIS, TER.TERMA60DESCR from CUPOM CUP ';
+            dm.sqlConsulta.sql.text := dm.sqlConsulta.sql.text + 'left join USUARIO US on CUP.USUAICODCANC = US.USUAICOD';
+            dm.sqlConsulta.sql.text := dm.sqlConsulta.sql.text + 'left join TERMINAL TER on TER.TERMICOD = CUP.TERMICOD ';
+            dm.sqlConsulta.sql.text := dm.sqlConsulta.sql.text + 'where CUPOA13ID="'+Docum+'"';
+            dm.sqlConsulta.Open;
+            if not dm.sqlConsulta.IsEmpty then
+            begin
+              FormTelaItens.MemoRetornoNFE.Lines.Clear;
+              FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+              FormTelaItens.MemoRetornoNFE.Lines.Add('</ce><e>'+ComboOperacaoCaixa.Text+'</e>');
+              FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+              FormTelaItens.MemoRetornoNFE.Lines.Add('</ae></fn>Terminal: '+dm.SQLTerminalAtivoTERMA60DESCR.Value);
+              FormTelaItens.MemoRetornoNFE.Lines.Add('Usuario : '+dm.SQLUsuarioUSUAA60LOGIN.Value);
+              FormTelaItens.MemoRetornoNFE.Lines.Add('Impresso em '+FormatDateTime('dd/mm/yy hh:mm',now));
+              FormTelaItens.MemoRetornoNFE.Lines.Add('Cupom: ' + dm.sqlConsulta.fieldbyname('CUPOA13ID').Value);
+              FormTelaItens.MemoRetornoNFE.Lines.Add('Operador: ' + dm.sqlConsulta.fieldbyname('USUAA60LOGIN').Value);
+              FormTelaItens.MemoRetornoNFE.Lines.Add('Data Emissão:  ' + FormatDateTime('dd/mm/yyyy',dm.sqlConsulta.fieldbyname('CUPODEMIS').Value));
+
+              FormTelaItens.MemoRetornoNFE.Lines.Add('Motivo: '+DBEditObs.Text);
+              FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+              FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+              FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+              FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+              FormTelaItens.MemoRetornoNFE.Lines.Add('</corte_parcial>');
+              dm.ACBrPosPrinter.Device.Desativar;
+              dm.ACBrPosPrinter.Device.Ativar;
+              dm.ACBrPosPrinter.Imprimir(FormTelaItens.MemoRetornoNFE.Lines.Text);
+              Sleep(500);
+            end;
+
+            except
+              Informa('Problemas na impressão! '+ #13 +ComboOperacaoCaixa.Text+ ' Gravado mas não impresso!');
+            end;
+        end ;
+      end;
   end;
   //FECHAMENTO DO CAIXA
   if SQLOperacaoCaixaOPCXA5SIGLA.Value = 'FECHA' Then {Fechamento Caixa}
@@ -1400,9 +1439,9 @@ begin
     EditTipMov.Text := ComboOperacaoCaixa.Value ;
 
   //LblValor.Visible       := (SQLOperacaoCaixaOPCXCSOLICVLR.Value = 'S') ;
-  EditValor.Visible      := (SQLOperacaoCaixaOPCXCSOLICVLR.Value = 'S') ;
-  LblNumerario.Visible   := (SQLOperacaoCaixaOPCXCAUTENTICA.Value = 'S') ;
-  ComboNumerario.Visible := (SQLOperacaoCaixaOPCXCAUTENTICA.Value = 'S') ;
+  EditValor.Visible      := (SQLOperacaoCaixaOPCXCSOLICVLR.Value = 'S');
+  LblNumerario.Visible   := (SQLOperacaoCaixaOPCXCAUTENTICA.Value = 'S');
+  ComboNumerario.Visible := (SQLOperacaoCaixaOPCXCAUTENTICA.Value = 'S');
   if SQLOperacaoCaixaOPCXA5SIGLA.Value = 'CREDC' then
     begin
       lbCliente.Visible    := true ;
