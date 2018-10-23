@@ -1329,8 +1329,8 @@ begin
   DataSistema := StrToDate(FormatDateTime('dd/mm/yyyy', DataSistema));
   GetDataValidadeSistema;
 
-  if DelphiAberto then
-    ACBrNFe.Configuracoes.WebServices.Ambiente := taHomologacao;
+//  if DelphiAberto then
+//    ACBrNFe.Configuracoes.WebServices.Ambiente := taHomologacao;
 
   if sqlEmpresa.FieldByName('VERSAO').AsString = '4' then
     ACBrNFe.Configuracoes.Geral.VersaoDF := ve400

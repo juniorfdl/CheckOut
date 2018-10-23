@@ -38,12 +38,14 @@ type
     StringField3: TStringField;
     StringField4: TStringField;
     SQLCupomDISPICOD: TIntegerField;
+    chkMostrarCupom: TCheckBox;
     procedure DBGridListaKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DeKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure BtReturnClick(Sender: TObject);
     procedure ImgDesligarClick(Sender: TObject);
+    procedure chkMostrarCupomClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -91,6 +93,30 @@ end;
 procedure TFormTelaConsultaRapidaCupom.ImgDesligarClick(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TFormTelaConsultaRapidaCupom.chkMostrarCupomClick(
+  Sender: TObject);
+begin
+  if chkMostrarCupom.Checked = False then
+    begin
+      SQLCupom.Close;
+      SQLCupom.MacroByName('DataEmissao').Value := 'Cupom.CUPODEMIS = "' + FormatDateTime('mm/dd/yyyy',de.Date) + '"';
+      SQLCupom.MacroByName('Filtro').Value      := 'Cupom.CUPOINRO < 1';
+      SQLCupom.MacroByName('Empresa').Value     := 'Cupom.EMPRICOD  = ' + EmpresaPadrao;
+      SQLCupom.Open;
+      DBGridLista.SetFocus;
+    end
+  else
+    begin
+      SQLCupom.Close;
+      SQLCupom.MacroByName('DataEmissao').Value := 'Cupom.CUPODEMIS = "' + FormatDateTime('mm/dd/yyyy',de.Date) + '"';
+      SQLCupom.MacroByName('Filtro').Value      := '(Cupom.CUPOINRO>0) and ((Cupom.STNFE is null) or (Cupom.STNFE=''''))';
+      SQLCupom.MacroByName('Empresa').Value     := 'Cupom.EMPRICOD  = ' + EmpresaPadrao;
+      SQLCupom.Open;
+      DBGridLista.SetFocus;
+    end;
+
 end;
 
 end.

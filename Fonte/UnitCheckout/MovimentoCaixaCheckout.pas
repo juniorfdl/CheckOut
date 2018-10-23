@@ -191,7 +191,7 @@ end;
 procedure TFormTelaMovimentoCaixa.BtnOKClick(Sender: TObject);
 var
   Operacao, Codigo   : Integer ;
-  CupomOk            : boolean ;
+  CupomOk, ImprimirCancelamento : boolean ;
   VlrEstorn,
   Valor,
   TotalDeb,TotalCred,ValorTotal : Double ;
@@ -1105,82 +1105,93 @@ begin
 
       if Pergunta('NÃO', '* * * TEM CERTEZA QUE DESEJA CANCELAR ESTE CUPOM ? * * *') then
       begin
-        // Recupera Nro do Ult. Cupom Fiscal Emitido.
-        DM.SQLTemplate.Close;
-        DM.SQLTemplate.SQL.Clear;
-        DM.SQLTemplate.SQL.Add('Select Max(CUPOINRO) as ULTCUPOM from CUPOM where TERMICOD = '+IntToStr(TerminalAtual));
-        DM.SQLTemplate.Open;
-        NroUltCupom := DM.SQLTemplate.FieldByName('ULTCUPOM').AsInteger;
-        ///////////////////////////
+        try
+          // Recupera Nro do Ult. Cupom Fiscal Emitido.
+          DM.SQLTemplate.Close;
+          DM.SQLTemplate.SQL.Clear;
+          DM.SQLTemplate.SQL.Add('Select Max(CUPOINRO) as ULTCUPOM from CUPOM where TERMICOD = '+IntToStr(TerminalAtual));
+          DM.SQLTemplate.Open;
+          NroUltCupom := DM.SQLTemplate.FieldByName('ULTCUPOM').AsInteger;
+          ///////////////////////////
 
-        DM.SQLTemplate.Close;
-        DM.SQLTemplate.SQL.Clear;
-        DM.SQLTemplate.SQL.Add('select * from CUPOM');
-        DM.SQLTemplate.SQL.Add('where CUPOA13ID = "' + Docum + '"');
-        DM.SQLTemplate.Open;
-        if DM.SQLTemplate.EOF then
-        begin
-          Informa('Documento não encontrado !');
-          exit;
-        end;
-
-        if DM.SQLTemplate.Fieldbyname('TERMICOD').AsInteger <> TerminalAtual then
+          DM.SQLTemplate.Close;
+          DM.SQLTemplate.SQL.Clear;
+          DM.SQLTemplate.SQL.Add('select * from CUPOM');
+          DM.SQLTemplate.SQL.Add('where CUPOA13ID = "' + Docum + '"');
+          DM.SQLTemplate.Open;
+          if DM.SQLTemplate.EOF then
           begin
-            Informa('Você está tentado cancelar um Documento que não foi emitido no terminal ativo.' + #13 +
-                    'Você deve cancelá-lo no terminal "' + SQLLocate('TERMINAL', 'TERMICOD', 'TERMA60DESCR', DM.SQLTemplate.Fieldbyname('TERMICOD').AsString) + '".');
+            Informa('Documento não encontrado !');
             exit;
           end;
 
-        if DM.SQLTemplate.Fieldbyname('CUPODEMIS').AsString <> TerminalAtualData then
-        begin
-          Informa('Você está tentado cancelar um Documento que não foi emitido na mesma data do terminal ativo. Use a consulta de cupom para cancelá-lo !');
-          exit;
-        end;
+          if DM.SQLTemplate.Fieldbyname('TERMICOD').AsInteger <> TerminalAtual then
+            begin
+              Informa('Você está tentado cancelar um Documento que não foi emitido no terminal ativo.' + #13 +
+                      'Você deve cancelá-lo no terminal "' + SQLLocate('TERMINAL', 'TERMICOD', 'TERMA60DESCR', DM.SQLTemplate.Fieldbyname('TERMICOD').AsString) + '".');
+              exit;
+            end;
 
-        if DM.SQLTemplate.Fieldbyname('CUPOCSTATUS').AsString = 'C' then
-        begin
-          Informa('Este cupom já está cancelado !');
-          exit;
-        end;
-
-        if (ECFAtual <> '') and (PortaECFAtual <> '') and (copy(EcfAtual,1,4) <> 'NFCE') then
-          if Pergunta('NÃO', '* * * CANCELAR NA IMPRESSORA FISCAL TAMBEM ? * * *') then
-            CancelarCupomFiscal(ECFAtual, PortaECFAtual);
-
-        if (DM.SQLTemplate.FieldByName('CHAVEACESSO').AsString <>'') and (DM.SQLTemplate.FieldByName('PROTOCOLO').Value <> '') then
+          if DM.SQLTemplate.Fieldbyname('CUPODEMIS').AsString <> TerminalAtualData then
           begin
-            dm.ACBrNFe.NotasFiscais.Clear;
-            dm.ACBrNFe.Consultar(DM.SQLTemplate.FieldByName('CHAVEACESSO').AsString);
-            if (dm.ACBrNFe.WebServices.Consulta.cStat = 100) then
-              begin
-                dm.ACBrNFe.EventoNFe.Evento.Clear;
-                with dm.ACBrNFe.EventoNFe.Evento.Add do
-                  begin
-                    InfEvento.chNFe      := DM.SQLTemplate.FieldByName('CHAVEACESSO').AsString ;
-                    InfEvento.CNPJ       := dm.SQLEmpresaEMPRA14CGC.Value;
-                    InfEvento.dhEvento   := Now;
-                    InfEvento.tpEvento   := teCancelamento;
-                    InfEvento.detEvento.xJust := 'Cancelamento por erro no preenchimento dos dados da nfe.'; // Justificativa;
-                    InfEvento.detEvento.nProt := DM.SQLTemplate.FieldByName('PROTOCOLO').Value;
-                  end;
-
-                // Envia o Cancelamento
-                dm.ACBrNFe.EnviarEvento(1);    {trunk2}
-
-                // Refaz Consulta pra ver se NFCe foi Cancelado se sim
-                dm.ACBrNFe.EventoNFe.Evento.Clear;
-                dm.ACBrNFe.NotasFiscais.Clear;
-                dm.ACBrNFe.Consultar(DM.SQLTemplate.FieldByName('CHAVEACESSO').AsString);
-                if (dm.ACBrNFe.WebServices.Consulta.cStat = 101) then
-                  begin
-                    dm.SQLConsulta.Close;
-                    dm.SQLConsulta.RequestLive := False;
-                    dm.SQLConsulta.SQL.Text    := 'Update CUPOM Set STNFE='+IntToStr(dm.ACBrNFe.WebServices.consulta.cStat)+
-                                                  ' Where CUPOA13ID ="'+DM.SQLTemplate.FieldByName('CUPOA13ID').AsString+'"';
-                    dm.SQLConsulta.ExecSQL;
-                  end;
-              end;
+            Informa('Você está tentado cancelar um Documento que não foi emitido na mesma data do terminal ativo. Use a consulta de cupom para cancelá-lo !');
+            exit;
           end;
+
+          if DM.SQLTemplate.Fieldbyname('CUPOCSTATUS').AsString = 'C' then
+          begin
+            Informa('Este cupom já está cancelado !');
+            exit;
+          end;
+
+          if (ECFAtual <> '') and (PortaECFAtual <> '') and (copy(EcfAtual,1,4) <> 'NFCE') then
+            if Pergunta('NÃO', '* * * CANCELAR NA IMPRESSORA FISCAL TAMBEM ? * * *') then
+              CancelarCupomFiscal(ECFAtual, PortaECFAtual);
+
+          ImprimirCancelamento := True;
+          if (DM.SQLTemplate.FieldByName('CHAVEACESSO').AsString <>'') and (DM.SQLTemplate.FieldByName('PROTOCOLO').Value <> '') then
+            begin
+              dm.ACBrNFe.NotasFiscais.Clear;
+              dm.ACBrNFe.Consultar(DM.SQLTemplate.FieldByName('CHAVEACESSO').AsString);
+              if (dm.ACBrNFe.WebServices.Consulta.cStat = 100) then
+                begin
+                  dm.ACBrNFe.EventoNFe.Evento.Clear;
+                  with dm.ACBrNFe.EventoNFe.Evento.Add do
+                    begin
+                      InfEvento.chNFe      := DM.SQLTemplate.FieldByName('CHAVEACESSO').AsString ;
+                      InfEvento.CNPJ       := dm.SQLEmpresaEMPRA14CGC.Value;
+                      InfEvento.dhEvento   := Now;
+                      InfEvento.tpEvento   := teCancelamento;
+                      InfEvento.detEvento.xJust := 'Cancelamento por erro no preenchimento dos dados da nfe.'; // Justificativa;
+                      InfEvento.detEvento.nProt := DM.SQLTemplate.FieldByName('PROTOCOLO').Value;
+                    end;
+
+                  // Envia o Cancelamento
+                  dm.ACBrNFe.EnviarEvento(1);    {trunk2}
+
+                  // Refaz Consulta pra ver se NFCe foi Cancelado se sim
+                  dm.ACBrNFe.EventoNFe.Evento.Clear;
+                  dm.ACBrNFe.NotasFiscais.Clear;
+                  dm.ACBrNFe.Consultar(DM.SQLTemplate.FieldByName('CHAVEACESSO').AsString);
+                  if (dm.ACBrNFe.WebServices.Consulta.cStat = 101) then
+                    begin
+                      dm.SQLConsulta.Close;
+                      dm.SQLConsulta.RequestLive := False;
+                      dm.SQLConsulta.SQL.Text    := 'Update CUPOM Set STNFE='+IntToStr(dm.ACBrNFe.WebServices.consulta.cStat)+
+                                                    ' Where CUPOA13ID ="'+DM.SQLTemplate.FieldByName('CUPOA13ID').AsString+'"';
+                      dm.SQLConsulta.ExecSQL;
+                    end
+                  else
+                    ImprimirCancelamento := False;
+                end;
+            end;
+        except on  E : Exception do
+          begin
+            ShowMessage('Erro: ' + e.Message);
+            ImprimirCancelamento := False;
+          end;
+        end;
+
 
         MostraMsg('Aguarde, cancelando venda...');
 
@@ -1277,44 +1288,48 @@ begin
         end;
         SQLMovimentoCaixa.Close;
 
-        if Pergunta('SIM','Imprimir cancelamento!') then
+        if ImprimirCancelamento then
         begin
-          try
-            dm.sqlConsulta.Close;
-            dm.sqlConsulta.sql.text := 'select CUP.CUPOA13ID, US.USUAA60LOGIN, CUP.CUPODEMIS, TER.TERMA60DESCR from CUPOM CUP ';
-            dm.sqlConsulta.sql.text := dm.sqlConsulta.sql.text + 'left join USUARIO US on CUP.USUAICODCANC = US.USUAICOD';
-            dm.sqlConsulta.sql.text := dm.sqlConsulta.sql.text + 'left join TERMINAL TER on TER.TERMICOD = CUP.TERMICOD ';
-            dm.sqlConsulta.sql.text := dm.sqlConsulta.sql.text + 'where CUPOA13ID="'+Docum+'"';
-            dm.sqlConsulta.Open;
-            if not dm.sqlConsulta.IsEmpty then
-            begin
-              FormTelaItens.MemoRetornoNFE.Lines.Clear;
-              FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
-              FormTelaItens.MemoRetornoNFE.Lines.Add('</ce><e>'+ComboOperacaoCaixa.Text+'</e>');
-              FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
-              FormTelaItens.MemoRetornoNFE.Lines.Add('</ae></fn>Terminal: '+dm.SQLTerminalAtivoTERMA60DESCR.Value);
-              FormTelaItens.MemoRetornoNFE.Lines.Add('Usuario : '+dm.SQLUsuarioUSUAA60LOGIN.Value);
-              FormTelaItens.MemoRetornoNFE.Lines.Add('Impresso em '+FormatDateTime('dd/mm/yy hh:mm',now));
-              FormTelaItens.MemoRetornoNFE.Lines.Add('Cupom: ' + dm.sqlConsulta.fieldbyname('CUPOA13ID').Value);
-              FormTelaItens.MemoRetornoNFE.Lines.Add('Operador: ' + dm.sqlConsulta.fieldbyname('USUAA60LOGIN').Value);
-              FormTelaItens.MemoRetornoNFE.Lines.Add('Data Emissão:  ' + FormatDateTime('dd/mm/yyyy',dm.sqlConsulta.fieldbyname('CUPODEMIS').Value));
+          if Pergunta('SIM','Imprimir cancelamento!') then
+          begin
+            try
+              dm.sqlConsulta.Close;
+              dm.sqlConsulta.sql.text := 'select CUP.CUPOA13ID, US.USUAA60LOGIN, CUP.CUPODEMIS, TER.TERMA60DESCR from CUPOM CUP ';
+              dm.sqlConsulta.sql.text := dm.sqlConsulta.sql.text + 'left join USUARIO US on CUP.USUAICODCANC = US.USUAICOD';
+              dm.sqlConsulta.sql.text := dm.sqlConsulta.sql.text + 'left join TERMINAL TER on TER.TERMICOD = CUP.TERMICOD ';
+              dm.sqlConsulta.sql.text := dm.sqlConsulta.sql.text + 'where CUPOA13ID="'+Docum+'"';
+              addLog('Instrução de cancelamento: ' + dm.sqlConsulta.sql.text);
+              dm.sqlConsulta.Open;
+              if not dm.sqlConsulta.IsEmpty then
+              begin
+                FormTelaItens.MemoRetornoNFE.Lines.Clear;
+                FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+                FormTelaItens.MemoRetornoNFE.Lines.Add('</ce><e>'+ComboOperacaoCaixa.Text+'</e>');
+                FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+                FormTelaItens.MemoRetornoNFE.Lines.Add('</ae></fn>Terminal: '+dm.SQLTerminalAtivoTERMA60DESCR.Value);
+                FormTelaItens.MemoRetornoNFE.Lines.Add('Usuario : '+dm.SQLUsuarioUSUAA60LOGIN.Value);
+                FormTelaItens.MemoRetornoNFE.Lines.Add('Impresso em '+FormatDateTime('dd/mm/yy hh:mm',now));
+                FormTelaItens.MemoRetornoNFE.Lines.Add('Cupom: ' + dm.sqlConsulta.fieldbyname('CUPOA13ID').Value);
+                FormTelaItens.MemoRetornoNFE.Lines.Add('Operador: ' + dm.sqlConsulta.fieldbyname('USUAA60LOGIN').Value);
+                FormTelaItens.MemoRetornoNFE.Lines.Add('Data Emissão:  ' + FormatDateTime('dd/mm/yyyy',dm.sqlConsulta.fieldbyname('CUPODEMIS').Value));
 
-              FormTelaItens.MemoRetornoNFE.Lines.Add('Motivo: '+DBEditObs.Text);
-              FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
-              FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
-              FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
-              FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
-              FormTelaItens.MemoRetornoNFE.Lines.Add('</corte_parcial>');
-              dm.ACBrPosPrinter.Device.Desativar;
-              dm.ACBrPosPrinter.Device.Ativar;
-              dm.ACBrPosPrinter.Imprimir(FormTelaItens.MemoRetornoNFE.Lines.Text);
-              Sleep(500);
-            end;
+                FormTelaItens.MemoRetornoNFE.Lines.Add('Motivo: '+DBEditObs.Text);
+                FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+                FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+                FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+                FormTelaItens.MemoRetornoNFE.Lines.Add(' ');
+                FormTelaItens.MemoRetornoNFE.Lines.Add('</corte_parcial>');
+                dm.ACBrPosPrinter.Device.Desativar;
+                dm.ACBrPosPrinter.Device.Ativar;
+                dm.ACBrPosPrinter.Imprimir(FormTelaItens.MemoRetornoNFE.Lines.Text);
+                Sleep(500);
+              end;
 
-            except
-              Informa('Problemas na impressão! '+ #13 +ComboOperacaoCaixa.Text+ ' Gravado mas não impresso!');
-            end;
-        end ;
+              except
+                Informa('Problemas na impressão! '+ #13 +ComboOperacaoCaixa.Text+ ' Gravado mas não impresso!');
+              end;
+          end ;
+        end;
       end;
   end;
   //FECHAMENTO DO CAIXA

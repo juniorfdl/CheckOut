@@ -6697,7 +6697,7 @@ begin
   PreparaEstadoBalcao(EstadoPDVChk);
   VoltaParaEntradaDados;
 
-  Exec_SP_ACERTO_TOTAL_CUPOM;
+//  Exec_SP_ACERTO_TOTAL_CUPOM;
 end;
 
 procedure TFormTelaItens.ExecutarPessagemAutomatica;

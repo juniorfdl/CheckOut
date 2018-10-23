@@ -783,6 +783,7 @@ end;
 procedure TFormCadastroCupom.MnadmRetransmitirNFCeClick(Sender: TObject);
 var
   nfce_tentativa: integer;
+  ConsultarDenovo: Boolean;
 begin
   inherited;
   {$IFDEF ACBrNFeOpenSSL}
@@ -809,13 +810,14 @@ begin
   begin
     while (nfce_tentativa <= 5) do
     begin
+      ConsultarDenovo := False;
       nfce_tentativa := nfce_tentativa + 1;
       LabelRegistros.Caption := 'Consultando Retorno Sefaz RS NFCe: ' + sqltemplateCUPOINRO.AsString + ' - Tentativa N.' + intToStr(nfce_tentativa);
       LabelRegistros.Update;
       dm.ACBrNFe.NotasFiscais.Clear;
       dm.ACBrNFe.Consultar(SQLTemplateCHAVEACESSO.Value);
       if dm.ACBrNFe.WebServices.Consulta.cStat <> 100 then
-        addLog('Cupom nº: ' + sqltemplateCUPOINRO.AsString + ' Status: ' + IntToStr(dm.ACBrNFe.WebServices.Consulta.cStat));
+        addLog('Cupom nº: ' + sqltemplateCUPOINRO.AsString + ' Status: ' + IntToStr(dm.ACBrNFe.WebServices.Consulta.cStat),ExtractFilePath(Application.ExeName) + 'LOG_STATUS.TXT');
 
       if (dm.ACBrNFe.WebServices.Consulta.cStat = 613) or (dm.ACBrNFe.WebServices.Consulta.cStat = 539) then
       begin
@@ -841,6 +843,7 @@ begin
               dm.SQLCupom.Post;
               dm.SQLCupom.Close;
             end;
+            ConsultarDenovo := True;
           end;
         end
         else if dm.ACBrNFe.WebServices.Consulta.protNFe.xMotivo <> '' then
@@ -878,6 +881,29 @@ begin
         dm.ACBrNFe.NotasFiscais.Clear;
         dm.ACBrNFe.Consultar(SQLTemplateCHAVEACESSO.Value);
       end;
+
+      if (dm.ACBrNFe.WebServices.Consulta.cStat <> 100) and (ConsultarDenovo) then
+      begin
+        if (dm.ACBrNFe.WebServices.Consulta.cStat = 613) then
+        begin
+          LabelRegistros.Caption := 'Assinando NFCe...' + sqltemplateCUPOINRO.AsString;
+          LabelRegistros.Update;
+          dm.ACBrNFe.NotasFiscais.Assinar;
+          LabelRegistros.Caption := 'Validando NFCe...' + sqltemplateCUPOINRO.AsString;
+          LabelRegistros.Update;
+          dm.ACBrNFe.NotasFiscais.Validar;
+          LabelRegistros.Caption := 'Enviando ao Sefaz RS NFCe: ' + sqltemplateCUPOINRO.AsString;
+          LabelRegistros.Update;
+          LabelRegistros.Caption := 'Evento de retorno: ' + IntToStr(dm.ACBrNFe.WebServices.Consulta.cStat);
+          if not FileExists('COMUNICACAO_OFFLINE.TXT') then
+           dm.ACBrNFe.Enviar('1', False, False);
+                  {refaz a consulta}
+          LabelRegistros.Caption := 'Consultando Retorno Sefaz do NFCe: ' + sqltemplateCUPOINRO.AsString;
+          LabelRegistros.Update;
+          dm.ACBrNFe.Consultar(chave);
+        end;
+      end;
+
       if (dm.ACBrNFe.WebServices.Consulta.cStat = 100) then
       begin
         LabelRegistros.Caption := 'Envio ao Sefaz RS NFCe: ' + sqltemplateCUPOINRO.AsString + ' Autorizado com sucesso!';
