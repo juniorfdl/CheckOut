@@ -7,12 +7,6 @@ uses
 type
   TFormTelaLogin = class(TForm)
     FormStorage: TFormStorage;
-    Image1: TImage;
-    Panel2: TPanel;
-    BtnOk: TBitBtn;
-    BitBtn2: TBitBtn;
-    Panel1: TPanel;
-    RxLabel4: TRxLabel;
     DSTblTerminal: TDataSource;
     SQLTerminal: TRxQuery;
     SQLTerminalTERMICOD: TIntegerField;
@@ -24,14 +18,18 @@ type
     SQLTerminalECFA13ID: TStringField;
     SQLTerminalTERMA60NOMECOMPUT: TStringField;
     SQLTerminalEMPRICOD: TIntegerField;
-    EditTerminal: TEdit;
-    ComboPdv: TDBLookupComboBox;
+    Panel1: TPanel;
+    Image2: TImage;
+    Panel2: TPanel;
     Label1: TLabel;
     RxLabel1: TLabel;
+    Label3: TLabel;
+    ComboPdv: TDBLookupComboBox;
+    BtnOk: TBitBtn;
+    BitBtn2: TBitBtn;
+    EditTerminal: TEdit;
     EditSenha: TEdit;
     EditUsuario: TEdit;
-    Label3: TLabel;
-    LblRetorno: TRxLabel;
     procedure BitBtn2Click(Sender: TObject);
     procedure BtnOkClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

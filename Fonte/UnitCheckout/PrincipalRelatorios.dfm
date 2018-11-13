@@ -57,8 +57,8 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     object RxLabel2: TRxLabel
       Left = 0
       Top = 0
-      Width = 596
-      Height = 49
+      Width = 414
+      Height = 39
       Align = alClient
       Alignment = taCenter
       Caption = 'Relat'#243'rio para Resumo de Caixa'
@@ -1453,7 +1453,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     DataPipeline = PipeOperacao
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'Custom'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.mmMarginBottom = 6350
     PrinterSetup.mmMarginLeft = 6350
@@ -1461,7 +1461,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 297000
     PrinterSetup.mmPaperWidth = 210000
-    PrinterSetup.PaperSize = 256
+    PrinterSetup.PaperSize = 9
     DeviceType = 'Screen'
     EmailSettings.ReportFormat = 'PDF'
     OnPreviewFormClose = ReportTotaisPreviewFormClose
@@ -1614,26 +1614,6 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         mmLeft = 16669
         mmTop = 23548
         mmWidth = 26776
-        BandType = 1
-      end
-      object ppLabel14: TppLabel
-        UserName = 'Label101'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
-        Caption = 'www.conceitossistemas.com'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Tahoma'
-        Font.Size = 8
-        Font.Style = []
-        TextAlignment = taRightJustified
-        Transparent = True
-        mmHeight = 3440
-        mmLeft = 159015
-        mmTop = 9525
-        mmWidth = 35454
         BandType = 1
       end
       object ppLabel31: TppLabel
@@ -1885,7 +1865,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
           DataPipeline = PipeNumerario
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
-          PrinterSetup.PaperName = 'Custom'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.mmMarginBottom = 6350
           PrinterSetup.mmMarginLeft = 6350
@@ -1893,7 +1873,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
           PrinterSetup.mmMarginTop = 6350
           PrinterSetup.mmPaperHeight = 297000
           PrinterSetup.mmPaperWidth = 210000
-          PrinterSetup.PaperSize = 256
+          PrinterSetup.PaperSize = 9
           Version = '10.06'
           mmColumnWidth = 0
           DataPipelineName = 'PipeNumerario'
@@ -2174,7 +2154,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                 DataPipeline = PipeItensVendidos
                 PrinterSetup.BinName = 'Default'
                 PrinterSetup.DocumentName = 'Report'
-                PrinterSetup.PaperName = 'Custom'
+                PrinterSetup.PaperName = 'A4'
                 PrinterSetup.PrinterName = 'Default'
                 PrinterSetup.mmMarginBottom = 6350
                 PrinterSetup.mmMarginLeft = 6350
@@ -2182,7 +2162,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                 PrinterSetup.mmMarginTop = 6350
                 PrinterSetup.mmPaperHeight = 297000
                 PrinterSetup.mmPaperWidth = 210000
-                PrinterSetup.PaperSize = 256
+                PrinterSetup.PaperSize = 9
                 Version = '10.06'
                 mmColumnWidth = 0
                 DataPipelineName = 'PipeItensVendidos'
@@ -2366,7 +2346,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                       DataPipeline = PipeVendasCartoesCheques
                       PrinterSetup.BinName = 'Default'
                       PrinterSetup.DocumentName = 'Report'
-                      PrinterSetup.PaperName = 'Custom'
+                      PrinterSetup.PaperName = 'A4'
                       PrinterSetup.PrinterName = 'Default'
                       PrinterSetup.mmMarginBottom = 6350
                       PrinterSetup.mmMarginLeft = 6350
@@ -2374,7 +2354,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
                       PrinterSetup.mmMarginTop = 6350
                       PrinterSetup.mmPaperHeight = 297000
                       PrinterSetup.mmPaperWidth = 210000
-                      PrinterSetup.PaperSize = 256
+                      PrinterSetup.PaperSize = 9
                       Version = '10.06'
                       mmColumnWidth = 0
                       DataPipelineName = 'PipeVendasCartoesCheques'
@@ -2952,9 +2932,9 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Transparent = True
         DataPipelineName = 'PipeOperacao'
         mmHeight = 3429
-        mmLeft = 173356
+        mmLeft = 176192
         mmTop = 1588
-        mmWidth = 21378
+        mmWidth = 18542
         BandType = 7
       end
     end

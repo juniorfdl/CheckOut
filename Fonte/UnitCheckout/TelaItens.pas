@@ -935,12 +935,12 @@ begin
                     tPag := fpCheque
                   else
                     tPag := fpDinheiro;
-
-//                if VarValorRecebido > 0 then            //Tirei pq quando era pago com dois tipos de pagamento a tag vpag ficava com o mesmo valor
-//                  vPag := VarValorRecebido
-//                else
+                 //Tirei pq quando era pago com dois tipos de pagamento a tag vpag ficava com o mesmo valor
+                  vCont := RecordCount;
+                  if (VarValorRecebido > 0) and (vCont = 1) then
+                    vPag := VarValorRecebido
+                  else
                   vPag := fieldbyname('CTRCN2VLR').AsFloat;
-
                 if VarValorTroco > 0 then
                   pag.vTroco := VarValorTroco;
             end;
@@ -4749,6 +4749,7 @@ begin
                     SQLImpressaoCupom.RequestLive := False;
                     SQLImpressaoCupom.SQL.Text := 'Update CUPOM Set STNFE=' + IntToStr(dm.ACBrNFe.WebServices.consulta.cStat) +
                       ', PROTOCOLO=''' + dm.ACBrNFe.WebServices.consulta.Protocolo + '''' +
+                      ', PENDENTE=' + QuotedStr('S') +
                       ' Where CUPOA13ID =''' + IDReimprimir + '''';
                     SQLImpressaoCupom.ExecSQL;
 
@@ -6175,6 +6176,7 @@ begin
       SQLImpressaoCupom.RequestLive := False;
       SQLImpressaoCupom.SQL.Text := 'Update CUPOM Set STNFE=' + IntToStr(dm.ACBrNFe.WebServices.consulta.cStat) +
         ', PROTOCOLO=''' + dm.ACBrNFe.WebServices.consulta.Protocolo + '''' +
+        ', PENDENTE=' + QuotedStr('S') +        
         ' Where CUPOA13ID =''' + idCupom + '''';
       SQLImpressaoCupom.ExecSQL;
 

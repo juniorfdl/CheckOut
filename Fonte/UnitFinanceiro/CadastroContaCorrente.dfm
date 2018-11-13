@@ -1,6 +1,6 @@
 inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
-  Left = 318
-  Top = 139
+  Left = 301
+  Top = 86
   Caption = 'Contas Correntes'
   ClientWidth = 760
   OldCreateOrder = True
@@ -134,7 +134,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
               end
               object Label5: TLabel
                 Left = 13
-                Top = 41
+                Top = 37
                 Width = 35
                 Height = 13
                 Caption = 'Limite'
@@ -147,7 +147,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
               end
               object Label6: TLabel
                 Left = 12
-                Top = 82
+                Top = 73
                 Width = 64
                 Height = 13
                 Caption = 'Saldo Atual'
@@ -160,10 +160,10 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
               end
               object Label8: TLabel
                 Left = 173
-                Top = 82
+                Top = 73
                 Width = 146
                 Height = 13
-                Caption = 'Última Alteração do Saldo'
+                Caption = #218'ltima Altera'#231#227'o do Saldo'
                 FocusControl = DBEdit6
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = 8404992
@@ -174,10 +174,10 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
               end
               object Label10: TLabel
                 Left = 173
-                Top = 42
+                Top = 38
                 Width = 109
                 Height = 13
-                Caption = 'Cód. Conta Contábil'
+                Caption = 'C'#243'd. Conta Cont'#225'bil'
                 FocusControl = DBEdit7
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = 8404992
@@ -185,6 +185,45 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
                 Font.Name = 'Tahoma'
                 Font.Style = [fsBold]
                 ParentFont = False
+              end
+              object Label21: TLabel
+                Left = 13
+                Top = 106
+                Width = 46
+                Height = 13
+                Caption = 'Instru'#231#227'o'
+              end
+              object RetornaInstrucao: TSpeedButton
+                Left = 101
+                Top = 121
+                Width = 21
+                Height = 20
+                Hint = 'Acessa Instru'#231#227'o Banco'
+                Flat = True
+                Glyph.Data = {
+                  9E020000424D9E0200000000000036000000280000000E0000000E0000000100
+                  18000000000068020000C40E0000C40E00000000000000000000FF00FFFF00FF
+                  FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+                  FFFF00FF0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+                  FFFF00FFFF00FF000000000000FF00FF0000FF00FFFF00FFFF00FFFF00FFFF00
+                  FFFF00FFFF00FFFF00FFFF00FFFF00FF000000000000000000FF00FF0000FF00
+                  FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00000000000000
+                  0000FF00FFFF00FF0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+                  00FF000000000000000000FF00FFFF00FFFF00FF0000FF00FFFF00FFA0B8BF3F
+                  48400000000000003F383F6F686F000000000000FF00FFFF00FFFF00FFFF00FF
+                  0000FF00FFA0B8B02F302F7080808F989F7F908F60706F000000000000FF00FF
+                  FF00FFFF00FFFF00FFFF00FF0000FF00FF3F40407F908FA0B8B090A8AF8F989F
+                  7F888F60706F404840FF00FFFF00FFFF00FFFF00FFFF00FF0000FF00FF000000
+                  B0C8C0CFD8DFA0B0B090A8A08098907F888F000000FF00FFFF00FFFF00FFFF00
+                  FFFF00FF0000FF00FF000000BFD0D0F0F8F0AFC0BF9FB0B090A0A08090900000
+                  00FF00FFFF00FFFF00FFFF00FFFF00FF0000FF00FF3F40408F989FCFE0DFE0E8
+                  EFAFB8BF9FB0AF70807F3F4840FF00FFFF00FFFF00FFFF00FFFF00FF0000FF00
+                  FF9FA8AF2F302F8F989FB0C8CFAFC0C07F888F2F3030AFC0BFFF00FFFF00FFFF
+                  00FFFF00FFFF00FF0000FF00FFFF00FF9FB0B03F40400000000000003F4840AF
+                  B8BFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF0000FF00FFFF00FFFF00FFFF
+                  00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+                  0000}
+                OnClick = RetornaBancoClick
               end
               object DBEdit4: TDBEdit
                 Left = 12
@@ -197,7 +236,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
               end
               object DBEdit5: TEvDBNumEdit
                 Left = 12
-                Top = 54
+                Top = 50
                 Width = 150
                 Height = 21
                 AutoHideCalculator = False
@@ -232,7 +271,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
               end
               object EvDBNumEdit1: TDBEdit
                 Left = 12
-                Top = 94
+                Top = 85
                 Width = 150
                 Height = 21
                 TabStop = False
@@ -243,7 +282,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
               end
               object DBEdit6: TDBEdit
                 Left = 169
-                Top = 94
+                Top = 85
                 Width = 348
                 Height = 21
                 TabStop = False
@@ -254,7 +293,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
               end
               object DBEdit7: TDBEdit
                 Left = 169
-                Top = 54
+                Top = 50
                 Width = 348
                 Height = 21
                 DataField = 'CTCRA30CODCONTABIL'
@@ -263,10 +302,10 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
               end
               object GroupBox1: TGroupBox
                 Left = 8
-                Top = 124
+                Top = 162
                 Width = 510
-                Height = 153
-                Caption = ' Cedente - Dados para emissão boleto laser '
+                Height = 111
+                Caption = ' Cedente - Dados para emiss'#227'o boleto laser '
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clWindowText
                 Font.Height = -11
@@ -279,7 +318,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
                   Top = 18
                   Width = 88
                   Height = 13
-                  Caption = 'Código Cedente'
+                  Caption = 'C'#243'digo Cedente'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clRed
                   Font.Height = -11
@@ -292,7 +331,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
                   Top = 18
                   Width = 83
                   Height = 13
-                  Caption = 'Dígito Cedente'
+                  Caption = 'D'#237'gito Cedente'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clRed
                   Font.Height = -11
@@ -331,7 +370,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
                   Top = 62
                   Width = 143
                   Height = 13
-                  Caption = 'Nosso Número  (próximo)'
+                  Caption = 'Nosso N'#250'mero  (pr'#243'ximo)'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clRed
                   Font.Height = -11
@@ -344,7 +383,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
                   Top = 18
                   Width = 49
                   Height = 13
-                  Caption = 'Variação'
+                  Caption = 'Varia'#231#227'o'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = 8404992
                   Font.Height = -11
@@ -357,7 +396,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
                   Top = 61
                   Width = 52
                   Height = 13
-                  Caption = 'Convênio'
+                  Caption = 'Conv'#234'nio'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = 8404992
                   Font.Height = -11
@@ -371,6 +410,19 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
                   Width = 80
                   Height = 13
                   Caption = 'Lote Remessa'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = 8404992
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = [fsBold]
+                  ParentFont = False
+                end
+                object Label22: TLabel
+                  Left = 398
+                  Top = 60
+                  Width = 76
+                  Height = 13
+                  Caption = 'Dias Protesto'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = 8404992
                   Font.Height = -11
@@ -499,6 +551,50 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
                   ParentFont = False
                   TabOrder = 7
                 end
+                object DBEdit18: TDBEdit
+                  Left = 396
+                  Top = 74
+                  Width = 88
+                  Height = 21
+                  DataField = 'DIAS_PROTESTO'
+                  DataSource = DSTemplate
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ParentFont = False
+                  TabOrder = 8
+                end
+              end
+              object DBEdit16: TDBEdit
+                Left = 12
+                Top = 121
+                Width = 88
+                Height = 21
+                DataField = 'CODIGO'
+                DataSource = DSTemplate
+                TabOrder = 6
+                OnKeyDown = DBEdit16KeyDown
+              end
+              object DBEdit17: TDBEdit
+                Left = 124
+                Top = 122
+                Width = 394
+                Height = 18
+                TabStop = False
+                AutoSize = False
+                BorderStyle = bsNone
+                DataField = 'NomeInstrucaoCalcFields'
+                DataSource = DSTemplate
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Tahoma'
+                Font.Style = [fsBold]
+                ParentColor = True
+                ParentFont = False
+                TabOrder = 7
               end
             end
           end
@@ -561,7 +657,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
               Top = 79
               Width = 70
               Height = 13
-              Caption = 'Nro. Agência'
+              Caption = 'Nro. Ag'#234'ncia'
               FocusControl = DBEdit2
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clRed
@@ -617,7 +713,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
               Top = 79
               Width = 69
               Height = 13
-              Caption = 'Dígito Conta'
+              Caption = 'D'#237'gito Conta'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clRed
               Font.Height = -11
@@ -630,7 +726,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
               Top = 79
               Width = 81
               Height = 13
-              Caption = 'Dígito Agência'
+              Caption = 'D'#237'gito Ag'#234'ncia'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clRed
               Font.Height = -11
@@ -764,7 +860,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
       end>
     object SQLTemplateCTCRICOD: TIntegerField
       Tag = 1
-      DisplayLabel = 'Código'
+      DisplayLabel = 'C'#243'digo'
       FieldName = 'CTCRICOD'
       Origin = 'DB.CONTACORRENTE.CTCRICOD'
       Visible = False
@@ -790,14 +886,14 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
       Calculated = True
     end
     object SQLTemplateCTCRA15AGENCIA: TStringField
-      DisplayLabel = 'Agência'
+      DisplayLabel = 'Ag'#234'ncia'
       FieldName = 'CTCRA15AGENCIA'
       Origin = 'DB.CONTACORRENTE.CTCRA15AGENCIA'
       FixedChar = True
       Size = 15
     end
     object SQLTemplateCTCRA15NUMERO: TStringField
-      DisplayLabel = 'Número'
+      DisplayLabel = 'N'#250'mero'
       FieldName = 'CTCRA15NUMERO'
       Origin = 'DB.CONTACORRENTE.CTCRA15NUMERO'
       FixedChar = True
@@ -842,14 +938,14 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
       Origin = 'DB.CONTACORRENTE.REGISTRO'
     end
     object SQLTemplateCTCRDULTALTSALDO: TDateTimeField
-      DisplayLabel = 'Últ. Alt. Saldo'
+      DisplayLabel = #218'lt. Alt. Saldo'
       FieldName = 'CTCRDULTALTSALDO'
       Origin = 'DB.CONTACORRENTE.CTCRDULTALTSALDO'
       Visible = False
       DisplayFormat = 'dddddd hh:nn:ss'
     end
     object SQLTemplateCTCRA30CODCONTABIL: TStringField
-      DisplayLabel = 'Cod. Conta Contábil'
+      DisplayLabel = 'Cod. Conta Cont'#225'bil'
       FieldName = 'CTCRA30CODCONTABIL'
       Origin = 'DB.CONTACORRENTE.CTCRA30CODCONTABIL'
       FixedChar = True
@@ -920,6 +1016,25 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
     object SQLTemplateLOTEREMESSABANCO: TIntegerField
       FieldName = 'LOTEREMESSABANCO'
       Origin = 'DB.CONTACORRENTE.LOTEREMESSABANCO'
+    end
+    object SQLTemplateCTRCINOSSONUMERO: TIntegerField
+      FieldName = 'CTRCINOSSONUMERO'
+      Origin = 'DB.CONTACORRENTE.CTRCINOSSONUMERO'
+    end
+    object SQLTemplateCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Origin = 'DB.CONTACORRENTE.CODIGO'
+      Size = 10
+    end
+    object SQLTemplateNomeInstrucaoCalcFields: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'NomeInstrucaoCalcFields'
+      Size = 100
+      Calculated = True
+    end
+    object SQLTemplateDIAS_PROTESTO: TIntegerField
+      FieldName = 'DIAS_PROTESTO'
+      Origin = 'DB.CONTACORRENTE.DIAS_PROTESTO'
     end
   end
   object SQLEmpresa: TRxQuery
