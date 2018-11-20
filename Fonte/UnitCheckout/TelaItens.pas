@@ -4043,7 +4043,6 @@ begin
               begin
                 IDReimprimir := '';
                 Application.CreateForm(TFormTelaConsultaRapidaCupom, FormTelaConsultaRapidaCupom);
-                FormTelaConsultaRapidaCupom.de.Date := Now;
                 FormTelaConsultaRapidaCupom.SQLCupom.Close;
                 FormTelaConsultaRapidaCupom.SQLCupom.MacroByName('DataEmissao').Value := 'Cupom.CUPODEMIS = ''' + FormatDateTime('mm/dd/yyyy', Now) + '''';
                 FormTelaConsultaRapidaCupom.SQLCupom.MacroByName('Empresa').Value := 'Cupom.EMPRICOD  = ' + EmpresaPadrao;
@@ -4626,7 +4625,6 @@ begin
 
               IDReimprimir := '';
               Application.CreateForm(TFormTelaConsultaRapidaCupom, FormTelaConsultaRapidaCupom);
-              FormTelaConsultaRapidaCupom.de.Date := Now;
               FormTelaConsultaRapidaCupom.SQLCupom.Close;
               FormTelaConsultaRapidaCupom.SQLCupom.MacroByName('DataEmissao').Value := 'Cupom.CUPODEMIS = ''' + FormatDateTime('mm/dd/yyyy', Now) + '''';
               FormTelaConsultaRapidaCupom.SQLCupom.MacroByName('Empresa').Value := 'Cupom.EMPRICOD  = ' + EmpresaPadrao;
@@ -4669,12 +4667,6 @@ begin
                         Chave := Copy(dm.ACBrNFe.WebServices.Consulta.XMotivo, pos('NF-e [', dm.ACBrNFe.WebServices.Consulta.XMotivo), 200);
                         Chave := StringReplace(Chave, 'NF-e [', '', [rfReplaceAll, rfIgnoreCase]);
                         Chave := StringReplace(Chave, ']', '', [rfReplaceAll]);
-
-                        {FormTelaConsultaRapidaCupom.SQLCupom.RequestLive := True;
-                        FormTelaConsultaRapidaCupom.SQLCupom.Edit;
-                        FormTelaConsultaRapidaCupom.SQLCupomCHAVEACESSO.AsString := Chave;
-                        FormTelaConsultaRapidaCupom.SQLCupom.Post;
-                        FormTelaConsultaRapidaCupom.SQLCupom.RequestLive := False;}
 
                         if Chave <> '' then
                         begin
