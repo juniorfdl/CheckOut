@@ -807,6 +807,7 @@ begin
           vTotTrib := RoundTo(vTotTrib, -2);
 
           Total_vTotTrib := Total_vTotTrib + vTotTrib;
+
         end;
 
         vaux := RoundTo(Total.ICMSTot.vProd, -2);
@@ -937,8 +938,10 @@ begin
                     tPag := fpDinheiro;
                  //Tirei pq quando era pago com dois tipos de pagamento a tag vpag ficava com o mesmo valor
                   vCont := RecordCount;
-                  if (VarValorRecebido > 0) and (vCont = 1) then
-                    vPag := VarValorRecebido
+                  VarValorRecebido := SQLImpressaoCupom.fieldbyname('CUPON2TOTITENS').AsFloat + SQLImpressaoCupom.fieldbyname('TROCO').AsFloat;
+//                  if (VarValorRecebido > 0) and (vCont = 1) then
+                  if (VarValorRecebido <> fieldbyname('CTRCN2VLR').AsFloat) and (vCont = 1) then
+                    vPag := SQLImpressaoCupom.fieldbyname('CUPON2TOTITENS').AsFloat + SQLImpressaoCupom.fieldbyname('TROCO').AsFloat
                   else
                   vPag := fieldbyname('CTRCN2VLR').AsFloat;
                 if VarValorTroco > 0 then
