@@ -5272,6 +5272,8 @@ begin
             DM.SQLCupomItemVENDICOD.Value := VendedorVenda;
 
         DM.SQLCupomItemCOITN2ICMSALIQ.AsFloat  := FormTelaItens.SQLItensVendaTempALIQUOTA.AsFloat;
+        DM.SQLCupomItemCPITN2VLRCOFINS.AsFloat := FormTelaItens.SQLItensVendaTempVALORCOFINS.AsFloat;
+        DM.SQLCupomItemCPITN2VLRPIS.AsFloat    := FormTelaItens.SQLItensVendaTempVALORPIS.AsFloat;
 
         if (FormTelaItens.SQLItensVendaTempTROCA.Value <> 'S') then
           begin

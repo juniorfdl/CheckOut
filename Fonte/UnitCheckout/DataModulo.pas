@@ -1160,6 +1160,8 @@ type
     SQLProduto_DescontosPRECO: TFloatField;
     SQLProduto_DescontosDATA_VALIDADE: TDateTimeField;
     SQLTerminalAtivoVALOR_LIMITE_SANGRIA: TFloatField;
+    SQLCupomItemCPITN2VLRPIS: TFloatField;
+    SQLCupomItemCPITN2VLRCOFINS: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure SQLCupomNewRecord(DataSet: TDataSet);
     procedure SQLCupomBeforePost(DataSet: TDataSet);
