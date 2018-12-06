@@ -1078,6 +1078,7 @@ begin
         begin
           //Abrir tela de consulta de cupom
           Application.CreateForm(TFormTelaConsultaRapidaCupom,FormTelaConsultaRapidaCupom);
+          FormTelaConsultaRapidaCupom.Cancelamento := True;
           FormTelaConsultaRapidaCupom.SQLCupom.Close;
           FormTelaConsultaRapidaCupom.SQLCupom.MacroByName('DataEmissao').Value := 'Cupom.CUPODEMIS = "' + FormatDateTime('mm/dd/yyyy',Now) + '"';
           FormTelaConsultaRapidaCupom.SQLCupom.MacroByName('Empresa').Value     := 'Cupom.EMPRICOD  = ' + EmpresaPadrao;

@@ -2308,6 +2308,22 @@ inherited DM: TDM
       FieldName = 'CPITN2VLRCOFINS'
       Origin = 'DB.CUPOMITEM.CPITN2VLRCOFINS'
     end
+    object SQLCupomItemALIQUOTA_PIS: TFloatField
+      FieldName = 'ALIQUOTA_PIS'
+      Origin = 'DB.CUPOMITEM.ALIQUOTA_PIS'
+    end
+    object SQLCupomItemVLR_BASE_PIS: TFloatField
+      FieldName = 'VLR_BASE_PIS'
+      Origin = 'DB.CUPOMITEM.VLR_BASE_PIS'
+    end
+    object SQLCupomItemALIQUOTA_COFINS: TFloatField
+      FieldName = 'ALIQUOTA_COFINS'
+      Origin = 'DB.CUPOMITEM.ALIQUOTA_COFINS'
+    end
+    object SQLCupomItemVLR_BASE_COFINS: TFloatField
+      FieldName = 'VLR_BASE_COFINS'
+      Origin = 'DB.CUPOMITEM.VLR_BASE_COFINS'
+    end
   end
   object DSSQLCupomItem: TDataSource
     DataSet = SQLCupomItem

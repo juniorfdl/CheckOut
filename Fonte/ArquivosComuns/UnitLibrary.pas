@@ -154,7 +154,8 @@ var
   FoneClienteRec   : string ;
   NroUltItem : Integer;
   DataAtualizacaoEstoque, DataNotaCompra : TDateTime;
-
+  Imprimir_Nfce : Boolean = True;
+  
 function ExecSql(xsql: string; Tipo: Integer = 0): TQuery;
 function  LocateByDisplayLabel(DataSet:TDataSet;DisplayLabel:String):Integer ;
 procedure Informa(Texto:string) ;

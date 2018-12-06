@@ -1,6 +1,6 @@
 inherited FormCadastroTipoDocumento: TFormCadastroTipoDocumento
-  Left = 7
-  Top = 27
+  Left = 230
+  Top = 95
   Caption = 'Tipos de Documentos'
   OldCreateOrder = True
   PixelsPerInch = 96
@@ -10,6 +10,7 @@ inherited FormCadastroTipoDocumento: TFormCadastroTipoDocumento
       inherited PanelFundoDados: TPanel
         inherited Panel5: TPanel
           inherited PagePrincipal: TPageControl
+            ActivePage = TabSheetDadosPrincipais
             inherited TabSheetConsulta: TTabSheet
               inherited DBGridLista: TDBGrid
                 Columns = <
@@ -41,6 +42,25 @@ inherited FormCadastroTipoDocumento: TFormCadastroTipoDocumento
                     FullHeight = 0
                   end
                 end
+              end
+            end
+            inherited TabSheetDadosPrincipais: TTabSheet
+              object dbrdbSomaFluxo: TDBRadioGroup
+                Left = 16
+                Top = 8
+                Width = 185
+                Height = 41
+                Caption = 'Soma no fluxo caixa quando pago'
+                Columns = 2
+                DataField = 'SOMA_QUITADO'
+                DataSource = DSTemplate
+                Items.Strings = (
+                  'Sim'
+                  'N'#227'o')
+                TabOrder = 0
+                Values.Strings = (
+                  'S'
+                  'N')
               end
             end
           end
@@ -125,6 +145,16 @@ inherited FormCadastroTipoDocumento: TFormCadastroTipoDocumento
       FieldName = 'REGISTRO'
       Origin = 'DB.TIPODOCUMENTO.REGISTRO'
       Visible = False
+    end
+    object SQLTemplateVLRTAXA: TFloatField
+      FieldName = 'VLRTAXA'
+      Origin = 'DB.TIPODOCUMENTO.VLRTAXA'
+    end
+    object SQLTemplateSOMA_QUITADO: TStringField
+      FieldName = 'SOMA_QUITADO'
+      Origin = 'DB.TIPODOCUMENTO.SOMA_QUITADO'
+      FixedChar = True
+      Size = 1
     end
   end
 end

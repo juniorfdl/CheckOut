@@ -502,7 +502,7 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
                   Font.Height = -11
                   Font.Name = 'Tahoma'
                   Font.Style = []
-                  MaxLength = 5
+                  MaxLength = 7
                   ParentFont = False
                   TabOrder = 5
                 end

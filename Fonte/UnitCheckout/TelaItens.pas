@@ -288,6 +288,8 @@ type
     SQLItensVendaTempVALORCOFINS: TFloatField;
     SQLItensVendaTempALIQUOTAPIS: TFloatField;
     SQLItensVendaTempALIQUOTACOFINS: TFloatField;
+    SQLItensVendaTempVLR_BASE_PIS: TFloatField;
+    SQLItensVendaTempVLR_BASE_COFINS: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure EntradaDadosKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -511,10 +513,10 @@ begin
 end;
 
 function TFormTelaItens.Gerar_NFCe(idCupom: string): string;
-var xCliente, xDocumento, xPlano, vTotaItem: string;
+var xCliente, xDocumento, xPlano, vTotaItem, Associado: string;
 var iCRT, vCont, vUltimo: integer;
 var VlrDescNoTotal, VlrTroca, VlrTotalItens, PercDesc, TotalDesconto: double;
-  vaux, Total_vTotTrib: Currency;
+  vaux, Total_vTotTrib, VlrTroco : Currency;
 var vDescTodosItens : Boolean;
 begin
   dm.ACBrNFe.DANFE.vTribFed := 0;
@@ -526,9 +528,10 @@ begin
   VlrTroca := 0;
   dm.sqlconsulta.close;
   dm.sqlconsulta.sql.clear;
-  dm.sqlconsulta.sql.text := 'Select CUPOINRO, CUPON2TOTITENS, CUPON2DESC, CUPON3BONUSTROCA, CLIENTECNPJ, CLIENTENOME, PLRCICOD from cupom where CUPOA13ID=''' + idCupom + '''';
+  dm.sqlconsulta.sql.text := 'Select CUPOINRO, CUPON2TOTITENS, CUPON2DESC, CUPON3BONUSTROCA, CLIENTECNPJ, CLIENTENOME, PLRCICOD, CLIEA13ID, TROCO from cupom where CUPOA13ID=''' + idCupom + '''';
   dm.sqlconsulta.open;
   xCliente := dm.sqlconsulta.fieldbyname('CLIENTENOME').AsString;
+  VlrTroco := dm.sqlconsulta.fieldbyname('TROCO').AsFloat;
   //xDocumento := dm.sqlconsulta.fieldbyname('CLIENTECNPJ').AsString ;
   xPlano := dm.sqlconsulta.fieldbyname('PLRCICOD').AsString;
 
@@ -538,6 +541,7 @@ begin
     VlrDescNoTotal := dm.sqlconsulta.fieldbyname('CUPON2DESC').Value;
   if dm.sqlconsulta.fieldbyname('CUPON3BONUSTROCA').Value > 0 then
     VlrTroca := dm.sqlconsulta.fieldbyname('CUPON3BONUSTROCA').Value;
+  Associado := SQLLocate('CLIENTE', 'CLIEA13ID', 'ASSOCIADO', dm.sqlconsulta.fieldbyname('CLIEA13ID').Value);
 
   if dm.sqlconsulta.fieldbyname('CUPOINRO').Value > 0 then {Retransmite NFCe que deu erro por qualquer motivo}
     NumNFe := dm.sqlconsulta.fieldbyname('CUPOINRO').value
@@ -654,6 +658,12 @@ begin
           if Length(dm.sqlConsulta.fieldbyname('PRODA60CODBAR').AsString) < 8 then
             Prod.cEANTrib := 'SEM GTIN';
         end;
+        if (Length(dm.sqlConsulta.fieldbyname('PRODA60CODBAR').AsString) < 10) or (prod.cEAN = '') then
+        begin
+          Prod.cEAN := 'SEM GTIN';
+          Prod.cEANTrib := 'SEM GTIN';
+        end;
+
         Prod.xProd := dm.sqlConsulta.fieldbyname('PRODA30ADESCRREDUZ').AsString;
                // Prod.xProd    := 'NOTA FISCAL EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL';
 
@@ -796,48 +806,50 @@ begin
                 ICMS.vBCST := 0;
                 ICMS.pICMSST := 0;
                 ICMS.vICMSST := 0;
+
                 //Pis e cofins
+
                 if dm.sqlConsulta.fieldbyname('PRODA2CSTCOFINS').AsString = '01' then
                 begin
                   COFINS.CST := cof01;
-                  COFINS.vBC := Prod.vProd - Prod.vDesc;
-                  COFINS.pCOFINS := dm.sqlConsulta.fieldbyname('PRODN2ALIQCOFINS').AsFloat;
-                  COFINS.vCOFINS := (dm.sqlConsulta.fieldbyname('PRODN2ALIQCOFINS').AsFloat * (Prod.vProd - Prod.vDesc)) / 100;
+                  COFINS.vBC := SQLImpressaoCupom.fieldbyname('VLR_BASE_COFINS').AsFloat;
+                  COFINS.pCOFINS := SQLImpressaoCupom.fieldbyname('ALIQUOTA_COFINS').AsFloat;
+                  COFINS.vCOFINS := SQLImpressaoCupom.fieldbyname('CPITN2VLRCOFINS').AsFloat;
                 end;
                 if dm.sqlConsulta.fieldbyname('PRODA2CSTCOFINS').AsString = '02' then
                 begin
                   COFINS.CST := cof02;
-                  COFINS.vBC := Prod.vProd - Prod.vDesc;
-                  COFINS.pCOFINS := dm.sqlConsulta.fieldbyname('PRODN2ALIQCOFINS').AsFloat;
-                  COFINS.vCOFINS := (dm.sqlConsulta.fieldbyname('PRODN2ALIQCOFINS').AsFloat * (Prod.vProd - Prod.vDesc)) / 100;
+                  COFINS.vBC := SQLImpressaoCupom.fieldbyname('VLR_BASE_COFINS').AsFloat;
+                  COFINS.pCOFINS := SQLImpressaoCupom.fieldbyname('ALIQUOTA_COFINS').AsFloat;
+                  COFINS.vCOFINS := SQLImpressaoCupom.fieldbyname('CPITN2VLRCOFINS').AsFloat;
                 end;
                 if dm.sqlConsulta.fieldbyname('PRODA2CSTCOFINS').AsString = '03' then
                 begin
                   COFINS.CST := cof03;
-                  COFINS.vBC := Prod.vProd - Prod.vDesc;
-                  COFINS.pCOFINS := dm.sqlConsulta.fieldbyname('PRODN2ALIQCOFINS').AsFloat;
-                  COFINS.vCOFINS := (dm.sqlConsulta.fieldbyname('PRODN2ALIQCOFINS').AsFloat * (Prod.vProd - Prod.vDesc)) / 100;
+                  COFINS.vBC := SQLImpressaoCupom.fieldbyname('VLR_BASE_COFINS').AsFloat;
+                  COFINS.pCOFINS := SQLImpressaoCupom.fieldbyname('ALIQUOTA_COFINS').AsFloat;
+                  COFINS.vCOFINS := SQLImpressaoCupom.fieldbyname('CPITN2VLRCOFINS').AsFloat;
                 end;
                 if dm.sqlConsulta.fieldbyname('PRODA2CSTCOFINS').AsString = '04' then
                 begin
                   COFINS.CST := cof04;
-                  COFINS.vBC := Prod.vProd - Prod.vDesc;
-                  COFINS.pCOFINS := dm.sqlConsulta.fieldbyname('PRODN2ALIQCOFINS').AsFloat;
-                  COFINS.vCOFINS := (dm.sqlConsulta.fieldbyname('PRODN2ALIQCOFINS').AsFloat * (Prod.vProd - Prod.vDesc)) / 100;
+                  COFINS.vBC := SQLImpressaoCupom.fieldbyname('VLR_BASE_COFINS').AsFloat;
+                  COFINS.pCOFINS := SQLImpressaoCupom.fieldbyname('ALIQUOTA_COFINS').AsFloat;
+                  COFINS.vCOFINS := SQLImpressaoCupom.fieldbyname('CPITN2VLRCOFINS').AsFloat;
                 end;
                 if dm.sqlConsulta.fieldbyname('PRODA2CSTCOFINS').AsString = '05' then
                 begin
                   COFINS.CST := cof05;
-                  COFINS.vBC := Prod.vProd - Prod.vDesc;
-                  COFINS.pCOFINS := dm.sqlConsulta.fieldbyname('PRODN2ALIQCOFINS').AsFloat;
-                  COFINS.vCOFINS := (dm.sqlConsulta.fieldbyname('PRODN2ALIQCOFINS').AsFloat * (Prod.vProd - Prod.vDesc)) / 100;
+                  COFINS.vBC := SQLImpressaoCupom.fieldbyname('VLR_BASE_COFINS').AsFloat;
+                  COFINS.pCOFINS := SQLImpressaoCupom.fieldbyname('ALIQUOTA_COFINS').AsFloat;
+                  COFINS.vCOFINS := SQLImpressaoCupom.fieldbyname('CPITN2VLRCOFINS').AsFloat;
                 end;
                 if dm.sqlConsulta.fieldbyname('PRODA2CSTCOFINS').AsString = '06' then
                 begin
                   COFINS.CST := cof06;
-                  COFINS.vBC := Prod.vProd - Prod.vDesc;
-                  COFINS.pCOFINS := dm.sqlConsulta.fieldbyname('PRODN2ALIQCOFINS').AsFloat;
-                  COFINS.vCOFINS := (dm.sqlConsulta.fieldbyname('PRODN2ALIQCOFINS').AsFloat * (Prod.vProd - Prod.vDesc)) / 100;
+                  COFINS.vBC := SQLImpressaoCupom.fieldbyname('VLR_BASE_COFINS').AsFloat;
+                  COFINS.pCOFINS := SQLImpressaoCupom.fieldbyname('ALIQUOTA_COFINS').AsFloat;
+                  COFINS.vCOFINS := SQLImpressaoCupom.fieldbyname('CPITN2VLRCOFINS').AsFloat;
                 end;
                 if dm.sqlConsulta.fieldbyname('PRODA2CSTCOFINS').AsString = '07' then
                   COFINS.CST := cof07;
@@ -862,44 +874,44 @@ begin
                 if dm.sqlConsulta.fieldbyname('PRODA2CSTPIS').AsString = '01' then
                 begin
                   PIS.CST := pis01;
-                  PIS.vBC := Prod.vProd - Prod.vDesc;
-                  PIS.pPIS := dm.sqlConsulta.fieldbyname('PRODN2ALIQPIS').AsFloat;
-                  PIS.vPIS := (dm.sqlConsulta.fieldbyname('PRODN2ALIQPIS').AsFloat * (Prod.vProd - Prod.vDesc)) / 100;
+                  PIS.vBC := SQLImpressaoCupom.fieldbyname('VLR_BASE_PIS').AsFloat;
+                  PIS.pPIS := SQLImpressaoCupom.fieldbyname('ALIQUOTA_PIS').AsFloat;;
+                  PIS.vPIS := SQLImpressaoCupom.fieldbyname('CPITN2VLRPIS').AsFloat;
                 end;
                 if dm.sqlConsulta.fieldbyname('PRODA2CSTPIS').AsString = '02' then
                 begin
                   PIS.CST := pis02;
-                  PIS.vBC := Prod.vProd - Prod.vDesc;
-                  PIS.pPIS := dm.sqlConsulta.fieldbyname('PRODN2ALIQPIS').AsFloat;
-                  PIS.vPIS := (dm.sqlConsulta.fieldbyname('PRODN2ALIQPIS').AsFloat * (Prod.vProd - Prod.vDesc)) / 100;
+                  PIS.vBC := SQLImpressaoCupom.fieldbyname('VLR_BASE_PIS').AsFloat;
+                  PIS.pPIS := SQLImpressaoCupom.fieldbyname('ALIQUOTA_PIS').AsFloat;;
+                  PIS.vPIS := SQLImpressaoCupom.fieldbyname('CPITN2VLRPIS').AsFloat;
                 end;
                 if dm.sqlConsulta.fieldbyname('PRODA2CSTPIS').AsString = '03' then
                 begin
                   PIS.CST := pis03;
-                  PIS.vBC := Prod.vProd - Prod.vDesc;
-                  PIS.pPIS := dm.sqlConsulta.fieldbyname('PRODN2ALIQPIS').AsFloat;
-                  PIS.vPIS := (dm.sqlConsulta.fieldbyname('PRODN2ALIQPIS').AsFloat * (Prod.vProd - Prod.vDesc)) / 100;
+                  PIS.vBC := SQLImpressaoCupom.fieldbyname('VLR_BASE_PIS').AsFloat;
+                  PIS.pPIS := SQLImpressaoCupom.fieldbyname('ALIQUOTA_PIS').AsFloat;;
+                  PIS.vPIS := SQLImpressaoCupom.fieldbyname('CPITN2VLRPIS').AsFloat;
                 end;
                 if dm.sqlConsulta.fieldbyname('PRODA2CSTPIS').AsString= '04' then
                 begin
                   PIS.CST := pis04;
-                  PIS.vBC := Prod.vProd - Prod.vDesc;
-                  PIS.pPIS := dm.sqlConsulta.fieldbyname('PRODN2ALIQPIS').AsFloat;
-                  PIS.vPIS := (dm.sqlConsulta.fieldbyname('PRODN2ALIQPIS').AsFloat * (Prod.vProd - Prod.vDesc)) / 100;
+                  PIS.vBC := SQLImpressaoCupom.fieldbyname('VLR_BASE_PIS').AsFloat;
+                  PIS.pPIS := SQLImpressaoCupom.fieldbyname('ALIQUOTA_PIS').AsFloat;;
+                  PIS.vPIS := SQLImpressaoCupom.fieldbyname('CPITN2VLRPIS').AsFloat;
                 end;
                 if dm.sqlConsulta.fieldbyname('PRODA2CSTPIS').AsString = '05' then
                 begin
                   PIS.CST := pis05;
-                  PIS.vBC := Prod.vProd - Prod.vDesc;
-                  PIS.pPIS := dm.sqlConsulta.fieldbyname('PRODN2ALIQPIS').AsFloat;
-                  PIS.vPIS := (dm.sqlConsulta.fieldbyname('PRODN2ALIQPIS').AsFloat * (Prod.vProd - Prod.vDesc)) / 100;
+                  PIS.vBC := SQLImpressaoCupom.fieldbyname('VLR_BASE_PIS').AsFloat;
+                  PIS.pPIS := SQLImpressaoCupom.fieldbyname('ALIQUOTA_PIS').AsFloat;;
+                  PIS.vPIS := SQLImpressaoCupom.fieldbyname('CPITN2VLRPIS').AsFloat;
                 end;
                 if dm.sqlConsulta.fieldbyname('PRODA2CSTPIS').AsString = '06' then
                 begin
                   PIS.CST := pis06;
-                  PIS.vBC := Prod.vProd - Prod.vDesc;
-                  PIS.pPIS := dm.sqlConsulta.fieldbyname('PRODN2ALIQPIS').AsFloat;
-                  PIS.vPIS := (dm.sqlConsulta.fieldbyname('PRODN2ALIQPIS').AsFloat * (Prod.vProd - Prod.vDesc)) / 100;
+                  PIS.vBC := SQLImpressaoCupom.fieldbyname('VLR_BASE_PIS').AsFloat;
+                  PIS.pPIS := SQLImpressaoCupom.fieldbyname('ALIQUOTA_PIS').AsFloat;;
+                  PIS.vPIS := SQLImpressaoCupom.fieldbyname('CPITN2VLRPIS').AsFloat;
                 end;
                 if dm.sqlConsulta.fieldbyname('PRODA2CSTPIS').AsString = '07' then
                   PIS.CST := pis07;
@@ -909,6 +921,19 @@ begin
                   PIS.CST := pis09;
                 if dm.sqlConsulta.fieldbyname('PRODA2CSTPIS').AsString = '49' then
                   PIS.CST := pis49;
+
+                if Associado = 'S' then
+                begin
+                  COFINS.CST := cof07;
+                  COFINS.vBC := 0;
+                  COFINS.pCOFINS := 0;
+                  COFINS.vCOFINS := 0;
+
+                  PIS.CST := pis07;
+                  PIS.vBC := 0;
+                  PIS.pPIS := 0;
+                  PIS.vPIS := 0;
+                end;
 
                 Total.ICMSTot.vBC := Total.ICMSTot.vBC + ICMS.vBC;
                 Total.ICMSTot.vICMS := Total.ICMSTot.vICMS + ICMS.vICMS;
@@ -962,8 +987,8 @@ begin
     Total.ICMSTot.vSeg := 0;
     Total.ICMSTot.vII := 0;
     Total.ICMSTot.vIPI := 0;
-    Total.ICMSTot.vPIS := 0;
-    Total.ICMSTot.vCOFINS := 0;
+//    Total.ICMSTot.vPIS := 0;
+//    Total.ICMSTot.vCOFINS := 0;
     Total.ICMSTot.vOutro := 0;
  //    Total.ICMSTot.vOutro  := SQLImpressaoCupom.fieldbyname('CUPON2ACRESC').AsFloat; // adilson removi pq os cliente nao querem o acrescimo no cupom
     Total.ICMSTot.vNF := Total.ICMSTot.vProd - Total.ICMSTot.vDesc;
@@ -1060,11 +1085,11 @@ begin
                   VarValorRecebido := SQLImpressaoCupom.fieldbyname('CUPON2TOTITENS').AsFloat + SQLImpressaoCupom.fieldbyname('TROCO').AsFloat;
 //                  if (VarValorRecebido > 0) and (vCont = 1) then
                   if (VarValorRecebido <> fieldbyname('CTRCN2VLR').AsFloat) and (vCont = 1) then
-                    vPag := SQLImpressaoCupom.fieldbyname('CUPON2TOTITENS').AsFloat + SQLImpressaoCupom.fieldbyname('TROCO').AsFloat
+                    vPag := SQLImpressaoCupom.fieldbyname('CUPON2TOTITENS').AsFloat + SQLImpressaoCupom.fieldbyname('TROCO').AsFloat - SQLImpressaoCupom.fieldbyname('CUPON2DESC').AsFloat
                   else
                   vPag := fieldbyname('CTRCN2VLR').AsFloat;
-                if VarValorTroco > 0 then
-                  pag.vTroco := VarValorTroco;
+                if VlrTroco > 0 then
+                  pag.vTroco := VlrTroco;
             end;
             next;
           end;
@@ -1103,7 +1128,7 @@ begin
       if dm.ACBrNFe.NotasFiscais.Count > 0 then
         dm.ACBrNFe.NotasFiscais[0].GravarXML('nfe.xml', 'c:\temp');
 
-    if FileExists('COMUNICACAO_OFFLINE.TXT') then
+    if (FileExists('COMUNICACAO_OFFLINE.TXT')) then //or (Imprimir_Nfce) then
       dm.ACBrNFe.NotasFiscais.Imprimir;
   end;
 end;
@@ -2652,29 +2677,33 @@ begin
         end;
 
         //CALCULA COFINS
-        if (SQLProdutoPRODA2CSTCOFINS.Value = '07') or (SQLProdutoPRODA2CSTCOFINS.Value = '08') or
+        if (SQLProdutoPRODA2CSTCOFINS.Value = '07') or (SQLProdutoPRODA2CSTCOFINS.Value = '08') or (SQLProdutoPRODA2CSTCOFINS.Value = '06') or
            (SQLProdutoPRODA2CSTCOFINS.Value = '09') or (SQLProdutoPRODA2CSTCOFINS.Value = '49') then
         begin
           SQLItensVendaTempVALORCOFINS.asFloat := 0;
           SQLItensVendaTempALIQUOTACOFINS.AsFloat := 0;
+          SQLItensVendaTempVLR_BASE_COFINS.AsFloat := 0;
         end
         else
         begin
           SQLItensVendaTempALIQUOTACOFINS.AsFloat := SQLProdutoPRODN2ALIQCOFINS.AsFloat;
-          SQLItensVendaTempVALORPIS.asFloat := (SQLItensVendaTempVLRTOTAL.AsFloat - SQLItensVendaTempVLRDESC) * (SQLItensVendaTempALIQUOTACOFINS.AsFloat / 100);
+          SQLItensVendaTempVLR_BASE_COFINS.AsFloat := SQLItensVendaTempVLRTOTAL.AsFloat - SQLItensVendaTempVLRDESC.AsFloat;
+          SQLItensVendaTempVALORCOFINS.asFloat := SQLItensVendaTempVLR_BASE_COFINS.AsFloat * (SQLItensVendaTempALIQUOTACOFINS.AsFloat / 100);
         end;
 
         //CALCULA PIS
-        if (SQLProdutoPRODA2CSTPIS.Value = '07') or (SQLProdutoPRODA2CSTPIS.Value = '08') or
+        if (SQLProdutoPRODA2CSTPIS.Value = '07') or (SQLProdutoPRODA2CSTPIS.Value = '08') or (SQLProdutoPRODA2CSTPIS.Value = '06') or
            (SQLProdutoPRODA2CSTPIS.Value = '09') or (SQLProdutoPRODA2CSTPIS.Value = '49') then
         begin
           SQLItensVendaTempVALORPIS.asFloat := 0;
           SQLItensVendaTempALIQUOTAPIS.AsFloat := 0;
+          SQLItensVendaTempVLR_BASE_PIS.AsFloat := 0;
         end
         else
         begin
-          SQLItensVendaTempALIQUOTAPIS.AsFloat := SQLProdutoPRODN2ALIQCOFINS.AsFloat;
-          SQLItensVendaTempVALORPIS.asFloat := (SQLItensVendaTempVLRTOTAL.AsFloat - SQLItensVendaTempVLRDESC) * (SQLItensVendaTempALIQUOTAPIS.AsFloat / 100);
+          SQLItensVendaTempALIQUOTAPIS.AsFloat := SQLProdutoPRODN2ALIQPIS.AsFloat;
+          SQLItensVendaTempVLR_BASE_PIS.AsFloat := SQLItensVendaTempVLRTOTAL.AsFloat - SQLItensVendaTempVLRDESC.AsFloat;
+          SQLItensVendaTempVALORPIS.asFloat := SQLItensVendaTempVLR_BASE_PIS.AsFloat * (SQLItensVendaTempALIQUOTAPIS.AsFloat / 100);
         end;
 
         if DM.SQLConfigCompraCFCOCTOTPRCVENPROD.AsString <> '' then
@@ -4192,6 +4221,7 @@ begin
               begin
                 IDReimprimir := '';
                 Application.CreateForm(TFormTelaConsultaRapidaCupom, FormTelaConsultaRapidaCupom);
+                FormTelaConsultaRapidaCupom.Cancelamento := False;
                 FormTelaConsultaRapidaCupom.SQLCupom.Close;
                 FormTelaConsultaRapidaCupom.SQLCupom.MacroByName('DataEmissao').Value := 'Cupom.CUPODEMIS = ''' + FormatDateTime('mm/dd/yyyy', Now) + '''';
                 FormTelaConsultaRapidaCupom.SQLCupom.MacroByName('Empresa').Value := 'Cupom.EMPRICOD  = ' + EmpresaPadrao;
@@ -5609,12 +5639,12 @@ procedure TFormTelaItens.EditQtdeKeyDown(Sender: TObject; var Key: Word;
 var
   vDouble: Double;
 begin
-  if Key = VK_Return then
+  if (Key = VK_Return) then
   begin
-    if (EditQtde.Value > 0) then
+    if (EditQtde.Value > 0)  then
     begin
       vDouble := StrToFloat(EditQtde.Text);
-      if vDouble >= 1000 then
+      if vDouble >= 10000 then
       begin
         InformaG('Valor informado excede o limite permitido. Favor verificar!');
         EditQtde.SetFocus;
@@ -6267,7 +6297,7 @@ begin
   LblInstrucoes.Caption := 'Validando NFCe.: ' + inttostr(NumNFe);
   LblInstrucoes.Update;
   dm.ACBrNFe.NotasFiscais.Validar;
-  if (ECFAtual <> 'NFCE A4') then
+  if (ECFAtual <> 'NFCE A4') and (Imprimir_Nfce) then
   begin
     LblInstrucoes.Caption := 'Imprimindo NFCe.: ' + inttostr(NumNFe);
     LblInstrucoes.Update;

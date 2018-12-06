@@ -1162,6 +1162,10 @@ type
     SQLTerminalAtivoVALOR_LIMITE_SANGRIA: TFloatField;
     SQLCupomItemCPITN2VLRPIS: TFloatField;
     SQLCupomItemCPITN2VLRCOFINS: TFloatField;
+    SQLCupomItemALIQUOTA_PIS: TFloatField;
+    SQLCupomItemVLR_BASE_PIS: TFloatField;
+    SQLCupomItemALIQUOTA_COFINS: TFloatField;
+    SQLCupomItemVLR_BASE_COFINS: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure SQLCupomNewRecord(DataSet: TDataSet);
     procedure SQLCupomBeforePost(DataSet: TDataSet);

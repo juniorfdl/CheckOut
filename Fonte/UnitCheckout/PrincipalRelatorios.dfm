@@ -1130,14 +1130,11 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       'select'
       '  MOVIMENTOCAIXA.OPCXICOD,'
       '  OPERACAOCAIXA.OPCXA60DESCR,'
-      
-        '  sum(MOVIMENTOCAIXA.MVCXN2VLRCRED + MOVIMENTOCAIXA.MVCXN2VLRJUR' +
-        'O + MOVIMENTOCAIXA.MVCXN2VLRMULTA) as CREDITOS,'
+      '  sum(MOVIMENTOCAIXA.MVCXN2VLRCRED) as CREDITOS,'
       '  sum(MOVIMENTOCAIXA.MVCXN2VLRDEB) as DEBITOS,'
       
         '  sum(MOVIMENTOCAIXA.MVCXN2VLRCRED - MOVIMENTOCAIXA.MVCXN2VLRDEB' +
-        ' + MOVIMENTOCAIXA.MVCXN2VLRJURO + MOVIMENTOCAIXA.MVCXN2VLRMULTA)' +
-        ' as Saldo'
+        ') as Saldo'
       'from'
       '  MOVIMENTOCAIXA, OPERACAOCAIXA'
       'where'
@@ -1223,9 +1220,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       'select'
       '  MOVIMENTOCAIXA.NUMEICOD,'
       '  NUMERARIO.NUMEA30DESCR,'
-      
-        '  sum(MOVIMENTOCAIXA.MVCXN2VLRCRED + MOVIMENTOCAIXA.MVCXN2VLRJUR' +
-        'O + MOVIMENTOCAIXA.MVCXN2VLRMULTA) as VlrCredito,'
+      '  sum(MOVIMENTOCAIXA.MVCXN2VLRCRED) as VlrCredito,'
       '  sum(MOVIMENTOCAIXA.MVCXN2VLRDEB)  as VlrDebito'
       'from'
       '  MOVIMENTOCAIXA, NUMERARIO'
