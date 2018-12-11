@@ -1537,7 +1537,7 @@ begin
       if not VerificaLimiteCredito(SQLTemplateCLIEA13ID.AsString,ValorVenda,DM.SQLParcelas,DM.SQLCliente) then
         Abort;}
       ClienteCadastro := SQLTemplateCLIEA13ID.AsString;
-//      UsaPrecoVenda   := SQLTemplateCLIECTPPRCVENDA.AsString;
+      UsaPrecoVenda   := SQLTemplateCLIECTPPRCVENDA.AsString;
   {  end;   }
   inherited;
 end;
