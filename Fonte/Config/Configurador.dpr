@@ -100,7 +100,8 @@ uses
   uDebugEx in '..\..\Template\uDebugEx.pas',
   UnSoundPlay in '..\..\Template\UnSoundPlay.pas',
   TelaGerenciamentoAcesso in '..\..\Template\TelaGerenciamentoAcesso.pas' {FormTelaGerenciamentoAcesso},
-  CadastroConfigNotaServico in 'CadastroConfigNotaServico.pas' {FormCadastroNotaServico};
+  CadastroConfigNotaServico in 'CadastroConfigNotaServico.pas' {FormCadastroNotaServico},
+  CadastroInstrucaoBanco in 'CadastroInstrucaoBanco.pas' {FormCadastroInstrucaoBanco};
 
 {$R *.res}
 

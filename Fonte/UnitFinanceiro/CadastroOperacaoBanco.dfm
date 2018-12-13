@@ -1,6 +1,6 @@
 inherited FormCadastroOperacaoBanco: TFormCadastroOperacaoBanco
-  Left = 208
-  Top = 162
+  Left = 184
+  Top = 77
   Caption = 'Opera'#231#245'es Banc'#225'rias'
   OldCreateOrder = True
   PixelsPerInch = 96

@@ -171,6 +171,7 @@ type
     Parmetros2: TMenuItem;
     Servio2: TMenuItem;
     Parmetros3: TMenuItem;
+    InstruoBanco1: TMenuItem;
     procedure MnEmpresaClick(Sender: TObject);
     procedure MnTerminaisClick(Sender: TObject);
     procedure MnPlanosdeRecebimentoClick(Sender: TObject);
@@ -232,6 +233,7 @@ type
     procedure MnProfissionaisClick(Sender: TObject);
     procedure MnConfigRestClick(Sender: TObject);
     procedure Parmetros3Click(Sender: TObject);
+    procedure InstruoBanco1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -263,7 +265,7 @@ uses DataModulo, FormResources, CadastroEmpresa, CadastroCep,
   CadastroMotivoNFecVenda, CadastroPalm, CadastroEspecialidade,
   CadastroFeriados, CadastroMotivoNaoAtendimento, CadastroConfigAgenda,
   TelaGeracaoHorario, TelaManutHorario, CadastroProfissional,
-  TelaConfigRestaurante, CadastroConfigNotaServico;
+  TelaConfigRestaurante, CadastroConfigNotaServico, CadastroInstrucaoBanco;
 
 {$R *.dfm}
 
@@ -830,6 +832,15 @@ begin
   inherited;
   if DM.Acesso((Sender as TMenuItem).Name) > 0 then
     CriaFormulario(TFormCadastroNotaServico, 'FormCadastroNotaServico',False,False,True,'')
+  else
+    SoundPlay('Acesso Negado.wav',Sender);
+end;
+
+procedure TFormPrincipal.InstruoBanco1Click(Sender: TObject);
+begin
+  inherited;
+  if DM.Acesso((Sender as TMenuItem).Name) > 0 then
+    CriaFormulario(TFormCadastroInstrucaoBanco, 'FormCadastroInstrucaoBanco',False,False,True,'')
   else
     SoundPlay('Acesso Negado.wav',Sender);
 end;

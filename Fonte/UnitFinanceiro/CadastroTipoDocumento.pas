@@ -19,6 +19,9 @@ type
     DBEdit1: TDBEdit;
     Label2: TLabel;
     DBEdit2: TDBEdit;
+    SQLTemplateVLRTAXA: TFloatField;
+    SQLTemplateSOMA_QUITADO: TStringField;
+    dbrdbSomaFluxo: TDBRadioGroup;
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }

@@ -2030,6 +2030,7 @@ begin
                    Application.ProcessMessages;
                  end;
                end;
+             UsaPrecoVenda := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIECTPPRCVENDA', '''' + ClienteVenda + '''');
 
              {Solicita Vendedor}
              if dm.SQLTerminalAtivoTERMCSOLCODVEND.Value = 'S' then

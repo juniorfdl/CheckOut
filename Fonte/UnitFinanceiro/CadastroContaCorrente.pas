@@ -86,11 +86,23 @@ type
     SQLTemplateLOTEREMESSABANCO: TIntegerField;
     DBEdit15: TDBEdit;
     Label18: TLabel;
+    Label21: TLabel;
+    DBEdit16: TDBEdit;
+    RetornaInstrucao: TSpeedButton;
+    DBEdit17: TDBEdit;
+    SQLTemplateCTRCINOSSONUMERO: TIntegerField;
+    SQLTemplateCODIGO: TStringField;
+    SQLTemplateNomeInstrucaoCalcFields: TStringField;
+    Label22: TLabel;
+    DBEdit18: TDBEdit;
+    SQLTemplateDIAS_PROTESTO: TIntegerField;
     procedure FormCreate(Sender: TObject);
     procedure SQLTemplateCalcFields(DataSet: TDataSet);
     procedure RetornaBancoClick(Sender: TObject);
     procedure SQLTemplateNewRecord(DataSet: TDataSet);
     procedure DBEdit1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure DBEdit16KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
   private
     { Private declarations }
@@ -103,7 +115,7 @@ var
 
 implementation
 
-uses UnitLibrary, CadastroBanco;
+uses UnitLibrary, CadastroBanco, CadastroInstrucaoBanco;
 
 {$R *.dfm}
 
@@ -119,14 +131,15 @@ procedure TFormCadastroContaCorrente.SQLTemplateCalcFields(
 begin
   inherited;
   SQLTemplateBancoCalcField.AsString := SQLLocate('BANCO', 'BANCA5COD', 'BANCA60NOME', '"' + SQLTemplateBANCA5COD.AsString + '"') ;
+  SQLTemplateNomeInstrucaoCalcFields.AsString := SQLLocate('INSTRUCAO_BANCO', 'CODIGO', 'DESCRICAO', '"' + SQLTemplateCODIGO.AsString + '"') ;
 end;
 
 procedure TFormCadastroContaCorrente.RetornaBancoClick(Sender: TObject);
 begin
   inherited;
-  FieldLookup := DsTemplate.DataSet.FieldByName('BANCA5COD') ;
-  FieldOrigem := 'BANCA5COD' ;
-  CriaFormulario(TFormCadastroBanco, 'FormCadastroBanco',False,True,True,'');
+  FieldLookup := DsTemplate.DataSet.FieldByName('CODIGO') ;
+  FieldOrigem := 'CODIGO' ;
+  CriaFormulario(TFormCadastroInstrucaoBanco, 'FormCadastroInstrucaoBanco',False,True,True,'');
 end;
 
 procedure TFormCadastroContaCorrente.SQLTemplateNewRecord(DataSet: TDataSet);
@@ -141,6 +154,15 @@ begin
   inherited;
   if Key = VK_F2 then
     RetornaBanco.Click;
+end;
+
+procedure TFormCadastroContaCorrente.DBEdit16KeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  inherited;
+  if Key = VK_F2 then
+    RetornaInstrucao.Click;
+
 end;
 
 end.

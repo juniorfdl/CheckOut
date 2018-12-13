@@ -1160,6 +1160,12 @@ type
     SQLProduto_DescontosPRECO: TFloatField;
     SQLProduto_DescontosDATA_VALIDADE: TDateTimeField;
     SQLTerminalAtivoVALOR_LIMITE_SANGRIA: TFloatField;
+    SQLCupomItemCPITN2VLRPIS: TFloatField;
+    SQLCupomItemCPITN2VLRCOFINS: TFloatField;
+    SQLCupomItemALIQUOTA_PIS: TFloatField;
+    SQLCupomItemVLR_BASE_PIS: TFloatField;
+    SQLCupomItemALIQUOTA_COFINS: TFloatField;
+    SQLCupomItemVLR_BASE_COFINS: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure SQLCupomNewRecord(DataSet: TDataSet);
     procedure SQLCupomBeforePost(DataSet: TDataSet);
@@ -1329,8 +1335,8 @@ begin
   DataSistema := StrToDate(FormatDateTime('dd/mm/yyyy', DataSistema));
   GetDataValidadeSistema;
 
-//  if DelphiAberto then
-//    ACBrNFe.Configuracoes.WebServices.Ambiente := taHomologacao;
+  if DelphiAberto then
+    ACBrNFe.Configuracoes.WebServices.Ambiente := taHomologacao;
 
   if sqlEmpresa.FieldByName('VERSAO').AsString = '4' then
     ACBrNFe.Configuracoes.Geral.VersaoDF := ve400

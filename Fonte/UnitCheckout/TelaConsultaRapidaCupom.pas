@@ -8,7 +8,7 @@ uses
   Buttons, Mask, ToolEdit, AdvGlowButton, DBClient, cxStyles, cxCustomData,
   cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit, cxDBData,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridLevel,
-  cxClasses, cxControls, cxGridCustomView, cxGrid;
+  cxClasses, cxControls, cxGridCustomView, cxGrid, DBCtrls;
 
 type
   TFormTelaConsultaRapidaCupom = class(TForm)
@@ -69,6 +69,9 @@ type
     procedure cxGrid1DBTableView1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure cxGrid1DBTableView1SelecionarHeaderClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure edtDataInicialExit(Sender: TObject);
+    procedure edtDataFinalExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -77,6 +80,7 @@ type
     TempoLimite, TempoIntervalo: Integer;
     RetornoCartao : TInfoRetorno;
     DadosImpressora : TInfoImpressao;
+    Cancelamento : Boolean;
   end;
 
 var
@@ -215,6 +219,7 @@ begin
     try
       if cdsCupomSelecionar.Value then
       begin
+        Imprimir_Nfce := False;
         FormTelaItens.Transmite_NFCe(cdsCupomCUPOA13ID.Value);
         Inc(vCupomOK);
       end;
@@ -229,7 +234,7 @@ begin
     end;
     cdsCupom.Next;
   end;
-
+  Imprimir_Nfce := True;
   ShowMessage('Cupom(s) Enviado(s): ' + FormatFloat('000', vCupomOK)
     + sLineBreak +'Cupom(s) não Enviado(s): '+ FormatFloat('000', vCupomNaoOK));
 
@@ -238,7 +243,11 @@ end;
 procedure TFormTelaConsultaRapidaCupom.cxGrid1DBTableView1KeyDown(
   Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-  if Key = VK_RETURN then  ModalResult := mrOk;
+  if Key = VK_RETURN then
+  begin
+   SQLCupom.locate('CUPOA13ID', cdsCupomCUPOA13ID.Value, []); 
+   ModalResult := mrOk;
+  end;
   if Key = VK_ESCAPE then  ModalResult := mrCancel;
 end;
 
@@ -259,6 +268,24 @@ begin
     cdsCupom.EnableControls;
   end;
 
+end;
+
+procedure TFormTelaConsultaRapidaCupom.FormShow(Sender: TObject);
+begin
+  btnEnviarTodos.Enabled := not Cancelamento;
+  btTransmite.Enabled    := not Cancelamento;
+  BtInutilizarNFCE.Enabled := not Cancelamento;
+  cxGrid1.SetFocus;
+end;
+
+procedure TFormTelaConsultaRapidaCupom.edtDataInicialExit(Sender: TObject);
+begin
+  AbrirDadosCupom;
+end;
+
+procedure TFormTelaConsultaRapidaCupom.edtDataFinalExit(Sender: TObject);
+begin
+ AbrirDadosCupom;
 end;
 
 end.

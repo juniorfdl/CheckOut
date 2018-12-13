@@ -1,6 +1,6 @@
 inherited FormCadastroBanco: TFormCadastroBanco
-  Left = 3
-  Top = 36
+  Left = 238
+  Top = 111
   Caption = 'Cadastro de Bancos'
   ClientHeight = 484
   ClientWidth = 793

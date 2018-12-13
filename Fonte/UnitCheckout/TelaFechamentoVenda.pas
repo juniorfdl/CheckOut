@@ -5181,6 +5181,7 @@ var
   GravouItem : Boolean;
   Tentativa : integer;
   IniFile: TiniFile;
+  Associado : String;
 begin
   FormTelaItens.SQLItensVendaTemp.First;
   while not FormTelaItens.SQLItensVendaTemp.EOF do
@@ -5203,6 +5204,7 @@ begin
     GravouItem := False;
     if (copy(EcfAtual,1,4) = 'NFCE') and (FormTelaItens.SQLItensVendaTempCANCELADO.Value = 'S') then
       Tentativa := 9;
+    Associado := SQLLocate('CLIENTE', 'CLIEA13ID', 'ASSOCIADO', ClienteVenda);
 
     while not GravouItem and (Tentativa < 4) do
       begin
@@ -5272,6 +5274,16 @@ begin
             DM.SQLCupomItemVENDICOD.Value := VendedorVenda;
 
         DM.SQLCupomItemCOITN2ICMSALIQ.AsFloat  := FormTelaItens.SQLItensVendaTempALIQUOTA.AsFloat;
+
+        if Associado <> 'S' then
+        begin
+          DM.SQLCupomItemCPITN2VLRPIS.AsFloat    := FormTelaItens.SQLItensVendaTempVALORPIS.AsFloat;
+          DM.SQLCupomItemALIQUOTA_PIS.AsFloat    := FormTelaItens.SQLItensVendaTempALIQUOTAPIS.AsFloat;
+          DM.SQLCupomItemVLR_BASE_PIS.AsFloat    := FormTelaItens.SQLItensVendaTempVLR_BASE_PIS.AsFloat;
+          DM.SQLCupomItemCPITN2VLRCOFINS.AsFloat := FormTelaItens.SQLItensVendaTempVALORCOFINS.AsFloat;
+          DM.SQLCupomItemALIQUOTA_COFINS.AsFloat := FormTelaItens.SQLItensVendaTempALIQUOTACOFINS.AsFloat;
+          DM.SQLCupomItemVLR_BASE_COFINS.AsFloat := FormTelaItens.SQLItensVendaTempVLR_BASE_COFINS.AsFloat;
+        end;
 
         if (FormTelaItens.SQLItensVendaTempTROCA.Value <> 'S') then
           begin

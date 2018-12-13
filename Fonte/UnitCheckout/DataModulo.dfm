@@ -5,6 +5,7 @@ inherited DM: TDM
   Height = 744
   Width = 1382
   inherited DB: TDatabase
+    Connected = False
     AfterConnect = DBAfterConnect
     Left = 32
     Top = 8
@@ -2150,7 +2151,7 @@ inherited DM: TDM
         Value = '0=0'
       end>
     Left = 392
-    Top = 97
+    Top = 96
     object SQLCupomItemCUPOA13ID: TStringField
       FieldName = 'CUPOA13ID'
       Origin = 'DB.CUPOMITEM.CUPOA13ID'
@@ -2298,6 +2299,30 @@ inherited DM: TDM
       Origin = 'DB.CUPOMITEM.CPITN3QTD'
       DisplayFormat = '0.,00##'
       EditFormat = '0.00##'
+    end
+    object SQLCupomItemCPITN2VLRPIS: TFloatField
+      FieldName = 'CPITN2VLRPIS'
+      Origin = 'DB.CUPOMITEM.CPITN2VLRPIS'
+    end
+    object SQLCupomItemCPITN2VLRCOFINS: TFloatField
+      FieldName = 'CPITN2VLRCOFINS'
+      Origin = 'DB.CUPOMITEM.CPITN2VLRCOFINS'
+    end
+    object SQLCupomItemALIQUOTA_PIS: TFloatField
+      FieldName = 'ALIQUOTA_PIS'
+      Origin = 'DB.CUPOMITEM.ALIQUOTA_PIS'
+    end
+    object SQLCupomItemVLR_BASE_PIS: TFloatField
+      FieldName = 'VLR_BASE_PIS'
+      Origin = 'DB.CUPOMITEM.VLR_BASE_PIS'
+    end
+    object SQLCupomItemALIQUOTA_COFINS: TFloatField
+      FieldName = 'ALIQUOTA_COFINS'
+      Origin = 'DB.CUPOMITEM.ALIQUOTA_COFINS'
+    end
+    object SQLCupomItemVLR_BASE_COFINS: TFloatField
+      FieldName = 'VLR_BASE_COFINS'
+      Origin = 'DB.CUPOMITEM.VLR_BASE_COFINS'
     end
   end
   object DSSQLCupomItem: TDataSource
