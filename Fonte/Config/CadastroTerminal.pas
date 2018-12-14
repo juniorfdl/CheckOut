@@ -292,6 +292,8 @@ type
     SQLTemplateVALOR_LIMITE_SANGRIA: TFloatField;
     DBEdit20: TDBEdit;
     Label3: TLabel;
+    DBCheckBox6: TDBCheckBox;
+    SQLTemplateALTERA_NOSSO_NUMERO: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure SQLTemplateCalcFields(DataSet: TDataSet);
     procedure RetornaEmpresaClick(Sender: TObject);

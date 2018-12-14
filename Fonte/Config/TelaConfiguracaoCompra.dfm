@@ -1,6 +1,6 @@
 inherited FormTelaConfiguracaoCompra: TFormTelaConfiguracaoCompra
-  Left = 383
-  Top = 161
+  Left = 260
+  Top = 97
   Caption = 'Configura'#231#245'es de Compra'
   OldCreateOrder = True
   PixelsPerInch = 96
@@ -107,7 +107,7 @@ inherited FormTelaConfiguracaoCompra: TFormTelaConfiguracaoCompra
           Left = 6
           Top = 13
           Width = 312
-          Height = 21
+          Height = 17
           Caption = 'Verificar se o Total da Nota '#233' Igual ao dos Produtos'
           DataField = 'CFCOCTESTAITENSNFE'
           DataSource = DSSQLConfigCompra
@@ -125,7 +125,7 @@ inherited FormTelaConfiguracaoCompra: TFormTelaConfiguracaoCompra
           Left = 6
           Top = 31
           Width = 317
-          Height = 21
+          Height = 17
           Caption = 'Excluir Pedido de Compra Depois Importado na Nota'
           DataField = 'CFCOCEXCLUIPEDENT'
           DataSource = DSSQLConfigCompra
@@ -141,9 +141,9 @@ inherited FormTelaConfiguracaoCompra: TFormTelaConfiguracaoCompra
         end
         object DBCheckBox7: TDBCheckBox
           Left = 6
-          Top = 68
+          Top = 69
           Width = 305
-          Height = 21
+          Height = 17
           Caption = 'Testar se Produto Pertence ao Fornecedor da Nota'
           DataField = 'CFCOCTESTPRODFORN'
           DataSource = DSSQLConfigCompra
@@ -159,9 +159,9 @@ inherited FormTelaConfiguracaoCompra: TFormTelaConfiguracaoCompra
         end
         object DBCheckBox9: TDBCheckBox
           Left = 6
-          Top = 86
+          Top = 87
           Width = 305
-          Height = 21
+          Height = 18
           Caption = 'Informa Dados do Frete'
           DataField = 'CFCOCINFDADOSFRETE'
           DataSource = DSSQLConfigCompra
@@ -177,9 +177,9 @@ inherited FormTelaConfiguracaoCompra: TFormTelaConfiguracaoCompra
         end
         object DBCheckBox10: TDBCheckBox
           Left = 6
-          Top = 49
+          Top = 50
           Width = 317
-          Height = 21
+          Height = 17
           Caption = 'N'#227'o Importar os Itens do Pedido para a Nf.Compra'
           DataField = 'CFCOCNIMPFINPEDCOMP'
           DataSource = DSSQLConfigCompra
@@ -331,9 +331,9 @@ inherited FormTelaConfiguracaoCompra: TFormTelaConfiguracaoCompra
         end
         object DBCheckBox3: TDBCheckBox
           Left = 6
-          Top = 23
+          Top = 20
           Width = 296
-          Height = 21
+          Height = 17
           Caption = 'Altera Pre'#231'o de Compra pela NF Compra'
           DataField = 'CFCOCALTVLRCOMPRA'
           DataSource = DSSQLConfigCompra
@@ -349,9 +349,9 @@ inherited FormTelaConfiguracaoCompra: TFormTelaConfiguracaoCompra
         end
         object DBCheckBox4: TDBCheckBox
           Left = 6
-          Top = 40
+          Top = 38
           Width = 289
-          Height = 21
+          Height = 17
           Caption = 'Altera Pre'#231'o de Custo pela NF Compra'
           DataField = 'CFCOCALTVLRCUSTO'
           DataSource = DSSQLConfigCompra
@@ -367,9 +367,9 @@ inherited FormTelaConfiguracaoCompra: TFormTelaConfiguracaoCompra
         end
         object DBCheckBox5: TDBCheckBox
           Left = 6
-          Top = 57
+          Top = 56
           Width = 404
-          Height = 21
+          Height = 17
           Caption = 'Altera % de de IPI, ST, DIF ICMS, FRETE, DESP pela NF Compra'
           DataField = 'CFCOCALTPERCIPI'
           DataSource = DSSQLConfigCompra
@@ -403,9 +403,9 @@ inherited FormTelaConfiguracaoCompra: TFormTelaConfiguracaoCompra
         end
         object DBCheckBox2: TDBCheckBox
           Left = 6
-          Top = 77
+          Top = 75
           Width = 289
-          Height = 15
+          Height = 17
           Caption = 'Altera Pre'#231'o de Venda na Entrada dos Produtos'
           DataField = 'CFCOCALTPRCPRODENT'
           DataSource = DSSQLConfigCompra
@@ -423,7 +423,7 @@ inherited FormTelaConfiguracaoCompra: TFormTelaConfiguracaoCompra
           Left = 6
           Top = 93
           Width = 406
-          Height = 15
+          Height = 17
           Caption = 
             'N'#227'o alterar quando os valores da nota forem menores que os atuai' +
             's'

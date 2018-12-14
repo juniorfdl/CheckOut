@@ -721,7 +721,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
               end
               object Label3: TLabel
                 Left = 6
-                Top = 382
+                Top = 415
                 Width = 126
                 Height = 13
                 Caption = 'Valor Limite p/Sangria'
@@ -959,7 +959,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 Left = 2
                 Top = 189
                 Width = 655
-                Height = 189
+                Height = 219
                 Caption = 'Par'#226'metros'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = 8404992
@@ -990,7 +990,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object ImpConfDiv: TDBCheckBox
                   Left = 4
-                  Top = 67
+                  Top = 71
                   Width = 284
                   Height = 12
                   Caption = 'Imprimir Confiss'#227'o D'#237'vida'
@@ -1011,7 +1011,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object ImpCDBarrasPrevenda: TDBCheckBox
                   Left = 4
-                  Top = 28
+                  Top = 29
                   Width = 284
                   Height = 12
                   Caption = 'Imprimir C'#243'digo Barras not Ticket da Pr'#233'-Venda'
@@ -1031,7 +1031,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object ImpCheque: TDBCheckBox
                   Left = 4
-                  Top = 41
+                  Top = 43
                   Width = 284
                   Height = 12
                   Caption = 'Imprimir Cheque'
@@ -1052,7 +1052,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object ConfirmaImpCarne: TDBCheckBox
                   Left = 294
-                  Top = 68
+                  Top = 70
                   Width = 191
                   Height = 12
                   Caption = 'Confirma Impress'#227'o de Carn'#234
@@ -1092,7 +1092,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object OcultarVendCliPlano: TDBCheckBox
                   Left = 4
-                  Top = 148
+                  Top = 154
                   Width = 284
                   Height = 12
                   Caption = 'Ocultar Cliente, Plano e Vendedor no PDV'
@@ -1112,7 +1112,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object ImpDadosInternosCupom: TDBCheckBox
                   Left = 4
-                  Top = 54
+                  Top = 57
                   Width = 284
                   Height = 12
                   Caption = 'Imprimir Dados Internos no Cupom'
@@ -1132,7 +1132,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object MovEstoque: TDBCheckBox
                   Left = 294
-                  Top = 107
+                  Top = 111
                   Width = 182
                   Height = 12
                   Caption = 'Movimentar Estoque on Line'
@@ -1152,7 +1152,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object ConfirmaEncerramentoCupom: TDBCheckBox
                   Left = 294
-                  Top = 55
+                  Top = 56
                   Width = 274
                   Height = 12
                   Caption = 'Confirma o Encerramento do Cupom'
@@ -1172,7 +1172,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object MostraIDCupomNoFechamento: TDBCheckBox
                   Left = 294
-                  Top = 94
+                  Top = 98
                   Width = 237
                   Height = 12
                   Caption = 'Mostra ID do Cupom no Encerramento'
@@ -1192,7 +1192,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object InformaDadosClienteNoFechamento: TDBCheckBox
                   Left = 294
-                  Top = 81
+                  Top = 84
                   Width = 256
                   Height = 12
                   Caption = 'Informa Dados do Cliente no Fechamento'
@@ -1212,7 +1212,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object AutenticImpMatricial: TDBCheckBox
                   Left = 294
-                  Top = 14
+                  Top = 13
                   Width = 274
                   Height = 14
                   Caption = 'Autenticar em Impressora Matricial'
@@ -1232,7 +1232,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object ImpEntradaCarne: TDBCheckBox
                   Left = 4
-                  Top = 122
+                  Top = 126
                   Width = 284
                   Height = 12
                   Caption = 'Imprimir Entrada no Carn'#234
@@ -1272,7 +1272,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object ImpComprovComTotalRecto: TDBCheckBox
                   Left = 4
-                  Top = 135
+                  Top = 140
                   Width = 284
                   Height = 12
                   Caption = 'Imprimir Comprovante com Total no Recebimento'
@@ -1292,7 +1292,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object InfDadosCartaoCred: TDBCheckBox
                   Left = 294
-                  Top = 120
+                  Top = 125
                   Width = 189
                   Height = 12
                   Caption = 'Informa dados Cart'#227'o Cr'#233'dito'
@@ -1312,7 +1312,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object InformaTrocoDestaqueCupom: TDBCheckBox
                   Left = 4
-                  Top = 161
+                  Top = 168
                   Width = 284
                   Height = 12
                   Caption = 'Mostrar Troco em Destaque no Encerramento'
@@ -1332,7 +1332,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object CheckVendInicioVenda: TDBCheckBox
                   Left = 294
-                  Top = 160
+                  Top = 166
                   Width = 284
                   Height = 12
                   Caption = 'Solicita Vendedor ao iniciar venda PDV'
@@ -1352,7 +1352,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object DBCheckBox2: TDBCheckBox
                   Left = 294
-                  Top = 133
+                  Top = 139
                   Width = 221
                   Height = 12
                   Caption = 'Sim - Na impress'#227'o das Pr'#233'-Vendas'
@@ -1372,7 +1372,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object DBCheckBox3: TDBCheckBox
                   Left = 294
-                  Top = 147
+                  Top = 152
                   Width = 266
                   Height = 12
                   Caption = 'Movimentar Estoque ao Fechar o Caixa PDV'
@@ -1392,9 +1392,9 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object CheckMostraPAtacadoPDV: TDBCheckBox
                   Left = 294
-                  Top = 173
+                  Top = 180
                   Width = 264
-                  Height = 12
+                  Height = 19
                   Caption = 'Mostra Preco Atacado no Tira-Teima PDV'
                   Ctl3D = False
                   DataField = 'TERMCMPATACADO'
@@ -1412,7 +1412,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object ImpConfDivPerg: TDBCheckBox
                   Left = 20
-                  Top = 79
+                  Top = 85
                   Width = 237
                   Height = 12
                   Caption = 'Perguntar Antes de Imprimir'
@@ -1432,7 +1432,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object ImpConfDivItens: TDBCheckBox
                   Left = 20
-                  Top = 93
+                  Top = 99
                   Width = 245
                   Height = 12
                   Caption = 'Imprimir Itens Vendidos na Confiss'#227'o'
@@ -1452,7 +1452,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object ImpConfDivFat: TDBCheckBox
                   Left = 20
-                  Top = 107
+                  Top = 112
                   Width = 249
                   Height = 12
                   Caption = 'Imprimir Faturamento na Confiss'#227'o'
@@ -1472,9 +1472,9 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object DBCheckBox4: TDBCheckBox
                   Left = 4
-                  Top = 174
+                  Top = 182
                   Width = 278
-                  Height = 12
+                  Height = 17
                   Caption = 'Movimenta Estoque (Saida) na Transferencia'
                   Ctl3D = False
                   DataField = 'TERMCMOVTRANSF'
@@ -1492,7 +1492,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object DBCheckBox5: TDBCheckBox
                   Left = 513
-                  Top = 112
+                  Top = 109
                   Width = 140
                   Height = 14
                   Caption = 'Imprimir dos Tablets'
@@ -1507,6 +1507,26 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   ParentCtl3D = False
                   ParentFont = False
                   TabOrder = 26
+                  ValueChecked = 'S'
+                  ValueUnchecked = 'N'
+                end
+                object DBCheckBox6: TDBCheckBox
+                  Left = 4
+                  Top = 198
+                  Width = 278
+                  Height = 17
+                  Caption = 'Permite alterar Nosso N'#250'mero'
+                  Ctl3D = False
+                  DataField = 'ALTERA_NOSSO_NUMERO'
+                  DataSource = DSTemplate
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clRed
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = [fsBold]
+                  ParentCtl3D = False
+                  ParentFont = False
+                  TabOrder = 27
                   ValueChecked = 'S'
                   ValueUnchecked = 'N'
                 end
@@ -1828,7 +1848,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
               end
               object DBEdit20: TDBEdit
                 Left = 2
-                Top = 395
+                Top = 428
                 Width = 134
                 Height = 19
                 Ctl3D = False
@@ -3657,6 +3677,12 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
       FieldName = 'VALOR_LIMITE_SANGRIA'
       Origin = 'DB.TERMINAL.VALOR_LIMITE_SANGRIA'
       DisplayFormat = '##0.00'
+    end
+    object SQLTemplateALTERA_NOSSO_NUMERO: TStringField
+      FieldName = 'ALTERA_NOSSO_NUMERO'
+      Origin = 'DB.TERMINAL.ALTERA_NOSSO_NUMERO'
+      FixedChar = True
+      Size = 1
     end
   end
   inherited UpdateSQLTemplate: TUpdateSQL
