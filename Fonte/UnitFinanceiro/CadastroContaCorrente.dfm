@@ -1,46 +1,54 @@
 inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
-  Left = 301
-  Top = 86
+  Left = 219
+  Top = 52
   Caption = 'Contas Correntes'
-  ClientWidth = 760
+  ClientHeight = 579
+  ClientWidth = 844
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited ScrollBoxFundo: TScrollBox
-    Width = 760
+    Width = 844
+    Height = 579
     inherited PanelCabecalho: TPanel
-      Width = 758
+      Width = 842
       inherited ScrollBoxPanelCabecalho: TScrollBox
-        Width = 758
+        Width = 842
         inherited Panel1: TPanel
-          Width = 756
+          Width = 840
           inherited PanelNavigator: TPanel
-            Width = 756
+            Width = 840
             inherited AdvPanelNavigator: TAdvOfficeStatusBar
-              Width = 756
+              Width = 840
             end
           end
           inherited PanelLeft: TPanel
-            Left = 299
+            Left = 383
           end
         end
       end
     end
     inherited PanelCentral: TPanel
-      Width = 758
+      Width = 842
+      Height = 505
+      inherited PanelBarra: TPanel
+        Height = 505
+      end
       inherited PanelFundoDados: TPanel
-        Width = 628
+        Width = 712
+        Height = 505
         inherited Panel5: TPanel
-          Width = 628
+          Width = 712
+          Height = 505
           inherited PagePrincipal: TPageControl
             Top = 132
-            Width = 628
-            Height = 317
+            Width = 712
+            Height = 373
             ActivePage = TabSheetDadosPrincipais
             inherited TabSheetConsulta: TTabSheet
               inherited DBGridLista: TDBGrid
-                Width = 620
-                Height = 244
+                Width = 704
+                Height = 300
                 Columns = <
                   item
                     Expanded = False
@@ -92,18 +100,18 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
                   end>
               end
               inherited PanelProcura: TPanel
-                Width = 620
+                Width = 704
                 inherited PanelBetween: TPanel
-                  Width = 226
+                  Width = 310
                   inherited AdvPanel1: TAdvPanel
-                    Width = 226
+                    Width = 310
                     FullHeight = 0
                   end
                 end
                 inherited PanelEditProcura: TPanel
-                  Width = 226
+                  Width = 310
                   inherited AdvPanelEditProcura: TAdvPanel
-                    Width = 226
+                    Width = 310
                     FullHeight = 0
                   end
                 end
@@ -224,6 +232,19 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
                   00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
                   0000}
                 OnClick = RetornaBancoClick
+              end
+              object Label23: TLabel
+                Left = 8
+                Top = 279
+                Width = 170
+                Height = 13
+                Caption = 'Valor Limite para Gerar Boleto'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = 8404992
+                Font.Height = -11
+                Font.Name = 'Tahoma'
+                Font.Style = [fsBold]
+                ParentFont = False
               end
               object DBEdit4: TDBEdit
                 Left = 12
@@ -596,15 +617,25 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
                 ParentFont = False
                 TabOrder = 7
               end
+              object DBEdit19: TDBEdit
+                Left = 8
+                Top = 291
+                Width = 174
+                Height = 21
+                TabStop = False
+                DataField = 'VALOR_LIMITE_BOLETO'
+                DataSource = DSTemplate
+                TabOrder = 8
+              end
             end
           end
           inherited PanelMaster: TPanel
             Top = 117
-            Width = 628
+            Width = 712
             Height = 15
           end
           inherited PanelCodigoDescricao: TPanel
-            Width = 628
+            Width = 712
             Height = 117
             object Label1: TLabel
               Left = 4
@@ -1035,6 +1066,11 @@ inherited FormCadastroContaCorrente: TFormCadastroContaCorrente
     object SQLTemplateDIAS_PROTESTO: TIntegerField
       FieldName = 'DIAS_PROTESTO'
       Origin = 'DB.CONTACORRENTE.DIAS_PROTESTO'
+    end
+    object SQLTemplateVALOR_LIMITE_BOLETO: TFloatField
+      FieldName = 'VALOR_LIMITE_BOLETO'
+      Origin = 'DB.CONTACORRENTE.VALOR_LIMITE_BOLETO'
+      DisplayFormat = '##0.00'
     end
   end
   object SQLEmpresa: TRxQuery

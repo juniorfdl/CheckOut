@@ -284,12 +284,6 @@ type
     RxLabel8: TRxLabel;
     LBSaldo: TRxLabel;
     SQLProdutoPESAGEM_AUTOMATICA: TStringField;
-    SQLItensVendaTempVALORPIS: TFloatField;
-    SQLItensVendaTempVALORCOFINS: TFloatField;
-    SQLItensVendaTempALIQUOTAPIS: TFloatField;
-    SQLItensVendaTempALIQUOTACOFINS: TFloatField;
-    SQLItensVendaTempVLR_BASE_PIS: TFloatField;
-    SQLItensVendaTempVLR_BASE_COFINS: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure EntradaDadosKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -2643,7 +2637,7 @@ begin
         end;
 
         //CALCULA COFINS
-        if (SQLProdutoPRODA2CSTCOFINS.Value = '07') or (SQLProdutoPRODA2CSTCOFINS.Value = '08') or (SQLProdutoPRODA2CSTCOFINS.Value = '06') or
+{        if (SQLProdutoPRODA2CSTCOFINS.Value = '07') or (SQLProdutoPRODA2CSTCOFINS.Value = '08') or (SQLProdutoPRODA2CSTCOFINS.Value = '06') or
            (SQLProdutoPRODA2CSTCOFINS.Value = '09') or (SQLProdutoPRODA2CSTCOFINS.Value = '49') or (SQLProdutoPRODA2CSTCOFINS.Value = '04') then
         begin
           SQLItensVendaTempVALORCOFINS.asFloat := 0;
@@ -2670,7 +2664,7 @@ begin
           SQLItensVendaTempALIQUOTAPIS.AsFloat := SQLProdutoPRODN2ALIQPIS.AsFloat;
           SQLItensVendaTempVLR_BASE_PIS.AsFloat := SQLItensVendaTempVLRTOTAL.AsFloat - SQLItensVendaTempVLRDESC.AsFloat;
           SQLItensVendaTempVALORPIS.asFloat := SQLItensVendaTempVLR_BASE_PIS.AsFloat * (SQLItensVendaTempALIQUOTAPIS.AsFloat / 100);
-        end;
+        end;}
 
         if DM.SQLConfigCompraCFCOCTOTPRCVENPROD.AsString <> '' then
         begin
@@ -4181,7 +4175,6 @@ begin
           //IMPRIMIR VENDA
         'X': begin {Cttl X}
             DocumentoClienteVenda := '';
-            Exec_SP_ACERTO_TOTAL_CUPOM;
             if (ECFAtual <> '') then
             begin
               if not Pergunta('SIM', 'Imprimir Cupom da Ultima Venda ou Consultar Vendas Anteriores?') then
@@ -6783,7 +6776,7 @@ begin
       Application.ProcessMessages; end;
   end;
   if (dm.sqlterminalativoTERMCSOLCODVEND.value = 'S') then
-    if (VendedorVenda > 0) then
+    if (VendedorVenda > 0) and (SQLLocate('VENDEDOR', 'VENDICOD', 'VENDCATIVO', IntToStr(VendedorVenda)) <> 'N') then
     begin
       rxVendedor.Visible := True;
       rxVendedor.Caption := SQLLocate('VENDEDOR', 'VENDICOD', 'VENDA60NOME', IntToStr(VendedorVenda));
@@ -6791,6 +6784,7 @@ begin
     end
     else
     begin
+      VendedorVenda := 0;
       rxVendedor.Caption := 'Não Encontrado';
       rxVendedor.Update;
     end;

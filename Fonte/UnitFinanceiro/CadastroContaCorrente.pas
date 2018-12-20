@@ -96,6 +96,9 @@ type
     Label22: TLabel;
     DBEdit18: TDBEdit;
     SQLTemplateDIAS_PROTESTO: TIntegerField;
+    Label23: TLabel;
+    DBEdit19: TDBEdit;
+    SQLTemplateVALOR_LIMITE_BOLETO: TFloatField;
     procedure FormCreate(Sender: TObject);
     procedure SQLTemplateCalcFields(DataSet: TDataSet);
     procedure RetornaBancoClick(Sender: TObject);

@@ -808,7 +808,8 @@ begin
           DM.SQLTemplate.SQL.Clear ;
           DM.SQLTemplate.SQL.Add('select * from VENDEDOR') ;
           DM.SQLTemplate.SQL.Add('where') ;
-          DM.SQLTemplate.SQL.Add('VENDICOD = ' + EntradaDados.text) ;
+          DM.SQLTemplate.SQL.Add('VENDICOD = ' + EntradaDados.text);
+          DM.SQLTemplate.SQL.Add(' AND VENDCATIVO <> ' + QuotedStr('N')); ;
           DM.SQLTemplate.Open ;
 
           DM.SQLTemplate.First ;
@@ -5275,7 +5276,7 @@ begin
 
         DM.SQLCupomItemCOITN2ICMSALIQ.AsFloat  := FormTelaItens.SQLItensVendaTempALIQUOTA.AsFloat;
 
-        if Associado <> 'S' then
+{        if Associado <> 'S' then
         begin
           DM.SQLCupomItemCPITN2VLRPIS.AsFloat    := FormTelaItens.SQLItensVendaTempVALORPIS.AsFloat;
           DM.SQLCupomItemALIQUOTA_PIS.AsFloat    := FormTelaItens.SQLItensVendaTempALIQUOTAPIS.AsFloat;
@@ -5283,7 +5284,7 @@ begin
           DM.SQLCupomItemCPITN2VLRCOFINS.AsFloat := FormTelaItens.SQLItensVendaTempVALORCOFINS.AsFloat;
           DM.SQLCupomItemALIQUOTA_COFINS.AsFloat := FormTelaItens.SQLItensVendaTempALIQUOTACOFINS.AsFloat;
           DM.SQLCupomItemVLR_BASE_COFINS.AsFloat := FormTelaItens.SQLItensVendaTempVLR_BASE_COFINS.AsFloat;
-        end;
+        end;}
 
         if (FormTelaItens.SQLItensVendaTempTROCA.Value <> 'S') then
           begin
