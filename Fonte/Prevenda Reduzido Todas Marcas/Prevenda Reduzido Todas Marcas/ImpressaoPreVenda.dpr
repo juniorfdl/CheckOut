@@ -1,5 +1,8 @@
 program ImpressaoPreVenda;
 
+{%File 'ECF deve estar em Estado de "Venda", "Pagamento"'}
+{%File 'ECF deve estar em Estado de "Venda", "Pagamento"'}
+
 uses
   Forms,
   Principal in 'Principal.pas' {FormPrincipal};

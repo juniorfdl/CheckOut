@@ -14,7 +14,7 @@ uses
   ACBrBAL, ACBrPosPrinter, ACBrNFeDANFEClass, ACBrNFeDANFeESCPOS, ACBrDFe,
   ACBrNFe, pcnConversao, ACBrUtil, ACBrMail, ACBrNFeDANFeRLClass, ACBrDevice,
   ZAbstractConnection, DBClient, RestClient, RestUtils, pcnConversaoNFe,
-  ACBrDFeReport, ACBrDFeDANFeReport;
+  ACBrDFeReport, ACBrDFeDANFeReport, Principal;
 
 type
   TDM = class(TDMTemplate)

@@ -1,11 +1,11 @@
 object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
-  Left = 48
-  Top = 14
+  Left = -8
+  Top = -8
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'acbr'
-  ClientHeight = 742
-  ClientWidth = 1362
+  ClientHeight = 705
+  ClientWidth = 1366
   Color = 14731440
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,6 +18,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
   OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
@@ -26,12 +27,15 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
     Left = 150
     Top = 0
     Width = 1022
-    Height = 742
+    Height = 705
     Align = alLeft
     BorderStyle = bsNone
     Color = 5278518
     ParentColor = False
     TabOrder = 3
+    DesignSize = (
+      1022
+      705)
     object LblNomeSistema: TRxLabel
       Left = 0
       Top = 0
@@ -1422,7 +1426,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       object LblVendedor: TRxLabel
         Left = 28
         Top = 91
-        Width = 92
+        Width = 91
         Height = 20
         Caption = 'Vendedor:'
         Color = 10567680
@@ -1519,7 +1523,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       object LblBonusTroca: TRxLabel
         Left = 569
         Top = 91
-        Width = 115
+        Width = 113
         Height = 20
         Caption = 'B'#244'nus Troca:'
         Color = 10567680
@@ -2019,7 +2023,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       object LblTotalVenda: TRxLabel
         Left = 5
         Top = 55
-        Width = 90
+        Width = 86
         Height = 32
         Caption = 'TOTAL'
         Color = 32767
@@ -2038,7 +2042,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       object LblValorDescontoAcrescimo: TRxLabel
         Left = 5
         Top = 118
-        Width = 140
+        Width = 139
         Height = 29
         Caption = 'DESCONTO'
         Color = 32767
@@ -2239,6 +2243,86 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
         OnEnter = ValorEntradaEnter
       end
     end
+    object pMensagem: TPanel
+      Left = 480
+      Top = 592
+      Width = 425
+      Height = 113
+      Anchors = [akRight, akBottom]
+      BevelOuter = bvNone
+      BevelWidth = 2
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentColor = True
+      ParentFont = False
+      TabOrder = 8
+      Visible = False
+      object pMensagemOperador: TPanel
+        Left = 0
+        Top = 0
+        Width = 425
+        Height = 51
+        Align = alClient
+        BevelOuter = bvNone
+        ParentColor = True
+        TabOrder = 0
+        Visible = False
+        object lMensagemOperador: TLabel
+          Left = 0
+          Top = 0
+          Width = 425
+          Height = 51
+          Align = alClient
+          Alignment = taCenter
+          Caption = 'lMensagemOperador'
+          Layout = tlCenter
+          WordWrap = True
+          OnClick = lMensagemOperadorClick
+        end
+      end
+      object pMensagemCliente: TPanel
+        Left = 0
+        Top = 51
+        Width = 425
+        Height = 62
+        Align = alBottom
+        BevelOuter = bvNone
+        ParentColor = True
+        TabOrder = 1
+        Visible = False
+        object Label11: TLabel
+          Left = 0
+          Top = 0
+          Width = 104
+          Height = 13
+          Caption = 'Mensagem Cliente'
+          Color = clBtnFace
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+        end
+        object lMensagemCliente: TLabel
+          Left = 0
+          Top = 0
+          Width = 425
+          Height = 62
+          Align = alClient
+          Alignment = taCenter
+          Caption = 'lMensagemCliente'
+          Layout = tlCenter
+          WordWrap = True
+          OnClick = lMensagemClienteClick
+        end
+      end
+    end
   end
   object MemoRetorno: TMemo
     Left = 1065
@@ -2278,7 +2362,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
     Left = 0
     Top = 0
     Width = 150
-    Height = 742
+    Height = 705
     Align = alLeft
     BevelInner = bvNone
     BevelOuter = bvNone
@@ -2290,8 +2374,8 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
   object ScrollBoxDireita: TScrollBox
     Left = 1172
     Top = 0
-    Width = 190
-    Height = 742
+    Width = 194
+    Height = 705
     Align = alClient
     BorderStyle = bsNone
     Color = 5278518
