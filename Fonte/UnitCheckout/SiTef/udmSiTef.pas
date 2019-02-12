@@ -115,9 +115,12 @@ begin
     INI := TIniFile.Create(vCamArqSitTef);
     try
       vDocEmpresa:= SQLLocate('EMPRESA', 'EMPRICOD', 'EMPRA14CGC', EmpresaPadrao);
-      ACBrTEFD1.TEFCliSiTef.ParametrosAdicionais.Text := 'ParmsClient=1='+vDocEmpresa+';2='+'09033442000109';
+      //ACBrTEFD1.TEFCliSiTef.ParametrosAdicionais.Text := 'ParmsClient=1='+vDocEmpresa+';2='+'09033442000109';
 
       vGPAtual := INI.ReadString('CONF', 'GPAtual', '');
+      ACBrTEFD1.TEFCliSiTef.CNPJEstabelecimento := vDocEmpresa;
+      ACBrTEFD1.TEFCliSiTef.CNPJSoftwareHouse := '09033442000109';
+
       ACBrTEFD1.TEFCliSiTef.EnderecoIP:= INI.ReadString('CONF', 'EnderecoIP', '');
       ACBrTEFD1.TEFCliSiTef.CodigoLoja:= INI.ReadString('CONF', 'CodigoLoja', '');
       ACBrTEFD1.TEFCliSiTef.NumeroTerminal:= INI.ReadString('CONF', 'NumeroTerminal', '');
@@ -520,14 +523,7 @@ begin
 
      ineEstadoECF :
        begin
-         Case estadoSimuladoEcf of
-           tpsLivre     : RetornoECF := 'L' ;
-           tpsVenda     : RetornoECF := 'V' ;
-           tpsPagamento : RetornoECF := 'P' ;
-           tpsRelatorio : RetornoECF := 'R' ;
-         else
-           RetornoECF := 'O' ;
-         end;
+         RetornoECF := 'N'; // nao fiscal
        end;
    end;
 end;
