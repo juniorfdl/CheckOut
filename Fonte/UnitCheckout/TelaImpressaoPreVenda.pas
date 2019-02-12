@@ -149,7 +149,7 @@ var
 
 implementation
 
-uses DataModulo, UnitLibrary, IMPNAOFISCAL ;
+uses DataModulo, UnitLibrary, IMPNAOFISCAL , udmECF;
 
 {$R *.DFM}
 procedure TFormTelaImpressaoPreVenda.ImprimeClick(Sender: TObject);
@@ -168,7 +168,9 @@ begin
 //             WinExec(Pchar('IMPRESSAOPREVENDA.EXE'),sw_Show);
          if dm.SQLTerminalAtivoTERMCIMPPREVENDASIM.Value <> 'S' then
            if Pergunta('NAO','Imprimir Prevenda / Orçamento?') then
+           begin
              WinExec(Pchar('IMPRESSAOPREVENDA.EXE'),sw_Show);
+           end;
        end;
    end
  else

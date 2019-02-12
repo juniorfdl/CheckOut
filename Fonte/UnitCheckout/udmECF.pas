@@ -3,9 +3,13 @@ unit udmECF;
 interface
 
 uses
-  SysUtils, Classes, ACBrBase, ACBrECF, IniFiles, Forms, dialogs;
+  SysUtils, Classes, ACBrBase, ACBrECF, IniFiles, Forms, dialogs, ACBrTEFD, Controls,
+  ACBrDevice, ACBrTEFDClass, ACBrUtil , ACBrTEFDCliSiTef, TypInfo, DateUtils;
 
 type
+  TevMostrarMensagem = Procedure(pMsg:String) of object;
+  TevGetMensagem = Function:String of object;
+
   TdmECF = class(TDataModule)
     ACBrECF1: TACBrECF;
     procedure DataModuleCreate(Sender: TObject);
@@ -13,6 +17,8 @@ type
     procedure ACBrECF1MsgPoucoPapel(Sender: TObject);
     procedure ACBrECF1ErrorCancelaCupom(var Tratado: Boolean);
   private
+
+    fCancelado : Boolean ;
     fModelo: Integer;
     fECFVirtual: Integer;
     fPorta: String;
@@ -30,11 +36,17 @@ type
     fOperador: String;
     fBandWidth: Integer;
     fRelatorioGerencial:TStringList;
+    fSiTEFIniciado:Boolean;
+    fevMostrarInstrucoes: TevMostrarMensagem;
+    fevMostrarMensagemCliente: TevMostrarMensagem;
+    fevMostrarMensagemOperador: TevMostrarMensagem;
+    fevGetMensagem: TevGetMensagem;
     procedure LerINI;
     { Private declarations }
   public
     { Public declarations }
-    EmitiuPagamento: Boolean;
+    EmitiuPagamento, fNaoFiscal: Boolean;
+    fCPF_CNPJ:String;
     property Modelo:Integer read fModelo write fModelo;
     property ECFVirtual:Integer read fECFVirtual write fECFVirtual;
     property Porta:String read fPorta write fPorta;
@@ -80,8 +92,9 @@ type
     function Sangria(Valor: Double; Obs: AnsiString;
       DescricaoCNF: String; DescricaoFPG: String; IndiceBMP: Integer ) : boolean ;
     function Suprimento(Valor: Double; DescricaoFPG: String) : boolean ;
-    procedure EfetuaPagamento(FormaPagamento:Integer; Valor:Double);
+    procedure EfetuaPagamento(FormaPagamento:Integer; Valor:Double; TipoPagamento:String);
     procedure EstornarPagamento(FormaPagamento:Integer; Valor:Double);
+    Function ExecutaOperacaoSiTEF(FormaPagamento: Integer; Valor: Double):Boolean;
   end;
 
 var
@@ -89,12 +102,19 @@ var
 
 implementation
 
+uses UnitLibrary;
+
 {$R *.dfm}
 
 function TdmECF.AbrirCupomFiscal(var NroCupom: String): boolean;
 begin
   AbrirPorta;
-  ACBrECF1.AbreCupom();
+
+  if fNaoFiscal then
+    ACBrECF1.AbreNaoFiscal(fCPF_CNPJ)
+  else
+    ACBrECF1.AbreCupom();
+
   Result := True;
   EmitiuPagamento:= False;
 end;
@@ -148,7 +168,11 @@ end;
 
 function TdmECF.CancelarItemECF(Posicao: String): Boolean;
 begin
-  ACBrECF1.CancelaItemVendido(StrToIntDef(Posicao,0));
+  if fNaoFiscal then
+    ACBrECF1.CancelaItemNaoFiscal(StrToIntDef(Posicao,0))
+  else
+    ACBrECF1.CancelaItemVendido(StrToIntDef(Posicao,0));
+    
   Result := true;
 end;
 
@@ -157,6 +181,7 @@ begin
   LerINI;
   fRelatorioGerencial:= TStringList.Create;
   EmitiuPagamento:= False;
+  
 end;
 
 function TdmECF.EnviaComando_NAOFISCAL(Texto: String): Boolean;
@@ -179,12 +204,14 @@ begin
 end;
 
 function TdmECF.FecharCupomFiscal(): Boolean;
-begin
-//  SubTotal;
-//  ACBrECF1.EfetuaPagamento('1',1,'',False);
-  ACBrECF1.FechaCupom();
+begin 
+  if fNaoFiscal then
+    ACBrECF1.FechaNaoFiscal()
+  else
+    ACBrECF1.FechaCupom();
+    
   Result := True;
-  EmitiuPagamento:= False;
+  EmitiuPagamento:= False; 
 end;
 
 function TdmECF.FecharPortaECF: Boolean;
@@ -208,7 +235,11 @@ function TdmECF.ImprimeItemECF(Numitem, Codigo, Descricao, Tributo,
   TipoDesc, Unid: String; Qtde, Valor, Percdesc, Vlrdesco: Double;
   NumDecQuant: integer): Boolean;
 begin
-  ACBrECF1.VendeItem(Codigo, Descricao, Tributo, Qtde, Valor, Vlrdesco, Unid, TipoDesc);
+  if fNaoFiscal then
+    ACBrECF1.RegistraItemNaoFiscal(Codigo, Valor, '')
+  else
+    ACBrECF1.VendeItem(Codigo, Descricao, Tributo, Qtde, Valor, Vlrdesco, Unid, TipoDesc);
+    
   Result := true;
 end;
 
@@ -300,19 +331,30 @@ end;
 
 function TdmECF.SubTotal: boolean;
 begin
-  ACBrECF1.SubtotalizaCupom();
+  if fNaoFiscal then
+    ACBrECF1.SubtotalizaNaoFiscal()
+  else
+    ACBrECF1.SubtotalizaCupom();
+    
   Result := True;
 end;
 
 procedure TdmECF.DataModuleDestroy(Sender: TObject);
 begin
   if ACBrECF1.Ativo then
-    ACBrECF1.Desativar;
+    ACBrECF1.Desativar;                      
+
+  
 end;
 
 procedure TdmECF.ACBrECF1MsgPoucoPapel(Sender: TObject);
+Var
+  OldTecladoBloqueado : Boolean ;
 begin
-  ShowMessage('ATENÇÃO... POUCO PAPEL');
+  try
+     ShowMessage( ACBrStr('ATENÇÃO. Detectada proximadade do fim da Bobina') );
+  finally
+  end ;
 end;
 
 procedure TdmECF.ACBrECF1ErrorCancelaCupom(var Tratado: Boolean);
@@ -345,15 +387,20 @@ begin
   Result := True;
 end;
 
-procedure TdmECF.EfetuaPagamento(FormaPagamento: Integer; Valor: Double);
+procedure TdmECF.EfetuaPagamento(FormaPagamento: Integer; Valor: Double; TipoPagamento:String);
 begin
   AbrirPorta;
 
   if Valor = 0 then
     Valor := ACBrECF1.GrandeTotal;
 
-  ACBrECF1.EfetuaPagamento(IntToStr(FormaPagamento), Valor);
+  if fNaoFiscal then
+    ACBrECF1.EfetuaPagamentoNaoFiscal(IntToStr(FormaPagamento), Valor)
+  else
+    ACBrECF1.EfetuaPagamento(IntToStr(FormaPagamento), Valor);
+
   EmitiuPagamento:= True;
+
 end;
 
 procedure TdmECF.EstornarPagamento(FormaPagamento: Integer; Valor: Double);
@@ -362,6 +409,12 @@ begin
 
   ACBrECF1.EstornaPagamento(IntToStr(FormaPagamento), IntToStr(FormaPagamento), Valor);
   EmitiuPagamento := False;
+end;
+
+
+function TdmECF.ExecutaOperacaoSiTEF(FormaPagamento: Integer; Valor: Double):Boolean;
+begin
+  Result := False;
 end;
 
 end.

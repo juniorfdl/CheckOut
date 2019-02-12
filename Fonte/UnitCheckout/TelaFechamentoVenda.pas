@@ -271,6 +271,12 @@ type
     SQLClienteCreditoVALORDEBITO: TFloatField;
     SQLClienteCreditoHISTORICO: TStringField;
     edtSaldo: TCurrencyEdit;
+    pMensagem: TPanel;
+    pMensagemOperador: TPanel;
+    lMensagemOperador: TLabel;
+    pMensagemCliente: TPanel;
+    Label11: TLabel;
+    lMensagemCliente: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure EntradaDadosKeyDown(Sender: TObject; var Key: Word;
@@ -289,6 +295,9 @@ type
     procedure ConerBtn1Click(Sender: TObject);
     procedure btnF11Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure lMensagemOperadorClick(Sender: TObject);
+    procedure lMensagemClienteClick(Sender: TObject);
   private
     { Private declarations }
     Tempo, TempoLimite, TempoIntervalo, MesParcelaTemp, AnoParcelaTemp : integer;
@@ -320,6 +329,11 @@ type
     function  VerificandoTotalVenda : Double ;
     function  Pontos(NumPOntos : Integer) : string ;
     function  VerificaCartaoCredito : Boolean;
+
+    Procedure MostrarInstrucoes(pMsg:String);
+    Procedure MostrarMensagemOperador(pMsg:String);
+    Procedure MostrarMensagemCliente(pMsg:String);
+    Function GetMensagemOperador:String;
 
   public
     { Public declarations }
@@ -373,7 +387,7 @@ uses TelaItens, TelaConsultaRapidaCliente, DataModulo,
      ImportarPreVenda, TelaFechamentoOrcamento, TelaDadosCliente, TelaCadastroObs, UnitLibrary, TelaConsultaLiberacaoCredito, DataModuloTemplate,
      IMPNAOFISCAL, TelaDadosCartaoCreditoManual, TelaTroco, TelaAssistenteLancamentoContasReceber, TelaAssistenteLancamentoPlanoVariavelCheckout,
      TelaConsultaRapidaDependente, LeitorCodigoBarrasCheckout, TelaGeracaoXMLVendas, TelaDataEntrega,
-  udmECF;
+  udmECF, udmSiTef;
 
 {$R *.DFM}
 procedure TFormTelaFechamentoVenda.FormCreate(Sender: TObject);
@@ -492,6 +506,8 @@ begin
           ImportandoPreVenda      := False ;
           DescTotVenda            := false ;
           ForcaDescTotVenda       := False ;
+
+          dmSiTEF.CancelarSiTEF;
 
           FormTelaItens.CancelarVenda ;
           FormTelaItens.LimparVariaveis ;
@@ -1254,7 +1270,7 @@ begin
           EntradaDados.SelectAll ;
           exit ;
         end ;
-      //INFORMANDO VALOR NUMERÁRIO A VISTA
+      //INFORMANDO VALOR NUMERÁRIO A VISTA   #pagamento aqui
       if EstadoFechVenda = InformandoValorNumerarioVista then
         begin
           EntradaDados.Text := TrocaPontoPorVirgula(EntradaDados.Text) ;
@@ -1352,11 +1368,16 @@ begin
                   SQLParcelasVistaVendaTemp.Post ;
                 end;
 
+              if (TipoPadrao = 'CRT') then
+              begin
+                dmSiTef.EfetuarPagamentoSiTef(NumerarioAtual, StrToFloat(EntradaDados.Text), '');
+              end;
+
               if (ECFAtual = 'ECF') and (not FileExists('Confirma.txt')) then
               begin
                 if NumerarioAtual = 0 then
                   showmessage('Numerario não informado: '+ inttostr(NumerarioAtual) + ':' + EntradaDados.text);
-                dmECF.EfetuaPagamento(NumerarioAtual,SQLParcelasVistaVendaTempVALORPARC.Value);
+                dmECF.EfetuaPagamento(NumerarioAtual,SQLParcelasVistaVendaTempVALORPARC.Value, SQLParcelasVistaVendaTempTIPOPADR.Value);
               end;
 
               SQLParcelasVistaVendaTemp.Close ;
@@ -2208,7 +2229,7 @@ begin
                 end ;
 
                if (ECFAtual = 'ECF') then
-                 dmECF.EfetuaPagamento(NumerarioPrazo,ValorTotalVenda.Value);
+                 dmECF.EfetuaPagamento(NumerarioPrazo,ValorTotalVenda.Value, SQLParcelasVistaVendaTempTIPOPADR.Value);
 
               //EMITIR FECHAMENTO CUPOM FISCAL
               if (LblValorDescontoAcrescimo.Caption = 'DESCONTO') or
@@ -2742,7 +2763,7 @@ begin
               FechouCupomFiscal   := False;
               EnviouNumerariosECF := False;
              if (ECFAtual = 'ECF')and(NumerarioPrazo > 0) then
-                 dmECF.EfetuaPagamento(NumerarioPrazo,ValorTotalVenda.Value);
+                 dmECF.EfetuaPagamento(NumerarioPrazo,ValorTotalVenda.Value, SQLParcelasVistaVendaTempTIPOPADR.Value);
               repeat
                 if (LblValorDescontoAcrescimo.Caption = 'DESCONTO') or
                    ((VlrBonusTroca > 0) or (VlrRetConfig_SldCad > 0)) then
@@ -3466,7 +3487,9 @@ begin
           end ;
 
         if ECFAtual = 'ECF' then
-          NroCupomFiscal := dmECF.GetNroCupomFiscal; 
+          NroCupomFiscal := dmECF.GetNroCupomFiscal;
+
+        dmSiTEF.FecharSiTEF;
 
         if (NroCupomFiscal = '') and (ECFAtual <> '') and (not E_Orcamento) and (copy(EcfAtual,1,4) <> 'NFCE') then
           begin
@@ -6567,6 +6590,11 @@ begin
             (Trim(ProvedorCartao) = 'BANRISUL')or
             (Trim(ProvedorCartao) = 'TECBAN')) then
           begin
+            if dmECF.ExecutaOperacaoSiTEF(01, 1) then   
+            begin
+              
+            end
+            else
             if Ativo then
               begin
                 {Passa o numero da proxima nota que sera gerada}
@@ -6688,11 +6716,60 @@ begin
   else
     shpStatusServidor.Brush.Color := clRed;
 
+  dmSiTef.evMostrarInstrucoes := MostrarInstrucoes;
+  dmSiTef.evMostrarMensagemCliente := MostrarMensagemCliente;
+  dmSiTef.evMostrarMensagemOperador := MostrarMensagemOperador;
+  dmSiTef.evGetMensagemOperador := GetMensagemOperador;
+//  dmSiTef.fCPF_CNPJ := '';  
 end;
 
 procedure TFormTelaFechamentoVenda.AtualizarSaldoEdit;
 begin
   edtSaldo.Text := FormatFloat('##0.00', ValorEntrada.Value - ValorRecebido.Value) ;
+end;
+
+procedure TFormTelaFechamentoVenda.FormDestroy(Sender: TObject);
+begin
+  //dmSiTef.CancelarSiTEF;
+end;
+
+function TFormTelaFechamentoVenda.GetMensagemOperador: String;
+begin
+  if pMensagemOperador.Visible then
+    Result := lMensagemOperador.Caption
+  else
+    Result := '';
+end;
+
+procedure TFormTelaFechamentoVenda.MostrarInstrucoes(pMsg: String);
+begin
+  pMensagemOperador.Visible := pMsg <> '';
+  lMensagemOperador.Caption := pMsg;
+  pMensagem.Visible := pMensagemOperador.Visible or pMensagemCliente.Visible;
+  Application.ProcessMessages;
+end;
+
+procedure TFormTelaFechamentoVenda.MostrarMensagemCliente(pMsg: String);
+begin
+  pMensagemCliente.Visible := pMsg <> '';
+  lMensagemCliente.Caption := pMsg;
+  pMensagem.Visible := pMensagemOperador.Visible or pMensagemCliente.Visible;
+  Application.ProcessMessages;
+end;
+
+procedure TFormTelaFechamentoVenda.MostrarMensagemOperador(pMsg: String);
+begin
+
+end;
+
+procedure TFormTelaFechamentoVenda.lMensagemOperadorClick(Sender: TObject);
+begin
+  pMensagem.Visible := False;
+end;
+
+procedure TFormTelaFechamentoVenda.lMensagemClienteClick(Sender: TObject);
+begin
+  pMensagem.Visible := False;
 end;
 
 end.

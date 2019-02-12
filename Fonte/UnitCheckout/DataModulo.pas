@@ -14,7 +14,7 @@ uses
   ACBrBAL, ACBrPosPrinter, ACBrNFeDANFEClass, ACBrNFeDANFeESCPOS, ACBrDFe,
   ACBrNFe, pcnConversao, ACBrUtil, ACBrMail, ACBrNFeDANFeRLClass, ACBrDevice,
   ZAbstractConnection, DBClient, RestClient, RestUtils, pcnConversaoNFe,
-  ACBrDFeReport, ACBrDFeDANFeReport;
+  ACBrDFeReport, ACBrDFeDANFeReport, Principal;
 
 type
   TDM = class(TDMTemplate)
@@ -1350,10 +1350,27 @@ procedure TDM.GetDataValidadeSistema;
 var
   Data: TDateTime;
   DiasVencimento: integer;
+
+  function DiasEmAviso:Boolean;
+  begin
+    Result := False;
+
+    if Dm.SQLConfigGeralDIAS_AVISO.Value > 0 then
+    begin
+      DiasVencimento := DaysBetween(Dm.SQLConfigGeralCFGEDBLOQ.AsDateTime, DataSistema);
+
+      if Dm.SQLConfigGeralDIAS_AVISO.Value >= DiasVencimento then
+      begin
+        Result := True;
+      end;
+    end;
+  end;
+  
 begin
   vSEM_INTERNET := False;
   OBSAutorizacao := '';
-  if Dm.SQLConfigGeralCFGEDBLOQ.AsDateTime < DataSistema then
+  if (Dm.SQLConfigGeralCFGEDBLOQ.AsDateTime < DataSistema)
+    or(DiasEmAviso) then
   begin
     GetDataValidadeSistemaWebApi;
   end;
@@ -1372,21 +1389,17 @@ begin
   else begin
     Dm.SQLConfigGeralCFGECBLOQ.Value := '';
 
-    if Dm.SQLConfigGeralDIAS_AVISO.Value > 0 then
+    if DiasEmAviso then
     begin
-      DiasVencimento := DaysBetween(Dm.SQLConfigGeralCFGEDBLOQ.AsDateTime, DataSistema);
-
-      if Dm.SQLConfigGeralDIAS_AVISO.Value >= DiasVencimento then
-      begin
-        if DiasVencimento = 1 then
-          OBSAutorizacao := '01 dia'
-        else
-          OBSAutorizacao := FormatFloat('00', DiasVencimento) + ' dias '; // - Falta '+FormatFloat('00', DiasVencimento)+' dias;
-      end;
+      if DiasVencimento = 1 then
+        OBSAutorizacao := '01 dia'
+      else
+        OBSAutorizacao := FormatFloat('00', DiasVencimento) + ' dias '; // - Falta '+FormatFloat('00', DiasVencimento)+' dias;
     end;
-
   end;
-  Dm.SQLConfigGeral.Post;
+
+  if Dm.SQLConfigGeral.state in ([dsedit, dsinsert]) then
+    Dm.SQLConfigGeral.Post;
 end;
 
 procedure TDM.GetDataValidadeSistemaWebApi;

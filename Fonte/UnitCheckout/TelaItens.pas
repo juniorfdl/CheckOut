@@ -29,6 +29,7 @@ const
   InformandoDescricaoTecnica = 'InformandoDescricaoTecnica';
   InformandoTotalVenda = 'InformandoTotalVenda';
 type
+
   TFormTelaItens = class(TForm)
     SQLProduto: TRxQuery;
     DSSQLIntensVenda: TDataSource;
@@ -348,6 +349,8 @@ type
     Urano_Porta: string;
     Urano_PesoLido: TextFile;
 
+    procedure CriardmECF;
+    procedure CriardmSiTEF;
     procedure Exec_SP_ACERTO_TOTAL_CUPOM;
     function GetCPNMN2VLR(pCUPOA13ID:String; pnumeicod: Integer):Double;
     function GravaCupom: Boolean;
@@ -366,6 +369,7 @@ type
     procedure ExecutarCtrlQ;
     procedure ExecutarF2;
     procedure ExecutarPessagemAutomatica;
+    procedure ConfACBrPosPrinter;
   public
     { Public declarations }
     CodICMS,
@@ -427,7 +431,8 @@ uses DataModulo, UnitLibrary, TelaTipoDescontoItem, TelaConsultaRapidaItem,
   TelaConsultaPlaca, TelaProdutoNaoEncontrado, TelaConsultaRapidaCupom, Daruma_Framework_FISCAL,
   pcnNFe, ACBrDFeConfiguracoes, pcnAuxiliar, ACBrDFeSSL, pcnNFeRTXT,
   ACBrNFeNotasFiscais, TelaDadosCliente, TelaImpressaoPreVenda,
-  ACBrNFeWebServices, ACBrDFeWebService, TelaProdutoDimensao, udmECF;
+  ACBrNFeWebServices, ACBrDFeWebService, TelaProdutoDimensao, udmECF,
+  udmSiTef;
 
 {$R *.DFM}
 
@@ -491,13 +496,12 @@ begin
     dm.ACBrPosPrinter.ControlePorta := False;
     dm.ACBrPosPrinter.Device.DeviceType := dtFile;
   end;
+=======
+  //dm.ACBrNFe.DANFE.ViaConsumidor := True;
+  //dm.ACBrNFe.DANFE.ImprimirItens := True;
+>>>>>>> origin/master
 
-  dm.ACBrNFeDANFeESCPOS.ImprimeEmUmaLinha := False;
-  dm.ACBrNFeDANFeESCPOS.ImprimeDescAcrescItem := True;
-//  if dm.ACBrPosPrinter.ControlePorta then
-//    ShowMessage('Controle de porta Ativa')
-//  else
-//    ShowMessage('Controle de porta Inativa');
+  ConfACBrPosPrinter; 
 end;
 
 procedure TFormTelaItens.LoadXML(MyMemo: TMemo; MyWebBrowser: TWebBrowser);
@@ -1164,7 +1168,8 @@ var
   ValorTotalCartaoSTR, NomeRede, NroTransacao, Finalizacao: string;
   ValorTotalCartaoFloat: Double;
   IniFile: TiniFile;
-begin
+
+  begin
   {Ajustar paineis na Tela}
   Width := Screen.Width;
   Height := Screen.Height;
@@ -4406,7 +4411,7 @@ begin
                   VlrTotalSistema := VlrTotalSistema + SQLParcelasVistaVendaTempVALORPARC.Value;
 
                   if (ECFAtual = 'ECF') then
-                    dmECF.EfetuaPagamento(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger,SQLParcelasVistaVendaTempVALORPARC.Value);
+                    dmECF.EfetuaPagamento(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger,SQLParcelasVistaVendaTempVALORPARC.Value, SQLParcelasVistaVendaTempTIPOPADR.Value);
 
                   SQLImpressaoCupom.next;
                 end;
@@ -4459,7 +4464,7 @@ begin
                   VlrTotalSistema := VlrTotalSistema + SQLParcelasPrazoVendaTempVALORVENCTO.Value;
 
                   if (ECFAtual = 'ECF') then
-                    dmECF.EfetuaPagamento(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger,SQLParcelasPrazoVendaTempVALORVENCTO.Value);
+                    dmECF.EfetuaPagamento(SQLImpressaoCupom.fieldbyname('NUMEICOD').AsInteger,SQLParcelasPrazoVendaTempVALORVENCTO.Value, SQLParcelasVistaVendaTempTIPOPADR.Value);
                 end;
 
                 SQLParcelasPrazoVendaTemp.Close;
@@ -6024,6 +6029,10 @@ end;
 
 procedure TFormTelaItens.FormShow(Sender: TObject);
 begin
+  ConfACBrPosPrinter;
+  CriardmECF;
+  CriardmSiTEF;      
+  
   dm.SQLCupom.RequestLive := True;
   dm.SQLCupomItem.RequestLive := True;
 
@@ -6470,6 +6479,7 @@ end;
 procedure TFormTelaItens.FormDestroy(Sender: TObject);
 begin
   FreeAndNil(dmECF);
+  FreeAndNil(dmSiTef);
 end;
 
 procedure TFormTelaItens.ExecutarCtrlQ;
@@ -6935,6 +6945,50 @@ begin
   finally
     //ExecSql(' alter trigger TG_CUPOMITEM_BIU0 active; ', 1);
   end;
+end;
+
+procedure TFormTelaItens.CriardmECF;
+begin
+  dmECF := TdmECF.Create(Self);
+end;
+
+procedure TFormTelaItens.CriardmSiTEF;
+begin
+  dmSiTef := TdmSiTef.Create(Self);
+end;
+
+procedure TFormTelaItens.ConfACBrPosPrinter;
+begin
+  if (ECFAtual = 'NFCE A4') then dm.ACBrPosPrinter.Modelo := ppTexto;
+  if (ECFAtual = 'NFCE EPSON') then dm.ACBrPosPrinter.Modelo := ppEscPosEpson;
+  if (ECFAtual = 'NFCE BEMATECH') then dm.ACBrPosPrinter.Modelo := ppEscBematech;
+  if (ECFAtual = 'NFCE ELGIN') then dm.ACBrPosPrinter.Modelo := ppEscVox;
+  if (ECFAtual = 'NFCE DR700') then dm.ACBrPosPrinter.Modelo := ppEscDaruma;
+  if (ECFAtual = 'NFCE DR800') then dm.ACBrPosPrinter.Modelo := ppEscDaruma;
+{  begin
+    dm.ACBrPosPrinter.Modelo := ppEscDaruma;
+    dm.ACBrPosPrinter.ControlePorta := False;
+  end;}
+
+  if dm.SQLTerminalAtivoTERMA5ECFPORTACOM.Value <> 'USB' then
+    dm.ACBrPosPrinter.Device.Porta := dm.SQLTerminalAtivoTERMA5ECFPORTACOM.Value
+  else
+    dm.ACBrPosPrinter.Device.Porta := '\\localhost\nfce';
+
+  if not FileExists('COMUNICACAO_OFFLINE.TXT') then
+  begin
+    if dm.SQLTerminalAtivoECF_VELOC.Value > 0 then
+      dm.ACBrPosPrinter.Device.Baud := dm.SQLTerminalAtivoECF_VELOC.Value;
+  end
+  else
+  begin
+    dm.ACBrPosPrinter.Device.Porta := ExtractFilePath(application.ExeName) + '\nfceOffline.txt';
+    dm.ACBrPosPrinter.ControlePorta := False;
+    dm.ACBrPosPrinter.Device.DeviceType := dtFile;
+  end;
+
+  dm.ACBrNFeDANFeESCPOS.ImprimeEmUmaLinha := False;
+  dm.ACBrNFeDANFeESCPOS.ImprimeDescAcrescItem := True;
 end;
 
 end.

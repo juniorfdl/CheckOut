@@ -31,7 +31,7 @@ type
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
-  public
+  public                             
     { Public declarations }
   end;
 
@@ -40,7 +40,7 @@ var
 
 implementation
 
-uses TelaFechamentoVenda, UnitLibrary, TelaItens;
+uses TelaFechamentoVenda, UnitLibrary, TelaItens, udmSiTef;
 
 {$R *.DFM}
 

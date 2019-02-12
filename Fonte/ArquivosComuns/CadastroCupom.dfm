@@ -5385,14 +5385,14 @@ inherited FormCadastroCupom: TFormCadastroCupom
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Etiquetas Adesiva'
     PrinterSetup.PaperName = 'Custom'
-    PrinterSetup.PrinterName = 'Microsoft XPS Document Writer'
+    PrinterSetup.PrinterName = 'Screen'
     PrinterSetup.mmMarginBottom = 0
     PrinterSetup.mmMarginLeft = 0
     PrinterSetup.mmMarginRight = 0
     PrinterSetup.mmMarginTop = 0
     PrinterSetup.mmPaperHeight = 0
     PrinterSetup.mmPaperWidth = 0
-    PrinterSetup.PaperSize = 177
+    PrinterSetup.PaperSize = 256
     Units = utMillimeters
     DeviceType = 'Screen'
     EmailSettings.ReportFormat = 'PDF'
