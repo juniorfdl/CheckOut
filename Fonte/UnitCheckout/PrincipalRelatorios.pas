@@ -398,8 +398,8 @@ begin
     memo.Lines.Add('------------------------------------------------');
     memo.Lines.Add('<ad><n>TOTAL => ' + FormatFloat('R$ ##0.00', vSaldoTotal) + '</n></ad>');
     memo.Lines.Add('------------------------------------------------');
-    vValorSangria := vSaldoTotal + vValorSangria;
-    memo.Lines.Add('<ad><n>TOTAL DE VENDA => ' + FormatFloat('R$ ##0.00', vValorSangria) + '</n></ad>');
+//    vValorSangria := vSaldoTotal + vValorSangria;
+//    memo.Lines.Add('<ad><n>TOTAL DE VENDA => ' + FormatFloat('R$ ##0.00', vValorSangria) + '</n></ad>');
 
 
       // Produtos Vendidos

@@ -1,6 +1,6 @@
 inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
-  Left = 148
-  Top = 0
+  Left = 125
+  Top = 4
   Caption = 'Opera'#231#245'es de Estoque'
   ClientHeight = 696
   ClientWidth = 955
@@ -370,6 +370,19 @@ inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
                 Width = 131
                 Height = 13
                 Caption = 'Gera Comissionamento'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = 8404992
+                Font.Height = -11
+                Font.Name = 'Tahoma'
+                Font.Style = [fsBold]
+                ParentFont = False
+              end
+              object Label24: TLabel
+                Left = 468
+                Top = 72
+                Width = 116
+                Height = 13
+                Caption = 'Atualiza Pre'#231'o Custo'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = 8404992
                 Font.Height = -11
@@ -1116,6 +1129,25 @@ inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
                   'S'
                   'N')
               end
+              object RxDBComboBox10: TRxDBComboBox
+                Tag = 1
+                Left = 468
+                Top = 88
+                Width = 141
+                Height = 21
+                Style = csDropDownList
+                DataField = 'ATUALIZA_PRECO_CUSTO'
+                DataSource = DSTemplate
+                EnableValues = True
+                ItemHeight = 13
+                Items.Strings = (
+                  'Sim'
+                  'N'#227'o')
+                TabOrder = 11
+                Values.Strings = (
+                  'S'
+                  'N')
+              end
             end
           end
           inherited PanelMaster: TPanel
@@ -1356,6 +1388,12 @@ inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
     object SQLTemplateMOVIMENTA_CONSIGNADO: TStringField
       FieldName = 'MOVIMENTA_CONSIGNADO'
       Origin = 'DB.OPERACAOESTOQUE.MOVIMENTA_CONSIGNADO'
+      FixedChar = True
+      Size = 1
+    end
+    object SQLTemplateATUALIZA_PRECO_CUSTO: TStringField
+      FieldName = 'ATUALIZA_PRECO_CUSTO'
+      Origin = 'DB.OPERACAOESTOQUE.ATUALIZA_PRECO_CUSTO'
       FixedChar = True
       Size = 1
     end

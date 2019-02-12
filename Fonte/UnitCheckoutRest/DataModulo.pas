@@ -12,7 +12,8 @@ uses
   IdMessage, DBXpress, ZConnection, SqlExpr, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, ACBrNFeDANFEClass, ACBrNFeDANFeESCPOS, pcnConversaoNFe,
   ACBrDFe, ACBrNFe, ACBrBase, ACBrPosPrinter, ZAbstractConnection,
-  RestClient, RestUtils, DBClient, UnitLibrary;
+  RestClient, RestUtils, DBClient, UnitLibrary, ACBrDFeReport,
+  ACBrDFeDANFeReport;
 
 type
   TDM = class(TDMTemplate)

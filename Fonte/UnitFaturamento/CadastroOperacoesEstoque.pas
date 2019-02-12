@@ -114,6 +114,9 @@ type
     RxDBComboBox9: TRxDBComboBox;
     Label13: TLabel;
     SQLTemplateMOVIMENTA_CONSIGNADO: TStringField;
+    Label24: TLabel;
+    RxDBComboBox10: TRxDBComboBox;
+    SQLTemplateATUALIZA_PRECO_CUSTO: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure AcessaSeriesClick(Sender: TObject);
     procedure SQLTemplateNewRecord(DataSet: TDataSet);

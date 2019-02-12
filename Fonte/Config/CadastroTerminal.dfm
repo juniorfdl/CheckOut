@@ -1530,6 +1530,26 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   ValueChecked = 'S'
                   ValueUnchecked = 'N'
                 end
+                object DBCheckBox7: TDBCheckBox
+                  Left = 294
+                  Top = 196
+                  Width = 290
+                  Height = 19
+                  Caption = 'Ocultar Registro conforme Tipo Fornecedor'
+                  Ctl3D = False
+                  DataField = 'CONTROLA_CONSULTA_CP'
+                  DataSource = DSTemplate
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = 8404992
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = [fsBold]
+                  ParentCtl3D = False
+                  ParentFont = False
+                  TabOrder = 28
+                  ValueChecked = 'S'
+                  ValueUnchecked = 'N'
+                end
               end
               object GroupBox5: TGroupBox
                 Left = 2
@@ -3681,6 +3701,12 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
     object SQLTemplateALTERA_NOSSO_NUMERO: TStringField
       FieldName = 'ALTERA_NOSSO_NUMERO'
       Origin = 'DB.TERMINAL.ALTERA_NOSSO_NUMERO'
+      FixedChar = True
+      Size = 1
+    end
+    object SQLTemplateCONTROLA_CONSULTA_CP: TStringField
+      FieldName = 'CONTROLA_CONSULTA_CP'
+      Origin = 'DB.TERMINAL.CONTROLA_CONSULTA_CP'
       FixedChar = True
       Size = 1
     end

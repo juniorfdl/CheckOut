@@ -1594,11 +1594,17 @@ begin
                   SQLRecebimentoRECEDDATAMOV.Value   := DataBaixa ;
                   SQLRecebimentoCLIEA13ID.Value      := SQLParcelasReceberTempCLIEA13ID.Value ;
                   if SQLParcelasReceberTempBAIXAR_PARCELA.Value = 'S' then
-                    SQLRecebimentoRECEN2VLRRECTO.Value := SQLParcelasReceberTempN2VLRVENC.Value
+                  begin
+                    SQLRecebimentoRECEN2VLRRECTO.Value := SQLParcelasReceberTempN2VLRVENC.Value;
+                    SQLRecebimentoRECEN2VLRJURO.Value  := 0;
+                    SQLRecebimentoRECEN2VLRMULTA.Value := 0;
+                  end
                   else
+                  begin
                     SQLRecebimentoRECEN2VLRRECTO.Value := SQLParcelasReceberTempN2VLRAMORT.Value ;
-                  SQLRecebimentoRECEN2VLRJURO.Value  := SQLParcelasReceberTempN2VLRJURO.Value;
-                  SQLRecebimentoRECEN2VLRMULTA.Value := SQLParcelasReceberTempN2VLRMULTA.Value;
+                    SQLRecebimentoRECEN2VLRJURO.Value  := SQLParcelasReceberTempN2VLRJURO.Value;
+                    SQLRecebimentoRECEN2VLRMULTA.Value := SQLParcelasReceberTempN2VLRMULTA.Value;
+                  end;
                   SQLRecebimentoRECEN2DESC.Value     := SQLParcelasReceberTempN2VLRDESC.Value ;
                   SQLRecebimentoRECEN2MULTACOBR.Value:= SQLParcelasReceberTempN2VLRTXCOBR.Value ;
                   SQLRecebimentoEMPRICODREC.Value    := StrToInt(EmpresaPadrao) ;
@@ -1676,7 +1682,7 @@ begin
                                                '') ;
                         end ;
                       //GRAVAR MOVIMENTO CAIXA REF. AO JURO DA PARCELA
-                      if (SQLParcelasReceberTempN2VLRJURO.Value > 0) then
+                      if (SQLParcelasReceberTempN2VLRJURO.Value > 0) and (SQLParcelasReceberTempBAIXAR_PARCELA.AsString <> 'S') then
                       begin
                           DM.SQLTemplate.Close ;
                           DM.SQLTemplate.SQL.Clear ;
@@ -1705,7 +1711,7 @@ begin
                                                  '') ;
                       end ;
                       //GRAVAR MOVIMENTO CAIXA REF. A MULTA DA PARCELA
-                      if (SQLParcelasReceberTempN2VLRMULTA.Value > 0) then
+                      if (SQLParcelasReceberTempN2VLRMULTA.Value > 0) and (SQLParcelasReceberTempBAIXAR_PARCELA.AsString <> 'S') then
                       begin
                           DM.SQLTemplate.Close ;
                           DM.SQLTemplate.SQL.Clear ;
@@ -3247,15 +3253,19 @@ begin
   if SQLPesquisa.FieldByName('EMPRICODULTREC').Value > 0 then
     SQLRenegociacaoEMPRICODULTREC.Value := SQLPesquisa.FieldByName('EMPRICODULTREC').Value;
   SQLRenegociacaoCUPOA13ID.Value := SQLPesquisa.FieldByName('CUPOA13ID').Value;
-  SQLRenegociacaoPLCTA15COD.Value := SQLPesquisa.FieldByName('PLCTA15COD').Value;
-  SQLRenegociacaoCTRCA30NRODUPLICBANCO.Value := SQLPesquisa.FieldByName('CTRCA30NRODUPLICBANCO').Value;
+  if not (SQLPesquisa.FieldByName('PLCTA15COD').isNull) then
+    SQLRenegociacaoPLCTA15COD.Value := SQLPesquisa.FieldByName('PLCTA15COD').Value;
+  if not (SQLPesquisa.FieldByName('CTRCA30NRODUPLICBANCO').isNull) then
+    SQLRenegociacaoCTRCA30NRODUPLICBANCO.Value := SQLPesquisa.FieldByName('CTRCA30NRODUPLICBANCO').value;
   SQLRenegociacaoCTRCDEMIS.Value := SQLPesquisa.FieldByName('CTRCDEMIS').Value;
   SQLRenegociacaoPENDENTE.Value := SQLPesquisa.FieldByName('PENDENTE').Value;
   SQLRenegociacaoREGISTRO.Value := SQLPesquisa.FieldByName('REGISTRO').Value;
   SQLRenegociacaoCTRCCTIPOREGISTRO.Value := SQLPesquisa.FieldByName('CTRCCTIPOREGISTRO').Value;
   SQLRenegociacaoCTRCCEMITIDOBOLETO.Value := SQLPesquisa.FieldByName('CTRCCEMITIDOBOLETO').Value;
-  SQLRenegociacaoCTRCA2MESCOMP.Value := SQLPesquisa.FieldByName('CTRCA2MESCOMP').Value;
-  SQLRenegociacaoCTRCA4ANOCOMP.Value := SQLPesquisa.FieldByName('CTRCA4ANOCOMP').Value;
+  if not SQLPesquisa.FieldByName('CTRCA2MESCOMP').isNull then
+    SQLRenegociacaoCTRCA2MESCOMP.Value := SQLPesquisa.FieldByName('CTRCA2MESCOMP').Value;
+  if not (SQLPesquisa.FieldByName('CTRCA4ANOCOMP').isNull) then
+    SQLRenegociacaoCTRCA4ANOCOMP.Value := SQLPesquisa.FieldByName('CTRCA4ANOCOMP').Value;
   SQLRenegociacaoCTRCA254HIST.Value := 'Renegociacao: ' + SQLPesquisa.FieldByName('CTRCA13ID').Value;
   SQLRenegociacao.Post;
 end;

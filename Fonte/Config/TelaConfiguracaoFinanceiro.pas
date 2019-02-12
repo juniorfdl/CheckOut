@@ -110,6 +110,8 @@ type
     Label15: TLabel;
     DblOpeTesouDeb: TRxDBLookupCombo;
     BotaoGravar: TSpeedButton;
+    SQLConfigFinanceiroCONTROLA_CONS_CONTAS_PAGAR: TStringField;
+    DBCheckBox3: TDBCheckBox;
     procedure DSSQLConfigFinanceiroDataChange(Sender: TObject;
       Field: TField);
     procedure BtnFecharTelaClick(Sender: TObject);

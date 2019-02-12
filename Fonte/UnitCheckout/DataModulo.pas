@@ -13,7 +13,8 @@ uses
   ZConnection, ZAbstractRODataset, ZAbstractDataset, ZDataset, ACBrBase,
   ACBrBAL, ACBrPosPrinter, ACBrNFeDANFEClass, ACBrNFeDANFeESCPOS, ACBrDFe,
   ACBrNFe, pcnConversao, ACBrUtil, ACBrMail, ACBrNFeDANFeRLClass, ACBrDevice,
-  ZAbstractConnection, DBClient, RestClient, RestUtils, pcnConversaoNFe;
+  ZAbstractConnection, DBClient, RestClient, RestUtils, pcnConversaoNFe,
+  ACBrDFeReport, ACBrDFeDANFeReport;
 
 type
   TDM = class(TDMTemplate)
