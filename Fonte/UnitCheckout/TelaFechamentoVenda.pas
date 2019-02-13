@@ -301,7 +301,7 @@ type
   private
     { Private declarations }
     Tempo, TempoLimite, TempoIntervalo, MesParcelaTemp, AnoParcelaTemp : integer;
-
+    fUsandoSitef:Boolean;
     HoraInicial, HoraAtual : TDateTime;
     HoraInicialStr, HoraAtualStr: String;
     MsgBloqueioVenda,
@@ -1368,9 +1368,19 @@ begin
                   SQLParcelasVistaVendaTemp.Post ;
                 end;
 
-              if (TipoPadrao = 'CRT') then
+              ProvedorCartao   := dm.SQLLocate('PROVEDORCARTAO','PRCAA13ID','PRCAA60CARTAO',
+                '"'+dm.SQLLocate('NUMERARIO','NUMEICOD','PRCAA13ID',
+                SQLParcelasVistaVendaTempNUMEICOD.AsString
+                )+'"');
+                
+              if (TipoPadrao = 'CRT') and (ProvedorCartao <> '') then
               begin
-                dmSiTef.EfetuarPagamentoSiTef(NumerarioAtual, StrToFloat(EntradaDados.Text), '');
+                if not dmSiTef.EfetuarPagamentoSiTef(NumerarioAtual, StrToFloat(EntradaDados.Text), '') then
+                begin
+                  EntradaDados.SelectAll ;
+                  exit;
+                end
+                else fUsandoSitef := True;
               end;
 
               if (ECFAtual = 'ECF') and (not FileExists('Confirma.txt')) then
@@ -6540,6 +6550,9 @@ end ;
 
 function TFormTelaFechamentoVenda.VerificaCartaoCredito : Boolean;
 begin
+
+  if fUsandoSitef then exit;
+
   // TESTA CARTAO DE CRÉDITO
   // MANDA DADOS DISPLAY TECLADO
   if TecladoReduzidoModelo = 'TEC44DIS' then
@@ -6589,12 +6602,7 @@ begin
             (Trim(ProvedorCartao) = 'AMEX') or
             (Trim(ProvedorCartao) = 'BANRISUL')or
             (Trim(ProvedorCartao) = 'TECBAN')) then
-          begin
-            if dmECF.ExecutaOperacaoSiTEF(01, 1) then   
-            begin
-              
-            end
-            else
+          begin 
             if Ativo then
               begin
                 {Passa o numero da proxima nota que sera gerada}

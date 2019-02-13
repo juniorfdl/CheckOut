@@ -75,7 +75,7 @@ type
     property evMostrarMensagemOperador: TevMostrarMensagem read fevMostrarMensagemOperador write fevMostrarMensagemOperador;
     property evGetMensagemOperador: TevGetMensagem read fevGetMensagem write fevGetMensagem;
 
-    procedure EfetuarPagamentoSiTef(FormaPagamento: Integer; Valor: Double; NumCOO:String);
+    Function EfetuarPagamentoSiTef(FormaPagamento: Integer; Valor: Double; NumCOO:String): Boolean;
     procedure FecharSiTEF;
     procedure FinalizarSiTEF;
     procedure CancelarSiTEF;
@@ -91,12 +91,13 @@ uses DataModulo, UnitLibrary, uExibeMenu, uObtemCampo;
 
 {$R *.dfm}
 
-procedure TdmSiTef.EfetuarPagamentoSiTef(FormaPagamento: Integer; Valor: Double; NumCOO:String);
+Function TdmSiTef.EfetuarPagamentoSiTef(FormaPagamento: Integer; Valor: Double; NumCOO:String):Boolean;
 begin
+  Result := True;
   if not ACBrTEFD1.TEFCliSiTef.Habilitado then exit;
-  
+
   InicializarSiTEF;
-  ACBrTEFD1.CRT( Valor, FormatFloat('00', FormaPagamento), NumCOO);  //ACBrECF1.NumCOO
+  Result := ACBrTEFD1.CRT( Valor, FormatFloat('00', FormaPagamento), NumCOO);  //ACBrECF1.NumCOO
   //verificar se deve guardar o ACBrECF1.NumCOO caso tenha que cancelar depois
 end;
 
