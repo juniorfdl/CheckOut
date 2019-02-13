@@ -54,6 +54,7 @@ type
     procedure ACBrTEFD1DepoisCancelarTransacoes(
       RespostasPendentes: TACBrTEFDRespostasPendentes);
   private
+    fValor: Double;
     estadoSimuladoEcf : tEstadoEcfSimulado;
     fSiTEFIniciado, fCancelado:Boolean;
     fevGetMensagem: TevGetMensagem;
@@ -93,8 +94,9 @@ uses DataModulo, UnitLibrary, uExibeMenu, uObtemCampo;
 
 procedure TdmSiTef.EfetuarPagamentoSiTef(FormaPagamento: Integer; Valor: Double; NumCOO:String);
 begin
-  if not ACBrTEFD1.TEFCliSiTef.Habilitado then exit;
+  if not ACBrTEFD1.TEFCliSiTef.Habilitado then exit;  
   
+  fValor := Valor;
   InicializarSiTEF;
   ACBrTEFD1.CRT( Valor, FormatFloat('00', FormaPagamento), NumCOO);  //ACBrECF1.NumCOO
   //verificar se deve guardar o ACBrECF1.NumCOO caso tenha que cancelar depois
@@ -510,12 +512,12 @@ begin
    case Operacao of
      ineSubTotal :
        begin
-        { ASubTotal := StringToFloatDef(edValorVenda.Text, 0);
+         ASubTotal := fValor;
          RetornoECF := FloatToStr(ASubTotal);
-         if estadoSimuladoEcf = tpsPagamento then
-           RetornoECF := FloatToStr(0);  }
+        { if estadoSimuladoEcf = tpsPagamento then
+           RetornoECF := FloatToStr(0);  
 
-         RetornoECF := '0';  
+         RetornoECF := '0';  }
        end;
 
      ineTotalAPagar :
