@@ -496,10 +496,8 @@ begin
     dm.ACBrPosPrinter.ControlePorta := False;
     dm.ACBrPosPrinter.Device.DeviceType := dtFile;
   end;
-=======
-  //dm.ACBrNFe.DANFE.ViaConsumidor := True;
-  //dm.ACBrNFe.DANFE.ImprimirItens := True;
->>>>>>> origin/master
+  dm.ACBrNFeDANFeESCPOS.ViaConsumidor := True;
+  dm.ACBrNFeDANFeESCPOS.ImprimeItens := True;
 
   ConfACBrPosPrinter; 
 end;
