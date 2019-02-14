@@ -1497,16 +1497,6 @@ begin
           DM.SQLTemplate.SQL.Add('NUMEICOD = ' + EntradaDados.text) ;
           DM.SQLTemplate.Open ;
 
-          if DM.SQLTemplate.FieldByName('NUMECVISTAPRAZO').Value = 'V' then
-            begin
-              EntradaDados.SelectAll ;
-              Informa('Este Numerário é a Vista!') ;
-              exit ;
-            end ;
-          ProvedorCartao   := dm.SQLLocate('PROVEDORCARTAO','PRCAA13ID','PRCAA60CARTAO',
-                              '"'+dm.SQLLocate('NUMERARIO','NUMEICOD','PRCAA13ID',
-                              SQLParcelasVistaVendaTempNUMEICOD.AsString)+'"');
-
           if (TipoPadrao = 'CRT') and (ProvedorCartao <> '') then
           begin
             if not dmSiTef.EfetuarPagamentoSiTef(NumerarioAtual, StrToFloat(EntradaDados.Text), '') then
@@ -1547,6 +1537,15 @@ begin
                 end ;
               SQLParcelasPrazoVendaTemp.First ;
               SQLParcelasPrazoVendaTemp.EnableControls;
+              if DM.SQLTemplate.FieldByName('NUMECVISTAPRAZO').Value = 'V' then
+                begin
+                  EntradaDados.SelectAll ;
+                  Informa('Este Numerário é a Vista!') ;
+                  exit ;
+                end ;
+              ProvedorCartao   := dm.SQLLocate('PROVEDORCARTAO','PRCAA13ID','PRCAA60CARTAO',
+                                  '"'+dm.SQLLocate('NUMERARIO','NUMEICOD','PRCAA13ID',
+                                  SQLParcelasVistaVendaTempNUMEICOD.AsString)+'"');
 
               // Testa se tem algum produto q nao pode vender Fiado ou Cheque Pre
               if (TipoPadrao = 'CRD') or (TipoPadrao = 'CHQP') then
