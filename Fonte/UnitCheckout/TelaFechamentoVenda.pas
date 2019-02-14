@@ -1503,6 +1503,19 @@ begin
               Informa('Este Numerário é a Vista!') ;
               exit ;
             end ;
+          ProvedorCartao   := dm.SQLLocate('PROVEDORCARTAO','PRCAA13ID','PRCAA60CARTAO',
+                              '"'+dm.SQLLocate('NUMERARIO','NUMEICOD','PRCAA13ID',
+                              SQLParcelasVistaVendaTempNUMEICOD.AsString)+'"');
+
+          if (TipoPadrao = 'CRT') and (ProvedorCartao <> '') then
+          begin
+            if not dmSiTef.EfetuarPagamentoSiTef(NumerarioAtual, StrToFloat(EntradaDados.Text), '') then
+            begin
+              EntradaDados.SelectAll ;
+              exit;
+            end
+            else fUsandoSitef := True;
+          end;
 
           DM.SQLTemplate.First ;
           if not DM.SQLTemplate.EOF then
