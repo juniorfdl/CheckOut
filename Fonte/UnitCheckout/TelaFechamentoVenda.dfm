@@ -27,7 +27,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
     Left = 150
     Top = 0
     Width = 1022
-    Height = 705
+    Height = 742
     Align = alLeft
     BorderStyle = bsNone
     Color = 5278518
@@ -35,7 +35,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
     TabOrder = 3
     DesignSize = (
       1022
-      705)
+      742)
     object LblNomeSistema: TRxLabel
       Left = 0
       Top = 0
@@ -1426,7 +1426,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       object LblVendedor: TRxLabel
         Left = 28
         Top = 91
-        Width = 91
+        Width = 92
         Height = 20
         Caption = 'Vendedor:'
         Color = 10567680
@@ -1523,7 +1523,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       object LblBonusTroca: TRxLabel
         Left = 569
         Top = 91
-        Width = 113
+        Width = 115
         Height = 20
         Caption = 'B'#244'nus Troca:'
         Color = 10567680
@@ -2023,7 +2023,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       object LblTotalVenda: TRxLabel
         Left = 5
         Top = 55
-        Width = 86
+        Width = 90
         Height = 32
         Caption = 'TOTAL'
         Color = 32767
@@ -2042,7 +2042,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
       object LblValorDescontoAcrescimo: TRxLabel
         Left = 5
         Top = 118
-        Width = 139
+        Width = 140
         Height = 29
         Caption = 'DESCONTO'
         Color = 32767
@@ -2362,7 +2362,7 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
     Left = 0
     Top = 0
     Width = 150
-    Height = 705
+    Height = 742
     Align = alLeft
     BevelInner = bvNone
     BevelOuter = bvNone
@@ -2374,8 +2374,8 @@ object FormTelaFechamentoVenda: TFormTelaFechamentoVenda
   object ScrollBoxDireita: TScrollBox
     Left = 1172
     Top = 0
-    Width = 194
-    Height = 705
+    Width = 190
+    Height = 742
     Align = alClient
     BorderStyle = bsNone
     Color = 5278518

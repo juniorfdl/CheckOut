@@ -1375,7 +1375,6 @@ begin
 
               vNUMECVISTAPRAZO:= dm.SQLLocate('NUMERARIO','NUMEICOD','NUMECVISTAPRAZO',SQLParcelasVistaVendaTempNUMEICOD.AsString);
 
-              if vNUMECVISTAPRAZO = 'V' then
               if (TipoPadrao = 'CRT') and (ProvedorCartao <> '') then
               begin
                 if not dmSiTef.EfetuarPagamentoSiTef(NumerarioAtual, StrToFloat(EntradaDados.Text), '') then
@@ -1504,7 +1503,7 @@ begin
           if not DM.SQLTemplate.EOF then
             begin
               NumerarioPrazo := DM.SQLTemplate.FieldByName('NUMEICOD').AsInteger ;
-
+              ValorPrazo := 0;
               SQLParcelasPrazoVendaTemp.DisableControls;
               SQLParcelasPrazoVendaTemp.First ;
               while not SQLParcelasPrazoVendaTemp.EOF do
@@ -1512,6 +1511,7 @@ begin
                   SQLParcelasPrazoVendaTemp.Edit ;
                   SQLParcelasPrazoVendaTempNUMEICOD.Value  := NumerarioPrazo ;
                   SQLParcelasPrazoVendaTempTIPOPADR.Value  := DM.SQLTemplate.FieldByName('NUMEA5TIPO').AsString ;
+                  ValorPrazo := ValorPrazo + SQLParcelasPrazoVendaTempVALORVENCTO.value;
                   if SQLParcelasPrazoVendaTempTIPOPADR.AsString = 'CRT' then
                     begin
                       if (SQLParcelasVistaVendaTempPRCAA60CARTAO.AsString <> SQLParcelasPrazoVendaTempPRCAA60CARTAO.AsString) and (SQLParcelasVistaVendaTempPRCAA60CARTAO.AsString <> '' ) then
@@ -1530,6 +1530,18 @@ begin
                 end ;
               SQLParcelasPrazoVendaTemp.First ;
               SQLParcelasPrazoVendaTemp.EnableControls;
+              vNUMECVISTAPRAZO:= dm.SQLLocate('NUMERARIO','NUMEICOD','NUMECVISTAPRAZO',SQLParcelasPrazoVendaTempNUMEICOD.AsString);
+
+              if (TipoPadrao = 'CRT') and (ProvedorCartao <> '') then
+              begin
+                if not dmSiTef.EfetuarPagamentoSiTef(NumerarioAtual, ValorPrazo, '') then
+                begin
+                  EntradaDados.SelectAll ;
+                  exit;
+                end
+                else fUsandoSitef := True;
+              end;
+
               if DM.SQLTemplate.FieldByName('NUMECVISTAPRAZO').Value = 'V' then
                 begin
                   EntradaDados.SelectAll ;
