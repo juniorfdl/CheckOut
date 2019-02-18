@@ -465,7 +465,7 @@ end ;
 
 procedure TFormTelaFechamentoVenda.EntradaDadosKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 Var
-  TotNumECF   : string ;
+  TotNumECF, vNUMECVISTAPRAZO : string ;
   Valor1, Valor2, ValorDevido : double ;
   DiaVctoConvenio, MesVctoConvenio, MesVctoConvenioAnt, DataConevio : String;
   InicioCompraConvenio, FimCompraConveio, PrimeiraParcela, Ndias : TDateTime;
@@ -1372,7 +1372,10 @@ begin
                 '"'+dm.SQLLocate('NUMERARIO','NUMEICOD','PRCAA13ID',
                 SQLParcelasVistaVendaTempNUMEICOD.AsString
                 )+'"');
-                
+
+              vNUMECVISTAPRAZO:= dm.SQLLocate('NUMERARIO','NUMEICOD','NUMECVISTAPRAZO',SQLParcelasVistaVendaTempNUMEICOD.AsString);
+
+              if vNUMECVISTAPRAZO = 'V' then
               if (TipoPadrao = 'CRT') and (ProvedorCartao <> '') then
               begin
                 if not dmSiTef.EfetuarPagamentoSiTef(NumerarioAtual, StrToFloat(EntradaDados.Text), '') then
@@ -1495,17 +1498,7 @@ begin
           DM.SQLTemplate.SQL.Add('select * from NUMERARIO') ;
           DM.SQLTemplate.SQL.Add('where') ;
           DM.SQLTemplate.SQL.Add('NUMEICOD = ' + EntradaDados.text) ;
-          DM.SQLTemplate.Open ;
-
-          if (TipoPadrao = 'CRT') and (ProvedorCartao <> '') then
-          begin
-            if not dmSiTef.EfetuarPagamentoSiTef(NumerarioAtual, StrToFloat(EntradaDados.Text), '') then
-            begin
-              EntradaDados.SelectAll ;
-              exit;
-            end
-            else fUsandoSitef := True;
-          end;
+          DM.SQLTemplate.Open ;     
 
           DM.SQLTemplate.First ;
           if not DM.SQLTemplate.EOF then
