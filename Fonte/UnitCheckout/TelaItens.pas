@@ -3424,6 +3424,9 @@ begin
           end;
       end;
     VK_F12: begin
+     
+        if dmSiTef.AbrirADM then exit;
+
         if (TerminalModo = 'P') and (ECFAtual = '') then
         begin
           InformaG('O sistema não pode movimentar caixa em um terminal que está operando como Pré-Venda!');

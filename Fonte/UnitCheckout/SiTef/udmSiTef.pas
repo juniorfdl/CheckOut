@@ -12,8 +12,8 @@ type
   
   TevMostrarMensagem = Procedure(pMsg:String) of object;
   TevGetMensagem = Function:String of object;
-  
-  TdmSiTef = class(TDataModule)
+
+  TdmSiTef = class(TDataModule)      
     ACBrTEFD1: TACBrTEFD;
     procedure ACBrTEFD1CliSiTefExibeMenu(Titulo: String;
       Opcoes: TStringList; var ItemSelecionado: Integer;
@@ -55,8 +55,9 @@ type
       RespostasPendentes: TACBrTEFDRespostasPendentes);
   private
     fValor: Double;
+    fFormaPagamento:Integer;
     estadoSimuladoEcf : tEstadoEcfSimulado;
-    fSiTEFIniciado, fCancelado:Boolean;
+    fSiTEFIniciado, fCancelado, fPodeCancelar:Boolean;
     fevGetMensagem: TevGetMensagem;
     fevMostrarMensagemOperador: TevMostrarMensagem;
     fevMostrarInstrucoes: TevMostrarMensagem;
@@ -80,8 +81,13 @@ type
     procedure FecharSiTEF;
     procedure FinalizarSiTEF;
     procedure CancelarSiTEF;
-    
+    function AbrirADM: Boolean;
+    procedure CancelarOperacao;
   end;
+
+  const
+    fMensagemPodeCancelar = 'Tecle "ESC" para cancelar.';
+    fTituloCondicaoPagamento = 'Selecione a forma de pagamento';
 
 var
   dmSiTef: TdmSiTef;
@@ -99,6 +105,7 @@ begin
   
   fValor := Valor;
   InicializarSiTEF;
+  fFormaPagamento:= FormaPagamento;
   Result := ACBrTEFD1.CRT( Valor, FormatFloat('00', FormaPagamento), NumCOO);  //ACBrECF1.NumCOO
   //verificar se deve guardar o ACBrECF1.NumCOO caso tenha que cancelar depois
 end;
@@ -144,6 +151,7 @@ begin
       ACBrTEFD1.EsperaSleep := INI.ReadInteger('CONF', 'EsperaSleep', 250);
       ACBrTEFD1.EsperaSTS := INI.ReadInteger('CONF', 'EsperaSTS', 7);
       ACBrTEFD1.ImprimirViaClienteReduzida := INI.ReadBool('CONF', 'ImprimirViaClienteReduzida', False);
+      ACBrTEFD1.NumeroMaximoCartoes := INI.ReadInteger('CONF', 'NumeroMaximoCartoes', 0);
     finally
       INI.Free;
     end;
@@ -203,7 +211,21 @@ procedure TdmSiTef.ACBrTEFD1CliSiTefExibeMenu(Titulo: String;
 Var
   AForm : TfExibeMenu ;
   MR    : TModalResult;
+  vSITEF_NRO_CONDICAO_PAG:String;
 begin
+
+  if fTituloCondicaoPagamento = Titulo then
+  begin
+    vSITEF_NRO_CONDICAO_PAG := SQLLocate('NUMERARIO','NUMEICOD','SITEF_NRO_CONDICAO_PAG',InttoStr(fFormaPagamento));
+
+    if vSITEF_NRO_CONDICAO_PAG <> '' then
+    begin
+      ItemSelecionado:= strtoint(vSITEF_NRO_CONDICAO_PAG);
+      exit;
+    end;
+
+  end;
+
   AForm := TfExibeMenu.Create(self);
   try
     AForm.Panel1.Caption := Titulo;
@@ -214,7 +236,11 @@ begin
     VoltarMenu := (MR = mrRetry) ;
 
     if (MR = mrOK) then
+    begin
       ItemSelecionado := AForm.ListBox1.ItemIndex;
+      ExecSql(' update NUMERARIO set SITEF_NRO_CONDICAO_PAG = '+inttoStr(ItemSelecionado)
+      +' where NUMEICOD = '+inttostr(fFormaPagamento),1);
+    end;
   finally
     AForm.Free;
   end;
@@ -231,6 +257,7 @@ begin
   AForm := TfObtemCampo.Create(self);
   try
     AForm.Panel1.Caption := Titulo;
+    addLog(Titulo+' Tamanho Maximo Retorno SiTef: '+ inttoStr(TamanhoMaximo));
     AForm.TamanhoMaximo  := TamanhoMaximo;
     AForm.TamanhoMinimo  := TamanhoMinimo;
     AForm.Operacao       := Operacao;
@@ -266,7 +293,7 @@ begin
            //       um clique apenas no botão cancelar.... FALTA CORRIGIR NO DEMO
         end ;
 
-        Msg := 'Tecle "ESC" para cancelar.';
+        Msg := fMensagemPodeCancelar;
         //bCancelarResp.Visible := True ;
         fCancelado := False;
      end;
@@ -560,6 +587,8 @@ end;
 
 procedure TdmSiTef.MostrarInstrucoes(pMsg: String);
 begin
+  fPodeCancelar := fMensagemPodeCancelar = pMsg;
+
   if Assigned(fevMostrarInstrucoes) then
     fevMostrarInstrucoes(pMsg);
 end;
@@ -630,6 +659,24 @@ begin
 
      end;
   end;
+end;
+
+Function TdmSiTef.AbrirADM:Boolean;
+begin
+  if not ACBrTEFD1.TEFCliSiTef.Habilitado then exit;
+
+  InicializarSiTEF;
+  ACBrTEFD1.ADM(ACBrTEFD1.GPAtual);
+  Result := True;
+end;
+
+procedure TdmSiTef.CancelarOperacao;
+begin
+  if not fSiTEFIniciado then exit;
+
+  if not fPodeCancelar then exit;
+  
+  fCancelado := True;
 end;
 
 end.

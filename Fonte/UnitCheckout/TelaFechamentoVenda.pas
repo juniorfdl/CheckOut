@@ -3554,6 +3554,11 @@ var
   NomeClie : string ;
   RetornoUser : TInfoRetornoUser;
 begin
+  if (Key = 27) then
+  begin
+    dmSiTef.CancelarOperacao;
+  end;  
+
   case Key of
      VK_F1:begin
              if FinalizacaodeVenda then exit;
@@ -3824,6 +3829,7 @@ begin
 
            end ;
     VK_F12:begin
+             if dmSiTef.AbrirADM then exit;
              if FinalizacaodeVenda then exit;
            end ;
   else
