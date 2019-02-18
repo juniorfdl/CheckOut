@@ -3423,9 +3423,8 @@ begin
               rxClienteNome.caption := SQLLocate('CLIENTE', 'CLIEA13ID', 'CLIEA60RAZAOSOC', '''' + ClienteVenda + '''');
           end;
       end;
-    VK_F12: begin
-     
-        if dmSiTef.AbrirADM then exit;
+    VK_F12: begin     
+
 
         if (TerminalModo = 'P') and (ECFAtual = '') then
         begin
@@ -3451,6 +3450,8 @@ begin
         Dm.SQLTerminalAtivo.Open;
         FormTelaMovimentoCaixa.EditData.Date := Date;
         FormTelaMovimentoCaixa.ShowModal;
+
+        if dmSiTef.AbrirADM then exit; // russimar só tem que saber quando chamar
 
              {Testa pra ver se tem caminho ao Servidor para definir se o PDV é Offline}
         if dm.ConectaServidor then

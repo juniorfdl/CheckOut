@@ -73,7 +73,7 @@ begin
    begin
       if Length( Edit1.Text ) < TamanhoMinimo then
       begin
-         ShowMessage('O Tamanho MÃ­nimo para este campo e: '+IntToStr(TamanhoMinimo) );
+         ShowMessage('O Tamanho Mínimo para este campo e: '+IntToStr(TamanhoMinimo) );
          CanClose := False ;
          Edit1.SetFocus;
       end;
@@ -85,6 +85,9 @@ begin
    if Operacao = tcDouble then
       Edit1.Text := '0,00' ;
    Edit1.SetFocus;
+
+   if pos('Seguran',Panel1.Caption) > 0 then
+     Edit1.PasswordChar:= '*';
 end;
 
 end.

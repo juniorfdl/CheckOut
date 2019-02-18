@@ -13,6 +13,9 @@ object fObtemCampo: TfObtemCampo
   FormStyle = fsStayOnTop
   OldCreateOrder = True
   Position = poOwnerFormCenter
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnShow = FormShow
   DesignSize = (
     509
     164)
@@ -25,6 +28,7 @@ object fObtemCampo: TfObtemCampo
     Height = 32
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
+    OnKeyPress = Edit1KeyPress
   end
   object BitBtn1: TBitBtn
     Left = 84
