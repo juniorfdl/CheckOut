@@ -280,8 +280,10 @@ begin
     Close;
    end;
    if SQLOperacaoCaixaOPCXA5SIGLA.Value = 'SITEF' then
+   begin
      if dmSiTef.AbrirADM then exit;
-
+     Close;
+   end;
 
    GravarFechamentoCupom;
 

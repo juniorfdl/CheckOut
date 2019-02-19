@@ -18,7 +18,7 @@ object fObtemCampo: TfObtemCampo
   OnShow = FormShow
   DesignSize = (
     509
-    164)
+    165)
   PixelsPerInch = 96
   TextHeight = 24
   object Edit1: TEdit
@@ -46,6 +46,7 @@ object fObtemCampo: TfObtemCampo
     Width = 102
     Height = 35
     Anchors = [akTop]
+    Caption = 'Cancelar'
     TabOrder = 4
     Kind = bkCancel
   end
@@ -55,6 +56,7 @@ object fObtemCampo: TfObtemCampo
     Width = 102
     Height = 35
     Anchors = [akTop]
+    Caption = '&Voltar'
     TabOrder = 2
     Kind = bkRetry
   end
