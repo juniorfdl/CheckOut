@@ -1,6 +1,6 @@
 object FormConsultaProvedor: TFormConsultaProvedor
-  Left = 138
-  Top = 99
+  Left = 246
+  Top = 144
   AutoSize = True
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle

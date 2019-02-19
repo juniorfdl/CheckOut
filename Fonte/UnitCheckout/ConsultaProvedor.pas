@@ -44,7 +44,7 @@ var
 
 implementation
 
-uses UnitLibrary, CartaoCredito, TelaItens;
+uses UnitLibrary, CartaoCredito, TelaItens, udmSiTef;
 
 {$R *.dfm}
 

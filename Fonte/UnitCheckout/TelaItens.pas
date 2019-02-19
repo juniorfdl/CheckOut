@@ -3451,7 +3451,6 @@ begin
         FormTelaMovimentoCaixa.EditData.Date := Date;
         FormTelaMovimentoCaixa.ShowModal;
 
-        if dmSiTef.AbrirADM then exit; // russimar só tem que saber quando chamar
 
              {Testa pra ver se tem caminho ao Servidor para definir se o PDV é Offline}
         if dm.ConectaServidor then

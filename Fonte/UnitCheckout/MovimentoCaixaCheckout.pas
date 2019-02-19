@@ -139,7 +139,7 @@ implementation
 uses DataModulo, UnitLibrary, ECFCheckout, UnitCheckoutLibrary, Epson_Termica,
   TelaFechamentoCaixa, TelaConsultaRapidaCupom, Corisco_CT7000_V3, ACBrPosPrinter,
   IMPNAOFISCAL, Sigtron_FS345, Bematech_MP20_FI_II, BemaFi32, Elgin_FIT,
-  TelaItens, udmECF;
+  TelaItens, udmECF, udmSiTef;
 
 {$R *.DFM}
 procedure TFormTelaMovimentoCaixa.FormClose(Sender: TObject;
@@ -279,6 +279,9 @@ begin
     FormTelaItens.TefAdm;
     Close;
    end;
+   if SQLOperacaoCaixaOPCXA5SIGLA.Value = 'SITEF' then
+     if dmSiTef.AbrirADM then exit;
+
 
    GravarFechamentoCupom;
 
