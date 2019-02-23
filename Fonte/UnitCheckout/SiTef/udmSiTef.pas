@@ -57,7 +57,7 @@ type
     fValor: Double;
     fFormaPagamento:Integer;
     estadoSimuladoEcf : tEstadoEcfSimulado;
-    fSiTEFIniciado, fCancelado, fPodeCancelar:Boolean;
+    fSiTEFIniciado, fCancelado, fPodeCancelar, fIniciouPagamento:Boolean;
     fevGetMensagem: TevGetMensagem;
     fevMostrarMensagemOperador: TevMostrarMensagem;
     fevMostrarInstrucoes: TevMostrarMensagem;
@@ -106,6 +106,7 @@ begin
   fValor := Valor;
   InicializarSiTEF;
   fFormaPagamento:= FormaPagamento;
+  fIniciouPagamento:= True;
   Result := ACBrTEFD1.CRT( Valor, FormatFloat('00', FormaPagamento), NumCOO);  //ACBrECF1.NumCOO
   //verificar se deve guardar o ACBrECF1.NumCOO caso tenha que cancelar depois
 end;
@@ -212,19 +213,23 @@ Var
   AForm : TfExibeMenu ;
   MR    : TModalResult;
   vSITEF_NRO_CONDICAO_PAG:String;
-begin
-
-  if fTituloCondicaoPagamento = Titulo then
+  vAtualizarNumerario:Boolean;
+begin 
+  vAtualizarNumerario:= False; 
+  if (fTituloCondicaoPagamento = Titulo)and(fIniciouPagamento) then
   begin
+    fIniciouPagamento:= False;
     vSITEF_NRO_CONDICAO_PAG := SQLLocate('NUMERARIO','NUMEICOD','SITEF_NRO_CONDICAO_PAG',InttoStr(fFormaPagamento));
 
     if vSITEF_NRO_CONDICAO_PAG <> '' then
     begin
       ItemSelecionado:= strtoint(vSITEF_NRO_CONDICAO_PAG);
       exit;
-    end;
-
+    end
+    else vAtualizarNumerario:= True;   
   end;
+
+  fIniciouPagamento:= False;
 
   AForm := TfExibeMenu.Create(self);
   try
@@ -238,8 +243,11 @@ begin
     if (MR = mrOK) then
     begin
       ItemSelecionado := AForm.ListBox1.ItemIndex;
-      ExecSql(' update NUMERARIO set SITEF_NRO_CONDICAO_PAG = '+inttoStr(ItemSelecionado)
-      +' where NUMEICOD = '+inttostr(fFormaPagamento),1);
+      if vAtualizarNumerario then
+      begin
+        ExecSql(' update NUMERARIO set SITEF_NRO_CONDICAO_PAG = '+inttoStr(ItemSelecionado)
+        +' where NUMEICOD = '+inttostr(fFormaPagamento),1);
+      end;
     end;
   finally
     AForm.Free;
@@ -256,6 +264,7 @@ Var
 begin
   AForm := TfObtemCampo.Create(self);
   try
+    AForm.Caption := AForm.Caption+' - '+inttostr(TipoCampo);
     AForm.Panel1.Caption := Titulo;
     addLog(Titulo+' Tamanho Maximo Retorno SiTef: '+ inttoStr(TamanhoMaximo));
     AForm.TamanhoMaximo  := TamanhoMaximo;
@@ -365,13 +374,13 @@ begin
         begin
           MemoCupomTEF.Lines.Add('PulaLinhas');
           Sleep(200);
-        end;
+        end;   
 
       opeImprimePagamentos :
         begin
-          MemoCupomTEF.Lines.Add('ImprimePagamentos');
-        end;
-    end; }
+          showmessage('ImprimePagamentos');
+        end;   
+    end;       }
     RetornoECF := 1 ;
   except
     RetornoECF := 0 ;
@@ -470,6 +479,7 @@ begin
           dm.ACBrPosPrinter.Imprimir('Rede: '  + Rede, True);
           dm.ACBrPosPrinter.Imprimir('NSU: '  + NSU, True);
           dm.ACBrPosPrinter.Imprimir('Valor: '  + FormatFloat('###,###,##0.00',ValorTotal), True);
+          dm.ACBrPosPrinter.Imprimir('Data: '  + FormatDateTime('dd/mm/yyyy hh:mm',DataHoraTransacaoHost));
           vCampo11:= LeInformacao(11,0).AsString;
 
           if trim(vCampo11) <> '' then

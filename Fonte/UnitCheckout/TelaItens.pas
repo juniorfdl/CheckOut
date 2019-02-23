@@ -5499,10 +5499,9 @@ end;
 procedure TFormTelaItens.TimerLeitorTimer(Sender: TObject);
 begin
 
-  if (FileExists('TelaAtiva.txt'))and(Screen.ActiveForm.active) then
-    Screen.ActiveForm.BringToFront;
-
-  try              
+  try
+    if (FileExists('TelaAtiva.txt'))and(Screen.ActiveForm.active) then
+      Screen.ActiveForm.BringToFront;   
 
    { PanelDataHora.Caption := FormatDateTime('ddddddddddddd hh:mm:ss', Now);
     PanelDataHora.Update; }

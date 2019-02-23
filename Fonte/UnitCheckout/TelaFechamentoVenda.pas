@@ -1290,7 +1290,7 @@ begin
               exit ;
             end ;
 
-          if (TipoPadrao = 'CRT') and (StrToFloat(EntradaDados.Text) > ValorEntrada.Value) then
+          if (TipoPadrao = 'CRT') and (StrToFloatDef(EntradaDados.Text,0) > ValorEntrada.Value) then
           begin
             Informa('Valor Informado excede o permitido!') ;
             EntradaDados.SelectAll ;
@@ -1299,7 +1299,7 @@ begin
 
           if dm.SQLConfigVendaVALOR_LIMITE_PAGTO.AsFloat > 0 then
           begin
-            if (StrToFloat(EntradaDados.Text) >= dm.SQLConfigVendaVALOR_LIMITE_PAGTO.AsFloat) then
+            if (StrToFloatDef(EntradaDados.Text,0) >= dm.SQLConfigVendaVALOR_LIMITE_PAGTO.AsFloat) then
             begin
               Informa('Valor Informado excede o permitido, verifique nos parâmetros de venda!') ;
               EntradaDados.SelectAll ;
@@ -1336,14 +1336,14 @@ begin
                   SQLParcelasVistaVendaTempTERMICOD.Value := TerminalAtual ;
                   SQLParcelasVistaVendaTempNROITEM.Value  := NroIt ;
                   SQLParcelasVistaVendaTempNUMEICOD.Value := NumerarioVista ;
-                  Valor1 := StrToFloat(EntradaDados.Text) ;
+                  Valor1 := StrToFloatDef(EntradaDados.Text,0);
                   if (Valor1 > ValorDevido) and (ValorDevido > 0) then
                     begin
                       //SQLParcelasVistaVendaTempVALORPARC.Value := StrToFloat(EntradaDados.Text) - (StrToFloat(EntradaDados.Text) - ValorDevido) ;
-                      SQLParcelasVistaVendaTempVALORPARC.Value := StrToFloat(EntradaDados.Text);
+                      SQLParcelasVistaVendaTempVALORPARC.Value := StrToFloatDef(EntradaDados.Text,0);
                     end
                   else
-                    SQLParcelasVistaVendaTempVALORPARC.Value := StrToFloat(EntradaDados.Text) ;
+                    SQLParcelasVistaVendaTempVALORPARC.Value := StrToFloatDef(EntradaDados.Text,0) ;
                   SQLParcelasVistaVendaTempTIPOPADR.Value    := TipoPadrao ;
                   SQLParcelasVistaVendaTemp.Post ;
                 end
@@ -1360,9 +1360,9 @@ begin
                   AtualizarSaldoEdit;
 
                   SQLParcelasVistaVendaTemp.Edit ;
-                 // SQLParcelasVistaVendaTempVALORPARC.Value := StrToFloat(EntradaDados.Text) - ValorDevido ;
-                 //SQLParcelasVistaVendaTempVALORPARC.Value := StrToFloat(EntradaDados.Text) + VarValorRecebido ;
-                 SQLParcelasVistaVendaTempVALORPARC.Value := StrToFloat(EntradaDados.Text) + SQLParcelasVistaVendaTempVALORPARC.Value;
+                 // SQLParcelasVistaVendaTempVALORPARC.Value := StrToFloatDef(EntradaDados.Text,0) - ValorDevido ;
+                 //SQLParcelasVistaVendaTempVALORPARC.Value := StrToFloatDef(EntradaDados.Text,0) + VarValorRecebido ;
+                 SQLParcelasVistaVendaTempVALORPARC.Value := StrToFloatDef(EntradaDados.Text,0) + SQLParcelasVistaVendaTempVALORPARC.Value;
 
                   SQLParcelasVistaVendaTempTIPOPADR.Value  := TipoPadrao ;
                   SQLParcelasVistaVendaTemp.Post ;
@@ -1377,7 +1377,7 @@ begin
 
               if (TipoPadrao = 'CRT') and (ProvedorCartao <> '') then
               begin
-                if not dmSiTef.EfetuarPagamentoSiTef(NumerarioAtual, StrToFloat(EntradaDados.Text), '') then
+                if not dmSiTef.EfetuarPagamentoSiTef(NumerarioAtual, StrToFloatDef(EntradaDados.Text,0), '') then
                 begin
                   EntradaDados.SelectAll ;
                   exit;
@@ -1398,7 +1398,7 @@ begin
               SQLParcelasVistaVendaTemp.SQL.Add('where TERMICOD = ' + IntToStr(TerminalAtual)) ;
               SQLParcelasVistaVendaTemp.Open ;
 
-              ValorRecebido.Value := ValorRecebido.Value + StrToFloat(EntradaDados.Text) ;
+              ValorRecebido.Value := ValorRecebido.Value + StrToFloatDef(EntradaDados.Text,0) ;
               VarValorRecebido    := ValorRecebido.Value;
               AtualizarSaldoEdit;
               EntradaDados.Clear ;
@@ -1765,7 +1765,7 @@ begin
             exit ;
           end ;
 
-          ValorDiminuirAcresc := StrToFloat(EntradaDados.Text) ;
+          ValorDiminuirAcresc := StrToFloatDef(EntradaDados.Text,0) ;
           ValorDescontoAcrescimo.Value := 0 ;
           ValorEntrada.Value           := 0 ;
 
@@ -1779,7 +1779,7 @@ begin
       if EstadoFechVenda = InformandoDesconto then
         begin
          { try
-            EntradaDados.Text := FloatToStr(StrToFloat(EntradaDados.Text)) ;
+            EntradaDados.Text := FloatToStr(StrToFloatDef(EntradaDados.Text,0)) ;
           except
             Informa('Valor inválido !') ;
             exit ;

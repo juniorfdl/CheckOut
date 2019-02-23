@@ -10,7 +10,6 @@ object fObtemCampo: TfObtemCampo
   Font.Height = -19
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  FormStyle = fsStayOnTop
   OldCreateOrder = True
   Position = poOwnerFormCenter
   OnCloseQuery = FormCloseQuery
@@ -18,7 +17,7 @@ object fObtemCampo: TfObtemCampo
   OnShow = FormShow
   DesignSize = (
     509
-    165)
+    164)
   PixelsPerInch = 96
   TextHeight = 24
   object Edit1: TEdit

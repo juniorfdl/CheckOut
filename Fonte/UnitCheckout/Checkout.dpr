@@ -196,13 +196,17 @@ uses
   udmECF in 'udmECF.pas' {dmECF: TDataModule},
   uExibeMenu in 'SiTef\uExibeMenu.pas' {fExibeMenu},
   uObtemCampo in 'SiTef\uObtemCampo.pas' {fObtemCampo},
-  udmSiTef in 'SiTef\udmSiTef.pas' {dmSiTef: TDataModule};
+  udmSiTef in 'SiTef\udmSiTef.pas' {dmSiTef: TDataModule},
+  ExceptLog in '..\ExceptLog.pas',
+  MemCheck in '..\MemCheck.pas';
 
 {$R *.RES}
 
 var
   hMapping: hwnd;
 begin
+  OutputDebugString('c:\Easy2Solutions\Temp');
+
   //Este código foi testado no arquivo dpr do projeto
   hMapping := CreateFileMapping(HWND($FFFFFFFF),
     nil,
@@ -234,7 +238,6 @@ begin
   F12 := Vk_F12;
   Application.Title := 'Cupom Fiscal';
   Application.CreateForm(TDM, DM);
-  
   if (DM.OBSAutorizacao <> '') or (dm.SQLConfigGeralCFGECBLOQ.AsString = 'S') and(not DelphiAberto) then
   begin
     FormTelaAtivacao := TFormTelaAtivacao.Create(Application);

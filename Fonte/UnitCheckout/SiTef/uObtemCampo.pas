@@ -45,6 +45,8 @@ var
 
 implementation
 
+uses UnitLibrary;
+
 { TForm5 }
 
 procedure TfObtemCampo.FormCreate(Sender : TObject);
@@ -78,16 +80,30 @@ begin
          Edit1.SetFocus;
       end;
    end;
+
+
+  if (ModalResult = mrOK) and (TipoCampo = 500) and (ExecSql(' select USUAICOD from USUARIO WHERE USUACPERMITEADM = ''S'' AND USUAA5SENHA = '
+    +Quotedstr(Edit1.Text)).IsEmpty) then
+  begin
+    ShowMessage('Senha do Supervisor Inválida!');
+    CanClose := False ;
+    Edit1.SetFocus;
+  end;
+
 end;
 
 procedure TfObtemCampo.FormShow(Sender : TObject);
 begin
    if Operacao = tcDouble then
       Edit1.Text := '0,00' ;
-   Edit1.SetFocus;
 
-   if pos('Seguran',Panel1.Caption) > 0 then
+   Edit1.SetFocus; 
+
+   if (TipoCampo = 514) or (TipoCampo = 505)or (TipoCampo = 500) then //Codigo de eguranca // nro parcela
+   begin
      Edit1.PasswordChar:= '*';
+     Operacao := tcCMC7;
+   end;
 end;
 
 end.
