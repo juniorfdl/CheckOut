@@ -117,6 +117,12 @@ type
     Label24: TLabel;
     RxDBComboBox10: TRxDBComboBox;
     SQLTemplateATUALIZA_PRECO_CUSTO: TStringField;
+    Label25: TLabel;
+    RxDBComboBox11: TRxDBComboBox;
+    Label26: TLabel;
+    RxDBComboBox12: TRxDBComboBox;
+    SQLTemplateCALCULAR_ST_RETIDO: TStringField;
+    SQLTemplateCALCULAR_ST_RETIDO_FIS: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure AcessaSeriesClick(Sender: TObject);
     procedure SQLTemplateNewRecord(DataSet: TDataSet);

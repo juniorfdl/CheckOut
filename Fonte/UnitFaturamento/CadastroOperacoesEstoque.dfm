@@ -1,6 +1,6 @@
 inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
-  Left = 125
-  Top = 4
+  Left = 308
+  Top = 5
   Caption = 'Opera'#231#245'es de Estoque'
   ClientHeight = 696
   ClientWidth = 955
@@ -769,7 +769,7 @@ inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
                   ParentFont = False
                 end
                 object Label9: TLabel
-                  Left = 315
+                  Left = 298
                   Top = 16
                   Width = 65
                   Height = 13
@@ -795,11 +795,24 @@ inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
                   ParentFont = False
                 end
                 object Label18: TLabel
-                  Left = 428
+                  Left = 393
                   Top = 15
                   Width = 94
                   Height = 13
                   Caption = 'Subst. Tribut'#225'ria'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = 8404992
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = [fsBold]
+                  ParentFont = False
+                end
+                object Label25: TLabel
+                  Left = 492
+                  Top = 15
+                  Width = 54
+                  Height = 13
+                  Caption = 'ST Retido'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = 8404992
                   Font.Height = -11
@@ -828,7 +841,7 @@ inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
                 object ComboCalcICMS: TRxDBComboBox
                   Left = 202
                   Top = 32
-                  Width = 110
+                  Width = 92
                   Height = 21
                   Style = csDropDownList
                   DataField = 'OPESCCALCICMS'
@@ -846,9 +859,9 @@ inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
                     'D')
                 end
                 object ComboCalcIPI: TRxDBComboBox
-                  Left = 315
+                  Left = 297
                   Top = 32
-                  Width = 110
+                  Width = 92
                   Height = 21
                   Style = csDropDownList
                   DataField = 'OPESCCALCIPI'
@@ -864,9 +877,9 @@ inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
                     'N')
                 end
                 object RxDBComboBox4: TRxDBComboBox
-                  Left = 428
+                  Left = 393
                   Top = 32
-                  Width = 110
+                  Width = 92
                   Height = 21
                   Style = csDropDownList
                   DataField = 'OPESCCALCSUBST'
@@ -877,6 +890,24 @@ inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
                     'Calcular'
                     'n'#227'o Calcular')
                   TabOrder = 3
+                  Values.Strings = (
+                    'S'
+                    'N')
+                end
+                object RxDBComboBox11: TRxDBComboBox
+                  Left = 492
+                  Top = 32
+                  Width = 92
+                  Height = 21
+                  Style = csDropDownList
+                  DataField = 'CALCULAR_ST_RETIDO'
+                  DataSource = DSTemplate
+                  EnableValues = True
+                  ItemHeight = 13
+                  Items.Strings = (
+                    'Calcular'
+                    'n'#227'o Calcular')
+                  TabOrder = 4
                   Values.Strings = (
                     'S'
                     'N')
@@ -960,7 +991,7 @@ inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
                   ParentFont = False
                 end
                 object Label16: TLabel
-                  Left = 315
+                  Left = 295
                   Top = 16
                   Width = 65
                   Height = 13
@@ -986,11 +1017,24 @@ inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
                   ParentFont = False
                 end
                 object Label19: TLabel
-                  Left = 428
+                  Left = 392
                   Top = 16
                   Width = 94
                   Height = 13
                   Caption = 'Subst. Tribut'#225'ria'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = 8404992
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = [fsBold]
+                  ParentFont = False
+                end
+                object Label26: TLabel
+                  Left = 492
+                  Top = 15
+                  Width = 54
+                  Height = 13
+                  Caption = 'ST Retido'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = 8404992
                   Font.Height = -11
@@ -1019,7 +1063,7 @@ inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
                 object RxDBComboBox2: TRxDBComboBox
                   Left = 202
                   Top = 32
-                  Width = 110
+                  Width = 92
                   Height = 21
                   Style = csDropDownList
                   DataField = 'OPESCCALCICMSFIS'
@@ -1037,9 +1081,9 @@ inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
                     'D')
                 end
                 object RxDBComboBox3: TRxDBComboBox
-                  Left = 315
+                  Left = 295
                   Top = 32
-                  Width = 110
+                  Width = 92
                   Height = 21
                   Style = csDropDownList
                   DataField = 'OPESCCALCIPIFIS'
@@ -1055,9 +1099,9 @@ inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
                     'N')
                 end
                 object RxDBComboBox6: TRxDBComboBox
-                  Left = 428
+                  Left = 392
                   Top = 32
-                  Width = 110
+                  Width = 92
                   Height = 21
                   Style = csDropDownList
                   DataField = 'OPESCCALCSUBSTFIS'
@@ -1068,6 +1112,24 @@ inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
                     'Calcular'
                     'n'#227'o Calcular')
                   TabOrder = 3
+                  Values.Strings = (
+                    'S'
+                    'N')
+                end
+                object RxDBComboBox12: TRxDBComboBox
+                  Left = 492
+                  Top = 32
+                  Width = 92
+                  Height = 21
+                  Style = csDropDownList
+                  DataField = 'CALCULAR_ST_RETIDO_FIS'
+                  DataSource = DSTemplate
+                  EnableValues = True
+                  ItemHeight = 13
+                  Items.Strings = (
+                    'Calcular'
+                    'n'#227'o Calcular')
+                  TabOrder = 4
                   Values.Strings = (
                     'S'
                     'N')
@@ -1394,6 +1456,18 @@ inherited FormCadastroOperacoesEstoque: TFormCadastroOperacoesEstoque
     object SQLTemplateATUALIZA_PRECO_CUSTO: TStringField
       FieldName = 'ATUALIZA_PRECO_CUSTO'
       Origin = 'DB.OPERACAOESTOQUE.ATUALIZA_PRECO_CUSTO'
+      FixedChar = True
+      Size = 1
+    end
+    object SQLTemplateCALCULAR_ST_RETIDO: TStringField
+      FieldName = 'CALCULAR_ST_RETIDO'
+      Origin = 'DB.OPERACAOESTOQUE.CALCULAR_ST_RETIDO'
+      FixedChar = True
+      Size = 1
+    end
+    object SQLTemplateCALCULAR_ST_RETIDO_FIS: TStringField
+      FieldName = 'CALCULAR_ST_RETIDO_FIS'
+      Origin = 'DB.OPERACAOESTOQUE.CALCULAR_ST_RETIDO_FIS'
       FixedChar = True
       Size = 1
     end
