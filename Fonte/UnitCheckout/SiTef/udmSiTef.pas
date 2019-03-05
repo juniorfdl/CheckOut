@@ -54,6 +54,7 @@ type
     procedure ACBrTEFD1DepoisCancelarTransacoes(
       RespostasPendentes: TACBrTEFDRespostasPendentes);
   private
+    fExecutandoADM:Boolean;
     fValor: Double;
     fFormaPagamento:Integer;
     estadoSimuladoEcf : tEstadoEcfSimulado;
@@ -69,6 +70,7 @@ type
     Procedure MostrarMensagemOperador(pMsg:String);
     Procedure MostrarMensagemCliente(pMsg:String);
     Function GetMensagemOperador:String;
+   	procedure ReImprimir(pValue:String);
     { Private declarations }
   public
     { Public declarations }
@@ -102,7 +104,7 @@ Function TdmSiTef.EfetuarPagamentoSiTef(FormaPagamento: Integer; Valor: Double; 
 begin
   Result := True;
   if not ACBrTEFD1.TEFCliSiTef.Habilitado then exit;
-      
+  
   fValor := Valor;
   InicializarSiTEF;
   fFormaPagamento:= FormaPagamento;
@@ -167,6 +169,7 @@ begin
       end;
     end;
 
+    ACBrTEFD1.CancelarTransacoesPendentes;
     fCancelandoAoIniciar := True;
     try
       ACBrTEFD1.CancelarTransacoesPendentes;
@@ -193,6 +196,7 @@ begin
 
   ACBrTEFD1.DesInicializar( ACBrTEFD1.GPAtual );
   fSiTEFIniciado:= False;
+  //Self.FinalizarSiTEF;
 end;
 
 procedure TdmSiTef.FecharSiTEF;
@@ -202,7 +206,6 @@ begin
   ACBrTEFD1.ConfirmarTransacoesPendentes;
   ACBrTEFD1.ImprimirTransacoesPendentes;
   ACBrTEFD1.FinalizarCupom;
-  //Self.FinalizarSiTEF;
 end;
 
 procedure TdmSiTef.CancelarSiTEF;
@@ -365,30 +368,16 @@ procedure TdmSiTef.ACBrTEFD1ComandaECF(Operacao: TACBrTEFDOperacaoECF;
   Resp: TACBrTEFDResp; var RetornoECF: Integer);
 begin
   try
-    {case Operacao of
+    case Operacao of
       opeAbreGerencial :
-         MemoCupomTEF.Lines.Add('Abre Gerencial') ;
+         estadoSimuladoEcf := tpsLivre; 
 
       opeFechaCupom :
-         estadoSimuladoEcf := tpsLivre;
-
-      opeSubTotalizaCupom :
-         MemoCupomTEF.Lines.Add('Sub Totaliza');
+         estadoSimuladoEcf := tpsLivre;   
 
       opeFechaGerencial, opeFechaVinculado :
          estadoSimuladoEcf := tpsRelatorio;
-
-      opePulaLinhas :
-        begin
-          MemoCupomTEF.Lines.Add('PulaLinhas');
-          Sleep(200);
-        end;   
-
-      opeImprimePagamentos :
-        begin
-          showmessage('ImprimePagamentos');
-        end;   
-    end;       }
+    end;       
     RetornoECF := 1 ;
   except
     RetornoECF := 0 ;
@@ -417,11 +406,11 @@ begin
      case TipoRelatorio of
        trGerencial :
          //ACBrECF1.LinhaRelatorioGerencial( ImagemComprovante.Text ) ;
-         ShowMessage(ImagemComprovante.Text);
+         ReImprimir(ImagemComprovante.Text);
 
        trVinculado :
          //ACBrECF1.LinhaCupomVinculado( ImagemComprovante.Text )
-         ShowMessage(ImagemComprovante.Text);
+         ReImprimir(ImagemComprovante.Text);
      end;
 
      RetornoECF := 1 ;
@@ -461,6 +450,17 @@ begin
   RetornoECF := 1 ;
 end;
 
+procedure TdmSiTef.ReImprimir(pValue:String);
+begin
+  dm.ACBrPosPrinter.Device.Ativar;
+  try
+    dm.ACBrPosPrinter.Imprimir(pValue, True);
+    dm.ACBrPosPrinter.Imprimir('</corte_parcial>', True);
+  finally
+    dm.ACBrPosPrinter.Device.Desativar;
+  end;
+end;
+
 procedure TdmSiTef.ACBrTEFD1DepoisConfirmarTransacoes(
   RespostasPendentes: TACBrTEFDRespostasPendentes);
 var
@@ -468,6 +468,7 @@ var
   vAtivo:Boolean;
   vCampo11:String;
 begin
+
   Try
     if RespostasPendentes.Count > 0 then
       vAtivo := dm.ACBrPosPrinter.Device.Ativo;
@@ -481,16 +482,25 @@ begin
         if not vAtivo then
           dm.ACBrPosPrinter.Device.Ativar;
           
-        try
-          dm.ACBrPosPrinter.Imprimir('Transacao TEF Confirmada!', True);
-          dm.ACBrPosPrinter.Imprimir('Rede: '  + Rede, True);
-          dm.ACBrPosPrinter.Imprimir('NSU: '  + NSU, True);
-          dm.ACBrPosPrinter.Imprimir('Valor: '  + FormatFloat('###,###,##0.00',ValorTotal), True);
-          dm.ACBrPosPrinter.Imprimir('Data: '  + FormatDateTime('dd/mm/yyyy hh:mm',DataHoraTransacaoHost));
-          vCampo11:= LeInformacao(11,0).AsString;
+        try    
+          if ImagemComprovante1aVia.Count > 0 then
+            dm.ACBrPosPrinter.Imprimir(ImagemComprovante1aVia.Text);
 
-          if trim(vCampo11) <> '' then
-            dm.ACBrPosPrinter.Imprimir('Campo 11: '  + LeInformacao(11,0).AsString, True);
+          if ImagemComprovante2aVia.Count > 0 then
+            dm.ACBrPosPrinter.Imprimir(ImagemComprovante1aVia.Text);
+
+          if (ImagemComprovante1aVia.Count = 0)and(ImagemComprovante2aVia.Count = 0) then
+          begin
+            dm.ACBrPosPrinter.Imprimir('Transacao TEF Confirmada!', True);
+            dm.ACBrPosPrinter.Imprimir('Rede: '  + Rede, True);
+            dm.ACBrPosPrinter.Imprimir('NSU: '  + NSU, True);
+            dm.ACBrPosPrinter.Imprimir('Valor: '  + FormatFloat('###,###,##0.00',ValorTotal), True);
+            dm.ACBrPosPrinter.Imprimir('Data: '  + FormatDateTime('dd/mm/yyyy hh:mm',DataHoraTransacaoHost));
+            vCampo11:= LeInformacao(11,0).AsString;
+
+            if trim(vCampo11) <> '' then
+              dm.ACBrPosPrinter.Imprimir('Campo 11: '  + LeInformacao(11,0).AsString, True);
+          end;
             
           dm.ACBrPosPrinter.Imprimir('</corte_parcial>', True);
         finally
@@ -570,9 +580,16 @@ begin
 
      ineEstadoECF :
        begin
-         RetornoECF := 'N'; // nao fiscal
+         Case estadoSimuladoEcf of
+           tpsRelatorio : RetornoECF := 'R' ;
+         else
+           RetornoECF := 'N' ;
+         end;
        end;
    end;
+   
+   if fExecutandoADM then
+     RetornoECF := 'L' ;   
 end;
 
 procedure TdmSiTef.ACBrTEFD1MudaEstadoReq(EstadoReq: TACBrTEFDReqEstado);
@@ -645,7 +662,6 @@ var
 begin
 
   vExistePendente := RespostasPendentes.Count > 0;
-
   Try
     if RespostasPendentes.Count > 0 then
       vAtivo := dm.ACBrPosPrinter.Device.Ativo;
@@ -656,18 +672,28 @@ begin
   begin
      with RespostasPendentes[I] do
      begin
+
         if not vAtivo then
           dm.ACBrPosPrinter.Device.Ativar;
 
         try
-          dm.ACBrPosPrinter.Imprimir('Transacao TEF foi cancelada!', True);
-          dm.ACBrPosPrinter.Imprimir('Rede: '  + Rede, True);
-          dm.ACBrPosPrinter.Imprimir('NSU: '  + NSU, True);
-          dm.ACBrPosPrinter.Imprimir('Valor: '  + FormatFloat('###,###,##0.00',ValorTotal), True);
-          vCampo11:= LeInformacao(11,0).AsString;
+          if ImagemComprovante1aVia.Count > 0 then
+            dm.ACBrPosPrinter.Imprimir(ImagemComprovante1aVia.Text);
 
-          if trim(vCampo11) <> '' then
-            dm.ACBrPosPrinter.Imprimir('Campo 11: '  + LeInformacao(11,0).AsString, True);
+          if ImagemComprovante2aVia.Count > 0 then
+            dm.ACBrPosPrinter.Imprimir(ImagemComprovante1aVia.Text);
+
+          if (ImagemComprovante1aVia.Count = 0)and(ImagemComprovante2aVia.Count = 0) then
+          begin
+            dm.ACBrPosPrinter.Imprimir('Transacao TEF foi cancelada!', True);
+            dm.ACBrPosPrinter.Imprimir('Rede: '  + Rede, True);
+            dm.ACBrPosPrinter.Imprimir('NSU: '  + NSU, True);
+            dm.ACBrPosPrinter.Imprimir('Valor: '  + FormatFloat('###,###,##0.00',ValorTotal), True);
+            vCampo11:= LeInformacao(11,0).AsString;
+
+            if trim(vCampo11) <> '' then
+              dm.ACBrPosPrinter.Imprimir('Campo 11: '  + LeInformacao(11,0).AsString, True);
+          end;
 
           dm.ACBrPosPrinter.Imprimir('</corte_parcial>', True);
         finally
@@ -679,17 +705,23 @@ begin
 
   if (fCancelandoAoIniciar)and(vExistePendente) then
   begin
-    ShowMessage('Transação não foi efetuada!'+slineBreak+'Favor reter o Cupom.');
+    ShowMessage('Transa??o n?o foi efetuada!'+slineBreak+'Favor reter o Cupom.');
   end;
+  
 end;
 
 Function TdmSiTef.AbrirADM:Boolean;
 begin
   if not ACBrTEFD1.TEFCliSiTef.Habilitado then exit;
 
-  InicializarSiTEF;
-  ACBrTEFD1.ADM(ACBrTEFD1.GPAtual);
-  Result := True;
+  fExecutandoADM:= True;
+  try
+    InicializarSiTEF;
+    ACBrTEFD1.ADM(ACBrTEFD1.GPAtual);  
+    Result := True;
+  finally
+    fExecutandoADM:= False;
+  end;
 end;
 
 procedure TdmSiTef.CancelarOperacao;
