@@ -57,7 +57,7 @@ type
     fValor: Double;
     fFormaPagamento:Integer;
     estadoSimuladoEcf : tEstadoEcfSimulado;
-    fSiTEFIniciado, fCancelado, fPodeCancelar, fIniciouPagamento:Boolean;
+    fSiTEFIniciado, fCancelado, fPodeCancelar, fIniciouPagamento, fCancelandoAoIniciar:Boolean;
     fevGetMensagem: TevGetMensagem;
     fevMostrarMensagemOperador: TevMostrarMensagem;
     fevMostrarInstrucoes: TevMostrarMensagem;
@@ -102,7 +102,7 @@ Function TdmSiTef.EfetuarPagamentoSiTef(FormaPagamento: Integer; Valor: Double; 
 begin
   Result := True;
   if not ACBrTEFD1.TEFCliSiTef.Habilitado then exit;
-  
+      
   fValor := Valor;
   InicializarSiTEF;
   fFormaPagamento:= FormaPagamento;
@@ -167,7 +167,13 @@ begin
       end;
     end;
 
-    ACBrTEFD1.CancelarTransacoesPendentes;
+    fCancelandoAoIniciar := True;
+    try
+      ACBrTEFD1.CancelarTransacoesPendentes;
+      ACBrTEFD1.ConfirmarTransacoesPendentes;
+    finally
+      fCancelandoAoIniciar := False;
+    end;
   end;
 
 end;
@@ -176,6 +182,7 @@ procedure TdmSiTef.InicializarSiTEF;
 begin
   if fSiTEFIniciado then exit;
 
+  MostrarInstrucoes('Conectando Sitef');
   ACBrTEFD1.Inicializar( ACBrTEFD1.GPAtual );
   fSiTEFIniciado:= True;
 end;
@@ -195,6 +202,7 @@ begin
   ACBrTEFD1.ConfirmarTransacoesPendentes;
   ACBrTEFD1.ImprimirTransacoesPendentes;
   ACBrTEFD1.FinalizarCupom;
+  //Self.FinalizarSiTEF;
 end;
 
 procedure TdmSiTef.CancelarSiTEF;
@@ -460,7 +468,6 @@ var
   vAtivo:Boolean;
   vCampo11:String;
 begin
-
   Try
     if RespostasPendentes.Count > 0 then
       vAtivo := dm.ACBrPosPrinter.Device.Ativo;
@@ -632,10 +639,12 @@ end;
 procedure TdmSiTef.ACBrTEFD1DepoisCancelarTransacoes(
   RespostasPendentes: TACBrTEFDRespostasPendentes);
 var
-  vAtivo:Boolean;
+  vAtivo, vExistePendente:Boolean;
   vCampo11:String;
   I : Integer;
 begin
+
+  vExistePendente := RespostasPendentes.Count > 0;
 
   Try
     if RespostasPendentes.Count > 0 then
@@ -647,7 +656,6 @@ begin
   begin
      with RespostasPendentes[I] do
      begin
-
         if not vAtivo then
           dm.ACBrPosPrinter.Device.Ativar;
 
@@ -666,8 +674,12 @@ begin
           if not vAtivo then
             dm.ACBrPosPrinter.Device.Desativar;
         end;
-
      end;
+  end;
+
+  if (fCancelandoAoIniciar)and(vExistePendente) then
+  begin
+    ShowMessage('Transação não foi efetuada!'+slineBreak+'Favor reter o Cupom.');
   end;
 end;
 
