@@ -104,7 +104,7 @@ Function TdmSiTef.EfetuarPagamentoSiTef(FormaPagamento: Integer; Valor: Double; 
 begin
   Result := True;
   if not ACBrTEFD1.TEFCliSiTef.Habilitado then exit;
-  
+
   fValor := Valor;
   InicializarSiTEF;
   fFormaPagamento:= FormaPagamento;
@@ -168,14 +168,15 @@ begin
         Break;
       end;
     end;
-
-    ACBrTEFD1.CancelarTransacoesPendentes;
+    InicializarSiTEF;
+//    ACBrTEFD1.CancelarTransacoesPendentes;
     fCancelandoAoIniciar := True;
     try
       ACBrTEFD1.CancelarTransacoesPendentes;
-      ACBrTEFD1.ConfirmarTransacoesPendentes;
+//      ACBrTEFD1.ConfirmarTransacoesPendentes;
     finally
       fCancelandoAoIniciar := False;
+      FinalizarSiTEF;
     end;
   end;
 
@@ -184,7 +185,6 @@ end;
 procedure TdmSiTef.InicializarSiTEF;
 begin
   if fSiTEFIniciado then exit;
-
   MostrarInstrucoes('Conectando Sitef');
   ACBrTEFD1.Inicializar( ACBrTEFD1.GPAtual );
   fSiTEFIniciado:= True;
@@ -490,7 +490,7 @@ begin
 
           if ImagemComprovante2aVia.Count > 0 then
           begin
-            dm.ACBrPosPrinter.Imprimir(ImagemComprovante1aVia.Text);
+            dm.ACBrPosPrinter.Imprimir(ImagemComprovante2aVia.Text);
             dm.ACBrPosPrinter.Imprimir('</corte_parcial>', True);
           end;
 
@@ -666,53 +666,53 @@ var
   I : Integer;
 begin
 
-  vExistePendente := RespostasPendentes.Count > 0;
-  Try
-    if RespostasPendentes.Count > 0 then
-      vAtivo := dm.ACBrPosPrinter.Device.Ativo;
-  except
-  end;
+//  vExistePendente := RespostasPendentes.Count > 0;
+//  Try
+//    if RespostasPendentes.Count > 0 then
+//      vAtivo := dm.ACBrPosPrinter.Device.Ativo;
+//  except
+//  end;
+//
+//  for I := 0 to RespostasPendentes.Count-1  do
+//  begin
+//     with RespostasPendentes[I] do
+//     begin
+//
+//        if not vAtivo then
+//          dm.ACBrPosPrinter.Device.Ativar;
+//
+//        try
+//          if ImagemComprovante1aVia.Count > 0 then
+//            dm.ACBrPosPrinter.Imprimir(ImagemComprovante1aVia.Text);
+//
+//          if ImagemComprovante2aVia.Count > 0 then
+//            dm.ACBrPosPrinter.Imprimir(ImagemComprovante1aVia.Text);
+//
+//          if (ImagemComprovante1aVia.Count = 0)and(ImagemComprovante2aVia.Count = 0) then
+//          begin
+//            dm.ACBrPosPrinter.Imprimir('Transacao TEF foi cancelada!', True);
+//            dm.ACBrPosPrinter.Imprimir('Rede: '  + Rede, True);
+//            dm.ACBrPosPrinter.Imprimir('NSU: '  + NSU, True);
+//            dm.ACBrPosPrinter.Imprimir('Valor: '  + FormatFloat('###,###,##0.00',ValorTotal), True);
+//            vCampo11:= LeInformacao(11,0).AsString;
+//
+//            if trim(vCampo11) <> '' then
+//              dm.ACBrPosPrinter.Imprimir('Campo 11: '  + LeInformacao(11,0).AsString, True);
+//          end;
+//
+//          dm.ACBrPosPrinter.Imprimir('</corte_parcial>', True);
+//        finally
+//          if not vAtivo then
+//            dm.ACBrPosPrinter.Device.Desativar;
+//        end;
+//     end;
+//  end;
+//
+//  if (fCancelandoAoIniciar)and(vExistePendente) then
+//  begin
+//    ShowMessage('Transa??o n?o foi efetuada!'+slineBreak+'Favor reter o Cupom.');
+//  end;
 
-  for I := 0 to RespostasPendentes.Count-1  do
-  begin
-     with RespostasPendentes[I] do
-     begin
-
-        if not vAtivo then
-          dm.ACBrPosPrinter.Device.Ativar;
-
-        try
-          if ImagemComprovante1aVia.Count > 0 then
-            dm.ACBrPosPrinter.Imprimir(ImagemComprovante1aVia.Text);
-
-          if ImagemComprovante2aVia.Count > 0 then
-            dm.ACBrPosPrinter.Imprimir(ImagemComprovante1aVia.Text);
-
-          if (ImagemComprovante1aVia.Count = 0)and(ImagemComprovante2aVia.Count = 0) then
-          begin
-            dm.ACBrPosPrinter.Imprimir('Transacao TEF foi cancelada!', True);
-            dm.ACBrPosPrinter.Imprimir('Rede: '  + Rede, True);
-            dm.ACBrPosPrinter.Imprimir('NSU: '  + NSU, True);
-            dm.ACBrPosPrinter.Imprimir('Valor: '  + FormatFloat('###,###,##0.00',ValorTotal), True);
-            vCampo11:= LeInformacao(11,0).AsString;
-
-            if trim(vCampo11) <> '' then
-              dm.ACBrPosPrinter.Imprimir('Campo 11: '  + LeInformacao(11,0).AsString, True);
-          end;
-
-          dm.ACBrPosPrinter.Imprimir('</corte_parcial>', True);
-        finally
-          if not vAtivo then
-            dm.ACBrPosPrinter.Device.Desativar;
-        end;
-     end;
-  end;
-
-  if (fCancelandoAoIniciar)and(vExistePendente) then
-  begin
-    ShowMessage('Transa??o n?o foi efetuada!'+slineBreak+'Favor reter o Cupom.');
-  end;
-  
 end;
 
 Function TdmSiTef.AbrirADM:Boolean;
