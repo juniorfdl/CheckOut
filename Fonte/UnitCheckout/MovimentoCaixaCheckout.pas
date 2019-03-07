@@ -281,6 +281,10 @@ begin
    end;
    if SQLOperacaoCaixaOPCXA5SIGLA.Value = 'SITEF' then
    begin
+     dmSiTef.evMostrarInstrucoes := nil;
+     dmSiTef.evMostrarMensagemCliente := nil;
+     dmSiTef.evMostrarMensagemOperador := nil;
+     dmSiTef.evGetMensagemOperador := nil;
      if dmSiTef.AbrirADM then exit;
      Close;
    end;
