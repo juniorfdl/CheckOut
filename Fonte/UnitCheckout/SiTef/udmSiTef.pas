@@ -403,16 +403,15 @@ procedure TdmSiTef.ACBrTEFD1ComandaECFImprimeVia(
 begin
 
   try
-     case TipoRelatorio of
-       trGerencial :
-         //ACBrECF1.LinhaRelatorioGerencial( ImagemComprovante.Text ) ;
-         ReImprimir(ImagemComprovante.Text);
-
-       trVinculado :
-         //ACBrECF1.LinhaCupomVinculado( ImagemComprovante.Text )
-         ReImprimir(ImagemComprovante.Text);
-     end;
-
+//     case TipoRelatorio of
+//       trGerencial :
+//         //ACBrECF1.LinhaRelatorioGerencial( ImagemComprovante.Text ) ;
+//         ReImprimir(ImagemComprovante.Text);
+//
+//       trVinculado :
+//         //ACBrECF1.LinhaCupomVinculado( ImagemComprovante.Text )
+//         ReImprimir(ImagemComprovante.Text);
+//     end;
      RetornoECF := 1 ;
   except
      RetornoECF := 0 ;
@@ -482,12 +481,18 @@ begin
         if not vAtivo then
           dm.ACBrPosPrinter.Device.Ativar;
           
-        try    
+        try
           if ImagemComprovante1aVia.Count > 0 then
+          begin
             dm.ACBrPosPrinter.Imprimir(ImagemComprovante1aVia.Text);
+            dm.ACBrPosPrinter.Imprimir('</corte_parcial>', True);
+          end;
 
           if ImagemComprovante2aVia.Count > 0 then
+          begin
             dm.ACBrPosPrinter.Imprimir(ImagemComprovante1aVia.Text);
+            dm.ACBrPosPrinter.Imprimir('</corte_parcial>', True);
+          end;
 
           if (ImagemComprovante1aVia.Count = 0)and(ImagemComprovante2aVia.Count = 0) then
           begin
@@ -501,8 +506,8 @@ begin
             if trim(vCampo11) <> '' then
               dm.ACBrPosPrinter.Imprimir('Campo 11: '  + LeInformacao(11,0).AsString, True);
           end;
-            
-          dm.ACBrPosPrinter.Imprimir('</corte_parcial>', True);
+
+//          dm.ACBrPosPrinter.Imprimir('</corte_parcial>', True);
         finally
           if not vAtivo then
             dm.ACBrPosPrinter.Device.Desativar;
@@ -580,11 +585,11 @@ begin
 
      ineEstadoECF :
        begin
-         Case estadoSimuladoEcf of
-           tpsRelatorio : RetornoECF := 'R' ;
-         else
+//         Case estadoSimuladoEcf of
+//           tpsRelatorio : RetornoECF := 'R' ;
+//         else
            RetornoECF := 'N' ;
-         end;
+//         end;
        end;
    end;
    
