@@ -6790,7 +6790,10 @@ end;
 
 procedure TFormTelaFechamentoVenda.MostrarMensagemOperador(pMsg: String);
 begin
-
+  pMensagemOperador.Visible := pMsg <> '';
+  lMensagemOperador.Caption := pMsg;
+  pMensagem.Visible := pMensagemOperador.Visible or pMensagemCliente.Visible;
+  Application.ProcessMessages;
 end;
 
 procedure TFormTelaFechamentoVenda.lMensagemOperadorClick(Sender: TObject);

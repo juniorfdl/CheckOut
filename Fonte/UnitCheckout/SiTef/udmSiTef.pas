@@ -58,7 +58,7 @@ type
     fValor: Double;
     fFormaPagamento:Integer;
     estadoSimuladoEcf : tEstadoEcfSimulado;
-    fSiTEFIniciado, fCancelado, fPodeCancelar, fIniciouPagamento, fCancelandoAoIniciar, fIniciandoSitef:Boolean;
+    fSiTEFIniciado, fCancelado, fPodeCancelar, fIniciouPagamento, fCancelandoAoIniciar:Boolean;
     fevGetMensagem: TevGetMensagem;
     fevMostrarMensagemOperador: TevMostrarMensagem;
     fevMostrarInstrucoes: TevMostrarMensagem;
@@ -185,13 +185,8 @@ end;
 procedure TdmSiTef.InicializarSiTEF;
 begin
   if fSiTEFIniciado then exit;
-  MostrarInstrucoes('Conectando Sitef');
-  fIniciandoSitef := True;
-  try
-    ACBrTEFD1.Inicializar( ACBrTEFD1.GPAtual );
-  finally
-    fIniciandoSitef := False;
-  end;
+
+  ACBrTEFD1.Inicializar( ACBrTEFD1.GPAtual ); 
   fSiTEFIniciado:= True;
 end;
 
@@ -631,12 +626,10 @@ end;
 
 procedure TdmSiTef.MostrarInstrucoes(pMsg: String);
 begin
-  if fIniciandoSitef then Exit;
-  
   fPodeCancelar := fMensagemPodeCancelar = pMsg;
 
   if Assigned(fevMostrarInstrucoes) then
-    fevMostrarInstrucoes(pMsg);
+    fevMostrarInstrucoes(pMsg); 
 end;
 
 procedure TdmSiTef.MostrarMensagemCliente(pMsg: String);
