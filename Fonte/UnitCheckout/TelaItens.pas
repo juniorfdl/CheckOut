@@ -285,6 +285,8 @@ type
     RxLabel8: TRxLabel;
     LBSaldo: TRxLabel;
     SQLProdutoPESAGEM_AUTOMATICA: TStringField;
+    SQLProdutoPERC_REDUCAO_BASE_CALCULO: TFloatField;
+    SQLItensVendaTempPERC_RED_BASE_ICMS: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure EntradaDadosKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -512,7 +514,7 @@ function TFormTelaItens.Gerar_NFCe(idCupom: string): string;
 var xCliente, xDocumento, xPlano, vTotaItem, Associado: string;
 var iCRT, vCont, vUltimo: integer;
 var VlrDescNoTotal, VlrTroca, VlrTotalItens, PercDesc, TotalDesconto: double;
-  vaux, Total_vTotTrib, VlrTroco, AliquotaPis, AliquotaCofins, ValorPis, ValorCofins, ValorBasePis, ValorBaseCofins : Currency;
+  vaux, Total_vTotTrib, VlrTroco, AliquotaPis, AliquotaCofins, ValorPis, ValorCofins, ValorBasePis, ValorBaseCofins, vPercSTEfe : Currency;
 var vDescTodosItens : Boolean;
 begin
   dm.ACBrNFe.DANFE.vTribFed := 0;
@@ -635,7 +637,8 @@ begin
            {Carrega Produtos temporarios}
       dm.sqlconsulta.close;
       dm.sqlconsulta.sql.Clear;
-      dm.sqlconsulta.sql.Text := 'select NCMICOD, PRODA30ADESCRREDUZ,PRODA60CODBAR,PRODA60REFER,PRODIORIGEM, PRODISITTRIB, PRODA1TIPO, PRODA1MODBC,PRODA1MODBCST,PRODA1MODBCST,TABCEST, PRODA2CSTPIS, PRODN2ALIQPIS, PRODA2CSTCOFINS, PRODN2ALIQCOFINS from produto where prodicod=' + SQLImpressaoCupom.fieldbyname('PRODICOD').AsString;
+      dm.sqlconsulta.sql.Text := 'select NCMICOD, PRODA30ADESCRREDUZ,PRODA60CODBAR,PRODA60REFER,PRODIORIGEM, PRODISITTRIB, PRODA1TIPO, PRODA1MODBC,PRODA1MODBCST,PRODA1MODBCST,TABCEST, PRODA2CSTPIS, PRODN2ALIQPIS, PRODA2CSTCOFINS, PRODN2ALIQCOFINS, BASE_ICM_ST_RET, VALOR_ICM_ST_RET '
+                               + ' from produto where prodicod=' + SQLImpressaoCupom.fieldbyname('PRODICOD').AsString;
       dm.sqlconsulta.open;
 
       with Det.Add do
@@ -664,6 +667,9 @@ begin
                // Prod.xProd    := 'NOTA FISCAL EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL';
 
         Prod.NCM := SQLLocate('NCM', 'NCMICOD', 'NCMA30CODIGO', SQLLocate('PRODUTO', 'PRODICOD', 'NCMICOD', SQLImpressaoCupom.fieldbyname('PRODICOD').AsString));
+        if SQLLocate('NCM', 'NCMICOD', 'ALIQ_ICMS', SQLLocate('PRODUTO', 'PRODICOD', 'NCMICOD', SQLImpressaoCupom.fieldbyname('PRODICOD').AsString)) <> '' then
+          vPercSTEfe := StrToFloat(SQLLocate('NCM', 'NCMICOD', 'ALIQ_ICMS', SQLLocate('PRODUTO', 'PRODICOD', 'NCMICOD', SQLImpressaoCupom.fieldbyname('PRODICOD').AsString)));
+
         Prod.EXTIPI := '';
         if (dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '60') or (dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '500') then
           Prod.CFOP := '5405'
@@ -759,8 +765,19 @@ begin
                       ICMS.vICMSST := 0; // Adilson, verificar melhor
                     end;
                   csosn500: begin
-                      ICMS.vBCSTRet := 0; // Adilson, verificar melhor
-                      ICMS.vICMSSTRet := 0; // Adilson, verificar melhor
+                      if dm.sqlConsulta.fieldbyname('VALOR_ICM_ST_RET').AsFloat > 0 then
+                      begin
+                        ICMS.vBCSTRet := dm.sqlConsulta.fieldbyname('BASE_ICM_ST_RET').AsFloat * Prod.qCom;
+                        ICMS.vICMSSTRet := dm.sqlConsulta.fieldbyname('VALOR_ICM_ST_RET').AsFloat * Prod.qCom;
+                      end;
+                      if vPercSTEfe > 0 then
+                      begin
+                        ICMS.vICMSEfet := (Prod.qCom * (Prod.vProd - Prod.vDesc));
+                        ICMS.pICMSEfet := vPercSTEfe;
+                        ICMS.vBCEfet := (Prod.qCom * (Prod.vProd - Prod.vDesc)) * vPercSTEfe;
+                      end;
+//                      ICMS.vBCSTRet := 0; // Adilson, verificar melhor
+//                      ICMS.vICMSSTRet := 0; // Adilson, verificar melhor
                     end;
                 end; // fim do case icms.csosn
               end;
@@ -785,6 +802,23 @@ begin
                 if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '81' then ICMS.CST := cst81;
                 if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '90' then ICMS.CST := cst90;
 
+                if dm.sqlConsulta.fieldbyname('PRODISITTRIB').asstring = '60' then
+                  begin
+                    ICMS.CST := cst60;
+                    if dm.sqlConsulta.fieldbyname('VALOR_ICM_ST_RET').AsFloat > 0 then
+                    begin
+                      ICMS.vBCSTRet := dm.sqlConsulta.fieldbyname('BASE_ICM_ST_RET').AsFloat * Prod.qCom;
+                      ICMS.vICMSSTRet := dm.sqlConsulta.fieldbyname('VALOR_ICM_ST_RET').AsFloat * Prod.qCom;
+                    end;
+                    if vPercSTEfe > 0 then
+                    begin
+                      ICMS.vICMSEfet := (Prod.qCom * (Prod.vProd - Prod.vDesc));
+                      ICMS.pICMSEfet := vPercSTEfe;
+                      ICMS.vBCEfet := (Prod.qCom * (Prod.vProd - Prod.vDesc)) * vPercSTEfe;
+                    end;
+                  end;
+
+
                           // Base Calculo
                 if dm.sqlConsulta.fieldbyname('PRODA1MODBC').AsString = '0' then
                   ICMS.modBC := dbiMargemValorAgregado else
@@ -798,6 +832,8 @@ begin
                 ICMS.vBC := SQLImpressaoCupom.fieldbyname('CPITN2BASEICMS').AsFloat;
                 ICMS.pICMS := SQLImpressaoCupom.fieldbyname('COITN2ICMSALIQ').AsFloat;
                 ICMS.vICMS := SQLImpressaoCupom.fieldbyname('CPITN2VLRICMS').AsFloat;
+                if ICMS.CST = cst20 then
+                  ICMS.pRedBC := SQLImpressaoCupom.fieldbyname('PERC_REDUCAO_BASE_CALCULO').AsFloat;
 
                 ICMS.vBCST := 0;
                 ICMS.pICMSST := 0;
@@ -893,14 +929,11 @@ begin
                   PIS.vPIS := 0;
                 end;
 
-
                 Total.ICMSTot.vBC := Total.ICMSTot.vBC + ICMS.vBC;
                 Total.ICMSTot.vICMS := Total.ICMSTot.vICMS + ICMS.vICMS;
                 Total.ICMSTot.vCOFINS := Total.ICMSTot.vCOFINS + cofins.vCOFINS;
                 Total.ICMSTot.vPIS := Total.ICMSTot.vPIS + pis.vPIS;
                 ValorBaseCofins := cofins.vCOFINS;
-                if valorbasecofins > 0 then
-                  ShowMessage(FloatToStr(ValorBaseCofins));
               end;
           end;
 
@@ -2630,11 +2663,13 @@ begin
         begin
           SQLItensVendaTempBASEICMS.asFloat := SQLItensVendaTempVLRTOTAL.AsFloat;
           SQLItensVendaTempALIQUOTA.AsFloat := RetornaAliquotaICMSProduto(SQLProdutoICMSICOD.AsInteger);
-          ReducaoICMS := RetornaREDUCAOICMSProduto(SQLProdutoICMSICOD.AsInteger);
-              {if ReducaoICMS > 0 then
+          ReducaoICMS := SQLProdutoPERC_REDUCAO_BASE_CALCULO.AsFloat;
+//          ReducaoICMS := RetornaREDUCAOICMSProduto(SQLProdutoICMSICOD.AsInteger);
+              if ReducaoICMS > 0 then
                 begin
                   SQLItensVendaTempBASEICMS.asFloat := SQLItensVendaTempVLRTOTAL.AsFloat * (ReducaoICMS / 100);
-                end;}
+                  SQLItensVendaTempPERC_RED_BASE_ICMS.AsFloat := ReducaoICMS;
+                end;
 
           SQLItensVendaTempVLRICMS.Value := SQLItensVendaTempBASEICMS.asFloat * (SQLItensVendaTempALIQUOTA.AsFloat / 100);
         end;

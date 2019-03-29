@@ -204,16 +204,12 @@ uses
 
 var
   hMapping: hwnd;
+
 begin
   OutputDebugString('c:\Easy2Solutions\Temp');
 
   //Este código foi testado no arquivo dpr do projeto
-  hMapping := CreateFileMapping(HWND($FFFFFFFF),
-    nil,
-    PAGE_READONLY,
-    0,
-    32,
-    PChar(ExtractFileName(Application.ExeName)));
+  hMapping := CreateFileMapping(HWND($FFFFFFFF), nil, PAGE_READONLY, 0, 32, PChar(ExtractFileName(Application.ExeName)));
 
   if (hMapping <> Null) and (GetLastError <> 0) then
   begin
@@ -238,21 +234,23 @@ begin
   F12 := Vk_F12;
   Application.Title := 'Cupom Fiscal';
   Application.CreateForm(TDM, DM);
-  if (DM.OBSAutorizacao <> '') or (dm.SQLConfigGeralCFGECBLOQ.AsString = 'S') and(not DelphiAberto) then
+//  if not DelphiAberto then
+//    dm.ExecAndWait('C:\Easy2Solutions\Updater.exe', '-Quiet', SW_SHOW);
+
+  if (DM.OBSAutorizacao <> '') or (dm.SQLConfigGeralCFGECBLOQ.AsString = 'S') and (not DelphiAberto) then
   begin
     FormTelaAtivacao := TFormTelaAtivacao.Create(Application);
     FormTelaAtivacao.ShowModal;
 
-    if (DM.vSEM_INTERNET)and((DM.DataSistema-DM.SQLConfigGeralDATA_INI_SEM_NET.AsDateTime) <= 7) then
+    if (DM.vSEM_INTERNET) and ((DM.DataSistema - DM.SQLConfigGeralDATA_INI_SEM_NET.AsDateTime) <= 7) then
     begin
     end
-    else
-    if (dm.SQLConfigGeralCFGECBLOQ.AsString = 'S') then
+    else if (dm.SQLConfigGeralCFGECBLOQ.AsString = 'S') then
     begin
       Application.terminate;
       Exit;
     end;
-  end;                                
+  end;
 
   FormTelaLogin := TFormTelaLogin.Create(Application);
   FormTelaLogin.Caption := 'Bem Vindo ao Módulo Emissão de Cupom Fiscal ';

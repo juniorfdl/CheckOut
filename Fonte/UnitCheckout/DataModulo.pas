@@ -14,7 +14,7 @@ uses
   ACBrBAL, ACBrPosPrinter, ACBrNFeDANFEClass, ACBrNFeDANFeESCPOS, ACBrDFe,
   ACBrNFe, pcnConversao, ACBrUtil, ACBrMail, ACBrNFeDANFeRLClass, ACBrDevice,
   ZAbstractConnection, DBClient, RestClient, RestUtils, pcnConversaoNFe,
-  ACBrDFeReport, ACBrDFeDANFeReport, Principal;
+  ACBrDFeReport, ACBrDFeDANFeReport, Principal, ShellAPI;
 
 type
   TDM = class(TDMTemplate)
@@ -1167,6 +1167,9 @@ type
     SQLCupomItemVLR_BASE_PIS: TFloatField;
     SQLCupomItemALIQUOTA_COFINS: TFloatField;
     SQLCupomItemVLR_BASE_COFINS: TFloatField;
+    SQLCupomItemPERC_REDUCAO_BASE_CALCULO: TFloatField;
+    SQLCupomItemBASE_ST_RETIDO: TFloatField;
+    SQLCupomItemVALOR_ST_RETIDO: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure SQLCupomNewRecord(DataSet: TDataSet);
     procedure SQLCupomBeforePost(DataSet: TDataSet);
@@ -1209,6 +1212,8 @@ type
     OBSAutorizacao: string;
     function ConectaServidor : boolean ;
     function BloquearTerminal(Usuario, Terminal : string ) : boolean ;
+//    function ExecAndWait(FileName, Params: string; const WindowState: Word): boolean;
+    function ExecAndWait(const FileName, Params: string; const WindowState: Word): boolean;
     procedure DesbloquearTerminal(Terminal : string) ;
   end;
 
@@ -1297,6 +1302,7 @@ var
   DiaSemana : string;
 begin
   inherited;
+
   FormSplash.lbDados.Caption := 'Abrindo Tabela de Filiais...'; FormSplash.lbDados.Update;
   SQLEmpresa.Open ;
   FormSplash.lbDados.Caption := 'Abrindo Tabela de Terminais...'; FormSplash.lbDados.Update;
@@ -1663,6 +1669,62 @@ procedure TDM.DBAfterConnect(Sender: TObject);
 begin
   inherited;
   //
+end;
+
+//function TDM.ExecAndWait(FileName, Params: string;
+//  const WindowState: Word): boolean;
+//var
+//  StartInfo : TStartupInfo;
+//  ProcInfo : TProcessInformation;
+//  Done : Boolean;
+//begin
+//  FillChar(StartInfo,SizeOf(TStartupInfo),#0);
+//  FillChar(ProcInfo,SizeOf(TProcessInformation),#0);
+//  StartInfo.cb := SizeOf(TStartupInfo);
+//  try
+//    {$IFDEF UNICODE}
+//    if StringRefCount(FileName) = -1 then begin
+//      FileName := Copy(FileName, 1, MaxInt);
+//    end;
+//    {$ENDIF UNICODE}
+//
+//    Done := CreateProcess(nil, PChar(FileName + ' ' + Params), nil, nil,False,
+//                          CREATE_NEW_PROCESS_GROUP + NORMAL_PRIORITY_CLASS,
+//                          nil, nil, StartInfo, ProcInfo);
+//    Result := Done;
+//  finally
+//    CloseHandle(ProcInfo.hProcess);
+//    CloseHandle(ProcInfo.hThread);
+//  end;
+//end;
+
+function TDM.ExecAndWait(const FileName, Params: string;
+  const WindowState: Word): boolean;
+var
+  SUinfo : TStartupInfo;
+  ProcInfo : TProcessInformation;
+  CmdLine : String;  
+begin
+  { Coloca o nome do arquivo entre aspas. Isto é necessário devido aos espaços contidos em nomes longos } 
+  CmdLine := '"' + Filename + '"' + Params; 
+  FillChar(SUInfo, SizeOf(SUInfo), #0); 
+  with SUInfo do
+  begin
+    cb := SizeOf(SUInfo);
+    dwFlags := STARTF_USESHOWWINDOW;
+    wShowWindow := WindowState;
+  end;
+  Result := CreateProcess(nil, PChar(CmdLine), nil, nil, false,
+  CREATE_NEW_CONSOLE or NORMAL_PRIORITY_CLASS, nil,
+  PChar(ExtractFilePath(Filename)), SUInfo, ProcInfo);
+  { Aguarda até ser finalizado }
+  if Result then
+  begin
+    WaitForSingleObject(ProcInfo.hProcess, INFINITE);
+    { Libera os Handles }
+    CloseHandle(ProcInfo.hProcess);
+    CloseHandle(ProcInfo.hThread);
+  end;
 end;
 
 end.

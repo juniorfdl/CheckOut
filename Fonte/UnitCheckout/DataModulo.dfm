@@ -5,6 +5,7 @@ inherited DM: TDM
   Height = 726
   Width = 1364
   inherited DB: TDatabase
+    Connected = False
     AfterConnect = DBAfterConnect
     Left = 32
     Top = 8
@@ -2322,6 +2323,18 @@ inherited DM: TDM
     object SQLCupomItemVLR_BASE_COFINS: TFloatField
       FieldName = 'VLR_BASE_COFINS'
       Origin = 'DB.CUPOMITEM.VLR_BASE_COFINS'
+    end
+    object SQLCupomItemPERC_REDUCAO_BASE_CALCULO: TFloatField
+      FieldName = 'PERC_REDUCAO_BASE_CALCULO'
+      Origin = 'DB.CUPOMITEM.PERC_REDUCAO_BASE_CALCULO'
+    end
+    object SQLCupomItemBASE_ST_RETIDO: TFloatField
+      FieldName = 'BASE_ST_RETIDO'
+      Origin = 'DB.CUPOMITEM.BASE_ST_RETIDO'
+    end
+    object SQLCupomItemVALOR_ST_RETIDO: TFloatField
+      FieldName = 'VALOR_ST_RETIDO'
+      Origin = 'DB.CUPOMITEM.VALOR_ST_RETIDO'
     end
   end
   object DSSQLCupomItem: TDataSource

@@ -5297,6 +5297,15 @@ begin
         if Dm.SQLCupomItemCPITN2VLRDESCSOBTOT.AsVariant = null then
           Dm.SQLCupomItemCPITN2VLRDESCSOBTOT.AsVariant := 0;
 
+        if (SQLLocate('PRODUTO', 'PRODICOD', 'BASE_ICM_ST_RET', FormTelaItens.SQLItensVendaTempCODIGO.AsString) <> '') and
+           (SQLLocate('PRODUTO', 'PRODICOD', 'VALOR_ICM_ST_RET', FormTelaItens.SQLItensVendaTempCODIGO.AsString) <> '') and
+           (StrToInt(SQLLocate('PRODUTO', 'PRODICOD', 'PRODISITTRIB', FormTelaItens.SQLItensVendaTempCODIGO.AsString)) = 60) then
+        begin
+          Dm.SQLCupomItemVALOR_ST_RETIDO.AsFloat := (StrToFloat(SQLLocate('PRODUTO', 'PRODICOD', 'BASE_ICM_ST_RET', FormTelaItens.SQLItensVendaTempCODIGO.AsString)) * FormTelaItens.SQLItensVendaTempQUANTIDADE.Value);
+          Dm.SQLCupomItemBASE_ST_RETIDO.AsFloat := (StrToFloat(SQLLocate('PRODUTO', 'PRODICOD', 'VALOR_ICM_ST_RET', FormTelaItens.SQLItensVendaTempCODIGO.AsString)) * FormTelaItens.SQLItensVendaTempQUANTIDADE.Value);
+        end;
+
+
         DM.SQLCupomItemCPITN3VLRUNIT.Value     := FormTelaItens.SQLItensVendaTempVLRUNITBRUT.Value;
         { Removido Adilson porque estava ficando o valor unitario errado diminuindo o desconto do Unitario
                                                   - (FormTelaItens.SQLItensVendaTempVLRDESC.Value / FormTelaItens.SQLItensVendaTempQUANTIDADE.Value )-
@@ -5346,6 +5355,7 @@ begin
           begin
             DM.SQLCupomItemCPITN2BASEICMS.AsFloat  := FormTelaItens.SQLItensVendaTempBASEICMS.AsFloat;
             DM.SQLCupomItemCPITN2VLRICMS.AsFloat   := FormTelaItens.SQLItensVendaTempVLRICMS.AsFloat;
+            DM.SQLCupomItemPERC_REDUCAO_BASE_CALCULO.AsFloat := FormTelaItens.SQLItensVendaTempPERC_RED_BASE_ICMS.AsFloat
           end
         else
           begin
