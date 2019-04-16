@@ -5,7 +5,6 @@ inherited DM: TDM
   Height = 726
   Width = 1364
   inherited DB: TDatabase
-    Connected = False
     AfterConnect = DBAfterConnect
     Left = 32
     Top = 8
@@ -1807,7 +1806,6 @@ inherited DM: TDM
   end
   object DatabaseTerm: TDatabase
     AliasName = 'Easy_Gestao'
-    Connected = True
     DatabaseName = 'DBTerm'
     LoginPrompt = False
     Params.Strings = (
@@ -6824,7 +6822,7 @@ inherited DM: TDM
     Configuracoes.Geral.ValidarDigest = False
     Configuracoes.Geral.ModeloDF = moNFCe
     Configuracoes.Geral.AtualizarXMLCancelado = True
-    Configuracoes.Geral.VersaoQRCode = veqr000
+    Configuracoes.Geral.VersaoQRCode = veqr200
     Configuracoes.Arquivos.PathSalvar = 'c:\easy2solutions\nfce\'
     Configuracoes.Arquivos.OrdenacaoPath = <>
     Configuracoes.Arquivos.SepararPorMes = True

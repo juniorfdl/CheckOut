@@ -1,6 +1,6 @@
 object FormTelaMesa: TFormTelaMesa
-  Left = 156
-  Top = 0
+  Left = 266
+  Top = 13
   BorderStyle = bsSingle
   ClientHeight = 687
   ClientWidth = 1016
@@ -1920,6 +1920,7 @@ object FormTelaMesa: TFormTelaMesa
     SQL.Strings = (
       'select * from PREVENDAITEM'
       'Where (%MFiltro)')
+    UpdateMode = upWhereChanged
     Macros = <
       item
         DataType = ftString

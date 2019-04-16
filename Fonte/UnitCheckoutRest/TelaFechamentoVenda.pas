@@ -373,7 +373,7 @@ uses TelaItens, TelaConsultaRapidaCliente, DataModulo,
      UnitLibrary, TelaConsultaLiberacaoCredito, DataModuloTemplate, IMPNAOFISCAL,
      TelaDadosCartaoCreditoManual, TelaTroco, TelaAssistenteLancamentoContasReceber,
      TelaAssistenteLancamentoPlanoVariavelCheckout, TelaConsultaRapidaDependente,
-     LeitorCodigoBarrasCheckout, TelaDisplay;
+     LeitorCodigoBarrasCheckout, TelaDisplay, Math;
 
 {$R *.DFM}
 procedure TFormTelaFechamentoVenda.FormCreate(Sender: TObject);
@@ -3550,15 +3550,25 @@ end ;
 function TFormTelaFechamentoVenda.GravarItensCupom : boolean ;
 var
   PercItemSobreTot,VlrDesc : double ;
+  vRateioDesconto, vTotalItem, vEstimativa : Real;
   GravouItem : Boolean;
   Tentativa : integer;
 begin
+  vEstimativa := 0;
   FormTelaItens.SQLItensVendaTemp.First;
   while not FormTelaItens.SQLItensVendaTemp.EOF do
   begin
-    //TESTAR SE HOUVE DESCONTO NO TOTAL DA VENDA PARA RATEAR NOS ITENS
-    VlrDesc          := 0;
     PercItemSobreTot := 0;
+    VlrDesc          := 0;
+    vRateioDesconto  := 0;
+    vTotalItem       := 0;
+    //TESTAR SE HOUVE DESCONTO NO TOTAL DA VENDA PARA RATEAR NOS ITENS
+    if (LblValorDescontoAcrescimo.Caption = 'DESCONTO') and (ValorDescontoAcrescimo.Value > 0) then
+      begin
+        vTotalItem  := (FormTelaItens.SQLItensVendaTempVLRUNITBRUT.Value * FormTelaItens.SQLItensVendaTempQUANTIDADE.Value);
+        VlrDesc := RoundTo((vTotalItem * ValorDescontoAcrescimo.Value) / (ValorTotalVenda.Value + ValorDescontoAcrescimo.Value),-2);
+      end;
+    vEstimativa := vEstimativa + VlrDesc;
     Tentativa := 1;
     GravouItem := False;
     while not GravouItem and (Tentativa < 4) do
@@ -3591,30 +3601,23 @@ begin
         DM.SQLCupomItemSABOR05.Value          := FormTelaItens.SQLItensVendaTempSABOR05.Value;
         DM.SQLCupomItemSABOR06.Value          := FormTelaItens.SQLItensVendaTempSABOR06.Value;
 
+        //O DESCONTO ESTÁ SENDO APLICADO NOVAMENTE POIS PODE SER DADO DESCONTO NO TOTAL DA VENDA
+        // E JÁ TER DESCONTO NO ITEM
+        DM.SQLCupomItemCPITN2DESC.Value := 0;
         if VlrDesc > 0 then
-          Dm.SQLCupomItemCPITN2VLRDESCSOBTOT.AsFloat := VlrDesc;
-
+          DM.SQLCupomItemCPITN2DESC.AsFloat := VlrDesc;
         if Dm.SQLCupomItemCPITN2VLRDESCSOBTOT.AsVariant = null then
           Dm.SQLCupomItemCPITN2VLRDESCSOBTOT.AsVariant := 0;
 
-        DM.SQLCupomItemCPITN3VLRUNIT.Value     := FormTelaItens.SQLItensVendaTempVLRUNITBRUT.Value;
+        if (FormTelaItens.SQLItensVendaTempVLRDESC.Value > 0) then
+          DM.SQLCupomItemCPITN2DESC.asFloat := StrToFloat(FormatFloat('0.00',FormTelaItens.SQLItensVendaTempVLRDESC.Value));
 
+        DM.SQLCupomItemCPITN3VLRUNIT.Value     := FormTelaItens.SQLItensVendaTempVLRUNITBRUT.Value;
         try
           DM.SQLCupomItemCPITN3VLRCUSTUNIT.Value := FormTelaItens.SQLItensVendaTempVLRCUSTO.Value;
         except
           DM.SQLCupomItemCPITN3VLRCUSTUNIT.Value := 0;
         end;
-
-        if FormTelaItens.SQLItensVendaTempVLRDESC.Value > 0 then
-          DM.SQLCupomItemCPITN2DESC.Value := FormTelaItens.SQLItensVendaTempVLRDESC.Value;
-
-        //O DESCONTO ESTÁ SENDO APLICADO NOVAMENTE POIS PODE SER DADO DESCONTO NO TOTAL DA VENDA
-        // E JÁ TER DESCONTO NO ITEM
-
-        if (VlrDesc > 0) then
-          DM.SQLCupomItemCPITN2DESC.asFloat := StrToFloat(FormatFloat('0.00',FormTelaItens.SQLItensVendaTempVLRDESC.Value))
-        else
-          DM.SQLCupomItemCPITN2DESC.Value := 0;
 
         // CALCULA O VALOR DE LUCRO DO PRODUTO
         if FormTelaItens.SQLItensVendaTempVLRCUSTO.Value > 0 then
@@ -3705,6 +3708,21 @@ begin
     end;
     FormTelaItens.SQLItensVendaTemp.Next;
   end;
+  //Verifica se tem diferença no valor total dos itens e no desconto total
+  if (GravouItem) and (ValorDescontoAcrescimo.Value <> vEstimativa) then
+  begin
+    DM.SQLCupomItem.Close;
+    DM.SQLCupomItem.MacroByName('MFiltro').Value := 'CUPOA13ID = ' + QuotedStr(DM.CodNextCupom);
+    DM.SQLCupomItem.Open;
+    if not DM.SQLCupomItem.IsEmpty then
+    begin
+      DM.SQLCupomItem.Last;
+      DM.SQLCupomItem.Edit;
+      DM.SQLCupomItemCPITN2DESC.AsFloat := Dm.SQLCupomItemCPITN2DESC.AsFloat + (ValorDescontoAcrescimo.Value - vEstimativa);
+      DM.SQLCupomItem.Post
+    end;
+  end;
+
 end;
 
 function TFormTelaFechamentoVenda.GravarNumerarioAVistaCupom : boolean ;

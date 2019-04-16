@@ -1,7 +1,7 @@
 inherited DM: TDM
   OldCreateOrder = True
-  Left = 129
-  Top = 1
+  Left = 332
+  Top = 16
   Height = 724
   Width = 859
   inherited DB: TDatabase

@@ -2138,7 +2138,7 @@ inherited FormCadastroCupom: TFormCadastroCupom
   end
   inherited PopupMenuImpressao: TPopupMenu
     object CupomEletronicoNFCe1: TMenuItem
-      Caption = 'l'
+      Caption = 'NFCe'
       OnClick = CupomEletronicoNFCe1Click
     end
     object MnReimprimirvendaatual: TMenuItem

@@ -296,6 +296,8 @@ type
     SQLTemplateALTERA_NOSSO_NUMERO: TStringField;
     DBCheckBox7: TDBCheckBox;
     SQLTemplateCONTROLA_CONSULTA_CP: TStringField;
+    DBCheckBox8: TDBCheckBox;
+    SQLTemplateCONTROLA_ES_RAPIDA: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure SQLTemplateCalcFields(DataSet: TDataSet);
     procedure RetornaEmpresaClick(Sender: TObject);

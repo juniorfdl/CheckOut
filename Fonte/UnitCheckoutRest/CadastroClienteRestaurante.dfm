@@ -4428,7 +4428,7 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 279401
     PrinterSetup.mmPaperWidth = 215900
-    PrinterSetup.PaperSize = 256
+    PrinterSetup.PaperSize = 120
     DeviceType = 'Screen'
     EmailSettings.ReportFormat = 'PDF'
     OutlineSettings.CreateNode = True
@@ -7040,7 +7040,7 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 279401
     PrinterSetup.mmPaperWidth = 215900
-    PrinterSetup.PaperSize = 256
+    PrinterSetup.PaperSize = 120
     DeviceType = 'Screen'
     EmailSettings.ReportFormat = 'PDF'
     OutlineSettings.CreateNode = True

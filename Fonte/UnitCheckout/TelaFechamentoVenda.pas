@@ -387,7 +387,7 @@ uses TelaItens, TelaConsultaRapidaCliente, DataModulo,
      ImportarPreVenda, TelaFechamentoOrcamento, TelaDadosCliente, TelaCadastroObs, UnitLibrary, TelaConsultaLiberacaoCredito, DataModuloTemplate,
      IMPNAOFISCAL, TelaDadosCartaoCreditoManual, TelaTroco, TelaAssistenteLancamentoContasReceber, TelaAssistenteLancamentoPlanoVariavelCheckout,
      TelaConsultaRapidaDependente, LeitorCodigoBarrasCheckout, TelaGeracaoXMLVendas, TelaDataEntrega,
-  udmECF, udmSiTef;
+  udmECF, udmSiTef, Math;
 
 {$R *.DFM}
 procedure TFormTelaFechamentoVenda.FormCreate(Sender: TObject);
@@ -1377,6 +1377,7 @@ begin
 
               if (TipoPadrao = 'CRT') and (ProvedorCartao <> '') then
               begin
+                NumerarioAtual := 0;
                 if not dmSiTef.EfetuarPagamentoSiTef(NumerarioAtual, StrToFloatDef(EntradaDados.Text,0), '') then
                 begin
                   EntradaDados.SelectAll ;
@@ -1537,6 +1538,7 @@ begin
                                   SQLParcelasPrazoVendaTempNUMEICOD.AsString)+'"');
               if (TipoPadrao = 'CRT') and (ProvedorCartao <> '') then
               begin
+                NumerarioAtual := 0;
                 if not dmSiTef.EfetuarPagamentoSiTef(NumerarioAtual, ValorPrazo, '') then
                 begin
                   EntradaDados.SelectAll ;
@@ -5234,28 +5236,27 @@ end ;
 
 function TFormTelaFechamentoVenda.GravarItensCupom : boolean ;
 var
-  PercItemSobreTot,VlrDesc : double ;
+  PercItemSobreTot,VlrDesc : double;
+  vRateioDesconto, vTotalItem, vEstimativa : Real;
   GravouItem : Boolean;
   Tentativa : integer;
   IniFile: TiniFile;
   Associado : String;
 begin
+  vEstimativa := 0;
   FormTelaItens.SQLItensVendaTemp.First;
   while not FormTelaItens.SQLItensVendaTemp.EOF do
   begin
+    VlrDesc         := 0;
+    vRateioDesconto := 0;
+    vTotalItem      := 0;
     //TESTAR SE HOUVE DESCONTO NO TOTAL DA VENDA PARA RATEAR NOS ITENS
-    VlrDesc          := 0;
-    PercItemSobreTot := 0;
-    { Judimar, Removi a rotina abaixo, pq os calculos que ela resulta estao Errados, por hora o sistema nao fara mais rateio nos itens
     if (LblValorDescontoAcrescimo.Caption = 'DESCONTO') and (ValorDescontoAcrescimo.Value > 0) then
       begin
-        PercItemSobreTot := (FormTelaItens.SQLItensVendaTempVLRUNITBRUT.Value *
-                             FormTelaItens.SQLItensVendaTempQUANTIDADE.Value) - FormTelaItens.SQLItensVendaTempVLRDESC.Value;
-        PercItemSobreTot := (PercItemSobreTot /
-                            (ValorTotalVenda.Value + ValorDescontoAcrescimo.Value))*100;
-        VlrDesc          := ValorDescontoAcrescimo.Value * (PercItemSobreTot/100);
-        VlrDesc          := VlrDesc / FormTelaItens.SQLItensVendaTempQUANTIDADE.Value;
-      end; }
+        vTotalItem  := (FormTelaItens.SQLItensVendaTempVLRUNITBRUT.Value * FormTelaItens.SQLItensVendaTempQUANTIDADE.Value);
+        VlrDesc := RoundTo((vTotalItem * ValorDescontoAcrescimo.Value) / (ValorTotalVenda.Value + ValorDescontoAcrescimo.Value),-2);
+      end;
+    vEstimativa := vEstimativa + VlrDesc;
 
     Tentativa := 1;
     GravouItem := False;
@@ -5291,9 +5292,6 @@ begin
         else
           DM.SQLCupomItemCPITN3QTDTROCA.Value  := FormTelaItens.SQLItensVendaTempQUANTIDADE.Value;
 
-        if VlrDesc > 0 then
-          Dm.SQLCupomItemCPITN2VLRDESCSOBTOT.AsFloat := VlrDesc;
-
         if Dm.SQLCupomItemCPITN2VLRDESCSOBTOT.AsVariant = null then
           Dm.SQLCupomItemCPITN2VLRDESCSOBTOT.AsVariant := 0;
 
@@ -5316,11 +5314,12 @@ begin
           DM.SQLCupomItemCPITN3VLRCUSTUNIT.Value := 0;
         end;
 
+        DM.SQLCupomItemCPITN2DESC.Value := 0;
+        if VlrDesc > 0 then
+          DM.SQLCupomItemCPITN2DESC.AsFloat := VlrDesc;
+
         if FormTelaItens.SQLItensVendaTempVLRDESC.Value > 0 then
-          // Alterado pelo Judi + DM.SQLCupomItemCPITN2DESC.Value := FormTelaItens.SQLItensVendaTempVLRDESC.Value / FormTelaItens.SQLItensVendaTempQUANTIDADE.Value
-          DM.SQLCupomItemCPITN2DESC.asFloat := StrToFloat(FormatFloat('0.00',FormTelaItens.SQLItensVendaTempVLRDESC.Value))
-        else
-          DM.SQLCupomItemCPITN2DESC.Value := 0;
+          DM.SQLCupomItemCPITN2DESC.asFloat := StrToFloat(FormatFloat('0.00',FormTelaItens.SQLItensVendaTempVLRDESC.Value));
 
         // CALCULA O VALOR DE LUCRO DO PRODUTO
         if (FormTelaItens.SQLItensVendaTempVLRCUSTO.Value > 0) and (DM.SQLCupomItemCPITN3QTD.Value > 0) then
@@ -5456,6 +5455,21 @@ begin
       end;
     FormTelaItens.SQLItensVendaTemp.Next;
   end;
+  //Verifica se tem diferença no valor total dos itens e no desconto total
+  if (GravouItem) and (ValorDescontoAcrescimo.Value <> vEstimativa) then
+  begin
+    DM.SQLCupomItem.Close;
+    DM.SQLCupomItem.MacroByName('MFiltro').Value := 'CUPOA13ID = ' + QuotedStr(DM.CodNextCupom);
+    DM.SQLCupomItem.Open;
+    if not DM.SQLCupomItem.IsEmpty then
+    begin
+      DM.SQLCupomItem.Last;
+      DM.SQLCupomItem.Edit;
+      DM.SQLCupomItemCPITN2DESC.AsFloat := Dm.SQLCupomItemCPITN2DESC.AsFloat + (ValorDescontoAcrescimo.Value - vEstimativa);
+      DM.SQLCupomItem.Post
+    end;
+  end;
+
 end;
 
 function TFormTelaFechamentoVenda.GravarNumerarioAVistaCupom : boolean ;

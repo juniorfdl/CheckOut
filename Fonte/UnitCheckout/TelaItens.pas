@@ -699,8 +699,8 @@ begin
         if SQLImpressaoCupom.fieldbyname('CPITN2DESC').AsFloat > 0 then
           Prod.vDesc := SQLImpressaoCupom.fieldbyname('CPITN2DESC').AsFloat;
 
-        if (PercDesc > 0) then
-          Prod.vDesc := ((Prod.vProd * PercDesc) / 100) + SQLImpressaoCupom.fieldbyname('CPITN2DESC').AsFloat;
+//        if (PercDesc > 0) then
+//          Prod.vDesc := ((Prod.vProd * PercDesc) / 100) + SQLImpressaoCupom.fieldbyname('CPITN2DESC').AsFloat;
 
         Prod.vDesc := RoundTo(Prod.vDesc, -2);
 

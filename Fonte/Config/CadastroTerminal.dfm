@@ -1,6 +1,6 @@
 inherited FormCadastroTerminais: TFormCadastroTerminais
-  Left = -8
-  Top = -8
+  Left = 348
+  Top = 2
   Caption = 'Cadastro de Terminais'
   ClientHeight = 706
   ClientWidth = 1366
@@ -721,7 +721,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
               end
               object Label3: TLabel
                 Left = 6
-                Top = 415
+                Top = 434
                 Width = 126
                 Height = 13
                 Caption = 'Valor Limite p/Sangria'
@@ -763,7 +763,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 ParentColor = True
                 ParentCtl3D = False
                 ParentFont = False
-                TabOrder = 1
+                TabOrder = 7
               end
               object ComboTipoTerminal: TRxDBComboBox
                 Left = 477
@@ -781,7 +781,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   'Pr'#233'-venda         501 ate 600'
                   'Administrativo   601 ate ...')
                 ParentCtl3D = False
-                TabOrder = 2
+                TabOrder = 14
                 Values.Strings = (
                   'C'
                   'P'
@@ -796,7 +796,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 DataField = 'CLIEA13ID'
                 DataSource = DSTemplate
                 ParentCtl3D = False
-                TabOrder = 8
+                TabOrder = 2
                 OnKeyDown = DBEdit7KeyDown
               end
               object DBEdit8: TDBEdit
@@ -808,7 +808,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 DataField = 'VENDICOD'
                 DataSource = DSTemplate
                 ParentCtl3D = False
-                TabOrder = 12
+                TabOrder = 3
                 OnKeyDown = DBEdit8KeyDown
               end
               object DBEdit9: TDBEdit
@@ -820,7 +820,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 DataField = 'PLRCICOD'
                 DataSource = DSTemplate
                 ParentCtl3D = False
-                TabOrder = 13
+                TabOrder = 11
                 OnKeyDown = DBEdit9KeyDown
               end
               object DBEdit11: TDBEdit
@@ -841,7 +841,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 ParentColor = True
                 ParentCtl3D = False
                 ParentFont = False
-                TabOrder = 17
+                TabOrder = 10
               end
               object DBEdit12: TDBEdit
                 Left = 356
@@ -861,7 +861,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 ParentColor = True
                 ParentCtl3D = False
                 ParentFont = False
-                TabOrder = 18
+                TabOrder = 13
               end
               object DBEdit4: TDBEdit
                 Left = 2
@@ -872,7 +872,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 DataField = 'ECFA13ID'
                 DataSource = DSTemplate
                 ParentCtl3D = False
-                TabOrder = 3
+                TabOrder = 1
                 OnKeyDown = DBEdit4KeyDown
               end
               object DBEdit19: TDBEdit
@@ -893,7 +893,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 ParentColor = True
                 ParentCtl3D = False
                 ParentFont = False
-                TabOrder = 19
+                TabOrder = 8
               end
               object ComboPortaECF: TDBComboBox
                 Left = 477
@@ -933,7 +933,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   'COM25'
                   'USB')
                 ParentCtl3D = False
-                TabOrder = 5
+                TabOrder = 15
               end
               object DBEdit10: TDBEdit
                 Left = 111
@@ -959,7 +959,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 Left = 2
                 Top = 189
                 Width = 655
-                Height = 219
+                Height = 242
                 Caption = 'Par'#226'metros'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = 8404992
@@ -967,12 +967,12 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 Font.Name = 'Tahoma'
                 Font.Style = [fsBold]
                 ParentFont = False
-                TabOrder = 16
+                TabOrder = 5
                 object ImpPreVenda: TDBCheckBox
                   Left = 4
                   Top = 15
                   Width = 284
-                  Height = 12
+                  Height = 17
                   Caption = 'Imprimir Ticket da Pr'#233'-Venda'
                   Ctl3D = False
                   DataField = 'TERMCIMPPREVENDA'
@@ -990,9 +990,9 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object ImpConfDiv: TDBCheckBox
                   Left = 4
-                  Top = 71
+                  Top = 74
                   Width = 284
-                  Height = 12
+                  Height = 17
                   Caption = 'Imprimir Confiss'#227'o D'#237'vida'
                   Ctl3D = False
                   DataField = 'TERMCIMPCONFDIVIDA'
@@ -1011,9 +1011,9 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object ImpCDBarrasPrevenda: TDBCheckBox
                   Left = 4
-                  Top = 29
+                  Top = 30
                   Width = 284
-                  Height = 12
+                  Height = 17
                   Caption = 'Imprimir C'#243'digo Barras not Ticket da Pr'#233'-Venda'
                   Ctl3D = False
                   DataField = 'TERMCIMPBARRASPED'
@@ -1031,9 +1031,9 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object ImpCheque: TDBCheckBox
                   Left = 4
-                  Top = 43
+                  Top = 44
                   Width = 284
-                  Height = 12
+                  Height = 17
                   Caption = 'Imprimir Cheque'
                   Ctl3D = False
                   DataField = 'TERMCIMPRIMECHEQUE'
@@ -1052,9 +1052,9 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object ConfirmaImpCarne: TDBCheckBox
                   Left = 294
-                  Top = 70
+                  Top = 72
                   Width = 191
-                  Height = 12
+                  Height = 17
                   Caption = 'Confirma Impress'#227'o de Carn'#234
                   Ctl3D = False
                   DataField = 'TERMCCONFIMPCARNE'
@@ -1066,15 +1066,15 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   Font.Style = [fsBold]
                   ParentCtl3D = False
                   ParentFont = False
-                  TabOrder = 15
+                  TabOrder = 19
                   ValueChecked = 'S'
                   ValueUnchecked = 'N'
                 end
                 object AutenticEntradaFinalCupom: TDBCheckBox
                   Left = 294
-                  Top = 29
+                  Top = 28
                   Width = 274
-                  Height = 12
+                  Height = 17
                   Caption = 'Autenticar Entrada na Finaliza'#231#227'o do Cupom'
                   Ctl3D = False
                   DataField = 'TERMCAUTENTRFIMCUP'
@@ -1086,15 +1086,15 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   Font.Style = [fsBold]
                   ParentCtl3D = False
                   ParentFont = False
-                  TabOrder = 12
+                  TabOrder = 16
                   ValueChecked = 'S'
                   ValueUnchecked = 'N'
                 end
                 object OcultarVendCliPlano: TDBCheckBox
                   Left = 4
-                  Top = 154
+                  Top = 162
                   Width = 284
-                  Height = 12
+                  Height = 17
                   Caption = 'Ocultar Cliente, Plano e Vendedor no PDV'
                   Ctl3D = False
                   DataField = 'TERMCHIDECLIVENDPL'
@@ -1112,9 +1112,9 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object ImpDadosInternosCupom: TDBCheckBox
                   Left = 4
-                  Top = 57
+                  Top = 59
                   Width = 284
-                  Height = 12
+                  Height = 17
                   Caption = 'Imprimir Dados Internos no Cupom'
                   Ctl3D = False
                   DataField = 'TERMCIMPRDADINTCUP'
@@ -1132,9 +1132,9 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object MovEstoque: TDBCheckBox
                   Left = 294
-                  Top = 111
+                  Top = 116
                   Width = 182
-                  Height = 12
+                  Height = 17
                   Caption = 'Movimentar Estoque on Line'
                   Ctl3D = False
                   DataField = 'TERMCMOVESTOQUE'
@@ -1146,15 +1146,15 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   Font.Style = [fsBold]
                   ParentCtl3D = False
                   ParentFont = False
-                  TabOrder = 18
+                  TabOrder = 22
                   ValueChecked = 'S'
                   ValueUnchecked = 'N'
                 end
                 object ConfirmaEncerramentoCupom: TDBCheckBox
                   Left = 294
-                  Top = 56
+                  Top = 57
                   Width = 274
-                  Height = 12
+                  Height = 17
                   Caption = 'Confirma o Encerramento do Cupom'
                   Ctl3D = False
                   DataField = 'TERMCCONFFECHCUPOM'
@@ -1166,15 +1166,15 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   Font.Style = [fsBold]
                   ParentCtl3D = False
                   ParentFont = False
-                  TabOrder = 14
+                  TabOrder = 18
                   ValueChecked = 'S'
                   ValueUnchecked = 'N'
                 end
                 object MostraIDCupomNoFechamento: TDBCheckBox
                   Left = 294
-                  Top = 98
+                  Top = 101
                   Width = 237
-                  Height = 12
+                  Height = 17
                   Caption = 'Mostra ID do Cupom no Encerramento'
                   Ctl3D = False
                   DataField = 'TERMCMOSTRAIDCUPOM'
@@ -1186,15 +1186,15 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   Font.Style = [fsBold]
                   ParentCtl3D = False
                   ParentFont = False
-                  TabOrder = 17
+                  TabOrder = 21
                   ValueChecked = 'S'
                   ValueUnchecked = 'N'
                 end
                 object InformaDadosClienteNoFechamento: TDBCheckBox
                   Left = 294
-                  Top = 84
+                  Top = 86
                   Width = 256
-                  Height = 12
+                  Height = 17
                   Caption = 'Informa Dados do Cliente no Fechamento'
                   Ctl3D = False
                   DataField = 'TERMCINFDADOCLIPAD'
@@ -1206,7 +1206,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   Font.Style = [fsBold]
                   ParentCtl3D = False
                   ParentFont = False
-                  TabOrder = 16
+                  TabOrder = 20
                   ValueChecked = 'S'
                   ValueUnchecked = 'N'
                 end
@@ -1214,7 +1214,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   Left = 294
                   Top = 13
                   Width = 274
-                  Height = 14
+                  Height = 17
                   Caption = 'Autenticar em Impressora Matricial'
                   Ctl3D = False
                   DataField = 'TERMCAUTENTIMPMATRI'
@@ -1226,15 +1226,15 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   Font.Style = [fsBold]
                   ParentCtl3D = False
                   ParentFont = False
-                  TabOrder = 11
+                  TabOrder = 15
                   ValueChecked = 'S'
                   ValueUnchecked = 'N'
                 end
                 object ImpEntradaCarne: TDBCheckBox
                   Left = 4
-                  Top = 126
+                  Top = 133
                   Width = 284
-                  Height = 12
+                  Height = 17
                   Caption = 'Imprimir Entrada no Carn'#234
                   Ctl3D = False
                   DataField = 'TERMCIMPENTCARNE'
@@ -1254,7 +1254,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   Left = 294
                   Top = 42
                   Width = 274
-                  Height = 12
+                  Height = 17
                   Caption = 'N'#227'o Autenticar Parcelas no Recebimento'
                   Ctl3D = False
                   DataField = 'TERMCNAOAUTRCTOCRD'
@@ -1266,15 +1266,15 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   Font.Style = [fsBold]
                   ParentCtl3D = False
                   ParentFont = False
-                  TabOrder = 13
+                  TabOrder = 17
                   ValueChecked = 'S'
                   ValueUnchecked = 'N'
                 end
                 object ImpComprovComTotalRecto: TDBCheckBox
                   Left = 4
-                  Top = 140
+                  Top = 147
                   Width = 284
-                  Height = 12
+                  Height = 17
                   Caption = 'Imprimir Comprovante com Total no Recebimento'
                   Ctl3D = False
                   DataField = 'TERMCIMPCOMPTOTREC'
@@ -1292,9 +1292,9 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object InfDadosCartaoCred: TDBCheckBox
                   Left = 294
-                  Top = 125
+                  Top = 131
                   Width = 189
-                  Height = 12
+                  Height = 17
                   Caption = 'Informa dados Cart'#227'o Cr'#233'dito'
                   Ctl3D = False
                   DataField = 'TERMCINFDADOCARTAO'
@@ -1306,15 +1306,15 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   Font.Style = [fsBold]
                   ParentCtl3D = False
                   ParentFont = False
-                  TabOrder = 19
+                  TabOrder = 23
                   ValueChecked = 'S'
                   ValueUnchecked = 'N'
                 end
                 object InformaTrocoDestaqueCupom: TDBCheckBox
                   Left = 4
-                  Top = 168
+                  Top = 177
                   Width = 284
-                  Height = 12
+                  Height = 17
                   Caption = 'Mostrar Troco em Destaque no Encerramento'
                   Ctl3D = False
                   DataField = 'TERMCMOSTRATROCOCUP'
@@ -1332,9 +1332,9 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 end
                 object CheckVendInicioVenda: TDBCheckBox
                   Left = 294
-                  Top = 166
+                  Top = 175
                   Width = 284
-                  Height = 12
+                  Height = 17
                   Caption = 'Solicita Vendedor ao iniciar venda PDV'
                   Ctl3D = False
                   DataField = 'TERMCSOLCODVEND'
@@ -1346,118 +1346,18 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   Font.Style = [fsBold]
                   ParentCtl3D = False
                   ParentFont = False
-                  TabOrder = 9
+                  TabOrder = 26
                   ValueChecked = 'S'
                   ValueUnchecked = 'N'
                 end
                 object DBCheckBox2: TDBCheckBox
                   Left = 294
-                  Top = 139
+                  Top = 145
                   Width = 221
-                  Height = 12
+                  Height = 17
                   Caption = 'Sim - Na impress'#227'o das Pr'#233'-Vendas'
                   Ctl3D = False
                   DataField = 'TERMCIMPPREVENDASIM'
-                  DataSource = DSTemplate
-                  Font.Charset = DEFAULT_CHARSET
-                  Font.Color = 8404992
-                  Font.Height = -11
-                  Font.Name = 'Tahoma'
-                  Font.Style = [fsBold]
-                  ParentCtl3D = False
-                  ParentFont = False
-                  TabOrder = 20
-                  ValueChecked = 'S'
-                  ValueUnchecked = 'N'
-                end
-                object DBCheckBox3: TDBCheckBox
-                  Left = 294
-                  Top = 152
-                  Width = 266
-                  Height = 12
-                  Caption = 'Movimentar Estoque ao Fechar o Caixa PDV'
-                  Ctl3D = False
-                  DataField = 'TERMCBXESTFECHCX'
-                  DataSource = DSTemplate
-                  Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clRed
-                  Font.Height = -11
-                  Font.Name = 'Tahoma'
-                  Font.Style = [fsBold]
-                  ParentCtl3D = False
-                  ParentFont = False
-                  TabOrder = 21
-                  ValueChecked = 'S'
-                  ValueUnchecked = 'N'
-                end
-                object CheckMostraPAtacadoPDV: TDBCheckBox
-                  Left = 294
-                  Top = 180
-                  Width = 264
-                  Height = 19
-                  Caption = 'Mostra Preco Atacado no Tira-Teima PDV'
-                  Ctl3D = False
-                  DataField = 'TERMCMPATACADO'
-                  DataSource = DSTemplate
-                  Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clRed
-                  Font.Height = -11
-                  Font.Name = 'Tahoma'
-                  Font.Style = [fsBold]
-                  ParentCtl3D = False
-                  ParentFont = False
-                  TabOrder = 10
-                  ValueChecked = 'S'
-                  ValueUnchecked = 'N'
-                end
-                object ImpConfDivPerg: TDBCheckBox
-                  Left = 20
-                  Top = 85
-                  Width = 237
-                  Height = 12
-                  Caption = 'Perguntar Antes de Imprimir'
-                  Ctl3D = False
-                  DataField = 'TERMCECFIMPRCONFDIVPERGUNTA'
-                  DataSource = DSTemplate
-                  Font.Charset = DEFAULT_CHARSET
-                  Font.Color = 8404992
-                  Font.Height = -11
-                  Font.Name = 'Tahoma'
-                  Font.Style = [fsBold]
-                  ParentCtl3D = False
-                  ParentFont = False
-                  TabOrder = 22
-                  ValueChecked = 'S'
-                  ValueUnchecked = 'N'
-                end
-                object ImpConfDivItens: TDBCheckBox
-                  Left = 20
-                  Top = 99
-                  Width = 245
-                  Height = 12
-                  Caption = 'Imprimir Itens Vendidos na Confiss'#227'o'
-                  Ctl3D = False
-                  DataField = 'TERMCECFIMPRCONFDIVIMPITENS'
-                  DataSource = DSTemplate
-                  Font.Charset = DEFAULT_CHARSET
-                  Font.Color = 8404992
-                  Font.Height = -11
-                  Font.Name = 'Tahoma'
-                  Font.Style = [fsBold]
-                  ParentCtl3D = False
-                  ParentFont = False
-                  TabOrder = 23
-                  ValueChecked = 'S'
-                  ValueUnchecked = 'N'
-                end
-                object ImpConfDivFat: TDBCheckBox
-                  Left = 20
-                  Top = 112
-                  Width = 249
-                  Height = 12
-                  Caption = 'Imprimir Faturamento na Confiss'#227'o'
-                  Ctl3D = False
-                  DataField = 'TERMCECFIMPRCONFDIVIMPFAT'
                   DataSource = DSTemplate
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = 8404992
@@ -1470,9 +1370,109 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   ValueChecked = 'S'
                   ValueUnchecked = 'N'
                 end
+                object DBCheckBox3: TDBCheckBox
+                  Left = 294
+                  Top = 160
+                  Width = 266
+                  Height = 17
+                  Caption = 'Movimentar Estoque ao Fechar o Caixa PDV'
+                  Ctl3D = False
+                  DataField = 'TERMCBXESTFECHCX'
+                  DataSource = DSTemplate
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clRed
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = [fsBold]
+                  ParentCtl3D = False
+                  ParentFont = False
+                  TabOrder = 25
+                  ValueChecked = 'S'
+                  ValueUnchecked = 'N'
+                end
+                object CheckMostraPAtacadoPDV: TDBCheckBox
+                  Left = 294
+                  Top = 189
+                  Width = 264
+                  Height = 17
+                  Caption = 'Mostra Preco Atacado no Tira-Teima PDV'
+                  Ctl3D = False
+                  DataField = 'TERMCMPATACADO'
+                  DataSource = DSTemplate
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clRed
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = [fsBold]
+                  ParentCtl3D = False
+                  ParentFont = False
+                  TabOrder = 27
+                  ValueChecked = 'S'
+                  ValueUnchecked = 'N'
+                end
+                object ImpConfDivPerg: TDBCheckBox
+                  Left = 20
+                  Top = 89
+                  Width = 237
+                  Height = 17
+                  Caption = 'Perguntar Antes de Imprimir'
+                  Ctl3D = False
+                  DataField = 'TERMCECFIMPRCONFDIVPERGUNTA'
+                  DataSource = DSTemplate
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = 8404992
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = [fsBold]
+                  ParentCtl3D = False
+                  ParentFont = False
+                  TabOrder = 12
+                  ValueChecked = 'S'
+                  ValueUnchecked = 'N'
+                end
+                object ImpConfDivItens: TDBCheckBox
+                  Left = 20
+                  Top = 103
+                  Width = 245
+                  Height = 17
+                  Caption = 'Imprimir Itens Vendidos na Confiss'#227'o'
+                  Ctl3D = False
+                  DataField = 'TERMCECFIMPRCONFDIVIMPITENS'
+                  DataSource = DSTemplate
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = 8404992
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = [fsBold]
+                  ParentCtl3D = False
+                  ParentFont = False
+                  TabOrder = 13
+                  ValueChecked = 'S'
+                  ValueUnchecked = 'N'
+                end
+                object ImpConfDivFat: TDBCheckBox
+                  Left = 20
+                  Top = 118
+                  Width = 249
+                  Height = 17
+                  Caption = 'Imprimir Faturamento na Confiss'#227'o'
+                  Ctl3D = False
+                  DataField = 'TERMCECFIMPRCONFDIVIMPFAT'
+                  DataSource = DSTemplate
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = 8404992
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = [fsBold]
+                  ParentCtl3D = False
+                  ParentFont = False
+                  TabOrder = 14
+                  ValueChecked = 'S'
+                  ValueUnchecked = 'N'
+                end
                 object DBCheckBox4: TDBCheckBox
                   Left = 4
-                  Top = 182
+                  Top = 192
                   Width = 278
                   Height = 17
                   Caption = 'Movimenta Estoque (Saida) na Transferencia'
@@ -1486,7 +1486,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   Font.Style = [fsBold]
                   ParentCtl3D = False
                   ParentFont = False
-                  TabOrder = 25
+                  TabOrder = 9
                   ValueChecked = 'S'
                   ValueUnchecked = 'N'
                 end
@@ -1506,13 +1506,13 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   Font.Style = [fsBold]
                   ParentCtl3D = False
                   ParentFont = False
-                  TabOrder = 26
+                  TabOrder = 29
                   ValueChecked = 'S'
                   ValueUnchecked = 'N'
                 end
                 object DBCheckBox6: TDBCheckBox
                   Left = 4
-                  Top = 198
+                  Top = 206
                   Width = 278
                   Height = 17
                   Caption = 'Permite alterar Nosso N'#250'mero'
@@ -1526,15 +1526,15 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   Font.Style = [fsBold]
                   ParentCtl3D = False
                   ParentFont = False
-                  TabOrder = 27
+                  TabOrder = 10
                   ValueChecked = 'S'
                   ValueUnchecked = 'N'
                 end
                 object DBCheckBox7: TDBCheckBox
                   Left = 294
-                  Top = 196
+                  Top = 204
                   Width = 290
-                  Height = 19
+                  Height = 17
                   Caption = 'Ocultar Registro conforme Tipo Fornecedor'
                   Ctl3D = False
                   DataField = 'CONTROLA_CONSULTA_CP'
@@ -1547,6 +1547,26 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   ParentCtl3D = False
                   ParentFont = False
                   TabOrder = 28
+                  ValueChecked = 'S'
+                  ValueUnchecked = 'N'
+                end
+                object DBCheckBox8: TDBCheckBox
+                  Left = 4
+                  Top = 221
+                  Width = 290
+                  Height = 17
+                  Caption = 'Desabilita Entrada e Sa'#237'da R'#225'pida de Estoque'
+                  Ctl3D = False
+                  DataField = 'CONTROLA_ES_RAPIDA'
+                  DataSource = DSTemplate
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = 8404992
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = [fsBold]
+                  ParentCtl3D = False
+                  ParentFont = False
+                  TabOrder = 11
                   ValueChecked = 'S'
                   ValueUnchecked = 'N'
                 end
@@ -1563,7 +1583,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 Font.Name = 'Tahoma'
                 Font.Style = [fsBold]
                 ParentFont = False
-                TabOrder = 15
+                TabOrder = 4
                 object RetornoNumeVista: TSpeedButton
                   Left = 48
                   Top = 25
@@ -1788,7 +1808,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   '3 Casas'
                   '4 Casas')
                 ParentCtl3D = False
-                TabOrder = 10
+                TabOrder = 16
                 Values.Strings = (
                   '2'
                   '3'
@@ -1800,7 +1820,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 Width = 62
                 Height = 20
                 Caption = 'Limpar ECF'
-                TabOrder = 7
+                TabOrder = 20
                 OnClick = BTLimpaPortaSerialClick
               end
               object DBEdit30: TDBEdit
@@ -1812,7 +1832,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 DataField = 'TERMIQTDEPADRAO'
                 DataSource = DSTemplate
                 ParentCtl3D = False
-                TabOrder = 14
+                TabOrder = 17
                 OnKeyDown = DBEdit9KeyDown
               end
               object ComboDecVenda: TRxDBComboBox
@@ -1830,7 +1850,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   '2 Casas'
                   '3 Casas')
                 ParentCtl3D = False
-                TabOrder = 11
+                TabOrder = 18
                 Values.Strings = (
                   '2'
                   '3'
@@ -1846,7 +1866,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 DataField = 'TERMA20NROSERIE'
                 DataSource = DSTemplate
                 ParentCtl3D = False
-                TabOrder = 4
+                TabOrder = 12
                 OnKeyDown = DBEdit4KeyDown
               end
               object ComboVelocidadeECF: TDBComboBox
@@ -1864,11 +1884,11 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                   '38400'
                   '115200')
                 ParentCtl3D = False
-                TabOrder = 6
+                TabOrder = 19
               end
               object DBEdit20: TDBEdit
                 Left = 2
-                Top = 428
+                Top = 447
                 Width = 134
                 Height = 19
                 Ctl3D = False
@@ -1881,7 +1901,7 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
                 Font.Style = []
                 ParentCtl3D = False
                 ParentFont = False
-                TabOrder = 20
+                TabOrder = 6
               end
             end
             object TabSheetAdicional: TTabSheet
@@ -3707,6 +3727,12 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
     object SQLTemplateCONTROLA_CONSULTA_CP: TStringField
       FieldName = 'CONTROLA_CONSULTA_CP'
       Origin = 'DB.TERMINAL.CONTROLA_CONSULTA_CP'
+      FixedChar = True
+      Size = 1
+    end
+    object SQLTemplateCONTROLA_ES_RAPIDA: TStringField
+      FieldName = 'CONTROLA_ES_RAPIDA'
+      Origin = 'DB.TERMINAL.CONTROLA_ES_RAPIDA'
       FixedChar = True
       Size = 1
     end
