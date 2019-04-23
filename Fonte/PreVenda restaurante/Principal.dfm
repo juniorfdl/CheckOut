@@ -1,6 +1,6 @@
 object FormPrincipal: TFormPrincipal
-  Left = 714
-  Top = 259
+  Left = 342
+  Top = 152
   Width = 507
   Height = 118
   Caption = 'Impressao PreVenda'
@@ -557,6 +557,9 @@ object FormPrincipal: TFormPrincipal
     end
     object TblPreVendaCabSequencial: TIntegerField
       FieldName = 'Sequencial'
+    end
+    object TblPreVendaCabSeq_Dia: TIntegerField
+      FieldName = 'Seq_Dia'
     end
   end
   object ACBrPosPrinter: TACBrPosPrinter

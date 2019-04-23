@@ -1074,7 +1074,7 @@ begin
                   else if fieldbyname('ctrca5tipopadrao').AsString = 'CHQV' then
                     tPag := fpCheque
                   else
-                    tPag := fpDinheiro;
+                    tPag := fpOutro;
                  //Tirei pq quando era pago com dois tipos de pagamento a tag vpag ficava com o mesmo valor
                   vCont := RecordCount;
                   VarValorRecebido := SQLImpressaoCupom.fieldbyname('CUPON2TOTITENS').AsFloat + SQLImpressaoCupom.fieldbyname('TROCO').AsFloat;

@@ -245,6 +245,9 @@ object FormPrincipal: TFormPrincipal
     object TblPreVendaCabSequencial: TIntegerField
       FieldName = 'Sequencial'
     end
+    object TblPreVendaCabSeq_Dia: TIntegerField
+      FieldName = 'Seq_Dia'
+    end
   end
   object ACBrPosPrinter: TACBrPosPrinter
     ConfigBarras.MostrarCodigo = False

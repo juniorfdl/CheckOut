@@ -770,13 +770,14 @@ begin
       Total.ICMSTot.vProd   := SQLImpressaoCupom.fieldbyname('CUPON2TOTITENS').AsFloat+SQLImpressaoCupom.fieldbyname('CUPON2DESCITENS').AsFloat;
       Total.ICMSTot.vFrete  := 0;
       Total.ICMSTot.vSeg    := 0;
-      Total.ICMSTot.vDesc   := SQLImpressaoCupom.fieldbyname('CUPON2DESCITENS').AsFloat;
+//      Total.ICMSTot.vDesc   := SQLImpressaoCupom.fieldbyname('CUPON2DESCITENS').AsFloat;
       Total.ICMSTot.vII     := 0;
       Total.ICMSTot.vIPI    := 0;
       Total.ICMSTot.vPIS    := 0;
       Total.ICMSTot.vCOFINS := 0;
       Total.ICMSTot.vOutro  := 0;
-      Total.ICMSTot.vNF     := SQLImpressaoCupom.fieldbyname('CUPON2TOTITENS').AsFloat;
+//      Total.ICMSTot.vNF     := SQLImpressaoCupom.fieldbyname('CUPON2TOTITENS').AsFloat;
+      Total.ICMSTot.vNF := Total.ICMSTot.vProd - Total.ICMSTot.vDesc;
 
       Total.ISSQNtot.vServ   := 0;
       Total.ISSQNTot.vBC     := 0;
@@ -806,7 +807,7 @@ begin
           if SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CRD' then tPag   := fpCreditoLoja;
           if SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CHQV' then tPag  := fpCheque;
           if SQLImpressaoCupom.fieldbyname('CUPOCTIPOPADRAO').AsString = 'CHQP' then tPag  := fpCheque;
-          vPag := SQLImpressaoCupom.fieldbyname('CUPON2TOTITENS').AsFloat;
+          vPag := Total.ICMSTot.vNF;
         end;
 
       SQLImpressaoCupomFinanceiro.Close;

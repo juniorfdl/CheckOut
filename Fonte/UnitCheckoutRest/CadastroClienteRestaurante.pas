@@ -588,6 +588,9 @@ type
     SQLTemplateCLIEN2LIMITECRED: TFloatField;
     SQLTemplateCLIEN3VLRFRETE: TFloatField;
     DBCheckBox3: TDBCheckBox;
+    Label10: TLabel;
+    DBEdit6: TDBEdit;
+    SQLTemplateCLIEA5NROENDRES: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure SQLTemplateNewRecord(DataSet: TDataSet);
     procedure Button1Click(Sender: TObject);

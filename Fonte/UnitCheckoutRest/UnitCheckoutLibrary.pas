@@ -259,7 +259,8 @@ begin
   DM.TblTicketPreVendaCabBusca.value            := SQLCup.FieldByName('CUPOCBUSCA').AsString ;
   DM.TblTicketPreVendaCabMotoboy.value          := SQLCup.FieldByName('MTBYICOD').AsString ;
   DM.TblTicketPreVendaCabMesaCodigo.AsString    := SQLCup.FieldByName('MESAICOD').AsString ;
-  DM.TblTicketPreVendaCabContaCodigo.AsString   := SQLCup.FieldByName('CONTAICOD').AsString ;
+  DM.TblTicketPreVendaCabContaCodigo.AsString   := SQLCup.FieldByName('CONTAICOD').AsString;
+  DM.TblTicketPreVendaCabSeq_Dia.AsInteger      := SQLCup.FieldByName('SEQ_DIA').AsInteger;
 
   if Reimpressao = 'N' then
     begin
@@ -476,6 +477,7 @@ begin
   DM.TblTicketPreVendaCabBusca.value            := SQLPreVD.FieldByName('CUPOCBUSCA').AsString ;
   DM.TblTicketPreVendaCabMotoboy.value          := SQLPreVD.FieldByName('MTBYICOD').AsString ;
   DM.TblTicketPreVendaCabSequencial.AsString    := SQLPreVD.FieldByName('SEQUENCIAL').AsString ;
+  DM.TblTicketPreVendaCabSeq_Dia.AsString       := SQLPreVD.FieldByName('SEQ_DIA').AsString;
 
   if NomeClienteVenda <> '' then
     DM.TblTicketPreVendaCabNomeClienteVenda.AsString      := NomeClienteVenda
@@ -560,11 +562,16 @@ begin
   dm.SQLTemplate.Open ;
   if not dm.SQLTemplate.IsEmpty then
     begin
-      DM.TblTicketPreVendaFin.Append;
-      DM.TblTicketPreVendaFinPedICod.Value         := SQLPreVDIt.FieldbyName('PRODICOD').Value ;
-      DM.TblTicketPreVendaFinNumerario.AsString    := RetornaNumerario(dm.SQLTemplate.fieldbyname('NUMEICOD').AsString);
-      DM.TblTicketPreVendaFinValor.Value           := dm.SQLTemplate.fieldbyname('PVNUN2VLR').AsFloat;
-      DM.TblTicketPreVendaFin.Post;
+      dm.SQLTemplate.First;
+      while not dm.SQLTemplate.Eof do
+      begin
+        DM.TblTicketPreVendaFin.Append;
+        DM.TblTicketPreVendaFinPedICod.Value         := SQLPreVDIt.FieldbyName('PRODICOD').Value ;
+        DM.TblTicketPreVendaFinNumerario.AsString    := RetornaNumerario(dm.SQLTemplate.fieldbyname('NUMEICOD').AsString);
+        DM.TblTicketPreVendaFinValor.Value           := dm.SQLTemplate.fieldbyname('PVNUN2VLR').AsFloat;
+        DM.TblTicketPreVendaFin.Post;
+        dm.SQLTemplate.Next;
+      end;
     end
   else
     begin

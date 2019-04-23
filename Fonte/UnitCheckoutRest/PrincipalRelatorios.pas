@@ -224,6 +224,9 @@ type
     ppDBText28: TppDBText;
     ppLine1: TppLine;
     ppLine4: TppLine;
+    ppLabel12: TppLabel;
+    ppLine2: TppLine;
+    ppLabel35: TppLabel;
     procedure FormCreate(Sender: TObject);
     procedure BtnVisualizarClick(Sender: TObject);
     procedure ReportTotaisPreviewFormCreate(Sender: TObject);

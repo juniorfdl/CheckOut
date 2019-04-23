@@ -2567,7 +2567,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     DataPipelineName = 'PipeOperacao'
     object ppHeaderBand1: TppHeaderBand
       mmBottomOffset = 0
-      mmHeight = 30692
+      mmHeight = 27517
       mmPrintPosition = 0
       object ppLabel1: TppLabel
         UserName = 'Label1'
@@ -2681,10 +2681,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Style = [fsBold, fsUnderline]
         TextAlignment = taRightJustified
         Transparent = True
-        mmHeight = 4318
-        mmLeft = 8731
-        mmTop = 26194
-        mmWidth = 12954
+        mmHeight = 4233
+        mmLeft = 80433
+        mmTop = 21167
+        mmWidth = 12965
         BandType = 0
       end
       object ppLabel8: TppLabel
@@ -2701,10 +2701,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Style = [fsBold, fsUnderline]
         TextAlignment = taRightJustified
         Transparent = True
-        mmHeight = 4318
-        mmLeft = 32279
-        mmTop = 26194
-        mmWidth = 11853
+        mmHeight = 4233
+        mmLeft = 124619
+        mmTop = 21167
+        mmWidth = 11906
         BandType = 0
       end
       object LbPeriodo: TppLabel
@@ -2779,8 +2779,8 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4233
-        mmLeft = 58473
-        mmTop = 26194
+        mmLeft = 172509
+        mmTop = 21167
         mmWidth = 9790
         BandType = 0
       end
@@ -2788,7 +2788,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
     object ppDetailBand1: TppDetailBand
       PrintHeight = phDynamic
       mmBottomOffset = 0
-      mmHeight = 10319
+      mmHeight = 5821
       mmPrintPosition = 0
       object ppDBText1: TppDBText
         UserName = 'DBText1'
@@ -2830,9 +2830,9 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'PipeOperacao'
-        mmHeight = 4318
-        mmLeft = 794
-        mmTop = 4763
+        mmHeight = 4233
+        mmLeft = 73290
+        mmTop = 529
         mmWidth = 20638
         BandType = 4
       end
@@ -2854,9 +2854,9 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'PipeOperacao'
-        mmHeight = 4318
-        mmLeft = 23283
-        mmTop = 4763
+        mmHeight = 4233
+        mmLeft = 117475
+        mmTop = 0
         mmWidth = 20638
         BandType = 4
       end
@@ -2867,7 +2867,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Border.Style = psSolid
         Border.Visible = False
         DataField = 'SALDO'
-        DataPipeline = PipeNumerario
+        DataPipeline = PipeOperacao
         DisplayFormat = '#,0.00;-#,0.00'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -2876,10 +2876,10 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Font.Style = [fsBold]
         TextAlignment = taRightJustified
         Transparent = True
-        DataPipelineName = 'PipeNumerario'
+        DataPipelineName = 'PipeOperacao'
         mmHeight = 4233
-        mmLeft = 45773
-        mmTop = 5027
+        mmLeft = 159279
+        mmTop = 265
         mmWidth = 23019
         BandType = 4
       end
@@ -2949,7 +2949,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
           DataPipelineName = 'PipeNumerario'
           object ppTitleBand1: TppTitleBand
             mmBottomOffset = 0
-            mmHeight = 10583
+            mmHeight = 5821
             mmPrintPosition = 0
             object ppLabel6: TppLabel
               UserName = 'Label6'
@@ -2986,8 +2986,8 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               TextAlignment = taRightJustified
               Transparent = True
               mmHeight = 4233
-              mmLeft = 8996
-              mmTop = 4763
+              mmLeft = 80698
+              mmTop = 0
               mmWidth = 12700
               BandType = 1
             end
@@ -3006,8 +3006,8 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               TextAlignment = taRightJustified
               Transparent = True
               mmHeight = 4233
-              mmLeft = 32544
-              mmTop = 4763
+              mmLeft = 125942
+              mmTop = 529
               mmWidth = 11906
               BandType = 1
             end
@@ -3026,15 +3026,15 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               TextAlignment = taRightJustified
               Transparent = True
               mmHeight = 4233
-              mmLeft = 57415
-              mmTop = 4763
+              mmLeft = 171186
+              mmTop = 529
               mmWidth = 9790
               BandType = 1
             end
           end
           object ppDetailBand2: TppDetailBand
             mmBottomOffset = 0
-            mmHeight = 9260
+            mmHeight = 5556
             mmPrintPosition = 0
             object ppDBText4: TppDBText
               UserName = 'DBText4'
@@ -3051,9 +3051,9 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               Font.Style = []
               Transparent = True
               DataPipelineName = 'PipeNumerario'
-              mmHeight = 4318
-              mmLeft = 0
-              mmTop = 0
+              mmHeight = 4233
+              mmLeft = 529
+              mmTop = 265
               mmWidth = 68527
               BandType = 4
             end
@@ -3075,8 +3075,8 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               Transparent = True
               DataPipelineName = 'PipeNumerario'
               mmHeight = 4233
-              mmLeft = 0
-              mmTop = 4763
+              mmLeft = 71173
+              mmTop = 0
               mmWidth = 21696
               BandType = 4
             end
@@ -3098,8 +3098,8 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               Transparent = True
               DataPipelineName = 'PipeNumerario'
               mmHeight = 4233
-              mmLeft = 23548
-              mmTop = 4763
+              mmLeft = 116417
+              mmTop = 529
               mmWidth = 21431
               BandType = 4
             end
@@ -3121,8 +3121,8 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               Transparent = True
               DataPipelineName = 'PipeNumerario'
               mmHeight = 4233
-              mmLeft = 46567
-              mmTop = 4763
+              mmLeft = 160338
+              mmTop = 1323
               mmWidth = 20638
               BandType = 4
             end
@@ -3152,9 +3152,9 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               Transparent = True
               DataPipelineName = 'PipeNumerario'
               mmHeight = 4233
-              mmLeft = 44566
-              mmTop = 529
-              mmWidth = 23114
+              mmLeft = 158221
+              mmTop = 1323
+              mmWidth = 23019
               BandType = 7
             end
             object ppLabel25: TppLabel
@@ -3922,6 +3922,39 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
               mmWidth = 197115
               BandType = 7
             end
+            object ppLine2: TppLine
+              UserName = 'Line2'
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
+              Weight = 0.750000000000000000
+              mmHeight = 529
+              mmLeft = 0
+              mmTop = 7144
+              mmWidth = 193411
+              BandType = 7
+            end
+            object ppLabel35: TppLabel
+              UserName = 'Label35'
+              AutoSize = False
+              Border.BorderPositions = []
+              Border.Color = clBlack
+              Border.Style = psSolid
+              Border.Visible = False
+              Caption = 'Totais:'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Name = 'Tahoma'
+              Font.Size = 10
+              Font.Style = [fsBold]
+              Transparent = True
+              mmHeight = 4233
+              mmLeft = 0
+              mmTop = 1058
+              mmWidth = 69321
+              BandType = 7
+            end
           end
           object raCodeModule1: TraCodeModule
             ProgramStream = {00}
@@ -3946,8 +3979,8 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Transparent = True
         DataPipelineName = 'PipeOperacao'
         mmHeight = 4233
-        mmLeft = 794
-        mmTop = 1588
+        mmLeft = 73025
+        mmTop = 529
         mmWidth = 20638
         BandType = 7
       end
@@ -3969,8 +4002,8 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Transparent = True
         DataPipelineName = 'PipeOperacao'
         mmHeight = 4233
-        mmLeft = 20108
-        mmTop = 1588
+        mmLeft = 114036
+        mmTop = 265
         mmWidth = 24342
         BandType = 7
       end
@@ -3982,9 +4015,9 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Border.Visible = False
         Weight = 0.750000000000000000
         mmHeight = 529
-        mmLeft = 794
-        mmTop = 529
-        mmWidth = 68792
+        mmLeft = 0
+        mmTop = 7144
+        mmWidth = 193675
         BandType = 7
       end
       object ppDBCalc1: TppDBCalc
@@ -4006,9 +4039,29 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
         Transparent = True
         DataPipelineName = 'PipeOperacao'
         mmHeight = 4233
-        mmLeft = 46683
-        mmTop = 1588
-        mmWidth = 23114
+        mmLeft = 160073
+        mmTop = 1058
+        mmWidth = 23019
+        BandType = 7
+      end
+      object ppLabel12: TppLabel
+        UserName = 'Label12'
+        AutoSize = False
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
+        Caption = 'Totais:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 10
+        Font.Style = [fsBold, fsUnderline]
+        Transparent = True
+        mmHeight = 4233
+        mmLeft = 0
+        mmTop = 1058
+        mmWidth = 71173
         BandType = 7
       end
     end

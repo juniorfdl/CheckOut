@@ -1,7 +1,7 @@
 inherited DM: TDM
   OldCreateOrder = True
-  Left = 332
-  Top = 16
+  Left = 64405
+  Top = 48
   Height = 724
   Width = 859
   inherited DB: TDatabase
@@ -3109,6 +3109,9 @@ inherited DM: TDM
     end
     object TblTicketPreVendaCabSequencial: TIntegerField
       FieldName = 'Sequencial'
+    end
+    object TblTicketPreVendaCabSeq_Dia: TIntegerField
+      FieldName = 'Seq_Dia'
     end
   end
   object TblTicketPreVendaItem: TTable

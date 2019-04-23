@@ -92,6 +92,7 @@ type
     TblPedidoFinanceiroValor: TFloatField;
     TblPedidoFinanceiroPortador: TStringField;
     TblPedidoFinanceiroNumerario: TStringField;
+    TblPreVendaCabSeq_Dia: TIntegerField;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
@@ -152,6 +153,7 @@ begin
     ACBrPosPrinter.Device.Baud  := StrToint(ImpCaixaVeloc);
     ACBrPosPrinter.Desativar;
 
+    memo.Lines.Add('</ce><e>'  +FormatFloat('00000',TblPreVendaCabSeq_Dia.Value)+'</e>');
     memo.Lines.Add('</ce><e>'  +TblPreVendaCabNomeEmpresa.Value+'</e>');
     memo.Lines.Add('</ce><e>'  +TblPreVendaCabFoneEmpresa.Value+'</e>');
     memo.Lines.Add('</fn>------------------------------------------------');
@@ -224,7 +226,16 @@ begin
     memo.Lines.Add('Troco   R$ ' + FormatFloat('##0.00',TblPreVendaCabTroco.Value)+'   ');
     memo.Lines.Add('Descto  R$ ' + FormatFloat('##0.00',TblPreVendaCabDesconto.Value+TotDesc)+'   ');
     memo.Lines.Add('TOTAL   R$ ' + FormatFloat('##0.00',TblPreVendaCabTotalGeral.Value)+'   ');
+
+    memo.Lines.Add('</ae>------------------------------------------------');
+    memo.Lines.Add('</ae> Forma Pagto:' + TblPreVendaCabNumerarioPagto.AsString);
     TblPedidoFinanceiro.First;
+    While not TblPedidoFinanceiro.eof Do
+      Begin
+        memo.Lines.Add('</ad>' + TblPedidoFinanceiroNumerario.AsString + '  ' + FormatFloat('##0.00',TblPedidoFinanceiroValor.Value)+'    ');
+        TblPedidoFinanceiro.Next;
+      End;
+
     TotConfissao := 0;
     memo.Lines.Add('</ae>------------------------------------------------');
     memo.Lines.Add('</ae>'+ Obs_Venda);

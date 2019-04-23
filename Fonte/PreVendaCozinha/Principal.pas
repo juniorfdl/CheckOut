@@ -72,6 +72,7 @@ type
     TblPreVendaCabMotoboy: TStringField;
     TblPreVendaCabTaxaTele: TFloatField;
     TblPreVendaCabSequencial: TIntegerField;
+    TblPreVendaCabSeq_Dia: TIntegerField;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
@@ -122,6 +123,7 @@ begin
 
     memo.Lines.Add(' ');
     memo.Lines.Add(' ');
+    memo.Lines.Add('</ce><e>'  +FormatFloat('00000',TblPreVendaCabSeq_Dia.Value)+'</e>');
     memo.Lines.Add('</ce><e>'  +TblPreVendaCabNomeEmpresa.Value+'</e>');
     memo.Lines.Add('</ce><e>'  +TblPreVendaCabFoneEmpresa.Value+'</e>');
     memo.Lines.Add(' ');
@@ -177,10 +179,12 @@ begin
     memo.Lines.Add(' ');
     memo.Lines.Add('</corte_parcial>');
 
-    if ImpMarca = 'EPSON'    then ACBrPosPrinter.Modelo := ppEscPosEpson;
-    if ImpMarca = 'ELGIN'    then ACBrPosPrinter.Modelo := ppEscVox;
-    if ImpMarca = 'BEMATECH' then ACBrPosPrinter.Modelo := ppEscBematech;
-    if ImpMarca = 'DARUMA'   then ACBrPosPrinter.Modelo := ppEscDaruma;
+    if ImpMarca = 'EPSON'      then ACBrPosPrinter.Modelo := ppEscPosEpson;
+    if ImpMarca = 'ELGIN'      then ACBrPosPrinter.Modelo := ppEscVox;
+    if ImpMarca = 'BEMATECH'   then ACBrPosPrinter.Modelo := ppEscBematech;
+    if ImpMarca = 'DARUMA'     then ACBrPosPrinter.Modelo := ppEscDaruma;
+    if ImpMarca = 'NFCE DR700' then ACBrPosPrinter.Modelo := ppEscDaruma;
+    if ImpMarca = 'NFCE DR800' then ACBrPosPrinter.Modelo := ppEscDaruma;
 
     ACBrPosPrinter.Device.Porta := ImpCaixaPorta;
     ACBrPosPrinter.Device.Baud  := StrToint(ImpCaixaVeloc);

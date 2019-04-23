@@ -461,10 +461,24 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
                   Font.Style = [fsBold]
                   ParentFont = False
                 end
+                object Label10: TLabel
+                  Left = 464
+                  Top = 0
+                  Width = 44
+                  Height = 13
+                  Caption = 'N'#250'mero'
+                  FocusControl = DBEdit6
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = 8404992
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = [fsBold]
+                  ParentFont = False
+                end
                 object DBEditEnd: TDBEdit
                   Left = 4
                   Top = 13
-                  Width = 593
+                  Width = 458
                   Height = 21
                   DataField = 'CLIEA60ENDRES'
                   DataSource = DSTemplate
@@ -804,6 +818,15 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
                   TabOrder = 12
                   ValueChecked = 'S'
                   ValueUnchecked = 'N'
+                end
+                object DBEdit6: TDBEdit
+                  Left = 464
+                  Top = 13
+                  Width = 133
+                  Height = 21
+                  DataField = 'CLIEA5NROENDRES'
+                  DataSource = DSTemplate
+                  TabOrder = 14
                 end
               end
             end
@@ -2676,6 +2699,11 @@ inherited FormCadastroClienteRestaurante: TFormCadastroClienteRestaurante
     object SQLTemplateCLIEN3VLRFRETE: TFloatField
       FieldName = 'CLIEN3VLRFRETE'
       Origin = 'DB.CLIENTE.CLIEN3VLRFRETE'
+    end
+    object SQLTemplateCLIEA5NROENDRES: TStringField
+      FieldName = 'CLIEA5NROENDRES'
+      Origin = 'DB.CLIENTE.CLIEA5NROENDRES'
+      Size = 5
     end
   end
   inherited SQLExcluiDetalhes: TRxQuery

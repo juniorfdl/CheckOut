@@ -614,7 +614,8 @@ begin
               if not ImportandoPreVenda then
                 begin
                   NomeClienteVenda     := DM.SQLTemplate.FieldByName('CLIEA60RAZAOSOC').AsString ;
-                  EnderecoClienteVenda := DM.SQLTemplate.FieldByName('CLIEA60ENDRES').AsString ;
+                  EnderecoClienteVenda := DM.SQLTemplate.FieldByName('CLIEA60ENDRES').AsString + ' N. ' +
+                                          DM.SQLTemplate.FieldByName('CLIEA5NROENDRES').AsString;
                   CidadeClienteVenda   := DM.SQLTemplate.FieldByName('CLIEA60CIDRES').AsString ;
                   FoneClienteVenda     := DM.SQLTemplate.FieldByName('CLIEA15FONE1').AsString ;
                   BairroClienteVenda   := DM.SQLTemplate.FieldByName('CLIEA60BAIRES').AsString ;
@@ -3483,7 +3484,8 @@ begin
       if NomeClienteVenda = '' then
         NomeClienteVenda        := SQLLocate('cliente','cliea13id','cliea60razaosoc','"'+ClienteVenda+'"');
       if EnderecoClienteVenda = '' then
-        EnderecoClienteVenda    := SQLLocate('cliente','cliea13id','cliea60endres','"'+ClienteVenda+'"');
+        EnderecoClienteVenda    := SQLLocate('cliente','cliea13id','cliea60endres','"'+ClienteVenda+'"') + ' Nº: ' +
+                                   SQLLocate('cliente','cliea13id','CLIEA5NROENDRES','"'+ClienteVenda+'"') ;
       if DocumentoClienteVenda = '' then
         DocumentoClienteVenda   := SQLLocate('cliente','cliea13id','cliea11cpf','"'+ClienteVenda+'"');
       if CidadeClienteVenda = '' then
